@@ -1,0 +1,16 @@
+.Venue {
+  padding: 0.5em 0.5em;
+  border: 1px solid #cecece;
+  margin-bottom: 0.4em;
+  border-radius: 4px;
+}
+.Venue__title {
+  font-size: 0.925em;
+  font-weight: bold;
+  margin-bottom: 0.125em;
+}
+.Venue__content {
+  font-size: 0.85em;
+  line-height: 1.2;
+  margin-bottom: 0;
+}

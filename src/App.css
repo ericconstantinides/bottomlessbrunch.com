@@ -1,0 +1,10 @@
+.App__container {
+  display: flex;
+}
+.App__column:first-child {
+  flex: 1 1 25%;
+  min-width: 225px;
+}
+.App__column:last-child {
+  flex: 1 1 75%;
+}
