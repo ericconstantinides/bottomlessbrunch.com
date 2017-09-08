@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import { camelize } from '../lib/String'
+
+const mapEvents = ['ready', 'click', 'dragend']
 
 export class Map extends Component {
   constructor (props) {
@@ -21,15 +24,15 @@ export class Map extends Component {
   }
 
   recenterMap () {
-    const map = this.map
+    const googleMap = this.googleMap
     const curr = this.state.currentLocation
 
     const google = this.props.google
-    const maps = google.maps
+    const googleMaps = google.maps
 
-    if (map) {
-      let center = new maps.LatLng(curr.lat, curr.lng)
-      map.panTo(center)
+    if (googleMap) {
+      let center = new googleMaps.LatLng(curr.lat, curr.lng)
+      googleMap.panTo(center)
     }
   }
 
@@ -54,22 +57,37 @@ export class Map extends Component {
     if (this.props && this.props.google) {
       // google is available
       const { google } = this.props
-      const maps = google.maps
+      const googleMaps = google.maps
 
       const mapRef = this.refs.map
       const node = ReactDOM.findDOMNode(mapRef)
 
       let { zoom } = this.props
       const { lat, lng } = this.state.currentLocation
-      const center = new maps.LatLng(lat, lng)
-      const mapConfig = Object.assign(
-        {},
-        {
-          center: center,
-          zoom: zoom
+      const center = new googleMaps.LatLng(lat, lng)
+      const mapConfig = Object.assign({}, { center, zoom })
+      this.googleMap = new googleMaps.Map(node, mapConfig)
+
+      mapEvents.forEach(e => this.googleMap.addListener(e, this.handleEvent(e)))
+
+      googleMaps.event.trigger(this.googleMap, 'ready')
+    }
+  }
+
+  handleEvent (evtName) {
+    let timeout
+    const handlerName = `on${camelize(evtName)}`
+
+    return e => {
+      if (timeout) {
+        clearTimeout(timeout)
+        timeout = null
+      }
+      timeout = setTimeout(() => {
+        if (this.props[handlerName]) {
+          this.props[handlerName](this.props, this.map, e)
         }
-      )
-      this.map = new maps.Map(node, mapConfig)
+      }, 0)
     }
   }
 
@@ -89,6 +107,7 @@ Map.propTypes = {
   initialCenter: PropTypes.object,
   centerAroundCurrentLocation: PropTypes.bool
 }
+mapEvents.forEach(e => Map.propTypes[camelize(e)] = PropTypes.func)
 
 // Initialize the props with default values:
 Map.defaultProps = {
