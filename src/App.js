@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import RegionSelect from './components/RegionSelect'
-import RegionMap from './components/RegionMap'
+import RegionMapContainer from './components/RegionMapContainer'
 import VenueList from './components/VenueList'
 import './App.css'
 
@@ -14,8 +14,8 @@ class App extends Component {
             <RegionSelect />
             <VenueList />
           </div>
-          <div className='App__column'>
-            <RegionMap />
+          <div className='App__column Map__container'>
+            <RegionMapContainer />
           </div>
         </div>
       </div>
