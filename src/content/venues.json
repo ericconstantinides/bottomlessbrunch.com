@@ -1,12 +1,16 @@
 [
   {
-    "name": "The Table",
+    "title": "The Table",
     "metro": "San Jose, CA",
     "address": {
       "street": "1110 Willow St",
       "city": "San Jose",
       "state": "CA",
       "zip": 95125
+    },
+    "position": {
+      "lat": 37.30828,
+      "lng": -121.9033627
     },
     "hours": [
       {
@@ -58,15 +62,17 @@
     }
   },
   {
-    "name": "1621 Bistro",
+    "title": "1621 Bistro",
     "metro": "San Jose, CA",
     "address": {
       "street": "1621 North Capitol Ave.",
       "city": "San Jose",
       "state": "CA",
-      "zip": 95132,
-      "latitude": 37.3961055,
-      "longitude": -121.8757905
+      "zip": 95132
+    },
+    "position": {
+      "lat": 37.3961055,
+      "lng": -121.8757905
     },
     "hours": [
       {
@@ -87,15 +93,17 @@
     }
   },
   {
-    "name": "Flames Eatery & Bar",
+    "title": "Flames Eatery & Bar",
     "metro": "San Jose, CA",
     "address": {
       "street": "88 S 4th St",
       "city": "San Jose",
       "state": "CA",
-      "zip": 95112,
-      "latitude": 37.336155,
-      "longitude": -121.8880899
+      "zip": 95112
+    },
+    "position": {
+      "lat": 37.336155,
+      "lng": -121.8880899
     },
     "phone": "(408) 971-1960",
     "hours": [
@@ -162,15 +170,17 @@
     "password": "noneed"
   },
   {
-    "name": "4th St. Pizza Co",
+    "title": "4th St. Pizza Co",
     "metro": "San Jose, CA",
     "address": {
       "street": "150 E Santa Clara St",
       "city": "San Jose",
       "state": "CA",
-      "zip": 95113,
-      "latitude": 37.3374315,
-      "longitude": -121.8896738
+      "zip": 95113
+    },
+    "position": {
+      "lat": 37.3374315,
+      "lng": -121.8896738
     },
     "phone": "(408) 286-7500",
     "hours": [
@@ -211,15 +221,17 @@
     }
   },
   {
-    "name": "Billy’s Boston Chowder House",
+    "title": "Billy’s Boston Chowder House",
     "metro": "San Jose, CA",
     "address": {
       "street": "29 E Main St",
       "city": "Los Gatos",
       "state": "CA",
-      "zip": 95030,
-      "latitude": 37.2214323,
-      "longitude": -121.9829681
+      "zip": 95030
+    },
+    "position": {
+      "lat": 37.2214323,
+      "lng": -121.9829681
     },
     "phone": "(408) 827-4005",
     "hours": [
@@ -260,15 +272,17 @@
     "devNotes": "http://losgatosmagazine.com/2014/06/25/five-oclock-somewhere-happy-hour-around-town/, http://sanfrancisco.cbslocal.com/top-lists/5-must-have-bottomless-mimosas-near-the-south-bay/"
   },
   {
-    "name": "St. Stephen’s Green",
+    "title": "St. Stephen’s Green",
     "metro": "San Jose, CA",
     "address": {
       "street": "223 Castro St.",
       "city": "Mountain View",
       "state": "CA",
-      "zip": 94041,
-      "latitude": 37.3934652,
-      "longitude": -122.0812436
+      "zip": 94041
+    },
+    "position": {
+      "lat": 37.3934652,
+      "lng": -122.0812436
     },
     "phone": "(650) 964-9151",
     "hours": [
@@ -302,15 +316,17 @@
     }
   },
   {
-    "name": "Straits Restaurant",
+    "title": "Straits Restaurant",
     "metro": "San Jose, CA",
     "address": {
       "street": "333 Santana Row, Suite 1100",
       "city": "San Jose",
       "state": "CA",
-      "zip": 95128,
-      "latitude": 37.3217456,
-      "longitude": -121.9504902
+      "zip": 95128
+    },
+    "position": {
+      "lat": 37.3217456,
+      "lng": -121.9504902
     },
     "phone": "(408) 246-6320",
     "hours": [
@@ -362,15 +378,17 @@
     }
   },
   {
-    "name": "Tapsilog Bistro",
+    "title": "Tapsilog Bistro",
     "metro": "San Jose, CA",
     "address": {
       "street": "819 W Hamilton Ave",
       "city": "Campbell",
       "state": "CA",
-      "zip": 95008,
-      "latitude": 37.2949624,
-      "longitude": -121.9659308
+      "zip": 95008
+    },
+    "position": {
+      "lat": 37.2949624,
+      "lng": -121.9659308
     },
     "phone": "(408) 412-8926",
     "hours": [
@@ -409,15 +427,17 @@
     }
   },
   {
-    "name": "Chacho’s Restaurant",
+    "title": "Chacho’s Restaurant",
     "metro": "San Jose, CA",
     "address": {
       "street": "87 E San Fernando St",
       "city": "San Jose",
       "state": "CA",
-      "zip": 95113,
-      "latitude": 37.3353807,
-      "longitude": -121.8898257
+      "zip": 95113
+    },
+    "position": {
+      "lat": 37.3353807,
+      "lng": -121.8898257
     },
     "phone": "(408) 293-4321",
     "hours": [
@@ -439,15 +459,17 @@
     }
   },
   {
-    "name": "SP2",
+    "title": "SP2",
     "metro": "San Jose, CA",
     "address": {
       "street": "72 N. Almaden Ave",
       "city": "San Jose",
       "state": "CA",
-      "zip": 95110,
-      "latitude": 37.3360263,
-      "longitude": -121.896864
+      "zip": 95110
+    },
+    "position": {
+      "lat": 37.3360263,
+      "lng": -121.896864
     },
     "phone": "(408) 299-2000",
     "hours": [
@@ -482,15 +504,17 @@
     }
   },
   {
-    "name": "Santa Teresa Golf Club",
+    "title": "Santa Teresa Golf Club",
     "metro": "San Jose, CA",
     "address": {
       "street": "260 Bernal Rd",
       "city": "San Jose",
       "state": "CA",
-      "zip": 95119,
-      "latitude": 37.2267657,
-      "longitude": -121.8305103
+      "zip": 95119
+    },
+    "position": {
+      "lat": 37.2267657,
+      "lng": -121.8305103
     },
     "phone": "(408) 225-2650",
     "hours": [
