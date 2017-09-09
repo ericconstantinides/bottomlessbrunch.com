@@ -1,41 +1,36 @@
 import React, { Component } from 'react'
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
-// import { Map } from './Map'
-import './Map.css'
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
-const GAPI_KEY = 'AIzaSyClCXV7GZhNnvKwi6C8A9FRq-IEUbOzjqM'
-
-export class RegionMapContainer extends Component {
-  render () {
-    const style = {
-      width: '100%',
-      height: '100%',
-      position: 'relative'
+class RegionMapContainer extends Component {
+  constructor () {
+    super()
+    this.state = {
+      map: null
     }
+  }
+  mapMoved () {
+    console.log('Map Moved: ', JSON.stringify(this.state.map.getCenter()))
+  }
+  mapLoaded (map) {
+    // This is how we can save the map:
+    if (this.state.map !== null) return false
+    console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
+    this.setState({ map })
+  }
+  render () {
+    const markers = this.props.markers || []
     return (
-      <Map google={this.props.google} zoom={14} style={style}>
-        <Marker onClick={this.onMarkerClick} name={'Current location'} />
-        <Marker
-          title={'The marker`s title will appear as a tooltip.'}
-          name={'SOMA'}
-          position={{ lat: 37.778519, lng: -122.405640 }}
-        />
-        <Marker
-          name={'Dolores park'}
-          position={{ lat: 37.759703, lng: -122.428093 }}
-        />
-        <Marker />
-        <InfoWindow onClose={this.onInfoWindowClose}>
-          <div>
-            {/* <h1>{this.state.selectedPlace.name}</h1> */}
-            <h2>HELLO MOTO</h2>
-          </div>
-        </InfoWindow>
-      </Map>
+      <GoogleMap
+        ref={this.mapLoaded.bind(this)}
+        onDragEnd={this.mapMoved.bind(this)}
+        defaultZoom={this.props.zoom}
+        defaultCenter={this.props.center}
+        // Pass the map reference here as props
+      >
+        {markers.map((marker, index) => <Marker {...marker} />)}
+      </GoogleMap>
     )
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: GAPI_KEY
-})(RegionMapContainer)
+export default withGoogleMap(RegionMapContainer)
