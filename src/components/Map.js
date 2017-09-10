@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps'
+import * as actions from '../actions'
 
 class Map extends Component {
   constructor () {
@@ -41,9 +43,32 @@ class Map extends Component {
     //   })
     // })
   }
+  renderMarkers () {
+    console.log(this.props)
+    if (!this.props.markers) return ''
+    return this.props.markers.map((marker, i) => (
+      <Marker
+        key={i}
+        onMouseOver={() => this.props.hoverVenue(this.props.id, 'on')}
+        onMouseOut={() => this.props.hoverVenue(this.props.id, 'off')}
+        {...marker}
+      >
+        {marker.showInfo &&
+          <InfoWindow>
+            <div>
+              <h4>
+                {marker.title}
+              </h4>
+              <p>
+                {marker.address.city}
+              </p>
+            </div>
+          </InfoWindow>}
+      </Marker>
+    ))
+  }
 
   render () {
-    const markers = this.props.markers || []
     return (
       <GoogleMap
         ref={this.mapLoaded.bind(this)}
@@ -51,22 +76,10 @@ class Map extends Component {
         defaultZoom={this.props.zoom}
         defaultCenter={this.props.center}
       >
-        {markers.map((marker, i) => (
-          <Marker
-            key={i}
-            onMouseOver={() => this.handleMarkerHover(marker)}
-            onMouseOut={() => this.handleMarkerClose(marker)}
-            {...marker}
-          >
-            {marker.showInfo &&
-              <InfoWindow>
-                <div>{marker.infoContent}</div>
-              </InfoWindow>}
-          </Marker>
-        ))}
+        {this.renderMarkers()}
       </GoogleMap>
     )
   }
 }
 
-export default withGoogleMap(Map)
+export default connect(null, actions)(withGoogleMap(Map))
