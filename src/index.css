@@ -9,7 +9,8 @@ body {
 html,
 body,
 #root,
-.App{
+.App,
+.Home {
   display: flex;
   flex-flow: column;
   flex: 1;

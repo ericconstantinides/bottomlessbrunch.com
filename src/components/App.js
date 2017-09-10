@@ -1,23 +1,26 @@
 import React, { Component } from 'react'
-import RegionSelect from './RegionSelect'
-import MapContainer from './MapContainer'
-import VenueList from './VenueList'
+import { Route } from 'react-router-dom'
+import ReactGA from 'react-ga'
+import Home from './Home'
 import './App.css'
+
+ReactGA.initialize('UA-21524856-1')
+
+/**
+ * @return {null}
+ */
+function Analytics (props) {
+  ReactGA.set({ page: props.location.pathname + props.location.search })
+  ReactGA.pageview(props.location.pathname + props.location.search)
+  return null
+}
 
 class App extends Component {
   render () {
     return (
       <div className='App'>
-        <h1>Bottomless Brunch</h1>
-        <div className='App__container'>
-          <div className='App__column'>
-            <RegionSelect />
-            <VenueList />
-          </div>
-          <div className='App__column Map__container'>
-            <MapContainer />
-          </div>
-        </div>
+        <Route path='/' component={Analytics} />
+        <Route exact path='/' component={Home} />
       </div>
     )
   }
