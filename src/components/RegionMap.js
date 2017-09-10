@@ -44,7 +44,6 @@ class RegionMap extends Component {
 
   render () {
     const markers = this.props.markers || []
-    console.log(markers)
     return (
       <GoogleMap
         ref={this.mapLoaded.bind(this)}

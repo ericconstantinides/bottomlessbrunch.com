@@ -1,1 +1,2 @@
 export const FETCH_VENUES = 'FETCH_VENUES'
+export const PRE_SELECT_VENUE = 'PRE_SELECT_VENUE'
