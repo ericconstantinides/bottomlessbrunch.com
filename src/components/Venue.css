@@ -3,9 +3,11 @@
   border: 1px solid #ccc;
   margin-bottom: 0;
   border-bottom: none;
+  transition: 0.15s;
+  cursor: pointer;
 }
 .Venue.is-hovered {
-  background: yellow;
+  background: whitesmoke;
 }
 .Venue:last-child {
   border-bottom: 1px solid #ccc;

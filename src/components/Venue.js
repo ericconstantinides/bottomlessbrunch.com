@@ -11,6 +11,7 @@ class Venue extends Component {
         className={`Venue ${hovered}`}
         onMouseEnter={() => this.props.showInfoVenue(this.props.id, 'on')}
         onMouseLeave={() => this.props.showInfoVenue(this.props.id, 'off')}
+        onClick={() => this.props.openVenue(this.props.id)}
       >
         <h4 className='Venue__title'>{this.props.name}</h4>
         <p className='Venue__content'>

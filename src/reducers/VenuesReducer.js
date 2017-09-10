@@ -26,6 +26,7 @@ export default (state = [], action) => {
         return venue
       })
     case VENUE_OPEN:
+      console.log('open me venue now please')
       return state.map(venue => {
         if (venue.id === action.payload.id) {
           venue.open = true

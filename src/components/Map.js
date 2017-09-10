@@ -50,6 +50,7 @@ class Map extends Component {
         key={i}
         onMouseOver={() => this.props.showInfoVenue(marker.id, 'on')}
         onMouseOut={() => this.props.showInfoVenue(marker.id, 'off')}
+        onClick={() => this.props.openVenue(marker.id)}
         {...marker}
       >
         {marker.showInfo &&

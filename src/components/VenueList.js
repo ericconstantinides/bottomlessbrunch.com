@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 
 class VenueList extends Component {
-  componentWillMount () {
-    // get the venues
-    this.props.fetchVenues()
-  }
   render () {
     return (
       <div className='VenueList'>
