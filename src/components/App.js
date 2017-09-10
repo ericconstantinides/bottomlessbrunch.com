@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import RegionSelect from './components/RegionSelect'
-import RegionMapContainer from './components/RegionMapContainer'
-import VenueList from './components/VenueList'
+import RegionSelect from './RegionSelect'
+import RegionMapContainer from './RegionMapContainer'
+import VenueList from './VenueList'
 import './App.css'
 
 class App extends Component {
