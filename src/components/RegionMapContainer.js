@@ -1,36 +1,18 @@
-import React, { Component } from 'react'
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
+import React from 'react'
+import RegionMap from './RegionMap'
+import venuesJson from '../content/venues.json'
 
-class RegionMapContainer extends Component {
-  constructor () {
-    super()
-    this.state = {
-      map: null
-    }
-  }
-  mapMoved () {
-    console.log('Map Moved: ', JSON.stringify(this.state.map.getCenter()))
-  }
-  mapLoaded (map) {
-    // This is how we can save the map:
-    if (this.state.map !== null) return false
-    console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
-    this.setState({ map })
-  }
-  render () {
-    const markers = this.props.markers || []
-    return (
-      <GoogleMap
-        ref={this.mapLoaded.bind(this)}
-        onDragEnd={this.mapMoved.bind(this)}
-        defaultZoom={this.props.zoom}
-        defaultCenter={this.props.center}
-        // Pass the map reference here as props
-      >
-        {markers.map((marker, index) => <Marker {...marker} />)}
-      </GoogleMap>
-    )
-  }
+const RegionMapContainer = () => {
+  const styles = { height: `100%`, width: `100%` }
+  return (
+    <RegionMap
+      center={{ lat: 37.318835055903456, lng: -121.9353463464844 }}
+      zoom={11}
+      markers={venuesJson}
+      containerElement={<div style={styles} />}
+      mapElement={<div style={styles} />}
+    />
+  )
 }
 
-export default withGoogleMap(RegionMapContainer)
+export default RegionMapContainer
