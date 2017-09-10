@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps'
 
-class RegionMap extends Component {
+class Map extends Component {
   constructor () {
     super()
     this.state = {
@@ -69,4 +69,4 @@ class RegionMap extends Component {
   }
 }
 
-export default withGoogleMap(RegionMap)
+export default withGoogleMap(Map)

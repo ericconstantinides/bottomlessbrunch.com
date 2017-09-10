@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../actions'
 import './Venue.css'
 
-export default function (props) {
-  return (
-    <article className='Venue'>
-      <h4 className='Venue__title'>{props.name}</h4>
-      <p className='Venue__content'>
-        {props.address.street}, {props.address.city}
-      </p>
-    </article>
-  )
+class Venue extends Component {
+  render () {
+    const hovered = this.props.showInfo ? 'is-hovered' : 'not-hovered'
+    return (
+      <article
+        className={`Venue ${hovered}`}
+        onMouseEnter={() => this.props.hoverVenue(this.props.id, 'on')}
+        onMouseLeave={() => this.props.hoverVenue(this.props.id, 'off')}
+      >
+        <h4 className='Venue__title'>{this.props.name}</h4>
+        <p className='Venue__content'>
+          {this.props.address.street}, {this.props.address.city}
+        </p>
+      </article>
+    )
+  }
 }
+
+export default connect(null, actions)(Venue)

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import RegionMap from './RegionMap'
+import Map from './Map'
 import { connect } from 'react-redux'
 
-class RegionMapContainer extends Component {
+class MapContainer extends Component {
   render () {
     const styles = { height: `100%`, width: `100%` }
     return (
-      <RegionMap
+      <Map
         center={{ lat: 37.318835055903456, lng: -121.9353463464844 }}
         zoom={11}
         markers={this.props.venues}
@@ -21,4 +21,4 @@ function mapStateToProps ({venues}) {
   return { venues }
 }
 
-export default connect(mapStateToProps)(RegionMapContainer)
+export default connect(mapStateToProps)(MapContainer)

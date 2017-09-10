@@ -1,2 +1,3 @@
 export const FETCH_VENUES = 'FETCH_VENUES'
-export const PRE_SELECT_VENUE = 'PRE_SELECT_VENUE'
+export const HOVER_VENUE_ON = 'HOVER_VENUE_ON'
+export const HOVER_VENUE_OFF = 'HOVER_VENUE_OFF'

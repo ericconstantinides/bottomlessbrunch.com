@@ -14,13 +14,18 @@ class VenueList extends Component {
         <h2>
           VenueList
         </h2>
-        {this.props.venues.map((venue, key) => <Venue {...venue} key={key} />)}
+        {this.props.venues.map((venue, key) => (
+          <Venue
+            key={key}
+            {...venue}
+          />
+        ))}
       </div>
     )
   }
 }
 
-function mapStateToProps ({venues}) {
+function mapStateToProps ({ venues }) {
   return { venues }
 }
 
