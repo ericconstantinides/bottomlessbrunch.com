@@ -44,20 +44,19 @@ class Map extends Component {
     // })
   }
   renderMarkers () {
-    console.log(this.props)
     if (!this.props.markers) return ''
     return this.props.markers.map((marker, i) => (
       <Marker
         key={i}
-        onMouseOver={() => this.props.hoverVenue(this.props.id, 'on')}
-        onMouseOut={() => this.props.hoverVenue(this.props.id, 'off')}
+        onMouseOver={() => this.props.showInfoVenue(marker.id, 'on')}
+        onMouseOut={() => this.props.showInfoVenue(marker.id, 'off')}
         {...marker}
       >
         {marker.showInfo &&
           <InfoWindow>
             <div>
               <h4>
-                {marker.title}
+                {marker.name}
               </h4>
               <p>
                 {marker.address.city}

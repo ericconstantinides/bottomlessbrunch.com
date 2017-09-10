@@ -1,3 +1,4 @@
-export const FETCH_VENUES = 'FETCH_VENUES'
-export const HOVER_VENUE_ON = 'HOVER_VENUE_ON'
-export const HOVER_VENUE_OFF = 'HOVER_VENUE_OFF'
+export const VENUES_FETCH = 'VENUES_FETCH'
+export const VENUE_SHOWINFO = 'VENUE_SHOWINFO'
+export const VENUE_HIDEINFO = 'VENUE_HIDEINFO'
+export const VENUE_OPEN = 'VENUE_OPEN'

@@ -1,22 +1,34 @@
-import { FETCH_VENUES, HOVER_VENUE_ON, HOVER_VENUE_OFF } from './types'
+import {
+  VENUES_FETCH,
+  VENUE_SHOWINFO,
+  VENUE_HIDEINFO,
+  VENUE_OPEN
+} from './types'
 import venuesJson from '../content/venues.json'
 
 export function fetchVenues () {
   return {
-    type: FETCH_VENUES,
+    type: VENUES_FETCH,
     payload: { data: venuesJson }
   }
 }
 
-export function hoverVenue (id, direction) {
+export function showInfoVenue (id, direction) {
   if (direction === 'on') {
     return {
-      type: HOVER_VENUE_ON,
+      type: VENUE_SHOWINFO,
       payload: {id}
     }
   }
   return {
-    type: HOVER_VENUE_OFF,
+    type: VENUE_HIDEINFO,
+    payload: {id}
+  }
+}
+
+export function openVenue (id) {
+  return {
+    type: VENUE_OPEN,
     payload: {id}
   }
 }

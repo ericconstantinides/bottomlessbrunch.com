@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "title": "The Table",
+    "name": "The Table",
     "metro": "San Jose, CA",
     "address": {
       "street": "1110 Willow St",
@@ -64,7 +64,7 @@
   },
   {
     "id": 1,
-    "title": "1621 Bistro",
+    "name": "1621 Bistro",
     "metro": "San Jose, CA",
     "address": {
       "street": "1621 North Capitol Ave.",
@@ -96,7 +96,7 @@
   },
   {
     "id": 2,
-    "title": "Flames Eatery & Bar",
+    "name": "Flames Eatery & Bar",
     "metro": "San Jose, CA",
     "address": {
       "street": "88 S 4th St",
@@ -174,7 +174,7 @@
   },
   {
     "id": 3,
-    "title": "4th St. Pizza Co",
+    "name": "4th St. Pizza Co",
     "metro": "San Jose, CA",
     "address": {
       "street": "150 E Santa Clara St",
@@ -226,7 +226,7 @@
   },
   {
     "id": 4,
-    "title": "Billy’s Boston Chowder House",
+    "name": "Billy’s Boston Chowder House",
     "metro": "San Jose, CA",
     "address": {
       "street": "29 E Main St",
@@ -278,7 +278,7 @@
   },
   {
     "id": 5,
-    "title": "St. Stephen’s Green",
+    "name": "St. Stephen’s Green",
     "metro": "San Jose, CA",
     "address": {
       "street": "223 Castro St.",
@@ -323,7 +323,7 @@
   },
   {
     "id": 6,
-    "title": "Straits Restaurant",
+    "name": "Straits Restaurant",
     "metro": "San Jose, CA",
     "address": {
       "street": "333 Santana Row, Suite 1100",
@@ -386,7 +386,7 @@
   },
   {
     "id": 7,
-    "title": "Tapsilog Bistro",
+    "name": "Tapsilog Bistro",
     "metro": "San Jose, CA",
     "address": {
       "street": "819 W Hamilton Ave",
@@ -436,7 +436,7 @@
   },
   {
     "id": 8,
-    "title": "Chacho’s Restaurant",
+    "name": "Chacho’s Restaurant",
     "metro": "San Jose, CA",
     "address": {
       "street": "87 E San Fernando St",
@@ -469,7 +469,7 @@
   },
   {
     "id": 9,
-    "title": "SP2",
+    "name": "SP2",
     "metro": "San Jose, CA",
     "address": {
       "street": "72 N. Almaden Ave",
@@ -515,7 +515,7 @@
   },
   {
     "id": 10,
-    "title": "Santa Teresa Golf Club",
+    "name": "Santa Teresa Golf Club",
     "metro": "San Jose, CA",
     "address": {
       "street": "260 Bernal Rd",

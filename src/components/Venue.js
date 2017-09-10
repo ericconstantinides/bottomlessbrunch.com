@@ -9,10 +9,10 @@ class Venue extends Component {
     return (
       <article
         className={`Venue ${hovered}`}
-        onMouseEnter={() => this.props.hoverVenue(this.props.id, 'on')}
-        onMouseLeave={() => this.props.hoverVenue(this.props.id, 'off')}
+        onMouseEnter={() => this.props.showInfoVenue(this.props.id, 'on')}
+        onMouseLeave={() => this.props.showInfoVenue(this.props.id, 'off')}
       >
-        <h4 className='Venue__title'>{this.props.title}</h4>
+        <h4 className='Venue__title'>{this.props.name}</h4>
         <p className='Venue__content'>
           {this.props.address.street}, {this.props.address.city}
         </p>
