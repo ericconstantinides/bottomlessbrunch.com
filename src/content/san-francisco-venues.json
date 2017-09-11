@@ -1,0 +1,499 @@
+[
+  {
+    "id": 0,
+    "name": "Mission Rock Resort",
+    "images": [
+      {
+        "fileName": "san-francisco__mission-rock-resort-2.jpg",
+        "type": "patio"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "817 Terry A Francois Blvd",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94107
+    },
+    "position": {
+      "lat": 37.765488,
+      "lng": -122.3871512
+    },
+    "phone": "(415) 701-7625",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 20
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.missionrockresort.com/",
+      "facebook": "www.facebook.com/MissionRockResortSF",
+      "yelp": "www.yelp.com/biz/mission-rock-resort-san-francisco-2"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 1,
+    "name": "District",
+    "images": [
+      {
+        "fileName": "san-francisco__district.jpg",
+        "type": "inside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "216 Townsend St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94107
+    },
+    "position": {
+      "lat": 37.779127,
+      "lng": -122.39336
+    },
+    "phone": "(415) 896-2120",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:30PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosas",
+        "price": 15
+      },
+      {
+        "item": "Bottomless DIY Bloody Mary",
+        "price": 15
+      },
+      {
+        "item": "Buffet",
+        "price": 20
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.districtsf.com/locations.html",
+      "facebook": "www.facebook.com/districtsf/",
+      "yelp": "www.yelp.com/biz/district-san-francisco-3"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 2,
+    "name": "The Keystone",
+    "images": [
+      {
+        "fileName": "san-francisco__the-keystone.jpg",
+        "type": "inside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "68 4th St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94103
+    },
+    "position": {
+      "lat": 37.7848813,
+      "lng": -122.4072494
+    },
+    "phone": "(415) 777-1200",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 25
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.thekeystonesf.com/",
+      "facebook": "www.facebook.com/thekeystonesf/",
+      "yelp": "www.yelp.com/biz/the-keystone-san-francisco-2"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 3,
+    "name": "farmerbrown",
+    "images": [
+      {
+        "fileName": "san-francisco__farmerbrown.jpg",
+        "type": "inside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "25 Mason St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94102
+    },
+    "position": {
+      "lat": 37.783574,
+      "lng": -122.4115957
+    },
+    "phone": "(415) 409-3276",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:30PM",
+        "days": [
+          "Saturday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:30AM",
+        "ends": "2:30PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 20
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.farmerbrownsf.com/",
+      "facebook": "www.facebook.com/farmerbrownsf/",
+      "yelp": "www.yelp.com/biz/farmerbrown-san-francisco-2",
+      "openTable": "www.opentable.com/farmer-brown",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d860472-Reviews-Farmerbrown-San_Francisco_California.html"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 4,
+    "name": "Colibrí Mexican Bistro",
+    "images": [
+      {
+        "fileName": "san-francisco__colibri-mexican-bistro.jpg",
+        "type": "inside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "438 Geary St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94102
+    },
+    "position": {
+      "lat": 37.7872571,
+      "lng": -122.4127278
+    },
+    "phone": "(415) 440-2737",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:30AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 10
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.colibrimexicanbistro.com/",
+      "facebook": "www.facebook.com/ColibriSF/",
+      "yelp": "www.yelp.com/biz/colibri-mexican-bistro-san-francisco",
+      "openTable": "www.opentable.com/r/colibri-mexican-bistro-san-francisco",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d614164-Reviews-Colibri_Mexican_Bistro-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/colibri-mexican-bistro-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/colibri-mexican-bistro-union-square"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Kitchen Story",
+    "images": [
+      {
+        "fileName": "san-francisco_kitchen-story.png",
+        "type": "inside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "3499 16th St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94114
+    },
+    "position": {
+      "lat": 37.7641822,
+      "lng": -122.4328616
+    },
+    "phone": "(415) 525-4905",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "8:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 19
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.kitchenstorysf.com/",
+      "facebook": "www.facebook.com/KitchenStorySF/",
+      "yelp": "www.yelp.com/biz/kitchen-story-san-francisco",
+      "openTable": "www.opentable.com/kitchen-story",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d3865082-Reviews-Kitchen_Story-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/kitchen-story-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/kitchen-story-castro"
+    }
+  },
+  {
+    "id": 6,
+    "name": "1300 on Fillmore",
+    "images": [
+      {
+        "fileName": "san-francisco__1300-on-fillmore.jpg",
+        "type": "inside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "1300 Fillmore St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94115
+    },
+    "position": {
+      "lat": 37.781588,
+      "lng": -122.4343255
+    },
+    "phone": "(415) 771-7100",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Bellini",
+        "price": 15
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.1300fillmore.com/",
+      "facebook": "www.facebook.com/1300Fillmore/?rf=342306949166549",
+      "yelp": "www.yelp.com/biz/1300-on-fillmore-san-francisco",
+      "openTable": "www.opentable.com/1300-on-fillmore",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d776388-Reviews-1300_Fillmore-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/1300-on-fillmore-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/1300-on-fillmore-western-addition"
+    },
+    "description": "Seatings at 11am and 1pm"
+  },
+  {
+    "id": 7,
+    "name": "Stock in Trade",
+    "images": [
+      {
+        "fileName": "san-francisco__stock-in-trade.jpg",
+        "type": "outside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "2036 Lombard St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94123
+    },
+    "position": {
+      "lat": 37.800139,
+      "lng": -122.437681
+    },
+    "phone": "(415) 829-3000",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 17
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.stockintradesf.com/",
+      "facebook": "www.facebook.com/StockinTradeSF/",
+      "yelp": "www.yelp.com/biz/stock-in-trade-san-francisco",
+      "openTable": "www.opentable.com/r/stock-in-trade-san-francisco",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d4135154-Reviews-Stock_in_Trade-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/stock-in-trade-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/stock-in-trade-marina-presidio"
+    },
+    "description": "Bottomless Brunch starts at 10am on Sundays during NFL Season"
+  },
+  {
+    "id": 8,
+    "name": "Hard Knox Cafe",
+    "images": [
+      {
+        "fileName": "san-francisco__hard-knox-cafe.jpg",
+        "type": "inside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "2448 Clement St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94121
+    },
+    "position": {
+      "lat": 37.782091,
+      "lng": -122.4879177
+    },
+    "phone": "(415) 752-3770",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 18
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.hardknoxcafe.com/",
+      "facebook": "www.facebook.com/hardknoxcafe/",
+      "yelp": "www.yelp.com/biz/hard-knox-cafe-san-francisco-2",
+      "openTable": "www.opentable.com/r/hard-knox-cafe-san-francisco",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d1055815-Reviews-Hard_Knox_Cafe-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/hard-knox-cafe-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/hard-knox-cafe-outer-richmond"
+    }
+  },
+  {
+    "id": "9",
+    "name": "Cliff House Terrace Room ",
+    "images": [
+      {
+        "fileName": "san-francisco__cliff-house.jpg",
+        "type": "outside"
+      }
+    ],
+    "region": "San Francisco, CA",
+    "address": {
+      "street": "1090 Point Lobos",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94121
+    },
+    "position": {
+      "lat": 37.7784683,
+      "lng": -122.5142115
+    },
+    "phone": "(415) 386-3330",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "4:00PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Food and Drink",
+        "price": 55
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.cliffhouse.com",
+      "facebook": "www.facebook.com/CliffHouseSF/",
+      "yelp": "www.yelp.com/biz/cliff-house-terrace-room-champagne-brunch-san-francisco"
+    },
+    "description": "Call to make reservations for dining at 10am, noon, or 2pm.",
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  }
+]

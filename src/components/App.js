@@ -5,9 +5,10 @@ import ReactGA from 'react-ga'
 import * as actions from '../actions'
 import Home from './Home'
 import VenuePage from './VenuePage'
+import { googleGa } from '../config'
 import './App.css'
 
-ReactGA.initialize('UA-21524856-1')
+ReactGA.initialize(googleGa)
 
 /**
  * @return {null}

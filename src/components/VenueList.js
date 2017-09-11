@@ -7,9 +7,6 @@ class VenueList extends Component {
   render () {
     return (
       <div className='VenueList'>
-        <h2>
-          VenueList
-        </h2>
         {this.props.venues.map((venue, key) => (
           <VenueListItem
             key={key}

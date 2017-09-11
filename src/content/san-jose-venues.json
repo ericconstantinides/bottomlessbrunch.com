@@ -1,0 +1,600 @@
+[
+  {
+    "id": 0,
+    "name": "The Table",
+    "images": [
+      { "fileName": "san-jose__the-table.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "neighborhood": "Willow Glen",
+    "address": {
+      "street": "1110 Willow St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95125
+    },
+    "position": {
+      "lat": 37.30828,
+      "lng": -121.9033627
+    },
+    "hours": [
+      {
+        "category": "Happy Hour",
+        "starts": "4:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "10:00PM",
+        "ends": "12:00AM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "8:30AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.thetablesj.com",
+      "facebook": "www.facebook.com/thetablewillowglen/",
+      "yelp": "www.yelp.com/biz/the-table-san-jose"
+    }
+  },
+  {
+    "id": 1,
+    "name": "1621 Bistro",
+    "images": [
+      { "fileName": "san-jose__1621-bistro.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "1621 North Capitol Ave.",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95132
+    },
+    "position": {
+      "lat": 37.3961055,
+      "lng": -121.8757905
+    },
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.sixteentwentyone.com",
+      "facebook": "www.facebook.com/yjonesy1021/",
+      "yelp": "www.yelp.com/biz/1621-bistro-san-jose-3"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Flames Eatery & Bar",
+    "images": [
+      { "fileName": "san-jose__flames-eatery--dining.jpg" },
+      { "fileName": "san-jose__flames-eatery.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "88 S 4th St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95112
+    },
+    "position": {
+      "lat": 37.336155,
+      "lng": -121.8880899
+    },
+    "phone": "(408) 971-1960",
+    "hours": [
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "9:00PM",
+        "ends": "11:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "9:00PM",
+        "ends": "12:00AM",
+        "days": [
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 13.95
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.flameseatery.com/",
+      "facebook": "www.facebook.com/pg/flameseatery",
+      "yelp": "www.yelp.com/biz/flames-eatery-and-bar-san-jose"
+    }
+  },
+  {
+    "id": 3,
+    "name": "4th St. Pizza Co",
+    "images": [
+      { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "150 E Santa Clara St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95113
+    },
+    "position": {
+      "lat": 37.3374315,
+      "lng": -121.8896738
+    },
+    "phone": "(408) 286-7500",
+    "hours": [
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.4thstpizzaco.com",
+      "facebook": "www.facebook.com/4thstpizza",
+      "yelp": "www.yelp.com/biz/4th-st-pizza-san-jose"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Billy’s Boston Chowder House",
+    "images": [
+      { 
+        "fileName": "san-jose__billys-boston-chowder-house--logo.png",
+        "type": "logo"
+      }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "29 E Main St",
+      "city": "Los Gatos",
+      "state": "CA",
+      "zip": 95030
+    },
+    "position": {
+      "lat": 37.2214323,
+      "lng": -121.9829681
+    },
+    "phone": "(408) 827-4005",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "4:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 6
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.bostonchowderhouse.com",
+      "facebook": "www.facebook.com/BillysBostonChowderHouse",
+      "yelp": "www.yelp.com/biz/billys-boston-chowder-house-los-gatos"
+    },
+    "devNotes": "http://losgatosmagazine.com/2014/06/25/five-oclock-somewhere-happy-hour-around-town/, http://sanfrancisco.cbslocal.com/top-lists/5-must-have-bottomless-mimosas-near-the-south-bay/"
+  },
+  {
+    "id": 5,
+    "name": "St. Stephen’s Green",
+    "images": [
+      { "fileName": "san-jose__st-stephens-green.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "223 Castro St.",
+      "city": "Mountain View",
+      "state": "CA",
+      "zip": 94041
+    },
+    "position": {
+      "lat": 37.3934652,
+      "lng": -122.0812436
+    },
+    "phone": "(650) 964-9151",
+    "hours": [
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:30PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.ststephensgreen.com",
+      "facebook": "www.facebook.com/stephensgreen",
+      "yelp": "www.yelp.com/biz/st-stephens-green-mountain-view-3"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Straits Restaurant",
+    "images": [
+      { "fileName": "san-jose__straits.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "333 Santana Row, Suite 1100",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95128
+    },
+    "position": {
+      "lat": 37.3217456,
+      "lng": -121.9504902
+    },
+    "phone": "(408) 246-6320",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "3:00PM",
+        "ends": "10:00PM",
+        "days": [
+          "Monday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 15
+      },
+      {
+        "item": "Bottomless Bloody Mary",
+        "price": 15
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.straitsrestaurants.com",
+      "facebook": "www.facebook.com/Straits-Restaurants-1667217176894999/",
+      "yelp": "www.yelp.com/biz/straits-santana-row-san-jose"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Tapsilog Bistro",
+    "images": [
+      { "fileName": "san-jose__tapsilog-bistro.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "819 W Hamilton Ave",
+      "city": "Campbell",
+      "state": "CA",
+      "zip": 95008
+    },
+    "position": {
+      "lat": 37.2949624,
+      "lng": -121.9659308
+    },
+    "phone": "(408) 412-8926",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "2:30PM",
+        "ends": "6:30PM",
+        "days": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Calamansi Mimosas",
+        "price": 15
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.tapsilogbistro.com",
+      "facebook": "www.facebook.com/littleManilaCampbell.Ca/",
+      "yelp": "www.yelp.com/biz/tapsilog-bistro-campbell"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Chacho’s Restaurant",
+    "images": [
+      { "fileName": "san-jose__chachos.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "87 E San Fernando St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95113
+    },
+    "position": {
+      "lat": 37.3353807,
+      "lng": -121.8898257
+    },
+    "phone": "(408) 293-4321",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.chachosrestaurant.com",
+      "facebook": "www.facebook.com/ChachosRestaurant/",
+      "yelp": "www.yelp.com/biz/chachos-restaurant-san-jose-2"
+    }
+  },
+  {
+    "id": 9,
+    "name": "SP2",
+    "images": [
+      { "fileName": "san-jose__sp2.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "72 N. Almaden Ave",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95110
+    },
+    "position": {
+      "lat": 37.3360263,
+      "lng": -121.896864
+    },
+    "phone": "(408) 299-2000",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:30PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.sp2sanjose.com/",
+      "facebook": "www.facebook.com/SP2SanJose/",
+      "yelp": "www.yelp.com/biz/sp2-communal-bar-restaurant-san-jose"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Santa Teresa Golf Club",
+    "images": [
+      { "fileName": "san-jose__santa-teresa-golf-club.jpg" }
+    ],
+    "region": "San Jose, CA",
+    "address": {
+      "street": "260 Bernal Rd",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95119
+    },
+    "position": {
+      "lat": 37.2280344,
+      "lng": -121.8067599
+    },
+    "phone": "(408) 225-2650",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "4:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 10
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.santateresagolf.com/",
+      "facebook": "www.facebook.com/santateresagolfclub/",
+      "yelp": "www.yelp.com/biz/santa-teresa-golf-club-san-jose"
+    },
+    "devNotes": "http://www.santateresagolf.com/page.php?page_id=4198&name=Sunday_Funday_Drink_Specials"
+  }
+]

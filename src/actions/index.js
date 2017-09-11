@@ -5,7 +5,7 @@ import {
   VENUE_OPEN,
   VENUE_CLOSE
 } from './types'
-import venuesJson from '../content/venues.json'
+import venuesJson from '../content/san-francisco-venues.json'
 
 export function fetchVenues () {
   return {

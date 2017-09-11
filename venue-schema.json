@@ -31,14 +31,6 @@
           "type": "number",
           "title": "Zip Code",
           "minLength": 5
-        },
-        "latitude": {
-          "type": "number",
-          "title": "Latitude"
-        },
-        "longitude": {
-          "type": "number",
-          "title": "Longitude"
         }
       },
       "XXXrequired": [
@@ -50,13 +42,34 @@
   },
   "id": "bottomless_brunch_venue",
   "type": "object",
-  "title": "Venue",
+  "name": "Venue",
   "properties": {
+    "id": {
+      "type": "number",
+      "title": "Venue ID"
+    },
     "name": {
       "type": "string",
       "title": "Venue Name"
     },
-    "metro": { 
+    "images": {
+      "type": "array",
+      "title": "Images",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fileName": { 
+            "type": "string",
+            "title": "File Name"
+          },
+          "type": { 
+            "type": "string",
+            "title": "Image Type"
+          }
+        }
+      }
+    },
+    "region": { 
       "type": "string",
       "title": "Metro Area",
       "enum": [
@@ -73,6 +86,19 @@
     "address": {
       "title": "Address",
       "$ref": "#/definitions/address"
+    },
+    "position": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "title": "Latitude"
+        },
+        "lng": {
+          "type": "number",
+          "title": "Longitude"
+        }
+      }
     },
     "phone": {
       "type": "string",
@@ -146,6 +172,22 @@
         },
         "yelp": {
           "title": "Yelp URL",
+          "type": "string"
+        },
+        "openTable": {
+          "title": "OpenTable URL",
+          "type": "string"
+        },
+        "tripAdvisor": {
+          "title": "TripAdvisor URL",
+          "type": "string"
+        },
+        "zagat": {
+          "title": "Zagat URL",
+          "type": "string"
+        },
+        "zomato": {
+          "title": "Zomato URL",
           "type": "string"
         }
       }
