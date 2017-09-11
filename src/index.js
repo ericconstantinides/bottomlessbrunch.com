@@ -3,19 +3,15 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter } from 'react-router-dom'
-import { composeWithDevTools } from 'redux-devtools-extension'
 import './index.css'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
 import reducers from './reducers'
 
-// new
-const createStoreWithMiddleware = createStore(reducers, composeWithDevTools(
-  applyMiddleware()
-))
+const createStoreWithMiddleware = applyMiddleware()(createStore)
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware}>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <App />
     </BrowserRouter>

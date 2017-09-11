@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Venue from './Venue'
+import VenueListItem from './VenueListItem'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 
@@ -11,7 +11,7 @@ class VenueList extends Component {
           VenueList
         </h2>
         {this.props.venues.map((venue, key) => (
-          <Venue
+          <VenueListItem
             key={key}
             {...venue}
           />
