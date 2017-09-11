@@ -199,6 +199,10 @@
     "devNotes": {
       "type": "string",
       "title": "Developer Notes"
+    },
+    "canonical": {
+      "type": "string",
+      "title": "Canonical. Where to verify the B.B. data"
     }
   }
 }
