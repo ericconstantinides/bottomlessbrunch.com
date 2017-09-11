@@ -2,6 +2,9 @@
   {
     "id": 0,
     "name": "The Table",
+    "images": [
+      { "file": "the-table-san-jose.jpg" }
+    ],
     "metro": "San Jose, CA",
     "address": {
       "street": "1110 Willow St",

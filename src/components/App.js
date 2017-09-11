@@ -23,18 +23,14 @@ class App extends Component {
     // get the venues
     this.props.fetchVenues()
   }
-  chooseRender () {
-    const openVenue = this.props.venues.filter(venue => venue.open)
-    if (openVenue.length) {
-      return <VenuePage {...openVenue[0]} />
-    }
-    return <Home />
-  }
   render () {
+    const openVenue = this.props.venues.filter(venue => venue.open)[0]
+    const openVenueRendered = openVenue ? <VenuePage {...openVenue} /> : ''
     return (
       <div className='App'>
         <Route path='/' component={Analytics} />
-        {this.chooseRender()}
+        {openVenueRendered}
+        <Home />
       </div>
     )
   }

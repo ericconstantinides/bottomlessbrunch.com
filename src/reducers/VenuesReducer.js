@@ -2,7 +2,8 @@ import {
   VENUES_FETCH,
   VENUE_SHOWINFO,
   VENUE_HIDEINFO,
-  VENUE_OPEN
+  VENUE_OPEN,
+  VENUE_CLOSE
 } from '../actions/types'
 // import _ from 'lodash'
 
@@ -26,11 +27,16 @@ export default (state = [], action) => {
         return venue
       })
     case VENUE_OPEN:
-      console.log('open me venue now please')
       return state.map(venue => {
         if (venue.id === action.payload.id) {
           venue.open = true
         }
+        venue.showInfo = false
+        return venue
+      })
+    case VENUE_CLOSE:
+      return state.map(venue => {
+        venue.open = false
         return venue
       })
     default:

@@ -1,0 +1,26 @@
+.VenuePage {
+  position: fixed;
+  z-index: 1;
+  background: rgba(255, 163, 71, 0.25);
+}
+.VenuePage,
+.VenuePage__inner {
+  height: 100%;
+  width: 100%;
+}
+.VenuePage__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.VenuePage__close {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  right: 1em;
+  top: 1em;
+}

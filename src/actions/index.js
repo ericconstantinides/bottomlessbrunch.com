@@ -2,7 +2,8 @@ import {
   VENUES_FETCH,
   VENUE_SHOWINFO,
   VENUE_HIDEINFO,
-  VENUE_OPEN
+  VENUE_OPEN,
+  VENUE_CLOSE
 } from './types'
 import venuesJson from '../content/venues.json'
 
@@ -29,6 +30,13 @@ export function showInfoVenue (id, direction) {
 export function openVenue (id) {
   return {
     type: VENUE_OPEN,
+    payload: {id}
+  }
+}
+
+export function closeVenue (id) {
+  return {
+    type: VENUE_CLOSE,
     payload: {id}
   }
 }
