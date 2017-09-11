@@ -8,7 +8,7 @@
         "type": "patio"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "817 Terry A Francois Blvd",
       "city": "San Francisco",
@@ -54,7 +54,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "216 Townsend St",
       "city": "San Francisco",
@@ -108,7 +108,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "68 4th St",
       "city": "San Francisco",
@@ -154,7 +154,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "25 Mason St",
       "city": "San Francisco",
@@ -209,7 +209,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "438 Geary St",
       "city": "San Francisco",
@@ -258,7 +258,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "3499 16th St",
       "city": "San Francisco",
@@ -307,7 +307,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "1300 Fillmore St",
       "city": "San Francisco",
@@ -357,7 +357,7 @@
         "type": "outside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "2036 Lombard St",
       "city": "San Francisco",
@@ -407,7 +407,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "2448 Clement St",
       "city": "San Francisco",
@@ -459,7 +459,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "2140 Mission St",
       "city": "San Francisco",
@@ -505,7 +505,7 @@
         "type": "outside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "1090 Point Lobos",
       "city": "San Francisco",
@@ -551,7 +551,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "1582 Folsom St",
       "city": "San Francisco",
@@ -601,7 +601,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "2367 Market St",
       "city": "San Francisco",
@@ -643,7 +643,7 @@
     "canonical": "http://www.bisousf.com/menu/ via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
   },
   {
-    "id": 14,
+    "id": 13,
     "name": "The Pink Elephant Alibi",
     "images": [
       {
@@ -651,7 +651,7 @@
         "type": "bar"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "142 Minna St",
       "city": "San Francisco",
@@ -697,7 +697,7 @@
     "canonical": "www.thepinkelephantsf.wixsite.com/mysite via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
   },
   {
-    "id": 13,
+    "id": 14,
     "name": "Barrel Head Brewhouse",
     "images": [
       {
@@ -705,7 +705,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "1785 Fulton St",
       "city": "San Francisco",
@@ -743,7 +743,7 @@
     "canonical": "www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5?q=bottomless"
   },
   {
-    "id": 14,
+    "id": 15,
     "name": "Cafe Mystique",
     "images": [
       {
@@ -751,7 +751,7 @@
         "type": "inside"
       }
     ],
-    "region": "San Francisco, CA",
+    "region": "San Francisco",
     "address": {
       "street": "464 Castro St",
       "city": "San Francisco",

@@ -37,7 +37,7 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ venues}) {
+function mapStateToProps ({ venues }) {
   return { venues }
 }
 

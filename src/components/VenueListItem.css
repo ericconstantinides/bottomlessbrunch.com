@@ -1,6 +1,6 @@
 .VenueListItem {
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  /* border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc; */
   margin-bottom: 0;
   border-bottom: none;
   transition: 0.15s;
@@ -19,7 +19,9 @@
   margin-bottom: 0.125em;
 }
 .VenueListItem__content {
+  flex: 1;
   padding: 0.5em 0.5em;
+  border-bottom: 1px solid #ccc;
 }
 .VenueListItem__p {
   font-size: 0.85em;
@@ -32,6 +34,7 @@
 .VenueListItem__image {
   display: block;
   width: 100px;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   margin-top: -1px;
 }

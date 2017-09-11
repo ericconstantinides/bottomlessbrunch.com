@@ -5,7 +5,7 @@
     "images": [
       { "fileName": "san-jose__the-table.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "neighborhood": "Willow Glen",
     "address": {
       "street": "1110 Willow St",
@@ -72,7 +72,7 @@
     "images": [
       { "fileName": "san-jose__1621-bistro.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "1621 North Capitol Ave.",
       "city": "San Jose",
@@ -108,7 +108,7 @@
       { "fileName": "san-jose__flames-eatery--dining.jpg" },
       { "fileName": "san-jose__flames-eatery.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "88 S 4th St",
       "city": "San Jose",
@@ -184,7 +184,7 @@
     "images": [
       { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "150 E Santa Clara St",
       "city": "San Jose",
@@ -242,7 +242,7 @@
         "type": "logo"
       }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "29 E Main St",
       "city": "Los Gatos",
@@ -297,7 +297,7 @@
     "images": [
       { "fileName": "san-jose__st-stephens-green.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "223 Castro St.",
       "city": "Mountain View",
@@ -345,7 +345,7 @@
     "images": [
       { "fileName": "san-jose__straits.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "333 Santana Row, Suite 1100",
       "city": "San Jose",
@@ -411,7 +411,7 @@
     "images": [
       { "fileName": "san-jose__tapsilog-bistro.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "819 W Hamilton Ave",
       "city": "Campbell",
@@ -464,7 +464,7 @@
     "images": [
       { "fileName": "san-jose__chachos.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "87 E San Fernando St",
       "city": "San Jose",
@@ -500,7 +500,7 @@
     "images": [
       { "fileName": "san-jose__sp2.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "72 N. Almaden Ave",
       "city": "San Jose",
@@ -549,7 +549,7 @@
     "images": [
       { "fileName": "san-jose__santa-teresa-golf-club.jpg" }
     ],
-    "region": "San Jose, CA",
+    "region": "San Jose",
     "address": {
       "street": "260 Bernal Rd",
       "city": "San Jose",
