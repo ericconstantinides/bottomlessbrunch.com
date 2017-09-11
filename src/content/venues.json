@@ -3,9 +3,10 @@
     "id": 0,
     "name": "The Table",
     "images": [
-      { "fileName": "the-table-san-jose.jpg" }
+      { "fileName": "san-jose__the-table.jpg" }
     ],
-    "metro": "San Jose, CA",
+    "region": "San Jose, CA",
+    "neighborhood": "Willow Glen",
     "address": {
       "street": "1110 Willow St",
       "city": "San Jose",
@@ -68,7 +69,10 @@
   {
     "id": 1,
     "name": "1621 Bistro",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__1621-bistro.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "1621 North Capitol Ave.",
       "city": "San Jose",
@@ -100,7 +104,11 @@
   {
     "id": 2,
     "name": "Flames Eatery & Bar",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__flames-eatery--dining.jpg" },
+      { "fileName": "san-jose__flames-eatery.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "88 S 4th St",
       "city": "San Jose",
@@ -178,7 +186,10 @@
   {
     "id": 3,
     "name": "4th St. Pizza Co",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "150 E Santa Clara St",
       "city": "San Jose",
@@ -230,7 +241,13 @@
   {
     "id": 4,
     "name": "Billy’s Boston Chowder House",
-    "metro": "San Jose, CA",
+    "images": [
+      { 
+        "fileName": "san-jose__billys-boston-chowder-house--logo.png",
+        "type": "logo"
+      }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "29 E Main St",
       "city": "Los Gatos",
@@ -282,7 +299,10 @@
   {
     "id": 5,
     "name": "St. Stephen’s Green",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__st-stephens-green.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "223 Castro St.",
       "city": "Mountain View",
@@ -327,7 +347,10 @@
   {
     "id": 6,
     "name": "Straits Restaurant",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__straits.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "333 Santana Row, Suite 1100",
       "city": "San Jose",
@@ -390,7 +413,10 @@
   {
     "id": 7,
     "name": "Tapsilog Bistro",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__tapsilog-bistro.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "819 W Hamilton Ave",
       "city": "Campbell",
@@ -440,7 +466,10 @@
   {
     "id": 8,
     "name": "Chacho’s Restaurant",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__chachos.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "87 E San Fernando St",
       "city": "San Jose",
@@ -473,7 +502,10 @@
   {
     "id": 9,
     "name": "SP2",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__sp2.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "72 N. Almaden Ave",
       "city": "San Jose",
@@ -519,7 +551,10 @@
   {
     "id": 10,
     "name": "Santa Teresa Golf Club",
-    "metro": "San Jose, CA",
+    "images": [
+      { "fileName": "san-jose__santa-teresa-golf-club.jpg" }
+    ],
+    "region": "San Jose, CA",
     "address": {
       "street": "260 Bernal Rd",
       "city": "San Jose",
