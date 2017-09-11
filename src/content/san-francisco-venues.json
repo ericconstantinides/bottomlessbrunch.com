@@ -9,6 +9,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Potrero",
     "address": {
       "street": "817 Terry A Francois Blvd",
       "city": "San Francisco",
@@ -41,7 +42,8 @@
     "links": {
       "website": "www.missionrockresort.com/",
       "facebook": "www.facebook.com/MissionRockResortSF",
-      "yelp": "www.yelp.com/biz/mission-rock-resort-san-francisco-2"
+      "yelp": "www.yelp.com/biz/mission-rock-resort-san-francisco-2",
+      "zomato": "www.zomato.com/san-francisco/mission-rock-resort-potrero"
     },
     "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
   },
@@ -55,6 +57,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "SOMA",
     "address": {
       "street": "216 Townsend St",
       "city": "San Francisco",
@@ -95,7 +98,8 @@
     "links": {
       "website": "www.districtsf.com/locations.html",
       "facebook": "www.facebook.com/districtsf/",
-      "yelp": "www.yelp.com/biz/district-san-francisco-3"
+      "yelp": "www.yelp.com/biz/district-san-francisco-3",
+      "zomato": "www.zomato.com/san-francisco/district-soma"
     },
     "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
   },
@@ -109,6 +113,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "SOMA",
     "address": {
       "street": "68 4th St",
       "city": "San Francisco",
@@ -141,7 +146,8 @@
     "links": {
       "website": "www.thekeystonesf.com/",
       "facebook": "www.facebook.com/thekeystonesf/",
-      "yelp": "www.yelp.com/biz/the-keystone-san-francisco-2"
+      "yelp": "www.yelp.com/biz/the-keystone-san-francisco-2",
+      "zomato": "www.zomato.com/san-francisco/the-keystone-soma"
     },
     "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
   },
@@ -155,6 +161,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Civic Center",
     "address": {
       "street": "25 Mason St",
       "city": "San Francisco",
@@ -196,7 +203,8 @@
       "facebook": "www.facebook.com/farmerbrownsf/",
       "yelp": "www.yelp.com/biz/farmerbrown-san-francisco-2",
       "openTable": "www.opentable.com/farmer-brown",
-      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d860472-Reviews-Farmerbrown-San_Francisco_California.html"
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d860472-Reviews-Farmerbrown-San_Francisco_California.html",
+      "zomato": "www.zomato.com/san-francisco/farmerbrown-civic-center"
     },
     "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
   },
@@ -210,6 +218,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Union Square",
     "address": {
       "street": "438 Geary St",
       "city": "San Francisco",
@@ -259,6 +268,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Castro",
     "address": {
       "street": "3499 16th St",
       "city": "San Francisco",
@@ -308,6 +318,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Western Addition",
     "address": {
       "street": "1300 Fillmore St",
       "city": "San Francisco",
@@ -358,6 +369,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Marina",
     "address": {
       "street": "2036 Lombard St",
       "city": "San Francisco",
@@ -408,6 +420,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Outer Richmond",
     "address": {
       "street": "2448 Clement St",
       "city": "San Francisco",
@@ -460,6 +473,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Mission District",
     "address": {
       "street": "2140 Mission St",
       "city": "San Francisco",
@@ -492,7 +506,8 @@
     "links": {
       "website": "www.thesycamoresf.com/",
       "facebook": "www.facebook.com/TheSycamore/",
-      "yelp": "www.yelp.com/biz/the-sycamore-san-francisco"
+      "yelp": "www.yelp.com/biz/the-sycamore-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/sycamore-mission-district"
     },
     "trackBack": "http://www.thesycamoresf.com/brunch-menu.html"
   },
@@ -506,6 +521,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Outer Richmond",
     "address": {
       "street": "1090 Point Lobos",
       "city": "San Francisco",
@@ -537,7 +553,8 @@
     "links": {
       "website": "www.cliffhouse.com",
       "facebook": "www.facebook.com/CliffHouseSF/",
-      "yelp": "www.yelp.com/biz/cliff-house-terrace-room-champagne-brunch-san-francisco"
+      "yelp": "www.yelp.com/biz/cliff-house-terrace-room-champagne-brunch-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/cliff-house-outer-richmond"
     },
     "description": "Call to make reservations for dining at 10am, noon, or 2pm.",
     "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
@@ -552,6 +569,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "SOMA",
     "address": {
       "street": "1582 Folsom St",
       "city": "San Francisco",
@@ -588,7 +606,8 @@
     "links": {
       "website": "www.thewillowssf.com/",
       "facebook": "www.facebook.com/thewillowssf/?rf=1611272505783614",
-      "yelp": "www.yelp.com/biz/the-willows-san-francisco"
+      "yelp": "www.yelp.com/biz/the-willows-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/the-willows-soma"
     },
     "trackBack": "http://www.thewillowssf.com/brunch-menu.html"
   },
@@ -602,6 +621,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Castro",
     "address": {
       "street": "2367 Market St",
       "city": "San Francisco",
@@ -638,7 +658,8 @@
     "links": {
       "website": "www.bisousf.com/",
       "facebook": "www.facebook.com/bisoubistro/",
-      "yelp": "www.yelp.com/biz/bisou-bistronomy-san-francisco"
+      "yelp": "www.yelp.com/biz/bisou-bistronomy-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/bisou-castro"
     },
     "canonical": "http://www.bisousf.com/menu/ via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
   },
@@ -652,6 +673,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "SOMA",
     "address": {
       "street": "142 Minna St",
       "city": "San Francisco",
@@ -692,7 +714,8 @@
     "links": {
       "website": "www.thepinkelephantsf.wixsite.com/mysite",
       "facebook": "www.facebook.com/pg/thepinkelephantsf",
-      "yelp": "www.yelp.com/biz/the-pink-elephant-alibi-san-francisco-3"
+      "yelp": "www.yelp.com/biz/the-pink-elephant-alibi-san-francisco-3",
+      "zomato": "www.zomato.com/san-francisco/pink-elephant-soma"
     },
     "canonical": "www.thepinkelephantsf.wixsite.com/mysite via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
   },
@@ -706,6 +729,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Western Addition",
     "address": {
       "street": "1785 Fulton St",
       "city": "San Francisco",
@@ -738,13 +762,14 @@
     "links": {
       "website": "www.barrelheadsf.com/",
       "facebook": "www.facebook.com/pg/BarrelHeadBrewhouse",
-      "yelp": "www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5"
+      "yelp": "www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5",
+      "zomato": "www.zomato.com/san-francisco/barrel-head-western-addition"
     },
     "canonical": "www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5?q=bottomless"
   },
   {
     "id": 15,
-    "name": "Cafe Mystique",
+    "name": "Café Mystique",
     "images": [
       {
         "fileName": "san-francisco__cafe-mystique.jpg",
@@ -752,6 +777,7 @@
       }
     ],
     "region": "San Francisco",
+    "neighborhood": "Castro",
     "address": {
       "street": "464 Castro St",
       "city": "San Francisco",
@@ -778,7 +804,8 @@
     "links": {
       "website": "www.cafe-mystique.com/",
       "facebook": "www.facebook.com/CafeMystiqueSF/",
-      "yelp": "www.yelp.com/biz/cafe-mystique-san-francisco"
+      "yelp": "www.yelp.com/biz/cafe-mystique-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/café-mystique-castro"
     },
     "canonical": "https://www.yelp.com/biz/cafe-mystique-san-francisco?q=bottomless"
   }

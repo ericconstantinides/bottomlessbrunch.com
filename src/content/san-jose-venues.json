@@ -63,7 +63,8 @@
     "links": {
       "website": "www.thetablesj.com",
       "facebook": "www.facebook.com/thetablewillowglen/",
-      "yelp": "www.yelp.com/biz/the-table-san-jose"
+      "yelp": "www.yelp.com/biz/the-table-san-jose",
+      "zomato": "www.zomato.com/san-jose/the-table-willow-glen"
     }
   },
   {
@@ -73,6 +74,7 @@
       { "fileName": "san-jose__1621-bistro.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "",
     "address": {
       "street": "1621 North Capitol Ave.",
       "city": "San Jose",
@@ -98,7 +100,8 @@
     "links": {
       "website": "www.sixteentwentyone.com",
       "facebook": "www.facebook.com/yjonesy1021/",
-      "yelp": "www.yelp.com/biz/1621-bistro-san-jose-3"
+      "yelp": "www.yelp.com/biz/1621-bistro-san-jose-3",
+      "zomato": ""
     }
   },
   {
@@ -109,6 +112,7 @@
       { "fileName": "san-jose__flames-eatery.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "Downtown",
     "address": {
       "street": "88 S 4th St",
       "city": "San Jose",
@@ -175,7 +179,8 @@
     "links": {
       "website": "www.flameseatery.com/",
       "facebook": "www.facebook.com/pg/flameseatery",
-      "yelp": "www.yelp.com/biz/flames-eatery-and-bar-san-jose"
+      "yelp": "www.yelp.com/biz/flames-eatery-and-bar-san-jose",
+      "zomato": "www.zomato.com/san-jose/flames-eatery-and-bar-downtown"
     }
   },
   {
@@ -185,6 +190,7 @@
       { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
     ],
     "region": "San Jose",
+    "neighborhood": "Downtown",
     "address": {
       "street": "150 E Santa Clara St",
       "city": "San Jose",
@@ -230,7 +236,8 @@
     "links": {
       "website": "www.4thstpizzaco.com",
       "facebook": "www.facebook.com/4thstpizza",
-      "yelp": "www.yelp.com/biz/4th-st-pizza-san-jose"
+      "yelp": "www.yelp.com/biz/4th-st-pizza-san-jose",
+      "zomato": "www.zomato.com/san-jose/4th-street-pizza-downtown"
     }
   },
   {
@@ -243,6 +250,7 @@
       }
     ],
     "region": "San Jose",
+    "neighborhood": "Los Gatos",
     "address": {
       "street": "29 E Main St",
       "city": "Los Gatos",
@@ -287,7 +295,8 @@
     "links": {
       "website": "www.bostonchowderhouse.com",
       "facebook": "www.facebook.com/BillysBostonChowderHouse",
-      "yelp": "www.yelp.com/biz/billys-boston-chowder-house-los-gatos"
+      "yelp": "www.yelp.com/biz/billys-boston-chowder-house-los-gatos",
+      "zomato": "www.zomato.com/los-gatos-ca/billys-boston-chowder-house-los-gatos"
     },
     "devNotes": "http://losgatosmagazine.com/2014/06/25/five-oclock-somewhere-happy-hour-around-town/, http://sanfrancisco.cbslocal.com/top-lists/5-must-have-bottomless-mimosas-near-the-south-bay/"
   },
@@ -298,6 +307,7 @@
       { "fileName": "san-jose__st-stephens-green.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "Mountain View",
     "address": {
       "street": "223 Castro St.",
       "city": "Mountain View",
@@ -336,7 +346,8 @@
     "links": {
       "website": "www.ststephensgreen.com",
       "facebook": "www.facebook.com/stephensgreen",
-      "yelp": "www.yelp.com/biz/st-stephens-green-mountain-view-3"
+      "yelp": "www.yelp.com/biz/st-stephens-green-mountain-view-3",
+      "zomato": "www.zomato.com/mountain-view-ca/st-stephens-green-mountain-view"
     }
   },
   {
@@ -346,6 +357,7 @@
       { "fileName": "san-jose__straits.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "Santana Row",
     "address": {
       "street": "333 Santana Row, Suite 1100",
       "city": "San Jose",
@@ -402,7 +414,8 @@
     "links": {
       "website": "www.straitsrestaurants.com",
       "facebook": "www.facebook.com/Straits-Restaurants-1667217176894999/",
-      "yelp": "www.yelp.com/biz/straits-santana-row-san-jose"
+      "yelp": "www.yelp.com/biz/straits-santana-row-san-jose",
+      "zomato": "www.zomato.com/san-jose/straits-san-jose"
     }
   },
   {
@@ -412,6 +425,7 @@
       { "fileName": "san-jose__tapsilog-bistro.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "Campbell",
     "address": {
       "street": "819 W Hamilton Ave",
       "city": "Campbell",
@@ -455,7 +469,8 @@
     "links": {
       "website": "www.tapsilogbistro.com",
       "facebook": "www.facebook.com/littleManilaCampbell.Ca/",
-      "yelp": "www.yelp.com/biz/tapsilog-bistro-campbell"
+      "yelp": "www.yelp.com/biz/tapsilog-bistro-campbell",
+      "zomato": "www.zomato.com/san-jose/tapsilog-bistro-west-san-jose"
     }
   },
   {
@@ -465,6 +480,7 @@
       { "fileName": "san-jose__chachos.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "Downtown",
     "address": {
       "street": "87 E San Fernando St",
       "city": "San Jose",
@@ -491,7 +507,8 @@
     "links": {
       "website": "www.chachosrestaurant.com",
       "facebook": "www.facebook.com/ChachosRestaurant/",
-      "yelp": "www.yelp.com/biz/chachos-restaurant-san-jose-2"
+      "yelp": "www.yelp.com/biz/chachos-restaurant-san-jose-2",
+      "zomato": "www.zomato.com/san-jose/chachos-downtown"
     }
   },
   {
@@ -501,6 +518,7 @@
       { "fileName": "san-jose__sp2.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "Downtown",
     "address": {
       "street": "72 N. Almaden Ave",
       "city": "San Jose",
@@ -540,7 +558,8 @@
     "links": {
       "website": "www.sp2sanjose.com/",
       "facebook": "www.facebook.com/SP2SanJose/",
-      "yelp": "www.yelp.com/biz/sp2-communal-bar-restaurant-san-jose"
+      "yelp": "www.yelp.com/biz/sp2-communal-bar-restaurant-san-jose",
+      "zomato": "www.zomato.com/san-jose/sp2-communal-bar-restaurant-downtown"
     }
   },
   {
@@ -550,6 +569,7 @@
       { "fileName": "san-jose__santa-teresa-golf-club.jpg" }
     ],
     "region": "San Jose",
+    "neighborhood": "South San Jose",
     "address": {
       "street": "260 Bernal Rd",
       "city": "San Jose",
@@ -593,7 +613,8 @@
     "links": {
       "website": "www.santateresagolf.com/",
       "facebook": "www.facebook.com/santateresagolfclub/",
-      "yelp": "www.yelp.com/biz/santa-teresa-golf-club-san-jose"
+      "yelp": "www.yelp.com/biz/santa-teresa-golf-club-san-jose",
+      "zomato": "www.zomato.com/san-jose/santa-teresa-golf-club-south-san-jose"
     },
     "devNotes": "http://www.santateresagolf.com/page.php?page_id=4198&name=Sunday_Funday_Drink_Specials"
   }
