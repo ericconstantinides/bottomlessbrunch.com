@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withGoogleMap, GoogleMap, Marker, OverlayView } from 'react-google-maps'
+import GoogleMapReact from 'google-map-react'
 import * as actions from '../actions'
 import './VenuePopup.css'
-
-function getPixelPositionOffset(width, height) {
-  return { x: -(width / 2), y: -(height / 2) };
-}
+import MapItem from './MapItem'
 
 class Map extends Component {
   constructor () {
@@ -22,7 +19,7 @@ class Map extends Component {
   mapLoaded (map) {
     // This is how we can save the map:
     if (this.state.map !== null) return false
-    console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
+    // console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
     this.setState({ map })
   }
   handleMarkerClick = marker => {
@@ -35,71 +32,54 @@ class Map extends Component {
   handleMarkerMouseOut = marker => {
     this.props.hideInfoVenue(marker.id)
   }
-  renderMarkers () {
-    if (!this.props.venues) return ''
-    return this.props.venues.map((marker, i) => (
-      <Marker
-        key={i}
-        onMouseOver={() => this.handleMarkerMouseOver(marker)}
-        onMouseOut={() => this.handleMarkerMouseOut(marker)}
-        onClick={() => this.handleMarkerClick(marker)}
-        {...marker}
-      />
-    ))
-  }
-  componentDidMount() {
+  // renderMarkers () {
+  //   if (!this.props.venues) return ''
+  //   return this.props.venues.map((marker, i) => (
+  //     <Marker
+  //       key={i}
+  //       onMouseOver={() => this.handleMarkerMouseOver(marker)}
+  //       onMouseOut={() => this.handleMarkerMouseOut(marker)}
+  //       onClick={() => this.handleMarkerClick(marker)}
+  //       {...marker}
+  //     />
+  //   ))
+  // }
+  componentDidMount () {
     this.setState({ loaded: true })
   }
 
   render () {
     return (
-      <GoogleMap
+      <GoogleMapReact
         ref={this.mapLoaded.bind(this)}
         onDragEnd={this.mapMoved.bind(this)}
         defaultZoom={this.props.zoom}
         defaultCenter={this.props.center}
       >
-        {this.renderMarkers()}
+        {this.props.venues.map((venue, i) => (
+          <MapItem
+            key={i}
+            {...venue}
+            lat={venue.position.lat}
+            lng={venue.position.lng}
+          />
+        ))}
         <VenuePopup
           venues={this.props.venues}
           cursorPos={this.props.cursorPos}
         />
-        {this.state.loaded &&
-          <OverlayView
-            position={this.props.center}
-            /*
-            * An alternative to specifying position is specifying bounds.
-            * bounds can either be an instance of google.maps.LatLngBounds
-            * or an object in the following format:
-            * bounds={{
-            *    ne: { lat: 62.400471, lng: -150.005608 },
-            *    sw: { lat: 62.281819, lng: -150.287132 }
-            * }}
-            */
-            /*
-            * 1. Specify the pane the OverlayView will be rendered to. For
-            *    mouse interactivity, use `OverlayView.OVERLAY_MOUSE_TARGET`.
-            *    Defaults to `OverlayView.OVERLAY_LAYER`.
-            */
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-            /*
-            * 2. Tweak the OverlayView's pixel position. In this case, we're
-            *    centering the content.
-            */
-            getPixelPositionOffset={getPixelPositionOffset}
-            /*
-            * 3. Create OverlayView content using standard React components.
-            */
-          >
-            <div>
-              <h1>OverlayView</h1>
-              <p>I have the look</p>
-            </div>
-          </OverlayView> }
-      </GoogleMap>
+      </GoogleMapReact>
     )
   }
 }
+
+// const MapItems = props => {
+//   return props.venues.map((venue, i) => {
+//     return (
+//       <div key={i} lat={venue.position.lat} lng={venue.position.lng}>{venue.name}</div>
+//     )
+//   })
+// }
 
 const VenuePopup = props => {
   const showInfoVenue = props.venues.filter(venue => venue.showInfo)[0]
@@ -130,4 +110,4 @@ const VenuePopup = props => {
   )
 }
 
-export default connect(null, actions)(withGoogleMap(Map))
+export default connect(null, actions)(Map)
