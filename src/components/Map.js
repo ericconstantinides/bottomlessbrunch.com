@@ -4,17 +4,6 @@ import { withGoogleMap, GoogleMap, Marker, OverlayView } from 'react-google-maps
 import * as actions from '../actions'
 import './VenuePopup.css'
 
-const OVERLAY_STYLES = {
-  mapContainer: {
-    height: `100%`,
-  },
-  overlayView: {
-    background: `white`,
-    border: `1px solid #ccc`,
-    padding: 15,
-  },
-};
-
 function getPixelPositionOffset(width, height) {
   return { x: -(width / 2), y: -(height / 2) };
 }
@@ -92,7 +81,7 @@ class Map extends Component {
             *    mouse interactivity, use `OverlayView.OVERLAY_MOUSE_TARGET`.
             *    Defaults to `OverlayView.OVERLAY_LAYER`.
             */
-            mapPaneName={OverlayView.OVERLAY_LAYER}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             /*
             * 2. Tweak the OverlayView's pixel position. In this case, we're
             *    centering the content.
@@ -102,7 +91,7 @@ class Map extends Component {
             * 3. Create OverlayView content using standard React components.
             */
           >
-            <div style={OVERLAY_STYLES.overlayView}>
+            <div>
               <h1>OverlayView</h1>
               <p>I have the look</p>
             </div>
