@@ -9,6 +9,9 @@ class VenueList extends Component {
       <div className='VenueList'>
         {this.props.venues.map((venue, key) => (
           <VenueListItem
+            showInfoVenue={this.props.showInfoVenue}
+            hideInfoVenue={this.props.hideInfoVenue}
+            openVenue={this.props.openVenue}
             key={key}
             {...venue}
           />

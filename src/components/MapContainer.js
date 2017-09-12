@@ -10,9 +10,10 @@ class MapContainer extends Component {
     const styles = { height: `100%`, width: `100%` }
     return (
       <Map
+        cursorPos={this.props.cursorPos}
         center={region.position}
         zoom={region.zoom}
-        markers={this.props.venues}
+        venues={this.props.venues}
         containerElement={<div style={styles} />}
         mapElement={<div style={styles} />}
       />

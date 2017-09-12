@@ -20,6 +20,13 @@ function Analytics (props) {
 }
 
 class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { cursorPos: { x: 0, y: 0 } }
+  }
+  handleMouseMove (event) {
+    this.setState({ cursorPos: { x: event.clientX, y: event.clientY } })
+  }
   componentWillMount () {
     // get the venues
     this.props.fetchVenues()
@@ -28,10 +35,13 @@ class App extends Component {
     const openVenue = this.props.venues.filter(venue => venue.open)[0]
     const openVenueRendered = openVenue ? <VenuePage {...openVenue} /> : ''
     return (
-      <div className='App'>
+      <div
+        onMouseMove={this.handleMouseMove.bind(this)}
+        className='App'
+      >
         <Route path='/' component={Analytics} />
         {openVenueRendered}
-        <Home />
+        <Home cursorPos={this.state.cursorPos} />
       </div>
     )
   }

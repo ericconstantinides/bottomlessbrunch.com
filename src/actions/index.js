@@ -14,13 +14,14 @@ export function fetchVenues () {
   }
 }
 
-export function showInfoVenue (id, direction) {
-  if (direction === 'on') {
-    return {
-      type: VENUE_SHOWINFO,
-      payload: {id}
-    }
+export function showInfoVenue (id) {
+  return {
+    type: VENUE_SHOWINFO,
+    payload: {id}
   }
+}
+
+export function hideInfoVenue (id) {
   return {
     type: VENUE_HIDEINFO,
     payload: {id}

@@ -1,0 +1,8 @@
+.VenuePopup {
+  position: fixed;
+  left: 500px;
+  top: 500px;
+  z-index: 100;
+  background: white;
+  pointer-events: none;
+}

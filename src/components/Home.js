@@ -14,7 +14,7 @@ export default class Home extends Component {
             <VenueList />
           </div>
           <div className='App__column Map__container'>
-            <MapContainer />
+            <MapContainer cursorPos={this.props.cursorPos} />
           </div>
         </div>
       </div>

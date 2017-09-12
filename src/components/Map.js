@@ -1,7 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker, OverlayView } from 'react-google-maps'
 import * as actions from '../actions'
+import './VenuePopup.css'
+
+const OVERLAY_STYLES = {
+  mapContainer: {
+    height: `100%`,
+  },
+  overlayView: {
+    background: `white`,
+    border: `1px solid #ccc`,
+    padding: 15,
+  },
+};
+
+function getPixelPositionOffset(width, height) {
+  return { x: -(width / 2), y: -(height / 2) };
+}
 
 class Map extends Component {
   constructor () {
@@ -10,7 +26,6 @@ class Map extends Component {
       map: null
     }
   }
-
   mapMoved () {
     console.log('Map Moved: ', JSON.stringify(this.state.map.getCenter()))
   }
@@ -20,51 +35,26 @@ class Map extends Component {
     console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
     this.setState({ map })
   }
-  onMarkerClick () {
-    console.log('click.')
+  handleMarkerClick = marker => {
+    this.props.openVenue(marker.id)
   }
-  // Toggle to 'true' to show InfoWindow and re-renders component
-  handleMarkerHover (targetMarker) {
-    console.log('hover')
-    // this.setState({
-    //   markers: this.state.markers.map(marker => {
-    //     if (marker === targetMarker) return { ...marker, showInfo: true }
-    //     return marker
-    //   })
-    // })
+  handleMarkerMouseOver = marker => {
+    // console.log('x:', this.state.x, 'y:', this.state.y)
+    this.props.showInfoVenue(marker.id)
   }
-
-  handleMarkerClose (targetMarker) {
-    console.log('off-hover')
-    // this.setState({
-    //   markers: this.state.markers.map(marker => {
-    //     if (marker === targetMarker) return { ...marker, showInfo: false }
-    //     return marker
-    //   })
-    // })
+  handleMarkerMouseOut = marker => {
+    this.props.hideInfoVenue(marker.id)
   }
   renderMarkers () {
-    if (!this.props.markers) return ''
-    return this.props.markers.map((marker, i) => (
+    if (!this.props.venues) return ''
+    return this.props.venues.map((marker, i) => (
       <Marker
         key={i}
-        onMouseOver={() => this.props.showInfoVenue(marker.id, 'on')}
-        onMouseOut={() => this.props.showInfoVenue(marker.id, 'off')}
-        onClick={() => this.props.openVenue(marker.id)}
+        onMouseOver={() => this.handleMarkerMouseOver(marker)}
+        onMouseOut={() => this.handleMarkerMouseOut(marker)}
+        onClick={() => this.handleMarkerClick(marker)}
         {...marker}
-      >
-        {marker.showInfo &&
-          <InfoWindow>
-            <div>
-              <h4>
-                {marker.name}
-              </h4>
-              <p>
-                {marker.address.city}
-              </p>
-            </div>
-          </InfoWindow>}
-      </Marker>
+      />
     ))
   }
 
@@ -77,9 +67,74 @@ class Map extends Component {
         defaultCenter={this.props.center}
       >
         {this.renderMarkers()}
+        <VenuePopup
+          venues={this.props.venues}
+          cursorPos={this.props.cursorPos}
+        />
+        <OverlayView
+          key={Math.random()}
+          position={this.props.center}
+          /*
+          * An alternative to specifying position is specifying bounds.
+          * bounds can either be an instance of google.maps.LatLngBounds
+          * or an object in the following format:
+          * bounds={{
+          *    ne: { lat: 62.400471, lng: -150.005608 },
+          *    sw: { lat: 62.281819, lng: -150.287132 }
+          * }}
+          */
+          /*
+          * 1. Specify the pane the OverlayView will be rendered to. For
+          *    mouse interactivity, use `OverlayView.OVERLAY_MOUSE_TARGET`.
+          *    Defaults to `OverlayView.OVERLAY_LAYER`.
+          */
+          mapPaneName={OverlayView.OVERLAY_LAYER}
+          /*
+          * 2. Tweak the OverlayView's pixel position. In this case, we're
+          *    centering the content.
+          */
+          getPixelPositionOffset={getPixelPositionOffset}
+          /*
+          * 3. Create OverlayView content using standard React components.
+          */
+        >
+          <div style={OVERLAY_STYLES.overlayView}>
+            <h1>OverlayView</h1>
+            <p>I have the look</p>
+          </div>
+        </OverlayView>
       </GoogleMap>
     )
   }
+}
+
+const VenuePopup = props => {
+  const showInfoVenue = props.venues.filter(venue => venue.showInfo)[0]
+  if (!showInfoVenue) {
+    return null
+  }
+  const renderedImage = showInfoVenue.images
+    ? <div className='VenueListItem__image-container'>
+      <img
+        className='VenueListItem__image'
+        src={`/images/${showInfoVenue.images[0].fileName}`}
+        alt={showInfoVenue.name}
+        />
+    </div>
+    : ''
+  const { x, y } = props.cursorPos
+  const style = { left: `${x}px`, top: `${y}px` }
+  return (
+    <article style={style} className='VenueListItem VenuePopup'>
+      {renderedImage}
+      <div className='VenueListItem__content'>
+        <h4 className='VenueListItem__title'>{showInfoVenue.name}</h4>
+        <p className='VenueListItem__p'>
+          {showInfoVenue.address.street}, {showInfoVenue.address.city}
+        </p>
+      </div>
+    </article>
+  )
 }
 
 export default connect(null, actions)(withGoogleMap(Map))
