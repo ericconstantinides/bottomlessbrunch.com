@@ -1,3 +1,4 @@
+import slug from '../lib/Slug'
 import {
   VENUES_FETCH,
   VENUE_SHOWINFO,
@@ -8,9 +9,15 @@ import {
 import venuesJson from '../content/san-francisco-venues.json'
 
 export function fetchVenues () {
+  // let's add the slug here:
+  // <region>/<place name>-<neighborhood>
+  const venuesJsonWithSlug = venuesJson.map(venue => {
+    venue.slug = slug(venue.region, venue.name, venue.neighborhood)
+    return venue
+  })
   return {
     type: VENUES_FETCH,
-    payload: { data: venuesJson }
+    payload: { data: venuesJsonWithSlug }
   }
 }
 
