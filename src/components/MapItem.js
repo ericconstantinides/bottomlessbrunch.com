@@ -26,7 +26,7 @@ const MapItem = ({
         onMouseLeave={handleMouseLeave(venue.id)}
         onClick={handleClick(venue.id)}
       />
-      <article className='VenueListItem VenuePopup'>
+      <article className='VenueListItem'>
         {renderedImage}
         <div className='VenueListItem__content'>
           <h4 className='VenueListItem__title'>{venue.name}</h4>
