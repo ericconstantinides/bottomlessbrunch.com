@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import * as actions from '../actions'
-import './VenuePopup.css'
+// import './VenuePopup.css'
 import MapItem from './MapItem'
 
 class Map extends Component {
@@ -22,28 +22,15 @@ class Map extends Component {
     // console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
     this.setState({ map })
   }
-  handleMarkerClick = marker => {
-    this.props.openVenue(marker.id)
+  handleMouseOver = id => event => {
+    this.props.showInfoVenue(id)
   }
-  handleMarkerMouseOver = marker => {
-    // console.log('x:', this.state.x, 'y:', this.state.y)
-    this.props.showInfoVenue(marker.id)
+  handleMouseLeave = id => event => {
+    this.props.hideInfoVenue(id)
   }
-  handleMarkerMouseOut = marker => {
-    this.props.hideInfoVenue(marker.id)
+  handleClick = id => event => {
+    this.props.openVenue(id)
   }
-  // renderMarkers () {
-  //   if (!this.props.venues) return ''
-  //   return this.props.venues.map((marker, i) => (
-  //     <Marker
-  //       key={i}
-  //       onMouseOver={() => this.handleMarkerMouseOver(marker)}
-  //       onMouseOut={() => this.handleMarkerMouseOut(marker)}
-  //       onClick={() => this.handleMarkerClick(marker)}
-  //       {...marker}
-  //     />
-  //   ))
-  // }
   componentDidMount () {
     this.setState({ loaded: true })
   }
@@ -62,12 +49,16 @@ class Map extends Component {
             {...venue}
             lat={venue.position.lat}
             lng={venue.position.lng}
+            handleMouseOver={this.handleMouseOver}
+            handleMouseLeave={this.handleMouseLeave}
+            handleClick={this.handleClick}
+            venue={venue}
           />
         ))}
-        <VenuePopup
+        {/* <VenuePopup
           venues={this.props.venues}
           cursorPos={this.props.cursorPos}
-        />
+        /> */}
       </GoogleMapReact>
     )
   }
@@ -80,7 +71,7 @@ class Map extends Component {
 //     )
 //   })
 // }
-
+/* 
 const VenuePopup = props => {
   const showInfoVenue = props.venues.filter(venue => venue.showInfo)[0]
   if (!showInfoVenue) {
@@ -109,5 +100,5 @@ const VenuePopup = props => {
     </article>
   )
 }
-
+ */
 export default connect(null, actions)(Map)

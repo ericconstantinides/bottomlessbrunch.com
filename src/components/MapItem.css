@@ -1,14 +1,22 @@
-.MapItem {
-  width: 50px;
-  height: 50px;
-  display: block;
+.MapItem__marker {
+  width: 28px;
+  height: 44px;
   border-radius: 100px;
-  background: orange;
-  margin: -25px 0 0 -25px;
+  margin: -44px 0 0 -14px;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  background-image: url('data:image/svg+xml;utf8, <svg viewBox="0 0 14 22" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" opacity="0.65" fill="#FFFFFF" width="8" height="8"/> <path fill="#C92A2A" d="M12.942,3.223c-0.578-0.905-1.342-1.675-2.326-2.25C9.411,0.268,7.711-0.193,5.899,0.08 C3.683,0.414,2.032,1.686,1.044,3.237C0.445,4.179,0.03,5.333,0.001,6.77c-0.029,1.473,0.429,2.608,0.992,3.586 c0.283,0.49,0.537,0.986,0.831,1.458c0.88,1.412,1.832,2.756,2.653,4.213C5.585,17.99,6.482,19.453,7,22 c0.752-3.863,2.481-6.025,4.307-8.791c0.613-0.928,1.225-1.854,1.711-2.864c0.25-0.52,0.529-1.006,0.705-1.584 c0.172-0.576,0.295-1.269,0.275-2.016C13.965,5.288,13.547,4.169,12.942,3.223z M7,9.208c-1.355,0-2.453-1.1-2.453-2.454 C4.547,5.4,5.645,4.302,7,4.302c1.353,0,2.451,1.098,2.451,2.452C9.452,8.107,8.353,9.208,7,9.208z"/></svg>');
+}
+.MapItem .VenueListItem {
+  display: none;
+}
+.MapItem.is-hovered .VenueListItem {
+  display: block;
 }
