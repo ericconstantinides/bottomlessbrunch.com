@@ -1,5 +1,6 @@
 import React from 'react'
 import './VenueListItem.css'
+import { Link } from 'react-router-dom'
 
 const VenueListItem = ({
   venue,
@@ -18,7 +19,8 @@ const VenueListItem = ({
     </div>
     : ''
   return (
-    <article
+    <Link
+      to={`/${venue.slug}`}
       className={`VenueListItem ${hovered}`}
       onMouseEnter={handleMouseOver(venue.id)}
       onMouseLeave={handleMouseLeave(venue.id)}
@@ -31,7 +33,7 @@ const VenueListItem = ({
           {venue.address.street}, {venue.address.city}
         </p>
       </div>
-    </article>
+    </Link>
   )
 }
 

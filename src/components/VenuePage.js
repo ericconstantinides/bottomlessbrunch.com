@@ -21,5 +21,14 @@ class VenuePage extends Component {
     )
   }
 }
+// ownProps are the props that are "going to" PostShow during the connect
+// function mapStateToProps ({ venues }, ownProps) {
+//   const venue = venues.filter(
+//     venue => {
+//       return `/${venue.slug}` === ownProps.match.path
+//     }
+//   )[0]
+//   return { venue }
+// }
 
 export default connect(null, actions)(VenuePage)
