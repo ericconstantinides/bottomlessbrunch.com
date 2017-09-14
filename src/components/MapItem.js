@@ -21,11 +21,14 @@ const MapItem = ({
   // const style = { left: `${x}px`, top: `${y}px` }
   return (
     <div className={`MapItem ${activeState}`}>
-      <span className='MapItem__marker'
+      <div
+        className='MapItem__marker-container'
         onMouseEnter={handleMouseOver(venue.id)}
         onMouseLeave={handleMouseLeave(venue.id)}
         onClick={handleClick(venue.id)}
-      />
+      >
+        <span className='MapItem__marker' />
+      </div>
       <article className='VenueListItem'>
         {renderedImage}
         <div className='VenueListItem__content'>
