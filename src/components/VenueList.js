@@ -4,16 +4,26 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 
 class VenueList extends Component {
+  handleMouseOver = id => event => {
+    this.props.showInfoVenue(id)
+  }
+  handleMouseLeave = id => event => {
+    this.props.hideInfoVenue(id)
+  }
+  handleClick = id => event => {
+    this.props.openVenue(id)
+  }
+  
   render () {
     return (
       <div className='VenueList'>
         {this.props.venues.map((venue, key) => (
           <VenueListItem
-            showInfoVenue={this.props.showInfoVenue}
-            hideInfoVenue={this.props.hideInfoVenue}
-            openVenue={this.props.openVenue}
             key={key}
-            {...venue}
+            handleMouseOver={this.handleMouseOver}
+            handleMouseLeave={this.handleMouseLeave}
+            handleClick={this.handleClick}
+            venue={venue}
           />
         ))}
       </div>
