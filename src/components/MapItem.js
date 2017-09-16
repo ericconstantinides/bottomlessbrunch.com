@@ -20,13 +20,13 @@ const MapItem = ({
   // const { x, y } = props.cursorPos
   // const style = { left: `${x}px`, top: `${y}px` }
   return (
-    <div className={`MapItem ${activeState}`}>
-      <div
-        className='MapItem__marker-container'
-        onMouseEnter={handleMouseOver(venue.id)}
-        onMouseLeave={handleMouseLeave(venue.id)}
-        onClick={handleClick(venue.id)}
-      >
+    <div
+      className={`MapItem ${activeState}`}
+      onMouseEnter={handleMouseOver(venue.id)}
+      onMouseLeave={handleMouseLeave(venue.id)}
+      onClick={handleClick(venue.id)}
+    >
+      <div className='MapItem__marker-container'>
         <span className='MapItem__marker' />
       </div>
       <article className='VenueListItem'>
