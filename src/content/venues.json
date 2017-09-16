@@ -1,0 +1,1431 @@
+[
+  {
+    "id": 0,
+    "region": 0,
+    "name": "Mission Rock Resort",
+    "images": [
+      {
+        "fileName": "san-francisco__mission-rock-resort-2.jpg",
+        "type": "patio"
+      }
+    ],
+    "neighborhood": "Potrero",
+    "address": {
+      "street": "817 Terry A Francois Blvd",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94107
+    },
+    "position": {
+      "lat": 37.765496,
+      "lng": -122.386594
+    },
+    "phone": "(415) 701-7625",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 20
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.missionrockresort.com/",
+      "facebook": "www.facebook.com/MissionRockResortSF",
+      "yelp": "www.yelp.com/biz/mission-rock-resort-san-francisco-2",
+      "zomato": "www.zomato.com/san-francisco/mission-rock-resort-potrero"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 1,
+    "region": 0,
+    "name": "District",
+    "images": [
+      {
+        "fileName": "san-francisco__district.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "SOMA",
+    "address": {
+      "street": "216 Townsend St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94107
+    },
+    "position": {
+      "lat": 37.778634,
+      "lng": -122.393320
+    },
+    "phone": "(415) 896-2120",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:30PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosas",
+        "price": 15
+      },
+      {
+        "item": "Bottomless DIY Bloody Mary",
+        "price": 15
+      },
+      {
+        "item": "Buffet",
+        "price": 20
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.districtsf.com/locations.html",
+      "facebook": "www.facebook.com/districtsf/",
+      "yelp": "www.yelp.com/biz/district-san-francisco-3",
+      "zomato": "www.zomato.com/san-francisco/district-soma"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 2,
+    "region": 0,
+    "name": "The Keystone",
+    "images": [
+      {
+        "fileName": "san-francisco__the-keystone.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "SOMA",
+    "address": {
+      "street": "68 4th St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94103
+    },
+    "position": {
+      "lat": 37.784881,
+      "lng": -122.405061
+    },
+    "phone": "(415) 777-1200",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 25
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.thekeystonesf.com/",
+      "facebook": "www.facebook.com/thekeystonesf/",
+      "yelp": "www.yelp.com/biz/the-keystone-san-francisco-2",
+      "zomato": "www.zomato.com/san-francisco/the-keystone-soma"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 3,
+    "region": 0,
+    "name": "farmerbrown",
+    "images": [
+      {
+        "fileName": "san-francisco__farmerbrown.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Civic Center",
+    "address": {
+      "street": "25 Mason St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94102
+    },
+    "position": {
+      "lat": 37.783574,
+      "lng": -122.409407
+    },
+    "phone": "(415) 409-3276",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:30PM",
+        "days": [
+          "Saturday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:30AM",
+        "ends": "2:30PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 20
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.farmerbrownsf.com/",
+      "facebook": "www.facebook.com/farmerbrownsf/",
+      "yelp": "www.yelp.com/biz/farmerbrown-san-francisco-2",
+      "openTable": "www.opentable.com/farmer-brown",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d860472-Reviews-Farmerbrown-San_Francisco_California.html",
+      "zomato": "www.zomato.com/san-francisco/farmerbrown-civic-center"
+    },
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 4,
+    "region": 0,
+    "name": "Colibri Mexican Bistro",
+    "images": [
+      {
+        "fileName": "san-francisco__colibri-mexican-bistro.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Union Square",
+    "address": {
+      "street": "438 Geary St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94102
+    },
+    "position": {
+      "lat": 37.787257,
+      "lng": -122.410539
+    },
+    "phone": "(415) 440-2737",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:30AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 10
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.colibrimexicanbistro.com/",
+      "facebook": "www.facebook.com/ColibriSF/",
+      "yelp": "www.yelp.com/biz/colibri-mexican-bistro-san-francisco",
+      "openTable": "www.opentable.com/r/colibri-mexican-bistro-san-francisco",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d614164-Reviews-Colibri_Mexican_Bistro-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/colibri-mexican-bistro-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/colibri-mexican-bistro-union-square"
+    }
+  },
+  {
+    "id": 5,
+    "region": 0,
+    "name": "Kitchen Story",
+    "images": [
+      {
+        "fileName": "san-francisco_kitchen-story.png",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Castro",
+    "address": {
+      "street": "3499 16th St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94114
+    },
+    "position": {
+      "lat": 37.764182,
+      "lng": -122.430673
+    },
+    "phone": "(415) 525-4905",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "8:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 19
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.kitchenstorysf.com/",
+      "facebook": "www.facebook.com/KitchenStorySF/",
+      "yelp": "www.yelp.com/biz/kitchen-story-san-francisco",
+      "openTable": "www.opentable.com/kitchen-story",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d3865082-Reviews-Kitchen_Story-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/kitchen-story-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/kitchen-story-castro"
+    }
+  },
+  {
+    "id": 6,
+    "region": 0,
+    "name": "1300 on Fillmore",
+    "images": [
+      {
+        "fileName": "san-francisco__1300-on-fillmore.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Western Addition",
+    "address": {
+      "street": "1300 Fillmore St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94115
+    },
+    "position": {
+      "lat": 37.781588,
+      "lng": -122.432137
+    },
+    "phone": "(415) 771-7100",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Bellini",
+        "price": 15
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.1300fillmore.com/",
+      "facebook": "www.facebook.com/1300Fillmore/?rf=342306949166549",
+      "yelp": "www.yelp.com/biz/1300-on-fillmore-san-francisco",
+      "openTable": "www.opentable.com/1300-on-fillmore",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d776388-Reviews-1300_Fillmore-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/1300-on-fillmore-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/1300-on-fillmore-western-addition"
+    },
+    "description": "Seatings at 11am and 1pm"
+  },
+  {
+    "id": 7,
+    "region": 0,
+    "name": "Stock in Trade",
+    "images": [
+      {
+        "fileName": "san-francisco__stock-in-trade.jpg",
+        "type": "outside"
+      }
+    ],
+    "neighborhood": "Marina",
+    "address": {
+      "street": "2036 Lombard St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94123
+    },
+    "position": {
+      "lat": 37.800139,
+      "lng": -122.435492
+    },
+    "phone": "(415) 829-3000",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 17
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.stockintradesf.com/",
+      "facebook": "www.facebook.com/StockinTradeSF/",
+      "yelp": "www.yelp.com/biz/stock-in-trade-san-francisco",
+      "openTable": "www.opentable.com/r/stock-in-trade-san-francisco",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d4135154-Reviews-Stock_in_Trade-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/stock-in-trade-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/stock-in-trade-marina-presidio"
+    },
+    "description": "Bottomless Brunch starts at 10am on Sundays during NFL Season"
+  },
+  {
+    "id": 8,
+    "region": 0,
+    "name": "Hard Knox Cafe",
+    "images": [
+      {
+        "fileName": "san-francisco__hard-knox-cafe.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Outer Richmond",
+    "address": {
+      "street": "2448 Clement St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94121
+    },
+    "position": {
+      "lat": 37.782091,
+      "lng": -122.485729
+    },
+    "phone": "(415) 752-3770",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 18
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.hardknoxcafe.com/",
+      "facebook": "www.facebook.com/hardknoxcafe/",
+      "yelp": "www.yelp.com/biz/hard-knox-cafe-san-francisco-2",
+      "openTable": "www.opentable.com/r/hard-knox-cafe-san-francisco",
+      "tripAdvisor": "www.tripadvisor.com/Restaurant_Review-g60713-d1055815-Reviews-Hard_Knox_Cafe-San_Francisco_California.html",
+      "zagat": "www.zagat.com/r/hard-knox-cafe-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/hard-knox-cafe-outer-richmond"
+    }
+  },
+  {
+    "id": 9,
+    "region": 0,
+    "name": "The Sycamore",
+    "images": [
+      {
+        "fileName": "san-francisco__the-sycamore.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Mission District",
+    "address": {
+      "street": "2140 Mission St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94110
+    },
+    "position": {
+      "lat": 37.762763,
+      "lng": -122.419799
+    },
+    "phone": "(415) 252-7704",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 12
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.thesycamoresf.com/",
+      "facebook": "www.facebook.com/TheSycamore/",
+      "yelp": "www.yelp.com/biz/the-sycamore-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/sycamore-mission-district"
+    },
+    "trackBack": "http://www.thesycamoresf.com/brunch-menu.html"
+  },
+  {
+    "id": 10,
+    "region": 0,
+    "name": "Cliff House Terrace Room",
+    "images": [
+      {
+        "fileName": "san-francisco__cliff-house.jpg",
+        "type": "outside"
+      }
+    ],
+    "neighborhood": "Outer Richmond",
+    "address": {
+      "street": "1090 Point Lobos",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94121
+    },
+    "position": {
+      "lat": 37.778476,
+      "lng": -122.513963
+    },
+    "phone": "(415) 386-3330",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "4:00PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Food and Drink",
+        "price": 55
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.cliffhouse.com",
+      "facebook": "www.facebook.com/CliffHouseSF/",
+      "yelp": "www.yelp.com/biz/cliff-house-terrace-room-champagne-brunch-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/cliff-house-outer-richmond"
+    },
+    "description": "Call to make reservations for dining at 10am, noon, or 2pm.",
+    "devNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+  },
+  {
+    "id": 11,
+    "region": 0,
+    "name": "The Willows",
+    "images": [
+      {
+        "fileName": "san-francisco__the-willows.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "SOMA",
+    "address": {
+      "street": "1582 Folsom St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94103
+    },
+    "position": {
+      "lat": 37.771153,
+      "lng": -122.415165
+    },
+    "phone": "(415) 529-2039",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Bloody Mary",
+        "price": 18.75
+      },
+      {
+        "item": "Bottomless Bloody Mary w/ Absolut Vodka",
+        "price": 24.75
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.thewillowssf.com/",
+      "facebook": "www.facebook.com/thewillowssf/?rf=1611272505783614",
+      "yelp": "www.yelp.com/biz/the-willows-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/the-willows-soma"
+    },
+    "trackBack": "http://www.thewillowssf.com/brunch-menu.html"
+  },
+  {
+    "id": 12,
+    "region": 0,
+    "name": "Bisou Bistronomy",
+    "images": [
+      {
+        "fileName": "san-francisco__bisou-bistronomy.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Castro",
+    "address": {
+      "street": "2367 Market St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94114
+    },
+    "position": {
+      "lat": 37.763007,
+      "lng": -122.434324
+    },
+    "phone": "(415) 556-6200",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 20
+      },
+      {
+        "item": "Bottomless Bloody Mary",
+        "price": 20
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.bisousf.com/",
+      "facebook": "www.facebook.com/bisoubistro/",
+      "yelp": "www.yelp.com/biz/bisou-bistronomy-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/bisou-castro"
+    },
+    "canonical": "http://www.bisousf.com/menu/ via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
+  },
+  {
+    "id": 13,
+    "region": 0,
+    "name": "The Pink Elephant Alibi",
+    "images": [
+      {
+        "fileName": "san-francisco__the-pink-elephant-alibi.jpg",
+        "type": "bar"
+      }
+    ],
+    "neighborhood": "SOMA",
+    "address": {
+      "street": "142 Minna St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94105
+    },
+    "position": {
+      "lat": 37.786785,
+      "lng": -122.400466
+    },
+    "phone": "(415) 872-9379",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Friday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:30AM",
+        "ends": "4:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 22.99
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.thepinkelephantsf.wixsite.com/mysite",
+      "facebook": "www.facebook.com/pg/thepinkelephantsf",
+      "yelp": "www.yelp.com/biz/the-pink-elephant-alibi-san-francisco-3",
+      "zomato": "www.zomato.com/san-francisco/pink-elephant-soma"
+    },
+    "canonical": "www.thepinkelephantsf.wixsite.com/mysite via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
+  },
+  {
+    "id": 14,
+    "region": 0,
+    "name": "Barrel Head Brewhouse",
+    "images": [
+      {
+        "fileName": "san-francisco__barrel-head-brewhouse.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Western Addition",
+    "address": {
+      "street": "1785 Fulton St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94117
+    },
+    "position": {
+      "lat": 37.775711,
+      "lng": -122.446054
+    },
+    "phone": "(415) 416-6989",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 18
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.barrelheadsf.com/",
+      "facebook": "www.facebook.com/pg/BarrelHeadBrewhouse",
+      "yelp": "www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5",
+      "zomato": "www.zomato.com/san-francisco/barrel-head-western-addition"
+    },
+    "canonical": "www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5?q=bottomless"
+  },
+  {
+    "id": 15,
+    "region": 0,
+    "name": "Cafe Mystique",
+    "images": [
+      {
+        "fileName": "san-francisco__cafe-mystique.jpg",
+        "type": "inside"
+      }
+    ],
+    "neighborhood": "Castro",
+    "address": {
+      "street": "464 Castro St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": 94114
+    },
+    "position": {
+      "lat": 37.761480,
+      "lng": -122.435298
+    },
+    "phone": "(415) 865-9963",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.cafe-mystique.com/",
+      "facebook": "www.facebook.com/CafeMystiqueSF/",
+      "yelp": "www.yelp.com/biz/cafe-mystique-san-francisco",
+      "zomato": "www.zomato.com/san-francisco/café-mystique-castro"
+    },
+    "canonical": "https://www.yelp.com/biz/cafe-mystique-san-francisco?q=bottomless"
+  },
+  {
+    "id": 16,
+    "region": 1,
+    "name": "The Table",
+    "images": [
+      { "fileName": "san-jose__the-table.jpg" }
+    ],
+    "neighborhood": "Willow Glen",
+    "address": {
+      "street": "1110 Willow St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95125
+    },
+    "position": {
+      "lat": 37.308280,
+      "lng": -121.901174
+    },
+    "hours": [
+      {
+        "category": "Happy Hour",
+        "starts": "4:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "10:00PM",
+        "ends": "12:00AM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "8:30AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.thetablesj.com",
+      "facebook": "www.facebook.com/thetablewillowglen/",
+      "yelp": "www.yelp.com/biz/the-table-san-jose",
+      "zomato": "www.zomato.com/san-jose/the-table-willow-glen"
+    }
+  },
+  {
+    "id": 17,
+    "region": 1,
+    "name": "1621 Bistro",
+    "images": [
+      { "fileName": "san-jose__1621-bistro.jpg" }
+    ],
+    "neighborhood": "",
+    "address": {
+      "street": "1621 North Capitol Ave.",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95132
+    },
+    "position": {
+      "lat": 37.396016,
+      "lng": -121.873517
+    },
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.sixteentwentyone.com",
+      "facebook": "www.facebook.com/yjonesy1021/",
+      "yelp": "www.yelp.com/biz/1621-bistro-san-jose-3",
+      "zomato": ""
+    }
+  },
+  {
+    "id": 18,
+    "region": 1,
+    "name": "Flames Eatery & Bar",
+    "images": [
+      { "fileName": "san-jose__flames-eatery--dining.jpg" },
+      { "fileName": "san-jose__flames-eatery.jpg" }
+    ],
+    "neighborhood": "Downtown",
+    "address": {
+      "street": "88 S 4th St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95112
+    },
+    "position": {
+      "lat": 37.336155,
+      "lng": -121.885901
+    },
+    "phone": "(408) 971-1960",
+    "hours": [
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "9:00PM",
+        "ends": "11:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "9:00PM",
+        "ends": "12:00AM",
+        "days": [
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 13.95
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.flameseatery.com/",
+      "facebook": "www.facebook.com/pg/flameseatery",
+      "yelp": "www.yelp.com/biz/flames-eatery-and-bar-san-jose",
+      "zomato": "www.zomato.com/san-jose/flames-eatery-and-bar-downtown"
+    }
+  },
+  {
+    "id": 19,
+    "region": 1,
+    "name": "4th St. Pizza Co",
+    "images": [
+      { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
+    ],
+    "neighborhood": "Downtown",
+    "address": {
+      "street": "150 E Santa Clara St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95113
+    },
+    "position": {
+      "lat": 37.337432,
+      "lng": -121.887485
+    },
+    "phone": "(408) 286-7500",
+    "hours": [
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.4thstpizzaco.com",
+      "facebook": "www.facebook.com/4thstpizza",
+      "yelp": "www.yelp.com/biz/4th-st-pizza-san-jose",
+      "zomato": "www.zomato.com/san-jose/4th-street-pizza-downtown"
+    }
+  },
+  {
+    "id": 20,
+    "region": 1,
+    "name": "Billy’s Boston Chowder House",
+    "images": [
+      { 
+        "fileName": "san-jose__billys-boston-chowder-house--logo.png",
+        "type": "logo"
+      }
+    ],
+    "neighborhood": "Los Gatos",
+    "address": {
+      "street": "29 E Main St",
+      "city": "Los Gatos",
+      "state": "CA",
+      "zip": 95030
+    },
+    "position": {
+      "lat": 37.221432,
+      "lng": -121.980779
+    },
+    "phone": "(408) 827-4005",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "4:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 6
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.bostonchowderhouse.com",
+      "facebook": "www.facebook.com/BillysBostonChowderHouse",
+      "yelp": "www.yelp.com/biz/billys-boston-chowder-house-los-gatos",
+      "zomato": "www.zomato.com/los-gatos-ca/billys-boston-chowder-house-los-gatos"
+    },
+    "devNotes": "http://losgatosmagazine.com/2014/06/25/five-oclock-somewhere-happy-hour-around-town/, http://sanfrancisco.cbslocal.com/top-lists/5-must-have-bottomless-mimosas-near-the-south-bay/"
+  },
+  {
+    "id": 21,
+    "region": 1,
+    "name": "St. Stephen’s Green",
+    "images": [
+      { "fileName": "san-jose__st-stephens-green.jpg" }
+    ],
+    "neighborhood": "Mountain View",
+    "address": {
+      "street": "223 Castro St.",
+      "city": "Mountain View",
+      "state": "CA",
+      "zip": 94041
+    },
+    "position": {
+      "lat": 37.393465,
+      "lng": -122.079055
+    },
+    "phone": "(650) 964-9151",
+    "hours": [
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:30PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.ststephensgreen.com",
+      "facebook": "www.facebook.com/stephensgreen",
+      "yelp": "www.yelp.com/biz/st-stephens-green-mountain-view-3",
+      "zomato": "www.zomato.com/mountain-view-ca/st-stephens-green-mountain-view"
+    }
+  },
+  {
+    "id": 22,
+    "region": 1,
+    "name": "Straits Restaurant",
+    "images": [
+      { "fileName": "san-jose__straits.jpg" }
+    ],
+    "neighborhood": "Santana Row",
+    "address": {
+      "street": "333 Santana Row, Suite 1100",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95128
+    },
+    "position": {
+      "lat": 37.321746,
+      "lng": -121.948302
+    },
+    "phone": "(408) 246-6320",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "11:00AM",
+        "ends": "3:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "category": "Reverse Happy Hour",
+        "starts": "3:00PM",
+        "ends": "10:00PM",
+        "days": [
+          "Monday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 15
+      },
+      {
+        "item": "Bottomless Bloody Mary",
+        "price": 15
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.straitsrestaurants.com",
+      "facebook": "www.facebook.com/Straits-Restaurants-1667217176894999/",
+      "yelp": "www.yelp.com/biz/straits-santana-row-san-jose",
+      "zomato": "www.zomato.com/san-jose/straits-san-jose"
+    }
+  },
+  {
+    "id": 23,
+    "region": 1,
+    "name": "Tapsilog Bistro",
+    "images": [
+      { "fileName": "san-jose__tapsilog-bistro.jpg" }
+    ],
+    "neighborhood": "Campbell",
+    "address": {
+      "street": "819 W Hamilton Ave",
+      "city": "Campbell",
+      "state": "CA",
+      "zip": 95008
+    },
+    "position": {
+      "lat": 37.294962,
+      "lng": -121.963742
+    },
+    "phone": "(408) 412-8926",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "9:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "2:30PM",
+        "ends": "6:30PM",
+        "days": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Calamansi Mimosas",
+        "price": 15
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.tapsilogbistro.com",
+      "facebook": "www.facebook.com/littleManilaCampbell.Ca/",
+      "yelp": "www.yelp.com/biz/tapsilog-bistro-campbell",
+      "zomato": "www.zomato.com/san-jose/tapsilog-bistro-west-san-jose"
+    }
+  },
+  {
+    "id": 24,
+    "region": 1,
+    "name": "Chacho’s Restaurant",
+    "images": [
+      { "fileName": "san-jose__chachos.jpg" }
+    ],
+    "neighborhood": "Downtown",
+    "address": {
+      "street": "87 E San Fernando St",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95113
+    },
+    "position": {
+      "lat": 37.335381,
+      "lng": -121.887637
+    },
+    "phone": "(408) 293-4321",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.chachosrestaurant.com",
+      "facebook": "www.facebook.com/ChachosRestaurant/",
+      "yelp": "www.yelp.com/biz/chachos-restaurant-san-jose-2",
+      "zomato": "www.zomato.com/san-jose/chachos-downtown"
+    }
+  },
+  {
+    "id": 25,
+    "region": 1,
+    "name": "SP2",
+    "images": [
+      { "fileName": "san-jose__sp2.jpg" }
+    ],
+    "neighborhood": "Downtown",
+    "address": {
+      "street": "72 N. Almaden Ave",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95110
+    },
+    "position": {
+      "lat": 37.336026,
+      "lng": -121.894675
+    },
+    "phone": "(408) 299-2000",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:30PM",
+        "days": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "3:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+      }
+    ],
+    "full_bar": true,
+    "links": {
+      "website": "www.sp2sanjose.com/",
+      "facebook": "www.facebook.com/SP2SanJose/",
+      "yelp": "www.yelp.com/biz/sp2-communal-bar-restaurant-san-jose",
+      "zomato": "www.zomato.com/san-jose/sp2-communal-bar-restaurant-downtown"
+    }
+  },
+  {
+    "id": 26,
+    "region": 1,
+    "name": "Santa Teresa Golf Club",
+    "images": [
+      { "fileName": "san-jose__santa-teresa-golf-club.jpg" }
+    ],
+    "neighborhood": "South San Jose",
+    "address": {
+      "street": "260 Bernal Rd",
+      "city": "San Jose",
+      "state": "CA",
+      "zip": 95119
+    },
+    "position": {
+      "lat": 37.219626,
+      "lng": -121.776917
+    },
+    "phone": "(408) 225-2650",
+    "hours": [
+      {
+        "category": "Bottomless Brunch",
+        "starts": "10:00AM",
+        "ends": "2:00PM",
+        "days": [
+          "Sunday"
+        ]
+      },
+      {
+        "category": "Happy Hour",
+        "starts": "4:00PM",
+        "ends": "6:00PM",
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      }
+    ],
+    "menu_items": [
+      {
+        "item": "Bottomless Mimosa",
+        "price": 10
+      }
+    ],
+    "full_bar": false,
+    "links": {
+      "website": "www.santateresagolf.com/",
+      "facebook": "www.facebook.com/santateresagolfclub/",
+      "yelp": "www.yelp.com/biz/santa-teresa-golf-club-san-jose",
+      "zomato": "www.zomato.com/san-jose/santa-teresa-golf-club-south-san-jose"
+    },
+    "devNotes": "http://www.santateresagolf.com/page.php?page_id=4198&name=Sunday_Funday_Drink_Specials"
+  }
+]

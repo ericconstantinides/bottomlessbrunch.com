@@ -1,0 +1,20 @@
+[
+  {
+    "id": 0,
+    "name": "San Francisco",
+    "slug": "san-francisco",
+    "position": {
+      "lat": 37.774929,
+      "lng": -122.419416
+    }
+  },
+  {
+    "id": 1,
+    "name": "San Jose",
+    "slug": "san-jose",
+    "position": {
+      "lat": 37.338208,
+      "lng": -121.886329
+    }
+  }
+]
