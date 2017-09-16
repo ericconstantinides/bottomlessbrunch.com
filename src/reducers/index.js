@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
+import RegionsReducer from './RegionsReducer'
 import VenuesReducer from './VenuesReducer'
 
 const rootReducer = combineReducers({
+  regions: RegionsReducer,
   venues: VenuesReducer
-  // this is just a placeholder:
-  // state: (state = {}) => state
 })
 
 export default rootReducer

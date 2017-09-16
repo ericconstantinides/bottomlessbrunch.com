@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ReactGA from 'react-ga'
 import * as actions from '../actions'
@@ -28,18 +28,27 @@ class App extends Component {
     this.setState({ cursorPos: { x: event.clientX, y: event.clientY } })
   }
   componentWillMount () {
-    // get the venues
+    // get the regions and the venues
+    this.props.fetchRegions()
     this.props.fetchVenues()
   }
   render () {
     const openVenue = this.props.venues.filter(venue => venue.open)[0]
     const openVenueRendered = openVenue ? <VenuePage {...openVenue} /> : ''
+    const venueSlugs = this.props.venues.map(venue => {
+      return (
+        <Route path={`/${venue.slug}`} key={`/${venue.slug}`} component={VenuePage} />
+      )
+    })
     return (
       <div
         onMouseMove={this.handleMouseMove.bind(this)}
         className='App'
       >
-        <Route path='/' component={Analytics} />
+        <Switch>
+          <Route path='/' component={Analytics} />
+          {venueSlugs}
+        </Switch>
         {openVenueRendered}
         <Home cursorPos={this.state.cursorPos} />
       </div>

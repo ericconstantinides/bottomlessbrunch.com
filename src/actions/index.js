@@ -1,23 +1,32 @@
-import slug from '../lib/Slug'
+import slugify from '../lib/Slug'
 import {
+  REGIONS_FETCH,
   VENUES_FETCH,
   VENUE_SHOWINFO,
   VENUE_HIDEINFO,
   VENUE_OPEN,
   VENUE_CLOSE
 } from './types'
-import venuesJson from '../content/san-francisco-venues.json'
+import venues from '../content/venues.json'
+import regions from '../content/regions.json'
+
+export function fetchRegions () {
+  return {
+    type: REGIONS_FETCH,
+    payload: { data: regions }
+  }
+}
 
 export function fetchVenues () {
   // let's add the slug here:
-  // <region>/<place name>-<neighborhood>
-  const venuesJsonWithSlug = venuesJson.map(venue => {
-    venue.slug = slug(venue.region, venue.name, venue.neighborhood)
+  // <place name>-<neighborhood>
+  const venuesWithSlug = venues.map(venue => {
+    venue.slug = slugify(venue.name) + '-' + slugify(venue.neighborhood)
     return venue
   })
   return {
     type: VENUES_FETCH,
-    payload: { data: venuesJsonWithSlug }
+    payload: { data: venuesWithSlug }
   }
 }
 

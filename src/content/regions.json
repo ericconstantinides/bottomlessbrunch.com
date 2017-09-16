@@ -3,18 +3,20 @@
     "id": 0,
     "name": "San Francisco",
     "slug": "san-francisco",
+    "zoom": 13,
     "position": {
-      "lat": 37.774929,
-      "lng": -122.419416
+      "lat": 37.7737683,
+      "lng": -122.4469884
     }
   },
   {
     "id": 1,
     "name": "San Jose",
     "slug": "san-jose",
+    "zoom": 11,
     "position": {
-      "lat": 37.338208,
-      "lng": -121.886329
+      "lat": 37.318835055903456,
+      "lng": -121.9353463464844
     }
   }
 ]
