@@ -6,11 +6,6 @@ import MapContainer from './MapContainer'
 import VenueList from './VenueList'
 
 class Home extends Component {
-  componentWillMount () {
-    // get the regions and the venues
-    this.props.fetchRegions()
-    this.props.fetchVenues()
-  }
   render () {
     return (
       <div className='Home'>
@@ -29,8 +24,4 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps ({ venues }) {
-  return { venues }
-}
-
-export default connect(mapStateToProps, actions)(Home)
+export default connect(null, actions)(Home)

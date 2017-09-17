@@ -5,18 +5,16 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
 import createHistory from 'history/createBrowserHistory'
-import { Route } from 'react-router'
 
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 
 import reducers from './reducers' // Or wherever you keep your reducers
 
 import './index.css'
-import App from './components/App'
+import './components/App.css'
 import registerServiceWorker from './registerServiceWorker'
 
-import Home from './components/Home'
-import VenuePage from './components/VenuePage'
+import App from './components/App'
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
@@ -39,16 +37,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    { /* ConnectedRouter will use the store from Provider automatically */ }
-    <ConnectedRouter history={history}>
-      <div className='App'>
-        <Route exact path='/' component={Home} />
-        <Route
-          path='/san-francisco/mission-rock-resort-potrero'
-          component={VenuePage}
-        />
-      </div>
-    </ConnectedRouter>
+    <App />
   </Provider>,
   document.getElementById('root')
 )
