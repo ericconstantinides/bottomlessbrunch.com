@@ -14,7 +14,7 @@ class VenuePage extends Component {
             className='VenuePage__close'
           />
           <h1>
-            venue page
+            {this.props.venue.name}
           </h1>
         </div>
         <Home />

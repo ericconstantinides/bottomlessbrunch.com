@@ -18,15 +18,23 @@ class App extends Component {
     this.props.fetchVenues()
   }
   render () {
+    const venueSlugs = this.props.venues.map(venue => {
+      return (
+        <Route
+          path={`/${venue.regionSlug}/${venue.slug}`}
+          key={`/${venue.regionSlug}/${venue.slug}`}
+          render={props => {
+            return <VenuePage {...props} venue={venue} />
+          }}
+        />
+      )
+    })
     return (
       <div className='App'>
         <ConnectedRouter history={history}>
           <div className='App'>
             {/* <Route exact path='/' component={Home} /> */}
-            <Route
-              path='/san-francisco/mission-rock-resort-potrero'
-              component={VenuePage}
-            />
+            {venueSlugs}
             <Home />
           </div>
         </ConnectedRouter>
