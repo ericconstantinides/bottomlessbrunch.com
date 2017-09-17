@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
+import Home from './Home'
 import './VenuePage.css'
 
 class VenuePage extends Component {
   render () {
-    console.log(this.props)
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
-          <div
+          <Link to='/'
             className='VenuePage__close'
-            onClick={() => this.props.closeVenue(this.props.id)}
           />
           <h1>
-            {this.props.name}
+            venue page
           </h1>
         </div>
+        <Home />
       </div>
     )
   }

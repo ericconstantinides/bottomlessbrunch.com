@@ -2,6 +2,7 @@
   {
     "id": 0,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Mission Rock Resort",
     "images": [
       {
@@ -50,6 +51,7 @@
   {
     "id": 1,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "District",
     "images": [
       {
@@ -106,6 +108,7 @@
   {
     "id": 2,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "The Keystone",
     "images": [
       {
@@ -154,6 +157,7 @@
   {
     "id": 3,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "farmerbrown",
     "images": [
       {
@@ -211,6 +215,7 @@
   {
     "id": 4,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Colibri Mexican Bistro",
     "images": [
       {
@@ -261,6 +266,7 @@
   {
     "id": 5,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Kitchen Story",
     "images": [
       {
@@ -311,6 +317,7 @@
   {
     "id": 6,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "1300 on Fillmore",
     "images": [
       {
@@ -362,6 +369,7 @@
   {
     "id": 7,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Stock in Trade",
     "images": [
       {
@@ -413,6 +421,7 @@
   {
     "id": 8,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Hard Knox Cafe",
     "images": [
       {
@@ -466,6 +475,7 @@
   {
     "id": 9,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "The Sycamore",
     "images": [
       {
@@ -514,6 +524,7 @@
   {
     "id": 10,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Cliff House Terrace Room",
     "images": [
       {
@@ -562,6 +573,7 @@
   {
     "id": 11,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "The Willows",
     "images": [
       {
@@ -614,6 +626,7 @@
   {
     "id": 12,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Bisou Bistronomy",
     "images": [
       {
@@ -666,6 +679,7 @@
   {
     "id": 13,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "The Pink Elephant Alibi",
     "images": [
       {
@@ -722,6 +736,7 @@
   {
     "id": 14,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Barrel Head Brewhouse",
     "images": [
       {
@@ -770,6 +785,7 @@
   {
     "id": 15,
     "region": 0,
+    "regionSlug": "san-francisco",
     "name": "Cafe Mystique",
     "images": [
       {
@@ -812,6 +828,7 @@
   {
     "id": 16,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "The Table",
     "images": [
       { "fileName": "san-jose__the-table.jpg" }
@@ -880,6 +897,7 @@
   {
     "id": 17,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "1621 Bistro",
     "images": [
       { "fileName": "san-jose__1621-bistro.jpg" }
@@ -917,6 +935,7 @@
   {
     "id": 18,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "Flames Eatery & Bar",
     "images": [
       { "fileName": "san-jose__flames-eatery--dining.jpg" },
@@ -996,6 +1015,7 @@
   {
     "id": 19,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "4th St. Pizza Co",
     "images": [
       { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
@@ -1053,6 +1073,7 @@
   {
     "id": 20,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "Billy’s Boston Chowder House",
     "images": [
       { 
@@ -1113,6 +1134,7 @@
   {
     "id": 21,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "St. Stephen’s Green",
     "images": [
       { "fileName": "san-jose__st-stephens-green.jpg" }
@@ -1163,6 +1185,7 @@
   {
     "id": 22,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "Straits Restaurant",
     "images": [
       { "fileName": "san-jose__straits.jpg" }
@@ -1231,6 +1254,7 @@
   {
     "id": 23,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "Tapsilog Bistro",
     "images": [
       { "fileName": "san-jose__tapsilog-bistro.jpg" }
@@ -1286,6 +1310,7 @@
   {
     "id": 24,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "Chacho’s Restaurant",
     "images": [
       { "fileName": "san-jose__chachos.jpg" }
@@ -1324,6 +1349,7 @@
   {
     "id": 25,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "SP2",
     "images": [
       { "fileName": "san-jose__sp2.jpg" }
@@ -1375,6 +1401,7 @@
   {
     "id": 26,
     "region": 1,
+    "regionSlug": "san-jose",
     "name": "Santa Teresa Golf Club",
     "images": [
       { "fileName": "san-jose__santa-teresa-golf-club.jpg" }

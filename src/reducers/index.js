@@ -1,10 +1,11 @@
-import { combineReducers } from 'redux'
 import RegionsReducer from './RegionsReducer'
 import VenuesReducer from './VenuesReducer'
+import UiReducer from './UiReducer'
 
-const rootReducer = combineReducers({
+const reducers = {
   regions: RegionsReducer,
-  venues: VenuesReducer
-})
+  venues: VenuesReducer,
+  ui: UiReducer
+}
 
-export default rootReducer
+export default reducers

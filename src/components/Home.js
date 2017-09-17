@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../actions'
 import RegionSelect from './RegionSelect'
 import MapContainer from './MapContainer'
 import VenueList from './VenueList'
 
-export default class Home extends Component {
+class Home extends Component {
+  componentWillMount () {
+    // get the regions and the venues
+    this.props.fetchRegions()
+    this.props.fetchVenues()
+  }
   render () {
     return (
       <div className='Home'>
@@ -21,3 +28,9 @@ export default class Home extends Component {
     )
   }
 }
+
+function mapStateToProps ({ venues }) {
+  return { venues }
+}
+
+export default connect(mapStateToProps, actions)(Home)

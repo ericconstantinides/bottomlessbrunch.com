@@ -15,6 +15,7 @@ class VenueList extends Component {
   }
   
   render () {
+    // NOTE: NOT SURE IF location={this.props.location} is necessary
     return (
       <div className='VenueList'>
         {this.props.venues.map((venue, key) => (
@@ -24,6 +25,7 @@ class VenueList extends Component {
             handleMouseLeave={this.handleMouseLeave}
             handleClick={this.handleClick}
             venue={venue}
+            location={this.props.location}
           />
         ))}
       </div>

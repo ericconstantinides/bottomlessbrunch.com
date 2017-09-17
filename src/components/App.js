@@ -33,24 +33,32 @@ class App extends Component {
     this.props.fetchVenues()
   }
   render () {
-    const openVenue = this.props.venues.filter(venue => venue.open)[0]
-    const openVenueRendered = openVenue ? <VenuePage {...openVenue} /> : ''
-    const venueSlugs = this.props.venues.map(venue => {
-      return (
-        <Route path={`/${venue.slug}`} key={`/${venue.slug}`} component={VenuePage} />
-      )
-    })
+    // const openVenue = this.props.venues.filter(venue => venue.open)[0]
+    // const openVenueRendered = openVenue ? <VenuePage {...openVenue} /> : ''
+    // const venueSlugs = this.props.venues.map(venue => {
+    //   return (
+    //     <Route
+    //       path={`/${venue.regionSlug}/${venue.slug}`}
+    //       key={`/${venue.regionSlug}/${venue.slug}`}
+    //       render={props => {
+    //         return <VenuePage {...props} location={this.props.location} />
+    //       }}
+    //     />
+    //   )
+    // })
     return (
       <div
-        onMouseMove={this.handleMouseMove.bind(this)}
         className='App'
       >
+        {/* onMouseMove={this.handleMouseMove.bind(this)} */}
+        {/* <Route path='/' component={Analytics} />
         <Switch>
-          <Route path='/' component={Analytics} />
           {venueSlugs}
-        </Switch>
-        {openVenueRendered}
-        <Home cursorPos={this.state.cursorPos} />
+          <Route path='/' component={Home} />
+        </Switch> */}
+        {/* {openVenueRendered} */}
+        <Home />
+        {/* <Home cursorPos={this.state.cursorPos} /> */}
       </div>
     )
   }

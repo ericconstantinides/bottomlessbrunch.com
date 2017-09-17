@@ -19,21 +19,24 @@ const VenueListItem = ({
     </div>
     : ''
   return (
-    <Link
-      to={`/${venue.slug}`}
-      className={`VenueListItem ${hovered}`}
+    <div
       onMouseEnter={handleMouseOver(venue.id)}
       onMouseLeave={handleMouseLeave(venue.id)}
       onClick={handleClick(venue.id)}
     >
-      {renderedImage}
-      <div className='VenueListItem__content'>
-        <h4 className='VenueListItem__title'>{venue.name}</h4>
-        <p className='VenueListItem__p'>
-          {venue.address.street}, {venue.address.city}
-        </p>
-      </div>
-    </Link>
+      <Link
+        to={`/${venue.regionSlug}/${venue.slug}`}
+        className={`VenueListItem ${hovered}`}
+      >
+        {renderedImage}
+        <div className='VenueListItem__content'>
+          <h4 className='VenueListItem__title'>{venue.name}</h4>
+          <p className='VenueListItem__p'>
+            {venue.address.street}, {venue.address.city}
+          </p>
+        </div>
+      </Link>
+    </div>
   )
 }
 

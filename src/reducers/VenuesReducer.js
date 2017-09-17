@@ -1,32 +1,26 @@
-import {
-  VENUES_FETCH,
-  VENUE_SHOWINFO,
-  VENUE_HIDEINFO,
-  VENUE_OPEN,
-  VENUE_CLOSE
-} from '../actions/types'
+import constants from '../actions/types'
 // import _ from 'lodash'
 
 export default (state = [], action) => {
   switch (action.type) {
-    case VENUES_FETCH:
+    case constants.VENUES_FETCH:
       // change it from an array to an object:
       // (will maybe do this later)
       // return _.mapKeys(action.payload.data, 'id')
       return action.payload.data
-    case VENUE_SHOWINFO:
+    case constants.VENUE_SHOWINFO:
       return state.map(venue => {
         if (venue.id === action.payload.id) {
           venue.showInfo = true
         }
         return venue
       })
-    case VENUE_HIDEINFO:
+    case constants.VENUE_HIDEINFO:
       return state.map(venue => {
         venue.showInfo = false
         return venue
       })
-    case VENUE_OPEN:
+    case constants.VENUE_OPEN:
       return state.map(venue => {
         if (venue.id === action.payload.id) {
           venue.open = true
@@ -34,7 +28,7 @@ export default (state = [], action) => {
         venue.showInfo = false
         return venue
       })
-    case VENUE_CLOSE:
+    case constants.VENUE_CLOSE:
       return state.map(venue => {
         venue.open = false
         return venue
