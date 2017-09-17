@@ -18,7 +18,7 @@ class App extends Component {
     this.props.fetchVenues()
   }
   render () {
-    const venueSlugs = this.props.venues.map(venue => {
+    const venueRoutes = this.props.venues.map(venue => {
       return (
         <Route
           path={`/${venue.regionSlug}/${venue.slug}`}
@@ -34,7 +34,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <div className='App'>
             {/* <Route exact path='/' component={Home} /> */}
-            {venueSlugs}
+            {venueRoutes}
             <Home />
           </div>
         </ConnectedRouter>
