@@ -34,14 +34,16 @@ class Map extends Component {
   componentDidMount () {
     this.setState({ loaded: true })
   }
-
   render () {
+    // Google Map React API:
+    // https://github.com/istarkov/google-map-react/blob/master/API.md
     return (
       <GoogleMapReact
         ref={this.mapLoaded.bind(this)}
         onDragEnd={this.mapMoved.bind(this)}
         defaultZoom={this.props.zoom}
         defaultCenter={this.props.center}
+        options={{ minZoomOverride: true, minZoom: 3 }}
       >
         {this.props.venues.map((venue, i) => (
           <MapItem

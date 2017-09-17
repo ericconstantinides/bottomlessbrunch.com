@@ -23,6 +23,7 @@ class Home extends Component {
               cursorPos={this.props.cursorPos}
               center={region.position}
               zoom={region.zoom}
+              minZoom={4}
               venues={this.props.venues}
               containerElement={<div style={styles} />}
               mapElement={<div style={styles} />}
