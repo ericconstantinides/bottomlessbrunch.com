@@ -34,15 +34,12 @@ class Map extends Component {
     this.setState({ loaded: true })
   }
   render () {
-    // Google Map React API:
-    // https://github.com/istarkov/google-map-react/blob/master/API.md
     return (
       <GoogleMapReact
         ref={this.mapLoaded.bind(this)}
         onDragEnd={this.mapMoved.bind(this)}
         defaultZoom={this.props.zoom}
         defaultCenter={this.props.center}
-        options={{ minZoomOverride: true, minZoom: 3 }}
       >
         {this.props.venues.map((venue, i) => (
           <VenueTeaser
@@ -57,50 +54,9 @@ class Map extends Component {
             venue={venue}
           />
         ))}
-        {/* <VenuePopup
-          venues={this.props.venues}
-          cursorPos={this.props.cursorPos}
-        /> */}
       </GoogleMapReact>
     )
   }
 }
 
-// const MapItems = props => {
-//   return props.venues.map((venue, i) => {
-//     return (
-//       <div key={i} lat={venue.position.lat} lng={venue.position.lng}>{venue.name}</div>
-//     )
-//   })
-// }
-/* 
-const VenuePopup = props => {
-  const showInfoVenue = props.venues.filter(venue => venue.showInfo)[0]
-  if (!showInfoVenue) {
-    return null
-  }
-  const renderedImage = showInfoVenue.images
-    ? <div className='VenueListItem__image-container'>
-      <img
-        className='VenueListItem__image'
-        src={`/images/${showInfoVenue.images[0].fileName}`}
-        alt={showInfoVenue.name}
-        />
-    </div>
-    : ''
-  const { x, y } = props.cursorPos
-  const style = { left: `${x}px`, top: `${y}px` }
-  return (
-    <article style={style} className='VenueListItem VenuePopup'>
-      {renderedImage}
-      <div className='VenueListItem__content'>
-        <h4 className='VenueListItem__title'>{showInfoVenue.name}</h4>
-        <p className='VenueListItem__p'>
-          {showInfoVenue.address.street}, {showInfoVenue.address.city}
-        </p>
-      </div>
-    </article>
-  )
-}
- */
 export default connect(null, actions)(Map)

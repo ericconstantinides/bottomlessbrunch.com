@@ -4,7 +4,7 @@ import * as actions from '../actions'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router'
 
-import Home from './Home'
+import MapPage from './MapPage'
 import VenuePage from './VenuePage'
 
 import createHistory from 'history/createBrowserHistory'
@@ -33,9 +33,9 @@ class App extends Component {
       <div className='App'>
         <ConnectedRouter history={history}>
           <div className='App'>
-            {/* <Route exact path='/' component={Home} /> */}
+            {/* <Route exact path='/' component={MapPage} /> */}
             {venueRoutes}
-            <Home />
+            <MapPage />
           </div>
         </ConnectedRouter>
       </div>

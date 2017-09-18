@@ -4,21 +4,22 @@ import * as actions from '../actions'
 import RegionSelect from './RegionSelect'
 import Map from './Map'
 import VenueList from './VenueList'
+import './MapPage.css'
 
-class Home extends Component {
+class MapPage extends Component {
   render () {
     // default to San Francisco (ID: 0) region:
     const region = this.props.regions.filter(region => region.id === 0)[0]
     const styles = { height: `100%`, width: `100%` }
     return (
-      <div className='Home'>
+      <div className='MapPage'>
         <h1>Bottomless Brunch</h1>
-        <div className='App__container'>
-          <div className='App__column'>
+        <div className='MapPage__container'>
+          <div className='MapPage__column'>
             <RegionSelect />
             <VenueList />
           </div>
-          <div className='App__column Map__container'>
+          <div className='MapPage__column Map__container'>
             <Map
               cursorPos={this.props.cursorPos}
               center={region.position}
@@ -39,4 +40,4 @@ function mapStateToProps ({ regions, venues }) {
   return { regions, venues }
 }
 
-export default connect(mapStateToProps, actions)(Home)
+export default connect(mapStateToProps, actions)(MapPage)

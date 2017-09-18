@@ -10,7 +10,7 @@ html,
 body,
 #root,
 .App,
-.Home {
+.MapPage {
   display: flex;
   flex-flow: column;
   flex: 1;
