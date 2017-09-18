@@ -1,6 +1,5 @@
 import constants from '../actions/types'
 
-// default to San Francisco (ID: 0) region:
 const initialState = {
   venueOpenId: -1,
   leftNavOpen: true,

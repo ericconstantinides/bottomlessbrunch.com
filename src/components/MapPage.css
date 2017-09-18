@@ -1,5 +1,6 @@
 .MapPage__container {
   display: flex;
+  flex: 1;
 }
 .MapPage__column:first-child {
   flex: 0 0 280px;

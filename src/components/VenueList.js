@@ -14,21 +14,29 @@ class VenueList extends Component {
   handleClick = id => event => {
     this.props.openVenue(id)
   }
+  renderTeasers = () => {
+    const reduced = _.filter(this.props.venues, venue => {
+      if (venue.region === this.props.ui.region) return venue
+    })
+    return _.map(reduced, venue => {
+      return (
+        <VenueTeaser
+          key={venue.id}
+          altClass='VenueListItem'
+          handleMouseOver={this.handleMouseOver}
+          handleMouseLeave={this.handleMouseLeave}
+          handleClick={this.handleClick}
+          venue={venue}
+          hoveredId={this.props.ui.venueHover.id}
+        />
+      )
+    })
+  }
   
   render () {
     return (
       <div className='VenueList'>
-        {_.map(this.props.venues, venue => (
-          <VenueTeaser
-            key={venue.id}
-            altClass='VenueListItem'
-            handleMouseOver={this.handleMouseOver}
-            handleMouseLeave={this.handleMouseLeave}
-            handleClick={this.handleClick}
-            venue={venue}
-            hoveredId={this.props.ui.venueHover.id}
-          />
-        ))}
+        {this.renderTeasers()}
       </div>
     )
   }
