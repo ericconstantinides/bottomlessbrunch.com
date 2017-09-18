@@ -57,3 +57,16 @@ export function setRegionUi (regionId) {
     payload: {regionId}
   }
 }
+
+export function hoverVenueUi (venue) {
+  if (venue) {
+    return {
+      type: constants.UI_VENUE_HOVER_ON,
+      payload: {venue}
+    }
+  }
+  return {
+    type: constants.UI_VENUE_HOVER_OFF,
+    payload: null
+  }
+}

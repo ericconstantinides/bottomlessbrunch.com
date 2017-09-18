@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import * as actions from '../actions'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router'
@@ -18,7 +19,7 @@ class App extends Component {
     this.props.fetchVenues()
   }
   render () {
-    const venueRoutes = this.props.venues.map(venue => {
+    const venueRoutes = _.map(this.props.venues, venue => {
       return (
         <Route
           path={`/${venue.regionSlug}/${venue.slug}`}

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import VenueTeaser from './VenueTeaser'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import * as actions from '../actions'
+import VenueTeaser from './VenueTeaser'
 
 class VenueList extends Component {
-  handleMouseOver = id => event => {
-    this.props.showInfoVenue(id)
+  handleMouseOver = venue => event => {
+    this.props.hoverVenueUi(venue)
   }
-  handleMouseLeave = id => event => {
-    this.props.hideInfoVenue(id)
+  handleMouseLeave = venue => event => {
+    this.props.hoverVenueUi()
   }
   handleClick = id => event => {
     this.props.openVenue(id)
@@ -17,14 +18,15 @@ class VenueList extends Component {
   render () {
     return (
       <div className='VenueList'>
-        {this.props.venues.map((venue, key) => (
+        {_.map(this.props.venues, venue => (
           <VenueTeaser
-            key={key}
+            key={venue.id}
             altClass='VenueListItem'
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
             handleClick={this.handleClick}
             venue={venue}
+            hoveredId={this.props.ui.venueHover.id}
           />
         ))}
       </div>
@@ -32,8 +34,8 @@ class VenueList extends Component {
   }
 }
 
-function mapStateToProps ({ venues }) {
-  return { venues }
+function mapStateToProps ({ venues, ui }) {
+  return { venues, ui }
 }
 
 export default connect(mapStateToProps, actions)(VenueList)

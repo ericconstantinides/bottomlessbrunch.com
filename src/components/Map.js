@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
+import _ from 'lodash'
 import * as actions from '../actions'
 import VenueTeaser from './VenueTeaser'
 
@@ -21,14 +22,11 @@ class Map extends Component {
     // console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
     this.setState({ map })
   }
-  handleMouseOver = id => event => {
-    this.props.showInfoVenue(id)
+  handleMouseOver = venue => event => {
+    this.props.hoverVenueUi(venue)
   }
-  handleMouseLeave = id => event => {
-    this.props.hideInfoVenue(id)
-  }
-  handleClick = id => event => {
-    this.props.openVenue(id)
+  handleMouseLeave = venue => event => {
+    this.props.hoverVenueUi()
   }
   componentDidMount () {
     this.setState({ loaded: true })
@@ -41,9 +39,9 @@ class Map extends Component {
         zoom={this.props.zoom}
         center={this.props.center}
       >
-        {this.props.venues.map((venue, i) => (
+        {_.map(this.props.venues, venue => (
           <VenueTeaser
-            key={i}
+            key={venue.id}
             altClass='MapItem'
             {...venue}
             lat={venue.position.lat}
@@ -52,6 +50,7 @@ class Map extends Component {
             handleMouseLeave={this.handleMouseLeave}
             handleClick={this.handleClick}
             venue={venue}
+            hoveredId={this.props.ui.venueHover.id}
           />
         ))}
       </GoogleMapReact>
@@ -59,4 +58,8 @@ class Map extends Component {
   }
 }
 
-export default connect(null, actions)(Map)
+function mapStateToProps ({ ui }) {
+  return { ui }
+}
+
+export default connect(mapStateToProps, actions)(Map)

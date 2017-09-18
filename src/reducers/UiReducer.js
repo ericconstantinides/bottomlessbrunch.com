@@ -4,7 +4,8 @@ import constants from '../actions/types'
 const initialState = {
   venueOpenId: -1,
   leftNavOpen: true,
-  region: 0
+  region: 0,
+  venueHover: {}
 }
 
 export default function (state = initialState, action) {
@@ -13,10 +14,18 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         venueOpenId: action.payload.id
       })
+
     case constants.UI_SET_REGION:
       return Object.assign({}, state, {
         region: action.payload.regionId
       })
+
+    case constants.UI_VENUE_HOVER_ON:
+      return {...state, venueHover: action.payload.venue}
+
+    case constants.UI_VENUE_HOVER_OFF:
+      return {...state, venueHover: {}}
+
     default:
       return state
   }

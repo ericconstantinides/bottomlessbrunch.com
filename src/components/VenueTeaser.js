@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import './VenueTeaser.css'
 
 const VenueTeaser = ({
+  hoveredId,
   venue,
   handleMouseOver,
   handleMouseLeave,
   altClass
 }) => {
-  const hovered = venue.showInfo ? 'is-hovered' : 'not-hovered'
+  const hovered = venue.id === hoveredId ? 'is-hovered' : 'not-hovered'
   const renderedImage = venue.images
     ? <div className='VenueTeaser__image-container'>
       <img
@@ -22,8 +23,8 @@ const VenueTeaser = ({
     <Link
       to={`/${venue.regionSlug}/${venue.slug}`}
       className={`VenueTeaser ${altClass} ${hovered}`}
-      onMouseEnter={handleMouseOver(venue.id)}
-      onMouseLeave={handleMouseLeave(venue.id)}
+      onMouseEnter={handleMouseOver(venue)}
+      onMouseLeave={handleMouseLeave(venue)}
     >
       <div className='VenueTeaser__marker-container'>
         <span className='VenueTeaser__marker' />
