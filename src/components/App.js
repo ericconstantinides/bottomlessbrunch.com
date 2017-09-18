@@ -23,8 +23,8 @@ class App extends Component {
     const venueRoutes = _.map(this.props.venues, venue => {
       return (
         <Route
-          path={`/${venue.regionSlug}/${venue.slug}`}
-          key={`/${venue.regionSlug}/${venue.slug}`}
+          key={venue.id}
+          path={`/${this.props.regions[venue.regionId].slug}/${venue.slug}`}
           render={props => {
             return <VenuePage {...props} venue={venue} />
           }}

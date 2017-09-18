@@ -51,6 +51,7 @@ class Map extends Component {
             handleClick={this.handleClick}
             venue={venue}
             hoveredId={this.props.ui.venueHover.id}
+            regionSlug={this.props.regions[venue.regionId].slug}
           />
         ))}
       </GoogleMapReact>
@@ -58,8 +59,8 @@ class Map extends Component {
   }
 }
 
-function mapStateToProps ({ ui }) {
-  return { ui }
+function mapStateToProps ({ ui, regions }) {
+  return { ui, regions }
 }
 
 export default connect(mapStateToProps, actions)(Map)

@@ -1,9 +1,9 @@
 [
   {
     "id": 0,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Mission Rock Resort",
+    "placeId": "ChIJryemAsd_j4AR60urAIzz6Dc",
     "images": [
       {
         "fileName": "san-francisco__mission-rock-resort-2.jpg",
@@ -50,9 +50,9 @@
   },
   {
     "id": 1,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "District",
+    "placeId": "ChIJJTVhTtZ_j4ARxpngmeH7DTc",
     "images": [
       {
         "fileName": "san-francisco__district.jpg",
@@ -107,9 +107,9 @@
   },
   {
     "id": 2,
-    "region": 0,
-    "regionSlug": "san-francisco",
-    "name": "The Keystone",
+    "regionId": 0,
+    "name": "The Keystone Social House",
+    "placeId": "ChIJRcqFN4aAhYARSvdFY6nNytM",
     "images": [
       {
         "fileName": "san-francisco__the-keystone.jpg",
@@ -156,9 +156,9 @@
   },
   {
     "id": 3,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "farmerbrown",
+    "placeId": "ChIJv-klmoWAhYAReflECbnTyRE",
     "images": [
       {
         "fileName": "san-francisco__farmerbrown.jpg",
@@ -214,9 +214,9 @@
   },
   {
     "id": 4,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Colibri Mexican Bistro",
+    "placeId": "ChIJ816kUY6AhYARYWi1Uf1JnCI",
     "images": [
       {
         "fileName": "san-francisco__colibri-mexican-bistro.jpg",
@@ -265,9 +265,9 @@
   },
   {
     "id": 5,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Kitchen Story",
+    "placeId": "ChIJ_wloDhx-j4AR636PeyqpwKY",
     "images": [
       {
         "fileName": "san-francisco_kitchen-story.png",
@@ -316,9 +316,9 @@
   },
   {
     "id": 6,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "1300 on Fillmore",
+    "placeId": "ChIJZbMizLuAhYARKiMObMwPGfc",
     "images": [
       {
         "fileName": "san-francisco__1300-on-fillmore.jpg",
@@ -368,9 +368,9 @@
   },
   {
     "id": 7,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Stock in Trade",
+    "placeId": "ChIJfVUaqdCAhYAR-sBJn3ZxSu8",
     "images": [
       {
         "fileName": "san-francisco__stock-in-trade.jpg",
@@ -420,9 +420,9 @@
   },
   {
     "id": 8,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Hard Knox Cafe",
+    "placeId": "ChIJ9cCh2gWHhYARlkhcPaOvZS0",
     "images": [
       {
         "fileName": "san-francisco__hard-knox-cafe.jpg",
@@ -474,9 +474,9 @@
   },
   {
     "id": 9,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "The Sycamore",
+    "placeId": "ChIJ0WvRSyN-j4ARpvLPuZyI3l4",
     "images": [
       {
         "fileName": "san-francisco__the-sycamore.jpg",
@@ -523,9 +523,9 @@
   },
   {
     "id": 10,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Cliff House Terrace Room",
+    "placeId": "ChIJ7dtznbWHhYAR81fEwzi58F4",
     "images": [
       {
         "fileName": "san-francisco__cliff-house.jpg",
@@ -572,9 +572,9 @@
   },
   {
     "id": 11,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "The Willows",
+    "placeId": "ChIJFw3ArCd-j4AR5T85mhj6N5Y",
     "images": [
       {
         "fileName": "san-francisco__the-willows.jpg",
@@ -625,9 +625,9 @@
   },
   {
     "id": 12,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Bisou Bistronomy",
+    "placeId": "ChIJPc_WpRx-j4AR5xmnSgDgB0A",
     "images": [
       {
         "fileName": "san-francisco__bisou-bistronomy.jpg",
@@ -678,9 +678,9 @@
   },
   {
     "id": 13,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "The Pink Elephant Alibi",
+    "placeId": "ChIJRwAoRH2AhYAR-AlsWfLuTLw",
     "images": [
       {
         "fileName": "san-francisco__the-pink-elephant-alibi.jpg",
@@ -735,9 +735,9 @@
   },
   {
     "id": 14,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Barrel Head Brewhouse",
+    "placeId": "ChIJg4a117KAhYARfFvbnNINjZY",
     "images": [
       {
         "fileName": "san-francisco__barrel-head-brewhouse.jpg",
@@ -784,9 +784,9 @@
   },
   {
     "id": 15,
-    "region": 0,
-    "regionSlug": "san-francisco",
+    "regionId": 0,
     "name": "Cafe Mystique",
+    "placeId": "ChIJPbV6qhx-j4ARJcmiQMJhbaM",
     "images": [
       {
         "fileName": "san-francisco__cafe-mystique.jpg",
@@ -827,9 +827,9 @@
   },
   {
     "id": 16,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "The Table",
+    "placeId": "ChIJF7uF3VczjoARsQacfJJdX-A",
     "images": [
       { "fileName": "san-jose__the-table.jpg" }
     ],
@@ -896,9 +896,9 @@
   },
   {
     "id": 17,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "1621 Bistro",
+    "placeId": "ChIJM9j_9CPMj4ARi200r9nA3CY",
     "images": [
       { "fileName": "san-jose__1621-bistro.jpg" }
     ],
@@ -934,9 +934,9 @@
   },
   {
     "id": 18,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "Flames Eatery & Bar",
+    "placeId": "ChIJg1bWkZXLj4ARJbjjVd0GN-E",
     "images": [
       { "fileName": "san-jose__flames-eatery--dining.jpg" },
       { "fileName": "san-jose__flames-eatery.jpg" }
@@ -1014,9 +1014,9 @@
   },
   {
     "id": 19,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "4th St. Pizza Co",
+    "placeId": "ChIJFxZAVbzMj4ARfiq-tLVzOn4",
     "images": [
       { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
     ],
@@ -1072,9 +1072,9 @@
   },
   {
     "id": 20,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "Billy’s Boston Chowder House",
+    "placeId": "ChIJ4wI3t-Q1joAR3lm5qYtF_8A",
     "images": [
       { 
         "fileName": "san-jose__billys-boston-chowder-house--logo.png",
@@ -1133,9 +1133,9 @@
   },
   {
     "id": 21,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "St. Stephen’s Green",
+    "placeId": "ChIJsfMnDjS3j4ARoUdVDMJyqMU",
     "images": [
       { "fileName": "san-jose__st-stephens-green.jpg" }
     ],
@@ -1184,9 +1184,9 @@
   },
   {
     "id": 22,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "Straits Restaurant",
+    "placeId": "ChIJX76EBeDKj4ARDMTabmSeUR8",
     "images": [
       { "fileName": "san-jose__straits.jpg" }
     ],
@@ -1253,9 +1253,9 @@
   },
   {
     "id": 23,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "Tapsilog Bistro",
+    "placeId": "ChIJZQLbjTM1joARRaFhWYLkpPM",
     "images": [
       { "fileName": "san-jose__tapsilog-bistro.jpg" }
     ],
@@ -1309,9 +1309,9 @@
   },
   {
     "id": 24,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "Chacho’s Restaurant",
+    "placeId": "ChIJe07Zf7zMj4ARzhZdvFR9n-w",
     "images": [
       { "fileName": "san-jose__chachos.jpg" }
     ],
@@ -1348,9 +1348,9 @@
   },
   {
     "id": 25,
-    "region": 1,
-    "regionSlug": "san-jose",
-    "name": "SP2",
+    "regionId": 1,
+    "name": "SP2 Communal Bar + Restaurant",
+    "placeId": "ChIJawrlN6LMj4AR-Bhapw3p8Qs",
     "images": [
       { "fileName": "san-jose__sp2.jpg" }
     ],
@@ -1400,9 +1400,9 @@
   },
   {
     "id": 26,
-    "region": 1,
-    "regionSlug": "san-jose",
+    "regionId": 1,
     "name": "Santa Teresa Golf Club",
+    "placeId": "ChIJsTITnrsvjoARDHwPjmn3vEM",
     "images": [
       { "fileName": "san-jose__santa-teresa-golf-club.jpg" }
     ],

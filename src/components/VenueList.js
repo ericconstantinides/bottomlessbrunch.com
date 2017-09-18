@@ -16,7 +16,7 @@ class VenueList extends Component {
   }
   renderTeasers = () => {
     const reduced = _.filter(this.props.venues, venue => {
-      if (venue.region === this.props.ui.region) return venue
+      if (venue.regionId === this.props.ui.region) return venue
     })
     return _.map(reduced, venue => {
       return (
@@ -28,6 +28,7 @@ class VenueList extends Component {
           handleClick={this.handleClick}
           venue={venue}
           hoveredId={this.props.ui.venueHover.id}
+          regionSlug={this.props.regions[venue.regionId].slug}
         />
       )
     })
@@ -42,8 +43,8 @@ class VenueList extends Component {
   }
 }
 
-function mapStateToProps ({ venues, ui }) {
-  return { venues, ui }
+function mapStateToProps ({ regions, venues, ui }) {
+  return { regions, venues, ui }
 }
 
 export default connect(mapStateToProps, actions)(VenueList)

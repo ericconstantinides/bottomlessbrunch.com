@@ -5,6 +5,7 @@ import './VenueTeaser.css'
 const VenueTeaser = ({
   hoveredId,
   venue,
+  regionSlug,
   handleMouseOver,
   handleMouseLeave,
   altClass
@@ -21,7 +22,7 @@ const VenueTeaser = ({
     : ''
   return (
     <Link
-      to={`/${venue.regionSlug}/${venue.slug}`}
+      to={`/${regionSlug}/${venue.slug}`}
       className={`VenueTeaser ${altClass} ${hovered}`}
       onMouseEnter={handleMouseOver(venue)}
       onMouseLeave={handleMouseLeave(venue)}
