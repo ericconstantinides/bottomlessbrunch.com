@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import * as actions from '../actions'
 // import './VenuePopup.css'
-import MapItem from './MapItem'
+import VenueTeaser from './VenueTeaser'
 
 class Map extends Component {
   constructor () {
@@ -46,8 +46,9 @@ class Map extends Component {
         options={{ minZoomOverride: true, minZoom: 3 }}
       >
         {this.props.venues.map((venue, i) => (
-          <MapItem
+          <VenueTeaser
             key={i}
+            altClass='MapItem'
             {...venue}
             lat={venue.position.lat}
             lng={venue.position.lng}
