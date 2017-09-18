@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
+import Select from 'react-select'
+// Be sure to include styles at some point, probably during your bootstrapping
+import 'react-select/dist/react-select.css'
 
 class RegionSelect extends Component {
   constructor (props) {
@@ -9,19 +12,25 @@ class RegionSelect extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange = event => {
-    this.setState({ value: event.target.value })
-    this.props.setRegionUi(event.target.value)
+  handleChange = selected => {
+    this.setState({ value: selected.value })
+    this.props.setRegionUi(selected.value)
   }
 
   render () {
     return (
-      <div className='RegionSelect'>
-        <select value={this.state.value} onChange={this.handleChange}>
-          {this.props.regions.map((region, i) => (
-            <option key={i} value={region.slug}>{region.name}</option>
-          ))}
-        </select>
+      <div className='RegionSelect__container'>
+        <Select
+          className='RegionSelect'
+          value={this.state.value}
+          searchable={false}
+          clearable={false}
+          onChange={this.handleChange}
+          options={this.props.regions.map((region, i) => ({
+            value: region.slug,
+            label: region.name
+          }))}
+        />
       </div>
     )
   }
