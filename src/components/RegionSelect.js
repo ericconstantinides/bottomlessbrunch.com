@@ -6,14 +6,7 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 class RegionSelect extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { value: this.props.ui.region }
-    this.handleChange = this.handleChange.bind(this)
-  }
-
   handleChange = selected => {
-    this.setState({ value: selected.value })
     this.props.setRegionUi(selected.value)
   }
 
@@ -22,7 +15,7 @@ class RegionSelect extends Component {
       <div className='RegionSelect__container'>
         <Select
           className='RegionSelect'
-          value={this.state.value}
+          value={this.props.ui.region}
           searchable={false}
           clearable={false}
           onChange={this.handleChange}
