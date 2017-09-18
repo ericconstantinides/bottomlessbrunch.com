@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import * as actions from '../actions'
-// import './VenuePopup.css'
 import VenueTeaser from './VenueTeaser'
 
 class Map extends Component {
