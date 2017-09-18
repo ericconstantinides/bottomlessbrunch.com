@@ -43,8 +43,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ venues }) {
-  return { venues }
+function mapStateToProps ({ venues, regions }) {
+  return { venues, regions }
 }
 
 export default connect(mapStateToProps, actions)(App)

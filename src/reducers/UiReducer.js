@@ -4,7 +4,7 @@ import constants from '../actions/types'
 const initialState = {
   venueOpenId: -1,
   leftNavOpen: true,
-  region: 'san-francisco'
+  region: 0
 }
 
 export default function (state = initialState, action) {
@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
       })
     case constants.UI_SET_REGION:
       return Object.assign({}, state, {
-        region: action.payload.slug
+        region: action.payload.regionId
       })
     default:
       return state

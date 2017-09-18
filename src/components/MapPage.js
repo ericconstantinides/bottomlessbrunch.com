@@ -9,7 +9,7 @@ import './MapPage.css'
 class MapPage extends Component {
   render () {
     const region = this.props.regions.filter(
-      region => region.slug === this.props.ui.region
+      region => region.id === this.props.ui.region
     )[0]
     const styles = { height: `100%`, width: `100%` }
     return (

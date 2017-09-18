@@ -51,9 +51,9 @@ export function closeVenue (id) {
   }
 }
 
-export function setRegionUi (slug) {
+export function setRegionUi (regionId) {
   return {
     type: constants.UI_SET_REGION,
-    payload: {slug}
+    payload: {regionId}
   }
 }
