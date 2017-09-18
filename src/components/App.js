@@ -17,6 +17,7 @@ class App extends Component {
     // get the regions and the venues
     this.props.fetchRegions()
     this.props.fetchVenues()
+    this.props.setRegionUi(0)
   }
   render () {
     const venueRoutes = _.map(this.props.venues, venue => {

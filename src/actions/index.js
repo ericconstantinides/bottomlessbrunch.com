@@ -23,34 +23,6 @@ export function fetchVenues () {
   }
 }
 
-export function showInfoVenue (id) {
-  return {
-    type: constants.VENUE_SHOWINFO,
-    payload: {id}
-  }
-}
-
-export function hideInfoVenue (id) {
-  return {
-    type: constants.VENUE_HIDEINFO,
-    payload: {id}
-  }
-}
-
-export function openVenue (id) {
-  return {
-    type: constants.VENUE_OPEN,
-    payload: {id}
-  }
-}
-
-export function closeVenue (id) {
-  return {
-    type: constants.VENUE_CLOSE,
-    payload: {id}
-  }
-}
-
 export function setRegionUi (regionId) {
   return {
     type: constants.UI_SET_REGION,

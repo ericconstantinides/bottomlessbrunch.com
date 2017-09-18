@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import * as actions from '../actions'
 import Select from 'react-select'
 // Be sure to include styles at some point, probably during your bootstrapping
@@ -19,7 +20,7 @@ class RegionSelect extends Component {
           searchable={false}
           clearable={false}
           onChange={this.handleChange}
-          options={this.props.regions.map((region, i) => ({
+          options={_.map(this.props.regions, region => ({
             value: region.id,
             label: region.name
           }))}
