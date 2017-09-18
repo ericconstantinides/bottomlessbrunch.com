@@ -50,3 +50,10 @@ export function closeVenue (id) {
     payload: {id}
   }
 }
+
+export function setRegionUi (slug) {
+  return {
+    type: constants.UI_SET_REGION,
+    payload: {slug}
+  }
+}

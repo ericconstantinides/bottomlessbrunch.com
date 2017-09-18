@@ -38,8 +38,8 @@ class Map extends Component {
       <GoogleMapReact
         ref={this.mapLoaded.bind(this)}
         onDragEnd={this.mapMoved.bind(this)}
-        defaultZoom={this.props.zoom}
-        defaultCenter={this.props.center}
+        zoom={this.props.zoom}
+        center={this.props.center}
       >
         {this.props.venues.map((venue, i) => (
           <VenueTeaser

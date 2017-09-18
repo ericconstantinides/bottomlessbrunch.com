@@ -8,16 +8,17 @@ import './MapPage.css'
 
 class MapPage extends Component {
   render () {
-    // default to San Francisco (ID: 0) region:
-    const region = this.props.regions.filter(region => region.id === 0)[0]
+    const region = this.props.regions.filter(
+      region => region.slug === this.props.ui.region
+    )[0]
     const styles = { height: `100%`, width: `100%` }
     return (
       <div className='MapPage'>
         <h1>Bottomless Brunch</h1>
         <div className='MapPage__container'>
           <div className='MapPage__column'>
-            <RegionSelect />
-            <VenueList />
+            <RegionSelect region={this.props.ui.region} />
+            <VenueList region={this.props.ui.region} />
           </div>
           <div className='MapPage__column Map__container'>
             <Map
@@ -36,8 +37,8 @@ class MapPage extends Component {
   }
 }
 
-function mapStateToProps ({ regions, venues }) {
-  return { regions, venues }
+function mapStateToProps ({ regions, venues, ui }) {
+  return { regions, venues, ui }
 }
 
 export default connect(mapStateToProps, actions)(MapPage)
