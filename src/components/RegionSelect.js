@@ -7,8 +7,13 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 class RegionSelect extends Component {
+  componentWillMount () {
+    // update the location based on the current region
+    this.props.history.replace(this.props.regions[this.props.ui.region].slug)
+  }
   handleChange = selected => {
     this.props.setRegionUi(selected.value)
+    this.props.history.push(this.props.regions[selected.value].slug)
   }
 
   render () {

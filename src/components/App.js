@@ -26,6 +26,7 @@ class App extends Component {
           key={venue.id}
           path={`/${this.props.regions[venue.regionId].slug}/${venue.slug}`}
           render={props => {
+            // the {...props} give us history stuffs
             return (
               <VenuePage
                 {...props}
@@ -44,7 +45,7 @@ class App extends Component {
           <div className='App'>
             {/* <Route exact path='/' component={MapPage} /> */}
             {venueRoutes}
-            <MapPage />
+            <MapPage history={history} />
           </div>
         </ConnectedRouter>
       </div>

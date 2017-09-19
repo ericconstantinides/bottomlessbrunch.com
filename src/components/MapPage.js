@@ -15,7 +15,10 @@ class MapPage extends Component {
         <h1>Bottomless Brunch</h1>
         <div className='MapPage__container'>
           <div className='MapPage__column'>
-            <RegionSelect region={this.props.ui.region} />
+            <RegionSelect
+              region={this.props.ui.region}
+              history={this.props.history}
+            />
             <VenueList region={this.props.ui.region} />
           </div>
           <div className='MapPage__column Map__container'>

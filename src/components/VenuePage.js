@@ -25,8 +25,6 @@ class VenuePage extends Component {
     const nextId = objectFunctions.keys.next(reduced, venueId)
     const prevId = objectFunctions.keys.previous(reduced, venueId)
 
-    console.log(nextId)
-
     this.setState({
       nextSlug: '/' + regionSlug + '/' + venues[nextId].slug,
       prevSlug: '/' + regionSlug + '/' + venues[prevId].slug
@@ -52,7 +50,7 @@ class VenuePage extends Component {
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
-          <Link to='/' className='VenuePage__close' />
+          <Link to={`/${this.props.regionSlug}`} className='VenuePage__close' />
           <div className='btn-group-sm'>
             <button
               onClick={this.handlePrevious}
