@@ -11,17 +11,27 @@ class VenuePage extends Component {
   render () {
     const venue = this.props.venues[this.props.venueId]
     if (!venue.googePlacesData) venue.googePlacesData = {}
-    console.log(venue.googePlacesData)
+    const address = venue.googePlacesData.adr_address
+    let photo = '#'
+    if (venue.googePlacesData.photos) {
+      photo = venue.googePlacesData.photos['0'].getUrl({
+        maxWidth: 800,
+        maxHeight: 500
+      })
+    }
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
-          <Link to='/'
-            className='VenuePage__close'
-          />
+          <Link to='/' className='VenuePage__close' />
+          <div className='btn-group-sm'>
+            <button className='btn btn-primary btn-sm'>Previous</button>
+            <button className='btn btn-primary btn-sm'>Next</button>
+          </div>
+          <img src={photo} alt='' />
           <h1>
             {venue.name} <br />
-            {venue.googePlacesData.formatted_phone_number}
           </h1>
+          <div dangerouslySetInnerHTML={{ __html: address }} />
         </div>
       </div>
     )

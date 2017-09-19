@@ -4,7 +4,7 @@ import constants from '../actions/types'
 import venues from '../content/venues.json'
 import regions from '../content/regions.json'
 
-var googlePlaces = new google.maps.places.PlacesService(
+const googlePlaces = new google.maps.places.PlacesService(
   document.createElement('div')
 )
 
@@ -31,6 +31,7 @@ export function fetchVenues () {
 export function fetchVenueDetail (id, placeId) {
   return (dispatch) => {
     googlePlaces.getDetails({ placeId }, (place, status) => {
+      // TODO: ADD ERROR FALLBACK:
       dispatch(setVenueDetail(id, place))
     })
   }

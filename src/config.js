@@ -16,3 +16,4 @@ export const regions = {
 }
 
 export const googleGa = 'UA-21524856-1'
+export const GOOGLE_API_KEY = 'AIzaSyDsJWQDeqiFe-Chw1tBWfitg_7rGSWmHTU'
