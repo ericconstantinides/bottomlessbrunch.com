@@ -21,22 +21,21 @@ class VenuePage extends Component {
     this.props.fetchVenueDetail(venueId, googlePlacesId)
 
     // reduce the venues by region and then get the next and previous venues:
-    const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)
-    const nextId = objectFunctions.keys.next(reducedVenues, venueId)
-    const prevId = objectFunctions.keys.previous(reducedVenues, venueId)
+    const reduced = reduceVenuesByRegion(venues, venues[venueId].regionId)
+    const nextId = objectFunctions.keys.next(reduced, venueId)
+    const prevId = objectFunctions.keys.previous(reduced, venueId)
+
+    console.log(nextId)
 
     this.setState({
       nextSlug: '/' + regionSlug + '/' + venues[nextId].slug,
       prevSlug: '/' + regionSlug + '/' + venues[prevId].slug
     })
-
   }
   handlePrevious = () => {
     this.props.history.push(this.state.prevSlug)
   }
   handleNext = () => {
-    console.log(this.state.nextSlug)
-    // const region =
     this.props.history.push(this.state.nextSlug)
   }
   render () {

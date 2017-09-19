@@ -7,7 +7,8 @@ import _ from 'lodash'
  * @return {Object}
  */
 export function reduceVenuesByRegion (venues, regionId) {
-  return _.filter(venues, venue => {
+  const reduced = _.filter(venues, venue => {
     if (venue.regionId === regionId) return venue
   })
+  return _.mapKeys(reduced, 'id')
 }
