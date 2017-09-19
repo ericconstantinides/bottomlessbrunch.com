@@ -5,7 +5,13 @@ import * as actions from '../actions'
 import './VenuePage.css'
 
 class VenuePage extends Component {
+  componentDidMount () {
+    this.props.fetchVenueDetail(this.props.venueId, this.props.placeId)
+  }
   render () {
+    const venue = this.props.venues[this.props.venueId]
+    if (!venue.googePlacesData) venue.googePlacesData = {}
+    console.log(venue.googePlacesData)
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
@@ -13,7 +19,8 @@ class VenuePage extends Component {
             className='VenuePage__close'
           />
           <h1>
-            {this.props.venue.name}
+            {venue.name} <br />
+            {venue.googePlacesData.formatted_phone_number}
           </h1>
         </div>
       </div>
@@ -21,4 +28,8 @@ class VenuePage extends Component {
   }
 }
 
-export default connect(null, actions)(VenuePage)
+function mapStateToProps ({ venues }) {
+  return { venues }
+}
+
+export default connect(mapStateToProps, actions)(VenuePage)

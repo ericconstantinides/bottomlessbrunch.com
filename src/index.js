@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
+import reduxThunk from 'redux-thunk'
+
 import createHistory from 'history/createBrowserHistory'
 
 import { routerReducer, routerMiddleware } from 'react-router-redux'
@@ -28,7 +30,7 @@ const store = createStore(
     ...reducers,
     router: routerReducer
   }),
-  applyMiddleware(middleware)
+  applyMiddleware(reduxThunk, middleware)
 )
 
 // Now you can dispatch navigation actions from anywhere!

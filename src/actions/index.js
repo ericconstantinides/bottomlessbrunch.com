@@ -1,7 +1,12 @@
+/* global google */
 import slugify from '../lib/Slug'
 import constants from '../actions/types'
 import venues from '../content/venues.json'
 import regions from '../content/regions.json'
+
+var googlePlaces = new google.maps.places.PlacesService(
+  document.createElement('div')
+)
 
 export function fetchRegions () {
   return {
@@ -23,10 +28,26 @@ export function fetchVenues () {
   }
 }
 
+export function fetchVenueDetail (id, placeId) {
+  return (dispatch) => {
+    googlePlaces.getDetails({ placeId }, (place, status) => {
+      dispatch(setVenueDetail(id, place))
+    })
+  }
+}
+
+function setVenueDetail (id, place) {
+  return {
+    type: constants.VENUE_FETCH_DETAIL,
+    id: id,
+    payload: place
+  }
+}
+
 export function setRegionUi (regionId) {
   return {
     type: constants.UI_SET_REGION,
-    payload: {regionId}
+    payload: { regionId }
   }
 }
 
@@ -34,7 +55,7 @@ export function hoverVenueUi (venue) {
   if (venue) {
     return {
       type: constants.UI_VENUE_HOVER_ON,
-      payload: {venue}
+      payload: { venue }
     }
   }
   return {

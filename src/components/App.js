@@ -26,7 +26,13 @@ class App extends Component {
           key={venue.id}
           path={`/${this.props.regions[venue.regionId].slug}/${venue.slug}`}
           render={props => {
-            return <VenuePage {...props} venue={venue} />
+            return (
+              <VenuePage
+                {...props}
+                venueId={venue.id}
+                placeId={venue.placeId}
+              />
+            )
           }}
         />
       )
