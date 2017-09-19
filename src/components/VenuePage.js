@@ -3,10 +3,41 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import './VenuePage.css'
+import objectFunctions from '../lib/ObjectFunctions'
+import { reduceVenuesByRegion } from '../lib/myHelpers'
 
 class VenuePage extends Component {
-  componentDidMount () {
-    this.props.fetchVenueDetail(this.props.venueId, this.props.placeId)
+  constructor () {
+    super()
+    this.state = {
+      nextSlug: '',
+      prevSlug: ''
+    }
+  }
+  componentWillMount () {
+    const { venues, venueId, googlePlacesId, regionSlug } = this.props
+
+    // get the venue detail
+    this.props.fetchVenueDetail(venueId, googlePlacesId)
+
+    // reduce the venues by region and then get the next and previous venues:
+    const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)
+    const nextId = objectFunctions.keys.next(reducedVenues, venueId)
+    const prevId = objectFunctions.keys.previous(reducedVenues, venueId)
+
+    this.setState({
+      nextSlug: '/' + regionSlug + '/' + venues[nextId].slug,
+      prevSlug: '/' + regionSlug + '/' + venues[prevId].slug
+    })
+
+  }
+  handlePrevious = () => {
+    this.props.history.push(this.state.prevSlug)
+  }
+  handleNext = () => {
+    console.log(this.state.nextSlug)
+    // const region =
+    this.props.history.push(this.state.nextSlug)
   }
   render () {
     const venue = this.props.venues[this.props.venueId]
@@ -24,8 +55,18 @@ class VenuePage extends Component {
         <div className='VenuePage__inner'>
           <Link to='/' className='VenuePage__close' />
           <div className='btn-group-sm'>
-            <button className='btn btn-primary btn-sm'>Previous</button>
-            <button className='btn btn-primary btn-sm'>Next</button>
+            <button
+              onClick={this.handlePrevious}
+              className='btn btn-primary btn-sm'
+            >
+              Previous Spot
+            </button>
+            <button
+              onClick={this.handleNext}
+              className='btn btn-primary btn-sm'
+            >
+              Next Spot
+            </button>
           </div>
           <img src={photo} alt='' />
           <h1>
@@ -38,8 +79,8 @@ class VenuePage extends Component {
   }
 }
 
-function mapStateToProps ({ venues }) {
-  return { venues }
+function mapStateToProps ({ venues, regions }) {
+  return { venues, regions }
 }
 
 export default connect(mapStateToProps, actions)(VenuePage)

@@ -28,9 +28,9 @@ export function fetchVenues () {
   }
 }
 
-export function fetchVenueDetail (id, placeId) {
+export function fetchVenueDetail (id, googlePlacesId) {
   return (dispatch) => {
-    googlePlaces.getDetails({ placeId }, (place, status) => {
+    googlePlaces.getDetails({ placeId: googlePlacesId }, (place, status) => {
       // TODO: ADD ERROR FALLBACK:
       dispatch(setVenueDetail(id, place))
     })

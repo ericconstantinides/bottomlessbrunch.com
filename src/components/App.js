@@ -30,7 +30,8 @@ class App extends Component {
               <VenuePage
                 {...props}
                 venueId={venue.id}
-                placeId={venue.placeId}
+                googlePlacesId={venue.googlePlacesId}
+                regionSlug={this.props.regions[venue.regionId].slug}
               />
             )
           }}

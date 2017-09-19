@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { reduceVenuesByRegion } from '../lib/myHelpers'
 import * as actions from '../actions'
 import VenueTeaser from './VenueTeaser'
 
@@ -15,9 +16,10 @@ class VenueList extends Component {
     this.props.openVenue(id)
   }
   renderTeasers = () => {
-    const reduced = _.filter(this.props.venues, venue => {
-      if (venue.regionId === this.props.ui.region) return venue
-    })
+    const reduced = reduceVenuesByRegion(
+      this.props.venues,
+      this.props.ui.region
+    )
     return _.map(reduced, venue => {
       return (
         <VenueTeaser
@@ -33,7 +35,7 @@ class VenueList extends Component {
       )
     })
   }
-  
+
   render () {
     return (
       <div className='VenueList'>
