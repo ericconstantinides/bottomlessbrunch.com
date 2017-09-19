@@ -17,7 +17,27 @@ class App extends Component {
     // get the regions and the venues
     this.props.fetchRegions()
     this.props.fetchVenues()
-    this.props.setRegionUi(0)
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.regions && nextProps.regions[0]) {
+      const { history } = this.props
+
+      // first get the region from the URL (if any)
+      const regionUrl = (history.location.pathname).replace('/', '').split('/')[0]
+
+      if (regionUrl) {
+        const regionUrlId = _.filter(nextProps.regions, region => {
+          if (region.slug === regionUrl) return region
+        })[0].id
+        if (typeof regionUrlId !== 'undefined' && !isNaN(regionUrlId)) {
+          this.props.setRegionUi(regionUrlId)
+        } else {
+          this.props.setRegionUi(0)
+        }
+      } else {
+        this.props.setRegionUi(0)
+      }
+    }
   }
   render () {
     const venueRoutes = _.map(this.props.venues, venue => {
