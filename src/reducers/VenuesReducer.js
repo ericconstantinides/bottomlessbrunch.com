@@ -8,6 +8,8 @@ export default (state = {}, action) => {
     case constants.VENUE_FETCH_DETAIL:
       const venueState = {...state[action.id], googePlacesData: action.payload}
       return {...state, [action.id]: venueState}
+    case constants.VENUE_FETCH_DETAIL_CANCEL:
+      return state
     default:
       return state
   }

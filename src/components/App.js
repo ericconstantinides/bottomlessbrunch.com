@@ -50,6 +50,7 @@ class App extends Component {
             return (
               <VenuePage
                 {...props}
+                venue={venue}
                 venueId={venue.id}
                 googlePlacesId={venue.googlePlacesId}
                 regionSlug={this.props.regions[venue.regionId].slug}

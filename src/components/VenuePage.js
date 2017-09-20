@@ -15,10 +15,10 @@ class VenuePage extends Component {
     }
   }
   componentWillMount () {
-    const { venues, venueId, googlePlacesId, regionSlug } = this.props
+    const { venue, venues, venueId, regionSlug } = this.props
 
     // get the venue detail
-    this.props.fetchVenueDetail(venueId, googlePlacesId)
+    this.props.fetchVenueDetail(venue)
 
     // reduce the venues by region and then get the next and previous venues:
     const reduced = reduceVenuesByRegion(venues, venues[venueId].regionId)

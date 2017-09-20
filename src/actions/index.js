@@ -28,12 +28,27 @@ export function fetchVenues () {
   }
 }
 
-export function fetchVenueDetail (id, googlePlacesId) {
-  return (dispatch) => {
-    googlePlaces.getDetails({ placeId: googlePlacesId }, (place, status) => {
-      // TODO: ADD ERROR FALLBACK:
-      dispatch(setVenueDetail(id, place))
-    })
+export function fetchVenueDetail ({ id, googePlacesData, googlePlacesId }) {
+  // check the fetchedTime and don't refetch if fewer than n minutes:
+  if (!googePlacesData || !googePlacesData.fetchedTime) {
+    return dispatch => {
+      googlePlaces.getDetails({ placeId: googlePlacesId }, (place, status) => {
+        if (status === 'OK') {
+          return dispatch(setVenueDetail(id, place))
+        }
+        // TODO: this needs to return a DISPATCH to a API error.
+        // See: udemy-advanced-redux-auth/client/src/actions/index.js
+        throw new Error(`Error thrown: ${status}`)
+      })
+    }
+  }
+  return dispatch => dispatch(cancelFetchVenueDetail())
+}
+
+export function cancelFetchVenueDetail () {
+  return {
+    type: constants.VENUE_FETCH_DETAIL_CANCEL,
+    payload: 'already have the data'
   }
 }
 
@@ -41,7 +56,7 @@ function setVenueDetail (id, place) {
   return {
     type: constants.VENUE_FETCH_DETAIL,
     id: id,
-    payload: place
+    payload: { ...place, fetchedTime: new Date() }
   }
 }
 
