@@ -12,3 +12,12 @@ export function reduceVenuesByRegion (venues, regionId) {
   })
   return _.mapKeys(reduced, 'id')
 }
+
+/**
+ * Rounds the number to nearest half decimal
+ * @param {Number} num
+ * @return {Number}
+ */
+export function roundHalf (num) {
+  return Math.round(num * 2) / 2
+}

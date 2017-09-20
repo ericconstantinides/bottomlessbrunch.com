@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Star from 'react-stars'
 import * as actions from '../actions'
 import './VenuePage.css'
 import objectFunctions from '../lib/ObjectFunctions'
-import { reduceVenuesByRegion } from '../lib/myHelpers'
+import { reduceVenuesByRegion, roundHalf } from '../lib/myHelpers'
 
 class VenuePage extends Component {
   constructor () {
@@ -65,10 +66,18 @@ class VenuePage extends Component {
               Next Spot
             </button>
           </div>
-          <img src={photo} alt='' />
-          <h1>
-            {venue.name} <br />
-          </h1>
+          <div className='VenuePage__image-container'>
+            <div className='VenuePage__hero-content'>
+              <h1 className='VenuePage__title'>{venue.name}</h1>
+              <h2>Number Rating: {venue.googePlacesData.rating}</h2>
+              <Star
+                size={20}
+                value={roundHalf(venue.googePlacesData.rating)}
+                edit={false}
+              />
+            </div>
+            <img className='VenuePage__image' src={photo} alt='' />
+          </div>
           <div dangerouslySetInnerHTML={{ __html: address }} />
         </div>
       </div>
