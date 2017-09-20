@@ -3,6 +3,9 @@ import slugify from '../lib/Slug'
 import constants from '../actions/types'
 import venues from '../content/venues.json'
 import regions from '../content/regions.json'
+import { fetchTimeout } from '../config'
+
+let fetchTimeoutMs = fetchTimeout * 1000 * 60
 
 const googlePlaces = new google.maps.places.PlacesService(
   document.createElement('div')
@@ -29,14 +32,19 @@ export function fetchVenues () {
 }
 
 export function fetchVenueDetail ({ id, googePlacesData, googlePlacesId }) {
-  // check the fetchedTime and don't refetch if fewer than n minutes:
-  if (!googePlacesData || !googePlacesData.fetchedTime) {
+  // check the fetchedTime and don't refetch if fewer than fetchTimeout:
+  if (
+    !googePlacesData ||
+    !googePlacesData.fetchedTime ||
+    new Date(googePlacesData.fetchedTime.getTime() + fetchTimeoutMs) <
+      new Date()
+  ) {
     return dispatch => {
       googlePlaces.getDetails({ placeId: googlePlacesId }, (place, status) => {
         if (status === 'OK') {
           return dispatch(setVenueDetail(id, place))
         }
-        // TODO: this needs to return a DISPATCH to a API error.
+        // TODO: this needs to return a DISPATCH to an API error.
         // See: udemy-advanced-redux-auth/client/src/actions/index.js
         throw new Error(`Error thrown: ${status}`)
       })
