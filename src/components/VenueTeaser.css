@@ -30,14 +30,23 @@
   border-bottom: 1px solid #ccc;
 }
 .VenueTeaser__title {
-  font-size: 0.9375em;
-  font-weight: bold;
-  margin-bottom: 0.125em;
+  font-size: 1em;
+  /* font-weight: bold; */
+  margin-bottom: 0.2em;
   color: #014cac;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.VenuePage__rating {
+  margin-left: 1em;
+  flex: 0 0 auto;
+  display: flex;
+}
+.VenuePage__rating > * {
+  flex: 0 0 auto;
 }
 .VenueTeaser__content {
   flex: 1;

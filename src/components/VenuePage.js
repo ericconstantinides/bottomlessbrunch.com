@@ -39,20 +39,52 @@ class VenuePage extends Component {
   }
   render () {
     const venue = this.props.venues[this.props.venueId]
+    // only go here if we have data:
+    let hours = ''
+    if (venue.googePlacesData) {
+      hours = venue.googePlacesData.opening_hours.weekday_text.map((day, i) => {
+        const [weekday, ...rest] = day.split(' ')
+        return (
+          <p key={i} className='VenuePage__day'>
+            <strong>{weekday}</strong> {rest}
+          </p>
+        )
+      })
+    }
     if (!venue.googePlacesData) venue.googePlacesData = {}
     const address = venue.googePlacesData.adr_address
-    let photo = '#'
+    let photos = ''
     if (venue.googePlacesData.photos) {
-      photo = venue.googePlacesData.photos['0'].getUrl({
-        maxWidth: 800,
-        maxHeight: 500
-      })
+      photos = venue.googePlacesData.photos
+        .map(photo => photo.getUrl({ maxWidth: 800, maxHeight: 500 }))
+        .map((photoUrl, i) => (
+          <img key={i} className='VenuePage__hero' src={photoUrl} alt='' />
+        ))
     }
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
           <Link to={`/${this.props.regionSlug}`} className='VenuePage__close' />
-          <div className='btn-group-sm'>
+          <div className='VenuePage__hero-container'>
+            <div className='VenuePage__hero-content'>
+              <h1 className='VenuePage__title'>{venue.name}</h1>
+              <Star
+                className='VenuePage__rating'
+                size={30}
+                value={roundHalf(venue.googePlacesData.rating)}
+                edit={false}
+              />
+            </div>
+            {photos}
+          </div>
+          <div className='VenuePage__left-col'>
+            <p
+              className='VenuePage__address'
+              dangerouslySetInnerHTML={{ __html: address }}
+            />
+            {hours}
+          </div>
+          <div className='VenuePage__nav btn-group-sm'>
             <button
               onClick={this.handlePrevious}
               className='btn btn-primary btn-sm'
@@ -66,19 +98,6 @@ class VenuePage extends Component {
               Next Spot
             </button>
           </div>
-          <div className='VenuePage__image-container'>
-            <div className='VenuePage__hero-content'>
-              <h1 className='VenuePage__title'>{venue.name}</h1>
-              <h2>Number Rating: {venue.googePlacesData.rating}</h2>
-              <Star
-                size={20}
-                value={roundHalf(venue.googePlacesData.rating)}
-                edit={false}
-              />
-            </div>
-            <img className='VenuePage__image' src={photo} alt='' />
-          </div>
-          <div dangerouslySetInnerHTML={{ __html: address }} />
         </div>
       </div>
     )
