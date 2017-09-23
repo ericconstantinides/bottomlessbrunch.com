@@ -4,9 +4,12 @@ import _ from 'lodash'
 import * as actions from '../actions'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router'
+import { parsePath } from '../lib/myHelpers'
 
 import MapPage from './MapPage'
 import VenuePage from './VenuePage'
+import AdminRegions from './admin/regions'
+import EditRegion from './admin/regions/EditRegion'
 
 import createHistory from 'history/createBrowserHistory'
 // Create a history of your choosing (we're using a browser history in this case)
@@ -19,7 +22,7 @@ class App extends Component {
     this.props.fetchVenues()
   }
   componentWillReceiveProps (nextProps) {
-    if (nextProps.regions && nextProps.regions[0]) {
+    /*     if (nextProps.regions && nextProps.regions[0]) {
       const { history } = this.props
 
       // first get the region from the URL (if any)
@@ -37,7 +40,7 @@ class App extends Component {
       } else {
         this.props.setRegionUi(0)
       }
-    }
+    } */
   }
   render () {
     const venueRoutes = _.map(this.props.venues, venue => {
@@ -60,13 +63,20 @@ class App extends Component {
         />
       )
     })
+    const parsedHistory = parsePath(history.location.pathname)
     return (
       <div className='App'>
         <ConnectedRouter history={history}>
           <div className='App'>
             {/* <Route exact path='/' component={MapPage} /> */}
+            <Route exact path='/admin/regions' component={AdminRegions} />
+            <Route
+              exact
+              path='/admin/regions/:id/edit'
+              component={EditRegion}
+            />
             {venueRoutes}
-            <MapPage history={history} />
+            {parsedHistory[0] !== 'admin' && <MapPage history={history} />}
           </div>
         </ConnectedRouter>
       </div>
