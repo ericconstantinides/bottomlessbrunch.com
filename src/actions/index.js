@@ -38,10 +38,9 @@ export function addRegion (values, history) {
   }
 }
 
-// TODO: THIS DON"T WORK NONE YET
 export function editRegion (id, values, history) {
   return function (dispatch) {
-    axios.patch(`${ROOT_URL}/api/v1/regions/${id}`, values)
+    axios.put(`${ROOT_URL}/api/v1/regions/${id}`, values)
       .then(response => {
         dispatch({
           type: constants.REGION_EDIT,

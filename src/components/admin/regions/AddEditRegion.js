@@ -5,10 +5,6 @@ import { Field, FormSection, reduxForm } from 'redux-form'
 import { addRegion, editRegion } from '../../../actions'
 
 class AddEditRegion extends Component {
-  componentWillMount () {
-    if (this.props.task === 'edit') {
-    }
-  }
   renderField (field) {
     // console.log(field)
     const { touched, error } = field.meta
@@ -28,13 +24,19 @@ class AddEditRegion extends Component {
     if (this.props.task === 'add') {
       this.props.addRegion(values, this.props.history)
     } else {
-      this.props.editRegion(values, this.props.history)
+      this.props.editRegion(
+        this.props.match.params.id,
+        values,
+        this.props.history
+      )
     }
   }
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
-    const title = thisForm.addEditRegion && thisForm.addEditRegion.values && thisForm.addEditRegion.values.name
+    const title = thisForm.addEditRegion &&
+      thisForm.addEditRegion.values &&
+      thisForm.addEditRegion.values.name
       ? <h1>{thisForm.addEditRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
     // const title = 'hello'
