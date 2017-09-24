@@ -23,7 +23,6 @@ export function fetchRegions () {
   }
 }
 
-// TODO: MAKE HISTORY WORK
 export function addRegion (values, history) {
   return function (dispatch) {
     axios.post(`${ROOT_URL}/api/v1/regions`, values)
@@ -32,9 +31,9 @@ export function addRegion (values, history) {
           type: constants.REGION_ADD,
           payload: response.data
         })
-        // history.push('/feature')
+        history.push('/admin/regions')
       })
-      // TODO: fix this. It doesn't work:
+      // TODO: fix error stuff. It doesn't work:
       .catch(error => dispatch(apiError(error.response.data.error)))
   }
 }

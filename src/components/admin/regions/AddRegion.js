@@ -20,10 +20,7 @@ class AddRegion extends Component {
   }
   // gets called after successful validation:
   onSubmit (values) {
-    this.props.addRegion(values, () => {
-      // as long as its in the <Route>
-      this.props.history.push('/admin/regions')
-    })
+    this.props.addRegion(values, this.props.history)
   }
   render () {
     // pull out the redux-form handleSubmit function from props:

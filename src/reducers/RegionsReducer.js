@@ -6,9 +6,7 @@ export default (state = {}, action) => {
     case constants.REGIONS_FETCH:
       return _.mapKeys(action.payload, '_id')
     case constants.REGION_ADD:
-      // TODO: ADD THIS TO STATE
-      console.log(action.payload)
-      return state
+      return {...state, [action.payload._id]: action.payload}
     default:
       return state
   }
