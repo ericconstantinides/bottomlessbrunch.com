@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Field, FormSection, reduxForm } from 'redux-form'
-import { addRegion } from '../../../actions'
+import { addRegion, editRegion } from '../../../actions'
 
 class AddEditRegion extends Component {
+  componentWillMount () {
+    if (this.props.task === 'edit') {
+    }
+  }
   renderField (field) {
     // console.log(field)
     const { touched, error } = field.meta
@@ -21,15 +25,20 @@ class AddEditRegion extends Component {
   }
   // gets called after successful validation:
   onSubmit (values) {
-    this.props.addRegion(values, this.props.history)
+    if (this.props.task === 'add') {
+      this.props.addRegion(values, this.props.history)
+    } else {
+      this.props.editRegion(values, this.props.history)
+    }
   }
   render () {
     // pull out the redux-form handleSubmit function from props:
-    const { handleSubmit, pristine, submitting, form } = this.props
-    const title = form.addRegion.values &&
-      form.addRegion.values.name
-      ? <h1>{form.addRegion.values.name}</h1>
+    const { handleSubmit, pristine, submitting, thisForm } = this.props
+    const title = thisForm.addEditRegion && thisForm.addEditRegion.values && thisForm.addEditRegion.values.name
+      ? <h1>{thisForm.addEditRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
+    // const title = 'hello'
+    // console.log(this.props)
     return (
       <div className='container'>
         {title}
@@ -67,10 +76,16 @@ class AddEditRegion extends Component {
               component={this.renderField}
             />
           </FormSection>
-          <button type='submit' className='btn btn-sm btn-primary' disabled={pristine || submitting}>
+          <button
+            type='submit'
+            className='btn btn-sm btn-primary'
+            disabled={pristine || submitting}
+          >
             Submit
           </button>
-          <Link to='/admin/regions' className='btn btn-sm btn-danger'>Cancel</Link>
+          <Link to='/admin/regions' className='btn btn-sm btn-danger'>
+            Cancel
+          </Link>
         </form>
       </div>
     )
@@ -98,26 +113,26 @@ function validate (values) {
   // if errors is still empty, we're bueno!
   return errors
 }
-const tempData = {
-  _id: '59c5c962190541d50cc71cce',
-  name: 'Monkey',
-  slug: 'monkey-monkey-monkey',
-  zoom: 99999,
-  position: {
-    lat: 34.0201613,
-    lng: -118.6919121
-  },
-  __v: 0
+
+function mapStateToProps (state, ownProps) {
+  // if we have an id, load the id region:
+  if (ownProps.match.params.id) {
+    return {
+      thisForm: state.form,
+      initialValues: state.regions[ownProps.match.params.id]
+    }
+  }
+  // if we don't, just use your default
+  return {
+    thisForm: state.form
+  }
 }
 
-function mapStateToProps ({ form }) {
-  return { form }
-}
-
-// AddEditRegionForm is the _unique_ form name
-export default reduxForm({
-  validate,
-  initialValues: tempData,
-  form: 'addRegion',
-  enableReinitialize: true
-})(connect(mapStateToProps, { addRegion })(AddEditRegion))
+// connect needs to be the last thing run
+export default connect(mapStateToProps, { addRegion, editRegion })(
+  reduxForm({
+    form: 'addEditRegion',
+    validate,
+    enableReinitialize: true
+  })(AddEditRegion)
+)

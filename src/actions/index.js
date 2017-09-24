@@ -38,6 +38,22 @@ export function addRegion (values, history) {
   }
 }
 
+// TODO: THIS DON"T WORK NONE YET
+export function editRegion (id, values, history) {
+  return function (dispatch) {
+    axios.patch(`${ROOT_URL}/api/v1/regions/${id}`, values)
+      .then(response => {
+        dispatch({
+          type: constants.REGION_EDIT,
+          payload: response.data
+        })
+        history.push('/admin/regions')
+      })
+      // TODO: fix error stuff. It doesn't work:
+      .catch(error => dispatch(apiError(error.response.data.error)))
+  }
+}
+
 export function deleteRegion (regionId, history) {
   return function (dispatch) {
     axios.delete(`${ROOT_URL}/api/v1/regions/${regionId}`)

@@ -1,24 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ConnectedRouter as Router } from 'react-router-redux'
 import { Route } from 'react-router'
 import AddEditRegion from './regions/AddEditRegion'
 import ListRegions from './regions/ListRegions'
 import './admin.css'
 
-class Admin extends Component {
-  render () {
-    return (
+const Admin = props => {
+  return (
+    <Router history={props.history}>
       <div>
-        <Router history={this.props.history}>
-          <div className='Question-Am-I-necessary'>
-            <Route exact path='/admin/regions/add' component={AddEditRegion} />
-            <Route exact path='/admin/regions/:id/edit' component={AddEditRegion} />
-            <Route exact path='/admin/regions' component={ListRegions} />
-          </div>
-        </Router>
+        <Route
+          exact path='/admin/regions/add'
+          render={props => <AddEditRegion {...props} task='add' />}
+        />
+        <Route
+          exact path='/admin/regions/:id/edit'
+          render={props => <AddEditRegion {...props} task='edit' />}
+        />
+        <Route exact path='/admin/regions' component={ListRegions} />
       </div>
-    )
-  }
+    </Router>
+  )
 }
 
 export default Admin
