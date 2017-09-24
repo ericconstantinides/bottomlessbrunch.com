@@ -18,6 +18,13 @@ export function fetchRegions () {
   }
 }
 
+export function addRegion () {
+  return {
+    type: constants.REGION_ADD,
+    payload: { data: regions }
+  }
+}
+
 export function fetchVenues () {
   // let's add the slug here:
   // <place name>-<neighborhood>

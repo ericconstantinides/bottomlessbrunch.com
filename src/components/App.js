@@ -10,6 +10,7 @@ import MapPage from './MapPage'
 import VenuePage from './VenuePage'
 import AdminRegions from './admin/regions'
 import EditRegion from './admin/regions/EditRegion'
+import AddRegion from './admin/regions/AddRegion'
 
 import createHistory from 'history/createBrowserHistory'
 // Create a history of your choosing (we're using a browser history in this case)
@@ -70,6 +71,7 @@ class App extends Component {
           <div className='App'>
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route exact path='/admin/regions' component={AdminRegions} />
+            <Route exact path='/admin/regions/add' component={AddRegion} />
             <Route
               exact
               path='/admin/regions/:id/edit'

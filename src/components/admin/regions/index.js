@@ -27,6 +27,7 @@ class AdminRegions extends Component {
         {_.map(this.props.regions, region => (
           <AdminRegion key={region.id} {...region} />
         ))}
+        <Link to='/admin/regions/add' className='btn btn-sm btn-primary'>Add Region</Link>
       </div>
     )
   }
