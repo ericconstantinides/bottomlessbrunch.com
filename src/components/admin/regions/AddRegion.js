@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Field, reduxForm } from 'redux-form'
+import { Field, FormSection, reduxForm } from 'redux-form'
 import { addRegion } from '../../../actions'
 
 class AddRegion extends Component {
@@ -27,10 +27,10 @@ class AddRegion extends Component {
   }
   render () {
     // pull out the redux-form handleSubmit function from props:
-    const { handleSubmit } = this.props
-    const title = this.props.form.addRegion.values &&
-      this.props.form.addRegion.values.name
-      ? <h1>{this.props.form.addRegion.values.name}</h1>
+    const { handleSubmit, pristine, submitting, form } = this.props
+    const title = form.addRegion.values &&
+      form.addRegion.values.name
+      ? <h1>{form.addRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
     return (
       <div className='container'>
@@ -55,19 +55,23 @@ class AddRegion extends Component {
             type='number'
             component={this.renderField}
           />
-          <Field
-            labelOfThis='Latitude'
-            name='lat'
-            type='text'
-            component={this.renderField}
-          />
-          <Field
-            labelOfThis='Longitude'
-            name='lng'
-            type='text'
-            component={this.renderField}
-          />
-          <button type='submit' className='btn btn-sm btn-primary'>Submit</button>
+          <FormSection name='position'>
+            <Field
+              labelOfThis='Latitude'
+              name='lat'
+              type='text'
+              component={this.renderField}
+            />
+            <Field
+              labelOfThis='Longitude'
+              name='lng'
+              type='text'
+              component={this.renderField}
+            />
+          </FormSection>
+          <button type='submit' className='btn btn-sm btn-primary' disabled={pristine || submitting}>
+            Submit
+          </button>
           <Link to='/admin/regions' className='btn btn-sm btn-danger'>Cancel</Link>
         </form>
       </div>

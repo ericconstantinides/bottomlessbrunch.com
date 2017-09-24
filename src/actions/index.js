@@ -1,9 +1,11 @@
 /* global google */
+import axios from 'axios'
 import slugify from '../lib/Slug'
 import constants from '../actions/types'
 import venues from '../content/venues.json'
 import regions from '../content/regions.json'
 import { fetchTimeout } from '../config'
+import { ROOT_URL } from '../config'
 
 let fetchTimeoutMs = fetchTimeout * 1000 * 60
 
@@ -18,10 +20,30 @@ export function fetchRegions () {
   }
 }
 
-export function addRegion () {
+export function addRegion (values, history) {
+  return function (dispatch) {
+    axios.post(`${ROOT_URL}/api/v1/regions`, values)
+      .then(response => {
+        dispatch({
+          type: constants.REGION_ADD,
+          payload: response.data
+        })
+        // history.push('/feature')
+      })
+      // this is new and different than above
+      // from the server's RESPONSE (response.data.error)
+      // send to the apiError() fn
+      // it dispatches and gets caught by the reducer...
+      // we need to have the answer created by the reducer seen in the container
+      // FYI, this is newer axios error handling
+      .catch(error => dispatch(apiError(error.response.data.error)))
+  }
+}
+
+export function apiError (error) {
   return {
-    type: constants.REGION_ADD,
-    payload: { data: regions }
+    type: constants.API_ERROR,
+    payload: error
   }
 }
 
