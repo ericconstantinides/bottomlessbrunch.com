@@ -3,9 +3,7 @@ import axios from 'axios'
 import slugify from '../lib/Slug'
 import constants from '../actions/types'
 import venues from '../content/venues.json'
-import regions from '../content/regions.json'
-import { fetchTimeout } from '../config'
-import { ROOT_URL } from '../config'
+import { fetchTimeout, ROOT_URL } from '../config'
 
 let fetchTimeoutMs = fetchTimeout * 1000 * 60
 
@@ -14,12 +12,18 @@ const googlePlaces = new google.maps.places.PlacesService(
 )
 
 export function fetchRegions () {
-  return {
-    type: constants.REGIONS_FETCH,
-    payload: { data: regions }
+  return function (dispatch) {
+    axios.get(`${ROOT_URL}/api/v1/regions`)
+    .then(response => {
+      dispatch({
+        type: constants.REGIONS_FETCH,
+        payload: response.data
+      })
+    })
   }
 }
 
+// TODO: MAKE HISTORY WORK
 export function addRegion (values, history) {
   return function (dispatch) {
     axios.post(`${ROOT_URL}/api/v1/regions`, values)
@@ -30,16 +34,12 @@ export function addRegion (values, history) {
         })
         // history.push('/feature')
       })
-      // this is new and different than above
-      // from the server's RESPONSE (response.data.error)
-      // send to the apiError() fn
-      // it dispatches and gets caught by the reducer...
-      // we need to have the answer created by the reducer seen in the container
-      // FYI, this is newer axios error handling
+      // TODO: fix this. It doesn't work:
       .catch(error => dispatch(apiError(error.response.data.error)))
   }
 }
 
+// TODO: THIS DOESN'T WORK EITHER
 export function apiError (error) {
   return {
     type: constants.API_ERROR,

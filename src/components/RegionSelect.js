@@ -22,7 +22,7 @@ class RegionSelect extends Component {
           clearable={false}
           onChange={this.handleChange}
           options={_.map(this.props.regions, region => ({
-            value: region.id,
+            value: region._id,
             label: region.name
           }))}
         />

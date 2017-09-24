@@ -21,6 +21,7 @@ class App extends Component {
     // get the regions and the venues
     this.props.fetchRegions()
     this.props.fetchVenues()
+    this.props.setRegionUi('59c4a61488348f8102580f25')
   }
   componentWillReceiveProps (nextProps) {
     /*     if (nextProps.regions && nextProps.regions[0]) {
@@ -44,26 +45,29 @@ class App extends Component {
     } */
   }
   render () {
-    const venueRoutes = _.map(this.props.venues, venue => {
-      return (
-        <Route
-          key={venue.id}
-          path={`/${this.props.regions[venue.regionId].slug}/${venue.slug}`}
-          render={props => {
-            // the {...props} give us history stuffs
-            return (
-              <VenuePage
-                {...props}
-                venue={venue}
-                venueId={venue.id}
-                googlePlacesId={venue.googlePlacesId}
-                regionSlug={this.props.regions[venue.regionId].slug}
-              />
-            )
-          }}
-        />
-      )
-    })
+    let venueRoutes = null
+    if (!_.isEmpty(this.props.regions) && !_.isEmpty(this.props.venues)) {
+      venueRoutes = _.map(this.props.venues, venue => {
+        return (
+          <Route
+            key={venue.id}
+            path={`/${this.props.regions[venue.regionId].slug}/${venue.slug}`}
+            render={props => {
+              // the {...props} give us history stuffs
+              return (
+                <VenuePage
+                  {...props}
+                  venue={venue}
+                  venueId={venue.id}
+                  googlePlacesId={venue.googlePlacesId}
+                  regionSlug={this.props.regions[venue.regionId].slug}
+                />
+              )
+            }}
+          />
+        )
+      })
+    }
     const parsedHistory = parsePath(history.location.pathname)
     return (
       <div className='App'>

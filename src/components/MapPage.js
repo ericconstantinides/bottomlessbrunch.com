@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import * as actions from '../actions'
 import RegionSelect from './RegionSelect'
 import Map from './Map'
@@ -8,6 +9,7 @@ import './MapPage.css'
 
 class MapPage extends Component {
   render () {
+    if (_.isEmpty(this.props.regions)) return <div>Loading...</div>
     const region = this.props.regions[this.props.ui.region]
     const styles = { height: `100%`, width: `100%` }
     return (
