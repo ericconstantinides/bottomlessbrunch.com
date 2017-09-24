@@ -38,6 +38,21 @@ export function addRegion (values, history) {
   }
 }
 
+export function deleteRegion (regionId, history) {
+  return function (dispatch) {
+    axios.delete(`${ROOT_URL}/api/v1/regions/${regionId}`)
+      .then(response => {
+        dispatch({
+          type: constants.REGION_DELETE,
+          payload: regionId
+        })
+        history.push('/admin/regions')
+      })
+      // TODO: fix error stuff. It doesn't work:
+      .catch(error => dispatch(apiError(error.response.data.error)))
+  }
+}
+
 // TODO: THIS DOESN'T WORK EITHER
 export function apiError (error) {
   return {
