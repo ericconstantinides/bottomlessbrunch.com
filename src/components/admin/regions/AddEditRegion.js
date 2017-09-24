@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 import { Field, FormSection, reduxForm } from 'redux-form'
 import { addRegion } from '../../../actions'
 
-class AddRegion extends Component {
+class AddEditRegion extends Component {
   renderField (field) {
+    // console.log(field)
     const { touched, error } = field.meta
     const className = `form-group ${touched && error ? 'has-danger' : ''}`
     return (
@@ -97,13 +98,26 @@ function validate (values) {
   // if errors is still empty, we're bueno!
   return errors
 }
+const tempData = {
+  _id: '59c5c962190541d50cc71cce',
+  name: 'Monkey',
+  slug: 'monkey-monkey-monkey',
+  zoom: 99999,
+  position: {
+    lat: 34.0201613,
+    lng: -118.6919121
+  },
+  __v: 0
+}
 
 function mapStateToProps ({ form }) {
   return { form }
 }
 
-// AddRegionForm is the _unique_ form name
+// AddEditRegionForm is the _unique_ form name
 export default reduxForm({
   validate,
-  form: 'addRegion'
-})(connect(mapStateToProps, { addRegion })(AddRegion))
+  initialValues: tempData,
+  form: 'addRegion',
+  enableReinitialize: true
+})(connect(mapStateToProps, { addRegion })(AddEditRegion))
