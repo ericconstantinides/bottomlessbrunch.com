@@ -2,7 +2,6 @@
 import axios from 'axios'
 import slugify from '../lib/Slug'
 import constants from '../actions/types'
-import venues from '../content/venues.json'
 import { fetchTimeout, ROOT_URL } from '../config'
 
 let fetchTimeoutMs = fetchTimeout * 1000 * 60
@@ -53,15 +52,76 @@ export function editRegion (id, values, history) {
   }
 }
 
-export function deleteRegion (regionId, history) {
+export function deleteRegion (region, history) {
   return function (dispatch) {
-    axios.delete(`${ROOT_URL}/api/v1/regions/${regionId}`)
+    axios.delete(`${ROOT_URL}/api/v1/regions/${region}`)
       .then(response => {
         dispatch({
           type: constants.REGION_DELETE,
-          payload: regionId
+          payload: region
         })
         history.push('/admin/regions')
+      })
+      // TODO: fix error stuff. It doesn't work:
+      .catch(error => dispatch(apiError(error.response.data.error)))
+  }
+}
+
+export function fetchVenues () {
+  return function (dispatch) {
+    axios.get(`${ROOT_URL}/api/v1/venues`)
+    .then(response => {
+      const venuesWithSlug = response.data.map(venue => {
+        venue.slug = slugify(venue.name) + '-' + slugify(venue.neighborhood)
+        return venue
+      })
+      dispatch({
+        type: constants.VENUES_FETCH,
+        payload: venuesWithSlug
+      })
+    })
+  }
+}
+
+export function addVenue (values, history) {
+  return function (dispatch) {
+    axios.post(`${ROOT_URL}/api/v1/venues`, values)
+      .then(response => {
+        dispatch({
+          type: constants.VENUE_ADD,
+          payload: response.data
+        })
+        history.push('/admin/venues')
+      })
+      // TODO: fix error stuff. It doesn't work:
+      .catch(error => dispatch(apiError(error.response.data.error)))
+  }
+}
+
+export function editVenue (id, values, history) {
+  return function (dispatch) {
+    axios.put(`${ROOT_URL}/api/v1/venues/${id}`, values)
+      .then(response => {
+        dispatch({
+          type: constants.VENUE_EDIT,
+          payload: response.data
+        })
+        history.push('/admin/venues')
+      })
+      // TODO: fix error stuff. It doesn't work:
+      .catch(error => dispatch(apiError(error.response.data.error)))
+  }
+}
+
+export function deleteVenue (venueId, history) {
+  return function (dispatch) {
+    axios.delete(`${ROOT_URL}/api/v1/venues/${venueId}`)
+      .then(response => {
+        dispatch({
+          type: constants.VENUE_DELETE,
+          payload: venueId
+        })
+        history.push('/admin/venues')
       })
       // TODO: fix error stuff. It doesn't work:
       .catch(error => dispatch(apiError(error.response.data.error)))
@@ -76,20 +136,7 @@ export function apiError (error) {
   }
 }
 
-export function fetchVenues () {
-  // let's add the slug here:
-  // <place name>-<neighborhood>
-  const venuesWithSlug = venues.map(venue => {
-    venue.slug = slugify(venue.name) + '-' + slugify(venue.neighborhood)
-    return venue
-  })
-  return {
-    type: constants.VENUES_FETCH,
-    payload: { data: venuesWithSlug }
-  }
-}
-
-export function fetchVenueDetail ({ id, googePlacesData, googlePlacesId }) {
+export function fetchVenueDetail ({ _id, googePlacesData, googlePlacesId }) {
   // check the fetchedTime and don't refetch if fewer than fetchTimeout:
   if (
     !googePlacesData ||
@@ -100,7 +147,7 @@ export function fetchVenueDetail ({ id, googePlacesData, googlePlacesId }) {
     return dispatch => {
       googlePlaces.getDetails({ placeId: googlePlacesId }, (place, status) => {
         if (status === 'OK') {
-          return dispatch(setVenueDetail(id, place))
+          return dispatch(setVenueDetail(_id, place))
         }
         // TODO: this needs to return a DISPATCH to an API error.
         // See: udemy-advanced-redux-auth/client/src/actions/index.js
@@ -118,10 +165,10 @@ export function cancelFetchVenueDetail () {
   }
 }
 
-function setVenueDetail (id, place) {
+function setVenueDetail (_id, place) {
   return {
     type: constants.VENUE_FETCH_DETAIL,
-    id: id,
+    _id: _id,
     payload: { ...place, fetchedTime: new Date() }
   }
 }

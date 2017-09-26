@@ -12,8 +12,8 @@ class VenueList extends Component {
   handleMouseLeave = venue => event => {
     this.props.hoverVenueUi()
   }
-  handleClick = id => event => {
-    this.props.openVenue(id)
+  handleClick = _id => event => {
+    this.props.openVenue(_id)
   }
   renderTeasers = () => {
     const reduced = reduceVenuesByRegion(
@@ -23,13 +23,13 @@ class VenueList extends Component {
     return _.map(reduced, venue => {
       return (
         <VenueTeaser
-          key={venue.id}
+          key={venue._id}
           altClass='VenueListItem'
           handleMouseOver={this.handleMouseOver}
           handleMouseLeave={this.handleMouseLeave}
           handleClick={this.handleClick}
           venue={venue}
-          hoveredId={this.props.ui.venueHover.id}
+          hoveredId={this.props.ui.venueHover._id}
           regionSlug={this.props.regions[venue.regionId].slug}
         />
       )

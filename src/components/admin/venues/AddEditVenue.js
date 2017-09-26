@@ -8,10 +8,10 @@ import {
   change as changeFieldValue
 } from 'redux-form'
 import GoogleMapReact from 'google-map-react'
-import { addRegion, editRegion } from '../../../actions'
+import { addVenue, editVenue } from '../../../actions'
 import { usaMap } from '../../../config'
 
-class AddEditRegion extends Component {
+class AddEditVenue extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -21,10 +21,10 @@ class AddEditRegion extends Component {
   renderField (field) {
     const { touched, error } = field.meta
     const fieldType = field.type ? field.type : 'text'
-    const className = `AddEditRegion__form-group form-group ${touched && error ? 'has-danger' : ''}`
+    const className = `AddEditVenue__form-group form-group ${touched && error ? 'has-danger' : ''}`
     return (
       <div className={className}>
-        <label className='AddEditRegion__label'>{field.lbl}</label>
+        <label className='AddEditVenue__label'>{field.lbl}</label>
         <input className='form-control' type={fieldType} {...field.input} />
         <small className='text-help'>
           {touched ? error : ''}
@@ -34,11 +34,11 @@ class AddEditRegion extends Component {
   }
   // gets called after successful validation:
   onSubmit (values) {
-    const { addRegion, editRegion, history, match } = this.props
+    const { addVenue, editVenue, history, match } = this.props
     if (match.params.id) {
-      editRegion(match.params.id, values, history)
+      editVenue(match.params.id, values, history)
     } else {
-      addRegion(values, history)
+      addVenue(values, history)
     }
   }
   handleMapLoaded = map => {
@@ -51,11 +51,11 @@ class AddEditRegion extends Component {
   handleMapMoved = position => {
     if (
       this.props.thisForm &&
-      this.props.thisForm.addEditRegion
+      this.props.thisForm.addEditVenue
     ) {
-      this.props.changeFieldValue('addEditRegion', 'zoom', position.zoom)
-      this.props.changeFieldValue('addEditRegion', 'position.lat', position.center.lat)
-      this.props.changeFieldValue('addEditRegion', 'position.lng', position.center.lng)
+      this.props.changeFieldValue('addEditVenue', 'zoom', position.zoom)
+      this.props.changeFieldValue('addEditVenue', 'position.lat', position.center.lat)
+      this.props.changeFieldValue('addEditVenue', 'position.lng', position.center.lng)
     }
 
     // this.setState((prevState, props) => {
@@ -65,21 +65,21 @@ class AddEditRegion extends Component {
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
-    const title = thisForm.addEditRegion &&
-      thisForm.addEditRegion.values &&
-      thisForm.addEditRegion.values.name
-      ? <h1>{thisForm.addEditRegion.values.name}</h1>
+    const title = thisForm.addEditVenue &&
+      thisForm.addEditVenue.values &&
+      thisForm.addEditVenue.values.name
+      ? <h1>{thisForm.addEditVenue.values.name}</h1>
       : <h1>&nbsp;</h1>
     return (
-      <div className='AddEditRegion container'>
+      <div className='AddEditVenue container'>
         {title}
         {/* the handleSubmit is from redux-form */}
         <form
-          className='AddEditRegion__form'
+          className='AddEditVenue__form'
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
         >
-          <div className='AddEditRegion__col-left'>
-            <Field lbl='Region Name' name='name' component={this.renderField} />
+          <div className='AddEditVenue__col-left'>
+            <Field lbl='Venue Name' name='name' component={this.renderField} />
             <Field lbl='Slug' name='slug' component={this.renderField} />
             <Field
               lbl='Zoom'
@@ -108,11 +108,11 @@ class AddEditRegion extends Component {
             >
               Submit
             </button>
-            <Link to='/admin/regions' className='btn btn-sm btn-danger'>
+            <Link to='/admin/venues' className='btn btn-sm btn-danger'>
               Cancel
             </Link>
           </div>
-          <div className='AddEditRegion__col-right'>
+          <div className='AddEditVenue__col-right'>
             <GoogleMapReact
               onGoogleApiLoaded={this.handleMapLoaded}
               yesIWantToUseGoogleMapApiInternals
@@ -150,11 +150,11 @@ function validate (values) {
 }
 
 function mapStateToProps (state, ownProps) {
-  // if we have an id, load the id region:
+  // if we have an id, load the id venue:
   if (ownProps.match.params.id) {
     return {
       thisForm: state.form,
-      initialValues: state.regions[ownProps.match.params.id]
+      initialValues: state.venues[ownProps.match.params.id]
     }
   }
   // if we don't, just use your default
@@ -164,13 +164,13 @@ function mapStateToProps (state, ownProps) {
 }
 // connect needs to be the outer-most thing run
 export default connect(mapStateToProps, {
-  addRegion,
-  editRegion,
+  addVenue,
+  editVenue,
   changeFieldValue
 })(
   reduxForm({
-    form: 'addEditRegion',
+    form: 'addEditVenue',
     validate,
     enableReinitialize: true
-  })(AddEditRegion)
+  })(AddEditVenue)
 )

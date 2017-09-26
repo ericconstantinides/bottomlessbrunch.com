@@ -41,7 +41,7 @@ class Map extends Component {
       >
         {_.map(this.props.venues, venue => (
           <VenueTeaser
-            key={venue.id}
+            key={venue._id}
             altClass='MapItem'
             {...venue}
             lat={venue.position.lat}
@@ -50,7 +50,7 @@ class Map extends Component {
             handleMouseLeave={this.handleMouseLeave}
             handleClick={this.handleClick}
             venue={venue}
-            hoveredId={this.props.ui.venueHover.id}
+            hoveredId={this.props.ui.venueHover._id}
             regionSlug={this.props.regions[venue.regionId].slug}
           />
         ))}

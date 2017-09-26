@@ -41,7 +41,7 @@ class VenuePage extends Component {
     const venue = this.props.venues[this.props.venueId]
     // only go here if we have data:
     let hours = ''
-    if (venue.googePlacesData) {
+    if (venue.googePlacesData && venue.googePlacesData.opening_hours) {
       hours = venue.googePlacesData.opening_hours.weekday_text.map((day, i) => {
         const [weekday, ...rest] = day.split(' ')
         return (

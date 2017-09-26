@@ -48,7 +48,7 @@ class App extends Component {
       venueRoutes = _.map(this.props.venues, venue => {
         return (
           <Route
-            key={venue.id}
+            key={venue._id}
             path={`/${this.props.regions[venue.regionId].slug}/${venue.slug}`}
             render={props => {
               // the {...props} give us history stuffs
@@ -56,7 +56,7 @@ class App extends Component {
                 <VenuePage
                   {...props}
                   venue={venue}
-                  venueId={venue.id}
+                  venueId={venue._id}
                   googlePlacesId={venue.googlePlacesId}
                   regionSlug={this.props.regions[venue.regionId].slug}
                 />

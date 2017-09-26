@@ -9,7 +9,9 @@ import './MapPage.css'
 
 class MapPage extends Component {
   render () {
-    if (_.isEmpty(this.props.regions)) return <div>Loading...</div>
+    if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
+      return <div>Loading...</div>
+    }
     const region = this.props.regions[this.props.ui.region]
     const styles = { height: `100%`, width: `100%` }
     return (

@@ -10,7 +10,7 @@ const VenueTeaser = ({
   handleMouseLeave,
   altClass
 }) => {
-  const hovered = venue.id === hoveredId ? 'is-hovered' : 'not-hovered'
+  const hovered = venue._id === hoveredId ? 'is-hovered' : 'not-hovered'
   const renderedImage = venue.images
     ? <div className='VenueTeaser__image-container'>
       <img
@@ -34,9 +34,11 @@ const VenueTeaser = ({
         {renderedImage}
         <div className='VenueTeaser__content'>
           <h4 className='VenueTeaser__title'>{venue.name}</h4>
-          <p className='VenueTeaser__p'>
-            {venue.address.street}, {venue.address.city}
-          </p>
+          {venue.address &&
+            <p className='VenueTeaser__p'>
+              {venue.address.street}, {venue.address.city}
+            </p>
+          }
         </div>
       </div>
     </Link>

@@ -19,3 +19,7 @@ body,
 .App__container {
   flex: 1;
 }
+
+.btn + .btn {
+  margin-left: 0.375em;
+}
