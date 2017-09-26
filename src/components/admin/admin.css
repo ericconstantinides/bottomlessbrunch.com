@@ -4,3 +4,18 @@
 .AdminRegion p {
   margin-bottom: 0;
 }
+
+.AddEditRegion__form {
+  display: flex;
+}
+.AddEditRegion__label {
+  margin-bottom: 0;
+  font-size: 0.875em;
+}
+.AddEditRegion__col-left {
+  margin-right: 1em;
+  flex: 0 0 200px;
+}
+.AddEditRegion__col-right {
+  width: 100%;
+}

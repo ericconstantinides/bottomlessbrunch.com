@@ -2,17 +2,26 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Field, FormSection, reduxForm } from 'redux-form'
+import GoogleMapReact from 'google-map-react'
 import { addRegion, editRegion } from '../../../actions'
+import { usaMap } from '../../../config'
 
 class AddEditRegion extends Component {
+  constructor () {
+    super()
+    this.state = {
+      map: null,
+      loaded: false
+    }
+  }
   renderField (field) {
-    // console.log(field)
     const { touched, error } = field.meta
-    const className = `form-group ${touched && error ? 'has-danger' : ''}`
+    const fieldType = field.type ? field.type : 'text'
+    const className = `AddEditRegion__form-group form-group ${touched && error ? 'has-danger' : ''}`
     return (
       <div className={className}>
-        <label>{field.labelOfThis}</label>
-        <input className='form-control' type={field.type} {...field.input} />
+        <label className='AddEditRegion__label'>{field.lbl}</label>
+        <input className='form-control' type={fieldType} {...field.input} />
         <small className='text-help'>
           {touched ? error : ''}
         </small>
@@ -21,15 +30,16 @@ class AddEditRegion extends Component {
   }
   // gets called after successful validation:
   onSubmit (values) {
-    if (this.props.task === 'add') {
-      this.props.addRegion(values, this.props.history)
+    const { addRegion, editRegion, history, match } = this.props
+    if (match.params.id) {
+      editRegion(match.params.id, values, history)
     } else {
-      this.props.editRegion(
-        this.props.match.params.id,
-        values,
-        this.props.history
-      )
+      addRegion(values, history)
     }
+  }
+  handleMapMoved = (position) => {
+    console.log('position:', position)
+    // console.log('Map Moved: ', JSON.stringify(this.state.map.getCenter()))
   }
   render () {
     // pull out the redux-form handleSubmit function from props:
@@ -39,55 +49,55 @@ class AddEditRegion extends Component {
       thisForm.addEditRegion.values.name
       ? <h1>{thisForm.addEditRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
-    // const title = 'hello'
-    // console.log(this.props)
     return (
-      <div className='container'>
+      <div className='AddEditRegion container'>
         {title}
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          {/* the handleSubmit is from redux-form */}
-          <Field
-            labelOfThis='Region Name'
-            name='name'
-            type='text'
-            component={this.renderField}
-          />
-          <Field
-            labelOfThis='Slug'
-            name='slug'
-            type='text'
-            component={this.renderField}
-          />
-          <Field
-            labelOfThis='Zoom'
-            name='zoom'
-            type='number'
-            component={this.renderField}
-          />
-          <FormSection name='position'>
+        {/* the handleSubmit is from redux-form */}
+        <form
+          className='AddEditRegion__form'
+          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+        >
+          <div className='AddEditRegion__col-left'>
+            <Field lbl='Region Name' name='name' component={this.renderField} />
+            <Field lbl='Slug' name='slug' component={this.renderField} />
             <Field
-              labelOfThis='Latitude'
-              name='lat'
-              type='text'
+              lbl='Zoom'
+              name='zoom'
+              type='number'
               component={this.renderField}
             />
-            <Field
-              labelOfThis='Longitude'
-              name='lng'
-              type='text'
-              component={this.renderField}
+            <FormSection name='position'>
+              <Field
+                lbl='Latitude'
+                name='lat'
+                type='number'
+                component={this.renderField}
+              />
+              <Field
+                lbl='Longitude'
+                name='lng'
+                type='number'
+                component={this.renderField}
+              />
+            </FormSection>
+            <button
+              type='submit'
+              className='btn btn-sm btn-primary'
+              disabled={pristine || submitting}
+            >
+              Submit
+            </button>
+            <Link to='/admin/regions' className='btn btn-sm btn-danger'>
+              Cancel
+            </Link>
+          </div>
+          <div className='AddEditRegion__col-right'>
+            <GoogleMapReact
+              zoom={usaMap.zoom}
+              center={usaMap.position}
+              onChange={this.handleMapMoved}
             />
-          </FormSection>
-          <button
-            type='submit'
-            className='btn btn-sm btn-primary'
-            disabled={pristine || submitting}
-          >
-            Submit
-          </button>
-          <Link to='/admin/regions' className='btn btn-sm btn-danger'>
-            Cancel
-          </Link>
+          </div>
         </form>
       </div>
     )

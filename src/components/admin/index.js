@@ -11,11 +11,11 @@ const Admin = props => {
       <div>
         <Route
           exact path='/admin/regions/add'
-          render={props => <AddEditRegion {...props} task='add' />}
+          render={props => <AddEditRegion {...props} />}
         />
         <Route
           exact path='/admin/regions/:id/edit'
-          render={props => <AddEditRegion {...props} task='edit' />}
+          render={props => <AddEditRegion {...props} />}
         />
         <Route exact path='/admin/regions' component={ListRegions} />
       </div>
