@@ -8,10 +8,9 @@ export const usaMap = {
   zoom: 4,
   position: { lat: 38.1510752, lng: -95.8457796 },
   bounds: {
-    COMMENT: 'for reference only right now:',
-    eastLongitude: -66.357421875,
-    westLongitude: -126.298828125,
-    northLatitude: 49.525208342,
-    southLatitude: 24.32707654
+    ne: { lat: 51.10981138736696, lng: -64.468826475 },
+    nw: { lat: 51.10981138736696, lng: -127.222732725 },
+    se: { lat: 22.410132469242768, lng: -64.468826475 },
+    sw: { lat: 22.410132469242768, lng: -127.222732725 }
   }
 }

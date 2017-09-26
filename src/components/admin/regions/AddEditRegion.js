@@ -7,12 +7,21 @@ import { addRegion, editRegion } from '../../../actions'
 import { usaMap } from '../../../config'
 
 class AddEditRegion extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
-      map: null,
-      loaded: false
+      map: usaMap
     }
+  }
+  handleMapLoaded = (map) => {
+    if (this.props.match.params.id && this.props.initialValues) {
+      this.setState((prevState, props) => {
+        return { map: this.props.initialValues }
+      })
+    }
+  }
+  componentDidUpdate () {
+    // console.log(this.props)
   }
   renderField (field) {
     const { touched, error } = field.meta
@@ -93,8 +102,10 @@ class AddEditRegion extends Component {
           </div>
           <div className='AddEditRegion__col-right'>
             <GoogleMapReact
-              zoom={usaMap.zoom}
-              center={usaMap.position}
+              onGoogleApiLoaded={this.handleMapLoaded}
+              yesIWantToUseGoogleMapApiInternals={true}
+              zoom={this.state.map.zoom}
+              center={this.state.map.position}
               onChange={this.handleMapMoved}
             />
           </div>
