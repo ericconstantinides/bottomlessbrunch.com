@@ -7,9 +7,11 @@ import {
   reduxForm,
   change as changeFieldValue
 } from 'redux-form'
+import RegionSelect from '../../RegionSelect'
 import GoogleMapReact from 'google-map-react'
 import { addVenue, editVenue } from '../../../actions'
 import { usaMap } from '../../../config'
+import Marker from '../../Marker'
 
 class AddEditVenue extends Component {
   constructor (props) {
@@ -24,7 +26,7 @@ class AddEditVenue extends Component {
     const className = `AddEditVenue__form-group form-group ${touched && error ? 'has-danger' : ''}`
     return (
       <div className={className}>
-        <label className='AddEditVenue__label'>{field.lbl}</label>
+        <label className='AddEdit__label'>{field.lbl}</label>
         <input className='form-control' type={fieldType} {...field.input} />
         <small className='text-help'>
           {touched ? error : ''}
@@ -49,14 +51,14 @@ class AddEditVenue extends Component {
     }
   }
   handleMapMoved = position => {
-    if (
-      this.props.thisForm &&
-      this.props.thisForm.addEditVenue
-    ) {
-      this.props.changeFieldValue('addEditVenue', 'zoom', position.zoom)
-      this.props.changeFieldValue('addEditVenue', 'position.lat', position.center.lat)
-      this.props.changeFieldValue('addEditVenue', 'position.lng', position.center.lng)
-    }
+    // if (
+    //   this.props.thisForm &&
+    //   this.props.thisForm.addEditVenue
+    // ) {
+    //   this.props.changeFieldValue('addEditVenue', 'zoom', position.zoom)
+    //   this.props.changeFieldValue('addEditVenue', 'position.lat', position.center.lat)
+    //   this.props.changeFieldValue('addEditVenue', 'position.lng', position.center.lng)
+    // }
 
     // this.setState((prevState, props) => {
     //   return { map: position }
@@ -71,20 +73,42 @@ class AddEditVenue extends Component {
       ? <h1>{thisForm.addEditVenue.values.name}</h1>
       : <h1>&nbsp;</h1>
     return (
-      <div className='AddEditVenue container'>
+      <div className='AddEdit AddEditVenue container'>
         {title}
         {/* the handleSubmit is from redux-form */}
         <form
-          className='AddEditVenue__form'
+          className='AddEdit__form'
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
         >
-          <div className='AddEditVenue__col-left'>
+          <div className='AddEdit__col-left'>
             <Field lbl='Venue Name' name='name' component={this.renderField} />
-            <Field lbl='Slug' name='slug' component={this.renderField} />
+            <RegionSelect
+            />
+              {/* region={this.props.ui.region} */}
             <Field
-              lbl='Zoom'
-              name='zoom'
-              type='number'
+              lbl='Neighborhood'
+              name='neighborhood'
+              component={this.renderField}
+            />
+            <Field
+              lbl='Google Places ID'
+              name='googlePlacesId'
+              component={this.renderField}
+            />
+            <Field
+              lbl='Yelp ID'
+              name='yelpId'
+              component={this.renderField}
+            />
+            <Field
+              lbl='Zomato ID'
+              name='zomatoId'
+              component={this.renderField}
+            />
+            <Field
+              lbl='Research Notes'
+              name='researchNotes'
+              type='textarea'
               component={this.renderField}
             />
             <FormSection name='position'>
@@ -112,14 +136,19 @@ class AddEditVenue extends Component {
               Cancel
             </Link>
           </div>
-          <div className='AddEditVenue__col-right'>
+          <div className='AddEdit__col-right'>
             <GoogleMapReact
               onGoogleApiLoaded={this.handleMapLoaded}
               yesIWantToUseGoogleMapApiInternals
-              zoom={this.state.map.zoom}
+              zoom={14}
               center={this.state.map.position}
               onChange={this.handleMapMoved}
-            />
+            >
+              <Marker
+                lat={this.state.map.position.lat}
+                lng={this.state.map.position.lng}
+              />
+            </GoogleMapReact>
           </div>
         </form>
       </div>
@@ -132,9 +161,6 @@ function validate (values) {
   // Validate the inputs from 'values'
   if (!values.name) {
     errors.name = 'Enter a name'
-  }
-  if (!values.slug) {
-    errors.slug = 'Enter some slug'
   }
   if (!values.zoom) {
     errors.zoom = 'Enter some zoom please'

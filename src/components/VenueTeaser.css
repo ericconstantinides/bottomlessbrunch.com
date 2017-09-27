@@ -129,3 +129,6 @@
 .VenueTeaser.MapItem.is-hovered .VenueTeaser__inner {
   display: flex;
 }
+.Marker {
+  transform: translateY(-100%);
+}

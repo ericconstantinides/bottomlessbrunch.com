@@ -24,7 +24,7 @@ class AddEditRegion extends Component {
     const className = `AddEditRegion__form-group form-group ${touched && error ? 'has-danger' : ''}`
     return (
       <div className={className}>
-        <label className='AddEditRegion__label'>{field.lbl}</label>
+        <label className='AddEdit__label'>{field.lbl}</label>
         <input className='form-control' type={fieldType} {...field.input} />
         <small className='text-help'>
           {touched ? error : ''}
@@ -71,14 +71,14 @@ class AddEditRegion extends Component {
       ? <h1>{thisForm.addEditRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
     return (
-      <div className='AddEditRegion container'>
+      <div className='AddEdit AddEditRegion container'>
         {title}
         {/* the handleSubmit is from redux-form */}
         <form
-          className='AddEditRegion__form'
+          className='AddEdit__form'
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
         >
-          <div className='AddEditRegion__col-left'>
+          <div className='AddEdit__col-left'>
             <Field lbl='Region Name' name='name' component={this.renderField} />
             <Field lbl='Slug' name='slug' component={this.renderField} />
             <Field
@@ -112,7 +112,7 @@ class AddEditRegion extends Component {
               Cancel
             </Link>
           </div>
-          <div className='AddEditRegion__col-right'>
+          <div className='AddEdit__col-right'>
             <GoogleMapReact
               onGoogleApiLoaded={this.handleMapLoaded}
               yesIWantToUseGoogleMapApiInternals

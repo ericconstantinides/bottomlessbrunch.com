@@ -5,17 +5,27 @@
   margin-bottom: 0;
 }
 
-.AddEditRegion__form {
+.AddEdit__form {
   display: flex;
 }
-.AddEditRegion__label {
+.AddEdit__label {
   margin-bottom: 0;
   font-size: 0.875em;
 }
-.AddEditRegion__col-left {
+.AddEdit__col-left {
   margin-right: 1em;
+}
+.AddEdit__col-right {
+  width: 100%;
+}
+.AddEditRegion .AddEdit__col-left {
   flex: 0 0 200px;
 }
-.AddEditRegion__col-right {
-  width: 100%;
+/* AddEditVenue */
+.AddEditVenue .AddEdit__col-left {
+  flex: 1 1 auto;
+}  
+.AddEditVenue .AddEdit__col-right {
+  flex: 0 0 500px;
+  width: auto;
 }
