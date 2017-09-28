@@ -13,6 +13,7 @@ import { fitBounds } from 'google-map-react/utils'
 import { addRegion, editRegion } from '../../../actions'
 import { usaMap } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
+import slug from '../../../lib/Slug'
 
 class AddEditRegion extends Component {
   constructor (props) {
@@ -89,13 +90,32 @@ class AddEditRegion extends Component {
   handleSelect = (address, placeId) => {
     geocodeByPlaceId(placeId)
       .then(results => {
-        console.log(results)
+        const { geometry, address_components } = results[0]
         const {
           b: { b: lngWest, f: lngEast },
           f: { b: latSouth, f: latNorth }
-        } = results[0].geometry.bounds
+        } = geometry.bounds
         const bounds = convertToBounds(latNorth, latSouth, lngWest, lngEast)
-        // Now I have: lngWest, lngEast, latNorth, latSouth
+        this.props.fieldValue(
+          'addEditRegion',
+          'name',
+          address_components[0].long_name
+        )
+        this.props.fieldValue(
+          'addEditRegion',
+          'state',
+          address_components[2].short_name
+        )
+        this.props.fieldValue(
+          'addEditRegion',
+          'slug',
+          slug(address_components[0].long_name)
+        )
+        this.props.fieldValue('addEditRegion', 'googlePlacesId', placeId)
+        this.props.fieldValue('addEditRegion', 'bounds.latNorth', latNorth)
+        this.props.fieldValue('addEditRegion', 'bounds.latSouth', latSouth)
+        this.props.fieldValue('addEditRegion', 'bounds.lngWest', lngWest)
+        this.props.fieldValue('addEditRegion', 'bounds.lngEast', lngEast)
         this.setState({
           map: fitBoundsGoogleReady(bounds, this.state.mapSize)
         })
@@ -142,6 +162,7 @@ class AddEditRegion extends Component {
           <div className='AddEdit__col-left'>
             <Field lbl='Region Name' name='name' component={this.renderField} />
             <Field lbl='Slug' name='slug' component={this.renderField} />
+            <Field lbl='State' name='state' component={this.renderField} />
             <Field
               lbl='Zoom'
               name='zoom'
@@ -162,28 +183,33 @@ class AddEditRegion extends Component {
                 component={this.renderField}
               />
             </FormSection>
+            <Field
+              lbl='Google Places ID'
+              name='googlePlacesId'
+              component={this.renderField}
+            />
             <FormSection name='bounds'>
               <Field
-                lbl='Latitude Left'
-                name='latLeft'
+                lbl='Latitude North'
+                name='latNorth'
                 type='number'
                 component={this.renderField}
               />
               <Field
-                lbl='Latitude Right'
-                name='latRight'
+                lbl='Latitude South'
+                name='latSouth'
                 type='number'
                 component={this.renderField}
               />
               <Field
-                lbl='Longitude Top'
-                name='lngTop'
+                lbl='Longitude West'
+                name='lngWest'
                 type='number'
                 component={this.renderField}
               />
               <Field
-                lbl='Longitude Bottom'
-                name='lngBottom'
+                lbl='Longitude East'
+                name='lngEast'
                 type='number'
                 component={this.renderField}
               />
