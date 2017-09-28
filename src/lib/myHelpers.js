@@ -1,3 +1,4 @@
+import { fitBounds } from 'google-map-react/utils'
 import _ from 'lodash'
 
 /**
@@ -35,4 +36,35 @@ export function parsePath (fullPath) {
     ? trimFront.substring(1)
     : trimFront
   return trimmed.split('/')
+}
+
+/**
+ * Takes coordinates and creates object with regular bounds
+ * @param {Number} LatNorth
+ * @param {Number} latSouth
+ * @param {Number} lngWest
+ * @param {Number} lngEast
+ * @return {Object} Object with nw, ne, se, sw
+ */
+export function convertToBounds (latNorth, latSouth, lngWest, lngEast) {
+  return {
+    nw: {lat: latNorth, lng: lngWest},
+    ne: {lat: latNorth, lng: lngEast},
+    se: {lat: latSouth, lng: lngEast},
+    sw: {lat: latSouth, lng: lngWest}
+  }
+}
+
+/**
+ * Takes fitBounds() values and makes it ready right away for Google Map
+ * @param {object} myBounds Bounds w/ either nw && se -OR- ne && sw
+ * @param {object} size Object with 'width' and 'height'
+ * @return {Object} Object ready for Google Maps
+ */
+export function fitBoundsGoogleReady (myBounds, size) {
+  const { center: position, newBounds: bounds, zoom } = fitBounds(
+    myBounds,
+    size
+  )
+  return { bounds, position, zoom }
 }

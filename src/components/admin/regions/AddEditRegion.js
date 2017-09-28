@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Field, FormSection, reduxForm, change as fieldValue } from 'redux-form'
 import PlacesAutocomplete, {
-  // geocodeByAddress,
+// geocodeByAddress,
   geocodeByPlaceId,
   getLatLng
 } from 'react-places-autocomplete'
@@ -12,6 +12,7 @@ import GoogleMapReact from 'google-map-react'
 import { fitBounds } from 'google-map-react/utils'
 import { addRegion, editRegion } from '../../../actions'
 import { usaMap } from '../../../config'
+import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 
 class AddEditRegion extends Component {
   constructor (props) {
@@ -19,7 +20,11 @@ class AddEditRegion extends Component {
     this.state = {
       map: usaMap,
       address: '',
-      loaded: false
+      loaded: false,
+      mapSize: {
+        width: 0,
+        height: 0
+      }
     }
     this.onChange = address => this.setState({ address })
   }
@@ -67,20 +72,34 @@ class AddEditRegion extends Component {
         'position.lng',
         position.center.lng
       )
-    } else if (!this.state.loaded) {
+    }
+    if (!this.state.loaded) {
       // get the real dimensions for the usa map
-      const {center, newBounds, zoom} = fitBounds(usaMap.bounds, position.size)
       this.setState({
         loaded: true,
-        map: {bounds: newBounds, position: center, zoom }
+        map: fitBoundsGoogleReady(usaMap.bounds, position.size)
       })
     }
-
-
+    // let's set the size of the map:
+    this.setState({
+      mapSize: { width: position.size.width, height: position.size.height }
+    })
   }
+  // Fires on Google AutoSelect selection:
   handleSelect = (address, placeId) => {
     geocodeByPlaceId(placeId)
-      .then(results => console.log(results))
+      .then(results => {
+        console.log(results)
+        const {
+          b: { b: lngWest, f: lngEast },
+          f: { b: latSouth, f: latNorth }
+        } = results[0].geometry.bounds
+        const bounds = convertToBounds(latNorth, latSouth, lngWest, lngEast)
+        // Now I have: lngWest, lngEast, latNorth, latSouth
+        this.setState({
+          map: fitBoundsGoogleReady(bounds, this.state.mapSize)
+        })
+      })
       .catch(error => console.error(error))
     // this.setState({ address, placeId })
 
@@ -139,6 +158,32 @@ class AddEditRegion extends Component {
               <Field
                 lbl='Longitude'
                 name='lng'
+                type='number'
+                component={this.renderField}
+              />
+            </FormSection>
+            <FormSection name='bounds'>
+              <Field
+                lbl='Latitude Left'
+                name='latLeft'
+                type='number'
+                component={this.renderField}
+              />
+              <Field
+                lbl='Latitude Right'
+                name='latRight'
+                type='number'
+                component={this.renderField}
+              />
+              <Field
+                lbl='Longitude Top'
+                name='lngTop'
+                type='number'
+                component={this.renderField}
+              />
+              <Field
+                lbl='Longitude Bottom'
+                name='lngBottom'
                 type='number'
                 component={this.renderField}
               />
