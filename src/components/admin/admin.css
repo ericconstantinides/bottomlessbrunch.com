@@ -20,9 +20,6 @@
 .AddEdit__col-right {
   width: 100%;
 }
-.AddEditRegion .AddEdit__col-left {
-  flex: 0 0 200px;
-}
 /* AddEditVenue */
 .AddEditVenue .AddEdit__col-left {
   flex: 1 1 auto;
@@ -31,4 +28,19 @@
   flex: 0 0 40%;
   width: auto;
   min-width: 250px;
+}
+.AddEditRegion .AddEdit__col-left {
+  flex: 1 0 300px;
+}
+.AddEditRegion .AddEdit__col-right {
+  flex: 1 1 80vh;
+  width: auto;
+}
+.AddEditRegion .AddEdit__col-right > * {
+  max-width: 80vh;
+}
+
+.AddEdit__map-container {
+  max-height: 80vh;
+  max-width: 80vh;
 }

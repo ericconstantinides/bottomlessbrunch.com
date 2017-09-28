@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 import { Field, FormSection, reduxForm, change as fieldValue } from 'redux-form'
 import PlacesAutocomplete, {
 // geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng
+  geocodeByPlaceId
+  // getLatLng
 } from 'react-places-autocomplete'
 import GoogleMapReact from 'google-map-react'
-import { fitBounds } from 'google-map-react/utils'
 import { addRegion, editRegion } from '../../../actions'
 import { usaMap } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
@@ -151,8 +150,13 @@ class AddEditRegion extends Component {
       radius: 3500,
       types: ['(cities)']
     }
+    const createMapOptions = () => {
+      return {
+        fullscreenControl: false
+      }
+    }
     return (
-      <div className='AddEdit AddEditRegion container'>
+      <div className='AddEdit AddEditRegion site-container'>
         {title}
         {/* the handleSubmit is from redux-form */}
         <form
@@ -234,13 +238,18 @@ class AddEditRegion extends Component {
               options={options}
               googleLogo={false}
             />
-            <GoogleMapReact
-              onGoogleApiLoaded={this.handleMapLoaded}
-              yesIWantToUseGoogleMapApiInternals
-              zoom={this.state.map.zoom}
-              center={this.state.map.position}
-              onChange={this.handleMapMoved}
-            />
+            <div className='m-ratio m-ratio--1-1 AddEdit__map-container'>
+              <div className='m-ratio__child'>
+                <GoogleMapReact
+                  onGoogleApiLoaded={this.handleMapLoaded}
+                  yesIWantToUseGoogleMapApiInternals
+                  zoom={this.state.map.zoom}
+                  center={this.state.map.position}
+                  onChange={this.handleMapMoved}
+                  options={createMapOptions}
+                />
+              </div>
+            </div>
           </div>
         </form>
       </div>
