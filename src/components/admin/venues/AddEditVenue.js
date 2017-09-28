@@ -143,6 +143,7 @@ class AddEditVenue extends Component {
               zoom={14}
               center={this.state.map.position}
               onChange={this.handleMapMoved}
+              style={{height: '300px', position: 'relative'}}
             >
               <Marker
                 lat={this.state.map.position.lat}

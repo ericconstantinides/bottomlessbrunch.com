@@ -1,13 +1,15 @@
+/* global google */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  Field,
-  FormSection,
-  reduxForm,
-  change as changeFieldValue
-} from 'redux-form'
+import { Field, FormSection, reduxForm, change as fieldValue } from 'redux-form'
+import PlacesAutocomplete, {
+  // geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng
+} from 'react-places-autocomplete'
 import GoogleMapReact from 'google-map-react'
+import { fitBounds } from 'google-map-react/utils'
 import { addRegion, editRegion } from '../../../actions'
 import { usaMap } from '../../../config'
 
@@ -15,8 +17,11 @@ class AddEditRegion extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      map: usaMap
+      map: usaMap,
+      address: '',
+      loaded: false
     }
+    this.onChange = address => this.setState({ address })
   }
   renderField (field) {
     const { touched, error } = field.meta
@@ -49,18 +54,37 @@ class AddEditRegion extends Component {
     }
   }
   handleMapMoved = position => {
-    if (
-      this.props.thisForm &&
-      this.props.thisForm.addEditRegion
-    ) {
-      this.props.changeFieldValue('addEditRegion', 'zoom', position.zoom)
-      this.props.changeFieldValue('addEditRegion', 'position.lat', position.center.lat)
-      this.props.changeFieldValue('addEditRegion', 'position.lng', position.center.lng)
+    // if we're editing an existing region:
+    if (this.props.thisForm && this.props.thisForm.addEditRegion) {
+      this.props.fieldValue('addEditRegion', 'zoom', position.zoom)
+      this.props.fieldValue(
+        'addEditRegion',
+        'position.lat',
+        position.center.lat
+      )
+      this.props.fieldValue(
+        'addEditRegion',
+        'position.lng',
+        position.center.lng
+      )
+    } else if (!this.state.loaded) {
+      // get the real dimensions for the usa map
+      const {center, newBounds, zoom} = fitBounds(usaMap.bounds, position.size)
+      this.setState({
+        loaded: true,
+        map: {bounds: newBounds, position: center, zoom }
+      })
     }
 
-    // this.setState((prevState, props) => {
-    //   return { map: position }
-    // })
+
+  }
+  handleSelect = (address, placeId) => {
+    geocodeByPlaceId(placeId)
+      .then(results => console.log(results))
+      .catch(error => console.error(error))
+    // this.setState({ address, placeId })
+
+    // You can do other things with address string or placeId. For example, geocode :)
   }
   render () {
     // pull out the redux-form handleSubmit function from props:
@@ -70,6 +94,24 @@ class AddEditRegion extends Component {
       thisForm.addEditRegion.values.name
       ? <h1>{thisForm.addEditRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
+    const AutocompleteItem = ({ formattedSuggestion }) => (
+      <div>
+        <strong>{formattedSuggestion.mainText}</strong>{' '}
+        <small>{formattedSuggestion.secondaryText}</small>
+      </div>
+    )
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange
+    }
+    const options = {
+      location: new google.maps.LatLng(
+        usaMap.position.lat,
+        usaMap.position.lng
+      ),
+      radius: 3500,
+      types: ['(cities)']
+    }
     return (
       <div className='AddEdit AddEditRegion container'>
         {title}
@@ -113,6 +155,14 @@ class AddEditRegion extends Component {
             </Link>
           </div>
           <div className='AddEdit__col-right'>
+            <PlacesAutocomplete
+              inputProps={inputProps}
+              autocompleteItem={AutocompleteItem}
+              styles={{ root: { zIndex: 999999999 } }}
+              onSelect={this.handleSelect}
+              options={options}
+              googleLogo={false}
+            />
             <GoogleMapReact
               onGoogleApiLoaded={this.handleMapLoaded}
               yesIWantToUseGoogleMapApiInternals
@@ -166,7 +216,7 @@ function mapStateToProps (state, ownProps) {
 export default connect(mapStateToProps, {
   addRegion,
   editRegion,
-  changeFieldValue
+  fieldValue
 })(
   reduxForm({
     form: 'addEditRegion',
