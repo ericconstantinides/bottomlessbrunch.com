@@ -111,10 +111,10 @@ class AddEditRegion extends Component {
           slug(address_components[0].long_name)
         )
         this.props.fieldValue('addEditRegion', 'googlePlacesId', placeId)
-        this.props.fieldValue('addEditRegion', 'bounds.latNorth', latNorth)
-        this.props.fieldValue('addEditRegion', 'bounds.latSouth', latSouth)
-        this.props.fieldValue('addEditRegion', 'bounds.lngWest', lngWest)
-        this.props.fieldValue('addEditRegion', 'bounds.lngEast', lngEast)
+        // this.props.fieldValue('addEditRegion', 'bounds.latNorth', latNorth)
+        // this.props.fieldValue('addEditRegion', 'bounds.latSouth', latSouth)
+        // this.props.fieldValue('addEditRegion', 'bounds.lngWest', lngWest)
+        // this.props.fieldValue('addEditRegion', 'bounds.lngEast', lngEast)
         this.setState({
           map: fitBoundsGoogleReady(bounds, this.state.mapSize)
         })
@@ -192,7 +192,7 @@ class AddEditRegion extends Component {
               name='googlePlacesId'
               component={this.renderField}
             />
-            <FormSection name='bounds'>
+            {/* <FormSection name='bounds'>
               <Field
                 lbl='Latitude North'
                 name='latNorth'
@@ -217,7 +217,7 @@ class AddEditRegion extends Component {
                 type='number'
                 component={this.renderField}
               />
-            </FormSection>
+            </FormSection> */}
             <button
               type='submit'
               className='btn btn-sm btn-primary'

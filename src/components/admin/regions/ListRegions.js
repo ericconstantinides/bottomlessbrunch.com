@@ -5,15 +5,17 @@ import _ from 'lodash'
 import * as actions from '../../../actions'
 
 
-const AdminRegion = ({ _id, name, slug, position, zoom, handleDelete }) => {
+const AdminRegion = props => {
+  const { _id, name, state, googlePlacesId, slug, position, zoom, handleDelete } = props
   return (
     <div className='AdminRegion'>
       <hr />
-      <h2>{name}</h2>
+      <h2>{name}{state && `, ${state}`}</h2>
       <p>slug: {slug}</p>
       <p>lat: {position.lat}</p>
       <p>lng: {position.lng}</p>
       <p>zoom: {zoom}</p>
+      <p>googlePlacesId: {googlePlacesId}</p>
       <Link
         to={`/admin/regions/${_id}/edit`}
         className='btn btn-sm btn-primary'
