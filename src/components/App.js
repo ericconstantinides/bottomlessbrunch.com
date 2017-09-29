@@ -57,7 +57,7 @@ class App extends Component {
                   {...props}
                   venue={venue}
                   venueId={venue._id}
-                  googlePlacesId={venue.googlePlacesId}
+                  gpId={venue.gpId}
                   regionSlug={this.props.regions[venue.regionId].slug}
                 />
               )

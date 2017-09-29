@@ -92,7 +92,7 @@ class AddEditVenue extends Component {
             />
             <Field
               lbl='Google Places ID'
-              name='googlePlacesId'
+              name='gpId'
               component={this.renderField}
             />
             <Field

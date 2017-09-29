@@ -110,7 +110,7 @@ class AddEditRegion extends Component {
           'slug',
           slug(address_components[0].long_name)
         )
-        this.props.fieldValue('addEditRegion', 'googlePlacesId', placeId)
+        this.props.fieldValue('addEditRegion', 'gpId', placeId)
         // this.props.fieldValue('addEditRegion', 'bounds.latNorth', latNorth)
         // this.props.fieldValue('addEditRegion', 'bounds.latSouth', latSouth)
         // this.props.fieldValue('addEditRegion', 'bounds.lngWest', lngWest)
@@ -189,7 +189,7 @@ class AddEditRegion extends Component {
             </FormSection>
             <Field
               lbl='Google Places ID'
-              name='googlePlacesId'
+              name='gpId'
               component={this.renderField}
             />
             {/* <FormSection name='bounds'>

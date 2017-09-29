@@ -6,7 +6,7 @@ import * as actions from '../../../actions'
 
 
 const AdminRegion = props => {
-  const { _id, name, state, googlePlacesId, slug, position, zoom, handleDelete } = props
+  const { _id, name, state, gpId, slug, position, zoom, handleDelete } = props
   return (
     <div className='AdminRegion'>
       <hr />
@@ -15,7 +15,7 @@ const AdminRegion = props => {
       <p>lat: {position.lat}</p>
       <p>lng: {position.lng}</p>
       <p>zoom: {zoom}</p>
-      <p>googlePlacesId: {googlePlacesId}</p>
+      <p>gpId: {gpId}</p>
       <Link
         to={`/admin/regions/${_id}/edit`}
         className='btn btn-sm btn-primary'

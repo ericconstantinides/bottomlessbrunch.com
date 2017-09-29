@@ -136,7 +136,7 @@ export function apiError (error) {
   }
 }
 
-export function fetchVenueDetail ({ _id, googePlacesData, googlePlacesId }) {
+export function fetchVenueDetail ({ _id, googePlacesData, gpId }) {
   // check the fetchedTime and don't refetch if fewer than fetchTimeout:
   if (
     !googePlacesData ||
@@ -145,7 +145,7 @@ export function fetchVenueDetail ({ _id, googePlacesData, googlePlacesId }) {
       new Date()
   ) {
     return dispatch => {
-      googlePlaces.getDetails({ placeId: googlePlacesId }, (place, status) => {
+      googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
         if (status === 'OK') {
           return dispatch(setVenueDetail(_id, place))
         }
