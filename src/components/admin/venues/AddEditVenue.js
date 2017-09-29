@@ -17,7 +17,9 @@ class AddEditVenue extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      map: usaMap
+      zoom: usaMap.zoom,
+      lat: usaMap.lat,
+      lng: usaMap.lng,
     }
   }
   renderField (field) {
@@ -46,7 +48,8 @@ class AddEditVenue extends Component {
   handleMapLoaded = map => {
     if (this.props.match.params.id && this.props.initialValues) {
       this.setState((prevState, props) => {
-        return { map: this.props.initialValues }
+        const { lat, lng, zoom } = this.props.initialValues
+        return { lat, lng, zoom }
       })
     }
   }
@@ -141,14 +144,11 @@ class AddEditVenue extends Component {
               onGoogleApiLoaded={this.handleMapLoaded}
               yesIWantToUseGoogleMapApiInternals
               zoom={14}
-              center={this.state.map.position}
+              center={{ lat: this.state.lat, lng: this.state.lng }}
               onChange={this.handleMapMoved}
               style={{height: '300px', position: 'relative'}}
             >
-              <Marker
-                lat={this.state.map.position.lat}
-                lng={this.state.map.position.lng}
-              />
+              <Marker lat={this.state.lat} lng={this.state.lng} />
             </GoogleMapReact>
           </div>
         </form>
