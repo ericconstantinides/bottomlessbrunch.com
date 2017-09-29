@@ -14,9 +14,13 @@ export function fetchRegions () {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/regions`)
     .then(response => {
+      const regionsWithSlug = response.data.map(region => {
+        region.slug = slugify(region.name)
+        return region
+      })
       dispatch({
         type: constants.REGIONS_FETCH,
-        payload: response.data
+        payload: regionsWithSlug
       })
     })
   }

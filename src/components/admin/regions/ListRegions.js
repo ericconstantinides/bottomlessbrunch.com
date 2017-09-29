@@ -6,14 +6,14 @@ import * as actions from '../../../actions'
 
 
 const AdminRegion = props => {
-  const { _id, name, state, gpId, slug, position, zoom, handleDelete } = props
+  const { _id, name, state, gpId, slug, lat, lng, zoom, handleDelete } = props
   return (
     <div className='AdminRegion'>
       <hr />
       <h2>{name}{state && `, ${state}`}</h2>
       <p>slug: {slug}</p>
-      <p>lat: {position.lat}</p>
-      <p>lng: {position.lng}</p>
+      <p>lat: {lat}</p>
+      <p>lng: {lng}</p>
       <p>zoom: {zoom}</p>
       <p>gpId: {gpId}</p>
       <Link

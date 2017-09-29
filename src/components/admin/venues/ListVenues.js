@@ -5,13 +5,13 @@ import _ from 'lodash'
 import * as actions from '../../../actions'
 
 
-const AdminVenue = ({ _id, name, position, zoom, handleDelete }) => {
+const AdminVenue = ({ _id, name, lat, lng, zoom, handleDelete }) => {
   return (
     <div className='AdminVenue'>
       <hr />
       <h2>{name}</h2>
-      <p>lat: {position.lat}</p>
-      <p>lng: {position.lng}</p>
+      <p>lat: {lat}</p>
+      <p>lng: {lng}</p>
       <Link
         to={`/admin/venues/${_id}/edit`}
         className='btn btn-sm btn-primary'

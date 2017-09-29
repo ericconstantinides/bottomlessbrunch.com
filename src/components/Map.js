@@ -44,8 +44,8 @@ class Map extends Component {
             key={venue._id}
             altClass='MapItem'
             {...venue}
-            lat={venue.position.lat}
-            lng={venue.position.lng}
+            lat={venue.lat}
+            lng={venue.lng}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
             handleClick={this.handleClick}

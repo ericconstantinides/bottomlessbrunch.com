@@ -28,7 +28,7 @@ class MapPage extends Component {
           <div className='MapPage__column Map__container'>
             <Map
               cursorPos={this.props.cursorPos}
-              center={region.position}
+              center={{lat: region.lat, lng: region.lng}}
               zoom={region.zoom}
               minZoom={4}
               venues={this.props.venues}

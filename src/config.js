@@ -6,7 +6,8 @@ export const ROOT_URL = 'http://localhost:3090'
 
 export const usaMap = {
   zoom: 4,
-  position: { lat: 38.1510752, lng: -95.8457796 },
+  lat: 38.1510752,
+  lng: -95.8457796,
   bounds: {
     nw: { lat: 49.5335125, lng: -126.1250427 },
     ne: { lat: 49.5335125, lng: -64.468826475 },

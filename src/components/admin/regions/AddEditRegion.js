@@ -18,7 +18,9 @@ class AddEditRegion extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      map: usaMap,
+      zoom: usaMap.zoom,
+      lat: usaMap.lat,
+      lng: usaMap.lng,
       address: '',
       loaded: false,
       mapSize: {
@@ -64,12 +66,12 @@ class AddEditRegion extends Component {
       this.props.fieldValue('addEditRegion', 'zoom', position.zoom)
       this.props.fieldValue(
         'addEditRegion',
-        'position.lat',
+        'lat',
         position.center.lat
       )
       this.props.fieldValue(
         'addEditRegion',
-        'position.lng',
+        'lng',
         position.center.lng
       )
     }
@@ -144,8 +146,8 @@ class AddEditRegion extends Component {
     }
     const options = {
       location: new google.maps.LatLng(
-        usaMap.position.lat,
-        usaMap.position.lng
+        usaMap.lat,
+        usaMap.lng
       ),
       radius: 3500,
       types: ['(cities)']
@@ -173,20 +175,18 @@ class AddEditRegion extends Component {
               type='number'
               component={this.renderField}
             />
-            <FormSection name='position'>
-              <Field
-                lbl='Latitude'
-                name='lat'
-                type='number'
-                component={this.renderField}
-              />
-              <Field
-                lbl='Longitude'
-                name='lng'
-                type='number'
-                component={this.renderField}
-              />
-            </FormSection>
+            <Field
+              lbl='Latitude'
+              name='lat'
+              type='number'
+              component={this.renderField}
+            />
+            <Field
+              lbl='Longitude'
+              name='lng'
+              type='number'
+              component={this.renderField}
+            />
             <Field
               lbl='Google Places ID'
               name='gpId'
@@ -243,8 +243,8 @@ class AddEditRegion extends Component {
                 <GoogleMapReact
                   onGoogleApiLoaded={this.handleMapLoaded}
                   yesIWantToUseGoogleMapApiInternals
-                  zoom={this.state.map.zoom}
-                  center={this.state.map.position}
+                  zoom={this.state.zoom}
+                  center={{lat: this.state.lat, lng: this.state.lng}}
                   onChange={this.handleMapMoved}
                   options={createMapOptions}
                 />
