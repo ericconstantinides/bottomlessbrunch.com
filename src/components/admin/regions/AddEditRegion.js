@@ -3,11 +3,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Field, FormSection, reduxForm, change as fieldValue } from 'redux-form'
-import PlacesAutocomplete, {
-// geocodeByAddress,
-  geocodeByPlaceId
-  // getLatLng
-} from 'react-places-autocomplete'
+// I may need these later below: geocodeByAddress, getLatLng
+import { geocodeByPlaceId } from 'react-places-autocomplete'
+import MapSearch from '../../MapSearch'
 import GoogleMapReact from 'google-map-react'
 import { addRegion, editRegion } from '../../../actions'
 import { usaMap } from '../../../config'
@@ -126,22 +124,6 @@ class AddEditRegion extends Component {
       thisForm.addEditRegion.values.name
       ? <h1>{thisForm.addEditRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
-    const AutocompleteItem = ({ formattedSuggestion }) => (
-      <div>
-        <strong>{formattedSuggestion.mainText}</strong>{' '}
-        <small>{formattedSuggestion.secondaryText}</small>
-      </div>
-    )
-    const inputProps = {
-      value: this.state.address,
-      onChange: this.onChange,
-      placeholder: 'Search for City...',
-    }
-    const options = {
-      location: new google.maps.LatLng(usaMap.lat, usaMap.lng),
-      radius: 3500,
-      types: ['(cities)']
-    }
     const createMapOptions = () => {
       return {
         fullscreenControl: false
@@ -199,13 +181,11 @@ class AddEditRegion extends Component {
             </Link>
           </div>
           <div className='AddEdit__col-right'>
-            <PlacesAutocomplete
-              inputProps={inputProps}
-              autocompleteItem={AutocompleteItem}
-              styles={{ root: { zIndex: 999999999 } }}
-              onSelect={this.handleSelect}
-              options={options}
-              googleLogo={false}
+            <MapSearch
+              address={this.state.address}
+              onChange={this.onChange}
+              placeholder='Search for City...'
+              handleSelect={this.handleSelect}
             />
             <div className='m-ratio m-ratio--1-1 AddEdit__map-container'>
               <div className='m-ratio__child'>
