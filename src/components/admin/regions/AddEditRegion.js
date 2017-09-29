@@ -12,7 +12,6 @@ import GoogleMapReact from 'google-map-react'
 import { addRegion, editRegion } from '../../../actions'
 import { usaMap } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
-import slug from '../../../lib/Slug'
 
 class AddEditRegion extends Component {
   constructor (props) {
@@ -54,9 +53,11 @@ class AddEditRegion extends Component {
     }
   }
   handleMapLoaded = map => {
+    // we're editing an existing region:
     if (this.props.match.params.id && this.props.initialValues) {
       this.setState((prevState, props) => {
-        return { map: this.props.initialValues }
+        const { lat, lng, zoom } = this.props.initialValues
+        return { lat, lng, zoom }
       })
     }
   }
@@ -64,16 +65,8 @@ class AddEditRegion extends Component {
     // if we're editing an existing region:
     if (this.props.thisForm && this.props.thisForm.addEditRegion) {
       this.props.fieldValue('addEditRegion', 'zoom', position.zoom)
-      this.props.fieldValue(
-        'addEditRegion',
-        'lat',
-        position.center.lat
-      )
-      this.props.fieldValue(
-        'addEditRegion',
-        'lng',
-        position.center.lng
-      )
+      this.props.fieldValue('addEditRegion', 'lat', position.center.lat)
+      this.props.fieldValue('addEditRegion', 'lng', position.center.lng)
     }
     if (!this.state.loaded) {
       // get the real dimensions for the usa map
@@ -107,18 +100,17 @@ class AddEditRegion extends Component {
           'state',
           address_components[2].short_name
         )
-        this.props.fieldValue(
-          'addEditRegion',
-          'slug',
-          slug(address_components[0].long_name)
-        )
         this.props.fieldValue('addEditRegion', 'gpId', placeId)
         // this.props.fieldValue('addEditRegion', 'bounds.latNorth', latNorth)
         // this.props.fieldValue('addEditRegion', 'bounds.latSouth', latSouth)
         // this.props.fieldValue('addEditRegion', 'bounds.lngWest', lngWest)
         // this.props.fieldValue('addEditRegion', 'bounds.lngEast', lngEast)
-        this.setState({
-          map: fitBoundsGoogleReady(bounds, this.state.mapSize)
+        this.setState((prevState, props) => {
+          const { position: { lat, lng }, zoom } = fitBoundsGoogleReady(
+            bounds,
+            this.state.mapSize
+          )
+          return { lat, lng, zoom }
         })
       })
       .catch(error => console.error(error))
@@ -142,13 +134,11 @@ class AddEditRegion extends Component {
     )
     const inputProps = {
       value: this.state.address,
-      onChange: this.onChange
+      onChange: this.onChange,
+      placeholder: 'Search for City...',
     }
     const options = {
-      location: new google.maps.LatLng(
-        usaMap.lat,
-        usaMap.lng
-      ),
+      location: new google.maps.LatLng(usaMap.lat, usaMap.lng),
       radius: 3500,
       types: ['(cities)']
     }
@@ -167,7 +157,6 @@ class AddEditRegion extends Component {
         >
           <div className='AddEdit__col-left'>
             <Field lbl='Region Name' name='name' component={this.renderField} />
-            <Field lbl='Slug' name='slug' component={this.renderField} />
             <Field lbl='State' name='state' component={this.renderField} />
             <Field
               lbl='Zoom'
@@ -193,30 +182,10 @@ class AddEditRegion extends Component {
               component={this.renderField}
             />
             {/* <FormSection name='bounds'>
-              <Field
-                lbl='Latitude North'
-                name='latNorth'
-                type='number'
-                component={this.renderField}
-              />
-              <Field
-                lbl='Latitude South'
-                name='latSouth'
-                type='number'
-                component={this.renderField}
-              />
-              <Field
-                lbl='Longitude West'
-                name='lngWest'
-                type='number'
-                component={this.renderField}
-              />
-              <Field
-                lbl='Longitude East'
-                name='lngEast'
-                type='number'
-                component={this.renderField}
-              />
+              <Field lbl='N' name='latNorth' component={this.renderField} />
+              <Field lbl='S' name='latSouth' component={this.renderField} />
+              <Field lbl='W' name='lngWest' component={this.renderField} />
+              <Field lbl='E' name='lngEast' component={this.renderField} />
             </FormSection> */}
             <button
               type='submit'
@@ -244,7 +213,7 @@ class AddEditRegion extends Component {
                   onGoogleApiLoaded={this.handleMapLoaded}
                   yesIWantToUseGoogleMapApiInternals
                   zoom={this.state.zoom}
-                  center={{lat: this.state.lat, lng: this.state.lng}}
+                  center={{ lat: this.state.lat, lng: this.state.lng }}
                   onChange={this.handleMapMoved}
                   options={createMapOptions}
                 />
@@ -262,9 +231,6 @@ function validate (values) {
   // Validate the inputs from 'values'
   if (!values.name) {
     errors.name = 'Enter a name'
-  }
-  if (!values.slug) {
-    errors.slug = 'Enter some slug'
   }
   if (!values.zoom) {
     errors.zoom = 'Enter some zoom please'
