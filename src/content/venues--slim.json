@@ -1,304 +1,237 @@
 [
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Mission Rock Resort",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJryemAsd_j4AR60urAIzz6Dc",
     "yId": "mission-rock-resort-san-francisco-2",
-    "images": [
-      {
-        "fileName": "san-francisco__mission-rock-resort-2.jpg",
-        "type": "patio"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__mission-rock-resort-2.jpg", "type": "patio" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "3:00PM",
+        "startTime": "10:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 20
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/MissionRockResortSF",
     "zomatoUrl": "https://www.zomato.com/san-francisco/mission-rock-resort-potrero",
-    "researchNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+    "research": [
+      { "url": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "District",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJJTVhTtZ_j4ARxpngmeH7DTc",
     "yId": "district-san-francisco-3",
-    "images": [
-      {
-        "fileName": "san-francisco__district.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__district.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "2:30PM",
+        "startTime": "11:00AM",
+        "endTime": "2:30PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosas",
-        "price": 15
-      },
-      {
-        "item": "Bottomless DIY Bloody Mary",
-        "price": 15
-      },
-      {
-        "item": "Buffet",
-        "price": 20
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosas", "price": 15 },
+      { "item": "Bottomless DIY Bloody Mary", "price": 15 },
+      { "item": "Buffet", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/districtsf/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/district-soma",
-    "researchNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+    "research": [
+      { "url": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "The Keystone Social House",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJRcqFN4aAhYARSvdFY6nNytM",
     "yId": "the-keystone-san-francisco-2",
-    "images": [
-      {
-        "fileName": "san-francisco__the-keystone.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__the-keystone.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "2:00PM",
+        "startTime": "10:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 25
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 25 }
     ],
     "facebookUrl": "https://www.facebook.com/thekeystonesf/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/the-keystone-soma",
-    "researchNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+    "research": [
+      { "url": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "farmerbrown",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJv-klmoWAhYAReflECbnTyRE",
     "yId": "farmerbrown-san-francisco-2",
-    "images": [
-      {
-        "fileName": "san-francisco__farmerbrown.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__farmerbrown.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "2:30PM",
+        "startTime": "10:00AM",
+        "endTime": "2:30PM",
         "days": [
           "Saturday"
         ]
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "9:30AM",
-        "ends": "2:30PM",
+        "startTime": "9:30AM",
+        "endTime": "2:30PM",
         "days": [
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 20
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/farmerbrownsf/",
-    "openTableUrl": "www.opentable.com/farmer-brown",
-    "tripAdvisorUrl": "www.tripadvisor.com/Restaurant_Review-g60713-d860472-Reviews-Farmerbrown-San_Francisco_California.html",
+    "openTableUrl": "http://www.opentable.com/farmer-brown",
+    "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d860472-Reviews-Farmerbrown-San_Francisco_California.html",
     "zomatoUrl": "https://www.zomato.com/san-francisco/farmerbrown-civic-center",
-    "researchNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+    "research": [
+      { "url": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Colibri Mexican Bistro",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJ816kUY6AhYARYWi1Uf1JnCI",
     "yId": "colibri-mexican-bistro-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__colibri-mexican-bistro.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__colibri-mexican-bistro.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:30AM",
-        "ends": "2:00PM",
+        "startTime": "10:30AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 10
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 10 }
     ],
     "facebookUrl": "https://www.facebook.com/ColibriSF/",
-    "openTableUrl": "www.opentable.com/r/colibri-mexican-bistro-san-francisco",
-    "tripAdvisorUrl": "www.tripadvisor.com/Restaurant_Review-g60713-d614164-Reviews-Colibri_Mexican_Bistro-San_Francisco_California.html",
-    "zagatUrl": "www.zagat.com/r/colibri-mexican-bistro-san-francisco",
+    "openTableUrl": "http://www.opentable.com/r/colibri-mexican-bistro-san-francisco",
+    "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d614164-Reviews-Colibri_Mexican_Bistro-San_Francisco_California.html",
+    "zagatUrl": "http://www.zagat.com/r/colibri-mexican-bistro-san-francisco",
     "zomatoUrl": "https://www.zomato.com/san-francisco/colibri-mexican-bistro-union-square"
     }
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Kitchen Story",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJ_wloDhx-j4AR636PeyqpwKY",
     "yId": "kitchen-story-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco_kitchen-story.png",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco_kitchen-story.png", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "8:00AM",
-        "ends": "3:00PM",
+        "startTime": "8:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 19
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 19 }
     ],
     "facebookUrl": "https://www.facebook.com/KitchenStorySF/",
-    "openTableUrl": "www.opentable.com/kitchen-story",
-    "tripAdvisorUrl": "www.tripadvisor.com/Restaurant_Review-g60713-d3865082-Reviews-Kitchen_Story-San_Francisco_California.html",
-    "zagatUrl": "www.zagat.com/r/kitchen-story-san-francisco",
+    "openTableUrl": "http://www.opentable.com/kitchen-story",
+    "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d3865082-Reviews-Kitchen_Story-San_Francisco_California.html",
+    "zagatUrl": "http://www.zagat.com/r/kitchen-story-san-francisco",
     "zomatoUrl": "https://www.zomato.com/san-francisco/kitchen-story-castro"
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "1300 on Fillmore",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJZbMizLuAhYARKiMObMwPGfc",
     "yId": "1300-on-fillmore-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__1300-on-fillmore.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__1300-on-fillmore.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "3:00PM",
+        "startTime": "11:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ],
-        "description": "Seatings at 11am and 1pm"
+        "remarks": "Seatings at 11am and 1pm"
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Bellini",
-        "price": 15
-      }
+    "funItems": [
+      { "item": "Bottomless Bellini", "price": 15 }
     ],
     "facebookUrl": "https://www.facebook.com/1300Fillmore/?rf=342306949166549",
-    "openTableUrl": "www.opentable.com/1300-on-fillmore",
-    "tripAdvisorUrl": "www.tripadvisor.com/Restaurant_Review-g60713-d776388-Reviews-1300_Fillmore-San_Francisco_California.html",
-    "zagatUrl": "www.zagat.com/r/1300-on-fillmore-san-francisco",
+    "openTableUrl": "http://www.opentable.com/1300-on-fillmore",
+    "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d776388-Reviews-1300_Fillmore-San_Francisco_California.html",
+    "zagatUrl": "http://www.zagat.com/r/1300-on-fillmore-san-francisco",
     "zomatoUrl": "https://www.zomato.com/san-francisco/1300-on-fillmore-western-addition",
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Stock in Trade",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJfVUaqdCAhYAR-sBJn3ZxSu8",
     "yId": "stock-in-trade-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__stock-in-trade.jpg",
-        "type": "outside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__stock-in-trade.jpg", "type": "outside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "3:00PM",
+        "startTime": "11:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ],
-        "description": "Bottomless Brunch starts at 10am on Sundays during NFL Season"
+        "remarks": "Bottomless Brunch starts at 10am on Sundays during NFL Season"
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 17
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 17 }
     ],
     "facebookUrl": "https://www.facebook.com/StockinTradeSF/",
-    "openTableUrl": "www.opentable.com/r/stock-in-trade-san-francisco",
-    "tripAdvisorUrl": "www.tripadvisor.com/Restaurant_Review-g60713-d4135154-Reviews-Stock_in_Trade-San_Francisco_California.html",
-    "zagatUrl": "www.zagat.com/r/stock-in-trade-san-francisco",
+    "openTableUrl": "http://www.opentable.com/r/stock-in-trade-san-francisco",
+    "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d4135154-Reviews-Stock_in_Trade-San_Francisco_California.html",
+    "zagatUrl": "http://www.zagat.com/r/stock-in-trade-san-francisco",
     "zomatoUrl": "https://www.zomato.com/san-francisco/stock-in-trade-marina-presidio"
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Hard Knox Cafe",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJ9cCh2gWHhYARlkhcPaOvZS0",
     "yId": "hard-knox-cafe-san-francisco-2",
-    "images": [
-      {
-        "fileName": "san-francisco__hard-knox-cafe.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__hard-knox-cafe.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "3:00PM",
+        "startTime": "11:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -308,242 +241,194 @@
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 18
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 18 }
     ],
     "facebookUrl": "https://www.facebook.com/hardknoxcafe/",
-    "openTableUrl": "www.opentable.com/r/hard-knox-cafe-san-francisco",
-    "tripAdvisorUrl": "www.tripadvisor.com/Restaurant_Review-g60713-d1055815-Reviews-Hard_Knox_Cafe-San_Francisco_California.html",
-    "zagatUrl": "www.zagat.com/r/hard-knox-cafe-san-francisco",
+    "openTableUrl": "http://www.opentable.com/r/hard-knox-cafe-san-francisco",
+    "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d1055815-Reviews-Hard_Knox_Cafe-San_Francisco_California.html",
+    "zagatUrl": "http://www.zagat.com/r/hard-knox-cafe-san-francisco",
     "zomatoUrl": "https://www.zomato.com/san-francisco/hard-knox-cafe-outer-richmond"
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "The Sycamore",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJ0WvRSyN-j4ARpvLPuZyI3l4",
     "yId": "the-sycamore-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__the-sycamore.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__the-sycamore.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "3:00PM",
+        "startTime": "10:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 12
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 12 }
     ],
     "facebookUrl": "https://www.facebook.com/TheSycamore/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/sycamore-mission-district",
-    "researchNotes": "http://www.thesycamoresf.com/brunch-menu.html"
+    "research": [
+      { "url": "http://www.thesycamoresf.com/brunch-menu.html" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Cliff House Terrace Room",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJ7dtznbWHhYAR81fEwzi58F4",
     "yId": "cliff-house-terrace-room-champagne-brunch-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__cliff-house.jpg",
-        "type": "outside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__cliff-house.jpg", "type": "outside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "4:00PM",
+        "startTime": "10:00AM",
+        "endTime": "4:00PM",
         "days": [
           "Sunday"
         ],
-        "description": "Call to make reservations for dining at 10am, noon, or 2pm.",
+        "remarks": "Must make reservations for 10am, noon, or 2pm.",
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Food and Drink",
-        "price": 55
-      }
+    "funItems": [
+      { "item": "Bottomless Food and Drink", "price": 55 }
     ],
     "facebookUrl": "https://www.facebook.com/CliffHouseSF/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/cliff-house-outer-richmond",
-    "researchNotes": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco"
+    "research": [
+      { "url": "https://sf.eater.com/maps/best-bottomless-brunches-san-francisco" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "The Willows",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJFw3ArCd-j4AR5T85mhj6N5Y",
     "yId": "the-willows-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__the-willows.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__the-willows.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "3:00PM",
+        "startTime": "11:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Bloody Mary",
-        "price": 18.75
-      },
-      {
-        "item": "Bottomless Bloody Mary w/ Absolut Vodka",
-        "price": 24.75
-      }
+    "funItems": [
+      { "item": "Bottomless Bloody Mary", "price": 18.75 },
+      { "item": "Bottomless Bloody Mary w/ Absolut Vodka", "price": 24.75 }
     ],
     "facebookUrl": "https://www.facebook.com/thewillowssf/?rf=1611272505783614",
     "zomatoUrl": "https://www.zomato.com/san-francisco/the-willows-soma",
-    "researchNotes": "http://www.thewillowssf.com/brunch-menu.html"
+    "research": [
+      { "url": "http://www.thewillowssf.com/brunch-menu.html" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Bisou Bistronomy",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJPc_WpRx-j4AR5xmnSgDgB0A",
     "yId": "bisou-bistronomy-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__bisou-bistronomy.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__bisou-bistronomy.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "9:00AM",
-        "ends": "3:00PM",
+        "startTime": "9:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 20
-      },
-      {
-        "item": "Bottomless Bloody Mary",
-        "price": 20
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 20 },
+      { "item": "Bottomless Bloody Mary", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/bisoubistro/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/bisou-castro",
-    "researchNotes": "http://www.bisousf.com/menu/ via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
+    "research": [
+      { "url": "http://www.bisousf.com/menu/" }
+      { "url": "http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "The Pink Elephant Alibi",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJRwAoRH2AhYAR-AlsWfLuTLw",
     "yId": "the-pink-elephant-alibi-san-francisco-3",
-    "images": [
-      {
-        "fileName": "san-francisco__the-pink-elephant-alibi.jpg",
-        "type": "bar"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__the-pink-elephant-alibi.jpg", "type": "bar" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "2:00PM",
+        "startTime": "11:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Friday"
         ]
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "10:30AM",
-        "ends": "4:00PM",
+        "startTime": "10:30AM",
+        "endTime": "4:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 22.99
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 22.99 }
     ],
     "facebookUrl": "https://www.facebook.com/pg/thepinkelephantsf",
     "zomatoUrl": "https://www.zomato.com/san-francisco/pink-elephant-soma",
-    "researchNotes": "www.thepinkelephantsf.wixsite.com/mysite via http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html"
+    "research": [
+      { "url": "http://www.thepinkelephantsf.wixsite.com/mysite" }
+      { "url": "http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Barrel Head Brewhouse",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJg4a117KAhYARfFvbnNINjZY",
     "yId": "barrel-head-brewhouse-san-francisco-5",
-    "images": [
-      {
-        "fileName": "san-francisco__barrel-head-brewhouse.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__barrel-head-brewhouse.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "2:00PM",
+        "startTime": "11:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 18
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 18 }
     ],
     "facebookUrl": "https://www.facebook.com/pg/BarrelHeadBrewhouse",
     "zomatoUrl": "https://www.zomato.com/san-francisco/barrel-head-western-addition",
-    "researchNotes": "www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5?q=bottomless"
+    "research": [
+      { "url": "http://www.yelp.com/biz/barrel-head-brewhouse-san-francisco-5?q=bottomless" }
+    ]
   },
   {
-    "regionId": "59c4a61488348f8102580f25",
     "name": "Cafe Mystique",
+    "regionId": "59c4a61488348f8102580f25",
     "gId": "ChIJPbV6qhx-j4ARJcmiQMJhbaM",
     "yId": "cafe-mystique-san-francisco",
-    "images": [
-      {
-        "fileName": "san-francisco__cafe-mystique.jpg",
-        "type": "inside"
-      }
-    ],
-    "relevantHours": [
+    "images": [{ "fileName": "san-francisco__cafe-mystique.jpg", "type": "inside" }],
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "9:00AM",
-        "ends": "2:00PM",
+        "startTime": "9:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -552,21 +437,23 @@
     ],
     "facebookUrl": "https://www.facebook.com/CafeMystiqueSF/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/café-mystique-castro",
-    "researchNotes": "https://www.yelp.com/biz/cafe-mystique-san-francisco?q=bottomless"
+    "research": [
+      { "url": "https://www.yelp.com/biz/cafe-mystique-san-francisco?q=bottomless" }
+    ]
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "The Table",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJF7uF3VczjoARsQacfJJdX-A",
     "yId": "the-table-san-jose",
     "images": [
       { "fileName": "san-jose__the-table.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Happy Hour",
-        "starts": "4:00PM",
-        "ends": "6:00PM",
+        "startTime": "4:00PM",
+        "endTime": "6:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -577,8 +464,8 @@
       },
       {
         "category": "Reverse Happy Hour",
-        "starts": "10:00PM",
-        "ends": "12:00AM",
+        "startTime": "10:00PM",
+        "endTime": "12:00AM",
         "days": [
           "Saturday",
           "Sunday"
@@ -586,8 +473,8 @@
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "9:00AM",
-        "ends": "2:00PM",
+        "startTime": "9:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Wednesday",
           "Thursday",
@@ -596,8 +483,8 @@
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "8:30AM",
-        "ends": "2:00PM",
+        "startTime": "8:30AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -608,18 +495,18 @@
     "zomatoUrl": "https://www.zomato.com/san-jose/the-table-willow-glen"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "1621 Bistro",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJM9j_9CPMj4ARi200r9nA3CY",
     "yId": "1621-bistro-san-jose-3",
     "images": [
       { "fileName": "san-jose__1621-bistro.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "2:00PM",
+        "startTime": "10:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -630,19 +517,19 @@
     }
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "Flames Eatery & Bar",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJg1bWkZXLj4ARJbjjVd0GN-E",
     "yId": "flames-eatery-and-bar-san-jose",
     "images": [
       { "fileName": "san-jose__flames-eatery--dining.jpg" },
       { "fileName": "san-jose__flames-eatery.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Reverse Happy Hour",
-        "starts": "9:00PM",
-        "ends": "11:00PM",
+        "startTime": "9:00PM",
+        "endTime": "11:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -651,8 +538,8 @@
       },
       {
         "category": "Reverse Happy Hour",
-        "starts": "9:00PM",
-        "ends": "12:00AM",
+        "startTime": "9:00PM",
+        "endTime": "12:00AM",
         "days": [
           "Wednesday",
           "Thursday",
@@ -662,8 +549,8 @@
       },
       {
         "category": "Happy Hour",
-        "starts": "3:00PM",
-        "ends": "6:00PM",
+        "startTime": "3:00PM",
+        "endTime": "6:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -676,35 +563,32 @@
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "9:00AM",
-        "ends": "2:00PM",
+        "startTime": "9:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Sunday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 13.95
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 13.95 }
     ],
     "facebookUrl": "https://www.facebook.com/pg/flameseatery",
     "zomatoUrl": "https://www.zomato.com/san-jose/flames-eatery-and-bar-downtown"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "4th St. Pizza Co",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJFxZAVbzMj4ARfiq-tLVzOn4",
     "yId": "4th-st-pizza-san-jose",
     "images": [
       { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Happy Hour",
-        "starts": "3:00PM",
-        "ends": "6:00PM",
+        "startTime": "3:00PM",
+        "endTime": "6:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -715,16 +599,16 @@
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "2:00PM",
+        "startTime": "11:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday"
         ]
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "9:00AM",
-        "ends": "2:00PM",
+        "startTime": "9:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Sunday"
         ]
@@ -734,8 +618,8 @@
     "zomatoUrl": "https://www.zomato.com/san-jose/4th-street-pizza-downtown"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "Billy’s Boston Chowder House",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJ4wI3t-Q1joAR3lm5qYtF_8A",
     "yId": "billys-boston-chowder-house-los-gatos",
     "images": [
@@ -744,11 +628,11 @@
         "type": "logo"
       }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "2:00PM",
+        "startTime": "11:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -756,8 +640,8 @@
       },
       {
         "category": "Happy Hour",
-        "starts": "4:00PM",
-        "ends": "6:00PM",
+        "startTime": "4:00PM",
+        "endTime": "6:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -767,29 +651,28 @@
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 6
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 6 }
     ],
     "facebookUrl": "https://www.facebook.com/BillysBostonChowderHouse",
     "zomatoUrl": "https://www.zomato.com/los-gatos-ca/billys-boston-chowder-house-los-gatos",
-    "researchNotes": "http://losgatosmagazine.com/2014/06/25/five-oclock-somewhere-happy-hour-around-town/, http://sanfrancisco.cbslocal.com/top-lists/5-must-have-bottomless-mimosas-near-the-south-bay/"
+    "research": [
+      { "url": "http://losgatosmagazine.com/2014/06/25/five-oclock-somewhere-happy-hour-around-town/, http://sanfrancisco.cbslocal.com/top-lists/5-must-have-bottomless-mimosas-near-the-south-bay/" }
+    ]
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "St. Stephen’s Green",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJsfMnDjS3j4ARoUdVDMJyqMU",
     "yId": "st-stephens-green-mountain-view-3",
     "images": [
       { "fileName": "san-jose__st-stephens-green.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Happy Hour",
-        "starts": "3:00PM",
-        "ends": "6:30PM",
+        "startTime": "3:00PM",
+        "endTime": "6:30PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -800,8 +683,8 @@
       },
       {
         "category": "Bottomless Brunch",
-        "starts": "9:00AM",
-        "ends": "2:00PM",
+        "startTime": "9:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -812,18 +695,18 @@
     "zomatoUrl": "https://www.zomato.com/mountain-view-ca/st-stephens-green-mountain-view"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "Straits Restaurant",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJX76EBeDKj4ARDMTabmSeUR8",
     "yId": "straits-santana-row-san-jose",
     "images": [
       { "fileName": "san-jose__straits.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "11:00AM",
-        "ends": "3:00PM",
+        "startTime": "11:00AM",
+        "endTime": "3:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -831,8 +714,8 @@
       },
       {
         "category": "Happy Hour",
-        "starts": "3:00PM",
-        "ends": "6:00PM",
+        "startTime": "3:00PM",
+        "endTime": "6:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -843,39 +726,33 @@
       },
       {
         "category": "Reverse Happy Hour",
-        "starts": "3:00PM",
-        "ends": "10:00PM",
+        "startTime": "3:00PM",
+        "endTime": "10:00PM",
         "days": [
           "Monday"
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 15
-      },
-      {
-        "item": "Bottomless Bloody Mary",
-        "price": 15
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 15 },
+      { "item": "Bottomless Bloody Mary", "price": 15 }
     ],
     "facebookUrl": "https://www.facebook.com/Straits-Restaurants-1667217176894999/",
     "zomatoUrl": "https://www.zomato.com/san-jose/straits-san-jose"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "Tapsilog Bistro",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJZQLbjTM1joARRaFhWYLkpPM",
     "yId": "tapsilog-bistro-campbell",
     "images": [
       { "fileName": "san-jose__tapsilog-bistro.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "9:00AM",
-        "ends": "2:00PM",
+        "startTime": "9:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -883,8 +760,8 @@
       },
       {
         "category": "Happy Hour",
-        "starts": "2:30PM",
-        "ends": "6:30PM",
+        "startTime": "2:30PM",
+        "endTime": "6:30PM",
         "days": [
           "Tuesday",
           "Wednesday",
@@ -893,28 +770,25 @@
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Calamansi Mimosas",
-        "price": 15
-      }
+    "funItems": [
+      { "item": "Bottomless Calamansi Mimosas", "price": 15 }
     ],
     "facebookUrl": "https://www.facebook.com/littleManilaCampbell.Ca/",
     "zomatoUrl": "https://www.zomato.com/san-jose/tapsilog-bistro-west-san-jose"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "Chacho’s Restaurant",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJe07Zf7zMj4ARzhZdvFR9n-w",
     "yId": "chachos-restaurant-san-jose-2",
     "images": [
       { "fileName": "san-jose__chachos.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "2:00PM",
+        "startTime": "10:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -925,18 +799,18 @@
     "zomatoUrl": "https://www.zomato.com/san-jose/chachos-downtown"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "SP2 Communal Bar + Restaurant",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJawrlN6LMj4AR-Bhapw3p8Qs",
     "yId": "sp2-communal-bar-restaurant-san-jose",
     "images": [
       { "fileName": "san-jose__sp2.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "2:30PM",
+        "startTime": "10:00AM",
+        "endTime": "2:30PM",
         "days": [
           "Saturday",
           "Sunday"
@@ -944,8 +818,8 @@
       },
       {
         "category": "Happy Hour",
-        "starts": "3:00PM",
-        "ends": "6:00PM",
+        "startTime": "3:00PM",
+        "endTime": "6:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -960,26 +834,26 @@
     "zomatoUrl": "https://www.zomato.com/san-jose/sp2-communal-bar-restaurant-downtown"
   },
   {
-    "regionId": "59c4a61e88348f8102580f29",
     "name": "Santa Teresa Golf Club",
+    "regionId": "59c4a61e88348f8102580f29",
     "gId": "ChIJsTITnrsvjoARDHwPjmn3vEM",
     "yId": "santa-teresa-golf-club-san-jose",
     "images": [
       { "fileName": "san-jose__santa-teresa-golf-club.jpg" }
     ],
-    "relevantHours": [
+    "funTimes": [
       {
         "category": "Bottomless Brunch",
-        "starts": "10:00AM",
-        "ends": "2:00PM",
+        "startTime": "10:00AM",
+        "endTime": "2:00PM",
         "days": [
           "Sunday"
         ]
       },
       {
         "category": "Happy Hour",
-        "starts": "4:00PM",
-        "ends": "6:00PM",
+        "startTime": "4:00PM",
+        "endTime": "6:00PM",
         "days": [
           "Monday",
           "Tuesday",
@@ -989,14 +863,13 @@
         ]
       }
     ],
-    "menuItems": [
-      {
-        "item": "Bottomless Mimosa",
-        "price": 10
-      }
+    "funItems": [
+      { "item": "Bottomless Mimosa", "price": 10 }
     ],
     "facebookUrl": "https://www.facebook.com/santateresagolfclub/",
     "zomatoUrl": "https://www.zomato.com/san-jose/santa-teresa-golf-club-south-san-jose",
-    "researchNotes": "http://www.santateresagolf.com/page.php?page_id=4198&name=Sunday_Funday_Drink_Specials"
+    "research": [
+      { "url": "http://www.santateresagolf.com/page.php?page_id=4198&name=Sunday_Funday_Drink_Specials" }
+    ]
   }
 ]
