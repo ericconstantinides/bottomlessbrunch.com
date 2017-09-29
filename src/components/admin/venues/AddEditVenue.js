@@ -97,7 +97,7 @@ class AddEditVenue extends Component {
             />
             <Field
               lbl='Yelp ID'
-              name='yelpId'
+              name='yId'
               component={this.renderField}
             />
             <Field
