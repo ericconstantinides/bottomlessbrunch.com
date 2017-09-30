@@ -113,6 +113,64 @@ class AddEditVenue extends Component {
 
     // You can do other things with address string or placeId. For example, geocode :)
   }
+  renderFunTimes = ({ fields, meta: { error, submitFailed } }) => (
+    <div className='AddEdit__full-across'>
+      <div>
+        <button
+          className='btn btn-sm btn-primary'
+          type='button'
+          onClick={() => fields.push({})}
+        >
+          Add Fun Time
+        </button>
+        {submitFailed && error && <span>{error}</span>}
+      </div>
+      <div className='XXXXAddEdit__field-wrapper'>
+        {fields.map((funTime, index) => (
+          <div className='AddEdit__field-wrapper--alt' key={index}>
+            <div className='AddEdit__field-wrapper'>
+              <Field
+                name={`${funTime}.category`}
+                type='text'
+                component={this.renderField}
+                lbl='Category'
+              />
+              <Field
+                name={`${funTime}.days`}
+                type='text'
+                component={this.renderField}
+                lbl='Days'
+              />
+              <Field
+                name={`${funTime}.startTime`}
+                type='text'
+                component={this.renderField}
+                lbl='Starts'
+              />
+              <Field
+                name={`${funTime}.endTime`}
+                type='text'
+                component={this.renderField}
+                lbl='Ends'
+              />
+              <Field
+                name={`${funTime}.remarks`}
+                type='text'
+                component={this.renderField}
+                lbl='Remarks'
+              />
+            </div>
+            <button
+              className='btn btn-sm btn-danger'
+              onClick={() => fields.remove(index)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
   renderFunItems = ({ fields, meta: { error, submitFailed } }) => (
     <div className='AddEdit__full-across'>
       <div>
@@ -216,7 +274,18 @@ class AddEditVenue extends Component {
               <RegionSelect />
               {/* region={this.props.ui.region} */}
               <Field lbl='Venue Name' name='name' component={renderField} />
-              <Field lbl='Places ID' name='gpId' component={renderField} />
+              <div>
+                <label htmlFor="active">Is Venue Active?</label>
+                <div>
+                  <Field
+                    name="active"
+                    id="active"
+                    component="input"
+                    type="checkbox"
+                  />
+                </div>
+              </div>
+              <Field lbl='Google Places ID' name='gpId' component={renderField} />
               <Field lbl='Yelp ID' name='yId' component={renderField} />
               <Field lbl='Zomato ID' name='zomatoId' component={renderField} />
               <Field
@@ -239,6 +308,29 @@ class AddEditVenue extends Component {
                 component={renderField}
               />
               <Field lbl='Phone #' name='phone' component={renderField} />
+              <Field lbl='Website' name='website' component={renderField} />
+              <Field
+                lbl='Facebook URL'
+                name='facebookUrl'
+                component={renderField}
+              />
+              <Field
+                lbl='OpenTable URL'
+                name='openTableUrl'
+                component={renderField}
+              />
+              <Field
+                lbl='Trip Advisor URL'
+                name='tripAdvisorUrl'
+                component={renderField}
+              />
+              <Field lbl='Zagat URL' name='zagatUrl' component={renderField} />
+              <Field
+                lbl='Zomato URL'
+                name='zomatoUrl'
+                component={renderField}
+              />
+              <FieldArray name='funTimes' component={this.renderFunTimes} />
               <FieldArray name='funItems' component={this.renderFunItems} />
               <FieldArray name='research' component={this.renderResearch} />
             </div>
