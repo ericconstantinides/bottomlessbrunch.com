@@ -144,7 +144,50 @@ class AddEditVenue extends Component {
               className='btn btn-sm btn-danger'
               onClick={() => fields.remove(index)}
             >
-              Delete Item
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+  renderResearch = ({ fields, meta: { error, submitFailed } }) => (
+    <div className='AddEdit__full-across'>
+      <div>
+        <button
+          className='btn btn-sm btn-primary'
+          type='button'
+          onClick={() => fields.push({})}
+        >
+          Add Research Item
+        </button>
+        {submitFailed && error && <span>{error}</span>}
+      </div>
+      <div className='XXXXAddEdit__field-wrapper'>
+        {fields.map((research, i) => (
+          <div
+            className='AddEdit__field-wrapper--alt AddEdit__field-wrapper--alt--wide'
+            key={i}
+          >
+            <div>
+              <Field
+                name={`${research}.url`}
+                type='text'
+                component={this.renderField}
+                lbl='URL'
+              />
+              <Field
+                name={`${research}.remarks`}
+                type='type'
+                component={this.renderField}
+                lbl='Remarks'
+              />
+            </div>
+            <button
+              className='btn btn-sm btn-danger'
+              onClick={() => fields.remove(i)}
+            >
+              Delete
             </button>
           </div>
         ))}
@@ -181,12 +224,6 @@ class AddEditVenue extends Component {
                 name='neighborhood'
                 component={renderField}
               />
-              <Field
-                lbl='Research'
-                name='research'
-                type='textarea'
-                component={renderField}
-              />
               <Field lbl='Latitude' name='lat' component={renderField} />
               <Field lbl='Longitude' name='lng' component={renderField} />
               <Field
@@ -203,6 +240,7 @@ class AddEditVenue extends Component {
               />
               <Field lbl='Phone #' name='phone' component={renderField} />
               <FieldArray name='funItems' component={this.renderFunItems} />
+              <FieldArray name='research' component={this.renderResearch} />
             </div>
             <button
               type='submit'
