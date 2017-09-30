@@ -14,7 +14,7 @@ import MapSearch from '../../MapSearch'
 import RegionSelect from '../../RegionSelect'
 import GoogleMapReact from 'google-map-react'
 import { addVenue, editVenue } from '../../../actions'
-import { usaMap } from '../../../config'
+import { usaMap, DATE_LONG } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 import Marker from '../../Marker'
 
@@ -163,9 +163,7 @@ class AddEditVenue extends Component {
             <button
               className='btn btn-sm btn-danger'
               onClick={() => fields.remove(index)}
-            >
-              Delete
-            </button>
+            >✖</button>
           </div>
         ))}
       </div>
@@ -202,7 +200,7 @@ class AddEditVenue extends Component {
               className='btn btn-sm btn-danger'
               onClick={() => fields.remove(index)}
             >
-              Delete
+            ✖
             </button>
           </div>
         ))}
@@ -244,9 +242,7 @@ class AddEditVenue extends Component {
             <button
               className='btn btn-sm btn-danger'
               onClick={() => fields.remove(i)}
-            >
-              Delete
-            </button>
+            >✖</button>
           </div>
         ))}
       </div>
@@ -261,75 +257,57 @@ class AddEditVenue extends Component {
       ? <h1>{thisForm.addEditVenue.values.name}</h1>
       : <h1>&nbsp;</h1>
     const renderField = this.renderField
+    let yData = []
+    // format the yData for displaying
+    if (this.props.initialValues && this.props.initialValues.yData) {
+      yData = Object.entries(this.props.initialValues.yData).map(([k, v]) => {
+        const v2 = v === true ? 'true' : v === false ? 'false' : v
+        const v3 = Array.isArray(v2) ? v2.join(', ') : v2
+        const v4 = k === 'fetchedTime'
+          ? new Date(v3).toLocaleDateString('en-US', DATE_LONG)
+          : v3
+        return <div key={k}><strong>{k}</strong>: {v4}</div>
+      })
+      yData.unshift(<h3>yData</h3>)
+    }
     return (
-      <div className='AddEdit AddEditVenue container'>
+      <div className='AddEdit AddEditVenue site-container'>
+        <Link to='/admin/venues'>
+        « Back to Venues
+        </Link>
         {title}
         {/* the handleSubmit is from redux-form */}
         <form
           className='AddEdit__form'
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
         >
-          <div className='AddEdit__col-left'>
+          <div className='AddEdit__col-1'>
             <div className='AddEdit__field-wrapper'>
-              <RegionSelect />
-              {/* region={this.props.ui.region} */}
-              <Field lbl='Venue Name' name='name' component={renderField} />
-              <div>
-                <label htmlFor="active">Is Venue Active?</label>
-                <div>
-                  <Field
-                    name="active"
-                    id="active"
-                    component="input"
-                    type="checkbox"
-                  />
-                </div>
+              <div className='AddEditVenue__form-group form-group'>
+                <label className='AddEdit__label'>Region</label>
+                <RegionSelect />
+                {/* region={this.props.ui.region} */}
               </div>
-              <Field lbl='Google Places ID' name='gpId' component={renderField} />
+              <Field lbl='Venue Name' name='name' component={renderField} />
+              <div className='AddEditVenue__form-group form-group'>
+                <label className='AddEdit__label' htmlFor='active'>
+                  Is Venue Active?
+                </label>
+                <Field
+                  name='active'
+                  id='active'
+                  component='input'
+                  type='checkbox'
+                  className='form-control'
+                />
+              </div>
+              <Field
+                lbl='Google Places ID'
+                name='gpId'
+                component={renderField}
+              />
               <Field lbl='Yelp ID' name='yId' component={renderField} />
               <Field lbl='Zomato ID' name='zomatoId' component={renderField} />
-              <Field
-                lbl='Neighborhood'
-                name='neighborhood'
-                component={renderField}
-              />
-              <Field lbl='Latitude' name='lat' component={renderField} />
-              <Field lbl='Longitude' name='lng' component={renderField} />
-              <Field
-                lbl='Street'
-                name='address.street'
-                component={renderField}
-              />
-              <Field lbl='City' name='address.city' component={renderField} />
-              <Field lbl='State' name='address.state' component={renderField} />
-              <Field
-                lbl='Zip Code'
-                name='address.zip'
-                component={renderField}
-              />
-              <Field lbl='Phone #' name='phone' component={renderField} />
-              <Field lbl='Website' name='website' component={renderField} />
-              <Field
-                lbl='Facebook URL'
-                name='facebookUrl'
-                component={renderField}
-              />
-              <Field
-                lbl='OpenTable URL'
-                name='openTableUrl'
-                component={renderField}
-              />
-              <Field
-                lbl='Trip Advisor URL'
-                name='tripAdvisorUrl'
-                component={renderField}
-              />
-              <Field lbl='Zagat URL' name='zagatUrl' component={renderField} />
-              <Field
-                lbl='Zomato URL'
-                name='zomatoUrl'
-                component={renderField}
-              />
               <FieldArray name='funTimes' component={this.renderFunTimes} />
               <FieldArray name='funItems' component={this.renderFunItems} />
               <FieldArray name='research' component={this.renderResearch} />
@@ -345,7 +323,7 @@ class AddEditVenue extends Component {
               Cancel
             </Link>
           </div>
-          <div className='AddEdit__col-right'>
+          <div className='AddEdit__col-2'>
             <MapSearch
               address={this.state.address}
               onChange={this.onChange}
@@ -361,13 +339,78 @@ class AddEditVenue extends Component {
                   zoom={this.state.zoom - 1}
                   center={{ lat: this.state.lat, lng: this.state.lng }}
                   onChange={this.handleMapMoved}
-                  style={{ height: '300px', position: 'relative' }}
+                  style={{
+                    height: '300px',
+                    position: 'relative',
+                    marginBottom: '1em'
+                  }}
                 >
                   {this.state.loadMarker &&
                     <Marker lat={this.state.lat} lng={this.state.lng} />}
                 </GoogleMapReact>
+                <div className='AddEdit__field-wrapper'>
+                  <Field
+                    lbl='Neighborhood'
+                    name='neighborhood'
+                    component={renderField}
+                  />
+                  <Field lbl='Latitude' name='lat' component={renderField} />
+                  <Field lbl='Longitude' name='lng' component={renderField} />
+                  <Field
+                    lbl='Street'
+                    name='address.street'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='City'
+                    name='address.city'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='State'
+                    name='address.state'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='Zip Code'
+                    name='address.zip'
+                    component={renderField}
+                  />
+                  <Field lbl='Phone #' name='phone' component={renderField} />
+                  <Field lbl='Website' name='website' component={renderField} />
+                  <Field
+                    lbl='Facebook URL'
+                    name='facebookUrl'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='OpenTable URL'
+                    name='openTableUrl'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='Trip Advisor URL'
+                    name='tripAdvisorUrl'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='Zagat URL'
+                    name='zagatUrl'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='Zomato URL'
+                    name='zomatoUrl'
+                    component={renderField}
+                  />
+                </div>
               </div>
             </div>
+          </div>
+          <div className='AddEdit__col-3'>
+            <aside className='AddEdit__yData'>
+              {yData}
+            </aside>
           </div>
         </form>
       </div>

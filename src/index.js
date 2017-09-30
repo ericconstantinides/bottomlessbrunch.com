@@ -13,7 +13,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import reducers from './reducers' // Or wherever you keep your reducers
 
 import './index.css'
-import registerServiceWorker from './registerServiceWorker'
+// // import registerServiceWorker from './registerServiceWorker'
 
 import App from './components/App'
 
@@ -43,4 +43,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-registerServiceWorker()
+// registerServiceWorker()

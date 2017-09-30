@@ -3,6 +3,7 @@ export const GOOGLE_API_KEY = 'AIzaSyDsJWQDeqiFe-Chw1tBWfitg_7rGSWmHTU'
 // How often should I reFetch the Google API in minutes
 export const fetchTimeout = 60
 export const ROOT_URL = 'http://localhost:3090'
+export const DATE_LONG = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export const usaMap = {
   zoom: 4,

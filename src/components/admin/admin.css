@@ -29,13 +29,17 @@
   width: 100%;
 }
 /* AddEditVenue */
-.AddEditVenue .AddEdit__col-left {
-  flex: 1 1 auto;
+.AddEdit__col-1 {
+  flex: 1 1 60%;
 }  
-.AddEditVenue .AddEdit__col-right {
-  flex: 0 0 40%;
-  width: auto;
+.AddEdit__col-2 {
+  flex: 1 1 40%;
   min-width: 250px;
+  margin-left: 1em;
+}
+.AddEdit__col-3 {
+  flex: 0 0 150px;
+  margin-left: 1em;
 }
 .AddEditRegion .AddEdit__col-left {
   flex: 1 0 300px;
@@ -50,13 +54,10 @@
 .AddEdit__field-wrapper {
   display: flex;
   flex-flow: wrap;
+  margin-left: -0.5em;
 }
 .AddEdit__field-wrapper > * {
-  width: 50%;
-  padding-right: 0.5em;
-}
-.AddEdit__field-wrapper > *:nth-child(2n) {
-  padding-right: 0;
+  width: 33.33%;
   padding-left: 0.5em;
 }
 .AddEdit__map-container {
@@ -65,7 +66,6 @@
 }
 .AddEdit .AddEdit__full-across {
   width: 100%;
-  padding: 0;
 }
 .AddEdit__field-wrapper--alt {
   background: whitesmoke;
@@ -86,12 +86,18 @@
   margin-bottom: 0;
 }
 .AddEdit__field-wrapper--alt > * {
-  flex: 1 1 auto;
-  margin: 0 0.5em 0 0;
+  /* flex: 1 1 auto;
+  margin: 0 0.5em 0 0; */
 }
 .AddEdit__field-wrapper--alt > *:last-child {
   margin-right: 0;
 }
 .AddEdit__field-wrapper--alt > button {
   flex-basis: 0;
+}
+.AddEdit__yData h3 {
+  text-align: center;
+}
+.AddEdit__yData div {
+  margin-bottom: 0.25em;
 }
