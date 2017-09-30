@@ -10,10 +10,17 @@
 }
 .AddEdit__form {
   display: flex;
+  line-height: 1.2;
+  font-size: 0.8125em;
+}
+.AddEdit__form input[type="text"],
+.AddEdit__form input[type="number"] {
+  font-size: inherit;
 }
 .AddEdit__label {
-  margin-bottom: 0;
-  font-size: 0.875em;
+  font-weight: 600;
+  margin-bottom: 0.125em;
+  padding-left: 0.5em;
 }
 .AddEdit__col-left {
   margin-right: 1em;
@@ -40,7 +47,18 @@
 .AddEditRegion .AddEdit__col-right > * {
   max-width: 80vh;
 }
-
+.AddEdit__field-wrapper {
+  display: flex;
+  flex-flow: wrap;
+}
+.AddEdit__field-wrapper > * {
+  width: 50%;
+  padding-right: 0.5em;
+}
+.AddEdit__field-wrapper > *:nth-child(2n) {
+  padding-right: 0;
+  padding-left: 0.5em;
+}
 .AddEdit__map-container {
   max-height: 80vh;
   max-width: 80vh;

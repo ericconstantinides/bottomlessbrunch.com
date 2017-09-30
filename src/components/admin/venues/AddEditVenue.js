@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  Field,
-  FormSection,
-  reduxForm,
-  change as changeFieldValue
-} from 'redux-form'
+import { Field, FormSection, reduxForm, change as fieldValue } from 'redux-form'
+// I may need these later below: geocodeByAddress, getLatLng
+import { geocodeByPlaceId } from 'react-places-autocomplete'
+import MapSearch from '../../MapSearch'
 import RegionSelect from '../../RegionSelect'
 import GoogleMapReact from 'google-map-react'
 import { addVenue, editVenue } from '../../../actions'
 import { usaMap } from '../../../config'
+import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 import Marker from '../../Marker'
 
 class AddEditVenue extends Component {
@@ -20,9 +19,12 @@ class AddEditVenue extends Component {
       zoom: usaMap.zoom,
       lat: usaMap.lat,
       lng: usaMap.lng,
+      loadMarker: false,
+      address: ''
     }
+    this.onChange = address => this.setState({ address })
   }
-  renderField (field) {
+  rndrFld (field) {
     const { touched, error } = field.meta
     const fieldType = field.type ? field.type : 'text'
     const className = `AddEditVenue__form-group form-group ${touched && error ? 'has-danger' : ''}`
@@ -46,10 +48,11 @@ class AddEditVenue extends Component {
     }
   }
   handleMapLoaded = map => {
+    // we have a venue already:
     if (this.props.match.params.id && this.props.initialValues) {
       this.setState((prevState, props) => {
-        const { lat, lng, zoom } = this.props.initialValues
-        return { lat, lng, zoom }
+        const { lat, lng } = this.props.initialValues
+        return { lat, lng, zoom: 14, loadMarker: true }
       })
     }
   }
@@ -58,14 +61,51 @@ class AddEditVenue extends Component {
     //   this.props.thisForm &&
     //   this.props.thisForm.addEditVenue
     // ) {
-    //   this.props.changeFieldValue('addEditVenue', 'zoom', position.zoom)
-    //   this.props.changeFieldValue('addEditVenue', 'position.lat', position.center.lat)
-    //   this.props.changeFieldValue('addEditVenue', 'position.lng', position.center.lng)
+    //   this.props.fieldValue('addEditVenue', 'zoom', position.zoom)
+    //   this.props.fieldValue('addEditVenue', 'position.lat', position.center.lat)
+    //   this.props.fieldValue('addEditVenue', 'position.lng', position.center.lng)
     // }
-
     // this.setState((prevState, props) => {
     //   return { map: position }
     // })
+  }
+  // Fires on Google AutoSelect selection:
+  handleSelect = (address, placeId) => {
+    geocodeByPlaceId(placeId)
+      .then(results => {
+        const { geometry, address_components } = results[0]
+        const {
+          b: { b: lngWest, f: lngEast },
+          f: { b: latSouth, f: latNorth }
+        } = geometry.bounds
+        const bounds = convertToBounds(latNorth, latSouth, lngWest, lngEast)
+        this.props.fieldValue(
+          'addEditRegion',
+          'name',
+          address_components[0].long_name
+        )
+        this.props.fieldValue(
+          'addEditRegion',
+          'state',
+          address_components[2].short_name
+        )
+        this.props.fieldValue('addEditRegion', 'gpId', placeId)
+        // this.props.fieldValue('addEditRegion', 'bounds.latNorth', latNorth)
+        // this.props.fieldValue('addEditRegion', 'bounds.latSouth', latSouth)
+        // this.props.fieldValue('addEditRegion', 'bounds.lngWest', lngWest)
+        // this.props.fieldValue('addEditRegion', 'bounds.lngEast', lngEast)
+        this.setState((prevState, props) => {
+          const { position: { lat, lng }, zoom } = fitBoundsGoogleReady(
+            bounds,
+            this.state.mapSize
+          )
+          return { lat, lng, zoom }
+        })
+      })
+      .catch(error => console.error(error))
+    // this.setState({ address, placeId })
+
+    // You can do other things with address string or placeId. For example, geocode :)
   }
   render () {
     // pull out the redux-form handleSubmit function from props:
@@ -75,6 +115,7 @@ class AddEditVenue extends Component {
       thisForm.addEditVenue.values.name
       ? <h1>{thisForm.addEditVenue.values.name}</h1>
       : <h1>&nbsp;</h1>
+    console.log(this.props)
     return (
       <div className='AddEdit AddEditVenue container'>
         {title}
@@ -84,50 +125,52 @@ class AddEditVenue extends Component {
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
         >
           <div className='AddEdit__col-left'>
-            <Field lbl='Venue Name' name='name' component={this.renderField} />
-            <RegionSelect
-            />
+            <div className='AddEdit__field-wrapper'>
+              <RegionSelect />
               {/* region={this.props.ui.region} */}
-            <Field
-              lbl='Neighborhood'
-              name='neighborhood'
-              component={this.renderField}
-            />
-            <Field
-              lbl='Google Places ID'
-              name='gpId'
-              component={this.renderField}
-            />
-            <Field
-              lbl='Yelp ID'
-              name='yId'
-              component={this.renderField}
-            />
-            <Field
-              lbl='Zomato ID'
-              name='zomatoId'
-              component={this.renderField}
-            />
-            <Field
-              lbl='Research Notes'
-              name='researchNotes'
-              type='textarea'
-              component={this.renderField}
-            />
-            <FormSection name='position'>
+              <Field lbl='Venue Name' name='name' component={this.rndrFld} />
+              <Field lbl='Places ID' name='gpId' component={this.rndrFld} />
+              <Field lbl='Yelp ID' name='yId' component={this.rndrFld} />
+              <Field lbl='Zomato ID' name='zomatoId' component={this.rndrFld} />
               <Field
-                lbl='Latitude'
-                name='lat'
-                type='number'
-                component={this.renderField}
+                lbl='Neighborhood'
+                name='neighborhood'
+                component={this.rndrFld}
               />
               <Field
-                lbl='Longitude'
-                name='lng'
-                type='number'
-                component={this.renderField}
+                lbl='Research'
+                name='research'
+                type='textarea'
+                component={this.rndrFld}
               />
-            </FormSection>
+              <Field lbl='Latitude' name='lat' component={this.rndrFld} />
+              <Field lbl='Longitude' name='lng' component={this.rndrFld} />
+              <Field
+                lbl='Street'
+                name='address.street'
+                component={this.rndrFld}
+              />
+              <Field
+                lbl='City'
+                name='address.city'
+                component={this.rndrFld}
+              />
+              <Field
+                lbl='State'
+                name='address.state'
+                component={this.rndrFld}
+              />
+              <Field
+                lbl='Zip Code'
+                name='address.zip'
+                component={this.rndrFld}
+              />
+              <Field
+                lbl='Phone #'
+                name='phone'
+                component={this.rndrFld}
+              />
+            </div>
             <button
               type='submit'
               className='btn btn-sm btn-primary'
@@ -140,16 +183,28 @@ class AddEditVenue extends Component {
             </Link>
           </div>
           <div className='AddEdit__col-right'>
-            <GoogleMapReact
-              onGoogleApiLoaded={this.handleMapLoaded}
-              yesIWantToUseGoogleMapApiInternals
-              zoom={14}
-              center={{ lat: this.state.lat, lng: this.state.lng }}
-              onChange={this.handleMapMoved}
-              style={{height: '300px', position: 'relative'}}
-            >
-              <Marker lat={this.state.lat} lng={this.state.lng} />
-            </GoogleMapReact>
+            <MapSearch
+              address={this.state.address}
+              onChange={this.onChange}
+              placeholder='Search for Venue...'
+              handleSelect={this.handleSelect}
+              types={['establishment']}
+            />
+            <div className='m-ratio m-ratio--1-1 AddEdit__map-container'>
+              <div className='m-ratio__child'>
+                <GoogleMapReact
+                  onGoogleApiLoaded={this.handleMapLoaded}
+                  yesIWantToUseGoogleMapApiInternals
+                  zoom={this.state.zoom - 1}
+                  center={{ lat: this.state.lat, lng: this.state.lng }}
+                  onChange={this.handleMapMoved}
+                  style={{ height: '300px', position: 'relative' }}
+                >
+                  {this.state.loadMarker &&
+                    <Marker lat={this.state.lat} lng={this.state.lng} />}
+                </GoogleMapReact>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -193,7 +248,7 @@ function mapStateToProps (state, ownProps) {
 export default connect(mapStateToProps, {
   addVenue,
   editVenue,
-  changeFieldValue
+  fieldValue
 })(
   reduxForm({
     form: 'addEditVenue',

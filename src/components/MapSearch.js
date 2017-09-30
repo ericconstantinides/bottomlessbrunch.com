@@ -16,9 +16,7 @@ const MapSearch = props => {
     placeholder: props.placeholder
   }
   const options = {
-    location: new google.maps.LatLng(usaMap.lat, usaMap.lng),
-    radius: 3500,
-    types: ['(cities)']
+    types: props.types
   }
   return (
     <PlacesAutocomplete

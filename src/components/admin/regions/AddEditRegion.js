@@ -186,6 +186,7 @@ class AddEditRegion extends Component {
               onChange={this.onChange}
               placeholder='Search for City...'
               handleSelect={this.handleSelect}
+              types={['(cities)']}
             />
             <div className='m-ratio m-ratio--1-1 AddEdit__map-container'>
               <div className='m-ratio__child'>
