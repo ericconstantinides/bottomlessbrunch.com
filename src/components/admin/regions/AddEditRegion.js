@@ -1,8 +1,12 @@
-/* global google */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Field, FormSection, reduxForm, change as fieldValue } from 'redux-form'
+import {
+  Field,
+  // FormSection,
+  reduxForm,
+  change as fieldValue
+} from 'redux-form'
 // I may need these later below: geocodeByAddress, getLatLng
 import { geocodeByPlaceId } from 'react-places-autocomplete'
 import MapSearch from '../../MapSearch'

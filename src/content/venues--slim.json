@@ -17,7 +17,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 20 }
+      { "name": "Bottomless Mimosa", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/MissionRockResortSF",
     "zomatoUrl": "https://www.zomato.com/san-francisco/mission-rock-resort-potrero",
@@ -43,9 +43,9 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosas", "price": 15 },
-      { "item": "Bottomless DIY Bloody Mary", "price": 15 },
-      { "item": "Buffet", "price": 20 }
+      { "name": "Bottomless Mimosas", "price": 15 },
+      { "name": "Bottomless DIY Bloody Mary", "price": 15 },
+      { "name": "Buffet", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/districtsf/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/district-soma",
@@ -71,7 +71,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 25 }
+      { "name": "Bottomless Mimosa", "price": 25 }
     ],
     "facebookUrl": "https://www.facebook.com/thekeystonesf/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/the-keystone-soma",
@@ -104,7 +104,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 20 }
+      { "name": "Bottomless Mimosa", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/farmerbrownsf/",
     "openTableUrl": "http://www.opentable.com/farmer-brown",
@@ -132,7 +132,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 10 }
+      { "name": "Bottomless Mimosa", "price": 10 }
     ],
     "facebookUrl": "https://www.facebook.com/ColibriSF/",
     "openTableUrl": "http://www.opentable.com/r/colibri-mexican-bistro-san-francisco",
@@ -159,7 +159,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 19 }
+      { "name": "Bottomless Mimosa", "price": 19 }
     ],
     "facebookUrl": "https://www.facebook.com/KitchenStorySF/",
     "openTableUrl": "http://www.opentable.com/kitchen-story",
@@ -186,7 +186,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Bellini", "price": 15 }
+      { "name": "Bottomless Bellini", "price": 15 }
     ],
     "facebookUrl": "https://www.facebook.com/1300Fillmore/?rf=342306949166549",
     "openTableUrl": "http://www.opentable.com/1300-on-fillmore",
@@ -213,7 +213,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 17 }
+      { "name": "Bottomless Mimosa", "price": 17 }
     ],
     "facebookUrl": "https://www.facebook.com/StockinTradeSF/",
     "openTableUrl": "http://www.opentable.com/r/stock-in-trade-san-francisco",
@@ -242,7 +242,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 18 }
+      { "name": "Bottomless Mimosa", "price": 18 }
     ],
     "facebookUrl": "https://www.facebook.com/hardknoxcafe/",
     "openTableUrl": "http://www.opentable.com/r/hard-knox-cafe-san-francisco",
@@ -268,7 +268,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 12 }
+      { "name": "Bottomless Mimosa", "price": 12 }
     ],
     "facebookUrl": "https://www.facebook.com/TheSycamore/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/sycamore-mission-district",
@@ -294,7 +294,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Food and Drink", "price": 55 }
+      { "name": "Bottomless Food and Drink", "price": 55 }
     ],
     "facebookUrl": "https://www.facebook.com/CliffHouseSF/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/cliff-house-outer-richmond",
@@ -320,8 +320,8 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Bloody Mary", "price": 18.75 },
-      { "item": "Bottomless Bloody Mary w/ Absolut Vodka", "price": 24.75 }
+      { "name": "Bottomless Bloody Mary", "price": 18.75 },
+      { "name": "Bottomless Bloody Mary w/ Absolut Vodka", "price": 24.75 }
     ],
     "facebookUrl": "https://www.facebook.com/thewillowssf/?rf=1611272505783614",
     "zomatoUrl": "https://www.zomato.com/san-francisco/the-willows-soma",
@@ -347,8 +347,8 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 20 },
-      { "item": "Bottomless Bloody Mary", "price": 20 }
+      { "name": "Bottomless Mimosa", "price": 20 },
+      { "name": "Bottomless Bloody Mary", "price": 20 }
     ],
     "facebookUrl": "https://www.facebook.com/bisoubistro/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/bisou-castro",
@@ -383,7 +383,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 22.99 }
+      { "name": "Bottomless Mimosa", "price": 22.99 }
     ],
     "facebookUrl": "https://www.facebook.com/pg/thepinkelephantsf",
     "zomatoUrl": "https://www.zomato.com/san-francisco/pink-elephant-soma",
@@ -410,7 +410,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 18 }
+      { "name": "Bottomless Mimosa", "price": 18 }
     ],
     "facebookUrl": "https://www.facebook.com/pg/BarrelHeadBrewhouse",
     "zomatoUrl": "https://www.zomato.com/san-francisco/barrel-head-western-addition",
@@ -571,7 +571,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 13.95 }
+      { "name": "Bottomless Mimosa", "price": 13.95 }
     ],
     "facebookUrl": "https://www.facebook.com/pg/flameseatery",
     "zomatoUrl": "https://www.zomato.com/san-jose/flames-eatery-and-bar-downtown"
@@ -652,7 +652,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 6 }
+      { "name": "Bottomless Mimosa", "price": 6 }
     ],
     "facebookUrl": "https://www.facebook.com/BillysBostonChowderHouse",
     "zomatoUrl": "https://www.zomato.com/los-gatos-ca/billys-boston-chowder-house-los-gatos",
@@ -734,8 +734,8 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 15 },
-      { "item": "Bottomless Bloody Mary", "price": 15 }
+      { "name": "Bottomless Mimosa", "price": 15 },
+      { "name": "Bottomless Bloody Mary", "price": 15 }
     ],
     "facebookUrl": "https://www.facebook.com/Straits-Restaurants-1667217176894999/",
     "zomatoUrl": "https://www.zomato.com/san-jose/straits-san-jose"
@@ -771,7 +771,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Calamansi Mimosas", "price": 15 }
+      { "name": "Bottomless Calamansi Mimosas", "price": 15 }
     ],
     "facebookUrl": "https://www.facebook.com/littleManilaCampbell.Ca/",
     "zomatoUrl": "https://www.zomato.com/san-jose/tapsilog-bistro-west-san-jose"
@@ -864,7 +864,7 @@
       }
     ],
     "funItems": [
-      { "item": "Bottomless Mimosa", "price": 10 }
+      { "name": "Bottomless Mimosa", "price": 10 }
     ],
     "facebookUrl": "https://www.facebook.com/santateresagolfclub/",
     "zomatoUrl": "https://www.zomato.com/san-jose/santa-teresa-golf-club-south-san-jose",

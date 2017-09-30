@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Field, FormSection, reduxForm, change as fieldValue } from 'redux-form'
+import {
+  Field,
+  FieldArray,
+  // FormSection,
+  reduxForm,
+  change as fieldValue
+} from 'redux-form'
 // I may need these later below: geocodeByAddress, getLatLng
 import { geocodeByPlaceId } from 'react-places-autocomplete'
 import MapSearch from '../../MapSearch'
@@ -24,7 +30,7 @@ class AddEditVenue extends Component {
     }
     this.onChange = address => this.setState({ address })
   }
-  rndrFld (field) {
+  renderField (field) {
     const { touched, error } = field.meta
     const fieldType = field.type ? field.type : 'text'
     const className = `AddEditVenue__form-group form-group ${touched && error ? 'has-danger' : ''}`
@@ -107,6 +113,44 @@ class AddEditVenue extends Component {
 
     // You can do other things with address string or placeId. For example, geocode :)
   }
+  renderFunItems = ({ fields, meta: { error, submitFailed } }) => (
+    <div className='AddEdit__full-across'>
+      <div>
+        <button
+          className='btn btn-sm btn-primary'
+          type='button'
+          onClick={() => fields.push({})}
+        >
+          Add Menu Item
+        </button>
+        {submitFailed && error && <span>{error}</span>}
+      </div>
+      <div className='XXXXAddEdit__field-wrapper'>
+        {fields.map((funItems, index) => (
+          <div className='AddEdit__field-wrapper--alt' key={index}>
+            <Field
+              name={`${funItems}.name`}
+              type='text'
+              component={this.renderField}
+              lbl='Name'
+            />
+            <Field
+              name={`${funItems}.price`}
+              type='number'
+              component={this.renderField}
+              lbl='Price'
+            />
+            <button
+              className='btn btn-sm btn-danger'
+              onClick={() => fields.remove(index)}
+            >
+              Delete Item
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
@@ -115,7 +159,7 @@ class AddEditVenue extends Component {
       thisForm.addEditVenue.values.name
       ? <h1>{thisForm.addEditVenue.values.name}</h1>
       : <h1>&nbsp;</h1>
-    console.log(this.props)
+    const renderField = this.renderField
     return (
       <div className='AddEdit AddEditVenue container'>
         {title}
@@ -128,48 +172,37 @@ class AddEditVenue extends Component {
             <div className='AddEdit__field-wrapper'>
               <RegionSelect />
               {/* region={this.props.ui.region} */}
-              <Field lbl='Venue Name' name='name' component={this.rndrFld} />
-              <Field lbl='Places ID' name='gpId' component={this.rndrFld} />
-              <Field lbl='Yelp ID' name='yId' component={this.rndrFld} />
-              <Field lbl='Zomato ID' name='zomatoId' component={this.rndrFld} />
+              <Field lbl='Venue Name' name='name' component={renderField} />
+              <Field lbl='Places ID' name='gpId' component={renderField} />
+              <Field lbl='Yelp ID' name='yId' component={renderField} />
+              <Field lbl='Zomato ID' name='zomatoId' component={renderField} />
               <Field
                 lbl='Neighborhood'
                 name='neighborhood'
-                component={this.rndrFld}
+                component={renderField}
               />
               <Field
                 lbl='Research'
                 name='research'
                 type='textarea'
-                component={this.rndrFld}
+                component={renderField}
               />
-              <Field lbl='Latitude' name='lat' component={this.rndrFld} />
-              <Field lbl='Longitude' name='lng' component={this.rndrFld} />
+              <Field lbl='Latitude' name='lat' component={renderField} />
+              <Field lbl='Longitude' name='lng' component={renderField} />
               <Field
                 lbl='Street'
                 name='address.street'
-                component={this.rndrFld}
+                component={renderField}
               />
-              <Field
-                lbl='City'
-                name='address.city'
-                component={this.rndrFld}
-              />
-              <Field
-                lbl='State'
-                name='address.state'
-                component={this.rndrFld}
-              />
+              <Field lbl='City' name='address.city' component={renderField} />
+              <Field lbl='State' name='address.state' component={renderField} />
               <Field
                 lbl='Zip Code'
                 name='address.zip'
-                component={this.rndrFld}
+                component={renderField}
               />
-              <Field
-                lbl='Phone #'
-                name='phone'
-                component={this.rndrFld}
-              />
+              <Field lbl='Phone #' name='phone' component={renderField} />
+              <FieldArray name='funItems' component={this.renderFunItems} />
             </div>
             <button
               type='submit'

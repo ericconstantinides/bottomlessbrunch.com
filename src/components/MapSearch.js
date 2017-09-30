@@ -1,7 +1,5 @@
-/* global google */
 import React from 'react'
 import PlacesAutocomplete from 'react-places-autocomplete'
-import { usaMap } from '../config'
 
 const MapSearch = props => {
   const AutocompleteItem = ({ formattedSuggestion }) => (
