@@ -21,12 +21,12 @@ import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
 
+const YELP_PREFIX = 'https://www.yelp.com/biz/'
+const YELP_SUFFIX = '?q=bottomless'
+
 const stateOptions = states.map(state => ({ label: state, value: state }))
-
 const timeOptions = times.map(time => ({ label: time, value: time }))
-
 const dayOptions = days.map(day => ({ label: day, value: day }))
-
 const timeCatOptions = timeCategories.map(cat => ({ label: cat, value: cat }))
 
 class AddEditVenue extends Component {
@@ -45,9 +45,16 @@ class AddEditVenue extends Component {
     const { touched, error } = field.meta
     const fieldType = field.type ? field.type : 'text'
     const className = `AddEditVenue__form-group form-group ${touched && error ? 'has-danger' : ''}`
+    let link = field.externalLink && field.input.value
+      ? <span> | <Link to={field.input.value}>link</Link></span>
+      : ''
+    if (field.input.name === 'yId' && field.input.value) {
+      const href = YELP_PREFIX + field.input.value + YELP_SUFFIX
+      link = <span> | <Link to={href}>link</Link></span>
+    }
     return (
       <div className={className}>
-        <label className='AddEdit__label'>{field.lbl}</label>
+        <label className='AddEdit__label'>{field.lbl} {link}</label>
         <input className='form-control' type={fieldType} {...field.input} />
         <small className='text-help'>
           {touched ? error : ''}
@@ -456,31 +463,41 @@ class AddEditVenue extends Component {
                     component={renderField}
                   />
                   <Field lbl='Phone #' name='phone' component={renderField} />
-                  <Field lbl='Website' name='website' component={renderField} />
+                  <Field
+                    lbl='Website'
+                    name='website'
+                    component={renderField}
+                    externalLink
+                  />
                   <Field
                     lbl='Facebook URL'
                     name='facebookUrl'
                     component={renderField}
+                    externalLink
                   />
                   <Field
                     lbl='OpenTable URL'
                     name='openTableUrl'
                     component={renderField}
+                    externalLink
                   />
                   <Field
                     lbl='Trip Advisor URL'
                     name='tripAdvisorUrl'
                     component={renderField}
+                    externalLink
                   />
                   <Field
                     lbl='Zagat URL'
                     name='zagatUrl'
                     component={renderField}
+                    externalLink
                   />
                   <Field
                     lbl='Zomato URL'
                     name='zomatoUrl'
                     component={renderField}
+                    externalLink
                   />
                 </div>
               </div>
