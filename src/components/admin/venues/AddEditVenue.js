@@ -114,20 +114,21 @@ class AddEditVenue extends Component {
     // You can do other things with address string or placeId. For example, geocode :)
   }
   renderFunTimes = ({ fields, meta: { error, submitFailed } }) => (
-    <div className='AddEdit__full-across'>
-      <div>
+    <div className='AddEdit__array'>
+      <header className='AddEdit__array-header'>
         <button
-          className='btn btn-sm btn-primary'
+          className='btn btn-sm btn-success'
           type='button'
           onClick={() => fields.push({})}
         >
-          Add Fun Time
+          <span className='embellish'>+</span>
         </button>
+        <h3 className='AddEdit__array-title'>Times</h3>
         {submitFailed && error && <span>{error}</span>}
-      </div>
-      <div className='XXXXAddEdit__field-wrapper'>
+      </header>
+      <div className='AddEdit__array-inner'>
         {fields.map((funTime, index) => (
-          <div className='AddEdit__field-wrapper--alt' key={index}>
+          <div className='AddEdit__field-wrapper-container' key={index}>
             <div className='AddEdit__field-wrapper'>
               <Field
                 name={`${funTime}.category`}
@@ -170,70 +171,71 @@ class AddEditVenue extends Component {
     </div>
   )
   renderFunItems = ({ fields, meta: { error, submitFailed } }) => (
-    <div className='AddEdit__full-across'>
-      <div>
+    <div className='AddEdit__array'>
+      <header className='AddEdit__array-header'>
         <button
-          className='btn btn-sm btn-primary'
+          className='btn btn-sm btn-success'
           type='button'
           onClick={() => fields.push({})}
         >
-          Add Menu Item
+          <span className='embellish'>+</span>
         </button>
+        <h3 className='AddEdit__array-title'>Menu Items</h3>
         {submitFailed && error && <span>{error}</span>}
-      </div>
-      <div className='XXXXAddEdit__field-wrapper'>
-        {fields.map((funItems, index) => (
-          <div className='AddEdit__field-wrapper--alt' key={index}>
-            <Field
-              name={`${funItems}.name`}
-              type='text'
-              component={this.renderField}
-              lbl='Name'
-            />
-            <Field
-              name={`${funItems}.price`}
-              type='number'
-              component={this.renderField}
-              lbl='Price'
-            />
-            <button
-              className='btn btn-sm btn-danger'
-              onClick={() => fields.remove(index)}
-            >
-            ✖
-            </button>
+      </header>
+      <div className='AddEdit__array-inner'>
+        {fields.map((funItem, index) => (
+          <div className='AddEdit__field-wrapper-container' key={index}>
+            <div className='AddEdit__field-wrapper'>
+              <Field
+                name={`${funItem}.name`}
+                type='text'
+                component={this.renderField}
+                lbl='Name'
+              />
+              <Field
+                name={`${funItem}.price`}
+                type='number'
+                component={this.renderField}
+                lbl='Price'
+              />
+              <button
+                className='btn btn-sm btn-danger'
+                onClick={() => fields.remove(index)}
+              >
+              ✖
+              </button>
+            </div>
           </div>
         ))}
       </div>
     </div>
   )
   renderResearch = ({ fields, meta: { error, submitFailed } }) => (
-    <div className='AddEdit__full-across'>
-      <div>
+    <div className='AddEdit__array'>
+      <header className='AddEdit__array-header'>
         <button
-          className='btn btn-sm btn-primary'
+          className='btn btn-sm btn-success'
           type='button'
           onClick={() => fields.push({})}
         >
-          Add Research Item
+          <span className='embellish'>+</span>
         </button>
+        <h3 className='AddEdit__array-title'>Research</h3>
         {submitFailed && error && <span>{error}</span>}
-      </div>
-      <div className='XXXXAddEdit__field-wrapper'>
-        {fields.map((research, i) => (
-          <div
-            className='AddEdit__field-wrapper--alt AddEdit__field-wrapper--alt--wide'
-            key={i}
-          >
-            <div>
+      </header>
+      <div className='AddEdit__array-inner'>
+        {fields.map((researchItem, index) => (
+          <div className='AddEdit__field-wrapper-container' key={index}>
+            <div className='AddEdit__field-wrapper'>
               <Field
-                name={`${research}.url`}
+                name={`${researchItem}.url`}
                 type='text'
                 component={this.renderField}
                 lbl='URL'
               />
               <Field
-                name={`${research}.remarks`}
+                name={`${researchItem}.remarks`}
                 type='type'
                 component={this.renderField}
                 lbl='Remarks'
@@ -241,8 +243,9 @@ class AddEditVenue extends Component {
             </div>
             <button
               className='btn btn-sm btn-danger'
-              onClick={() => fields.remove(i)}
-            >✖</button>
+              onClick={() => fields.remove(index)}
+            >✖              
+            </button>
           </div>
         ))}
       </div>
