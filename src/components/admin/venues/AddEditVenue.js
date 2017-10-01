@@ -154,12 +154,14 @@ class AddEditVenue extends Component {
                 component={this.renderField}
                 lbl='Ends'
               />
-              <Field
-                name={`${funTime}.remarks`}
-                type='text'
-                component={this.renderField}
-                lbl='Remarks'
-              />
+              <div className='flex-basis-66p'>
+                <Field
+                  name={`${funTime}.remarks`}
+                  type='text'
+                  component={this.renderField}
+                  lbl='Remarks'
+                />
+              </div>
             </div>
             <button
               className='btn btn-sm btn-danger'
@@ -187,18 +189,22 @@ class AddEditVenue extends Component {
         {fields.map((funItem, index) => (
           <div className='AddEdit__field-wrapper-container' key={index}>
             <div className='AddEdit__field-wrapper'>
-              <Field
-                name={`${funItem}.name`}
-                type='text'
-                component={this.renderField}
-                lbl='Name'
-              />
-              <Field
-                name={`${funItem}.price`}
-                type='number'
-                component={this.renderField}
-                lbl='Price'
-              />
+              <div className='flex-basis-66p'>
+                <Field
+                  name={`${funItem}.name`}
+                  type='text'
+                  component={this.renderField}
+                  lbl='Name'
+                />
+              </div>
+              <div className='flex-basis-33p'>
+                <Field
+                  name={`${funItem}.price`}
+                  type='number'
+                  component={this.renderField}
+                  lbl='Price'
+                />
+              </div>
               <button
                 className='btn btn-sm btn-danger'
                 onClick={() => fields.remove(index)}
@@ -228,18 +234,22 @@ class AddEditVenue extends Component {
         {fields.map((researchItem, index) => (
           <div className='AddEdit__field-wrapper-container' key={index}>
             <div className='AddEdit__field-wrapper'>
-              <Field
-                name={`${researchItem}.url`}
-                type='text'
-                component={this.renderField}
-                lbl='URL'
-              />
-              <Field
-                name={`${researchItem}.remarks`}
-                type='type'
-                component={this.renderField}
-                lbl='Remarks'
-              />
+              <div className='flex-basis-50p'>
+                <Field
+                  name={`${researchItem}.url`}
+                  type='text'
+                  component={this.renderField}
+                  lbl='URL'
+                />
+              </div>
+              <div className='flex-basis-50p'>
+                <Field
+                  name={`${researchItem}.remarks`}
+                  type='type'
+                  component={this.renderField}
+                  lbl='Remarks'
+                />
+              </div>
             </div>
             <button
               className='btn btn-sm btn-danger'

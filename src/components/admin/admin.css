@@ -8,6 +8,9 @@
 .AddEdit {
   padding-top: 1em;
 }
+.AddEdit .form-group {
+  margin-bottom: 1em;
+}
 .AddEdit__form {
   display: flex;
   line-height: 1.2;
@@ -102,6 +105,7 @@
   border-top: 1px solid #ccc;
   margin-bottom: -1em;
   padding: 0.5em;
+  padding-top: 1.125em;
 }
 .AddEdit__field-wrapper-container:first-child {
   border-top: none;
@@ -138,3 +142,7 @@
   font-size: 150%;
   line-height: 0.8125;
 }
+.flex-basis-25p { flex-basis: 25%; }
+.flex-basis-33p { flex-basis: 33.333%; }
+.flex-basis-50p { flex-basis: 50%; }
+.flex-basis-66p { flex-basis: 66.666%; }
