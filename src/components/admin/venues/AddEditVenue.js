@@ -46,11 +46,11 @@ class AddEditVenue extends Component {
     const fieldType = field.type ? field.type : 'text'
     const className = `AddEditVenue__form-group form-group ${touched && error ? 'has-danger' : ''}`
     let link = field.externalLink && field.input.value
-      ? <span> | <Link to={field.input.value}>link</Link></span>
+      ? <span> | <Link target='_blank' to={field.input.value}>link</Link></span>
       : ''
     if (field.input.name === 'yId' && field.input.value) {
       const href = YELP_PREFIX + field.input.value + YELP_SUFFIX
-      link = <span> | <Link to={href}>link</Link></span>
+      link = <span> | <Link target='_blank' to={href}>link</Link></span>
     }
     return (
       <div className={className}>
