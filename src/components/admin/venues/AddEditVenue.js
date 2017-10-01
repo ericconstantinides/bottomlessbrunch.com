@@ -17,6 +17,8 @@ import { addVenue, editVenue } from '../../../actions'
 import { usaMap, DATE_LONG } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 import Marker from '../../Marker'
+import enumerables from '../../../enumerables'
+console.log(enumerables)
 
 class AddEditVenue extends Component {
   constructor (props) {
@@ -146,11 +148,18 @@ class AddEditVenue extends Component {
                   component={this.renderField}
                   lbl='Days'
                 />
-                <Field
-                  name={`${funTime}.category`}
-                  component={this.renderField}
-                  lbl='Category'
-                />
+                <div>
+                  <label className='AddEdit__label'>
+                    Category
+                  </label>
+                  <Field name={`${funTime}.category`} component="select">
+                    <option />
+                    <option value='Happy Hour'>Happy Hour</option>
+                    <option value='Reverse Happy Hour'>Reverse Happy Hour</option>
+                    <option value='Bottomless Brunch'>Bottomless Brunch</option>
+                    <option value='Other'>Other</option>
+                  </Field>
+                </div>
                 <div className='flex-basis-66p'>
                   <Field
                     name={`${funTime}.remarks`}
@@ -341,10 +350,6 @@ class AddEditVenue extends Component {
         >
           <div className='AddEdit__col-1'>
             <div className='AddEdit__field-wrapper'>
-              <FieldArray name='funTimes' component={this.renderFunTimes} />
-              <FieldArray name='funItems' component={this.renderFunItems} />
-              <FieldArray name='images' component={this.renderImages} />
-              <FieldArray name='research' component={this.renderResearch} />
               <div className='AddEditVenue__form-group form-group checkbox-wrapper'>
                 <label className='AddEdit__label' htmlFor='unpublish'>
                   Unpublish Venue
@@ -363,7 +368,7 @@ class AddEditVenue extends Component {
               className='btn btn-sm btn-primary'
               disabled={pristine || submitting}
             >
-              Submit
+              Save Venue
             </button>
             <Link to='/admin/venues' className='btn btn-sm btn-danger'>
               Cancel

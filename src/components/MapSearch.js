@@ -20,7 +20,7 @@ const MapSearch = props => {
     <PlacesAutocomplete
       inputProps={inputProps}
       autocompleteItem={AutocompleteItem}
-      styles={{ root: { zIndex: 999999999 } }}
+      styles={{ root: { zIndex: 1 } }}
       onSelect={props.handleSelect}
       options={options}
       googleLogo={false}
