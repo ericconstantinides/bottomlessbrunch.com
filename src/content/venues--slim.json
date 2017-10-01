@@ -144,7 +144,6 @@
     "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d614164-Reviews-Colibri_Mexican_Bistro-San_Francisco_California.html",
     "zagatUrl": "http://www.zagat.com/r/colibri-mexican-bistro-san-francisco",
     "zomatoUrl": "https://www.zomato.com/san-francisco/colibri-mexican-bistro-union-square"
-    }
   },
   {
     "name": "Kitchen Story",
@@ -199,7 +198,7 @@
     "openTableUrl": "http://www.opentable.com/1300-on-fillmore",
     "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d776388-Reviews-1300_Fillmore-San_Francisco_California.html",
     "zagatUrl": "http://www.zagat.com/r/1300-on-fillmore-san-francisco",
-    "zomatoUrl": "https://www.zomato.com/san-francisco/1300-on-fillmore-western-addition",
+    "zomatoUrl": "https://www.zomato.com/san-francisco/1300-on-fillmore-western-addition"
   },
   {
     "name": "Stock in Trade",
@@ -301,7 +300,7 @@
         "days": [
           "Sunday"
         ],
-        "remarks": "Must make reservations for 10am, noon, or 2pm.",
+        "remarks": "Must make reservations for 10am, noon, or 2pm."
       }
     ],
     "funItems": [
@@ -366,7 +365,7 @@
     "facebookUrl": "https://www.facebook.com/bisoubistro/",
     "zomatoUrl": "https://www.zomato.com/san-francisco/bisou-castro",
     "research": [
-      { "url": "http://www.bisousf.com/menu/" }
+      { "url": "http://www.bisousf.com/menu/" },
       { "url": "http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html" }
     ]
   },
@@ -402,7 +401,7 @@
     "facebookUrl": "https://www.facebook.com/pg/thepinkelephantsf",
     "zomatoUrl": "https://www.zomato.com/san-francisco/pink-elephant-soma",
     "research": [
-      { "url": "http://www.thepinkelephantsf.wixsite.com/mysite" }
+      { "url": "http://www.thepinkelephantsf.wixsite.com/mysite" },
       { "url": "http://www.7x7.com/where-to-sip-bottomless-mimosas-in-san-francisco-1787276711.html" }
     ]
   },
@@ -532,7 +531,6 @@
       }
     ],
     "facebookUrl": "https://www.facebook.com/yjonesy1021/"
-    }
   },
   {
     "name": "Flames Eatery & Bar",
