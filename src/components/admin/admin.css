@@ -6,7 +6,7 @@
   margin-bottom: 0;
 }
 .AddEdit {
-  padding-top: 1em;
+  padding-top: 0.5em;
 }
 .AddEdit .form-group {
   display: flex;
@@ -33,15 +33,9 @@
 .AddEdit__col-right {
   width: 100%;
 }
-/* AddEditVenue */
-.AddEdit__col-1 {
-  flex: 1 1 50%;
-  order: 2;
-}  
+.AddEdit__col-1,
 .AddEdit__col-2 {
   flex: 1 1 50%;
-  min-width: 250px;
-  order: 1;
 }
 .AddEdit__col-3 {
   flex: 0 0 150px;

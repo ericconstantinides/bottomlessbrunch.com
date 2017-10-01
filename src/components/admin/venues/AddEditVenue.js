@@ -12,6 +12,7 @@ import {
 // I may need these later below: geocodeByAddress, getLatLng
 import { geocodeByPlaceId } from 'react-places-autocomplete'
 import MapSearch from '../../MapSearch'
+import SelectInput from '../../SelectInput'
 // import RegionSelect from '../../RegionSelect'
 import GoogleMapReact from 'google-map-react'
 import { addVenue, editVenue } from '../../../actions'
@@ -19,6 +20,22 @@ import { usaMap, DATE_LONG } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
+
+const stateOptions = states.map((state) => (
+  {label: state, value: state}
+))
+
+const timeOptions = times.map((time) => (
+  {label: time, value: time}
+))
+
+const dayOptions = days.map((day) => (
+  {label: day, value: day}
+))
+
+const timeCatOptions = timeCategories.map((cat) => (
+  {label: cat, value: cat}
+))
 
 class AddEditVenue extends Component {
   constructor (props) {
@@ -135,39 +152,36 @@ class AddEditVenue extends Component {
               <div className='AddEdit__field-wrapper'>
                 <div className='AddEditVenue__form-group form-group'>
                   <label className='AddEdit__label'>Start Time</label>
-                  <Field name={`${funTime}.startTime`} component="select">
-                    <option />
-                    {times.map((time, i) => 
-                      <option key={i} value={time}>{time}</option>
-                    )}
-                  </Field>
+                  <Field
+                    name={`${funTime}.startTime`}
+                    options={timeOptions}
+                    component={SelectInput}
+                  />
                 </div>
                 <div className='AddEditVenue__form-group form-group'>
                   <label className='AddEdit__label'>End Time</label>
-                  <Field name={`${funTime}.endTime`} component="select">
-                    <option />
-                    {times.map((time, i) => 
-                      <option key={i} value={time}>{time}</option>
-                    )}
-                  </Field>
+                  <Field
+                    name={`${funTime}.endTime`}
+                    options={timeOptions}
+                    component={SelectInput}
+                  />
                 </div>
                 <div className='AddEditVenue__form-group form-group'>
                   <label className='AddEdit__label'>Days</label>
-                  <Field name={`${funTime}.days`} component="select">
-                    <option />
-                    {days.map((day, i) => 
-                      <option key={i} value={day}>{day}</option>
-                    )}
-                  </Field>
+                  <Field
+                    name={`${funTime}.days`}
+                    options={dayOptions}
+                    component={SelectInput}
+                    multi
+                  />
                 </div>
                 <div className='AddEditVenue__form-group form-group'>
                   <label className='AddEdit__label'>Category</label>
-                  <Field name={`${funTime}.category`} component="select">
-                    <option />
-                    {timeCategories.map((cat, i) => 
-                      <option key={i} value={cat}>{cat}</option>
-                    )}
-                  </Field>
+                  <Field
+                    name={`${funTime}.category`}
+                    options={timeCatOptions}
+                    component={SelectInput}
+                  />
                 </div>
                 <div className='flex-basis-66p'>
                   <Field
@@ -346,49 +360,18 @@ class AddEditVenue extends Component {
       })
       yData.unshift(<h3 key='yDataTitle'>yData</h3>)
     }
-    console.log(this.props)
+    const regionOptions = this.props.regions ? _.map(this.props.regions,(rg => (
+      {label: rg.name, value: rg._id}
+    ))) : ''
     return (
       <div className='AddEdit AddEditVenue site-container'>
-        <Link to='/admin/venues'>
-        « Back to Venues
-        </Link>
-        {title}
-        {/* the handleSubmit is from redux-form */}
+        <Link to='/admin/venues'>« Back to Venues</Link>
         <form
           className='AddEdit__form'
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
         >
           <div className='AddEdit__col-1'>
-            <div className='AddEdit__field-wrapper'>
-              <FieldArray name='funTimes' component={this.renderFunTimes} />
-              <FieldArray name='funItems' component={this.renderFunItems} />
-              <FieldArray name='images' component={this.renderImages} />
-              <FieldArray name='research' component={this.renderResearch} />
-              <div className='checkbox-wrapper'>
-                <label className='AddEdit__label' htmlFor='unpublish'>
-                  Unpublish Venue
-                </label>
-                <Field
-                  name='unpublish'
-                  id='unpublish'
-                  component='input'
-                  type='checkbox'
-                  className='form-control'
-                />
-              </div>
-            </div>
-            <button
-              type='submit'
-              className='btn btn-sm btn-primary'
-              disabled={pristine || submitting}
-            >
-              Save Venue
-            </button>
-            <Link to='/admin/venues' className='btn btn-sm btn-danger'>
-              Cancel
-            </Link>
-          </div>
-          <div className='AddEdit__col-2'>
+            {title}
             <MapSearch
               address={this.state.address}
               onChange={this.onChange}
@@ -431,12 +414,11 @@ class AddEditVenue extends Component {
                 <div className='AddEdit__field-wrapper'>
                   <div className='AddEditVenue__form-group form-group'>
                     <label className='AddEdit__label'>Region</label>
-                    <Field name='regionId' component="select">
-                      <option />
-                      {this.props.regions && _.map(this.props.regions,(rg => (
-                        <option key={rg._id} value={rg._id}>{rg.name}</option>
-                      )))}
-                    </Field>
+                    <Field
+                      name='regionId'
+                      options={regionOptions}
+                      component={SelectInput}
+                    />
                   </div>
                   <Field lbl='Venue Name' name='name' component={renderField} />
                   <Field
@@ -465,12 +447,12 @@ class AddEditVenue extends Component {
                   />
                   <div className='AddEditVenue__form-group form-group'>
                     <label className='AddEdit__label'>State</label>
-                    <Field name='address.state' component="select">
-                      <option />
-                      {states.map((state, i) => 
-                        <option key={i} value={state}>{state}</option>
-                      )}
-                    </Field>
+                    <Field
+                      name='address.state'
+                      options={stateOptions}
+                      component={SelectInput}
+                      clearable={false}
+                    />
                   </div>
                   <Field
                     lbl='Zip Code'
@@ -507,6 +489,36 @@ class AddEditVenue extends Component {
                 </div>
               </div>
             </div>
+          </div>
+          <div className='AddEdit__col-2'>
+            <div className='AddEdit__field-wrapper'>
+              <FieldArray name='funTimes' component={this.renderFunTimes} />
+              <FieldArray name='funItems' component={this.renderFunItems} />
+              <FieldArray name='images' component={this.renderImages} />
+              <FieldArray name='research' component={this.renderResearch} />
+              <div className='checkbox-wrapper'>
+                <label className='AddEdit__label' htmlFor='unpublish'>
+                  Unpublish Venue
+                </label>
+                <Field
+                  name='unpublish'
+                  id='unpublish'
+                  component='input'
+                  type='checkbox'
+                  className='form-control'
+                />
+              </div>
+            </div>
+            <button
+              type='submit'
+              className='btn btn-sm btn-primary'
+              disabled={pristine || submitting}
+            >
+              Save Venue
+            </button>
+            <Link to='/admin/venues' className='btn btn-sm btn-danger'>
+              Cancel
+            </Link>
           </div>
           <div className='AddEdit__col-3'>
             <aside className='AddEdit__yData'>{yData}</aside>
