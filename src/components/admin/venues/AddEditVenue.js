@@ -126,45 +126,47 @@ class AddEditVenue extends Component {
         <h3 className='AddEdit__array-title'>Times</h3>
         {submitFailed && error && <span>{error}</span>}
       </header>
-      <div className='AddEdit__array-inner'>
-        {fields.map((funTime, index) => (
-          <div className='AddEdit__field-wrapper-container' key={index}>
-            <div className='AddEdit__field-wrapper'>
-              <Field
-                name={`${funTime}.category`}
-                component={this.renderField}
-                lbl='Category'
-              />
-              <Field
-                name={`${funTime}.days`}
-                component={this.renderField}
-                lbl='Days'
-              />
-              <Field
-                name={`${funTime}.startTime`}
-                component={this.renderField}
-                lbl='Starts'
-              />
-              <Field
-                name={`${funTime}.endTime`}
-                component={this.renderField}
-                lbl='Ends'
-              />
-              <div className='flex-basis-66p'>
+      {fields.length > 0 &&
+        <div className='AddEdit__array-inner'>
+          {fields.map((funTime, index) => (
+            <div className='AddEdit__field-wrapper-container' key={index}>
+              <div className='AddEdit__field-wrapper'>
                 <Field
-                  name={`${funTime}.remarks`}
+                  name={`${funTime}.startTime`}
                   component={this.renderField}
-                  lbl='Remarks'
+                  lbl='Start Time'
                 />
+                <Field
+                  name={`${funTime}.endTime`}
+                  component={this.renderField}
+                  lbl='End Time'
+                />
+                <Field
+                  name={`${funTime}.days`}
+                  component={this.renderField}
+                  lbl='Days'
+                />
+                <Field
+                  name={`${funTime}.category`}
+                  component={this.renderField}
+                  lbl='Category'
+                />
+                <div className='flex-basis-66p'>
+                  <Field
+                    name={`${funTime}.remarks`}
+                    component={this.renderField}
+                    lbl='Remarks'
+                  />
+                </div>
               </div>
+              <button
+                className='btn btn-sm btn-danger'
+                onClick={() => fields.remove(index)}
+              >✖</button>
             </div>
-            <button
-              className='btn btn-sm btn-danger'
-              onClick={() => fields.remove(index)}
-            >✖</button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      }
     </div>
   )
   renderFunItems = ({ fields, meta: { error, submitFailed } }) => (
@@ -180,35 +182,37 @@ class AddEditVenue extends Component {
         <h3 className='AddEdit__array-title'>Menu Items</h3>
         {submitFailed && error && <span>{error}</span>}
       </header>
-      <div className='AddEdit__array-inner'>
-        {fields.map((funItem, index) => (
-          <div className='AddEdit__field-wrapper-container' key={index}>
-            <div className='AddEdit__field-wrapper'>
-              <div className='flex-basis-66p'>
-                <Field
-                  name={`${funItem}.name`}
-                  component={this.renderField}
-                  lbl='Name'
-                />
+      {fields.length > 0 &&
+        <div className='AddEdit__array-inner'>
+          {fields.map((funItem, index) => (
+            <div className='AddEdit__field-wrapper-container' key={index}>
+              <div className='AddEdit__field-wrapper'>
+                <div className='flex-basis-66p'>
+                  <Field
+                    name={`${funItem}.name`}
+                    component={this.renderField}
+                    lbl='Name'
+                  />
+                </div>
+                <div className='flex-basis-33p'>
+                  <Field
+                    name={`${funItem}.price`}
+                    type='number'
+                    component={this.renderField}
+                    lbl='Price ($)'
+                  />
+                </div>
+                <button
+                  className='btn btn-sm btn-danger'
+                  onClick={() => fields.remove(index)}
+                >
+                ✖
+                </button>
               </div>
-              <div className='flex-basis-33p'>
-                <Field
-                  name={`${funItem}.price`}
-                  type='number'
-                  component={this.renderField}
-                  lbl='Price'
-                />
-              </div>
-              <button
-                className='btn btn-sm btn-danger'
-                onClick={() => fields.remove(index)}
-              >
-              ✖
-              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      }
     </div>
   )
   renderImages = ({ fields, meta: { error, submitFailed } }) => (
@@ -224,34 +228,36 @@ class AddEditVenue extends Component {
         <h3 className='AddEdit__array-title'>Images</h3>
         {submitFailed && error && <span>{error}</span>}
       </header>
-      <div className='AddEdit__array-inner'>
-        {fields.map((image, index) => (
-          <div className='AddEdit__field-wrapper-container' key={index}>
-            <div className='AddEdit__field-wrapper'>
-              <div className='flex-basis-66p'>
-                <Field
-                  name={`${image}.fileName`}
-                  component={this.renderField}
-                  lbl='Filename'
-                />
+      {fields.length > 0 &&
+        <div className='AddEdit__array-inner'>
+          {fields.map((image, index) => (
+            <div className='AddEdit__field-wrapper-container' key={index}>
+              <div className='AddEdit__field-wrapper'>
+                <div className='flex-basis-66p'>
+                  <Field
+                    name={`${image}.fileName`}
+                    component={this.renderField}
+                    lbl='Filename'
+                  />
+                </div>
+                <div className='flex-basis-33p'>
+                  <Field
+                    name={`${image}.category`}
+                    component={this.renderField}
+                    lbl='Category'
+                  />
+                </div>
+                <button
+                  className='btn btn-sm btn-danger'
+                  onClick={() => fields.remove(index)}
+                >
+                ✖
+                </button>
               </div>
-              <div className='flex-basis-33p'>
-                <Field
-                  name={`${image}.category`}
-                  component={this.renderField}
-                  lbl='Category'
-                />
-              </div>
-              <button
-                className='btn btn-sm btn-danger'
-                onClick={() => fields.remove(index)}
-              >
-              ✖
-              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      }
     </div>
   )
   renderResearch = ({ fields, meta: { error, submitFailed } }) => (
@@ -267,35 +273,37 @@ class AddEditVenue extends Component {
         <h3 className='AddEdit__array-title'>Research</h3>
         {submitFailed && error && <span>{error}</span>}
       </header>
-      <div className='AddEdit__array-inner'>
-        {fields.map((researchItem, index) => (
-          <div className='AddEdit__field-wrapper-container' key={index}>
-            <div className='AddEdit__field-wrapper'>
-              <div className='flex-basis-50p'>
-                <Field
-                  name={`${researchItem}.url`}
-                  type='text'
-                  component={this.renderField}
-                  lbl='URL'
-                />
+      {fields.length > 0 &&
+        <div className='AddEdit__array-inner'>
+          {fields.map((researchItem, index) => (
+            <div className='AddEdit__field-wrapper-container' key={index}>
+              <div className='AddEdit__field-wrapper'>
+                <div className='flex-basis-50p'>
+                  <Field
+                    name={`${researchItem}.url`}
+                    type='text'
+                    component={this.renderField}
+                    lbl='URL'
+                  />
+                </div>
+                <div className='flex-basis-50p'>
+                  <Field
+                    name={`${researchItem}.remarks`}
+                    type='type'
+                    component={this.renderField}
+                    lbl='Remarks'
+                  />
+                </div>
               </div>
-              <div className='flex-basis-50p'>
-                <Field
-                  name={`${researchItem}.remarks`}
-                  type='type'
-                  component={this.renderField}
-                  lbl='Remarks'
-                />
-              </div>
+              <button
+                className='btn btn-sm btn-danger'
+                onClick={() => fields.remove(index)}
+              >✖              
+              </button>
             </div>
-            <button
-              className='btn btn-sm btn-danger'
-              onClick={() => fields.remove(index)}
-            >✖              
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      }
     </div>
   )
   render () {
