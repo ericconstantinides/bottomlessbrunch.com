@@ -1,11 +1,11 @@
 [
   {
     "name": "Mission Rock Resort",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJryemAsd_j4AR60urAIzz6Dc",
     "yId": "mission-rock-resort-san-francisco-2",
-    "images": [{ "fileName": "san-francisco__mission-rock-resort-2.jpg", "type": "patio" }],
+    "images": [{ "fileName": "san-francisco__mission-rock-resort-2.jpg", "category": "patio" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -28,11 +28,11 @@
   },
   {
     "name": "District",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJJTVhTtZ_j4ARxpngmeH7DTc",
     "yId": "district-san-francisco-3",
-    "images": [{ "fileName": "san-francisco__district.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__district.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -57,11 +57,11 @@
   },
   {
     "name": "The Keystone Social House",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJRcqFN4aAhYARSvdFY6nNytM",
     "yId": "the-keystone-san-francisco-2",
-    "images": [{ "fileName": "san-francisco__the-keystone.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__the-keystone.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -84,11 +84,11 @@
   },
   {
     "name": "farmerbrown",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJv-klmoWAhYAReflECbnTyRE",
     "yId": "farmerbrown-san-francisco-2",
-    "images": [{ "fileName": "san-francisco__farmerbrown.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__farmerbrown.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -120,11 +120,11 @@
   },
   {
     "name": "Colibri Mexican Bistro",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJ816kUY6AhYARYWi1Uf1JnCI",
     "yId": "colibri-mexican-bistro-san-francisco",
-    "images": [{ "fileName": "san-francisco__colibri-mexican-bistro.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__colibri-mexican-bistro.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -148,7 +148,7 @@
   },
   {
     "name": "Kitchen Story",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJ_wloDhx-j4AR636PeyqpwKY",
     "yId": "kitchen-story-san-francisco",
@@ -175,11 +175,11 @@
   },
   {
     "name": "1300 on Fillmore",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJZbMizLuAhYARKiMObMwPGfc",
     "yId": "1300-on-fillmore-san-francisco",
-    "images": [{ "fileName": "san-francisco__1300-on-fillmore.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__1300-on-fillmore.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -203,11 +203,11 @@
   },
   {
     "name": "Stock in Trade",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJfVUaqdCAhYAR-sBJn3ZxSu8",
     "yId": "stock-in-trade-san-francisco",
-    "images": [{ "fileName": "san-francisco__stock-in-trade.jpg", "type": "outside" }],
+    "images": [{ "fileName": "san-francisco__stock-in-trade.jpg", "category": "outside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -231,11 +231,11 @@
   },
   {
     "name": "Hard Knox Cafe",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJ9cCh2gWHhYARlkhcPaOvZS0",
     "yId": "hard-knox-cafe-san-francisco-2",
-    "images": [{ "fileName": "san-francisco__hard-knox-cafe.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__hard-knox-cafe.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -261,11 +261,11 @@
   },
   {
     "name": "The Sycamore",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJ0WvRSyN-j4ARpvLPuZyI3l4",
     "yId": "the-sycamore-san-francisco",
-    "images": [{ "fileName": "san-francisco__the-sycamore.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__the-sycamore.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -288,11 +288,11 @@
   },
   {
     "name": "Cliff House Terrace Room",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJ7dtznbWHhYAR81fEwzi58F4",
     "yId": "cliff-house-terrace-room-champagne-brunch-san-francisco",
-    "images": [{ "fileName": "san-francisco__cliff-house.jpg", "type": "outside" }],
+    "images": [{ "fileName": "san-francisco__cliff-house.jpg", "category": "outside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -315,11 +315,11 @@
   },
   {
     "name": "The Willows",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJFw3ArCd-j4AR5T85mhj6N5Y",
     "yId": "the-willows-san-francisco",
-    "images": [{ "fileName": "san-francisco__the-willows.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__the-willows.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -343,11 +343,11 @@
   },
   {
     "name": "Bisou Bistronomy",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJPc_WpRx-j4AR5xmnSgDgB0A",
     "yId": "bisou-bistronomy-san-francisco",
-    "images": [{ "fileName": "san-francisco__bisou-bistronomy.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__bisou-bistronomy.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -372,11 +372,11 @@
   },
   {
     "name": "The Pink Elephant Alibi",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJRwAoRH2AhYAR-AlsWfLuTLw",
     "yId": "the-pink-elephant-alibi-san-francisco-3",
-    "images": [{ "fileName": "san-francisco__the-pink-elephant-alibi.jpg", "type": "bar" }],
+    "images": [{ "fileName": "san-francisco__the-pink-elephant-alibi.jpg", "category": "bar" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -408,11 +408,11 @@
   },
   {
     "name": "Barrel Head Brewhouse",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJg4a117KAhYARfFvbnNINjZY",
     "yId": "barrel-head-brewhouse-san-francisco-5",
-    "images": [{ "fileName": "san-francisco__barrel-head-brewhouse.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__barrel-head-brewhouse.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -435,11 +435,11 @@
   },
   {
     "name": "Cafe Mystique",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJPbV6qhx-j4ARJcmiQMJhbaM",
     "yId": "cafe-mystique-san-francisco",
-    "images": [{ "fileName": "san-francisco__cafe-mystique.jpg", "type": "inside" }],
+    "images": [{ "fileName": "san-francisco__cafe-mystique.jpg", "category": "inside" }],
     "funTimes": [
       {
         "category": "Bottomless Brunch",
@@ -459,7 +459,7 @@
   },
   {
     "name": "The Table",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJF7uF3VczjoARsQacfJJdX-A",
     "yId": "the-table-san-jose",
@@ -513,7 +513,7 @@
   },
   {
     "name": "1621 Bistro",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJM9j_9CPMj4ARi200r9nA3CY",
     "yId": "1621-bistro-san-jose-3",
@@ -536,7 +536,7 @@
   },
   {
     "name": "Flames Eatery & Bar",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJg1bWkZXLj4ARJbjjVd0GN-E",
     "yId": "flames-eatery-and-bar-san-jose",
@@ -597,12 +597,12 @@
   },
   {
     "name": "4th St. Pizza Co",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJFxZAVbzMj4ARfiq-tLVzOn4",
     "yId": "4th-st-pizza-san-jose",
     "images": [
-      { "fileName": "san-jose__4th-st-pizza-co.jpg", "type": "logo" }
+      { "fileName": "san-jose__4th-st-pizza-co.jpg", "category": "logo" }
     ],
     "funTimes": [
       {
@@ -639,7 +639,7 @@
   },
   {
     "name": "Billy’s Boston Chowder House",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJ4wI3t-Q1joAR3lm5qYtF_8A",
     "yId": "billys-boston-chowder-house-los-gatos",
@@ -683,7 +683,7 @@
   },
   {
     "name": "St. Stephen’s Green",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJsfMnDjS3j4ARoUdVDMJyqMU",
     "yId": "st-stephens-green-mountain-view-3",
@@ -718,7 +718,7 @@
   },
   {
     "name": "Straits Restaurant",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJX76EBeDKj4ARDMTabmSeUR8",
     "yId": "straits-santana-row-san-jose",
@@ -765,7 +765,7 @@
   },
   {
     "name": "Tapsilog Bistro",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJZQLbjTM1joARRaFhWYLkpPM",
     "yId": "tapsilog-bistro-campbell",
@@ -802,7 +802,7 @@
   },
   {
     "name": "Chacho’s Restaurant",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJe07Zf7zMj4ARzhZdvFR9n-w",
     "yId": "chachos-restaurant-san-jose-2",
@@ -825,7 +825,7 @@
   },
   {
     "name": "SP2 Communal Bar + Restaurant",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJawrlN6LMj4AR-Bhapw3p8Qs",
     "yId": "sp2-communal-bar-restaurant-san-jose",
@@ -861,7 +861,7 @@
   },
   {
     "name": "Santa Teresa Golf Club",
-    "active": true,
+    "unpublish": false,
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJsTITnrsvjoARDHwPjmn3vEM",
     "yId": "santa-teresa-golf-club-san-jose",

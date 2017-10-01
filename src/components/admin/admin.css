@@ -15,6 +15,10 @@
   display: flex;
   line-height: 1.2;
   font-size: 0.8125em;
+  margin-left: -1em;
+}
+.AddEdit__form > * {
+  margin-left: 1em;
 }
 .AddEdit__form input[type="text"],
 .AddEdit__form input[type="number"] {
@@ -25,24 +29,22 @@
   margin-bottom: 0.125em;
   padding-left: 0.5em;
 }
-.AddEdit__col-left {
-  margin-right: 1em;
-}
 .AddEdit__col-right {
   width: 100%;
 }
 /* AddEditVenue */
 .AddEdit__col-1 {
-  flex: 1 1 60%;
+  flex: 1 1 50%;
+  order: 2;
 }  
 .AddEdit__col-2 {
-  flex: 1 1 40%;
+  flex: 1 1 50%;
   min-width: 250px;
-  margin-left: 1em;
+  order: 1;
 }
 .AddEdit__col-3 {
   flex: 0 0 150px;
-  margin-left: 1em;
+  order: 3;
 }
 .AddEditRegion .AddEdit__col-left {
   flex: 1 0 300px;
@@ -146,3 +148,28 @@
 .flex-basis-33p { flex-basis: 33.333%; }
 .flex-basis-50p { flex-basis: 50%; }
 .flex-basis-66p { flex-basis: 66.666%; }
+
+.checkbox-wrapper {
+  display: flex;
+  flex-flow: row-reverse;
+  width: auto;
+  align-items: baseline;
+}
+.checkbox-wrapper label {
+  margin-bottom: 0;
+}
+.checkbox-wrapper input[type=checkbox] {
+  width: auto;
+}
+.AddEdit__compile-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.AddEdit__compile-buttons > * {
+  margin: 0 0.5em;
+}
+.AddEdit__compile-buttons span {
+  font-weight: bold;
+  text-transform: uppercase;
+}

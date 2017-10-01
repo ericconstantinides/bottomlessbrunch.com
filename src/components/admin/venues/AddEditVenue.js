@@ -132,32 +132,27 @@ class AddEditVenue extends Component {
             <div className='AddEdit__field-wrapper'>
               <Field
                 name={`${funTime}.category`}
-                type='text'
                 component={this.renderField}
                 lbl='Category'
               />
               <Field
                 name={`${funTime}.days`}
-                type='text'
                 component={this.renderField}
                 lbl='Days'
               />
               <Field
                 name={`${funTime}.startTime`}
-                type='text'
                 component={this.renderField}
                 lbl='Starts'
               />
               <Field
                 name={`${funTime}.endTime`}
-                type='text'
                 component={this.renderField}
                 lbl='Ends'
               />
               <div className='flex-basis-66p'>
                 <Field
                   name={`${funTime}.remarks`}
-                  type='text'
                   component={this.renderField}
                   lbl='Remarks'
                 />
@@ -192,7 +187,6 @@ class AddEditVenue extends Component {
               <div className='flex-basis-66p'>
                 <Field
                   name={`${funItem}.name`}
-                  type='text'
                   component={this.renderField}
                   lbl='Name'
                 />
@@ -203,6 +197,49 @@ class AddEditVenue extends Component {
                   type='number'
                   component={this.renderField}
                   lbl='Price'
+                />
+              </div>
+              <button
+                className='btn btn-sm btn-danger'
+                onClick={() => fields.remove(index)}
+              >
+              ✖
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+  renderImages = ({ fields, meta: { error, submitFailed } }) => (
+    <div className='AddEdit__array'>
+      <header className='AddEdit__array-header'>
+        <button
+          className='btn btn-sm btn-success'
+          type='button'
+          onClick={() => fields.push({})}
+        >
+          <span className='embellish'>+</span>
+        </button>
+        <h3 className='AddEdit__array-title'>Images</h3>
+        {submitFailed && error && <span>{error}</span>}
+      </header>
+      <div className='AddEdit__array-inner'>
+        {fields.map((image, index) => (
+          <div className='AddEdit__field-wrapper-container' key={index}>
+            <div className='AddEdit__field-wrapper'>
+              <div className='flex-basis-66p'>
+                <Field
+                  name={`${image}.fileName`}
+                  component={this.renderField}
+                  lbl='Filename'
+                />
+              </div>
+              <div className='flex-basis-33p'>
+                <Field
+                  name={`${image}.category`}
+                  component={this.renderField}
+                  lbl='Category'
                 />
               </div>
               <button
@@ -296,34 +333,22 @@ class AddEditVenue extends Component {
         >
           <div className='AddEdit__col-1'>
             <div className='AddEdit__field-wrapper'>
-              <div className='AddEditVenue__form-group form-group'>
-                <label className='AddEdit__label'>Region</label>
-                <RegionSelect />
-                {/* region={this.props.ui.region} */}
-              </div>
-              <Field lbl='Venue Name' name='name' component={renderField} />
-              <div className='AddEditVenue__form-group form-group'>
-                <label className='AddEdit__label' htmlFor='active'>
-                  Is Venue Active?
+              <FieldArray name='funTimes' component={this.renderFunTimes} />
+              <FieldArray name='funItems' component={this.renderFunItems} />
+              <FieldArray name='images' component={this.renderImages} />
+              <FieldArray name='research' component={this.renderResearch} />
+              <div className='AddEditVenue__form-group form-group checkbox-wrapper'>
+                <label className='AddEdit__label' htmlFor='unpublish'>
+                  Unpublish Venue
                 </label>
                 <Field
-                  name='active'
-                  id='active'
+                  name='unpublish'
+                  id='unpublish'
                   component='input'
                   type='checkbox'
                   className='form-control'
                 />
               </div>
-              <Field
-                lbl='Google Places ID'
-                name='gpId'
-                component={renderField}
-              />
-              <Field lbl='Yelp ID' name='yId' component={renderField} />
-              <Field lbl='Zomato ID' name='zomatoId' component={renderField} />
-              <FieldArray name='funTimes' component={this.renderFunTimes} />
-              <FieldArray name='funItems' component={this.renderFunItems} />
-              <FieldArray name='research' component={this.renderResearch} />
             </div>
             <button
               type='submit'
@@ -359,9 +384,37 @@ class AddEditVenue extends Component {
                   }}
                 >
                   {this.state.loadMarker &&
-                    <Marker lat={this.state.lat} lng={this.state.lng} />}
+                    <Marker lat={this.state.lat} lng={this.state.lng} />
+                  }
                 </GoogleMapReact>
+                <div className='AddEdit__compile-buttons'>
+                  <button
+                    className='btn btn-sm btn-primary'
+                    onClick={this.handleCompileMissingData}
+                  >
+                    Compile <span>Empty</span> Fields
+                  </button>
+                  <button
+                    className='btn btn-sm btn-primary'
+                    onClick={this.handleCompileAllData}
+                  >
+                    Compile <span>All</span> Fields
+                  </button>
+                </div>
                 <div className='AddEdit__field-wrapper'>
+                  <div className='AddEditVenue__form-group form-group'>
+                    <label className='AddEdit__label'>Region</label>
+                    <RegionSelect />
+                    {/* region={this.props.ui.region} */}
+                  </div>
+                  <Field lbl='Venue Name' name='name' component={renderField} />
+                  <Field
+                    lbl='Google Places ID'
+                    name='gpId'
+                    component={renderField}
+                  />
+                  <Field lbl='Yelp ID' name='yId' component={renderField} />
+                  <Field lbl='Zomato ID' name='zomatoId' component={renderField} />
                   <Field
                     lbl='Neighborhood'
                     name='neighborhood'
