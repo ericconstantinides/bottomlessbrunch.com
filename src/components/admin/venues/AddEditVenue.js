@@ -21,21 +21,13 @@ import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
 
-const stateOptions = states.map((state) => (
-  {label: state, value: state}
-))
+const stateOptions = states.map(state => ({ label: state, value: state }))
 
-const timeOptions = times.map((time) => (
-  {label: time, value: time}
-))
+const timeOptions = times.map(time => ({ label: time, value: time }))
 
-const dayOptions = days.map((day) => (
-  {label: day, value: day}
-))
+const dayOptions = days.map(day => ({ label: day, value: day }))
 
-const timeCatOptions = timeCategories.map((cat) => (
-  {label: cat, value: cat}
-))
+const timeCatOptions = timeCategories.map(cat => ({ label: cat, value: cat }))
 
 class AddEditVenue extends Component {
   constructor (props) {
@@ -150,23 +142,25 @@ class AddEditVenue extends Component {
           {fields.map((funTime, index) => (
             <div className='AddEdit__field-wrapper-container' key={index}>
               <div className='AddEdit__field-wrapper'>
-                <div className='AddEditVenue__form-group form-group'>
+                <div className='AddEditVenue__form-group form-group flex-basis-20p'>
                   <label className='AddEdit__label'>Start Time</label>
                   <Field
                     name={`${funTime}.startTime`}
                     options={timeOptions}
                     component={SelectInput}
+                    clearable={false}
                   />
                 </div>
-                <div className='AddEditVenue__form-group form-group'>
+                <div className='AddEditVenue__form-group form-group flex-basis-20p'>
                   <label className='AddEdit__label'>End Time</label>
                   <Field
                     name={`${funTime}.endTime`}
                     options={timeOptions}
                     component={SelectInput}
+                    clearable={false}
                   />
                 </div>
-                <div className='AddEditVenue__form-group form-group'>
+                <div className='AddEditVenue__form-group form-group flex-basis-60p'>
                   <label className='AddEdit__label'>Days</label>
                   <Field
                     name={`${funTime}.days`}
@@ -175,7 +169,7 @@ class AddEditVenue extends Component {
                     multi
                   />
                 </div>
-                <div className='AddEditVenue__form-group form-group'>
+                <div className='AddEditVenue__form-group form-group flex-basis-40p'>
                   <label className='AddEdit__label'>Category</label>
                   <Field
                     name={`${funTime}.category`}
@@ -183,7 +177,7 @@ class AddEditVenue extends Component {
                     component={SelectInput}
                   />
                 </div>
-                <div className='flex-basis-66p'>
+                <div className='flex-basis-60p'>
                   <Field
                     name={`${funTime}.remarks`}
                     component={this.renderField}
@@ -194,11 +188,12 @@ class AddEditVenue extends Component {
               <button
                 className='btn btn-sm btn-danger'
                 onClick={() => fields.remove(index)}
-              >✖</button>
+              >
+                ✖
+              </button>
             </div>
           ))}
-        </div>
-      }
+        </div>}
     </div>
   )
   renderFunItems = ({ fields, meta: { error, submitFailed } }) => (
@@ -238,13 +233,12 @@ class AddEditVenue extends Component {
                   className='btn btn-sm btn-danger'
                   onClick={() => fields.remove(index)}
                 >
-                ✖
+                  ✖
                 </button>
               </div>
             </div>
           ))}
-        </div>
-      }
+        </div>}
     </div>
   )
   renderImages = ({ fields, meta: { error, submitFailed } }) => (
@@ -283,13 +277,12 @@ class AddEditVenue extends Component {
                   className='btn btn-sm btn-danger'
                   onClick={() => fields.remove(index)}
                 >
-                ✖
+                  ✖
                 </button>
               </div>
             </div>
           ))}
-        </div>
-      }
+        </div>}
     </div>
   )
   renderResearch = ({ fields, meta: { error, submitFailed } }) => (
@@ -330,12 +323,12 @@ class AddEditVenue extends Component {
               <button
                 className='btn btn-sm btn-danger'
                 onClick={() => fields.remove(index)}
-              >✖              
+              >
+                ✖{' '}
               </button>
             </div>
           ))}
-        </div>
-      }
+        </div>}
     </div>
   )
   render () {
@@ -360,9 +353,9 @@ class AddEditVenue extends Component {
       })
       yData.unshift(<h3 key='yDataTitle'>yData</h3>)
     }
-    const regionOptions = this.props.regions ? _.map(this.props.regions,(rg => (
-      {label: rg.name, value: rg._id}
-    ))) : ''
+    const regionOptions = this.props.regions
+      ? _.map(this.props.regions, rg => ({ label: rg.name, value: rg._id }))
+      : ''
     return (
       <div className='AddEdit AddEditVenue site-container'>
         <Link to='/admin/venues'>« Back to Venues</Link>
@@ -394,8 +387,7 @@ class AddEditVenue extends Component {
                   }}
                 >
                   {this.state.loadMarker &&
-                    <Marker lat={this.state.lat} lng={this.state.lng} />
-                  }
+                    <Marker lat={this.state.lat} lng={this.state.lng} />}
                 </GoogleMapReact>
                 <div className='AddEdit__compile-buttons'>
                   <button
@@ -427,7 +419,11 @@ class AddEditVenue extends Component {
                     component={renderField}
                   />
                   <Field lbl='Yelp ID' name='yId' component={renderField} />
-                  <Field lbl='Zomato ID' name='zomatoId' component={renderField} />
+                  <Field
+                    lbl='Zomato ID'
+                    name='zomatoId'
+                    component={renderField}
+                  />
                   <Field
                     lbl='Neighborhood'
                     name='neighborhood'
