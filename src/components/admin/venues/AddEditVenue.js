@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
@@ -11,14 +12,13 @@ import {
 // I may need these later below: geocodeByAddress, getLatLng
 import { geocodeByPlaceId } from 'react-places-autocomplete'
 import MapSearch from '../../MapSearch'
-import RegionSelect from '../../RegionSelect'
+// import RegionSelect from '../../RegionSelect'
 import GoogleMapReact from 'google-map-react'
 import { addVenue, editVenue } from '../../../actions'
 import { usaMap, DATE_LONG } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 import Marker from '../../Marker'
-import enumerables from '../../../enumerables'
-console.log(enumerables)
+import { times, days, timeCategories, states } from '../../../enumerables'
 
 class AddEditVenue extends Component {
   constructor (props) {
@@ -133,31 +133,40 @@ class AddEditVenue extends Component {
           {fields.map((funTime, index) => (
             <div className='AddEdit__field-wrapper-container' key={index}>
               <div className='AddEdit__field-wrapper'>
-                <Field
-                  name={`${funTime}.startTime`}
-                  component={this.renderField}
-                  lbl='Start Time'
-                />
-                <Field
-                  name={`${funTime}.endTime`}
-                  component={this.renderField}
-                  lbl='End Time'
-                />
-                <Field
-                  name={`${funTime}.days`}
-                  component={this.renderField}
-                  lbl='Days'
-                />
-                <div>
-                  <label className='AddEdit__label'>
-                    Category
-                  </label>
+                <div className='AddEditVenue__form-group form-group'>
+                  <label className='AddEdit__label'>Start Time</label>
+                  <Field name={`${funTime}.startTime`} component="select">
+                    <option />
+                    {times.map((time, i) => 
+                      <option key={i} value={time}>{time}</option>
+                    )}
+                  </Field>
+                </div>
+                <div className='AddEditVenue__form-group form-group'>
+                  <label className='AddEdit__label'>End Time</label>
+                  <Field name={`${funTime}.endTime`} component="select">
+                    <option />
+                    {times.map((time, i) => 
+                      <option key={i} value={time}>{time}</option>
+                    )}
+                  </Field>
+                </div>
+                <div className='AddEditVenue__form-group form-group'>
+                  <label className='AddEdit__label'>Days</label>
+                  <Field name={`${funTime}.days`} component="select">
+                    <option />
+                    {days.map((day, i) => 
+                      <option key={i} value={day}>{day}</option>
+                    )}
+                  </Field>
+                </div>
+                <div className='AddEditVenue__form-group form-group'>
+                  <label className='AddEdit__label'>Category</label>
                   <Field name={`${funTime}.category`} component="select">
                     <option />
-                    <option value='Happy Hour'>Happy Hour</option>
-                    <option value='Reverse Happy Hour'>Reverse Happy Hour</option>
-                    <option value='Bottomless Brunch'>Bottomless Brunch</option>
-                    <option value='Other'>Other</option>
+                    {timeCategories.map((cat, i) => 
+                      <option key={i} value={cat}>{cat}</option>
+                    )}
                   </Field>
                 </div>
                 <div className='flex-basis-66p'>
@@ -335,8 +344,9 @@ class AddEditVenue extends Component {
           : v3
         return <div key={k}><strong>{k}</strong>: {v4}</div>
       })
-      yData.unshift(<h3>yData</h3>)
+      yData.unshift(<h3 key='yDataTitle'>yData</h3>)
     }
+    console.log(this.props)
     return (
       <div className='AddEdit AddEditVenue site-container'>
         <Link to='/admin/venues'>
@@ -350,7 +360,11 @@ class AddEditVenue extends Component {
         >
           <div className='AddEdit__col-1'>
             <div className='AddEdit__field-wrapper'>
-              <div className='AddEditVenue__form-group form-group checkbox-wrapper'>
+              <FieldArray name='funTimes' component={this.renderFunTimes} />
+              <FieldArray name='funItems' component={this.renderFunItems} />
+              <FieldArray name='images' component={this.renderImages} />
+              <FieldArray name='research' component={this.renderResearch} />
+              <div className='checkbox-wrapper'>
                 <label className='AddEdit__label' htmlFor='unpublish'>
                   Unpublish Venue
                 </label>
@@ -417,8 +431,12 @@ class AddEditVenue extends Component {
                 <div className='AddEdit__field-wrapper'>
                   <div className='AddEditVenue__form-group form-group'>
                     <label className='AddEdit__label'>Region</label>
-                    <RegionSelect />
-                    {/* region={this.props.ui.region} */}
+                    <Field name='regionId' component="select">
+                      <option />
+                      {this.props.regions && _.map(this.props.regions,(rg => (
+                        <option key={rg._id} value={rg._id}>{rg.name}</option>
+                      )))}
+                    </Field>
                   </div>
                   <Field lbl='Venue Name' name='name' component={renderField} />
                   <Field
@@ -445,11 +463,15 @@ class AddEditVenue extends Component {
                     name='address.city'
                     component={renderField}
                   />
-                  <Field
-                    lbl='State'
-                    name='address.state'
-                    component={renderField}
-                  />
+                  <div className='AddEditVenue__form-group form-group'>
+                    <label className='AddEdit__label'>State</label>
+                    <Field name='address.state' component="select">
+                      <option />
+                      {states.map((state, i) => 
+                        <option key={i} value={state}>{state}</option>
+                      )}
+                    </Field>
+                  </div>
                   <Field
                     lbl='Zip Code'
                     name='address.zip'
@@ -487,9 +509,7 @@ class AddEditVenue extends Component {
             </div>
           </div>
           <div className='AddEdit__col-3'>
-            <aside className='AddEdit__yData'>
-              {yData}
-            </aside>
+            <aside className='AddEdit__yData'>{yData}</aside>
           </div>
         </form>
       </div>
@@ -521,12 +541,14 @@ function mapStateToProps (state, ownProps) {
   if (ownProps.match.params.id) {
     return {
       thisForm: state.form,
-      initialValues: state.venues[ownProps.match.params.id]
+      initialValues: state.venues[ownProps.match.params.id],
+      regions: state.regions
     }
   }
   // if we don't, just use your default
   return {
-    thisForm: state.form
+    thisForm: state.form,
+    regions: state.regions
   }
 }
 // connect needs to be the outer-most thing run

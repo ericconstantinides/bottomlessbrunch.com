@@ -9,6 +9,8 @@
   padding-top: 1em;
 }
 .AddEdit .form-group {
+  display: flex;
+  flex-flow: column;
   margin-bottom: 1em;
 }
 .AddEdit__form {
@@ -20,8 +22,7 @@
 .AddEdit__form > * {
   margin-left: 1em;
 }
-.AddEdit__form input[type="text"],
-.AddEdit__form input[type="number"] {
+.AddEdit__form .form-control {
   font-size: inherit;
 }
 .AddEdit__label {
@@ -155,6 +156,7 @@
   flex-flow: row-reverse;
   width: auto;
   align-items: baseline;
+  margin-bottom: 1em;
 }
 .checkbox-wrapper label {
   margin-bottom: 0;
