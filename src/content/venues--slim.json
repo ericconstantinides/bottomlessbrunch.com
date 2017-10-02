@@ -1,7 +1,7 @@
 [
   {
     "name": "Mission Rock Resort",
-    "unpublish": false,
+    "unpublish": true,
     "regionId": "59c4a61488348f8102580f25",
     "gpId": "ChIJryemAsd_j4AR60urAIzz6Dc",
     "yId": "mission-rock-resort-san-francisco-2",
@@ -143,7 +143,11 @@
     "openTableUrl": "http://www.opentable.com/r/colibri-mexican-bistro-san-francisco",
     "tripAdvisorUrl": "http://www.tripadvisor.com/Restaurant_Review-g60713-d614164-Reviews-Colibri_Mexican_Bistro-San_Francisco_California.html",
     "zagatUrl": "http://www.zagat.com/r/colibri-mexican-bistro-san-francisco",
-    "zomatoUrl": "https://www.zomato.com/san-francisco/colibri-mexican-bistro-union-square"
+    "zomatoUrl": "https://www.zomato.com/san-francisco/colibri-mexican-bistro-union-square",
+    "research": [{
+      "url": "https://www.yelp.com/biz/colibri-mexican-bistro-san-francisco?hrid=HYnJ6nccdQxDoZ-z000Ljw",
+      "remarks": "8/20/2017"
+    }]
   },
   {
     "name": "Kitchen Story",
@@ -462,41 +466,8 @@
     "regionId": "59c4a61e88348f8102580f29",
     "gpId": "ChIJF7uF3VczjoARsQacfJJdX-A",
     "yId": "the-table-san-jose",
-    "images": [
-      { "fileName": "san-jose__the-table.jpg" }
-    ],
+    "images": [{ "fileName": "san-jose__the-table.jpg" }],
     "funTimes": [
-      {
-        "category": "Happy Hour",
-        "startTime": "4:00PM",
-        "endTime": "6:00PM",
-        "days": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ]
-      },
-      {
-        "category": "Reverse Happy Hour",
-        "startTime": "10:00PM",
-        "endTime": "12:00AM",
-        "days": [
-          "Saturday",
-          "Sunday"
-        ]
-      },
-      {
-        "category": "Bottomless Brunch",
-        "startTime": "9:00AM",
-        "endTime": "2:00PM",
-        "days": [
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ]
-      },
       {
         "category": "Bottomless Brunch",
         "startTime": "8:30AM",
@@ -508,7 +479,11 @@
       }
     ],
     "facebookUrl": "https://www.facebook.com/thetablewillowglen/",
-    "zomatoUrl": "https://www.zomato.com/san-jose/the-table-willow-glen"
+    "zomatoUrl": "https://www.zomato.com/san-jose/the-table-willow-glen",
+    "research": [{
+      "url": "https://www.yelp.com/biz/the-table-san-jose?hrid=kr2c4F4SRg5BtA7sey1wGA",
+      "remarks": "7/3/2017"
+    }]
   },
   {
     "name": "1621 Bistro",
