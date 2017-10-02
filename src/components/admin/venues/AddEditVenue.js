@@ -2,13 +2,7 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  Field,
-  FieldArray,
-  // FormSection,
-  reduxForm,
-  change as fieldValue
-} from 'redux-form'
+import { Field, FieldArray, reduxForm, change as fieldValue } from 'redux-form'
 // I may need these later below: geocodeByAddress, getLatLng
 import { geocodeByPlaceId } from 'react-places-autocomplete'
 import MapSearch from '../../MapSearch'
@@ -63,7 +57,7 @@ class AddEditVenue extends Component {
     )
   }
   // gets called after successful validation:
-  onSubmit (values) {
+  onSubmit = (values) => {
     const { addVenue, editVenue, history, match } = this.props
     if (match.params.id) {
       editVenue(match.params.id, values, history)
@@ -194,6 +188,7 @@ class AddEditVenue extends Component {
               </div>
               <button
                 className='btn btn-sm btn-danger'
+                type='button'
                 onClick={() => fields.remove(index)}
               >
                 ✖
@@ -238,6 +233,7 @@ class AddEditVenue extends Component {
                 </div>
                 <button
                   className='btn btn-sm btn-danger'
+                  type='button'
                   onClick={() => fields.remove(index)}
                 >
                   ✖
@@ -282,6 +278,7 @@ class AddEditVenue extends Component {
                 </div>
                 <button
                   className='btn btn-sm btn-danger'
+                  type='button'
                   onClick={() => fields.remove(index)}
                 >
                   ✖
@@ -316,6 +313,7 @@ class AddEditVenue extends Component {
                     type='text'
                     component={this.renderField}
                     lbl='URL'
+                    externalLink
                   />
                 </div>
                 <div className='flex-basis-50p'>
@@ -329,9 +327,10 @@ class AddEditVenue extends Component {
               </div>
               <button
                 className='btn btn-sm btn-danger'
+                type='button'
                 onClick={() => fields.remove(index)}
               >
-                ✖{' '}
+                ✖
               </button>
             </div>
           ))}
@@ -345,10 +344,10 @@ class AddEditVenue extends Component {
       thisForm.addEditVenue.values &&
       thisForm.addEditVenue.values.name
       ? <h1>{thisForm.addEditVenue.values.name}</h1>
-      : <h1>&nbsp;</h1>
+      : ''
     const renderField = this.renderField
     let yData = []
-    // format the yData for displaying
+    // format the yData for displaying:
     if (this.props.initialValues && this.props.initialValues.yData) {
       yData = Object.entries(this.props.initialValues.yData).map(([k, v]) => {
         const v2 = v === true ? 'true' : v === false ? 'false' : v
@@ -356,7 +355,7 @@ class AddEditVenue extends Component {
         const v4 = k === 'fetchedTime'
           ? new Date(v3).toLocaleDateString('en-US', DATE_LONG)
           : v3
-        return <div key={k}><strong>{k}</strong>: {v4}</div>
+        return <div key={k}><strong>{k}</strong>: <span>{v4}</span></div>
       })
       yData.unshift(<h3 key='yDataTitle'>yData</h3>)
     }
@@ -368,7 +367,7 @@ class AddEditVenue extends Component {
         <Link to='/admin/venues'>« Back to Venues</Link>
         <form
           className='AddEdit__form'
-          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          onSubmit={handleSubmit(this.onSubmit)}
         >
           <div className='AddEdit__col-1'>
             {title}
@@ -399,12 +398,14 @@ class AddEditVenue extends Component {
                 <div className='AddEdit__compile-buttons'>
                   <button
                     className='btn btn-sm btn-primary'
+                    type='button'
                     onClick={this.handleCompileMissingData}
                   >
                     Compile <span>Empty</span> Fields
                   </button>
                   <button
                     className='btn btn-sm btn-primary'
+                    type='button'
                     onClick={this.handleCompileAllData}
                   >
                     Compile <span>All</span> Fields
