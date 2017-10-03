@@ -17,7 +17,7 @@ import {
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
-import { findClosestRegion, extractAddress } from '../../../lib/myHelpers'
+import { findClosestRegion, getAddy } from '../../../lib/myHelpers'
 
 const YELP_PREFIX = 'https://www.yelp.com/biz/'
 const YELP_SUFFIX = '?q=bottomless'
@@ -34,7 +34,7 @@ class venueForm extends Component {
       zoom: usaMap.zoom,
       lat: usaMap.lat,
       lng: usaMap.lng,
-      loadMarker: false,
+      marker: false,
       address: ''
     }
     this.onChange = address => this.setState({ address })
@@ -60,25 +60,37 @@ class venueForm extends Component {
       </div>
     )
   }
-  componentDidUpdate () {
-    const { editVenueFields, fieldValue } = this.props
-    if (editVenueFields.gData) {
-      const { gData, gData: { address_components: address } } = editVenueFields
-
+  componentDidUpdate (prevProps, prevState) {
+    // Only run the field update IF: We have gData and no PrevGdata -OR-
+    // the old place_id is different than the new place_id
+    const { gData } = this.props.editVenueFields
+    const { gData: prevGdata } = prevProps.editVenueFields
+    if (gData && (!prevGdata || gData.place_id !== prevGdata.place_id)) {
+      const { address_components: address } = gData
       const replacements = [
-        {field: 'name', data: gData.name},
-        {field: 'website', data: gData.website},
-        {field: 'phone', data: gData.formatted_phone_number},
-        {field: 'address.street', data: (extractAddress(address, 'street_number') + ' ' +
-        extractAddress(address, 'route')) },
-        {field: 'address.city', data: extractAddress(address, 'locality')},
-        {field: 'address.state', data: extractAddress(address, 'administrative_area_level_1')},
-        {field: 'address.zip', data: extractAddress(address, 'postal_code')},
-        {field: 'neighborhood', data: extractAddress(address, 'neighborhood')}
+        { field: 'name', data: gData.name },
+        { field: 'website', data: gData.website },
+        { field: 'phone', data: gData.formatted_phone_number },
+        {
+          field: 'address.street',
+          data: getAddy(address, 'street_number') +
+            ' ' +
+            getAddy(address, 'route')
+        },
+        {
+          field: 'address.city',
+          data: getAddy(address, 'locality', 'long_name')
+        },
+        {
+          field: 'address.state',
+          data: getAddy(address, 'administrative_area_level_1')
+        },
+        { field: 'address.zip', data: getAddy(address, 'postal_code') },
+        { field: 'neighborhood', data: getAddy(address, 'neighborhood') }
       ]
       replacements.forEach(fieldObj => {
         const data = fieldObj.data ? fieldObj.data : ''
-        fieldValue('venueForm', fieldObj.field, data)
+        this.props.fieldValue('venueForm', fieldObj.field, data)
       })
     }
   }
@@ -104,8 +116,6 @@ class venueForm extends Component {
   handleGoogleAutoSelect = (address, placeId) => {
     // set the gpId
     this.props.fieldValue('venueForm', 'gpId', placeId)
-    // add the marker
-    this.setState({ loadMarker: true })
     geocodeByPlaceId(placeId)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
@@ -113,7 +123,7 @@ class venueForm extends Component {
         this.props.fieldValue('venueForm', 'regionId', region)
         this.props.fieldValue('venueForm', 'lat', lat)
         this.props.fieldValue('venueForm', 'lng', lng)
-        this.setState({ lat, lng, zoom: 15, address: '' })
+        this.setState({ marker: true, lat, lng, zoom: 15, address: '' })
 
         // get the google places info:
         this.props.fetchGooglePlacesEditVenueDetail(placeId)
@@ -386,7 +396,7 @@ class venueForm extends Component {
                     marginBottom: '1em'
                   }}
                 >
-                  {this.state.loadMarker &&
+                  {this.state.marker &&
                     <Marker lat={this.state.lat} lng={this.state.lng} />}
                 </GoogleMapReact>
                 <div className='AddEdit__compile-buttons'>

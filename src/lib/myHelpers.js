@@ -96,7 +96,7 @@ export function findClosestRegion ({ lat, lng }, regions) {
  * @param {string} fldLength
  * @return {string}
  */
-export function extractAddress (addressArr, reqType, fldLength = 'short_name') {
+export function getAddy (addressArr, reqType, fldLength = 'short_name') {
   let toReturn
   addressArr.forEach(component =>
     component.types.forEach(type => {
