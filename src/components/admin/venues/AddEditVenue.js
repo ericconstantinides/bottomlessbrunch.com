@@ -86,7 +86,14 @@ class venueForm extends Component {
           data: getAddy(address, 'administrative_area_level_1')
         },
         { field: 'address.zip', data: getAddy(address, 'postal_code') },
-        { field: 'neighborhood', data: getAddy(address, 'neighborhood') }
+        {
+          field: 'neighborhood',
+          data: getAddy(address, 'neighborhood')
+            ? getAddy(address, 'neighborhood')
+            : getAddy(address, 'sublocality')
+                ? getAddy(address, 'sublocality')
+                : ''
+        }
       ]
       replacements.forEach(fieldObj => {
         const data = fieldObj.data ? fieldObj.data : ''

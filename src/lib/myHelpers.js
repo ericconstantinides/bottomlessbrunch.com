@@ -97,13 +97,13 @@ export function findClosestRegion ({ lat, lng }, regions) {
  * @return {string}
  */
 export function getAddy (addressArr, reqType, fldLength = 'short_name') {
-  let toReturn
+  let fieldValue = ''
   addressArr.forEach(component =>
     component.types.forEach(type => {
       if (type === reqType) {
-        toReturn = component[fldLength]
+        fieldValue = component[fldLength]
       }
     })
   )
-  return toReturn
+  return fieldValue
 }
