@@ -17,7 +17,11 @@ import {
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
-import { findClosestRegion, getAddy } from '../../../lib/myHelpers'
+import {
+  findClosestRegion,
+  getAddy,
+  stripDashesSpaces
+} from '../../../lib/myHelpers'
 
 const YELP_PREFIX = 'https://www.yelp.com/biz/'
 const YELP_SUFFIX = '?q=bottomless'
@@ -66,11 +70,16 @@ class venueForm extends Component {
     const { gData } = this.props.editVenueFields
     const { gData: prevGdata } = prevProps.editVenueFields
     if (gData && (!prevGdata || gData.place_id !== prevGdata.place_id)) {
+      console.log(gData)
       const { address_components: address } = gData
       const replacements = [
         { field: 'name', data: gData.name },
         { field: 'website', data: gData.website },
         { field: 'phone', data: gData.formatted_phone_number },
+        {
+          field: 'globalPhone',
+          data: stripDashesSpaces(gData.international_phone_number)
+        },
         {
           field: 'address.street',
           data: getAddy(address, 'street_number') +
@@ -475,6 +484,11 @@ class venueForm extends Component {
                     component={renderField}
                   />
                   <Field lbl='Phone #' name='phone' component={renderField} />
+                  <Field
+                    lbl='Global Phone #'
+                    name='globalPhone'
+                    component={renderField}
+                  />
                   <Field
                     lbl='Website'
                     name='website'

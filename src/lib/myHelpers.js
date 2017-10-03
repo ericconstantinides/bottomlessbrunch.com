@@ -107,3 +107,20 @@ export function getAddy (addressArr, reqType, fldLength = 'short_name') {
   )
   return fieldValue
 }
+
+/**
+ * Removes dashes and spaces from some text
+ *
+ * @export
+ * @param {string} text
+ * @returns {string}
+ */
+export function stripDashesSpaces (text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '') // Replace spaces with ''
+    .replace(/-/g, '') // Replace - with ''
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, '') // Trim - from end of text
+}
