@@ -140,7 +140,7 @@ export function apiError (error) {
   }
 }
 
-export function fetchVenueDetail ({ _id, googePlacesData, gpId }) {
+export function fetchGooglePlacesVenueDetail ({ _id, googePlacesData, gpId }) {
   // check the fetchedTime and don't refetch if fewer than fetchTimeout:
   if (
     !googePlacesData ||
@@ -159,19 +159,19 @@ export function fetchVenueDetail ({ _id, googePlacesData, gpId }) {
       })
     }
   }
-  return dispatch => dispatch(cancelFetchVenueDetail())
+  return dispatch => dispatch(cancelFetchGooglePlacesVenueDetail())
 }
 
-export function cancelFetchVenueDetail () {
+export function cancelFetchGooglePlacesVenueDetail () {
   return {
-    type: constants.VENUE_FETCH_DETAIL_CANCEL,
+    type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL_CANCEL,
     payload: 'already have the data'
   }
 }
 
 function setVenueDetail (_id, place) {
   return {
-    type: constants.VENUE_FETCH_DETAIL,
+    type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL,
     _id: _id,
     payload: { ...place, fetchedTime: new Date() }
   }

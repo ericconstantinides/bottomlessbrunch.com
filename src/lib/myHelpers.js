@@ -68,3 +68,22 @@ export function fitBoundsGoogleReady (myBounds, size) {
   )
   return { bounds, position, zoom }
 }
+
+/**
+ * Finds the closest region
+ * @param {object} position with lat and lng
+ * @param {object} regions
+ * @return {string} String of the regionId
+ */
+export function findClosestRegion ({lat, lng}, regions) {
+  let closestMatchRegionId = null
+  let closestMatchDiff = null
+  _.map(regions, region => {
+    const diff = Math.abs(region.lat - lat) + Math.abs(region.lng - lng)
+    if (!closestMatchDiff || diff < closestMatchDiff) {
+      closestMatchDiff = diff
+      closestMatchRegionId = region._id
+    }
+  })
+  return closestMatchRegionId
+}

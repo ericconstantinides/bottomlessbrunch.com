@@ -46,7 +46,7 @@ class AddEditRegion extends Component {
     )
   }
   // gets called after successful validation:
-  onSubmit (values) {
+  onSubmit = values => {
     const { addRegion, editRegion, history, match } = this.props
     if (match.params.id) {
       editRegion(match.params.id, values, history)
@@ -139,7 +139,7 @@ class AddEditRegion extends Component {
         {/* the handleSubmit is from redux-form */}
         <form
           className='AddEdit__form'
-          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          onSubmit={handleSubmit(this.onSubmit)}
         >
           <div className='AddEdit__col-left'>
             <Field lbl='Region Name' name='name' component={this.renderField} />

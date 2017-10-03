@@ -19,7 +19,7 @@ class VenuePage extends Component {
     const { venue, venues, venueId, regionSlug } = this.props
 
     // get the venue detail
-    this.props.fetchVenueDetail(venue)
+    this.props.fetchGooglePlacesVenueDetail(venue)
 
     // reduce the venues by region and then get the next and previous venues:
     const reduced = reduceVenuesByRegion(venues, venues[venueId].regionId)
