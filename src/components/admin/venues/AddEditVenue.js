@@ -17,7 +17,7 @@ import {
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
-import { findClosestRegion } from '../../../lib/myHelpers'
+import { findClosestRegion, extractFromAddress } from '../../../lib/myHelpers'
 
 const YELP_PREFIX = 'https://www.yelp.com/biz/'
 const YELP_SUFFIX = '?q=bottomless'
@@ -61,19 +61,45 @@ class venueForm extends Component {
     )
   }
   componentDidUpdate () {
-    if (this.props.editVenueFields) {
-      const { editVenueFields, fieldValue } = this.props
-      if (editVenueFields.gData) {
-        if (editVenueFields.gData.name) {
-          fieldValue('venueForm', 'name', editVenueFields.gData.name)
-        }
-        if (editVenueFields.gData.website) {
-          fieldValue('venueForm', 'website', editVenueFields.gData.website)
-        }
-        if (editVenueFields.gData.formatted_phone_number) {
-          fieldValue('venueForm', 'phone', editVenueFields.gData.formatted_phone_number)
-        }
+    const { editVenueFields, fieldValue } = this.props
+    if (editVenueFields.gData) {
+      const { gData, gData: { address_components: address } } = editVenueFields
+      if (gData.name) {
+        fieldValue('venueForm', 'name', gData.name)
       }
+      if (gData.website) {
+        fieldValue('venueForm', 'website', gData.website)
+      }
+      if (gData.formatted_phone_number) {
+        fieldValue('venueForm', 'phone', gData.formatted_phone_number)
+      }
+      fieldValue(
+        'venueForm',
+        'address.street',
+        extractFromAddress(address, 'street_number', 'short_name') +
+          ' ' +
+          extractFromAddress(address, 'route', 'short_name')
+      )
+      fieldValue(
+        'venueForm',
+        'address.city',
+        extractFromAddress(address, 'locality', 'long_name')
+      )
+      fieldValue(
+        'venueForm',
+        'address.state',
+        extractFromAddress(address, 'administrative_area_level_1', 'short_name')
+      )
+      fieldValue(
+        'venueForm',
+        'address.zip',
+        extractFromAddress(address, 'postal_code', 'short_name')
+      )
+      fieldValue(
+        'venueForm',
+        'neighborhood',
+        extractFromAddress(address, 'neighborhood', 'short_name')
+      )
     }
   }
   // gets called after successful validation:

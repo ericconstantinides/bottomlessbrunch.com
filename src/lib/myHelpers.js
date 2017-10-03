@@ -32,7 +32,7 @@ export function parsePath (fullPath) {
   const trimFront = fullPath.substring(0, 1) === '/'
     ? fullPath.substring(1)
     : fullPath
-  const trimmed = trimFront.substring((trimFront.length - 1), 1) === '/'
+  const trimmed = trimFront.substring(trimFront.length - 1, 1) === '/'
     ? trimFront.substring(1)
     : trimFront
   return trimmed.split('/')
@@ -48,10 +48,10 @@ export function parsePath (fullPath) {
  */
 export function convertToBounds (latNorth, latSouth, lngWest, lngEast) {
   return {
-    nw: {lat: latNorth, lng: lngWest},
-    ne: {lat: latNorth, lng: lngEast},
-    se: {lat: latSouth, lng: lngEast},
-    sw: {lat: latSouth, lng: lngWest}
+    nw: { lat: latNorth, lng: lngWest },
+    ne: { lat: latNorth, lng: lngEast },
+    se: { lat: latSouth, lng: lngEast },
+    sw: { lat: latSouth, lng: lngWest }
   }
 }
 
@@ -75,7 +75,7 @@ export function fitBoundsGoogleReady (myBounds, size) {
  * @param {object} regions
  * @return {string} String of the regionId
  */
-export function findClosestRegion ({lat, lng}, regions) {
+export function findClosestRegion ({ lat, lng }, regions) {
   let closestMatchRegionId = null
   let closestMatchDiff = null
   _.map(regions, region => {
@@ -86,4 +86,22 @@ export function findClosestRegion ({lat, lng}, regions) {
     }
   })
   return closestMatchRegionId
+}
+
+/**
+ * Extract From Address gets value from a google places address_component
+ *
+ * @param {array} addressComponent
+ * @param {string} reqType
+ * @param {string} nameLength
+ * @return {string}
+ */
+export function extractFromAddress (addressComponent, reqType, nameLength) {
+  let toReturn
+  addressComponent.forEach(component => component.types.forEach(type => {
+    if (type === reqType) {
+      toReturn = component[nameLength]
+    }
+  }))
+  return toReturn
 }
