@@ -162,6 +162,19 @@ export function fetchGooglePlacesVenueDetail ({ _id, googePlacesData, gpId }) {
   return dispatch => dispatch(cancelFetchGooglePlacesVenueDetail())
 }
 
+export function fetchGooglePlacesEditVenueDetail (gpId) {
+  return dispatch => {
+    googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
+      if (status === 'OK') {
+        return dispatch(setEditVenueDetail(place))
+      }
+      // TODO: this needs to return a DISPATCH to an API error.
+      // See: udemy-advanced-redux-auth/client/src/actions/index.js
+      throw new Error(`Error thrown: ${status}`)
+    })
+  }
+}
+
 export function cancelFetchGooglePlacesVenueDetail () {
   return {
     type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL_CANCEL,
@@ -174,6 +187,13 @@ function setVenueDetail (_id, place) {
     type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL,
     _id: _id,
     payload: { ...place, fetchedTime: new Date() }
+  }
+}
+
+function setEditVenueDetail (place) {
+  return {
+    type: constants.EDIT_VENUE_FETCH_GOOGLE_PLACES_DETAIL,
+    payload: { ...place }
   }
 }
 

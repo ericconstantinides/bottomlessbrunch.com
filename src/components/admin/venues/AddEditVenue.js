@@ -9,7 +9,11 @@ import MapSearch from '../../MapSearch'
 import SelectInput from '../../SelectInput'
 import { getLatLng } from 'react-places-autocomplete'
 import GoogleMapReact from 'google-map-react'
-import { addVenue, editVenue } from '../../../actions'
+import {
+  addVenue,
+  editVenue,
+  fetchGooglePlacesEditVenueDetail
+} from '../../../actions'
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
@@ -23,7 +27,7 @@ const timeOptions = times.map(time => ({ label: time, value: time }))
 const dayOptions = days.map(day => ({ label: day, value: day }))
 const timeCatOptions = timeCategories.map(cat => ({ label: cat, value: cat }))
 
-class AddEditVenue extends Component {
+class venueForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -38,7 +42,7 @@ class AddEditVenue extends Component {
   renderField (field) {
     const { touched, error } = field.meta
     const fieldType = field.type ? field.type : 'text'
-    const className = `AddEditVenue__form-group form-group ${touched && error ? 'has-danger' : ''}`
+    const className = `venueForm__form-group form-group ${touched && error ? 'has-danger' : ''}`
     let link = field.externalLink && field.input.value
       ? <span> | <Link target='_blank' to={field.input.value}>link</Link></span>
       : ''
@@ -55,6 +59,22 @@ class AddEditVenue extends Component {
         </small>
       </div>
     )
+  }
+  componentDidUpdate () {
+    if (this.props.editVenueFields) {
+      const { editVenueFields, fieldValue } = this.props
+      if (editVenueFields.gData) {
+        if (editVenueFields.gData.name) {
+          fieldValue('venueForm', 'name', editVenueFields.gData.name)
+        }
+        if (editVenueFields.gData.website) {
+          fieldValue('venueForm', 'website', editVenueFields.gData.website)
+        }
+        if (editVenueFields.gData.formatted_phone_number) {
+          fieldValue('venueForm', 'phone', editVenueFields.gData.formatted_phone_number)
+        }
+      }
+    }
   }
   // gets called after successful validation:
   onSubmit = values => {
@@ -77,15 +97,20 @@ class AddEditVenue extends Component {
   // Fires on Google AutoSelect selection:
   handleGoogleAutoSelect = (address, placeId) => {
     // set the gpId
-    this.props.fieldValue('addEditVenue', 'gpId', placeId)
+    this.props.fieldValue('venueForm', 'gpId', placeId)
     // add the marker
-    this.setState({loadMarker: true})
+    this.setState({ loadMarker: true })
     geocodeByPlaceId(placeId)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         const region = findClosestRegion({ lat, lng }, this.props.regions)
-        this.props.fieldValue('addEditVenue', 'regionId', region)
-        this.setState({ lat, lng, zoom: 15 })
+        this.props.fieldValue('venueForm', 'regionId', region)
+        this.props.fieldValue('venueForm', 'lat', lat)
+        this.props.fieldValue('venueForm', 'lng', lng)
+        this.setState({ lat, lng, zoom: 15, address: '' })
+
+        // get the google places info:
+        this.props.fetchGooglePlacesEditVenueDetail(placeId)
       })
       .catch(error => console.error(error))
     // this.setState({ address, placeId })
@@ -110,7 +135,7 @@ class AddEditVenue extends Component {
           {fields.map((funTime, index) => (
             <div className='AddEdit__field-wrapper-container' key={index}>
               <div className='AddEdit__field-wrapper'>
-                <div className='AddEditVenue__form-group form-group flex-basis-20p'>
+                <div className='venueForm__form-group form-group flex-basis-20p'>
                   <label className='AddEdit__label'>Start Time</label>
                   <Field
                     name={`${funTime}.startTime`}
@@ -119,7 +144,7 @@ class AddEditVenue extends Component {
                     clearable={false}
                   />
                 </div>
-                <div className='AddEditVenue__form-group form-group flex-basis-20p'>
+                <div className='venueForm__form-group form-group flex-basis-20p'>
                   <label className='AddEdit__label'>End Time</label>
                   <Field
                     name={`${funTime}.endTime`}
@@ -128,7 +153,7 @@ class AddEditVenue extends Component {
                     clearable={false}
                   />
                 </div>
-                <div className='AddEditVenue__form-group form-group flex-basis-60p'>
+                <div className='venueForm__form-group form-group flex-basis-60p'>
                   <label className='AddEdit__label'>Days</label>
                   <Field
                     name={`${funTime}.days`}
@@ -137,7 +162,7 @@ class AddEditVenue extends Component {
                     multi
                   />
                 </div>
-                <div className='AddEditVenue__form-group form-group flex-basis-40p'>
+                <div className='venueForm__form-group form-group flex-basis-40p'>
                   <label className='AddEdit__label'>Category</label>
                   <Field
                     name={`${funTime}.category`}
@@ -307,10 +332,10 @@ class AddEditVenue extends Component {
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
-    const title = thisForm.addEditVenue &&
-      thisForm.addEditVenue.values &&
-      thisForm.addEditVenue.values.name
-      ? <h1>{thisForm.addEditVenue.values.name}</h1>
+    const title = thisForm.venueForm &&
+      thisForm.venueForm.values &&
+      thisForm.venueForm.values.name
+      ? <h1>{thisForm.venueForm.values.name}</h1>
       : ''
     const renderField = this.renderField
     let yData = []
@@ -330,7 +355,7 @@ class AddEditVenue extends Component {
       ? _.map(this.props.regions, rg => ({ label: rg.name, value: rg._id }))
       : ''
     return (
-      <div className='AddEdit AddEditVenue site-container'>
+      <div className='AddEdit venueForm site-container'>
         <Link to='/admin/venues'>« Back to Venues</Link>
         <form className='AddEdit__form' onSubmit={handleSubmit(this.onSubmit)}>
           <div className='AddEdit__col-1'>
@@ -375,7 +400,7 @@ class AddEditVenue extends Component {
                   </button>
                 </div>
                 <div className='AddEdit__field-wrapper'>
-                  <div className='AddEditVenue__form-group form-group'>
+                  <div className='venueForm__form-group form-group'>
                     <label className='AddEdit__label'>Region</label>
                     <Field
                       name='regionId'
@@ -412,7 +437,7 @@ class AddEditVenue extends Component {
                     name='address.city'
                     component={renderField}
                   />
-                  <div className='AddEditVenue__form-group form-group'>
+                  <div className='venueForm__form-group form-group'>
                     <label className='AddEdit__label'>State</label>
                     <Field
                       name='address.state'
@@ -531,24 +556,27 @@ function mapStateToProps (state, ownProps) {
     return {
       thisForm: state.form,
       initialValues: state.venues[ownProps.match.params.id],
-      regions: state.regions
+      regions: state.regions,
+      editVenueFields: state.editVenueFields
     }
   }
   // if we don't, just use your default
   return {
     thisForm: state.form,
-    regions: state.regions
+    regions: state.regions,
+    editVenueFields: state.editVenueFields
   }
 }
 // connect needs to be the outer-most thing run
 export default connect(mapStateToProps, {
   addVenue,
   editVenue,
-  fieldValue
+  fieldValue,
+  fetchGooglePlacesEditVenueDetail
 })(
   reduxForm({
-    form: 'addEditVenue',
+    form: 'venueForm',
     validate,
     enableReinitialize: true
-  })(AddEditVenue)
+  })(venueForm)
 )
