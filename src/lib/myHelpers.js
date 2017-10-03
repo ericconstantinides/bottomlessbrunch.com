@@ -91,17 +91,19 @@ export function findClosestRegion ({ lat, lng }, regions) {
 /**
  * Extract From Address gets value from a google places address_component
  *
- * @param {array} addressComponent
+ * @param {array} addressArr
  * @param {string} reqType
- * @param {string} nameLength
+ * @param {string} fldLength
  * @return {string}
  */
-export function extractFromAddress (addressComponent, reqType, nameLength) {
+export function extractAddress (addressArr, reqType, fldLength = 'short_name') {
   let toReturn
-  addressComponent.forEach(component => component.types.forEach(type => {
-    if (type === reqType) {
-      toReturn = component[nameLength]
-    }
-  }))
+  addressArr.forEach(component =>
+    component.types.forEach(type => {
+      if (type === reqType) {
+        toReturn = component[fldLength]
+      }
+    })
+  )
   return toReturn
 }

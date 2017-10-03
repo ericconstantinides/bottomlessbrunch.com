@@ -17,7 +17,7 @@ import {
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
-import { findClosestRegion, extractFromAddress } from '../../../lib/myHelpers'
+import { findClosestRegion, extractAddress } from '../../../lib/myHelpers'
 
 const YELP_PREFIX = 'https://www.yelp.com/biz/'
 const YELP_SUFFIX = '?q=bottomless'
@@ -64,42 +64,22 @@ class venueForm extends Component {
     const { editVenueFields, fieldValue } = this.props
     if (editVenueFields.gData) {
       const { gData, gData: { address_components: address } } = editVenueFields
-      if (gData.name) {
-        fieldValue('venueForm', 'name', gData.name)
-      }
-      if (gData.website) {
-        fieldValue('venueForm', 'website', gData.website)
-      }
-      if (gData.formatted_phone_number) {
-        fieldValue('venueForm', 'phone', gData.formatted_phone_number)
-      }
-      fieldValue(
-        'venueForm',
-        'address.street',
-        extractFromAddress(address, 'street_number', 'short_name') +
-          ' ' +
-          extractFromAddress(address, 'route', 'short_name')
-      )
-      fieldValue(
-        'venueForm',
-        'address.city',
-        extractFromAddress(address, 'locality', 'long_name')
-      )
-      fieldValue(
-        'venueForm',
-        'address.state',
-        extractFromAddress(address, 'administrative_area_level_1', 'short_name')
-      )
-      fieldValue(
-        'venueForm',
-        'address.zip',
-        extractFromAddress(address, 'postal_code', 'short_name')
-      )
-      fieldValue(
-        'venueForm',
-        'neighborhood',
-        extractFromAddress(address, 'neighborhood', 'short_name')
-      )
+
+      const replacements = [
+        {field: 'name', data: gData.name},
+        {field: 'website', data: gData.website},
+        {field: 'phone', data: gData.formatted_phone_number},
+        {field: 'address.street', data: (extractAddress(address, 'street_number') + ' ' +
+        extractAddress(address, 'route')) },
+        {field: 'address.city', data: extractAddress(address, 'locality')},
+        {field: 'address.state', data: extractAddress(address, 'administrative_area_level_1')},
+        {field: 'address.zip', data: extractAddress(address, 'postal_code')},
+        {field: 'neighborhood', data: extractAddress(address, 'neighborhood')}
+      ]
+      replacements.forEach(fieldObj => {
+        const data = fieldObj.data ? fieldObj.data : ''
+        fieldValue('venueForm', fieldObj.field, data)
+      })
     }
   }
   // gets called after successful validation:
