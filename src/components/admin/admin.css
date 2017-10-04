@@ -54,7 +54,7 @@
 .AddEdit__field-wrapper {
   display: flex;
   flex-flow: wrap;
-  align-items: center;
+  /* align-items: center; */
   margin-left: -0.5em;
 }
 .AddEdit__field-wrapper > * {

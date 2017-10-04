@@ -195,6 +195,23 @@ class venueForm extends Component {
           {fields.map((funTime, index) => (
             <div className='AddEdit__field-wrapper-container' key={index}>
               <div className='AddEdit__field-wrapper'>
+                <div className='venueForm__form-group form-group flex-basis-40p'>
+                  <label className='AddEdit__label'>Category</label>
+                  <Field
+                    name={`${funTime}.category`}
+                    options={timeCatOptions}
+                    component={SelectInput}
+                  />
+                </div>
+                <div className='venueForm__form-group form-group flex-basis-60p'>
+                  <label className='AddEdit__label'>Days</label>
+                  <Field
+                    name={`${funTime}.days`}
+                    options={dayOptions}
+                    component={SelectInput}
+                    multi
+                  />
+                </div>
                 <div className='venueForm__form-group form-group flex-basis-20p'>
                   <label className='AddEdit__label'>Start Time</label>
                   <Field
@@ -211,23 +228,6 @@ class venueForm extends Component {
                     options={timeOptions}
                     component={SelectInput}
                     clearable={false}
-                  />
-                </div>
-                <div className='venueForm__form-group form-group flex-basis-60p'>
-                  <label className='AddEdit__label'>Days</label>
-                  <Field
-                    name={`${funTime}.days`}
-                    options={dayOptions}
-                    component={SelectInput}
-                    multi
-                  />
-                </div>
-                <div className='venueForm__form-group form-group flex-basis-40p'>
-                  <label className='AddEdit__label'>Category</label>
-                  <Field
-                    name={`${funTime}.category`}
-                    options={timeCatOptions}
-                    component={SelectInput}
                   />
                 </div>
                 <div className='flex-basis-60p'>
@@ -250,7 +250,7 @@ class venueForm extends Component {
         </div>}
     </div>
   )
-  renderFunItems = ({ fields, meta: { error, submitFailed } }) => (
+  renderMenuItems = ({ fields, meta: { error, submitFailed } }) => (
     <div className='AddEdit__array'>
       <header className='AddEdit__array-header'>
         <button
@@ -272,7 +272,7 @@ class venueForm extends Component {
                   <Field
                     name={`${funItem}.name`}
                     component={this.renderField}
-                    lbl='Name'
+                    lbl='Menu Item Name'
                   />
                 </div>
                 <div className='flex-basis-33p'>
@@ -569,7 +569,7 @@ class venueForm extends Component {
           <div className='AddEdit__col-2'>
             <div className='AddEdit__field-wrapper'>
               <FieldArray name='funTimes' component={this.renderFunTimes} />
-              <FieldArray name='funItems' component={this.renderFunItems} />
+              <FieldArray name='funItems' component={this.renderMenuItems} />
               <FieldArray name='images' component={this.renderImages} />
               <FieldArray name='research' component={this.renderResearch} />
               <div className='checkbox-wrapper'>
