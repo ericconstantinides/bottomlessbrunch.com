@@ -1,9 +1,24 @@
+.AdminVenues,
 .AdminRegions {
   padding: 1em 0;
 }
 .AdminVenue p,
 .AdminRegion p {
   margin-bottom: 0;
+}
+.AdminVenue h2,
+.AdminRegion h2 {
+  margin-bottom: 0;
+  font-size: 1.25em;
+  margin-left: 0.5em;
+}
+.AdminVenue hr,
+.AdminRegion hr {
+  margin: 0.5em 0;
+}
+.AdminVenue__inner {
+  display: flex;
+  align-items: center;
 }
 .AddEdit {
   padding-top: 0.5em;
