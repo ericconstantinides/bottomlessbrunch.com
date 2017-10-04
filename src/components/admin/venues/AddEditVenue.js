@@ -12,7 +12,8 @@ import GoogleMapReact from 'google-map-react'
 import {
   addVenue,
   editVenue,
-  fetchGooglePlacesEditVenueDetail
+  fetchGooglePlacesEditVenueDetail,
+  fetchYelpPhoneSearchEditVenueDetail
 } from '../../../actions'
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
@@ -70,7 +71,6 @@ class venueForm extends Component {
     const { gData } = this.props.editVenueFields
     const { gData: prevGdata } = prevProps.editVenueFields
     if (gData && (!prevGdata || gData.place_id !== prevGdata.place_id)) {
-      console.log(gData)
       const { address_components: address } = gData
       const replacements = [
         { field: 'name', data: gData.name },
@@ -109,6 +109,18 @@ class venueForm extends Component {
         this.props.fieldValue('venueForm', fieldObj.field, data)
       })
     }
+    // now let's do the same for Yelp:
+    const { yData } = this.props.editVenueFields
+    const { yData: prevYdata } = prevProps.editVenueFields
+    if (yData && (!prevYdata || yData.id !== prevYdata.id)) {
+      const replacements = [
+        { field: 'yId', data: yData.id }
+      ]
+      replacements.forEach(fieldObj => {
+        const data = fieldObj.data ? fieldObj.data : ''
+        this.props.fieldValue('venueForm', fieldObj.field, data)
+      })
+    }
   }
   // gets called after successful validation:
   onSubmit = values => {
@@ -141,8 +153,15 @@ class venueForm extends Component {
         this.props.fieldValue('venueForm', 'lng', lng)
         this.setState({ marker: true, lat, lng, zoom: 15, address: '' })
 
-        // get the google places info:
-        this.props.fetchGooglePlacesEditVenueDetail(placeId)
+        // get the google places info and send in the
+        // yelp search method after:
+        this.props.fetchGooglePlacesEditVenueDetail(
+          placeId,
+          this.props.fetchYelpPhoneSearchEditVenueDetail
+        )
+        // this.props.fetchYelpPhoneSearchEditVenueDetail({
+        //   international_phone_number: '+1 408 929-5501'
+        // })
       })
       .catch(error => console.error(error))
     // this.setState({ address, placeId })
@@ -609,7 +628,8 @@ export default connect(mapStateToProps, {
   addVenue,
   editVenue,
   fieldValue,
-  fetchGooglePlacesEditVenueDetail
+  fetchGooglePlacesEditVenueDetail,
+  fetchYelpPhoneSearchEditVenueDetail
 })(
   reduxForm({
     form: 'venueForm',

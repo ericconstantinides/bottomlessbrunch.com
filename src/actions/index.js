@@ -2,7 +2,11 @@
 import axios from 'axios'
 import slugify from '../lib/Slug'
 import constants from '../actions/types'
-import { fetchTimeout, ROOT_URL } from '../config'
+import { stripDashesSpaces } from '../lib/myHelpers'
+import {
+  fetchTimeout,
+  ROOT_URL
+} from '../config'
 
 let fetchTimeoutMs = fetchTimeout * 1000 * 60
 
@@ -12,8 +16,7 @@ const googlePlaces = new google.maps.places.PlacesService(
 
 export function fetchRegions () {
   return function (dispatch) {
-    axios.get(`${ROOT_URL}/api/v1/regions`)
-    .then(response => {
+    axios.get(`${ROOT_URL}/api/v1/regions`).then(response => {
       const regionsWithSlug = response.data.map(region => {
         region.slug = slugify(region.name)
         return region
@@ -28,7 +31,8 @@ export function fetchRegions () {
 
 export function addRegion (values, history) {
   return function (dispatch) {
-    axios.post(`${ROOT_URL}/api/v1/regions`, values)
+    axios
+      .post(`${ROOT_URL}/api/v1/regions`, values)
       .then(response => {
         dispatch({
           type: constants.REGION_ADD,
@@ -43,7 +47,8 @@ export function addRegion (values, history) {
 
 export function editRegion (id, values, history) {
   return function (dispatch) {
-    axios.put(`${ROOT_URL}/api/v1/regions/${id}`, values)
+    axios
+      .put(`${ROOT_URL}/api/v1/regions/${id}`, values)
       .then(response => {
         dispatch({
           type: constants.REGION_EDIT,
@@ -58,7 +63,8 @@ export function editRegion (id, values, history) {
 
 export function deleteRegion (region, history) {
   return function (dispatch) {
-    axios.delete(`${ROOT_URL}/api/v1/regions/${region}`)
+    axios
+      .delete(`${ROOT_URL}/api/v1/regions/${region}`)
       .then(response => {
         dispatch({
           type: constants.REGION_DELETE,
@@ -73,8 +79,7 @@ export function deleteRegion (region, history) {
 
 export function fetchVenues () {
   return function (dispatch) {
-    axios.get(`${ROOT_URL}/api/v1/venues`)
-    .then(response => {
+    axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
       const venuesWithSlug = response.data.map(venue => {
         venue.slug = slugify(venue.name) + '-' + slugify(venue.neighborhood)
         return venue
@@ -89,7 +94,8 @@ export function fetchVenues () {
 
 export function addVenue (values, history) {
   return function (dispatch) {
-    axios.post(`${ROOT_URL}/api/v1/venues`, values)
+    axios
+      .post(`${ROOT_URL}/api/v1/venues`, values)
       .then(response => {
         dispatch({
           type: constants.VENUE_ADD,
@@ -104,7 +110,8 @@ export function addVenue (values, history) {
 
 export function editVenue (id, values, history) {
   return function (dispatch) {
-    axios.put(`${ROOT_URL}/api/v1/venues/${id}`, values)
+    axios
+      .put(`${ROOT_URL}/api/v1/venues/${id}`, values)
       .then(response => {
         dispatch({
           type: constants.VENUE_EDIT,
@@ -119,7 +126,8 @@ export function editVenue (id, values, history) {
 
 export function deleteVenue (venueId, history) {
   return function (dispatch) {
-    axios.delete(`${ROOT_URL}/api/v1/venues/${venueId}`)
+    axios
+      .delete(`${ROOT_URL}/api/v1/venues/${venueId}`)
       .then(response => {
         dispatch({
           type: constants.VENUE_DELETE,
@@ -151,7 +159,7 @@ export function fetchGooglePlacesVenueDetail ({ _id, googePlacesData, gpId }) {
     return dispatch => {
       googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
         if (status === 'OK') {
-          return dispatch(setVenueDetail(_id, place))
+          return dispatch(setGooglePlacesVenueDetail(_id, place))
         }
         // TODO: this needs to return a DISPATCH to an API error.
         // See: udemy-advanced-redux-auth/client/src/actions/index.js
@@ -162,11 +170,29 @@ export function fetchGooglePlacesVenueDetail ({ _id, googePlacesData, gpId }) {
   return dispatch => dispatch(cancelFetchGooglePlacesVenueDetail())
 }
 
-export function fetchGooglePlacesEditVenueDetail (gpId) {
+export function cancelFetchGooglePlacesVenueDetail () {
+  return {
+    type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL_CANCEL,
+    payload: 'already have the data'
+  }
+}
+
+function setGooglePlacesVenueDetail (_id, place) {
+  return {
+    type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL,
+    _id: _id,
+    payload: { ...place, fetchedTime: new Date() }
+  }
+}
+
+export function fetchGooglePlacesEditVenueDetail (gpId, callback) {
   return dispatch => {
     googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
       if (status === 'OK') {
-        return dispatch(setEditVenueDetail(place))
+        if (callback) {
+          callback(place)
+        }
+        return dispatch(setGooglePlacesEditVenueDetail(place))
       }
       // TODO: this needs to return a DISPATCH to an API error.
       // See: udemy-advanced-redux-auth/client/src/actions/index.js
@@ -175,27 +201,34 @@ export function fetchGooglePlacesEditVenueDetail (gpId) {
   }
 }
 
-export function cancelFetchGooglePlacesVenueDetail () {
-  return {
-    type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL_CANCEL,
-    payload: 'already have the data'
-  }
-}
-
-function setVenueDetail (_id, place) {
-  return {
-    type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL,
-    _id: _id,
-    payload: { ...place, fetchedTime: new Date() }
-  }
-}
-
-function setEditVenueDetail (place) {
+function setGooglePlacesEditVenueDetail (place) {
   return {
     type: constants.EDIT_VENUE_FETCH_GOOGLE_PLACES_DETAIL,
     payload: { ...place }
   }
 }
+
+export function fetchYelpPhoneSearchEditVenueDetail (place) {
+  const phone = encodeURI(stripDashesSpaces(place.international_phone_number))
+  return function (dispatch) {
+    axios.get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${phone}`)
+      .then(results => {
+        if (results.data && results.data.businesses) {
+          dispatch({
+            type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
+            payload: results.data.businesses[0]
+          })
+        }
+      })
+  }
+}
+
+// function setYelpPhoneSearchEditVenueDetail (data) {
+//   return {
+//     type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
+//     payload: { ...data }
+//   }
+// }
 
 export function setRegionUi (regionId) {
   return {
