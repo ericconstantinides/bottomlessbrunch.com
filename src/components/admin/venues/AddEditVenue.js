@@ -126,6 +126,12 @@ class venueForm extends Component {
   }
   // gets called after successful validation:
   onSubmit = values => {
+    // attach yData, yMeta, and gData here:
+    const { gData, yData, yMeta } = this.props.editVenueFields
+    if (gData) values.gData = gData
+    if (yData) values.yData = yData
+    if (yMeta) values.yMeta = yMeta
+
     const { addVenue, editVenue, history, match } = this.props
     if (match.params.id) {
       editVenue(match.params.id, values, history)
