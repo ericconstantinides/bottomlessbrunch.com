@@ -142,7 +142,7 @@ class venueForm extends Component {
     if (this.props.match.params.id && this.props.initialValues) {
       this.setState((prevState, props) => {
         const { lat, lng } = this.props.initialValues
-        return { lat, lng, zoom: 14, loadMarker: true }
+        return { lat, lng, zoom: 14, marker: true }
       })
     }
   }
