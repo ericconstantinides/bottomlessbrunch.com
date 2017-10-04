@@ -16,3 +16,9 @@ export const usaMap = {
     sw: { lat: 22.410132469242768, lng: -126.1250427 }
   }
 }
+
+export const BRUNCH_TIMES = {
+  START: '10:00AM',
+  END: '3:00PM',
+  DAYS: ['Saturday', 'Sunday']
+}

@@ -14,6 +14,9 @@ export default props => {
         } else {
           props.input.onChange(selectedVal.value)
         }
+        if (props.myOnChange) {
+          props.myOnChange(selectedVal.value, props.index)
+        }
       }}
       onBlur={() => props.input.onBlur(props.input.value)}
       options={props.options}

@@ -17,7 +17,7 @@ import {
   fetchYelpMetaEditVenueDetail,
   resetEditVenue
 } from '../../../actions'
-import { usaMap, DATE_LONG } from '../../../config'
+import { usaMap, DATE_LONG, BRUNCH_TIMES } from '../../../config'
 import Marker from '../../Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
 import {
@@ -115,9 +115,7 @@ class venueForm extends Component {
     const { yData } = this.props.editVenueFields
     const { yData: prevYdata } = prevProps.editVenueFields
     if (yData && (!prevYdata || yData.id !== prevYdata.id)) {
-      const replacements = [
-        { field: 'yId', data: yData.id }
-      ]
+      const replacements = [{ field: 'yId', data: yData.id }]
       replacements.forEach(fieldObj => {
         const data = fieldObj.data ? fieldObj.data : ''
         this.props.fieldValue('venueForm', fieldObj.field, data)
@@ -177,6 +175,25 @@ class venueForm extends Component {
 
     // You can do other things with address string or placeId. For example, geocode :)
   }
+  handleTimeCatChange = (val, index) => {
+    if (val === 'Bottomless Brunch') {
+      this.props.fieldValue(
+        'venueForm',
+        `funTimes[${index}].startTime`,
+        BRUNCH_TIMES.START
+      )
+      this.props.fieldValue(
+        'venueForm',
+        `funTimes[${index}].endTime`,
+        BRUNCH_TIMES.END
+      )
+      this.props.fieldValue(
+        'venueForm',
+        `funTimes[${index}].days`,
+        BRUNCH_TIMES.DAYS
+      )
+    }
+  }
   renderFunTimes = ({ fields, meta: { error, submitFailed } }) => (
     <div className='AddEdit__array'>
       <header className='AddEdit__array-header'>
@@ -201,6 +218,8 @@ class venueForm extends Component {
                     name={`${funTime}.category`}
                     options={timeCatOptions}
                     component={SelectInput}
+                    index={index}
+                    myOnChange={this.handleTimeCatChange}
                   />
                 </div>
                 <div className='venueForm__form-group form-group flex-basis-60p'>
@@ -389,7 +408,7 @@ class venueForm extends Component {
         </div>}
     </div>
   )
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.props.resetEditVenue()
   }
   render () {
