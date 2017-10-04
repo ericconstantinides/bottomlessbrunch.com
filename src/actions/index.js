@@ -214,7 +214,7 @@ export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
     axios.get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${phone}`)
       .then(results => {
         if (results.data) {
-          if (callback) {
+          if (callback && results.data[0] && results.data[0].id) {
             callback(results.data[0].id)
           }
           dispatch({
