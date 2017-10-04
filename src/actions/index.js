@@ -213,22 +213,15 @@ export function fetchYelpPhoneSearchEditVenueDetail (place) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${phone}`)
       .then(results => {
-        if (results.data && results.data.businesses) {
+        if (results.data) {
           dispatch({
             type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
-            payload: results.data.businesses[0]
+            payload: results.data[0]
           })
         }
       })
   }
 }
-
-// function setYelpPhoneSearchEditVenueDetail (data) {
-//   return {
-//     type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
-//     payload: { ...data }
-//   }
-// }
 
 export function setRegionUi (regionId) {
   return {
