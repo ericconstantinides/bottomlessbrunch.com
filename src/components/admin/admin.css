@@ -2,6 +2,9 @@
 .AdminRegions {
   padding: 1em 0;
 }
+button {
+  cursor: pointer;
+}
 .AdminVenue p,
 .AdminRegion p {
   margin-bottom: 0;

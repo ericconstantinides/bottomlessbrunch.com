@@ -3,10 +3,7 @@ import axios from 'axios'
 import slugify from '../lib/Slug'
 import constants from '../actions/types'
 import { stripDashesSpaces } from '../lib/myHelpers'
-import {
-  fetchTimeout,
-  ROOT_URL
-} from '../config'
+import { fetchTimeout, ROOT_URL } from '../config'
 
 let fetchTimeoutMs = fetchTimeout * 1000 * 60
 
@@ -81,7 +78,11 @@ export function fetchVenues () {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
       const venuesWithSlug = response.data.map(venue => {
-        venue.slug = slugify(venue.name) + '-' + slugify(venue.neighborhood)
+        const nameSlug = slugify(venue.name)
+        const neighSlug = venue.neighborhood
+          ? '-' + slugify(venue.neighborhood)
+          : ''
+        venue.slug = nameSlug + neighSlug
         return venue
       })
       dispatch({
@@ -189,7 +190,8 @@ export function fetchGooglePlacesEditVenueDetail (gpId, callback1, callback2) {
   return dispatch => {
     googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
       if (status === 'OK') {
-        if (callback1) {
+        // I shouldn't have intl phone number here... but
+        if (callback1 && place.international_phone_number) {
           callback1(place, callback2)
         }
         return dispatch(setGooglePlacesEditVenueDetail(place))
@@ -209,9 +211,12 @@ function setGooglePlacesEditVenueDetail (place) {
 }
 
 export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
-  const phone = encodeURI(stripDashesSpaces(place.international_phone_number))
-  return function (dispatch) {
-    axios.get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${phone}`)
+  const phone = place.international_phone_number
+  if (phone) {
+    const formattedPhone = encodeURI(stripDashesSpaces(phone))
+    return function (dispatch) {
+      axios
+      .get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${formattedPhone}`)
       .then(results => {
         if (results.data) {
           if (callback && results.data[0] && results.data[0].id) {
@@ -223,12 +228,14 @@ export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
           })
         }
       })
+    }
   }
 }
 
 export function fetchYelpMetaEditVenueDetail (id) {
   return function (dispatch) {
-    axios.get(`${ROOT_URL}/api/v1/methods/yelpMetaSearch?id=${id}`)
+    axios
+      .get(`${ROOT_URL}/api/v1/methods/yelpMetaSearch?id=${id}`)
       .then(results => {
         if (results.data) {
           dispatch({

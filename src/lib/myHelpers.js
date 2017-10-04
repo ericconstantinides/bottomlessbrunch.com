@@ -116,6 +116,7 @@ export function getAddy (addressArr, reqType, fldLength = 'short_name') {
  * @returns {string}
  */
 export function stripDashesSpaces (text) {
+  if (!text) return
   return text
     .toString()
     .toLowerCase()
