@@ -14,7 +14,8 @@ import {
   editVenue,
   fetchGooglePlacesEditVenueDetail,
   fetchYelpPhoneSearchEditVenueDetail,
-  fetchYelpMetaEditVenueDetail
+  fetchYelpMetaEditVenueDetail,
+  resetEditVenue
 } from '../../../actions'
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
@@ -382,6 +383,9 @@ class venueForm extends Component {
         </div>}
     </div>
   )
+  componentWillUnmount() {
+    this.props.resetEditVenue()
+  }
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
@@ -391,10 +395,16 @@ class venueForm extends Component {
       ? <h1>{thisForm.venueForm.values.name}</h1>
       : ''
     const renderField = this.renderField
-    let yMeta = []
     // format the yMeta for displaying:
-    if (this.props.editVenueFields && this.props.editVenueFields.yMeta) {
-      yMeta = Object.entries(this.props.editVenueFields.yMeta).map(([k, v]) => {
+    let yMeta = []
+    let yMetaObj
+    if (this.props.initialValues && this.props.initialValues.yMeta) {
+      yMetaObj = this.props.initialValues.yMeta
+    } else if (this.props.editVenueFields && this.props.editVenueFields.yMeta) {
+      yMetaObj = this.props.editVenueFields.yMeta
+    }
+    if (yMetaObj) {
+      yMeta = Object.entries(yMetaObj).map(([k, v]) => {
         const v2 = v === true ? 'true' : v === false ? 'false' : v
         const v3 = Array.isArray(v2) ? v2.join(', ') : v2
         const v4 = k === 'fetchedTime'
@@ -632,7 +642,8 @@ export default connect(mapStateToProps, {
   fieldValue,
   fetchGooglePlacesEditVenueDetail,
   fetchYelpPhoneSearchEditVenueDetail,
-  fetchYelpMetaEditVenueDetail
+  fetchYelpMetaEditVenueDetail,
+  resetEditVenue
 })(
   reduxForm({
     form: 'venueForm',

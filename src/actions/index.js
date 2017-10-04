@@ -240,6 +240,13 @@ export function fetchYelpMetaEditVenueDetail (id) {
   }
 }
 
+export function resetEditVenue () {
+  return {
+    type: constants.EDIT_VENUE_RESET,
+    payload: null
+  }
+}
+
 export function setRegionUi (regionId) {
   return {
     type: constants.UI_SET_REGION,
