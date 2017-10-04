@@ -4,29 +4,19 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 export default props => {
-  if (!props.multi) {
-    return (
-      <Select
-        {...props}
-        value={props.input.value}
-        onChange={valueObj => {
-          props.input.onChange(valueObj.value)
-        }}
-        onBlur={() => props.input.onBlur(props.input.value)}
-        options={props.options}
-      />
-    )
-  } else {
-    return (
-      <Select
-        {...props}
-        value={props.input.value}
-        onChange={valueArr => {
-          props.input.onChange(valueArr.map(val => val.value))
-        }}
-        onBlur={() => props.input.onBlur(props.input.value)}
-        options={props.options}
-      />
-    )
-  }
+  return (
+    <Select
+      {...props}
+      value={props.input.value}
+      onChange={selectedVal => {
+        if (Array.isArray(selectedVal)) {
+          props.input.onChange(selectedVal.map(val => val.value))
+        } else {
+          props.input.onChange(selectedVal.value)
+        }
+      }}
+      onBlur={() => props.input.onBlur(props.input.value)}
+      options={props.options}
+    />
+  )
 }
