@@ -128,10 +128,10 @@
 /* .AddEdit__field-wrapper-container > button {
   flex-basis: 0;
 } */
-.AddEdit__yData h3 {
+.AddEdit__yMeta h3 {
   text-align: center;
 }
-.AddEdit__yData div {
+.AddEdit__yMeta div {
   margin-bottom: 0.25em;
 }
 

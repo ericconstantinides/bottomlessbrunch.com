@@ -13,7 +13,8 @@ import {
   addVenue,
   editVenue,
   fetchGooglePlacesEditVenueDetail,
-  fetchYelpPhoneSearchEditVenueDetail
+  fetchYelpPhoneSearchEditVenueDetail,
+  fetchYelpMetaEditVenueDetail
 } from '../../../actions'
 import { usaMap, DATE_LONG } from '../../../config'
 import Marker from '../../Marker'
@@ -157,7 +158,8 @@ class venueForm extends Component {
         // yelp search method after:
         this.props.fetchGooglePlacesEditVenueDetail(
           placeId,
-          this.props.fetchYelpPhoneSearchEditVenueDetail
+          this.props.fetchYelpPhoneSearchEditVenueDetail,
+          this.props.fetchYelpMetaEditVenueDetail
         )
         // this.props.fetchYelpPhoneSearchEditVenueDetail({
         //   international_phone_number: '+1 408 929-5501'
@@ -389,10 +391,10 @@ class venueForm extends Component {
       ? <h1>{thisForm.venueForm.values.name}</h1>
       : ''
     const renderField = this.renderField
-    let yData = []
-    // format the yData for displaying:
-    if (this.props.initialValues && this.props.initialValues.yData) {
-      yData = Object.entries(this.props.initialValues.yData).map(([k, v]) => {
+    let yMeta = []
+    // format the yMeta for displaying:
+    if (this.props.editVenueFields && this.props.editVenueFields.yMeta) {
+      yMeta = Object.entries(this.props.editVenueFields.yMeta).map(([k, v]) => {
         const v2 = v === true ? 'true' : v === false ? 'false' : v
         const v3 = Array.isArray(v2) ? v2.join(', ') : v2
         const v4 = k === 'fetchedTime'
@@ -400,7 +402,7 @@ class venueForm extends Component {
           : v3
         return <div key={k}><strong>{k}</strong>: <span>{v4}</span></div>
       })
-      yData.unshift(<h3 key='yDataTitle'>yData</h3>)
+      yMeta.unshift(<h3 key='yMetaTitle'>yMeta</h3>)
     }
     const regionOptions = this.props.regions
       ? _.map(this.props.regions, rg => ({ label: rg.name, value: rg._id }))
@@ -579,7 +581,7 @@ class venueForm extends Component {
             </Link>
           </div>
           <div className='AddEdit__col-3'>
-            <aside className='AddEdit__yData'>{yData}</aside>
+            <aside className='AddEdit__yMeta'>{yMeta}</aside>
           </div>
         </form>
       </div>
@@ -629,7 +631,8 @@ export default connect(mapStateToProps, {
   editVenue,
   fieldValue,
   fetchGooglePlacesEditVenueDetail,
-  fetchYelpPhoneSearchEditVenueDetail
+  fetchYelpPhoneSearchEditVenueDetail,
+  fetchYelpMetaEditVenueDetail
 })(
   reduxForm({
     form: 'venueForm',

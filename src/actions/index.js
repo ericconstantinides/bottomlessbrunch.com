@@ -185,12 +185,12 @@ function setGooglePlacesVenueDetail (_id, place) {
   }
 }
 
-export function fetchGooglePlacesEditVenueDetail (gpId, callback) {
+export function fetchGooglePlacesEditVenueDetail (gpId, callback1, callback2) {
   return dispatch => {
     googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
       if (status === 'OK') {
-        if (callback) {
-          callback(place)
+        if (callback1) {
+          callback1(place, callback2)
         }
         return dispatch(setGooglePlacesEditVenueDetail(place))
       }
@@ -208,15 +208,32 @@ function setGooglePlacesEditVenueDetail (place) {
   }
 }
 
-export function fetchYelpPhoneSearchEditVenueDetail (place) {
+export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
   const phone = encodeURI(stripDashesSpaces(place.international_phone_number))
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${phone}`)
       .then(results => {
         if (results.data) {
+          if (callback) {
+            callback(results.data[0].id)
+          }
           dispatch({
             type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
             payload: results.data[0]
+          })
+        }
+      })
+  }
+}
+
+export function fetchYelpMetaEditVenueDetail (id) {
+  return function (dispatch) {
+    axios.get(`${ROOT_URL}/api/v1/methods/yelpMetaSearch?id=${id}`)
+      .then(results => {
+        if (results.data) {
+          dispatch({
+            type: constants.EDIT_VENUE_FETCH_YELP_META_DETAIL,
+            payload: results.data
           })
         }
       })
