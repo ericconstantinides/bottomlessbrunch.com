@@ -22,7 +22,8 @@
     "react-stars": "https://github.com/zdila/react-stars/tarball/master",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "stringify-object": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -232,10 +232,10 @@ export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
   }
 }
 
-export function fetchYelpMetaEditVenueDetail (id) {
+export function fetchYelpMetaEditVenueDetail (yId) {
   return function (dispatch) {
     axios
-      .get(`${ROOT_URL}/api/v1/methods/yelpMetaSearch?id=${id}`)
+      .get(`${ROOT_URL}/api/v1/methods/yelpMetaSearch?id=${yId}`)
       .then(results => {
         if (results.data) {
           dispatch({

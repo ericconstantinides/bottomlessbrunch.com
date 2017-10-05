@@ -49,7 +49,7 @@ class venueForm extends Component {
   renderField (field) {
     const { touched, error } = field.meta
     const fieldType = field.type ? field.type : 'text'
-    const className = `venueForm__form-group form-group ${touched && error ? 'has-danger' : ''}`
+    const className = `venueForm__form-group form-group ${touched && error ? 'has-danger' : ''} ${field.className ? field.className : ''}`
     let link = field.externalLink && field.input.value
       ? <span> | <Link target='_blank' to={field.input.value}>link</Link></span>
       : ''
@@ -411,6 +411,13 @@ class venueForm extends Component {
   componentWillUnmount () {
     this.props.resetEditVenue()
   }
+  handleCompileYelp = () => {
+    if (_.has(this.props.thisForm.venueForm.values, 'yId')) {
+      this.props.fetchYelpMetaEditVenueDetail(
+        this.props.thisForm.venueForm.values.yId
+      )
+    }
+  }
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
@@ -422,23 +429,25 @@ class venueForm extends Component {
     const renderField = this.renderField
     // format the yMeta for displaying:
     let yMeta = []
-    let yMetaObj
-    if (this.props.initialValues && this.props.initialValues.yMeta) {
-      yMetaObj = this.props.initialValues.yMeta
-    } else if (this.props.editVenueFields && this.props.editVenueFields.yMeta) {
-      yMetaObj = this.props.editVenueFields.yMeta
-    }
-    if (yMetaObj) {
-      yMeta = Object.entries(yMetaObj).map(([k, v]) => {
-        const v2 = v === true ? 'true' : v === false ? 'false' : v
-        const v3 = Array.isArray(v2) ? v2.join(', ') : v2
-        const v4 = k === 'fetchedTime'
-          ? new Date(v3).toLocaleDateString('en-US', DATE_LONG)
-          : v3
-        return <div key={k}><strong>{k}</strong>: <span>{v4}</span></div>
-      })
-      yMeta.unshift(<h3 key='yMetaTitle'>yMeta</h3>)
-    }
+    const yMetaObj = _.has(this.props.initialValues, 'yMeta')
+      ? this.props.initialValues.yMeta
+      : _.has(this.props.editVenueFields, 'yMeta')
+          ? this.props.editVenueFields.yMeta
+          : {}
+    const gDataObj = _.has(this.props.initialValues, 'gData')
+      ? this.props.initialValues.gData
+      : _.has(this.props.editVenueFields, 'gData')
+          ? this.props.editVenueFields.gData
+          : {}
+    yMeta = Object.entries(yMetaObj).map(([k, v]) => {
+      const v2 = v === true ? 'true' : v === false ? 'false' : v
+      const v3 = Array.isArray(v2) ? v2.join(', ') : v2
+      const v4 = k === 'fetchedTime'
+        ? new Date(v3).toLocaleDateString('en-US', DATE_LONG)
+        : v3
+      return <div key={k}><strong>{k}</strong>: <span>{v4}</span></div>
+    })
+    yMeta.unshift(<h3 key='yMetaTitle'>yMeta</h3>)
     const regionOptions = this.props.regions
       ? _.map(this.props.regions, rg => ({ label: rg.name, value: rg._id }))
       : ''
@@ -475,9 +484,9 @@ class venueForm extends Component {
                   <button
                     className='btn btn-sm btn-primary'
                     type='button'
-                    onClick={this.handleCompileMissingData}
+                    onClick={this.handleCompileYelp}
                   >
-                    Compile <span>Empty</span> Fields
+                    Compile <span>Yelp</span> Meta
                   </button>
                   <button
                     className='btn btn-sm btn-primary'
@@ -498,23 +507,27 @@ class venueForm extends Component {
                   </div>
                   <Field lbl='Venue Name' name='name' component={renderField} />
                   <Field
-                    lbl='Google Places ID'
-                    name='gpId'
-                    component={renderField}
-                  />
-                  <Field lbl='Yelp ID' name='yId' component={renderField} />
-                  <Field
-                    lbl='Zomato ID'
-                    name='zomatoId'
-                    component={renderField}
-                  />
-                  <Field
                     lbl='Neighborhood'
                     name='neighborhood'
                     component={renderField}
                   />
-                  <Field lbl='Latitude' name='lat' component={renderField} />
-                  <Field lbl='Longitude' name='lng' component={renderField} />
+                  <Field
+                    lbl='Website'
+                    name='website'
+                    component={renderField}
+                    externalLink
+                  />
+                  <Field
+                    lbl='Yelp ID'
+                    name='yId'
+                    component={renderField}
+                  />
+                  <Field
+                    lbl='Facebook URL'
+                    name='facebookUrl'
+                    component={renderField}
+                    externalLink
+                  />
                   <Field
                     lbl='Street'
                     name='address.street'
@@ -525,7 +538,7 @@ class venueForm extends Component {
                     name='address.city'
                     component={renderField}
                   />
-                  <div className='venueForm__form-group form-group'>
+                  <div className='venueForm__form-group form-group flex-basis-16p'>
                     <label className='AddEdit__label'>State</label>
                     <Field
                       name='address.state'
@@ -538,24 +551,41 @@ class venueForm extends Component {
                     lbl='Zip Code'
                     name='address.zip'
                     component={renderField}
+                    className='flex-basis-16p'
                   />
-                  <Field lbl='Phone #' name='phone' component={renderField} />
                   <Field
-                    lbl='Global Phone #'
+                    lbl='Latitude'
+                    name='lat'
+                    component={renderField}
+                    className='flex-basis-25p'
+                  />
+                  <Field
+                    lbl='Longitude'
+                    name='lng'
+                    component={renderField}
+                    className='flex-basis-25p'
+                  />
+                  <Field
+                    lbl='Display Phone'
+                    name='phone'
+                    component={renderField}
+                    className='flex-basis-25p'
+                  />
+                  <Field
+                    lbl='Global Phone'
                     name='globalPhone'
                     component={renderField}
+                    className='flex-basis-25p'
                   />
                   <Field
-                    lbl='Website'
-                    name='website'
+                    lbl='Google Places ID'
+                    name='gpId'
                     component={renderField}
-                    externalLink
                   />
                   <Field
-                    lbl='Facebook URL'
-                    name='facebookUrl'
+                    lbl='Zomato ID'
+                    name='zomatoId'
                     component={renderField}
-                    externalLink
                   />
                   <Field
                     lbl='OpenTable URL'

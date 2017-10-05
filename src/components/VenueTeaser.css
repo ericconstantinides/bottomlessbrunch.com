@@ -20,7 +20,7 @@
   border-radius: 1px;
   box-shadow: 0 2px 2px rgba(0,0,0,0.2);
   overflow: hidden;
-  width: 300px;
+  width: 240px;
   height: 86px;
   flex: 0 0 auto;
   position: relative;
@@ -39,6 +39,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   letter-spacing: -0.01em;
+  width: 240px;
 }
 .VenuePage__rating {
   margin-left: 1em;

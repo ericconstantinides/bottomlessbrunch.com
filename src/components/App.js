@@ -43,6 +43,7 @@ class App extends Component {
     } */
   }
   render () {
+    // create the Venue Routes:
     let venueRoutes = null
     if (!_.isEmpty(this.props.regions) && !_.isEmpty(this.props.venues)) {
       venueRoutes = _.map(this.props.venues, venue => {

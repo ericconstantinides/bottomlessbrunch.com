@@ -23,6 +23,17 @@ body,
 .btn + .btn {
   margin-left: 0.375em;
 }
+#root .Select-placeholder,
+#root .Select--single > .Select-control .Select-value {
+  line-height: 32px;
+}
+#root .Select-control {
+  height: 34px;
+  border-color: rgba(0,0,0,.15)
+}
+#root .Select-input {
+  height: 32px;
+}
 .site-container {
   width: calc(100% - 2em);
   margin: 0 auto;

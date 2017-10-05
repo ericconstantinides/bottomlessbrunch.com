@@ -42,6 +42,7 @@ button {
 }
 .AddEdit__form .form-control {
   font-size: inherit;
+  text-overflow: ellipsis;
 }
 .AddEdit__label {
   font-weight: 600;
@@ -57,10 +58,12 @@ button {
 }
 .AddEdit__col-3 {
   flex: 0 0 150px;
+  width: 150px;
   order: 3;
 }
 .AddEditRegion .AddEdit__col-left {
   flex: 1 0 300px;
+  width: 300px;
 }
 .AddEditRegion .AddEdit__col-right {
   flex: 1 1 80vh;
@@ -158,9 +161,12 @@ button {
   font-size: 150%;
   line-height: 0.8125;
 }
+.flex-basis-15p { flex-basis: 15%; }
+.flex-basis-16p { flex-basis: 16.666%; }
 .flex-basis-20p { flex-basis: 20%; }
 .flex-basis-25p { flex-basis: 25%; }
 .flex-basis-33p { flex-basis: 33.333%; }
+.flex-basis-35p { flex-basis: 35%; }
 .flex-basis-40p { flex-basis: 40%; }
 .flex-basis-50p { flex-basis: 50%; }
 .flex-basis-60p { flex-basis: 60%; }

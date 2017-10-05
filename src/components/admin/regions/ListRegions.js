@@ -6,28 +6,33 @@ import * as actions from '../../../actions'
 
 
 const AdminRegion = props => {
-  const { _id, name, state, gpId, slug, lat, lng, zoom, handleDelete } = props
+  // const { _id, name, state, gpId, slug, lat, lng, zoom, handleDelete } = props
+  const { _id, name, state, slug, handleDelete } = props
   return (
-    <div className='AdminRegion'>
+    <div className='AdminVenue'>
       <hr />
-      <h2>{name}{state && `, ${state}`}</h2>
-      <p>slug: {slug}</p>
-      <p>lat: {lat}</p>
-      <p>lng: {lng}</p>
-      <p>zoom: {zoom}</p>
-      <p>gpId: {gpId}</p>
-      <Link
-        to={`/admin/regions/${_id}/edit`}
-        className='btn btn-sm btn-primary'
-      >
-        Edit
-      </Link>
-      <button
-        onClick={handleDelete(_id, name)}
-        className='btn btn-sm btn-danger'
-      >
-        Delete
-      </button>
+        <div className='AdminVenue__inner'>
+        <Link
+          to={`/admin/regions/${_id}/edit`}
+          className='btn btn-sm btn-primary'
+        >
+          Edit
+        </Link>
+        <button
+          onClick={handleDelete(_id, name)}
+          className='btn btn-sm btn-danger'
+        >
+          Delete
+        </button>
+        <Link to={`/${slug}`}>
+          <h2>{name}{state && `, ${state}`}</h2>
+        </Link>
+        {/* <p>slug: {slug}</p>
+        <p>lat: {lat}</p>
+        <p>lng: {lng}</p>
+        <p>zoom: {zoom}</p>
+        <p>gpId: {gpId}</p> */}
+      </div>
     </div>
   )
 }

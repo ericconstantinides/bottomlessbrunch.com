@@ -11,7 +11,7 @@ const VenueTeaser = ({
   altClass
 }) => {
   const hovered = venue._id === hoveredId ? 'is-hovered' : 'not-hovered'
-  const renderedImage = venue.images[0]
+  const renderedImage = venue.images[0] && false === true
     ? <div className='VenueTeaser__image-container'>
       <img
         className='VenueTeaser__image'
