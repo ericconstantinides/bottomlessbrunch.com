@@ -82,8 +82,10 @@
 }
 .VenueTeaser__image {
   display: block;
-  width: 100px;
-  height: 100%;
+  /* width: 100px; */
+  /* height: 100%; */
+  width: 125px;
+  height: 80px;
   object-fit: cover;
   margin-top: -1px;
 }
@@ -114,6 +116,19 @@
   transition: 0.15s;
   transform-origin: center bottom;
 }
+/* span.VenueTeaser__marker:after {
+  content: '';
+  display: block;
+  background: rgba(255,255,255,0.7);
+  width: 26px;
+  height: 26px;
+  z-index: -1;
+  border-radius: 100px;
+  border: 10px solid rgba(255, 149, 61, 0.84);
+  position: absolute;
+  bottom: -13px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+} */
 /* Hover */
 .VenueTeaser.VenueListItem.is-hovered {
   background: whitesmoke;

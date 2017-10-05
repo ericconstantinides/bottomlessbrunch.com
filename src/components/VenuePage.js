@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Star from 'react-stars'
@@ -38,10 +39,11 @@ class VenuePage extends Component {
     this.props.history.push(this.state.nextSlug)
   }
   render () {
+    console.log(this.props)
     const venue = this.props.venues[this.props.venueId]
     // only go here if we have data:
     let hours = ''
-    if (venue.googePlacesData && venue.googePlacesData.opening_hours) {
+    if (_.has(venue.googePlacesData, 'opening_hours')) {
       hours = venue.googePlacesData.opening_hours.weekday_text.map((day, i) => {
         const [weekday, ...rest] = day.split(' ')
         return (

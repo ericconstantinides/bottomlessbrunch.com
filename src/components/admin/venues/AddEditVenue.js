@@ -418,6 +418,13 @@ class venueForm extends Component {
       )
     }
   }
+  handleCompileGooglePlaces = () => {
+    if (_.has(this.props.thisForm.venueForm.values, 'gpId')) {
+      this.props.fetchGooglePlacesEditVenueDetail(
+        this.props.thisForm.venueForm.values.gpId
+      )
+    }
+  }
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
@@ -429,15 +436,15 @@ class venueForm extends Component {
     const renderField = this.renderField
     // format the yMeta for displaying:
     let yMeta = []
-    const yMetaObj = _.has(this.props.initialValues, 'yMeta')
-      ? this.props.initialValues.yMeta
-      : _.has(this.props.editVenueFields, 'yMeta')
-          ? this.props.editVenueFields.yMeta
+    const yMetaObj = _.has(this.props.editVenueFields, 'yMeta')
+      ? this.props.editVenueFields.yMeta
+      : _.has(this.props.initialValues, 'yMeta')
+          ? this.props.initialValues.yMeta
           : {}
-    const gDataObj = _.has(this.props.initialValues, 'gData')
-      ? this.props.initialValues.gData
-      : _.has(this.props.editVenueFields, 'gData')
-          ? this.props.editVenueFields.gData
+    const gDataObj = _.has(this.props.editVenueFields, 'gData')
+      ? this.props.editVenueFields.gData
+      : _.has(this.props.initialValues, 'gData')
+          ? this.props.initialValues.gData
           : {}
     yMeta = Object.entries(yMetaObj).map(([k, v]) => {
       const v2 = v === true ? 'true' : v === false ? 'false' : v
@@ -491,10 +498,17 @@ class venueForm extends Component {
                   <button
                     className='btn btn-sm btn-primary'
                     type='button'
+                    onClick={this.handleCompileGooglePlaces}
+                  >
+                    Compile <span>Google</span> Meta
+                  </button>
+                  {/* <button
+                    className='btn btn-sm btn-primary'
+                    type='button'
                     onClick={this.handleCompileAllData}
                   >
                     Compile <span>All</span> Fields
-                  </button>
+                  </button> */}
                 </div>
                 <div className='AddEdit__field-wrapper'>
                   <div className='venueForm__form-group form-group'>
@@ -616,6 +630,11 @@ class venueForm extends Component {
             </div>
           </div>
           <div className='AddEdit__col-2'>
+            {gDataObj.images && 
+              <div className='AddEdit__image-wrapper'>
+                <img src={gDataObj.images.large[0].url} alt='' />
+              </div>
+            }
             <div className='AddEdit__field-wrapper'>
               <FieldArray name='funTimes' component={this.renderFunTimes} />
               <FieldArray name='funItems' component={this.renderMenuItems} />

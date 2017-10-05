@@ -86,6 +86,20 @@ button {
   max-height: 80vh;
   max-width: 80vh;
 }
+.AddEdit__image-wrapper {
+  background: whitesmoke;
+  border: 1px solid #ccc;
+  margin: 0 auto 1em;
+  padding: 0.5em;
+}
+.AddEdit__image-wrapper img {
+  max-width: 100%;
+  height: auto;
+  max-height: 170px;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+}
 .AddEdit .AddEdit__array {
   flex-basis: 100%;
   padding: 0;

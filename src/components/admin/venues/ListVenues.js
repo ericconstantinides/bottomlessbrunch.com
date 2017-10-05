@@ -5,11 +5,14 @@ import _ from 'lodash'
 import * as actions from '../../../actions'
 
 
-const AdminVenue = ({ _id, name, lat, lng, zoom, handleDelete }) => {
+const AdminVenue = ({ _id, name, lat, lng, zoom, gData, handleDelete }) => {
   return (
     <div className='AdminVenue'>
       <hr />
       <div className='AdminVenue__inner'>
+        {gData.images && 
+          <img src={gData.images.thumb[0].url} alt='' />
+        }
         <Link
           to={`/admin/venues/${_id}/edit`}
           className='btn btn-sm btn-primary'

@@ -11,11 +11,13 @@ const VenueTeaser = ({
   altClass
 }) => {
   const hovered = venue._id === hoveredId ? 'is-hovered' : 'not-hovered'
-  const renderedImage = venue.images[0] && false === true
+
+  if (venue.name === 'Stock in Trade') console.log(venue)
+  const renderedImage = venue.gData && venue.gData.images
     ? <div className='VenueTeaser__image-container'>
       <img
         className='VenueTeaser__image'
-        src={`/images/${venue.images[0].fileName}`}
+        src={venue.gData.images.thumb[0].url}
         alt={venue.name}
         />
     </div>

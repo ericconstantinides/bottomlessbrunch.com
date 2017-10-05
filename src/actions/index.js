@@ -194,12 +194,42 @@ export function fetchGooglePlacesEditVenueDetail (gpId, callback1, callback2) {
         if (callback1 && place.international_phone_number) {
           callback1(place, callback2)
         }
-        return dispatch(setGooglePlacesEditVenueDetail(place))
+        return dispatch(fetchGooglePlacesEditVenuePhotos(place))
       }
       // TODO: this needs to return a DISPATCH to an API error.
       // See: udemy-advanced-redux-auth/client/src/actions/index.js
       throw new Error(`Error thrown: ${status}`)
     })
+  }
+}
+
+function fetchGooglePlacesEditVenuePhotos (place) {
+  if (place.photos) {
+    place.images = {}
+    place.images.full = place.photos
+      .map(photo => ({
+        url: photo.getUrl({ maxWidth: photo.width, maxHeight: photo.height }),
+        width: photo.width,
+        height: photo.height
+      })
+    )
+    place.images.thumb = place.photos
+      .map(photo => ({
+        url: photo.getUrl({ maxWidth: 150, maxHeight: 150 }),
+        width: 150,
+        height: 150
+      })
+    )
+    place.images.large = place.photos
+      .map(photo => ({
+        url: photo.getUrl({ maxWidth: 800, maxHeight: 800 }),
+        width: 800,
+        height: 800
+      })
+    )
+  }
+  return dispatch => {
+    return dispatch(setGooglePlacesEditVenueDetail(place))
   }
 }
 

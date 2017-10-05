@@ -48,7 +48,6 @@ class Map extends Component {
             lng={venue.lng}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
-            handleClick={this.handleClick}
             venue={venue}
             hoveredId={this.props.ui.venueHover._id}
             regionSlug={this.props.regions[venue.regionId].slug}
