@@ -7,6 +7,7 @@ import { Route } from 'react-router'
 import { parsePath } from '../lib/myHelpers'
 
 import MapPage from './MapPage'
+import IntroPage from './IntroPage'
 import VenuePage from './VenuePage'
 import Admin from './admin'
 
@@ -15,30 +16,35 @@ import createHistory from 'history/createBrowserHistory'
 const history = createHistory()
 
 class App extends Component {
-  componentWillMount () {
+  componentDidMount () {
     // get the regions and the venues
-    this.props.fetchRegions()
+    this.props.fetchRegions(
+      history,
+      // add a callback to fetchUiRegion using history
+      this.props.fetchUiRegion
+    )
     this.props.fetchVenues()
-    this.props.setRegionUi('59c4a61488348f8102580f25')
   }
   componentWillReceiveProps (nextProps) {
-    /*     if (nextProps.regions && nextProps.regions[0]) {
+    /*     const parsedHistory = parsePath(history.location.pathname)
+    console.log(parsedHistory)
+    if (nextProps.regions && nextProps.regions[0] && 5 === 4) {
       const { history } = this.props
 
       // first get the region from the URL (if any)
-      const regionUrl = (history.location.pathname).replace('/', '').split('/')[0]
+      const regionUrl = history.location.pathname.replace('/', '').split('/')[0]
 
       if (regionUrl) {
         const regionUrlId = _.filter(nextProps.regions, region => {
           if (region.slug === regionUrl) return region
         })[0].id
         if (typeof regionUrlId !== 'undefined' && !isNaN(regionUrlId)) {
-          this.props.setRegionUi(regionUrlId)
+          this.props.setUiRegion(regionUrlId)
         } else {
-          this.props.setRegionUi(0)
+          this.props.setUiRegion(0)
         }
       } else {
-        this.props.setRegionUi(0)
+        this.props.setUiRegion(0)
       }
     } */
   }
@@ -75,7 +81,12 @@ class App extends Component {
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}
-            {parsedHistory[0] !== 'admin' && <MapPage history={history} />}
+            {parsedHistory[0] !== 'admin' &&
+              this.props.ui.region &&
+              <MapPage history={history} />}
+            {parsedHistory[0] !== 'admin' &&
+              !this.props.ui.region &&
+              <IntroPage history={history} />}
           </div>
         </Router>
       </div>
@@ -83,8 +94,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ venues, regions }) {
-  return { venues, regions }
+function mapStateToProps ({ venues, regions, ui }) {
+  return { venues, regions, ui }
 }
 
 export default connect(mapStateToProps, actions)(App)

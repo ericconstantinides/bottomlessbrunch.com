@@ -8,7 +8,7 @@ import 'react-select/dist/react-select.css'
 
 class RegionSelect extends Component {
   handleChange = selected => {
-    this.props.setRegionUi(selected.value)
+    this.props.setUiRegion(selected.value)
     this.props.history.push(this.props.regions[selected.value].slug)
   }
 

@@ -2,7 +2,7 @@
 import axios from 'axios'
 import slugify from '../lib/Slug'
 import constants from '../actions/types'
-import { stripDashesSpaces } from '../lib/myHelpers'
+import { stripDashesSpaces, parsePath } from '../lib/myHelpers'
 import { fetchTimeout, ROOT_URL } from '../config'
 
 let fetchTimeoutMs = fetchTimeout * 1000 * 60
@@ -11,13 +11,16 @@ const googlePlaces = new google.maps.places.PlacesService(
   document.createElement('div')
 )
 
-export function fetchRegions () {
+export function fetchRegions (history, callback) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/regions`).then(response => {
       const regionsWithSlug = response.data.map(region => {
         region.slug = slugify(region.name)
         return region
       })
+      if (callback) {
+        callback(regionsWithSlug, history)
+      }
       dispatch({
         type: constants.REGIONS_FETCH,
         payload: regionsWithSlug
@@ -206,27 +209,21 @@ export function fetchGooglePlacesEditVenueDetail (gpId, callback1, callback2) {
 function fetchGooglePlacesEditVenuePhotos (place) {
   if (place.photos) {
     place.images = {}
-    place.images.full = place.photos
-      .map(photo => ({
-        url: photo.getUrl({ maxWidth: photo.width, maxHeight: photo.height }),
-        width: photo.width,
-        height: photo.height
-      })
-    )
-    place.images.thumb = place.photos
-      .map(photo => ({
-        url: photo.getUrl({ maxWidth: 150, maxHeight: 150 }),
-        width: 150,
-        height: 150
-      })
-    )
-    place.images.large = place.photos
-      .map(photo => ({
-        url: photo.getUrl({ maxWidth: 800, maxHeight: 800 }),
-        width: 800,
-        height: 800
-      })
-    )
+    place.images.full = place.photos.map(photo => ({
+      url: photo.getUrl({ maxWidth: photo.width, maxHeight: photo.height }),
+      width: photo.width,
+      height: photo.height
+    }))
+    place.images.thumb = place.photos.map(photo => ({
+      url: photo.getUrl({ maxWidth: 150, maxHeight: 150 }),
+      width: 150,
+      height: 150
+    }))
+    place.images.large = place.photos.map(photo => ({
+      url: photo.getUrl({ maxWidth: 800, maxHeight: 800 }),
+      width: 800,
+      height: 800
+    }))
   }
   return dispatch => {
     return dispatch(setGooglePlacesEditVenueDetail(place))
@@ -246,18 +243,20 @@ export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
     const formattedPhone = encodeURI(stripDashesSpaces(phone))
     return function (dispatch) {
       axios
-      .get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${formattedPhone}`)
-      .then(results => {
-        if (results.data) {
-          if (callback && results.data[0] && results.data[0].id) {
-            callback(results.data[0].id)
+        .get(
+          `${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${formattedPhone}`
+        )
+        .then(results => {
+          if (results.data) {
+            if (callback && results.data[0] && results.data[0].id) {
+              callback(results.data[0].id)
+            }
+            dispatch({
+              type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
+              payload: results.data[0]
+            })
           }
-          dispatch({
-            type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
-            payload: results.data[0]
-          })
-        }
-      })
+        })
     }
   }
 }
@@ -284,10 +283,39 @@ export function resetEditVenue () {
   }
 }
 
-export function setRegionUi (regionId) {
+export function fetchUiRegion (regions, history) {
+  const parsedHistory = parsePath(history.location.pathname)
+  // first check if the region is in the path and set it
+  if (parsedHistory[0]) {
+    const pickedPathRegion = regions.filter(
+      region => region.slug === parsedHistory[0]
+    )
+    return setUiRegion(pickedPathRegion[0]._id)
+  }
+  // second see if region is in local storage and set it:
+  const pickedStorageRegionId = window.localStorage.getItem('regionId')
+  const pickedStorageRegion = regions.filter(
+    region => region._id === pickedStorageRegionId
+  )
+  if (pickedStorageRegion.length) {
+    return setUiRegion(
+      pickedStorageRegionId,
+      pickedStorageRegion[0].slug,
+      history
+    )
+  }
+  // none of this exists, so we show an intro page:
+  return setUiRegion('')
+}
+
+export function setUiRegion (regionId, location, history) {
+  window.localStorage.setItem('regionId', regionId)
+  if (location && history) {
+    history.push(location)
+  }
   return {
     type: constants.UI_SET_REGION,
-    payload: { regionId }
+    payload: regionId
   }
 }
 
