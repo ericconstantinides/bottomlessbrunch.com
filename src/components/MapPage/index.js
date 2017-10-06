@@ -16,10 +16,6 @@ class MapPage extends Component {
       this.props.regions[selected.value].slug,
       this.props.history
     )
-    // this.props.history.push(this.props.regions[selected.value].slug)
-  }
-  ComponentWillMount () {
-    this.props.setUiRegion(this.props.region._id)
   }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {

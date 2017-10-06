@@ -68,11 +68,9 @@ class App extends Component {
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}
             {regionRoutes}
-            {parsedHistory[0] !== 'admin' &&
-              this.props.ui.region &&
+            {parsedHistory[0] !== 'admin' && this.props.ui.region &&
               <MapPage history={history} />}
-            {parsedHistory[0] !== 'admin' &&
-              !this.props.ui.region &&
+            {parsedHistory[0] !== 'admin' && !this.props.ui.region &&
               <IntroPage history={history} />}
           </div>
         </Router>
