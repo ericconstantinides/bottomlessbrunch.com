@@ -4,18 +4,30 @@ import _ from 'lodash'
 
 import * as actions from '../../actions'
 
-import RegionSelect from '../RegionSelect'
+import RegionSelect from './RegionSelect'
 import Map from './Map'
 import VenueList from './VenueList'
 import './MapPage.css'
 
 class MapPage extends Component {
+  handleSelectChange = selected => {
+    this.props.setUiRegion(
+      selected.value,
+      this.props.regions[selected.value].slug,
+      this.props.history
+    )
+    // this.props.history.push(this.props.regions[selected.value].slug)
+  }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
     }
     const region = this.props.regions[this.props.ui.region]
     const styles = { height: `100%`, width: `100%` }
+    const regionOptions = _.map(this.props.regions, region => ({
+      value: region._id,
+      label: region.name
+    }))
     return (
       <div className='MapPage'>
         <h1>Bottomless Brunch</h1>
@@ -24,6 +36,8 @@ class MapPage extends Component {
             <RegionSelect
               region={this.props.ui.region}
               history={this.props.history}
+              handleChange={this.handleSelectChange}
+              options={regionOptions}
             />
             <VenueList region={this.props.ui.region} />
           </div>
