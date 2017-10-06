@@ -290,7 +290,9 @@ export function fetchUiRegion (regions, history) {
     const pickedPathRegion = regions.filter(
       region => region.slug === parsedHistory[0]
     )
-    return setUiRegion(pickedPathRegion[0]._id)
+    if (pickedPathRegion.length) {
+      return setUiRegion(pickedPathRegion[0]._id)
+    }
   }
   // second see if region is in local storage and set it:
   const pickedStorageRegionId = window.localStorage.getItem('regionId')
@@ -310,7 +312,7 @@ export function fetchUiRegion (regions, history) {
 
 export function setUiRegion (regionId, location, history) {
   window.localStorage.setItem('regionId', regionId)
-  if (location && history) {
+  if (location && history && parsePath(history.location.pathname)[0] !== 'admin') {
     history.push(location)
   }
   return {

@@ -71,3 +71,7 @@ body,
   height: 100%;
   margin: auto;
 }
+
+.u-d-n {
+  display: none;
+}

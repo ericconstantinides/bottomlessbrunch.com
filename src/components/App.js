@@ -8,6 +8,7 @@ import * as actions from '../actions'
 import { parsePath } from '../lib/myHelpers'
 
 import MapPage from './MapPage'
+import Region from './Region'
 import IntroPage from './IntroPage'
 import VenuePage from './VenuePage'
 import Admin from './admin'
@@ -26,30 +27,14 @@ class App extends Component {
     )
     this.props.fetchVenues()
   }
-  componentWillReceiveProps (nextProps) {
-    /*     const parsedHistory = parsePath(history.location.pathname)
-    console.log(parsedHistory)
-    if (nextProps.regions && nextProps.regions[0] && 5 === 4) {
-      const { history } = this.props
-
-      // first get the region from the URL (if any)
-      const regionUrl = history.location.pathname.replace('/', '').split('/')[0]
-
-      if (regionUrl) {
-        const regionUrlId = _.filter(nextProps.regions, region => {
-          if (region.slug === regionUrl) return region
-        })[0].id
-        if (typeof regionUrlId !== 'undefined' && !isNaN(regionUrlId)) {
-          this.props.setUiRegion(regionUrlId)
-        } else {
-          this.props.setUiRegion(0)
-        }
-      } else {
-        this.props.setUiRegion(0)
-      }
-    } */
-  }
   render () {
+    const regionRoutes = _.map(this.props.regions, region => (
+      <Route
+        key={region._id}
+        path={`/${region.slug}`}
+        render={props => <Region {...props} region={region} />}
+      />
+    ))
     // create the Venue Routes:
     let venueRoutes = null
     if (!_.isEmpty(this.props.regions) && !_.isEmpty(this.props.venues)) {
@@ -82,6 +67,7 @@ class App extends Component {
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}
+            {regionRoutes}
             {parsedHistory[0] !== 'admin' &&
               this.props.ui.region &&
               <MapPage history={history} />}
