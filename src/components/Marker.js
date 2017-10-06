@@ -1,5 +1,5 @@
 import React from 'react'
-import './VenueTeaser.css'
+import './MapPage/VenueTeaser.css'
 
 const Marker = () => {
   return (

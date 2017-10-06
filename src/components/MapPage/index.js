@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import * as actions from '../actions'
-import RegionSelect from './RegionSelect'
+
+import * as actions from '../../actions'
+
+import RegionSelect from '../RegionSelect'
 import Map from './Map'
 import VenueList from './VenueList'
 import './MapPage.css'

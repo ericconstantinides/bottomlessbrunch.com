@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
-import * as actions from '../actions'
+
+import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
 
 class Map extends Component {

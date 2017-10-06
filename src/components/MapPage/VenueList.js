@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { reduceVenuesByRegion } from '../lib/myHelpers'
-import * as actions from '../actions'
+
+import { reduceVenuesByRegion } from '../../lib/myHelpers'
+import * as actions from '../../actions'
+
 import VenueTeaser from './VenueTeaser'
 
 class VenueList extends Component {

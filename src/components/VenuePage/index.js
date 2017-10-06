@@ -3,10 +3,12 @@ import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Star from 'react-stars'
-import * as actions from '../actions'
+
+import objectFunctions from '../../lib/ObjectFunctions'
+import { reduceVenuesByRegion, roundHalf } from '../../lib/myHelpers'
+import * as actions from '../../actions'
+
 import './VenuePage.css'
-import objectFunctions from '../lib/ObjectFunctions'
-import { reduceVenuesByRegion, roundHalf } from '../lib/myHelpers'
 
 class VenuePage extends Component {
   constructor () {
