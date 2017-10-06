@@ -12,7 +12,6 @@ const VenueTeaser = ({
 }) => {
   const hovered = venue._id === hoveredId ? 'is-hovered' : 'not-hovered'
 
-  if (venue.name === 'Stock in Trade') console.log(venue)
   const renderedImage = venue.gData && venue.gData.images
     ? <div className='VenueTeaser__image-container'>
       <img
