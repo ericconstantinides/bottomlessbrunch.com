@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 import * as actions from '../../actions'
 
+import Logo from '../common/Logo'
 import RegionSelect from './RegionSelect'
 import Map from './Map'
 import VenueList from './VenueList'
@@ -29,7 +30,7 @@ class MapPage extends Component {
     }))
     return (
       <div className='MapPage'>
-        <h1>Bottomless Brunch</h1>
+        <Logo />
         <div className='MapPage__container'>
           <div className='MapPage__column'>
             <RegionSelect

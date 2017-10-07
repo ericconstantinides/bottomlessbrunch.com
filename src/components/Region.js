@@ -11,7 +11,7 @@ class Region extends Component {
   }
   render () {
     return (
-      <div className='u-d-n'>Region</div>
+      <div style={{display: 'none'}}/>
     )
   }
 }

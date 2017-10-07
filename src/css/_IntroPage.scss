@@ -1,0 +1,59 @@
+.Splash {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
+// based off of:
+// https://slicejack.com/fullscreen-html5-video-background-css/
+.Splash__video {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.325);
+  background-size: cover;
+  background: url(/images/bg__bartender-making-cocktails.jpg);
+}
+@media (min-aspect-ratio: 16/9) {
+  .Splash__video {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  .Splash__video {
+    width: auto;
+    height: 100%;
+  }
+}
+.Splash__inner {
+  position: relative;
+  width: 50vw;
+  max-width: 520px;
+  min-width: 300px;
+}
+.Splash__title {
+  @include responsive(font-size, 6);
+  text-align: center;
+  margin-bottom: 0.25em;
+}
+.Splash__RegionSelect {
+  width: 250px;
+  margin: 0 auto;
+}
+.Splash__footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: rgba(#f6b42a,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1em;
+}

@@ -5,12 +5,12 @@ import RegionSelect from '../MapPage/RegionSelect'
 
 import * as actions from '../../actions'
 
+import Logo from '../common/Logo'
+
 class IntroPage extends Component {
   handleSelectChange = selected => {
-    this.props.setUiRegion(
-      selected.value
-    )
-     this.props.history.replace(this.props.regions[selected.value].slug)
+    this.props.setUiRegion(selected.value)
+    this.props.history.replace(this.props.regions[selected.value].slug)
   }
   render () {
     const regionSelectOptions = _.map(this.props.regions, region => ({
@@ -18,13 +18,73 @@ class IntroPage extends Component {
       label: region.name
     }))
     return (
-      <div>
-        <RegionSelect
-          region={this.props.ui.region}
-          history={this.props.history}
-          handleChange={this.handleSelectChange}
-          options={regionSelectOptions}
-        />
+      <div className='IntroPage'>
+        <Logo />
+        <div className='Splash'>
+          <video className='Splash__video' autoPlay loop id='video-background' muted playsInline>
+            <source src='/images/bg__bartender-making-cocktails.mp4' type='video/mp4' />
+          </video>
+          <div className='Splash__inner'>
+            <h1 className='Splash__title'>I'm thirsty for brunch in...</h1>
+            <RegionSelect
+              region={this.props.ui.region}
+              history={this.props.history}
+              handleChange={this.handleSelectChange}
+              options={regionSelectOptions}
+              className='Splash__RegionSelect'
+            />
+          </div>
+          <div className='Splash__footer'>
+            <span className='Splash__footer-link'>About</span>
+          </div>
+        </div>
+        <div className='IntroPage__About'>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+          <p>Hello Moto</p>
+        </div>
       </div>
     )
   }

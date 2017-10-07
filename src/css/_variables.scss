@@ -1,0 +1,30 @@
+//breakpoints:
+$bp-xl: 1200px;
+$bp-large: 1024px; // tablet
+$bp-medium-large: 900px; // in-between tablet and full-tablet
+$bp-medium: 767px; // highest possible phone
+$bp-medium-small: 600px; //
+$bp-small: 480px; //
+$breakpoints: xl,large,medium-large,medium,small;
+
+// layout
+$site-width: 100%;
+$site-max-width: 1200px;
+$site-max-width: none;
+$site-min-width: 320px;
+$site-padding: 2rem;
+$span-padding: 2%;
+
+// colors
+$blue: #1691c6;
+//$teal: #19a89c;
+$teal: #00a99d;
+$medium-teal: #133a48;
+$dark-blue: #033244;
+$dark-teal: #022c3b;
+$light-gray: #f7f7f7;
+$medium-gray: #666666;
+
+// other
+$default-font-size: 16px;
+$mobile-nav-height: 48px;
