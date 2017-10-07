@@ -125,3 +125,22 @@ export function stripDashesSpaces (text) {
     .replace(/^-+/, '') // Trim - from start of text
     .replace(/-+$/, '') // Trim - from end of text
 }
+
+/**
+ * Breaks out the days from inside funTimes so every day of category is shown
+ *
+ * @export
+ * @param {Array} funTimes
+ * @param {String} category
+ * @returns {Array}
+ */
+export function compileDays (funTimes, catTerm) {
+  const compiled = funTimes.length ? funTimes
+    .filter(fun => catTerm === fun.category)
+    .map(fun => {
+      const { days, startTime, endTime } = fun
+      return days.map(day => ({ day, catTerm, startTime, endTime }))
+    })
+    .reduce(fun => fun) : ''
+  if (compiled.length) return compiled
+}

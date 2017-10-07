@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { compileDays } from '../../lib/myHelpers'
 
 const VenueTeaser = ({
   hoveredId,
@@ -20,7 +21,7 @@ const VenueTeaser = ({
         />
     </div>
     : ''
-  console.log(venue.funTimes)
+  const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch')
   return (
     <Link
       to={`/${regionSlug}/${venue.slug}`}
@@ -42,12 +43,18 @@ const VenueTeaser = ({
               {venue.address.street}, {venue.address.city}
             </p>
           }
-          <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>Go Bottomless:</h4>
-          {venue.funTimes.map((fun, i) => (
-            <p key={i} className={`VenueTeaser__p ${altClass}__p`}>
-              <strong>{fun.days}:</strong> {fun.startTime} - {fun.endTime}
-            </p>
-          ))}
+          {funTimes &&
+            <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
+              <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>
+                Go Bottomless
+              </h4>
+              {funTimes.map((fun, i) => (
+                <p key={i} className={`VenueTeaser__p ${altClass}__p`}>
+                  <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
+                </p>
+              ))}
+            </div>
+          }
         </div>
       </div>
     </Link>
