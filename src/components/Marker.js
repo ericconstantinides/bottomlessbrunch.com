@@ -1,5 +1,4 @@
 import React from 'react'
-import './MapPage/VenueTeaser.css'
 
 const Marker = () => {
   return (

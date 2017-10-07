@@ -1,20 +1,17 @@
-.VenueTeaser {
+.MapItem {
   display: block;
   margin-bottom: 0;
   border-bottom: none;
   transition: 0.15s;
   font-size: 1rem;
 }
-.VenueTeaser.MapItem {
+.MapItem {
   margin-left: -8px;
   margin-top: -74px;
   display: flex;
   position: relative;
 }
-.VenueTeaser__inner {
-  display: flex;
-}
-.VenueTeaser.MapItem .VenueTeaser__inner {
+.MapItem__inner {
   display: none;
   background-color: white;
   border-radius: 1px;
@@ -26,10 +23,7 @@
   position: relative;
   z-index: 1;
 }
-.VenueTeaser.VenueListItem:last-child {
-  border-bottom: 1px solid #ccc;
-}
-.VenueTeaser__title {
+.MapItem__title {
   font-size: 1em;
   /* font-weight: bold; */
   margin-bottom: 0.2em;
@@ -41,27 +35,15 @@
   letter-spacing: -0.01em;
   width: 240px;
 }
-.VenuePage__rating {
-  margin-left: 1em;
-  flex: 0 0 auto;
-  display: flex;
-}
-.VenuePage__rating > * {
-  flex: 0 0 auto;
-}
-.VenueTeaser__content {
+.MapItem__content {
   flex: 1;
   overflow: hidden;
 }
-.VenueTeaser.VenueListItem .VenueTeaser__content {
-  padding: 0.5em 0.5em;
-  border-bottom: 1px solid #ccc;
-}
-.VenueTeaser.MapItem .VenueTeaser__content {
+.MapItem__content {
   max-width: 265px;
   padding: 9px 14px 5px;
 }
-.VenueTeaser__p {
+.MapItem__p {
   font-size: 0.75em;
   line-height: 1.2;
   margin-bottom: 0;
@@ -71,16 +53,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.VenueTeaser__image-container {
+.MapItem__image-container {
   flex: 0 0 100px;
 }
-.VenueTeaser.MapItem .VenueTeaser__image-container {
+.MapItem__image-container {
   height: 86px;
   overflow: hidden;
   width: 86px;
   flex: 0 0 auto;
 }
-.VenueTeaser__image {
+.MapItem__image {
   display: block;
   /* width: 100px; */
   /* height: 100%; */
@@ -89,19 +71,16 @@
   object-fit: cover;
   margin-top: -1px;
 }
-.VenueTeaser.MapItem .VenueTeaser__image {
+.MapItem__image {
   margin: 0;
 }
-/* Map Marker */
-.VenueTeaser.VenueListItem .VenueTeaser__marker-container {
-  display: none;
-}
-.VenueTeaser__marker-container {
+
+.MapItem__marker-container {
   width: 30px;
   height: 74px;
   padding-right: 32px;
 }
-.VenueTeaser__marker {
+.MapItem__marker {
   width: 17px;
   height: 74px;
   display: flex;
@@ -130,21 +109,81 @@
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 } */
 /* Hover */
-.VenueTeaser.VenueListItem.is-hovered {
-  background: whitesmoke;
-}
-.VenueTeaser.is-hovered {
+.VenueListItem.is-hovered,
+.MapItem.is-hovered {
   text-decoration: none;
-}
-.VenueTeaser.MapItem.is-hovered {
   z-index: 1;
 }
-.VenueTeaser.MapItem.is-hovered .VenueTeaser__marker {
+.MapItem.is-hovered .MapItem__marker {
   transform: rotate(15deg);
 }
-.VenueTeaser.MapItem.is-hovered .VenueTeaser__inner {
+.MapItem.is-hovered .MapItem__inner {
   display: flex;
 }
 .Marker {
   transform: translateY(-100%);
 }
+
+.VenueList {
+  overflow: auto;
+  height: calc(100% - 2.15em);
+}
+.VenueListItem {
+  display: block;
+  background: white;
+  box-shadow: 0 2px rgba(#582a25, 0.25)
+}
+.VenueListItem__inner {
+  display: flex;
+  margin-top: 0.5em;
+}
+.VenueListItem__image-container {
+  width: 160px;
+  flex: 0 0 auto;
+}
+.VenueListItem__image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.VenueListItem__content {
+  flex: 1 1 auto;
+  padding: 0.5em;
+}
+.VenueListItem__sub-title,
+.VenueListItem__title {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: bold;
+}
+.VenueListItem__title {
+  color: #f45a26;
+  font-size: 1.2em;
+  margin-bottom: 0.2em;
+}
+.VenueListItem__sub-title {
+  color: #c84a01;
+  font-size: 0.825em;
+  margin-bottom: 0.25em;
+}
+.VenueListItem__p {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  font-size: 0.825em;
+  line-height: 1.25;
+  margin-bottom: 0.75em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

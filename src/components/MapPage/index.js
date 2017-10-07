@@ -8,7 +8,6 @@ import Logo from '../common/Logo'
 import RegionSelect from './RegionSelect'
 import Map from './Map'
 import VenueList from './VenueList'
-import './MapPage.css'
 
 class MapPage extends Component {
   handleSelectChange = selected => {
@@ -31,27 +30,25 @@ class MapPage extends Component {
     return (
       <div className='MapPage'>
         <Logo />
-        <div className='MapPage__container'>
-          <div className='MapPage__column'>
-            <RegionSelect
-              region={this.props.ui.region}
-              history={this.props.history}
-              handleChange={this.handleSelectChange}
-              options={regionSelectOptions}
-            />
-            <VenueList region={this.props.ui.region} />
-          </div>
-          <div className='MapPage__column Map__container'>
-            <Map
-              cursorPos={this.props.cursorPos}
-              center={{lat: region.lat, lng: region.lng}}
-              zoom={region.zoom}
-              minZoom={4}
-              venues={this.props.venues}
-              containerElement={<div style={styles} />}
-              mapElement={<div style={styles} />}
-            />
-          </div>
+        <div className='MapPage__Map-container'>
+          <Map
+            cursorPos={this.props.cursorPos}
+            center={{lat: region.lat, lng: region.lng}}
+            zoom={region.zoom}
+            minZoom={4}
+            venues={this.props.venues}
+            containerElement={<div style={styles} />}
+            mapElement={<div style={styles} />}
+          />
+        </div>
+        <div className='MapPage__VenueList-container'>
+          <RegionSelect
+            region={this.props.ui.region}
+            history={this.props.history}
+            handleChange={this.handleSelectChange}
+            options={regionSelectOptions}
+          />
+          <VenueList region={this.props.ui.region} />
         </div>
       </div>
     )
