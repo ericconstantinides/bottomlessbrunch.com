@@ -21,7 +21,7 @@ const VenueTeaser = ({
         />
     </div>
     : ''
-  const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch')
+  const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
   return (
     <Link
       to={`/${regionSlug}/${venue.slug}`}

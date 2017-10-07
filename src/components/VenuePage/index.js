@@ -41,7 +41,6 @@ class VenuePage extends Component {
     this.props.history.push(this.state.nextSlug)
   }
   render () {
-    console.log(this.props)
     const venue = this.props.venues[this.props.venueId]
     // only go here if we have data:
     let hours = ''

@@ -134,13 +134,14 @@ export function stripDashesSpaces (text) {
  * @param {String} category
  * @returns {Array}
  */
-export function compileDays (funTimes, catTerm) {
-  const compiled = funTimes.length ? funTimes
-    .filter(fun => catTerm === fun.category)
-    .map(fun => {
-      const { days, startTime, endTime } = fun
-      return days.map(day => ({ day, catTerm, startTime, endTime }))
-    })
-    .reduce(fun => fun) : ''
-  if (compiled.length) return compiled
+export function compileDays (funTimes, category) {
+  if (funTimes.length) {
+    return funTimes
+      .filter(fun => category === fun.category)
+      .map(fun => {
+        const { days, startTime, endTime } = fun
+        return days.map(day => ({ day, category, startTime, endTime }))
+      })
+      .reduce((totalFun, fun) => [...totalFun, ...fun])
+  }
 }
