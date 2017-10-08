@@ -6,6 +6,7 @@ const VenueTeaser = ({
   hoveredId,
   venue,
   regionSlug,
+  regionName,
   handleMouseOver,
   handleMouseLeave,
   altClass
@@ -24,6 +25,7 @@ const VenueTeaser = ({
   const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
   return (
     <Link
+      regionName={regionName}
       to={`/${regionSlug}/${venue.slug}`}
       className={`VenueTeaser ${altClass} ${hovered}`}
       onMouseEnter={handleMouseOver(venue)}

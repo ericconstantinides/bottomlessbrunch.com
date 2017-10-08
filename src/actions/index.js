@@ -152,12 +152,12 @@ export function apiError (error) {
   }
 }
 
-export function fetchGooglePlacesVenueDetail ({ _id, googePlacesData, gpId }) {
+export function fetchGooglePlacesVenueDetail ({ _id, googlePlacesData, gpId }) {
   // check the fetchedTime and don't refetch if fewer than fetchTimeout:
   if (
-    !googePlacesData ||
-    !googePlacesData.fetchedTime ||
-    new Date(googePlacesData.fetchedTime.getTime() + fetchTimeoutMs) <
+    !googlePlacesData ||
+    !googlePlacesData.fetchedTime ||
+    new Date(googlePlacesData.fetchedTime.getTime() + fetchTimeoutMs) <
       new Date()
   ) {
     return dispatch => {

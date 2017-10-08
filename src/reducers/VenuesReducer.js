@@ -12,7 +12,7 @@ export default (state = {}, action) => {
     case constants.VENUE_DELETE:
       return _.omit(state, action.payload)
     case constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL:
-      const venueState = {...state[action._id], googePlacesData: action.payload}
+      const venueState = {...state[action._id], googlePlacesData: action.payload}
       return {...state, [action._id]: venueState}
     case constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL_CANCEL:
       return state

@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 import Star from 'react-stars'
 
 import objectFunctions from '../../lib/ObjectFunctions'
-import { reduceVenuesByRegion, roundHalf } from '../../lib/myHelpers'
+import {
+  reduceVenuesByRegion,
+  roundHalf,
+  compileGoogleHours
+} from '../../lib/myHelpers'
 import * as actions from '../../actions'
-
-import './VenuePage.css'
 
 class VenuePage extends Component {
   constructor () {
@@ -43,49 +45,71 @@ class VenuePage extends Component {
   render () {
     const venue = this.props.venues[this.props.venueId]
     // only go here if we have data:
-    let hours = ''
-    if (_.has(venue.googePlacesData, 'opening_hours')) {
-      hours = venue.googePlacesData.opening_hours.weekday_text.map((day, i) => {
-        const [weekday, ...rest] = day.split(' ')
-        return (
-          <p key={i} className='VenuePage__day'>
-            <strong>{weekday}</strong> {rest}
-          </p>
-        )
-      })
+    const hours = compileGoogleHours(venue.googlePlacesData)
+    if (hours) {
+      console.log(hours)
     }
-    if (!venue.googePlacesData) venue.googePlacesData = {}
-    const address = venue.googePlacesData.adr_address
+    if (!venue.googlePlacesData) venue.googlePlacesData = {}
+    const address = venue.googlePlacesData.adr_address
     let photos = ''
-    if (venue.googePlacesData.photos) {
-      photos = venue.googePlacesData.photos
+    let bgStyle = ''
+    if (venue.googlePlacesData.photos) {
+      photos = venue.googlePlacesData.photos
         .map(photo => photo.getUrl({ maxWidth: 800, maxHeight: 500 }))
         .map((photoUrl, i) => (
           <img key={i} className='VenuePage__hero' src={photoUrl} alt='' />
         ))
+      bgStyle =
+        'url(' +
+        venue.googlePlacesData.photos[0].getUrl({
+          maxWidth: 1920,
+          maxHeight: 1080
+        }) +
+        ')'
     }
+    const regionName = this.props.regions[venue.regionId].name
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
+          <div className='VenuePage__bg' style={{ backgroundImage: bgStyle }} />
           <Link to={`/${this.props.regionSlug}`} className='VenuePage__close' />
-          <div className='VenuePage__hero-container'>
-            <div className='VenuePage__hero-content'>
-              <h1 className='VenuePage__title'>{venue.name}</h1>
-              <Star
-                className='VenuePage__rating'
-                size={30}
-                value={roundHalf(venue.googePlacesData.rating)}
-                edit={false}
-              />
-            </div>
-            {photos}
+          <h1 className='VenuePage__title'>{venue.name}</h1>
+          <h2 className='VenuePage__sub-title'>{regionName}</h2>
+          <div className='VenuePage__ratings'>
+            {venue.googlePlacesData && venue.googlePlacesData.rating &&
+              <div className='VenuePage__ratings-item'>
+                <h2 className='VenuePage__ratings-title'>Google</h2>
+                <Star
+                  className='VenuePage__ratings-stars'
+                  size={20}
+                  value={roundHalf(venue.googlePlacesData.rating)}
+                  edit={false}
+                />
+              </div>
+            }
+            {venue.yData && venue.yData.rating &&
+              <div className='VenuePage__ratings-item'>
+                <h2 className='VenuePage__ratings-title'>Yelp</h2>
+                <Star
+                  className='VenuePage__ratings-stars'
+                  size={20}
+                  value={roundHalf(venue.yData.rating)}
+                  edit={false}
+                />
+              </div>
+            }
           </div>
+          {/* {photos} */}
           <div className='VenuePage__left-col'>
             <p
               className='VenuePage__address'
               dangerouslySetInnerHTML={{ __html: address }}
             />
-            {hours}
+            {hours && hours.map((item, i) => (
+              <p key={i} className='VenuePage__day'>
+                <strong>{item.weekday}:</strong> {item.time}
+              </p>
+            ))}
           </div>
           <div className='VenuePage__nav btn-group-sm'>
             <button

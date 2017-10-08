@@ -145,3 +145,99 @@ export function compileDays (funTimes, category) {
       .reduce((totalFun, fun) => [...totalFun, ...fun])
   }
 }
+
+/**
+ * Takes the hours from Google and makes them nicer
+ *
+ * @export
+ * @param {Object} hours
+ * @returns {Array}
+ */
+export function compileGoogleHours (gData) {
+  if (gData && gData.opening_hours && gData.opening_hours.weekday_text) {
+    const niceTimes = gData.opening_hours.weekday_text.map((day, i) => {
+      // split string up at the `colon space`
+      const [weekday, rest] = day.split(': ')
+      // rewrite the time to be more readable
+      const time = rest
+        .split(':00')
+        .join('')
+        .split(' AM')
+        .join('AM')
+        .split(' PM')
+        .join('PM')
+        .split(' – ')
+        .join('–')
+      return { weekday, time }
+    })
+    // now I'd like to condense the hours
+    let condensedTimes = []
+    let accumulatedDays = []
+    let prevTime = ''
+    niceTimes.forEach((dayObj, i) => {
+      if (prevTime && prevTime !== dayObj.time) {
+        const weekday = accumulatedDays.join(', ')
+        condensedTimes.push({weekday, time: prevTime})
+        accumulatedDays = []
+      }
+      if (i >= (niceTimes.length - 1)) {
+        // it's the last one and not picked up so...
+        accumulatedDays.push(dayObj.weekday)
+        prevTime = dayObj.time
+        const weekday = accumulatedDays.join(', ')
+        condensedTimes.push({weekday, time: prevTime})
+      }
+      accumulatedDays.push(dayObj.weekday)
+      prevTime = dayObj.time
+    })
+    const nicerTimes = condensedTimes.map(dayObj => {
+      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday') {
+        return {weekday: 'Everyday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday, Friday') {
+        return {weekday: 'Weekdays', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday, Friday, Saturday') {
+        return {weekday: 'Monday - Saturday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday') {
+        return {weekday: 'Monday - Thursday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Tuesday, Wednesday, Thursday, Friday') {
+        return {weekday: 'Tuesday - Friday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Wednesday, Thursday, Friday, Saturday') {
+        return {weekday: 'Wednesday - Saturday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Monday, Tuesday, Wednesday') {
+        return {weekday: 'Monday - Wednesday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Tuesday, Wednesday, Thursday') {
+        return {weekday: 'Tuesday - Thursday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Thursday, Friday, Saturday') {
+        return {weekday: 'Thursday - Saturday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Saturday, Sunday') {
+        return {weekday: 'Weekends', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Friday, Saturday') {
+        return {weekday: 'Friday & Saturday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Thursday, Friday') {
+        return {weekday: 'Thursday & Friday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Tuesday, Wednesday') {
+        return {weekday: 'Tuesday & Wednesday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Monday, Tuesday') {
+        return {weekday: 'Monday & Tuesday', time: dayObj.time}
+      }
+      if (dayObj.weekday === 'Wednesday, Thursday') {
+        return {weekday: 'Wednesday & Thursday', time: dayObj.time}
+      }
+      return dayObj
+    })
+    return nicerTimes
+  }
+}

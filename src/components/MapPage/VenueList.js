@@ -27,6 +27,7 @@ class VenueList extends Component {
           handleMouseOver={this.handleMouseOver}
           handleMouseLeave={this.handleMouseLeave}
           venue={venue}
+          regionName={this.props.regions[venue.regionId].name}
           hoveredId={this.props.ui.venueHover._id}
           regionSlug={this.props.regions[venue.regionId].slug}
         />
