@@ -7,10 +7,10 @@ import { Route } from 'react-router'
 import * as actions from '../actions'
 import { parsePath } from '../lib/myHelpers'
 
-import MapPage from './MapPage'
+import MapPage from './MapPage/MapPage'
 import Region from './Region'
-import IntroPage from './IntroPage'
-import VenuePage from './VenuePage'
+import IntroPage from './IntroPage/IntroPage'
+import VenuePage from './VenuePage/VenuePage'
 import Admin from './admin'
 
 import createHistory from 'history/createBrowserHistory'

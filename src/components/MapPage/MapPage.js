@@ -29,7 +29,7 @@ class MapPage extends Component {
     }))
     return (
       <div className='MapPage'>
-        <Logo />
+        <Logo subTitle={region.name} />
         <div className='MapPage__Map-container'>
           <Map
             cursorPos={this.props.cursorPos}

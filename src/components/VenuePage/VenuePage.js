@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Star from 'react-stars'
@@ -8,7 +7,8 @@ import objectFunctions from '../../lib/ObjectFunctions'
 import {
   reduceVenuesByRegion,
   roundHalf,
-  compileGoogleHours
+  compileGoogleHours,
+  compileDays
 } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 
@@ -46,18 +46,14 @@ class VenuePage extends Component {
     const venue = this.props.venues[this.props.venueId]
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
-    if (hours) {
-      console.log(hours)
-    }
     if (!venue.googlePlacesData) venue.googlePlacesData = {}
-    const address = venue.googlePlacesData.adr_address
     let photos = ''
     let bgStyle = ''
     if (venue.googlePlacesData.photos) {
       photos = venue.googlePlacesData.photos
         .map(photo => photo.getUrl({ maxWidth: 800, maxHeight: 500 }))
         .map((photoUrl, i) => (
-          <img key={i} className='VenuePage__hero' src={photoUrl} alt='' />
+          <img key={i} className='VenuePage__image' src={photoUrl} alt='' />
         ))
       bgStyle =
         'url(' +
@@ -67,6 +63,8 @@ class VenuePage extends Component {
         }) +
         ')'
     }
+    console.log(venue)
+    const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)    
     const regionName = this.props.regions[venue.regionId].name
     return (
       <div className='VenuePage'>
@@ -74,14 +72,16 @@ class VenuePage extends Component {
           <div className='VenuePage__bg' style={{ backgroundImage: bgStyle }} />
           <Link to={`/${this.props.regionSlug}`} className='VenuePage__close' />
           <h1 className='VenuePage__title'>{venue.name}</h1>
-          <h2 className='VenuePage__sub-title'>{regionName}</h2>
+          {venue.neighborhood && 
+            <h2 className='VenuePage__sub-title'>{venue.neighborhood}</h2>
+          }
           <div className='VenuePage__ratings'>
             {venue.googlePlacesData && venue.googlePlacesData.rating &&
               <div className='VenuePage__ratings-item'>
-                <h2 className='VenuePage__ratings-title'>Google</h2>
+                <h3 className='VenuePage__ratings-title'>Google</h3>
                 <Star
                   className='VenuePage__ratings-stars'
-                  size={20}
+                  size={15}
                   value={roundHalf(venue.googlePlacesData.rating)}
                   edit={false}
                 />
@@ -89,27 +89,96 @@ class VenuePage extends Component {
             }
             {venue.yData && venue.yData.rating &&
               <div className='VenuePage__ratings-item'>
-                <h2 className='VenuePage__ratings-title'>Yelp</h2>
+                <h3 className='VenuePage__ratings-title'>Yelp</h3>
                 <Star
                   className='VenuePage__ratings-stars'
-                  size={20}
+                  size={15}
                   value={roundHalf(venue.yData.rating)}
                   edit={false}
                 />
               </div>
             }
           </div>
-          {/* {photos} */}
-          <div className='VenuePage__left-col'>
-            <p
-              className='VenuePage__address'
-              dangerouslySetInnerHTML={{ __html: address }}
-            />
-            {hours && hours.map((item, i) => (
-              <p key={i} className='VenuePage__day'>
-                <strong>{item.weekday}:</strong> {item.time}
+          <div className='VenuePage__top-meta'>
+            <div className='VenuePage__address'>
+              <h3 className='VenuePage__address-title'>Address</h3>
+              <p className='VenuePage__address-p'>
+                {venue.address.street}<br />
+                {venue.address.city}<br />
+                {venue.phone}
               </p>
-            ))}
+            </div>
+            <div className='VenuePage__hours'>
+              <h3 className='VenuePage__hours-title'>Hours</h3>
+              {hours && hours.map((item, i) => (
+                <p key={i} className='VenuePage__hours-p'>
+                  <strong>{item.weekday}:</strong> {item.time}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className='VenuePage__middle'>
+            <div className='VenuePage__middle-left'>
+              <div className='VenuePage__middle-meta'>
+                <h4 className='VenuePage__middle-meta-title'>
+                  Outside Seating
+                </h4>
+                <p className='VenuePage__middle-meta-p'>
+                  Yes
+                </p>
+              </div>
+              <div className='VenuePage__middle-meta'>
+                <h4 className='VenuePage__middle-meta-title'>
+                  Takes Reservations
+                </h4>
+                <p className='VenuePage__middle-meta-p'>
+                  Yes
+                </p>
+              </div>
+              <div className='VenuePage__middle-meta'>
+                <h4 className='VenuePage__middle-meta-title'>
+                  Full Bar?
+                </h4>
+                <p className='VenuePage__middle-meta-p'>
+                  Yes
+                </p>
+              </div>
+              <div className='VenuePage__middle-meta'>
+                <h4 className='VenuePage__middle-meta-title'>
+                  Cuisine
+                </h4>
+                <p className='VenuePage__middle-meta-p'>
+                  Yes
+                </p>
+              </div>
+            </div>
+            <div className='VenuePage__middle-center'>
+              {funTimes &&
+                <div className='VenuePage__middle-center-top'>
+                  <h3 className='VenuePage__middle-title'>
+                    Go Bottomless
+                  </h3>
+                  {funTimes.map((fun, i) => (
+                    <p key={i} className='VenuePage__middle-p'>
+                      <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
+                    </p>
+                  ))}
+                </div>
+              }
+              <div className='VenuePage__middle-center-bottom'>
+                <h3 className='VenuePage__middle-title'>
+                  Bottomless Deals
+                </h3>
+              </div>
+            </div>
+            <div className='VenuePage__middle-right'>
+              <h3 className='VenuePage__middle-title'>
+                Share your brunch plans!
+              </h3>              
+            </div>
+          </div>
+          <div className='VenuePage__image-container'>
+            {photos}
           </div>
           <div className='VenuePage__nav btn-group-sm'>
             <button
