@@ -468,26 +468,51 @@ body,
 .VenuePage__left-col {
   padding: 1em 1.7em; }
 
-.VenuePage__nav {
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  left: 0;
-  right: 0;
-  padding: 0.75em; }
-
-.VenuePage__nav > * {
-  margin: 0 0.375em; }
-
+.VenuePage__prev,
+.VenuePage__next,
 .VenuePage__close {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  background-color: red;
+  width: 60px;
+  height: 60px;
   right: 0;
   top: 0;
-  z-index: 2; }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  cursor: pointer; }
+  .VenuePage__prev:hover,
+  .VenuePage__next:hover,
+  .VenuePage__close:hover {
+    text-decoration: none;
+    color: inherit; }
+
+.VenuePage__inner-close {
+  transform: rotate(45deg); }
+
+.VenuePage__inner-prev,
+.VenuePage__inner-next,
+.VenuePage__inner-close {
+  font-size: 5em;
+  font-weight: 300;
+  color: white;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); }
+
+.VenuePage__prev,
+.VenuePage__next {
+  top: 50%; }
+
+.VenuePage__prev {
+  left: 0.5rem; }
+
+.VenuePage__next {
+  right: 0.5rem; }
+
+.VenuePage__inner-prev,
+.VenuePage__inner-next {
+  font-size: 7em;
+  line-height: 0;
+  margin-top: -0.25em; }
 
 .VenuePage__top-meta,
 .VenuePage__ratings {

@@ -36,7 +36,7 @@ class VenuePage extends Component {
       prevSlug: '/' + regionSlug + '/' + venues[prevId].slug
     })
   }
-  handlePrevious = () => {
+  handlePrev = () => {
     this.props.history.push(this.state.prevSlug)
   }
   handleNext = () => {
@@ -64,19 +64,27 @@ class VenuePage extends Component {
         ')'
     }
     console.log(venue)
-    const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)    
+    const funTimes = compileDays(
+      venue.funTimes,
+      'Bottomless Brunch',
+      venue.name
+    )
     const regionName = this.props.regions[venue.regionId].name
+    const displayHood = venue.neighborhood
+      ? venue.neighborhood
+      : venue.address.city
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
           <div className='VenuePage__bg' style={{ backgroundImage: bgStyle }} />
-          <Link to={`/${this.props.regionSlug}`} className='VenuePage__close' />
+          <Link to={`/${this.props.regionSlug}`} className='VenuePage__close'>
+            <span className='VenuePage__inner-close'>+</span>
+          </Link>
           <h1 className='VenuePage__title'>{venue.name}</h1>
-          {venue.neighborhood && 
-            <h2 className='VenuePage__sub-title'>{venue.neighborhood}</h2>
-          }
+          <h2 className='VenuePage__sub-title'>{displayHood}</h2>
           <div className='VenuePage__ratings'>
-            {venue.googlePlacesData && venue.googlePlacesData.rating &&
+            {venue.googlePlacesData &&
+              venue.googlePlacesData.rating &&
               <div className='VenuePage__ratings-item'>
                 <h3 className='VenuePage__ratings-title'>Google</h3>
                 <Star
@@ -85,9 +93,9 @@ class VenuePage extends Component {
                   value={roundHalf(venue.googlePlacesData.rating)}
                   edit={false}
                 />
-              </div>
-            }
-            {venue.yData && venue.yData.rating &&
+              </div>}
+            {venue.yData &&
+              venue.yData.rating &&
               <div className='VenuePage__ratings-item'>
                 <h3 className='VenuePage__ratings-title'>Yelp</h3>
                 <Star
@@ -96,8 +104,7 @@ class VenuePage extends Component {
                   value={roundHalf(venue.yData.rating)}
                   edit={false}
                 />
-              </div>
-            }
+              </div>}
           </div>
           <div className='VenuePage__top-meta'>
             <div className='VenuePage__address'>
@@ -110,11 +117,12 @@ class VenuePage extends Component {
             </div>
             <div className='VenuePage__hours'>
               <h3 className='VenuePage__hours-title'>Hours</h3>
-              {hours && hours.map((item, i) => (
-                <p key={i} className='VenuePage__hours-p'>
-                  <strong>{item.weekday}:</strong> {item.time}
-                </p>
-              ))}
+              {hours &&
+                hours.map((item, i) => (
+                  <p key={i} className='VenuePage__hours-p'>
+                    <strong>{item.weekday}:</strong> {item.time}
+                  </p>
+                ))}
             </div>
           </div>
           <div className='VenuePage__middle'>
@@ -163,8 +171,7 @@ class VenuePage extends Component {
                       <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
                     </p>
                   ))}
-                </div>
-              }
+                </div>}
               <div className='VenuePage__middle-center-bottom'>
                 <h3 className='VenuePage__middle-title'>
                   Bottomless Deals
@@ -174,25 +181,17 @@ class VenuePage extends Component {
             <div className='VenuePage__middle-right'>
               <h3 className='VenuePage__middle-title'>
                 Share your brunch plans!
-              </h3>              
+              </h3>
             </div>
           </div>
           <div className='VenuePage__image-container'>
             {photos}
           </div>
-          <div className='VenuePage__nav btn-group-sm'>
-            <button
-              onClick={this.handlePrevious}
-              className='btn btn-primary btn-sm'
-            >
-              Previous Spot
-            </button>
-            <button
-              onClick={this.handleNext}
-              className='btn btn-primary btn-sm'
-            >
-              Next Spot
-            </button>
+          <div className='VenuePage__prev' onClick={this.handlePrev}>
+            <div className='VenuePage__inner-prev'>‹</div>
+          </div>
+          <div className='VenuePage__next' onClick={this.handleNext}>
+            <div className='VenuePage__inner-next'>›</div>
           </div>
         </div>
       </div>
