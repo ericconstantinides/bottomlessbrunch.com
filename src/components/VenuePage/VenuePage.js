@@ -73,6 +73,17 @@ class VenuePage extends Component {
     const displayHood = venue.neighborhood
       ? venue.neighborhood
       : venue.address.city
+
+    const alcohol = !venue.yMeta.alcohol
+      ? false
+      : venue.yMeta.alcohol.replace(/&amp;/g, '&')
+    const ambience = !venue.yMeta.ambience
+      ? false
+      : Array.isArray(venue.yMeta.ambience)
+          ? venue.yMeta.ambience.length === 2
+              ? venue.yMeta.ambience.join(' & ')
+              : venue.yMeta.ambience.join(', ')
+          : venue.yMeta.ambience
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner'>
@@ -127,38 +138,42 @@ class VenuePage extends Component {
           </div>
           <div className='VenuePage__middle'>
             <div className='VenuePage__middle-left'>
-              <div className='VenuePage__middle-meta'>
-                <h4 className='VenuePage__middle-meta-title'>
-                  Outside Seating
-                </h4>
-                <p className='VenuePage__middle-meta-p'>
-                  Yes
-                </p>
-              </div>
-              <div className='VenuePage__middle-meta'>
-                <h4 className='VenuePage__middle-meta-title'>
-                  Takes Reservations
-                </h4>
-                <p className='VenuePage__middle-meta-p'>
-                  Yes
-                </p>
-              </div>
-              <div className='VenuePage__middle-meta'>
-                <h4 className='VenuePage__middle-meta-title'>
-                  Full Bar?
-                </h4>
-                <p className='VenuePage__middle-meta-p'>
-                  Yes
-                </p>
-              </div>
-              <div className='VenuePage__middle-meta'>
-                <h4 className='VenuePage__middle-meta-title'>
-                  Cuisine
-                </h4>
-                <p className='VenuePage__middle-meta-p'>
-                  Yes
-                </p>
-              </div>
+              {venue.yMeta.outdoorSeating !== undefined &&
+                <div className='VenuePage__middle-meta'>
+                  <h4 className='VenuePage__middle-meta-title'>
+                    Outside Seating
+                  </h4>
+                  <p className='VenuePage__middle-meta-p'>
+                    {venue.yMeta.outdoorSeating ? 'Yes' : 'No'}
+                  </p>
+                </div>}
+              {venue.yMeta.takesReservations !== undefined &&
+                <div className='VenuePage__middle-meta'>
+                  <h4 className='VenuePage__middle-meta-title'>
+                    Takes Reservations
+                  </h4>
+                  <p className='VenuePage__middle-meta-p'>
+                    {venue.yMeta.takesReservations ? 'Yes' : 'No'}
+                  </p>
+                </div>}
+              {alcohol !== false &&
+                <div className='VenuePage__middle-meta'>
+                  <h4 className='VenuePage__middle-meta-title'>
+                    Alcohol Served
+                  </h4>
+                  <p className='VenuePage__middle-meta-p'>
+                    {alcohol}
+                  </p>
+                </div>}
+              {ambience !== false &&
+                <div className='VenuePage__middle-meta'>
+                  <h4 className='VenuePage__middle-meta-title'>
+                    The Scene
+                  </h4>
+                  <p className='VenuePage__middle-meta-p'>
+                    {ambience}
+                  </p>
+                </div>}
             </div>
             <div className='VenuePage__middle-center'>
               {funTimes &&
@@ -167,16 +182,26 @@ class VenuePage extends Component {
                     Go Bottomless
                   </h3>
                   {funTimes.map((fun, i) => (
-                    <p key={i} className='VenuePage__middle-p'>
-                      <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
-                    </p>
+                    <div key={i} className='VenuePage__duo'>
+                      <p className='VenuePage__duo-left'>{fun.day}</p>
+                      <p className='VenuePage__duo-right'>{fun.startTime} - {fun.endTime}</p>
+                    </div>
                   ))}
-                </div>}
-              <div className='VenuePage__middle-center-bottom'>
-                <h3 className='VenuePage__middle-title'>
-                  Bottomless Deals
-                </h3>
-              </div>
+                </div>
+              }
+              {venue.funItems &&
+                <div className='VenuePage__middle-center-bottom'>
+                  <h3 className='VenuePage__middle-title'>
+                    Bottomless Deals
+                  </h3>
+                  {venue.funItems.map((item, i) => (
+                    <div key={i} className='VenuePage__duo'>
+                      <p className='VenuePage__duo-left'>${item.price}</p>
+                      <p className='VenuePage__duo-right'>{item.name}</p>
+                    </div>
+                  ))}
+                </div>
+              }
             </div>
             <div className='VenuePage__middle-right'>
               <h3 className='VenuePage__middle-title'>

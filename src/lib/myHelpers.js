@@ -139,7 +139,9 @@ export function compileDays (funTimes, category) {
     return funTimes
       .filter(fun => category === fun.category)
       .map(fun => {
-        const { days, startTime, endTime } = fun
+        const { days, startTime: start, endTime: end } = fun
+        const startTime = start.split(':00').join('')
+        const endTime = end.split(':00').join('')
         return days.map(day => ({ day, category, startTime, endTime }))
       })
       .reduce((totalFun, fun) => [...totalFun, ...fun])
@@ -154,10 +156,27 @@ export function compileDays (funTimes, category) {
  * @returns {Array}
  */
 export function compileGoogleHours (gData) {
+  function scrunchDays (daysArr) {
+    if (daysArr.length === 1) return daysArr[0]
+    if (daysArr.length === 2) {
+      return daysArr[0] + ' & ' + daysArr[1]
+    }
+    return daysArr[0] + ' - ' + daysArr[daysArr.length - 1]
+  }
+  function abbrWeekday (day) {
+    if (day === 'Monday') return 'Mon'
+    if (day === 'Tuesday') return 'Tues'
+    if (day === 'Wednesday') return 'Wed'
+    if (day === 'Thursday') return 'Thurs'
+    if (day === 'Friday') return 'Fri'
+    if (day === 'Saturday') return 'Sat'
+    if (day === 'Sunday') return 'Sun'
+  }
   if (gData && gData.opening_hours && gData.opening_hours.weekday_text) {
     const niceTimes = gData.opening_hours.weekday_text.map((day, i) => {
       // split string up at the `colon space`
-      const [weekday, rest] = day.split(': ')
+      let [weekday, rest] = day.split(': ')
+      weekday = abbrWeekday(weekday)
       // rewrite the time to be more readable
       const time = rest
         .split(':00')
@@ -176,7 +195,7 @@ export function compileGoogleHours (gData) {
     let prevTime = ''
     niceTimes.forEach((dayObj, i) => {
       if (prevTime && prevTime !== dayObj.time) {
-        const weekday = accumulatedDays.join(', ')
+        const weekday = scrunchDays(accumulatedDays)
         condensedTimes.push({weekday, time: prevTime})
         accumulatedDays = []
       }
@@ -184,57 +203,21 @@ export function compileGoogleHours (gData) {
         // it's the last one and not picked up so...
         accumulatedDays.push(dayObj.weekday)
         prevTime = dayObj.time
-        const weekday = accumulatedDays.join(', ')
+        const weekday = scrunchDays(accumulatedDays)
         condensedTimes.push({weekday, time: prevTime})
       }
       accumulatedDays.push(dayObj.weekday)
       prevTime = dayObj.time
     })
     const nicerTimes = condensedTimes.map(dayObj => {
-      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday') {
+      if (dayObj.weekday === 'Mon - Sun') {
         return {weekday: 'Everyday', time: dayObj.time}
       }
-      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday, Friday') {
+      if (dayObj.weekday === 'Mon - Fri') {
         return {weekday: 'Weekdays', time: dayObj.time}
       }
-      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday, Friday, Saturday') {
-        return {weekday: 'Monday - Saturday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Monday, Tuesday, Wednesday, Thursday') {
-        return {weekday: 'Monday - Thursday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Tuesday, Wednesday, Thursday, Friday') {
-        return {weekday: 'Tuesday - Friday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Wednesday, Thursday, Friday, Saturday') {
-        return {weekday: 'Wednesday - Saturday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Monday, Tuesday, Wednesday') {
-        return {weekday: 'Monday - Wednesday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Tuesday, Wednesday, Thursday') {
-        return {weekday: 'Tuesday - Thursday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Thursday, Friday, Saturday') {
-        return {weekday: 'Thursday - Saturday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Saturday, Sunday') {
+      if (dayObj.weekday === 'Sat & Sun') {
         return {weekday: 'Weekends', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Friday, Saturday') {
-        return {weekday: 'Friday & Saturday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Thursday, Friday') {
-        return {weekday: 'Thursday & Friday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Tuesday, Wednesday') {
-        return {weekday: 'Tuesday & Wednesday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Monday, Tuesday') {
-        return {weekday: 'Monday & Tuesday', time: dayObj.time}
-      }
-      if (dayObj.weekday === 'Wednesday, Thursday') {
-        return {weekday: 'Wednesday & Thursday', time: dayObj.time}
       }
       return dayObj
     })

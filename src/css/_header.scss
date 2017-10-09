@@ -1,0 +1,66 @@
+.Logo__outer-container {
+  height: 0;
+  width: 0;
+  z-index: 1;
+}
+.Logo__container {
+  padding: 0.5em 1em;
+  text-align: center;
+  display: inline-block;
+  margin-left: 22px;
+  .VenuePage ~ .MapPage & {
+    margin-left: 0;
+  }
+}
+.Logo,
+.Logo__sub-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 1px rgba(black, 0.75);
+  white-space: nowrap;
+  .VenuePage ~ .MapPage & {
+    text-shadow: 2px 2px 1px rgba(black, 0.5);
+  }
+}
+.Logo {
+  position: relative;
+  font-size: 2.25em;
+  line-height: 1.4;
+  letter-spacing: -0.06em;
+  // color: #ec5800;
+  // text-shadow: none;
+  // text-shadow:
+  //   1px 1px 0px rgba(#fed05b, 1),
+  //   1px 0px 0px rgba(#fed05b, 1),
+  //   1px -1px 0px rgba(#fed05b, 1),
+  //   0px 1px 0px rgba(#fed05b, 1),
+  //   0px -1px 0px rgba(#fed05b, 1),
+  //   -1px 1px 0px rgba(#fed05b, 1),
+  //   -1px 0px 0px rgba(#fed05b, 1),
+  //   -1px -1px 0px rgba(#fed05b, 1);
+  &:after {
+    content: "";
+    filter: drop-shadow(1px 1px rgba(black,0.5));
+    display: block;
+    background-image: url(/images/icon__split-orange--cond.png);
+    width: 1.25em;
+    height: 1em;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 0 0 10px;
+    position: absolute;
+    top: 0.5rem;
+    left: 100%;
+  }
+  .VenuePage ~ .MapPage & {
+    font-size: 1.75em;
+    color: white;
+    text-shadow: 2px 2px 1px rgba(black, 0.5);
+  }
+}
+.Logo__sub-title {
+  font-size: 1em;
+  text-transform: uppercase;
+  margin-top: -0.35em;
+}

@@ -6,7 +6,6 @@ import AddEditRegion from './regions/AddEditRegion'
 import ListRegions from './regions/ListRegions'
 import AddEditVenue from './venues/AddEditVenue'
 import ListVenues from './venues/ListVenues'
-import './admin.css'
 
 const Admin = props => {
   return (

@@ -1,0 +1,16 @@
+// fonts:
+$Raleway: 'Raleway', sans-serif;
+$UbuntuCondensed: 'Ubuntu Condensed', sans-serif;
+$OpenSans: 'Open Sans', sans-serif;
+
+body {
+  // font-family: $OpenSans;
+  font-family: $Raleway;
+  font-weight: 400;
+}
+h1 {
+  font-family: $UbuntuCondensed;
+}
+strong {
+  font-weight: 600;
+}

@@ -43,7 +43,7 @@
   font-weight: bold;
   color: white;
   line-height: 0.85;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
   font-size: 3.5em;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75);
 }
@@ -52,11 +52,11 @@
   font-weight: bold;
   color: #f8af00;
   line-height: 0.85;
-  margin: 0;
-  font-size: 1.5em;
+  // margin: 0;
+  font-size: 1.05em;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75);
-  position: absolute;
-  top: 0.5em;
+  // position: absolute;
+  // top: 0.5em;
   text-transform: uppercase;
   // background: rgba(black, 0.5);
   padding: 0.4em 0.5em;
@@ -176,7 +176,8 @@
   width: 30%;
 }
 .VenuePage__middle-center {
-  width: 40%;
+  width: 250px;
+  flex: 0 0 auto;
 }
 .VenuePage__middle-center-top,
 .VenuePage__middle-center-bottom {
@@ -193,9 +194,32 @@
   line-height: 1;
   margin-bottom: 0;
 }
+.VenuePage__middle-meta-p {
+  font-weight: 600;
+}
 .VenuePage__middle-p {
   margin-bottom: 0;
 }
+.VenuePage__duo {
+  width: 100%;
+  margin-bottom: 0.35em;
+  display: flex;
+  justify-content: center;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.VenuePage__duo-left,
+.VenuePage__duo-right {
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+.VenuePage__duo-left {
+  font-weight: 600;
+  text-align: left;
+  margin-right: 0.25em;
+}
+
 .VenuePage__image-container {
   height: 150px;
   width: 100%;
