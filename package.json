@@ -10,6 +10,7 @@
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^16.0.0-rc.2",
+    "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0-rc.2",
     "react-ga": "^2.2.0",
     "react-google-maps": "^7.3.0",
