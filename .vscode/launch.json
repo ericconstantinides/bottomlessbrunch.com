@@ -18,14 +18,6 @@
 					"${workspaceRoot}/webpack/*",
 					"<node_internals>/**/*.js"
 			]
-		},
-		{
-			"name": "Attach with sourcemaps",
-			"type": "chrome",
-			"request": "attach",
-			"port": 9222,
-			"sourceMaps": true,
-			"webRoot": "${workspaceRoot}"
 		}
 	]
 }
