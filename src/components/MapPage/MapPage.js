@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import PageTitle from 'react-document-title'
 
 import * as actions from '../../actions'
 
 import Logo from '../common/Logo'
-import RegionSelect from './RegionSelect'
+import RegionSelect from '../common/RegionSelect'
 import Map from './Map'
 import VenueList from './VenueList'
 
@@ -28,29 +29,31 @@ class MapPage extends Component {
       label: region.name
     }))
     return (
-      <div className='MapPage'>
-        <Logo subTitle={region.name} />
-        <div className='MapPage__Map-container'>
-          <Map
-            cursorPos={this.props.cursorPos}
-            center={{lat: region.lat, lng: region.lng}}
-            zoom={region.zoom}
-            minZoom={4}
-            venues={this.props.venues}
-            containerElement={<div style={styles} />}
-            mapElement={<div style={styles} />}
-          />
-        </div>
-        <div className='MapPage__VenueList-container'>
-          <RegionSelect
+      <PageTitle title={`${region.name} | Bottomless Brunch`}>
+        <div className='MapPage'>
+          <Logo
+            /* subTitle={region.name} */
             region={this.props.ui.region}
             history={this.props.history}
             handleChange={this.handleSelectChange}
             options={regionSelectOptions}
           />
-          <VenueList region={this.props.ui.region} />
+          <div className='MapPage__Map-container'>
+            <Map
+              cursorPos={this.props.cursorPos}
+              center={{lat: region.lat, lng: region.lng}}
+              zoom={region.zoom}
+              minZoom={4}
+              venues={this.props.venues}
+              containerElement={<div style={styles} />}
+              mapElement={<div style={styles} />}
+            />
+          </div>
+          <div className='MapPage__VenueList-container'>
+            <VenueList region={this.props.ui.region} />
+          </div>
         </div>
-      </div>
+      </PageTitle>
     )
   }
 }

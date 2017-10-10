@@ -1,4 +1,5 @@
 import React from 'react'
+import RegionSelect from './RegionSelect'
 
 const Logo = props => {
   return (
@@ -7,11 +8,13 @@ const Logo = props => {
         <div className='Logo'>
           Bottomless Brunch
         </div>
-        {props.subTitle &&
-          <div className='Logo__sub-title'>
-            {props.subTitle}
-          </div>
-        }
+        <RegionSelect
+          region={props.region}
+          history={props.history}
+          handleChange={props.handleChange}
+          options={props.options}
+          className='Logo__sub-title'
+        />
       </div>
     </div>
   )

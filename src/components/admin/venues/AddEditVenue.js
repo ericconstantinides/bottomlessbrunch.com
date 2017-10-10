@@ -6,7 +6,7 @@ import { Field, FieldArray, reduxForm, change as fieldValue } from 'redux-form'
 // I may need these later below: geocodeByAddress, getLatLng
 import { geocodeByPlaceId } from 'react-places-autocomplete'
 import MapSearch from '../../MapSearch'
-import SelectInput from '../../SelectInput'
+import SelectInput from '../../common/SelectInput'
 import { getLatLng } from 'react-places-autocomplete'
 import GoogleMapReact from 'google-map-react'
 import {
@@ -18,7 +18,7 @@ import {
   resetEditVenue
 } from '../../../actions'
 import { usaMap, DATE_LONG, BRUNCH_TIMES } from '../../../config'
-import Marker from '../../Marker'
+import Marker from '../../common/Marker'
 import { times, days, timeCategories, states } from '../../../enumerables'
 import {
   findClosestRegion,
