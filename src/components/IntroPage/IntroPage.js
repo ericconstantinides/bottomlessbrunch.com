@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import RegionSelect from '../MapPage/RegionSelect'
+import RegionSelect from '../common/RegionSelect'
 
 import * as actions from '../../actions'
 
