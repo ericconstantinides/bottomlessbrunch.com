@@ -196,6 +196,9 @@
 }
 .VenuePage__middle-meta-p {
   font-weight: 600;
+  .VenuePage__middle-meta:last-child & {
+    margin-bottom: 0;
+  }
 }
 .VenuePage__middle-p {
   margin-bottom: 0;

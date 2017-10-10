@@ -63,4 +63,12 @@
   font-size: 1em;
   text-transform: uppercase;
   margin-top: -0.35em;
+  .Select-control {
+    border: none;
+    background: none;
+  }
+  .has-value.Select--single > .Select-control .Select-value .Select-value-label,
+  .Select--single > .Select-control .Select-value {
+    color: white;
+  }
 }

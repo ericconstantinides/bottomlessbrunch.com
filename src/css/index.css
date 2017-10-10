@@ -132,6 +132,12 @@ strong {
   font-size: 1em;
   text-transform: uppercase;
   margin-top: -0.35em; }
+  .Logo__sub-title .Select-control {
+    border: none;
+    background: none; }
+  .Logo__sub-title .has-value.Select--single > .Select-control .Select-value .Select-value-label,
+  .Logo__sub-title .Select--single > .Select-control .Select-value {
+    color: white; }
 
 .Splash {
   position: relative;
@@ -197,11 +203,6 @@ strong {
   justify-content: flex-end;
   padding: 0 1em; }
 
-.MapPage__VenueList-container {
-  background: rgba(255, 255, 255, 0.5);
-  padding: 0.5em;
-  border-radius: 5px; }
-
 .MapPage {
   height: 100vh;
   width: 100vw;
@@ -215,12 +216,18 @@ strong {
   left: 0; }
 
 .MapPage__VenueList-container {
+  background: rgba(255, 255, 255, 0.75);
+  padding: 6em 0.5em 0.5em;
   width: 390px;
   position: absolute;
   overflow: hidden;
-  top: 4em;
-  bottom: 2em;
+  top: 0;
+  bottom: 0;
   left: 1em; }
+
+.VenueList {
+  overflow: auto;
+  height: calc(100%); }
 
 .MapItem {
   display: block;
@@ -346,10 +353,6 @@ strong {
 
 .Marker {
   transform: translateY(-100%); }
-
-.VenueList {
-  overflow: auto;
-  height: calc(100% - 2.15em); }
 
 .VenueListItem {
   display: block;
@@ -594,6 +597,8 @@ strong {
 
 .VenuePage__middle-meta-p {
   font-weight: 600; }
+  .VenuePage__middle-meta:last-child .VenuePage__middle-meta-p {
+    margin-bottom: 0; }
 
 .VenuePage__middle-p {
   margin-bottom: 0; }
@@ -867,15 +872,15 @@ button {
 .btn + .btn {
   margin-left: 0.375em; }
 
-#root .Select-placeholder,
-#root .Select--single > .Select-control .Select-value {
+.AddEdit .Select-placeholder,
+.AddEdit .Select--single > .Select-control .Select-value {
   line-height: 32px; }
 
-#root .Select-control {
+.AddEdit .Select-control {
   height: 34px;
   border-color: rgba(0, 0, 0, 0.15); }
 
-#root .Select-input {
+.AddEdit .Select-input {
   height: 32px; }
 
 .u-c-w * {

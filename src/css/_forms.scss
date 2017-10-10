@@ -2,14 +2,14 @@
   margin-left: 0.375em;
 }
 
-#root .Select-placeholder,
-#root .Select--single > .Select-control .Select-value {
+.AddEdit .Select-placeholder,
+.AddEdit .Select--single > .Select-control .Select-value {
   line-height: 32px;
 }
-#root .Select-control {
+.AddEdit .Select-control {
   height: 34px;
   border-color: rgba(0,0,0,.15)
 }
-#root .Select-input {
+.AddEdit .Select-input {
   height: 32px;
 }
