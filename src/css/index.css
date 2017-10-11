@@ -111,6 +111,7 @@ strong {
   line-height: 1.4;
   letter-spacing: -0.06em;
   color: #ff7f32;
+  margin: 0;
   cursor: pointer; }
   .Logo:after {
     content: "";

@@ -32,10 +32,13 @@ class App extends Component {
   render () {
     const { region, regionName, venueName, venueOpenId } = this.props.ui
     const pageTitle = region && venueOpenId
-      ? `${venueName} | ${regionName} | ${SITE_NAME}`
+      // venue:
+      ? `${venueName} in ${regionName} for Bottomless Brunch`
       : region
-          ? `${regionName} | ${SITE_NAME}`
-          : `${SITE_NAME} | ${SITE_SLOGAN}`
+          // region:
+          ? `${regionName} Bottomless Brunch & Mimosas Locations`
+          // homepage:
+          : `Bottomless Brunch: ${SITE_SLOGAN}`
     const regionRoutes = _.map(this.props.regions, region => (
       <Route
         key={region._id}

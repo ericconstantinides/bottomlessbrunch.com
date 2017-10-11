@@ -6,13 +6,13 @@ const Logo = props => {
   return (
     <div className='Logo__outer-container'>
       <div className='Logo__container'>
-        <div
+        <h1
           className='Logo'
           title={SITE_SLOGAN}
           onClick={props.handleLogoClick}
         >
           {SITE_NAME}
-        </div>
+        </h1>
         <RegionSelect
           region={props.region}
           history={props.history}
