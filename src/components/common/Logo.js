@@ -5,7 +5,7 @@ const Logo = props => {
   return (
     <div className='Logo__outer-container'>
       <div className='Logo__container'>
-        <div className='Logo'>
+        <div className='Logo' onClick={props.handleLogoClick}>
           Bottomless Brunch
         </div>
         <RegionSelect

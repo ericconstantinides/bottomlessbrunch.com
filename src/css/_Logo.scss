@@ -29,6 +29,7 @@
   line-height: 1.4;
   letter-spacing: -0.06em;
   color: #ff7f32;
+  cursor: pointer;
   // text-shadow: none;
   // text-shadow:
   //   1px 1px 0px rgba(#fed05b, 1),
@@ -66,6 +67,7 @@
   .Select-control {
     border: none;
     background: none;
+    cursor: pointer;
     &:hover {
       box-shadow: none;
     }

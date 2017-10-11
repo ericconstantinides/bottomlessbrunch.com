@@ -40,6 +40,7 @@ export function setUiRegion (regionId, location, history) {
 }
 
 export function unsetUiRegion () {
+  window.localStorage.removeItem('regionId')
   return {
     type: constants.UI_UNSET_REGION,
     payload: null

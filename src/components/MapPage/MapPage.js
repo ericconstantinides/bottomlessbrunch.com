@@ -17,6 +17,11 @@ class MapPage extends Component {
       this.props.history
     )
   }
+  handleLogoClick = () => {
+    this.props.unsetUiVenue()
+    this.props.unsetUiRegion()
+    this.props.history.push('/')
+  }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
@@ -35,6 +40,7 @@ class MapPage extends Component {
           history={this.props.history}
           handleChange={this.handleSelectChange}
           options={regionSelectOptions}
+          handleLogoClick={this.handleLogoClick}
         />
         <div className='MapPage__Map-container'>
           <Map
