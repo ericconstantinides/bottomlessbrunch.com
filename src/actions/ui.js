@@ -31,7 +31,7 @@ export function fetchUiRegion (regions, history) {
 export function setUiRegion (regionId, location, history) {
   window.localStorage.setItem('regionId', regionId)
   if (location && history && parsePath(history.location.pathname)[0] !== 'admin') {
-    history.push(location)
+    history.push('/' + location)
   }
   return {
     type: constants.UI_SET_REGION,
