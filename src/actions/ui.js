@@ -25,7 +25,7 @@ export function fetchUiRegion (regions, history) {
     )
   }
   // none of this exists, so we show an intro page:
-  return setUiRegion('')
+  return unsetUiRegion()
 }
 
 export function setUiRegion (regionId, location, history) {
@@ -36,6 +36,13 @@ export function setUiRegion (regionId, location, history) {
   return {
     type: constants.UI_SET_REGION,
     payload: regionId
+  }
+}
+
+export function unsetUiRegion () {
+  return {
+    type: constants.UI_UNSET_REGION,
+    payload: null
   }
 }
 

@@ -15,6 +15,8 @@ export default function (state = initialState, action) {
       return {...state, venueOpenId: false}
     case constants.UI_SET_REGION:
       return {...state, region: action.payload}
+    case constants.UI_UNSET_REGION:
+      return {...state, region: ''}
     case constants.UI_VENUE_HOVER_ON:
       return {...state, venueHover: action.payload.venue}
     case constants.UI_VENUE_HOVER_OFF:

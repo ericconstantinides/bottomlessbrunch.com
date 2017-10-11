@@ -12,6 +12,7 @@ export function fetchRegions (history, callback) {
         region.slug = slugify(region.name)
         return region
       })
+      // calling fetchUiRegion for all intents and purposes:
       if (callback) {
         callback(regionsWithSlug, history)
       }
