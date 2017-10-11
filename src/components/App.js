@@ -90,9 +90,11 @@ class App extends Component {
 }
 
 function mapStateToProps ({ venues, regions, ui }) {
+  // get the region name:
   if (ui.region && Object.entries(regions).length) {
     ui.regionName = regions[ui.region].name
   }
+  // get the venue name:
   if (ui.venueOpenId && Object.entries(venues).length) {
     ui.venueName = venues[ui.venueOpenId].name
   }

@@ -75,7 +75,6 @@ class VenuePage extends Component {
       'Bottomless Brunch',
       venue.name
     )
-    const regionName = this.props.regions[venue.regionId].name
     const displayHood = venue.neighborhood
       ? venue.neighborhood
       : venue.address.city

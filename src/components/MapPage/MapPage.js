@@ -5,7 +5,6 @@ import _ from 'lodash'
 import * as actions from '../../actions'
 
 import Logo from '../common/Logo'
-import RegionSelect from '../common/RegionSelect'
 import Map from './Map'
 import VenueList from './VenueList'
 
