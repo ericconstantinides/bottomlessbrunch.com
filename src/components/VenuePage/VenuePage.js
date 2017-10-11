@@ -63,7 +63,6 @@ class VenuePage extends Component {
         }) +
         ')'
     }
-    console.log(venue)
     const funTimes = compileDays(
       venue.funTimes,
       'Bottomless Brunch',
