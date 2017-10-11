@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { ConnectedRouter as Router } from 'react-router-redux'
 import { Route } from 'react-router'
+import PageTitle from 'react-document-title'
 
 import * as actions from '../actions'
 import { parsePath } from '../lib/myHelpers'
@@ -61,9 +62,9 @@ class App extends Component {
     }
     const parsedHistory = parsePath(history.location.pathname)
     return (
-      <div className='App'>
+      <PageTitle title={`TODO HERE! | Bottomless Brunch`}>
         <Router history={history}>
-          <div>
+          <div className='App'>
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}
@@ -74,7 +75,7 @@ class App extends Component {
               <IntroPage history={history} />}
           </div>
         </Router>
-      </div>
+      </PageTitle>
     )
   }
 }
