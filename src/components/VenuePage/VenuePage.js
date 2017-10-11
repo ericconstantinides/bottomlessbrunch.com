@@ -20,8 +20,11 @@ class VenuePage extends Component {
       prevSlug: ''
     }
   }
-  componentWillMount () {
+  componentDidMount () {
     const { venue, venues, venueId, regionSlug } = this.props
+
+    // set the venueUI:
+    this.props.setUiVenue(venueId)
 
     // get the venue detail
     this.props.fetchGooglePlacesVenueDetail(venue)
@@ -35,6 +38,10 @@ class VenuePage extends Component {
       nextSlug: '/' + regionSlug + '/' + venues[nextId].slug,
       prevSlug: '/' + regionSlug + '/' + venues[prevId].slug
     })
+  }
+  componentWillUnmount () {
+    // unset the venueUI:
+    this.props.unsetUiVenue()
   }
   handlePrev = () => {
     this.props.history.push(this.state.prevSlug)

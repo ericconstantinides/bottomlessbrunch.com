@@ -46,6 +46,20 @@ export function unsetUiRegion () {
   }
 }
 
+export function setUiVenue (venueId) {
+  return {
+    type: constants.UI_SET_VENUE,
+    payload: venueId
+  }
+}
+
+export function unsetUiVenue () {
+  return {
+    type: constants.UI_UNSET_VENUE,
+    payload: null
+  }
+}
+
 export function hoverVenueUi (venue) {
   if (venue) {
     return {

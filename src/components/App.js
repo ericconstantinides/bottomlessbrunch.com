@@ -7,6 +7,7 @@ import PageTitle from 'react-document-title'
 
 import * as actions from '../actions'
 import { parsePath } from '../lib/myHelpers'
+import { SITE_NAME, SITE_SLOGAN } from '../config'
 
 import MapPage from './MapPage/MapPage'
 import Region from './Region'
@@ -29,6 +30,12 @@ class App extends Component {
     this.props.fetchVenues()
   }
   render () {
+    const { region, regionName, venueName, venueOpenId } = this.props.ui
+    const pageTitle = region && venueOpenId
+      ? `${venueName} | ${regionName} | ${SITE_NAME}`
+      : region
+          ? `${regionName} | ${SITE_NAME}`
+          : `${SITE_NAME} | ${SITE_SLOGAN}`
     const regionRoutes = _.map(this.props.regions, region => (
       <Route
         key={region._id}
@@ -62,16 +69,18 @@ class App extends Component {
     }
     const parsedHistory = parsePath(history.location.pathname)
     return (
-      <PageTitle title={`TODO HERE! | Bottomless Brunch`}>
+      <PageTitle title={pageTitle}>
         <Router history={history}>
           <div className='App'>
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}
             {regionRoutes}
-            {parsedHistory[0] !== 'admin' && this.props.ui.region &&
+            {parsedHistory[0] !== 'admin' &&
+              this.props.ui.region &&
               <MapPage history={history} />}
-            {parsedHistory[0] !== 'admin' && !this.props.ui.region &&
+            {parsedHistory[0] !== 'admin' &&
+              !this.props.ui.region &&
               <IntroPage history={history} />}
           </div>
         </Router>
@@ -81,6 +90,12 @@ class App extends Component {
 }
 
 function mapStateToProps ({ venues, regions, ui }) {
+  if (ui.region && Object.entries(regions).length) {
+    ui.regionName = regions[ui.region].name
+  }
+  if (ui.venueOpenId && Object.entries(venues).length) {
+    ui.venueName = venues[ui.venueOpenId].name
+  }
   return { venues, regions, ui }
 }
 
