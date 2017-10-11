@@ -28,7 +28,7 @@
   font-size: 2.25em;
   line-height: 1.4;
   letter-spacing: -0.06em;
-  // color: #ec5800;
+  color: #ff7f32;
   // text-shadow: none;
   // text-shadow:
   //   1px 1px 0px rgba(#fed05b, 1),
@@ -59,16 +59,45 @@
     text-shadow: 2px 2px 1px rgba(black, 0.5);
   }
 }
-.Logo__sub-title {
+#root .Logo__sub-title {
   font-size: 1em;
   text-transform: uppercase;
   margin-top: -0.35em;
   .Select-control {
     border: none;
     background: none;
+    &:hover {
+      box-shadow: none;
+    }
   }
-  .has-value.Select--single > .Select-control .Select-value .Select-value-label,
-  .Select--single > .Select-control .Select-value {
+  .Select-value-label,
+  .Select-value {
     color: white;
+  }
+  .is-open .Select-control,
+  .is-focused:not(.is-open) > .Select-control,
+  .Select:focus,
+  .Select-value:focus {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: transparent;
+  }
+  .Select-option {
+    color: #333;
+    text-shadow: none;
+    &.is-focused {
+      color: #333;
+    }
+    &.is-selected {
+      color: #333;
+    }
+  }
+}
+#root .Region ~ .MapPage .Logo__sub-title {
+  .Select-value-label {
+    color: #f8af00;
+    text-shadow: none;
+    text-shadow: 1px 1px 0px rgba(black, 0.75);
   }
 }

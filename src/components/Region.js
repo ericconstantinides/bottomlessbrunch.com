@@ -7,7 +7,7 @@ import * as actions from '../actions'
 
 class Region extends Component {
   componentWillMount = () => { this.props.setUiRegion(this.props.region._id) }
-  render = () => <div style={{display: 'none'}} />
+  render = () => <div className='Region' style={{display: 'none'}} />
 }
 
 export default connect(null, actions)(Region)

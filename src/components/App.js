@@ -63,7 +63,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Router history={history}>
-          <div className='App'>
+          <div>
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}

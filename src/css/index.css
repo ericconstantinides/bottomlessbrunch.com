@@ -109,7 +109,8 @@ strong {
   position: relative;
   font-size: 2.25em;
   line-height: 1.4;
-  letter-spacing: -0.06em; }
+  letter-spacing: -0.06em;
+  color: #ff7f32; }
   .Logo:after {
     content: "";
     filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
@@ -128,16 +129,38 @@ strong {
     color: white;
     text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); }
 
-.Logo__sub-title {
+#root .Logo__sub-title {
   font-size: 1em;
   text-transform: uppercase;
   margin-top: -0.35em; }
-  .Logo__sub-title .Select-control {
+  #root .Logo__sub-title .Select-control {
     border: none;
     background: none; }
-  .Logo__sub-title .has-value.Select--single > .Select-control .Select-value .Select-value-label,
-  .Logo__sub-title .Select--single > .Select-control .Select-value {
+    #root .Logo__sub-title .Select-control:hover {
+      box-shadow: none; }
+  #root .Logo__sub-title .Select-value-label,
+  #root .Logo__sub-title .Select-value {
     color: white; }
+  #root .Logo__sub-title .is-open .Select-control,
+  #root .Logo__sub-title .is-focused:not(.is-open) > .Select-control,
+  #root .Logo__sub-title .Select:focus,
+  #root .Logo__sub-title .Select-value:focus {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: transparent; }
+  #root .Logo__sub-title .Select-option {
+    color: #333;
+    text-shadow: none; }
+    #root .Logo__sub-title .Select-option.is-focused {
+      color: #333; }
+    #root .Logo__sub-title .Select-option.is-selected {
+      color: #333; }
+
+#root .Region ~ .MapPage .Logo__sub-title .Select-value-label {
+  color: #f8af00;
+  text-shadow: none;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.75); }
 
 .Splash {
   position: relative;
