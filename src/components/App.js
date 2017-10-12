@@ -3,12 +3,11 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { ConnectedRouter as Router } from 'react-router-redux'
 import { Route } from 'react-router'
-import PageTitle from 'react-document-title'
 
 import * as actions from '../actions'
 import { parsePath } from '../lib/myHelpers'
-import { SITE_NAME, SITE_SLOGAN } from '../config'
 
+import MetaData from './common/MetaData'
 import MapPage from './MapPage/MapPage'
 import Region from './Region'
 import IntroPage from './IntroPage/IntroPage'
@@ -29,16 +28,38 @@ class App extends Component {
     )
     this.props.fetchVenues()
   }
+  componentDidUpdate (prevProps, prevState) {
+    // need to change the position of data-react-helmet="true"
+    const drhEls = document.querySelectorAll('[data-react-helmet]')
+    drhEls.forEach(metaEl => {
+      // metaEl.attributes.
+      // const first = metaEl.attributes.item(0)
+      // const last = metaEl.attributes.item(metaEl.attributes.length - 1)
+      // console.log(first, last)
+      // const first = metaEl.attributes.setNamedItem(last)
+      // metaEl.attributes.removeNamedItem('data-react-helmet')
+      let tempAttributes = []
+      tempAttributes.push(metaEl.attributes.getNamedItem('data-react-helmet'))
+      metaEl.removeAttribute('data-react-helmet')
+      ;[...metaEl.attributes].forEach((attr, i) => {
+        // console.dir(attr)
+        tempAttributes.push(attr)
+        metaEl.removeAttribute(attr.name)
+        // Object.entries(attr).map(([value, key]) => {
+        //   console.log(key, value)
+        // })
+        // if (attr === 'data-react-helmet') {
+        //   metaEl.attributes[i].pop()
+        // }
+      })
+      // console.log(tempAttributes)
+      tempAttributes.map(attr => {
+        metaEl.setAttribute(attr.name, attr.value)
+      })
+      console.log(metaEl.attributes)
+    })
+  }
   render () {
-    const { region, regionName, venueName, venueOpenId } = this.props.ui
-    const pageTitle = region && venueOpenId
-      // venue:
-      ? `${venueName} in ${regionName} for Bottomless Brunch`
-      : region
-          // region:
-          ? `${regionName} Bottomless Brunch & Mimosas Locations`
-          // homepage:
-          : `Bottomless Brunch: ${SITE_SLOGAN}`
     const regionRoutes = _.map(this.props.regions, region => (
       <Route
         key={region._id}
@@ -72,9 +93,13 @@ class App extends Component {
     }
     const parsedHistory = parsePath(history.location.pathname)
     return (
-      <PageTitle title={pageTitle}>
+      <div>
         <Router history={history}>
           <div className='App'>
+            <MetaData
+              path={history.location.pathname}
+              {...this.props.ui}
+            />
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}
@@ -87,7 +112,7 @@ class App extends Component {
               <IntroPage history={history} />}
           </div>
         </Router>
-      </PageTitle>
+      </div>
     )
   }
 }
