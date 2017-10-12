@@ -5,7 +5,7 @@ import { ConnectedRouter as Router } from 'react-router-redux'
 import { Route } from 'react-router'
 
 import * as actions from '../actions'
-import { parsePath } from '../lib/myHelpers'
+import { parsePath, reduceVenuesByRegion } from '../lib/myHelpers'
 
 import MetaData from './common/MetaData'
 import MapPage from './MapPage/MapPage'
@@ -30,33 +30,18 @@ class App extends Component {
   }
   componentDidUpdate (prevProps, prevState) {
     // need to change the position of data-react-helmet="true"
-    const drhEls = document.querySelectorAll('[data-react-helmet]')
-    drhEls.forEach(metaEl => {
-      // metaEl.attributes.
-      // const first = metaEl.attributes.item(0)
-      // const last = metaEl.attributes.item(metaEl.attributes.length - 1)
-      // console.log(first, last)
-      // const first = metaEl.attributes.setNamedItem(last)
-      // metaEl.attributes.removeNamedItem('data-react-helmet')
+    const metaElements = document.querySelectorAll('[data-react-helmet]')
+    metaElements.forEach(metaEl => {
       let tempAttributes = []
       tempAttributes.push(metaEl.attributes.getNamedItem('data-react-helmet'))
       metaEl.removeAttribute('data-react-helmet')
       ;[...metaEl.attributes].forEach((attr, i) => {
-        // console.dir(attr)
         tempAttributes.push(attr)
         metaEl.removeAttribute(attr.name)
-        // Object.entries(attr).map(([value, key]) => {
-        //   console.log(key, value)
-        // })
-        // if (attr === 'data-react-helmet') {
-        //   metaEl.attributes[i].pop()
-        // }
       })
-      // console.log(tempAttributes)
-      tempAttributes.map(attr => {
+      tempAttributes.forEach(attr => {
         metaEl.setAttribute(attr.name, attr.value)
       })
-      console.log(metaEl.attributes)
     })
   }
   render () {
@@ -121,6 +106,10 @@ function mapStateToProps ({ venues, regions, ui }) {
   // get the region name:
   if (ui.region && Object.entries(regions).length) {
     ui.regionName = regions[ui.region].name
+    ui.regionState = regions[ui.region].state
+    if (Object.entries(venues).length) {
+      ui.numOfVenues = _.size(reduceVenuesByRegion(venues, ui.region))
+    }
   }
   // get the venue name:
   if (ui.venueOpenId && Object.entries(venues).length) {
