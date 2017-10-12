@@ -130,12 +130,17 @@
 .VenueListItem {
   display: block;
   background: white;
-  box-shadow: 0 2px rgba(#582a25, 0.25)
+  // box-shadow: 0 2px rgba(#582a25, 0.25)
 }
 .VenueListItem__inner {
   display: flex;
   margin-top: 0.5em;
   min-height: 150px;
+  transition: 0.15s;
+  border: 1px solid #ddd;
+  &:hover {
+    background-color: whitesmoke;
+  }
 }
 .VenueListItem__image-container {
   width: 160px;
@@ -143,7 +148,7 @@
   display: flex;
   flex-flow: column;
   background-repeat: no-repeat;
-  background-size: auto 100%;
+  background-size: cover;
   background-position: center center;
 }
 .VenueListItem__content {
@@ -151,6 +156,7 @@
   display: flex;
   flex-flow: column;
   padding: 0.5em;
+  overflow: hidden;
 }
 .VenueListItem__sub-title,
 .VenueListItem__title {
@@ -161,6 +167,9 @@
   color: #f45a26;
   font-size: 1.25em;
   margin-bottom: 0.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .VenueListItem__sub-title {
   color: #c84a01;
@@ -172,6 +181,9 @@
   font-size: 0.825em;
   line-height: 1.25;
   margin-bottom: 1.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .VenueListItem__funtimes {
