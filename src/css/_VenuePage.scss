@@ -33,6 +33,10 @@
 .VenuePage__inner2 {
   height: 100%;
   width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+  padding: 6em 1em;
 }
 .VenuePage__bg {
   position: absolute;
@@ -80,11 +84,11 @@
 .VenuePage__prev,
 .VenuePage__next,
 .VenuePage__close {
-  position: absolute;
+  position: fixed;
   width: 60px;
   height: 60px;
-  right: 0;
-  top: 0;
+  right: 0.5em;
+  top: 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -255,7 +259,26 @@
   transition: 0.15s;
 }
 
-
+// MOBILE:
+@media only screen and (max-width: $bp-medium) {
+  .VenuePage__inner2 {
+    height: auto;
+    display: block;
+  }
+  .VenuePage__bg {
+    position: fixed;
+    top: 0.5em;
+    right: 0.5em;
+    bottom: 0.5em;
+    left: 0.5em;
+  }
+}
+@media only screen and (max-width: $bp-medium-small) {
+  .VenuePage__middle {
+    flex-flow: column;
+    align-items: center;
+  }
+}
 
 
 
