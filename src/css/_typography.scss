@@ -14,3 +14,8 @@ h1 {
 strong {
   font-weight: 600;
 }
+
+@mixin ubuntuBold {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+}

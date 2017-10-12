@@ -1,0 +1,28 @@
+.SocialMediaShareButton {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  @include ubuntuBold;
+  color: white;
+  font-size: 0.875em;
+  text-transform: uppercase;
+  padding: 0.25em 0.5em 0.25em 0;
+  margin-bottom: 0.5em;
+  transition: 0.15s;
+  line-height: 1.2;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.SocialMediaShareButton--facebook {
+  background: #fc9b2d;
+  &:hover { background: darken(#fc9b2d, 10%); }
+}
+.SocialMediaShareButton--twitter {
+  background: #fc6d24;
+  &:hover { background: darken(#fc6d24, 10%); }
+}

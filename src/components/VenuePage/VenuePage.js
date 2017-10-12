@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Star from 'react-stars'
+import { ShareButtons, ShareCounts, generateShareIcon } from 'react-share'
 
 import objectFunctions from '../../lib/ObjectFunctions'
 import {
@@ -10,6 +11,7 @@ import {
   compileGoogleHours,
   compileDays
 } from '../../lib/myHelpers'
+import { SITE_DOMAIN } from '../../config'
 import * as actions from '../../actions'
 
 class VenuePage extends Component {
@@ -48,6 +50,9 @@ class VenuePage extends Component {
   }
   handleNext = () => {
     this.props.history.push(this.state.nextSlug)
+  }
+  handleShare = service => event => {
+    console.log(service)
   }
   render () {
     const venue = this.props.venues[this.props.venueId]
@@ -89,11 +94,17 @@ class VenuePage extends Component {
               ? venue.yMeta.ambience.join(' & ')
               : venue.yMeta.ambience.join(', ')
           : venue.yMeta.ambience
+    const { FacebookShareButton, TwitterShareButton } = ShareButtons
+    const FacebookIcon = generateShareIcon('facebook')
+    const TwitterIcon = generateShareIcon('twitter')
     return (
       <div className='VenuePage'>
         <div className='VenuePage__inner1'>
           <div className='VenuePage__inner2'>
-            <div className='VenuePage__bg' style={{ backgroundImage: bgStyle }} />
+            <div
+              className='VenuePage__bg'
+              style={{ backgroundImage: bgStyle }}
+            />
             <Link to={`/${this.props.regionSlug}`} className='VenuePage__close'>
               <span className='VenuePage__inner-close'>+</span>
             </Link>
@@ -190,11 +201,12 @@ class VenuePage extends Component {
                     {funTimes.map((fun, i) => (
                       <div key={i} className='VenuePage__duo'>
                         <p className='VenuePage__duo-left'>{fun.day}</p>
-                        <p className='VenuePage__duo-right'>{fun.startTime} - {fun.endTime}</p>
+                        <p className='VenuePage__duo-right'>
+                          {fun.startTime} - {fun.endTime}
+                        </p>
                       </div>
                     ))}
-                  </div>
-                }
+                  </div>}
                 {venue.funItems &&
                   <div className='VenuePage__middle-center-bottom'>
                     <h3 className='VenuePage__middle-title'>
@@ -206,13 +218,34 @@ class VenuePage extends Component {
                         <p className='VenuePage__duo-right'>{item.name}</p>
                       </div>
                     ))}
-                  </div>
-                }
+                  </div>}
               </div>
               <div className='VenuePage__middle-right'>
                 <h3 className='VenuePage__middle-title'>
                   Share your brunch plans!
                 </h3>
+                <p className='u-mb-0_5'>Tell your girlfriends,<br/>
+                tell your boyfriends!</p>
+                <FacebookShareButton
+                  url={`${SITE_DOMAIN}${this.props.history.location.pathname}`}
+                  hashtag='#bottomlessbrunch'
+                >
+                  <FacebookIcon
+                    iconBgStyle={{fill: 'transparent'}}
+                    size={40}
+                  />
+                  <span>Share on Facebook</span>
+                </FacebookShareButton>
+                <TwitterShareButton
+                  url={`${SITE_DOMAIN}${this.props.history.location.pathname}`}
+                  hashtag='#bottomlessbrunch'
+                >
+                  <TwitterIcon
+                    iconBgStyle={{fill: 'transparent'}}
+                    size={40}
+                  />
+                  <span>Share on Twitter</span>
+                </TwitterShareButton>
               </div>
             </div>
             <div className='VenuePage__image-container'>

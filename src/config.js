@@ -2,8 +2,8 @@ export const googleGa = 'UA-21524856-1'
 export const GOOGLE_API_KEY = 'AIzaSyDsJWQDeqiFe-Chw1tBWfitg_7rGSWmHTU'
 export const SITE_NAME = 'Bottomless Brunch'
 export const SITE_SLOGAN = 'The Bottomless Mimosas & Drinks Guide'
-// export const SITE_DOMAIN = 'https://www.bottomlessbrunch.com'
-export const SITE_DOMAIN = 'http://localhost:3000'
+export const SITE_DOMAIN = 'https://www.bottomlessbrunch.com'
+// export const SITE_DOMAIN = 'http://localhost:3000'
 export const SITE_IMAGE = '/images/bottomless-brunch-orange.png'
 // How often should I reFetch the Google API in minutes
 export const fetchTimeout = 60
