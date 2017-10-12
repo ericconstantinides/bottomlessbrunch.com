@@ -168,6 +168,7 @@
   justify-content: center;
   color: black;
   margin-bottom: 2em;
+  padding: 0.25em;
 }
 .VenuePage__middle-center {
   display: flex;
@@ -179,7 +180,7 @@
 .VenuePage__middle-center-bottom {
   background: white;
   padding: 0.5em;
-  margin: 0.5em;
+  margin: 0.25em;
   text-align: center;
 }
 .VenuePage__middle-right,
@@ -240,16 +241,17 @@
   width: 100%;
   display: flex;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   background: rgba(black, 0.5);
   border-top: 1px solid #bc8940;
   border-bottom: 1px solid #bc8940;
-  padding: 0.5em;
+  padding: 0.5em 0.25em;
 }
 .VenuePage__image {
   display: block;
   height: 100%;
   width: auto;
-  margin: 0 0.5em;
+  margin: 0 0.25em;
   transition: 0.15s;
 }
 

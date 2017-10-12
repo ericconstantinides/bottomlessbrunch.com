@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Star from 'react-stars'
-import { ShareButtons, ShareCounts, generateShareIcon } from 'react-share'
+import { ShareButtons, generateShareIcon } from 'react-share'
 
 import objectFunctions from '../../lib/ObjectFunctions'
 import {

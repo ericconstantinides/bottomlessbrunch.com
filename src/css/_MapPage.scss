@@ -23,4 +23,5 @@
 .VenueList {
   overflow: auto;
   height: calc(100%);
+  -webkit-overflow-scrolling: touch;
 }
