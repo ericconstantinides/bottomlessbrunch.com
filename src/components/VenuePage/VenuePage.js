@@ -192,34 +192,36 @@ class VenuePage extends Component {
                     </p>
                   </div>}
               </div>
-              <div className='VenuePage__middle-center'>
-                {funTimes &&
-                  <div className='VenuePage__middle-center-top'>
-                    <h3 className='VenuePage__middle-title'>
-                      Go Bottomless
-                    </h3>
-                    {funTimes.map((fun, i) => (
-                      <div key={i} className='VenuePage__duo'>
-                        <p className='VenuePage__duo-left'>{fun.day}</p>
-                        <p className='VenuePage__duo-right'>
-                          {fun.startTime} - {fun.endTime}
-                        </p>
-                      </div>
-                    ))}
-                  </div>}
-                {venue.funItems &&
-                  <div className='VenuePage__middle-center-bottom'>
-                    <h3 className='VenuePage__middle-title'>
-                      Bottomless Deals
-                    </h3>
-                    {venue.funItems.map((item, i) => (
-                      <div key={i} className='VenuePage__duo'>
-                        <p className='VenuePage__duo-left'>${item.price}</p>
-                        <p className='VenuePage__duo-right'>{item.name}</p>
-                      </div>
-                    ))}
-                  </div>}
-              </div>
+              {(funTimes || venue.funItems.length) &&
+                <div className='VenuePage__middle-center'>
+                  {funTimes &&
+                    <div className='VenuePage__middle-center-top'>
+                      <h3 className='VenuePage__middle-title'>
+                        Go Bottomless
+                      </h3>
+                      {funTimes.map((fun, i) => (
+                        <div key={i} className='VenuePage__duo'>
+                          <p className='VenuePage__duo-left'>{fun.day}</p>
+                          <p className='VenuePage__duo-right'>
+                            {fun.startTime} - {fun.endTime}
+                          </p>
+                        </div>
+                      ))}
+                    </div>}
+                  {venue.funItems.length &&
+                    <div className='VenuePage__middle-center-bottom'>
+                      <h3 className='VenuePage__middle-title'>
+                        Bottomless Deals
+                      </h3>
+                      {venue.funItems.map((item, i) => (
+                        <div key={i} className='VenuePage__duo'>
+                          <p className='VenuePage__duo-left'>${item.price}</p>
+                          <p className='VenuePage__duo-right'>{item.name}</p>
+                        </div>
+                      ))}
+                    </div>}
+                </div>
+              }
               <div className='VenuePage__middle-right'>
                 <h3 className='VenuePage__middle-title'>
                   Share your brunch plans!

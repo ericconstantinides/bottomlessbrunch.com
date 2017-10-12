@@ -164,6 +164,8 @@
 
 .VenuePage__middle {
   display: flex;
+  border: 1px solid #df9600;
+  justify-content: center;
   color: black;
   margin-bottom: 2em;
 }
@@ -183,6 +185,7 @@
 .VenuePage__middle-right,
 .VenuePage__middle-left {
   width: 30%;
+  flex: 1 1 auto;
 }
 .VenuePage__middle-center {
   width: 250px;
