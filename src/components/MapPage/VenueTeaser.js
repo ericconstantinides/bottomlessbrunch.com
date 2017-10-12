@@ -14,13 +14,10 @@ const VenueTeaser = ({
   const hovered = venue._id === hoveredId ? 'is-hovered' : 'not-hovered'
 
   const renderedImage = venue.gData && venue.gData.images
-    ? <div className={`VenueTeaser__image-container ${altClass}__image-container`}>
-      <img
-        className={`VenueTeaser__image ${altClass}__image`}
-        src={venue.gData.images.large[0].url}
-        alt={venue.name}
-        />
-    </div>
+    ? <div
+      className={`VenueTeaser__image-container ${altClass}__image-container`}
+      style={{ backgroundImage: `url(${venue.gData.images.large[0].url})` }}
+      />
     : ''
   const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
   return (
@@ -32,19 +29,21 @@ const VenueTeaser = ({
       onMouseLeave={handleMouseLeave(venue)}
     >
       {altClass === 'MapItem' &&
-        <div className={`VenueTeaser__marker-container ${altClass}__marker-container`}>
+        <div
+          className={`VenueTeaser__marker-container ${altClass}__marker-container`}
+        >
           <span className={`VenueTeaser__marker ${altClass}__marker`} />
-        </div>
-      }
+        </div>}
       <div className={`VenueTeaser__inner ${altClass}__inner`}>
         {renderedImage}
         <div className={`VenueTeaser__content ${altClass}__content`}>
-          <h3 className={`VenueTeaser__title ${altClass}__title`}>{venue.name}</h3>
+          <h3 className={`VenueTeaser__title ${altClass}__title`}>
+            {venue.name}
+          </h3>
           {venue.address &&
             <p className={`VenueTeaser__p ${altClass}__p`}>
               {venue.address.street}, {venue.address.city}
-            </p>
-          }
+            </p>}
           {funTimes &&
             <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
               <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>
@@ -55,8 +54,11 @@ const VenueTeaser = ({
                   <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
                 </p>
               ))}
-            </div>
-          }
+            </div>}
+          <button className={`VenueTeaser__more-info ${altClass}__more-info`}>
+            <span className='text'>More Info</span>
+            <span className='chevron'>»</span>
+          </button>
         </div>
       </div>
     </Link>
