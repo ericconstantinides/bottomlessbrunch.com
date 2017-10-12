@@ -7,7 +7,9 @@ export const SITE_DOMAIN = 'https://www.bottomlessbrunch.com'
 export const SITE_IMAGE = '/images/bottomless-brunch-orange.png'
 // How often should I reFetch the Google API in minutes
 export const fetchTimeout = 60
-export const ROOT_URL = 'http://localhost:3090'
+// removed this so that create-react-app proxy would work correctly:
+// export const ROOT_URL = 'http://localhost:3090'
+export const ROOT_URL = ''
 export const DATE_LONG = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export const usaMap = {

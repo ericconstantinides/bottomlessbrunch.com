@@ -28,6 +28,7 @@
     "stringify-object": "^3.2.1"
   },
   "scripts": {
+    "full": "concurrently 'npm run start' 'nodemon ../server/index.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -36,7 +37,9 @@
     "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
   },
   "devDependencies": {
+    "concurrently": "^3.5.0",
     "node-sass-chokidar": "^0.0.3",
     "redux-devtools-extension": "^2.13.2"
-  }
+  },
+  "proxy": "http://localhost:3090/"
 }
