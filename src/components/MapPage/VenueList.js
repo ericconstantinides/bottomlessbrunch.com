@@ -14,6 +14,12 @@ class VenueList extends Component {
   handleMouseLeave = venue => event => {
     this.props.hoverVenueUi()
   }
+  componentDidUpdate (prevProps, prevState) {
+    // put the venueList back at the top for a new region:
+    if (prevProps.ui.region !== this.props.ui.region) {
+      this.refs.VenueList.scrollTop = 0
+    }
+  }
   renderTeasers = () => {
     const reduced = reduceVenuesByRegion(
       this.props.venues,
@@ -37,7 +43,7 @@ class VenueList extends Component {
 
   render () {
     return (
-      <div className='VenueList'>
+      <div className='VenueList' id='VenueList' ref='VenueList'>
         {this.renderTeasers()}
       </div>
     )
