@@ -39,6 +39,7 @@ class Map extends Component {
         onDragEnd={this.mapMoved.bind(this)}
         zoom={this.props.zoom}
         center={this.props.center}
+        options={{fullscreenControl: false}}
       >
         {_.map(this.props.venues, venue => (
           <VenueTeaser

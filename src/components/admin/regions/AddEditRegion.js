@@ -128,11 +128,6 @@ class AddEditRegion extends Component {
       thisForm.addEditRegion.values.name
       ? <h1>{thisForm.addEditRegion.values.name}</h1>
       : <h1>&nbsp;</h1>
-    const createMapOptions = () => {
-      return {
-        fullscreenControl: false
-      }
-    }
     return (
       <div className='AddEdit AddEditRegion site-container'>
         {title}
@@ -200,7 +195,7 @@ class AddEditRegion extends Component {
                   zoom={this.state.zoom}
                   center={{ lat: this.state.lat, lng: this.state.lng }}
                   onChange={this.handleMapMoved}
-                  options={createMapOptions}
+                  options={{fullscreenControl: false}}
                 />
               </div>
             </div>

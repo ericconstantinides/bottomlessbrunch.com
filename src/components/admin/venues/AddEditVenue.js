@@ -478,6 +478,7 @@ class venueForm extends Component {
                   yesIWantToUseGoogleMapApiInternals
                   zoom={this.state.zoom - 1}
                   center={{ lat: this.state.lat, lng: this.state.lng }}
+                  options={{fullscreenControl: false}}
                   style={{
                     height: '300px',
                     position: 'relative',
