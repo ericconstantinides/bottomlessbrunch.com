@@ -14,13 +14,9 @@ class Map extends Component {
       loaded: false
     }
   }
-  mapMoved () {
-    console.log('Map Moved: ', JSON.stringify(this.state.map.getCenter()))
-  }
   mapLoaded (map) {
     // This is how we can save the map:
     if (this.state.map !== null) return false
-    // console.log('Map Loaded: ', JSON.stringify(map.getCenter()))
     this.setState({ map })
   }
   handleMouseOver = venue => event => {
@@ -36,7 +32,6 @@ class Map extends Component {
     return (
       <GoogleMapReact
         ref={this.mapLoaded.bind(this)}
-        onDragEnd={this.mapMoved.bind(this)}
         zoom={this.props.zoom}
         center={this.props.center}
         options={{fullscreenControl: false}}

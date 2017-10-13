@@ -6,7 +6,8 @@
 .MapPage__Map-container {
   position: absolute;
   top: 0;
-  right: 0;
+  // to offset "center" the map:
+  right: -406px;
   bottom: 0;
   left: 0;
 }
