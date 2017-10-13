@@ -208,7 +208,7 @@ class VenuePage extends Component {
                         </div>
                       ))}
                     </div>}
-                  {venue.funItems.length &&
+                  {venue.funItems.length > 0 &&
                     <div className='VenuePage__middle-center-bottom'>
                       <h3 className='VenuePage__middle-title'>
                         Bottomless Deals
