@@ -6,6 +6,7 @@
   justify-content: center;
   overflow: hidden;
   color: white;
+  transition: 0.5s; // smoother height transition for 'viewport-units-buggyfill'
 }
 // based off of:
 // https://slicejack.com/fullscreen-html5-video-background-css/
@@ -52,9 +53,317 @@
   left: 0;
   width: 100%;
   height: 30px;
-  background: rgba(#f6b42a,0.75);
+  background: url(/images/bg__orange-bubbly--cmprsd.png);
+  background-position: 0% 93%;
+  background-size: 50% auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 0 1em;
+  color: black;
+  text-transform: uppercase;
+  &:before {
+    content: '▼';
+    font-size: 0.75em;
+    padding-top: 3px;
+    padding-right: 0.75em;
+  }
+}
+
+.IntroPage__about {
+  background: url(/images/bg__orange-bubbly--cmprsd.png) no-repeat;
+  background-position: 0% 100%;
+  background-size: 100% 800px;
+  background-color: #fdfbf8;
+}
+
+.IntroPage__orange {
+  display: block;
+  margin: 0 auto;
+  padding: 2em 0 1em;
+}
+.IntroPage__title {
+  @include openSansCondensedBold;
+  font-size: 3em;
+  border-bottom: 5px solid #f4b363;
+  padding-bottom: 0.05em;
+}
+
+
+
+
+
+
+//—————————————————————————————————————————————————————————————————————
+// PLAYOUT BOX THINGY
+//—————————————————————————————————————————————————————————————————————
+// Here's what the playout does:
+// playout encourages overlap! Overlap to your pleasure. Playout will bend for you.
+// playout keeps BODY text within the the $site-width, while extend automatically extending images
+// all the way out to the viewport borders.
+// playout is in a flexbox container with min height of 55vmin (so just over half of vh or vw)
+//
+// Here's how it works:
+// Playout works because we have a few things at our disposal
+// $site-sidth
+// CSS calc (this is the killer feature)
+// media-queries
+//
+// When we're INSIDE the $site-width, body and image percentages are essentially taken at face value.
+// When we're OUTSIDE the $site-width,
+//
+// The Structure:
+//
+// .playout (PLUS CLASSES BELOW)
+//   .playout__body
+//   .playout__image-container
+//     img
+//
+// .playout classes:
+//    .has-image-left         = image left (body right):
+//    .has-image-right        = image right (body left):
+//    .has-image-width-25p    = image width 25%:
+//    .has-image-width-33_3p  = image width 33.3%:
+//    .has-image-width-40p    = image width 40%:
+//    .has-image-width-50p    = image width 50%:
+//    .has-image-width-60p    = image width 60%:
+//    .has-image-width-66_6p  = image width 66.6%:
+//    .has-image-width-75p    = image width 75%:
+//    .has-body-width-25p     = body width  25%   (optional. body defaults to fill up rest of playout)
+//    .has-body-width-33_3p   = body width  33.3% (optional. body defaults to fill up rest of playout)
+//    .has-body-width-40p     = body width  40%   (optional. body defaults to fill up rest of playout)
+//    .has-body-width-50p     = body width  50%   (optional. body defaults to fill up rest of playout)
+//    .has-body-width-60p     = body width  60%   (optional. body defaults to fill up rest of playout)
+//    .has-body-width-66_6p   = body width  66.6% (optional. body defaults to fill up rest of playout)
+//    .has-body-width-75p     = body width  75%   (optional. body defaults to fill up rest of playout)
+//    .is-vertical            = ignores widths and displays image then body
+//    .has-body-top           = moves body text to the top instead of center in playout
+//
+// * optional. body will default to rest of image width
+//
+// The Variables in make-playout:
+//
+// $image-percentage: the percentage that the image takes up
+// $body-percentage: the percentage that the body takes up.
+//
+@mixin make-playout($image-percentage, $body-percentage: 0) {
+  $image-ratio: $image-percentage / 100%;
+  @if $body-percentage == 0 {
+    $body-percentage: 100% - $image-percentage;
+  }
+  $body-ratio: $body-percentage / 100%;
+
+  // if we have overlap:
+  @if $body-ratio + $image-ratio > 1.01 {
+    align-items: center;
+  }
+
+  // @if $body-percentage != 0 {
+    &.has-image-right .playout__body {
+      margin-right: 100% - $body-percentage - $image-percentage;
+    }
+    &.has-image-left .playout__body {
+      margin-left: 100% - $body-percentage - $image-percentage;
+    }
+  // }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // Inside Site container
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  @media only screen and (max-width: $bp-medium) {
+    @if $image-ratio > .49 {
+      .playout__image-container { width: $image-percentage - 7.5%; }
+      @if $body-percentage != 0 {
+        .playout__body { width: $body-percentage + 7.5%; }
+      }
+    }
+    @else {
+      .playout__image-container { width: $image-percentage; }
+      @if $body-percentage != 0 {
+        .playout__body { width: $body-percentage; }
+      }
+    }
+  }
+  @media only screen and (min-width: $bp-medium + 1) {
+    .playout__image-container { width: $image-percentage; }
+    @if $body-percentage != 0 {
+      .playout__body { width: $body-percentage; }
+    }
+  }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // Wider than site-container:
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  @media only screen and (min-width: $site-width + 1) {
+    .playout__image-container { width: calc(50% + ( #{$site-width} * (#{$image-ratio} - 0.5) ) ); }
+    @if $body-percentage != 0 {
+      .playout__body { width: $site-width * $body-ratio; }
+      &.has-image-right .playout__body {
+        margin-right: $site-width - ($site-width * $body-ratio) - ($site-width * $image-ratio);
+      }
+      &.has-image-left .playout__body {
+        margin-left: $site-width - ($site-width * $body-ratio) - ($site-width * $image-ratio);
+      }
+    }
+    @else {
+      .playout__body { width: $site-width * (1 - $image-ratio); }
+    }
+  }
+}
+
+.playout {
+  display: flex;
+  position: relative;
+  min-height: 55vmin;
+  &.is-vertical {
+    flex-flow: column;
+    .playout__image-container img {
+      position: static;
+    }
+    .playout__title {
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  // padding-bottom: 6px;
+  // &:after {
+  //   content: "";
+  //   position: absolute;
+  //   display: block;
+  //   right: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   height: 6px;
+  //   background: url(../images/bg--green-tile.jpg) center top;
+  // }
+  @include responsive(padding-bottom,4)
+}
+.playout__title {
+  // @include responsive(font-size, 1.125, 0.9);
+  // text-align: center;
+}
+.playout__body {
+  padding: 1.25em 1em;
+  position: relative;
+  // @include responsive(font-size, 1, 0.825, 800);
+  ul,li {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    text-align: center;
+    list-style: none;
+    margin-bottom: 0.75em;
+  }
+}
+.playout__image-container {
+  align-self: stretch;
+  position: relative;
+  img {
+    object-fit: cover;
+    object-position: top center;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media only screen and (min-width: $bp-medium-small + 1) {
+  .playout {
+    align-items: center;
+    &.has-image-left {flex-flow: row nowrap; }
+    &.has-image-right {flex-flow: row-reverse nowrap; justify-content: flex-end; }
+    &.is-vertical { flex-flow: column; }
+
+    &.has-image-width-25p                        { @include make-playout(25.00%); }
+    &.has-image-width-25p.has-body-width-25p     { @include make-playout(25.00%, 25.00%); }
+    &.has-image-width-25p.has-body-width-33_3p   { @include make-playout(25.00%, 33.33%); }
+    &.has-image-width-25p.has-body-width-40p     { @include make-playout(25.00%, 40.00%); }
+    &.has-image-width-25p.has-body-width-50p     { @include make-playout(25.00%, 50.00%); }
+    &.has-image-width-25p.has-body-width-60p     { @include make-playout(25.00%, 60.00%); }
+    &.has-image-width-25p.has-body-width-66_6p   { @include make-playout(25.00%, 66.67%); }
+    &.has-image-width-25p.has-body-width-75p     { @include make-playout(25.00%, 75.00%); }
+    &.has-image-width-33_3p                      { @include make-playout(33.33%); }
+    &.has-image-width-33_3p.has-body-width-25p   { @include make-playout(33.33%, 25.00%); }
+    &.has-image-width-33_3p.has-body-width-33_3p { @include make-playout(33.33%, 33.33%); }
+    &.has-image-width-33_3p.has-body-width-40p   { @include make-playout(33.33%, 40.00%); }
+    &.has-image-width-33_3p.has-body-width-50p   { @include make-playout(33.33%, 50.00%); }
+    &.has-image-width-33_3p.has-body-width-60p   { @include make-playout(33.33%, 60.00%); }
+    &.has-image-width-33_3p.has-body-width-66_6p { @include make-playout(33.33%, 66.67%); }
+    &.has-image-width-33_3p.has-body-width-75p   { @include make-playout(33.33%, 75.00%); }
+    &.has-image-width-40p                        { @include make-playout(40.00%); }
+    &.has-image-width-40p.has-body-width-25p     { @include make-playout(40.00%, 25.00%); }
+    &.has-image-width-40p.has-body-width-33_3p   { @include make-playout(40.00%, 33.33%); }
+    &.has-image-width-40p.has-body-width-40p     { @include make-playout(40.00%, 40.00%); }
+    &.has-image-width-40p.has-body-width-50p     { @include make-playout(40.00%, 50.00%); }
+    &.has-image-width-40p.has-body-width-60p     { @include make-playout(40.00%, 60.00%); }
+    &.has-image-width-40p.has-body-width-66_6p   { @include make-playout(40.00%, 66.67%); }
+    &.has-image-width-40p.has-body-width-75p     { @include make-playout(40.00%, 75.00%); }
+    &.has-image-width-50p                        { @include make-playout(50.00%); }
+    &.has-image-width-50p.has-body-width-25p     { @include make-playout(50.00%, 25.00%); }
+    &.has-image-width-50p.has-body-width-33_3p   { @include make-playout(50.00%, 33.33%); }
+    &.has-image-width-50p.has-body-width-40p     { @include make-playout(50.00%, 40.00%); }
+    &.has-image-width-50p.has-body-width-50p     { @include make-playout(50.00%, 50.00%); }
+    &.has-image-width-50p.has-body-width-60p     { @include make-playout(50.00%, 60.00%); }
+    &.has-image-width-50p.has-body-width-66_6p   { @include make-playout(50.00%, 66.67%); }
+    &.has-image-width-50p.has-body-width-75p     { @include make-playout(50.00%, 75.00%); }
+    &.has-image-width-60p                        { @include make-playout(60.00%);}
+    &.has-image-width-60p.has-body-width-25p     { @include make-playout(60.00%, 25.00%); }
+    &.has-image-width-60p.has-body-width-33_3p   { @include make-playout(60.00%, 33.33%); }
+    &.has-image-width-60p.has-body-width-40p     { @include make-playout(60.00%, 40.00%); }
+    &.has-image-width-60p.has-body-width-50p     { @include make-playout(60.00%, 50.00%); }
+    &.has-image-width-60p.has-body-width-60p     { @include make-playout(60.00%, 60.00%); }
+    &.has-image-width-60p.has-body-width-66_6p   { @include make-playout(60.00%, 66.67%); }
+    &.has-image-width-60p.has-body-width-75p     { @include make-playout(60.00%, 75.00%); }
+    &.has-image-width-66_6p                      { @include make-playout(66.67%);}
+    &.has-image-width-66_6p.has-body-width-25p   { @include make-playout(66.67%, 25.00%); }
+    &.has-image-width-66_6p.has-body-width-33_3p { @include make-playout(66.67%, 33.33%); }
+    &.has-image-width-66_6p.has-body-width-40p   { @include make-playout(66.67%, 40.00%); }
+    &.has-image-width-66_6p.has-body-width-50p   { @include make-playout(66.67%, 50.00%); }
+    &.has-image-width-66_6p.has-body-width-60p   { @include make-playout(66.67%, 60.00%); }
+    &.has-image-width-66_6p.has-body-width-66_6p { @include make-playout(66.67%, 66.67%); }
+    &.has-image-width-66_6p.has-body-width-75p   { @include make-playout(66.67%, 75.00%); }
+    &.has-image-width-75p                        { @include make-playout(75.00%); }
+    &.has-image-width-75p.has-body-width-25p     { @include make-playout(75.00%, 25.00%); }
+    &.has-image-width-75p.has-body-width-33_3p   { @include make-playout(75.00%, 33.33%); }
+    &.has-image-width-75p.has-body-width-40p     { @include make-playout(75.00%, 40.00%); }
+    &.has-image-width-75p.has-body-width-50p     { @include make-playout(75.00%, 50.00%); }
+    &.has-image-width-75p.has-body-width-60p     { @include make-playout(75.00%, 60.00%); }
+    &.has-image-width-75p.has-body-width-66_6p   { @include make-playout(75.00%, 66.67%); }
+    &.has-image-width-75p.has-body-width-75p     { @include make-playout(75.00%, 75.00%); }
+
+    &.has-body-top { align-items: flex-start; }
+  }
+  .playout__image-container {
+    width: 100%;
+    img {
+      position: absolute;
+    }
+  }
+  .playout__body {
+    background-color: rgba(white,0.75);
+  }
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Wider than site-container:
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@media only screen and (min-width: $site-width + 1) {
+  .playout {
+    justify-content: flex-start;
+    &.has-image-right,
+    &.has-image-left {
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media only screen and (max-width: $bp-medium-small) {
+  .playout {
+    flex-flow: column;
+    .playout__image-container {
+      width: 100%;
+    }
+    .playout__body {
+      width: 100%;
+      padding-left: $body-padding;
+      padding-right: $body-padding;
+    }
+  }
 }

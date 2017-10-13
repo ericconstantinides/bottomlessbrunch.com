@@ -25,10 +25,11 @@
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
     "redux-thunk": "^2.2.0",
-    "stringify-object": "^3.2.1"
+    "stringify-object": "^3.2.1",
+    "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
-    "full": "concurrently 'npm run start' 'nodemon ../server/index.js'",
+    "full": "concurrently 'npm run start' 'nodemon ../server/index.js' 'npm run watch-css'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -160,8 +160,7 @@
 }
 .VenueListItem__sub-title,
 .VenueListItem__title {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-weight: bold;
+  @include openSansCondensedBold;
 }
 .VenueListItem__title {
   color: #f45a26;

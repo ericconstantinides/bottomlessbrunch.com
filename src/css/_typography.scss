@@ -1,7 +1,10 @@
 // fonts:
 $Raleway: 'Raleway', sans-serif;
+
+$Ubuntu: 'Ubuntu', sans-serif;
 $UbuntuCondensed: 'Ubuntu Condensed', sans-serif;
 $OpenSans: 'Open Sans', sans-serif;
+$OpenSansCondensed: 'Open Sans Condensed', sans-serif;
 
 body {
   // font-family: $OpenSans;
@@ -16,6 +19,10 @@ strong {
 }
 
 @mixin ubuntuBold {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: $Ubuntu;
+  font-weight: bold;
+}
+@mixin openSansCondensedBold {
+  font-family: $OpenSansCondensed;
   font-weight: bold;
 }
