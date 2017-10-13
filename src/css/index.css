@@ -112,7 +112,8 @@ strong {
 .Logo__outer-container {
   height: 0;
   width: 0;
-  z-index: 1; }
+  z-index: 1;
+  position: relative; }
 
 .Logo__container {
   padding: 0.5em 1em;
@@ -136,11 +137,19 @@ strong {
 .Logo {
   position: relative;
   font-size: 2.25em;
+  font-size: 2.25em;
+  font-size: 8vw;
   line-height: 1.4;
   letter-spacing: -0.06em;
   color: #ff7f32;
   margin: 0;
   cursor: pointer; }
+  @media only screen and (min-width: 451px) {
+    .Logo {
+      font-size: 2.25rem; } }
+  @media only screen and (max-width: 300px) {
+    .Logo {
+      font-size: 1.5rem; } }
   .Logo:after {
     content: "";
     filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
@@ -192,6 +201,12 @@ strong {
   color: #f8af00;
   text-shadow: none;
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.75); }
+
+.IntroPage .Logo {
+  color: white; }
+
+.IntroPage .Logo__sub-title {
+  display: none; }
 
 .Splash {
   position: relative;

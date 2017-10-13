@@ -2,6 +2,7 @@
   height: 0;
   width: 0;
   z-index: 1;
+  position: relative;
 }
 .Logo__container {
   padding: 0.5em 1em;
@@ -26,6 +27,7 @@
 .Logo {
   position: relative;
   font-size: 2.25em;
+  @include responsive(font-size, 2.25, 1.5, 450);
   line-height: 1.4;
   letter-spacing: -0.06em;
   color: #ff7f32;
@@ -102,5 +104,14 @@
     color: #f8af00;
     text-shadow: none;
     text-shadow: 1px 1px 0px rgba(black, 0.75);
+  }
+}
+// INTRO PAGE:
+.IntroPage {
+  .Logo {
+    color: white;
+  }
+  .Logo__sub-title {
+    display: none;
   }
 }
