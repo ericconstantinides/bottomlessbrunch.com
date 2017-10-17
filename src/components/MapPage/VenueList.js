@@ -43,7 +43,7 @@ class VenueList extends Component {
 
   render () {
     return (
-      <div className='VenueList' id='VenueList' ref='VenueList'>
+      <div className='VenueList' ref='VenueList'>
         {this.renderTeasers()}
       </div>
     )

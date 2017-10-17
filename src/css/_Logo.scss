@@ -9,9 +9,6 @@
   text-align: center;
   display: inline-block;
   margin-left: 22px;
-  .VenuePage ~ .MapPage & {
-    margin-left: 0;
-  }
 }
 .Logo,
 .Logo__sub-title {
@@ -20,9 +17,6 @@
   color: white;
   text-shadow: 2px 2px 1px rgba(black, 0.75);
   white-space: nowrap;
-  .VenuePage ~ .MapPage & {
-    text-shadow: 2px 2px 1px rgba(black, 0.5);
-  }
 }
 .Logo {
   position: relative;
@@ -56,11 +50,6 @@
     position: absolute;
     top: 0.5rem;
     left: 100%;
-  }
-  .VenuePage ~ .MapPage & {
-    font-size: 1.75em;
-    color: white;
-    text-shadow: 2px 2px 1px rgba(black, 0.5);
   }
 }
 #root .Logo__sub-title {
@@ -99,13 +88,6 @@
     }
   }
 }
-#root .Region ~ .MapPage .Logo__sub-title {
-  .Select-value-label {
-    color: #f8af00;
-    text-shadow: none;
-    text-shadow: 1px 1px 0px rgba(black, 0.75);
-  }
-}
 // INTRO PAGE:
 .IntroPage {
   .Logo {
@@ -113,5 +95,37 @@
   }
   .Logo__sub-title {
     display: none;
+  }
+}
+
+// MAP PAGE:
+#root .Region ~ .MapPage {
+  .Logo__sub-title {
+    .Select-value-label {
+      color: #f8af00;
+      text-shadow: none;
+      text-shadow: 1px 1px 0px rgba(black, 0.75);
+    }
+  }
+  @media only screen and (max-width: $bp-medium-large) {
+    .Logo {
+      font-size: 1.65em;
+    }
+  }
+}
+
+// VENUE PAGE:
+.VenuePage ~ .MapPage {
+  .Logo__container {
+    margin-left: 0;
+  }
+  .Logo {
+    font-size: 1.75em;
+    color: white;
+    text-shadow: 2px 2px 1px rgba(black, 0.5);
+  }
+  .Logo,
+  .Logo__sub-title {
+    text-shadow: 2px 2px 1px rgba(black, 0.5);
   }
 }

@@ -22,6 +22,7 @@
     "react-select": "^1.0.0-rc.10",
     "react-share": "^1.16.0",
     "react-stars": "https://github.com/zdila/react-stars/tarball/master",
+    "react-swipeable": "^4.1.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
     "redux-thunk": "^2.2.0",
@@ -29,13 +30,13 @@
     "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
-    "full": "concurrently 'npm run start' 'nodemon ../server/index.js' 'npm run watch-css'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
+    "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "full": "concurrently 'npm run start' 'nodemon ../server/index.js' 'npm run watch-css'"
   },
   "devDependencies": {
     "concurrently": "^3.5.0",

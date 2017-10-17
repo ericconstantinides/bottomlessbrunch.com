@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Swipeable from 'react-swipeable'
 import _ from 'lodash'
 
 import * as actions from '../../actions'
@@ -9,6 +10,10 @@ import Map from './Map'
 import VenueList from './VenueList'
 
 class MapPage extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {drawerOpen: false}
+  }
   handleSelectChange = selected => {
     this.props.setUiRegion(
       selected.value,
@@ -21,6 +26,13 @@ class MapPage extends Component {
     this.props.unsetUiRegion()
     this.props.history.push('/')
   }
+  swipedUp = (e, deltaY, isFlick) => {
+    console.log("You Swiped Up...", e, deltaY, isFlick)
+    this.setState({ drawerOpen: !this.state.drawerOpen })
+  }
+  handleDrawerClick = () => {
+    this.setState({ drawerOpen: !this.state.drawerOpen })
+  }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
@@ -31,6 +43,7 @@ class MapPage extends Component {
       value: region._id,
       label: region.name
     }))
+    const drawerPos = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
         <Logo
@@ -52,8 +65,16 @@ class MapPage extends Component {
             mapElement={<div style={styles} />}
           />
         </div>
-        <div className='MapPage__VenueList-container'>
-        <VenueList region={this.props.ui.region} />
+        <div className={`MapPage__VenueList-container ${drawerPos}`}>
+          <Swipeable
+            trackMouse
+            onSwiped={this.swipedUp}
+          >
+            <div onClick={this.handleDrawerClick} className='VenueList__handle' id='VenueList__handle'>
+              <div className='VenueList__inner-handle' />
+            </div>
+          </Swipeable>
+          <VenueList region={this.props.ui.region} />
         </div>
       </div>
     )

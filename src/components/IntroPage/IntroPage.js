@@ -12,6 +12,12 @@ class IntroPage extends Component {
     this.props.setUiRegion(selected.value)
     this.props.history.replace(this.props.regions[selected.value].slug)
   }
+  componentDidMount () {
+    document.documentElement.classList.add('IntroPage')
+  }
+  componentWillUnmount () {
+    document.documentElement.classList.remove('IntroPage')
+  }
   render () {
     const regionSelectOptions = _.map(this.props.regions, region => ({
       value: region._id,
