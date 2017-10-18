@@ -29,3 +29,26 @@ export const BRUNCH_TIMES = {
   END: '3:00PM',
   DAYS: ['Saturday', 'Sunday']
 }
+
+export const DRAWER = {
+  sm: {
+    starts: 0,
+    ends: 767,
+    width: 0,
+    height: 300
+  },
+  md: {
+    starts: 768,
+    ends: 900,
+    width: 320,
+    height: 0
+  },
+  lg: {
+    starts: 901,
+    ends: 99999,
+    width: 390,
+    height: 0
+  }
+}
+
+export const PAD_DEGREES = 0.0125

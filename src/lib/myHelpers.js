@@ -1,3 +1,4 @@
+/* global google */
 import { fitBounds } from 'google-map-react/utils'
 import _ from 'lodash'
 
@@ -196,31 +197,91 @@ export function compileGoogleHours (gData) {
     niceTimes.forEach((dayObj, i) => {
       if (prevTime && prevTime !== dayObj.time) {
         const weekday = scrunchDays(accumulatedDays)
-        condensedTimes.push({weekday, time: prevTime})
+        condensedTimes.push({ weekday, time: prevTime })
         accumulatedDays = []
       }
-      if (i >= (niceTimes.length - 1)) {
+      if (i >= niceTimes.length - 1) {
         // it's the last one and not picked up so...
         accumulatedDays.push(dayObj.weekday)
         prevTime = dayObj.time
         const weekday = scrunchDays(accumulatedDays)
-        condensedTimes.push({weekday, time: prevTime})
+        condensedTimes.push({ weekday, time: prevTime })
       }
       accumulatedDays.push(dayObj.weekday)
       prevTime = dayObj.time
     })
     const nicerTimes = condensedTimes.map(dayObj => {
       if (dayObj.weekday === 'Mon - Sun') {
-        return {weekday: 'Everyday', time: dayObj.time}
+        return { weekday: 'Everyday', time: dayObj.time }
       }
       if (dayObj.weekday === 'Mon - Fri') {
-        return {weekday: 'Weekdays', time: dayObj.time}
+        return { weekday: 'Weekdays', time: dayObj.time }
       }
       if (dayObj.weekday === 'Sat & Sun') {
-        return {weekday: 'Weekends', time: dayObj.time}
+        return { weekday: 'Weekends', time: dayObj.time }
       }
       return dayObj
     })
     return nicerTimes
   }
+}
+
+export function offsetCenter (latlng, zoom, offsetx, offsety) {
+  // latlng is the apparent centre-point
+  // offsetx is the distance you want that point to move to the right, in pixels
+  // offsety is the distance you want that point to move upwards, in pixels
+  // offset can be negative
+  // offsetx and offsety are both optional
+
+  const map = new google.maps.Map(document.createElement('div'), {
+    center: latlng,
+    zoom: zoom
+  })
+  console.log(map)
+  google.maps.event.addListenerOnce(map, 'projection_changed', () => {
+    console.log(map)
+    debugger
+    const scale = Math.pow(2, map.getZoom())
+    const worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng)
+    const pixelOffset = new google.maps.Point(
+      offsetx / scale || 0,
+      offsety / scale || 0
+    )
+    const worldCoordinateNewCenter = new google.maps.Point(
+      worldCoordinateCenter.x - pixelOffset.x,
+      worldCoordinateCenter.y + pixelOffset.y
+    )
+    const newCenter = map
+      .getProjection()
+      .fromPointToLatLng(worldCoordinateNewCenter)
+    console.log(newCenter)
+  })
+  // map.setCenter(newCenter)
+}
+
+export function getRegionBoundsByVenues (venues) {
+  let regionsObject = {}
+  _.map(venues, venue => {
+    if (!regionsObject[venue.regionId]) {
+      regionsObject[venue.regionId] = {
+        north: venue.lat,
+        south: venue.lat,
+        east: venue.lng,
+        west: venue.lng
+      }
+    } else {
+      const region = regionsObject[venue.regionId]
+      if (venue.lat > region.north) {
+        region.north = venue.lat
+      } else if (venue.lat < region.south) {
+        region.south = venue.lat
+      }
+      if (venue.lng > region.east) {
+        region.east = venue.lng
+      } else if (venue.lng < region.west) {
+        region.west = venue.lng
+      }
+    }
+  })
+  return regionsObject
 }

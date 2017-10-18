@@ -2078,6 +2078,10 @@ html:not(.IntroPage) ~ body {
   width: 120px;
   border-radius: 100px; }
 
+@media only screen and (min-width: 768px) {
+  .VenueList__handle {
+    display: none; } }
+
 @media only screen and (min-width: 768px) and (max-width: 900px) {
   .MapPage__VenueList-container {
     width: 320px;
