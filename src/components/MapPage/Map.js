@@ -1,4 +1,3 @@
-/* global google */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
@@ -66,34 +65,27 @@ class Map extends Component {
 
     const regionsBounds = getRegionBoundsByVenues(this.props.venues)
 
-    const browserWidth = this.state.browserWidth
-    const browserHeight = this.state.browserHeight
+    const {browserWidth: width, browserHeight: height } = this.state
     let drawer
-    if (browserWidth >= DRAWER.sm.starts && browserWidth <= DRAWER.sm.ends) {
+    if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
       drawer = DRAWER.sm
-    } else if (
-      browserWidth >= DRAWER.md.starts &&
-      browserWidth <= DRAWER.md.ends
-    ) {
+    } else if (width >= DRAWER.md.starts && width <= DRAWER.md.ends) {
       drawer = DRAWER.md
     } else {
       drawer = DRAWER.lg
     }
 
-    const miniWidthPx = browserWidth - drawer.width
-    const miniHeightPx = browserHeight - drawer.height
-
-    // figure out the ratio differences
-    const drawerWidthRatio = 1 - miniWidthPx / browserWidth
-    const drawerHeightRatio = 1 - miniHeightPx / browserHeight
-    // debugger
+    // figure out the ratio differences:
+    const drawerWidthRatio = 1 - (width - drawer.width) / width
+    const drawerHeightRatio = 1 - (height - drawer.height) / height
 
     const myRegion = regionsBounds[this.props.ui.region]
 
+    // get the total latitude and longitude width and height:
     const totalLat = myRegion.north - myRegion.south
     const totalLng = myRegion.east - myRegion.west
 
-    const minibounds = {
+    const bounds = {
       nw: {
         lat: myRegion.north + PAD_DEGREES,
         lng: myRegion.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
@@ -104,16 +96,13 @@ class Map extends Component {
       }
     }
 
-    const miniCenter = fitBounds(minibounds, {
-      width: browserWidth,
-      height: browserHeight
-    })
+    const mapCenter = fitBounds(bounds, { width, height })
 
     this.setState({
       loaded: true,
-      lat: miniCenter.center.lat,
-      lng: miniCenter.center.lng,
-      zoom: miniCenter.zoom
+      lat: mapCenter.center.lat,
+      lng: mapCenter.center.lng,
+      zoom: mapCenter.zoom
     })
   }
   render () {
