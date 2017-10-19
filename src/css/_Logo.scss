@@ -138,6 +138,13 @@
       font-size: 1.75em;
     }
   }
+  @media only screen and (max-width: $bp-medium) {
+    .Logo__container {
+      // background: rgba(black,0.5);
+      // width: auto;
+      // height: auto;
+    }
+  }
 }
 @media only screen and (max-width: $bp-medium) {
   .Logo__outer-container {

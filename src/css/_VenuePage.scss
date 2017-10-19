@@ -278,8 +278,39 @@
     flex-flow: column;
     align-items: center;
   }
+  .VenuePage__middle-center {
+    order: -1;
+  }
+  .VenuePage__middle-center {
+    width: 100%;
+  }
+  .VenuePage__middle-left,
+  .VenuePage__middle-right {
+    width: (calc(100% - 0.5em))
+  }
+  .VenuePage__inner1 {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+  .VenuePage__bg {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .VenuePage__close {
+    top: 0;
+    right: 0;
+  }
+  .VenuePage__prev {
+    display: none;
+  }
+  .VenuePage__next {
+    display: none;
+  }
 }
-
 
 
 
