@@ -17,7 +17,8 @@ body,
 .MapPage {
   display: flex;
   flex-flow: column;
-  flex: 1; }
+  flex: 1;
+  overflow: hidden; }
 
 body {
   font-family: "Raleway", sans-serif;
@@ -226,12 +227,9 @@ strong {
     font-size: 1.75em; } }
 
 @media only screen and (max-width: 767px) {
-  .Logo__outer-container {
-    background: rgba(255, 255, 255, 0.625); }
   .Logo__container {
     margin-left: 0;
-    padding: 0.125em 0.5em;
-    background: rgba(255, 255, 255, 0.625); }
+    padding: 0.125em 0.5em; }
   .Logo {
     font-size: 1.4em;
     line-height: 1.3;

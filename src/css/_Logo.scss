@@ -148,12 +148,12 @@
 }
 @media only screen and (max-width: $bp-medium) {
   .Logo__outer-container {
-    background: rgba(255, 255, 255, 0.625);
+    // background: rgba(255, 255, 255, 0.625);
   }
   .Logo__container {
     margin-left: 0;
     padding: 0.125em 0.5em;
-    background: rgba(255,255,255,0.625);
+    // background: rgba(255,255,255,0.625);
   }
   .Logo {
     font-size: 1.4em;
