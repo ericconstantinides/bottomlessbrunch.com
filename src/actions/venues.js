@@ -8,14 +8,17 @@ import { apiError } from './index'
 export function fetchVenues (callback) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
-      const venuesWithSlug = response.data.map(venue => {
-        const nameSlug = slugify(venue.name)
-        const neighSlug = venue.neighborhood
-          ? '-' + slugify(venue.neighborhood)
-          : ''
-        venue.slug = nameSlug + neighSlug
-        return venue
-      })
+      // filter out the unpublished venues and add slugs:
+      const venuesWithSlug = response.data
+        .filter(venue => !venue.unpublish)
+        .map(venue => {
+          const nameSlug = slugify(venue.name)
+          const neighSlug = venue.neighborhood
+            ? '-' + slugify(venue.neighborhood)
+            : ''
+          venue.slug = nameSlug + neighSlug
+          return venue
+        })
       // calling calcRegionsBoundsByVenues for all intents and purposes:
       if (callback) {
         callback(venuesWithSlug)

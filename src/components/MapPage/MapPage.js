@@ -48,10 +48,13 @@ class MapPage extends Component {
     }
     const region = this.props.regions[this.props.ui.region]
     const styles = { height: `100%`, width: `100%` }
-    const regionSelectOptions = _.map(this.props.regions, region => ({
-      value: region._id,
-      label: region.name
-    }))
+    // cycle through the regions and filter out the ones without bounds
+    let regionOptions = Object.entries(this.props.regions)
+      .filter(([regionId, region]) => region.bounds)
+      .map(([regionId, region]) => ({
+        value: region._id,
+        label: region.name
+      }))
     const drawerPos = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
@@ -60,7 +63,7 @@ class MapPage extends Component {
           region={this.props.ui.region}
           history={this.props.history}
           handleChange={this.handleSelectChange}
-          options={regionSelectOptions}
+          options={regionOptions}
           handleLogoClick={this.handleLogoClick}
         />
         <div className='MapPage__Map-container'>
