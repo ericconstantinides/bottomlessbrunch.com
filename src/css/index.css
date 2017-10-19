@@ -201,21 +201,49 @@ strong {
   text-shadow: none;
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.75); }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (min-width: 768px) and (max-width: 900px) {
   #root .Region ~ .MapPage .Logo {
     font-size: 1.65em; } }
 
+@media only screen and (max-width: 767px) {
+  #root .Region ~ .MapPage .Logo__outer-container {
+    background: rgba(255, 255, 255, 0.625); } }
+
 .VenuePage ~ .MapPage .Logo__container {
-  margin-left: 0; }
+  margin-left: 0;
+  background: none; }
 
 .VenuePage ~ .MapPage .Logo {
-  font-size: 1.75em;
   color: white;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); }
 
 .VenuePage ~ .MapPage .Logo,
 .VenuePage ~ .MapPage .Logo__sub-title {
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); }
+
+@media only screen and (min-width: 768px) {
+  .VenuePage ~ .MapPage .Logo {
+    font-size: 1.75em; } }
+
+@media only screen and (max-width: 767px) {
+  .Logo__outer-container {
+    background: rgba(255, 255, 255, 0.625); }
+  .Logo__container {
+    margin-left: 0;
+    padding: 0.125em 0.5em;
+    background: rgba(255, 255, 255, 0.625); }
+  .Logo {
+    font-size: 1.4em;
+    line-height: 1.3;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); }
+  #root .Logo__sub-title {
+    font-size: 0.875em; }
+  #root .Select-placeholder,
+  #root .Select--single > .Select-control .Select-value {
+    line-height: 24px; }
+  #root .Select-input,
+  #root .Select-control {
+    height: 24px; } }
 
 html:not(.IntroPage),
 html:not(.IntroPage) ~ body {
@@ -2027,8 +2055,7 @@ html:not(.IntroPage) ~ body {
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  pointer-events: none; }
+  justify-content: center; }
 
 .VenueList__inner-handle {
   background: #a7a7a7;
@@ -2065,6 +2092,10 @@ html:not(.IntroPage) ~ body {
     .MapPage__VenueList-container.is-open {
       height: 75vh;
       bottom: 0; } }
+
+@media only screen and (max-width: 480px) {
+  .VenueListItem__image-container {
+    width: calc(50% - 0.5em); } }
 
 .VenuePage {
   position: fixed;

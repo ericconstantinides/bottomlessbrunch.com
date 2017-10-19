@@ -210,7 +210,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
 }
 .VenueList__inner-handle {
   background: #a7a7a7;
@@ -254,5 +253,9 @@
       bottom: 0;
     }
   }
-  
+}
+@media only screen and (max-width: $bp-small) {
+  .VenueListItem__image-container {
+    width: calc(50% - 0.5em);
+  }
 }

@@ -34,7 +34,8 @@ class MapPage extends Component {
   openDrawer = () => {
     this.setState((prevState, props) => ({
       drawerOpen: true,
-      drawerVertOffset: 0
+      drawerVertOffset: 0,
+      drawerSmoothScroll: true
     }))
     setTimeout(() => {
       this.setState((prevState, props) => ({
@@ -46,7 +47,8 @@ class MapPage extends Component {
   handleSwipedDown = (e, deltaY, isFlick) => {
     this.setState((prevState, props) => ({
       drawerOpen: false,
-      drawerVertOffset: 0
+      drawerVertOffset: 0,
+      drawerSmoothScroll: false
     }))
   }
   // open the drawer:
@@ -66,7 +68,8 @@ class MapPage extends Component {
     } else {
       this.setState((prevState, props) => ({
         drawerOpen: false,
-        drawerVertOffset: 0
+        drawerVertOffset: 0,
+        drawerSmoothScroll: false
       }))
     }
   }
