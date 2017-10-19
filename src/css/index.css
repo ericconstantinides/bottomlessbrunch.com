@@ -1919,6 +1919,9 @@ html:not(.IntroPage) ~ body {
     margin-top: 0; }
 
 .MapItem {
+  margin-left: -8px;
+  margin-top: -74px;
+  display: flex;
   position: relative;
   font-size: 1rem;
   font-family: "Raleway", sans-serif;

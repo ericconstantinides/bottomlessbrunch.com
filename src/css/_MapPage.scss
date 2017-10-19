@@ -90,6 +90,9 @@
   }
 }
 .MapItem {
+  margin-left: -8px;
+  margin-top: -74px;
+  display: flex;
   position: relative;
   // width: 180px; // this is temp and will need to be updated
   // override google's overrides:
