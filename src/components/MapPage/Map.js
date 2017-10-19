@@ -98,6 +98,7 @@ class Map extends Component {
         center={{ lat: this.state.lat, lng: this.state.lng }}
         options={{ fullscreenControl: false }}
         onGoogleApiLoaded={this.mapLoaded}
+        yesIWantToUseGoogleMapApiInternals
       >
         {_.map(this.props.venues, venue => (
           <VenueTeaser

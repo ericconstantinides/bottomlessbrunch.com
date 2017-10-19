@@ -14,7 +14,9 @@ class MapPage extends Component {
     super(props)
     this.state = {
       hoveredVenue: '',
-      drawerOpen: false
+      drawerOpen: false,
+      drawerVertOffset: 0,
+      drawerSmoothScroll: false
     }
   }
   handleSelectChange = selected => {
@@ -29,12 +31,47 @@ class MapPage extends Component {
     this.props.unsetUiRegion()
     this.props.history.push('/')
   }
-  swipedUp = (e, deltaY, isFlick) => {
-    console.log("You Swiped Up...", e, deltaY, isFlick)
-    this.setState({ drawerOpen: !this.state.drawerOpen })
+  openDrawer = () => {
+    this.setState((prevState, props) => ({
+      drawerOpen: true,
+      drawerVertOffset: 0
+    }))
+    setTimeout(() => {
+      this.setState((prevState, props) => ({
+        drawerSmoothScroll: true
+      }))
+    }, 1)
+  }
+  // close the drawer:
+  handleSwipedDown = (e, deltaY, isFlick) => {
+    this.setState((prevState, props) => ({
+      drawerOpen: false,
+      drawerVertOffset: 0
+    }))
+  }
+  // open the drawer:
+  handleSwipedUp = (e, deltaY, isFlick) => {
+    this.openDrawer()
+  }
+  // this on is only for looks
+  handleSwiping = (e, deltaX, deltaY, absX, absY, velocity) => {
+    const restrictedDeltaY = deltaY > 20 ? -20 : deltaY < -20 ? 20 : deltaY * -1
+    this.setState((prevState, props) => ({
+      drawerVertOffset: restrictedDeltaY
+    }))
   }
   handleDrawerClick = () => {
-    this.setState({ drawerOpen: !this.state.drawerOpen })
+    if (!this.state.drawerOpen) {
+      this.openDrawer()
+    } else {
+      this.setState((prevState, props) => ({
+        drawerOpen: false,
+        drawerVertOffset: 0
+      }))
+    }
+  }
+  handleVenueListScroll = (e) => {
+    this.openDrawer()
   }
   handleMouseOver = venue => event => {
     this.setState({ hoveredVenue: venue._id })
@@ -55,7 +92,7 @@ class MapPage extends Component {
         value: region._id,
         label: region.name
       }))
-    const drawerPos = this.state.drawerOpen ? 'is-open' : 'is-closed'
+    const drawerState = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
         <Logo
@@ -69,7 +106,7 @@ class MapPage extends Component {
         <div className='MapPage__Map-container'>
           <Map
             cursorPos={this.props.cursorPos}
-            center={{lat: region.lat, lng: region.lng}}
+            center={{ lat: region.lat, lng: region.lng }}
             zoom={region.zoom}
             minZoom={4}
             venues={this.props.venues}
@@ -80,20 +117,33 @@ class MapPage extends Component {
             mapElement={<div style={styles} />}
           />
         </div>
-        <div className={`MapPage__VenueList-container ${drawerPos}`}>
+        <div
+          className={`MapPage__VenueList-container ${drawerState}`}
+          style={{transform: `translateY(${this.state.drawerVertOffset}px)`}}
+        >
           <Swipeable
-            trackMouse
-            onSwiped={this.swipedUp}
+            onSwiping={this.handleSwiping}
+            onSwipedUp={this.handleSwipedUp}
+            onSwipedDown={this.handleSwipedDown}
           >
-            <div onClick={this.handleDrawerClick} className='VenueList__handle' id='VenueList__handle'>
+            {/* stopPropagation */}
+            {/* preventDefaultTouchmoveEvent */}
+            {/* trackMouse */}
+            <div
+              onClick={this.handleDrawerClick}
+              className='VenueList__handle'
+              id='VenueList__handle'
+            >
               <div className='VenueList__inner-handle' />
             </div>
           </Swipeable>
           <VenueList
+            handleScroll={this.handleVenueListScroll}
             region={this.props.ui.region}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
             hoveredVenue={this.state.hoveredVenue}
+            drawerSmoothScroll={this.state.drawerSmoothScroll}
           />
         </div>
       </div>

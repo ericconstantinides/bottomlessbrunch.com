@@ -1846,17 +1846,19 @@ html:not(.IntroPage) ~ body {
 
 .MapPage__VenueList-container {
   background: rgba(255, 255, 255, 0.75);
-  padding: 6em 0.5em 0.5em;
+  padding: 6em 0 0.5em;
   width: 390px;
   position: absolute;
   overflow: hidden;
   top: 0;
   bottom: 0;
-  left: 0; }
+  left: 0;
+  display: flex;
+  flex-flow: column; }
 
 .VenueList {
-  overflow: auto;
-  height: calc(100%);
+  overflow-y: scroll;
+  height: 100%;
   -webkit-overflow-scrolling: touch; }
 
 .MapItem__marker-container {
@@ -1914,6 +1916,7 @@ html:not(.IntroPage) ~ body {
  */
 .VenueListItem {
   display: block;
+  margin: 0 0.5em;
   background: white; }
   .VenueListItem:first-child .VenueListItem__inner {
     margin-top: 0; }
@@ -2024,12 +2027,14 @@ html:not(.IntroPage) ~ body {
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  pointer-events: none; }
 
 .VenueList__inner-handle {
-  background: #aaa;
+  background: #a7a7a7;
   height: 6px;
-  width: 120px;
+  width: 80px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
   border-radius: 100px; }
 
 @media only screen and (min-width: 768px) {
@@ -2045,7 +2050,7 @@ html:not(.IntroPage) ~ body {
 
 @media only screen and (max-width: 767px) {
   .MapPage__VenueList-container {
-    top: 65vh;
+    top: auto;
     right: 0;
     bottom: 0;
     left: 0;
@@ -2053,9 +2058,13 @@ html:not(.IntroPage) ~ body {
     padding-top: 0em;
     transition: 0.5s; }
     .MapPage__VenueList-container.is-closed {
-      top: 65vh; }
+      height: 35vh;
+      bottom: -30px; }
+      .MapPage__VenueList-container.is-closed .VenueList {
+        overflow-y: hidden; }
     .MapPage__VenueList-container.is-open {
-      top: 15vh; } }
+      height: 75vh;
+      bottom: 0; } }
 
 .VenuePage {
   position: fixed;

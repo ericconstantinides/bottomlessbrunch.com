@@ -36,8 +36,20 @@ class VenueList extends Component {
   }
 
   render () {
+    const style = this.props.drawerSmoothScroll
+      ? {
+        WebkitOverflowScrolling: 'touch',
+        overflowY: 'scroll'
+      }
+      : {}
     return (
-      <div className='VenueList' ref='VenueList'>
+      <div
+        className='VenueList'
+        ref='VenueList'
+        onScroll={this.props.handleScroll}
+        onTouchMove={this.props.handleScroll}
+        style={style}
+      >
         {this.renderTeasers()}
       </div>
     )
