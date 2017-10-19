@@ -28,18 +28,21 @@ export function fetchUiRegion (regions, history) {
   return unsetUiRegion()
 }
 
-export function setUiRegion (regionId, location, history) {
+export function setUiRegion (regionId, slug, history) {
   window.localStorage.setItem('regionId', regionId)
   if (
-    location &&
+    slug &&
     history &&
     parsePath(history.location.pathname)[0] !== 'admin'
   ) {
-    history.push('/' + location)
+    history.push('/' + slug)
   }
   return {
     type: constants.UI_SET_REGION,
-    payload: regionId
+    payload: {
+      _id: regionId,
+      name: 'TBD'
+    }
   }
 }
 
