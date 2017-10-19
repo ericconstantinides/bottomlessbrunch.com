@@ -65,6 +65,16 @@ export function unsetUiVenue () {
   }
 }
 
+export function setUiBrowserSize () {
+  return {
+    type: constants.UI_SET_BROWSER_SIZE,
+    payload: {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
+  }
+}
+
 export function hoverVenueUi (venue) {
   if (venue) {
     return {

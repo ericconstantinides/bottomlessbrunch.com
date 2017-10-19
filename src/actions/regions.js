@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 
 import constants from '../actions/types'
 import slugify from '../lib/Slug'
@@ -69,5 +70,35 @@ export function deleteRegion (region, history) {
       })
       // TODO: fix error stuff. It doesn't work:
       .catch(error => dispatch(apiError(error.response.data.error)))
+  }
+}
+
+export function calcRegionsBoundsByVenues (venues) {
+  let regionsObject = {}
+  _.map(venues, venue => {
+    if (!regionsObject[venue.regionId]) {
+      regionsObject[venue.regionId] = {
+        north: venue.lat,
+        south: venue.lat,
+        east: venue.lng,
+        west: venue.lng
+      }
+    } else {
+      const region = regionsObject[venue.regionId]
+      if (venue.lat > region.north) {
+        region.north = venue.lat
+      } else if (venue.lat < region.south) {
+        region.south = venue.lat
+      }
+      if (venue.lng > region.east) {
+        region.east = venue.lng
+      } else if (venue.lng < region.west) {
+        region.west = venue.lng
+      }
+    }
+  })
+  return {
+    type: constants.REGIONS_CALC_BOUNDS,
+    payload: regionsObject
   }
 }

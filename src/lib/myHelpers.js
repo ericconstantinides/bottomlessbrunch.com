@@ -258,30 +258,3 @@ export function offsetCenter (latlng, zoom, offsetx, offsety) {
   })
   // map.setCenter(newCenter)
 }
-
-export function getRegionBoundsByVenues (venues) {
-  let regionsObject = {}
-  _.map(venues, venue => {
-    if (!regionsObject[venue.regionId]) {
-      regionsObject[venue.regionId] = {
-        north: venue.lat,
-        south: venue.lat,
-        east: venue.lng,
-        west: venue.lng
-      }
-    } else {
-      const region = regionsObject[venue.regionId]
-      if (venue.lat > region.north) {
-        region.north = venue.lat
-      } else if (venue.lat < region.south) {
-        region.south = venue.lat
-      }
-      if (venue.lng > region.east) {
-        region.east = venue.lng
-      } else if (venue.lng < region.west) {
-        region.west = venue.lng
-      }
-    }
-  })
-  return regionsObject
-}

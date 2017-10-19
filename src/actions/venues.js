@@ -5,7 +5,7 @@ import slugify from '../lib/Slug'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
-export function fetchVenues () {
+export function fetchVenues (callback) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
       const venuesWithSlug = response.data.map(venue => {
@@ -16,6 +16,10 @@ export function fetchVenues () {
         venue.slug = nameSlug + neighSlug
         return venue
       })
+      // calling calcRegionsBoundsByVenues for all intents and purposes:
+      if (callback) {
+        callback(venuesWithSlug)
+      }
       dispatch({
         type: constants.VENUES_FETCH,
         payload: venuesWithSlug

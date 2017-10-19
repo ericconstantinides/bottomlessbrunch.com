@@ -4,7 +4,6 @@ import GoogleMapReact from 'google-map-react'
 import { fitBounds } from 'google-map-react/utils'
 import _ from 'lodash'
 
-import { getRegionBoundsByVenues } from '../../lib/myHelpers'
 import { usaMap, DRAWER, PAD_DEGREES } from '../../config'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
@@ -13,8 +12,6 @@ class Map extends Component {
   constructor () {
     super()
     this.state = {
-      browserWidth: 0,
-      browserHeight: 0,
       zoom: usaMap.zoom,
       lat: usaMap.lat,
       lng: usaMap.lng,
@@ -26,31 +23,8 @@ class Map extends Component {
       }
     }
   }
-  updateBrowserSize = () => {
-    this.setState({
-      browserWidth: window.innerWidth,
-      browserHeight: window.innerHeight
-    })
-  }
-  mapLoaded (map) {
-    // This is how we can save the map:
-    if (this.state.map !== null) return false
+  mapLoaded = ({ map, maps }) => {
     this.setState({ map })
-    // recenter map:
-    // debugger
-    // console.log(map)
-    // const recenter = offsetCenter(this.props.center, this.props.zoom, -320, 0)
-    // console.dir(recenter)
-
-    // get these values from the DOM:
-    // to start I'll hard code these in...
-  }
-  mapLoaded2 = ({ map, maps }) => {
-    // console.log(map, maps)
-    // maps.event.addListenerOnce(this.state.map, 'projection_changed', () => {
-    //   console.log('hello')
-    //   console.log(maps)
-    // })
   }
   handleMouseOver = venue => event => {
     this.props.hoverVenueUi(venue)
@@ -58,14 +32,15 @@ class Map extends Component {
   handleMouseLeave = venue => event => {
     this.props.hoverVenueUi()
   }
-  componentWillMount = () => {
-    this.updateBrowserSize()
-  }
   componentDidMount = () => {
+    // need to move this into the region action:
+    // const regionsBounds = getRegionBoundsByVenues(this.props.venues)
+    this.updateDrawer()
 
-    const regionsBounds = getRegionBoundsByVenues(this.props.venues)
-
-    const {browserWidth: width, browserHeight: height } = this.state
+  }
+  updateDrawer = () => {
+    // debugger
+    const { width, height } = this.props.ui.browserSize
     let drawer
     if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
       drawer = DRAWER.sm
@@ -75,45 +50,51 @@ class Map extends Component {
       drawer = DRAWER.lg
     }
 
-    // figure out the ratio differences:
+    // figure out the drawer ratio:
     const drawerWidthRatio = 1 - (width - drawer.width) / width
     const drawerHeightRatio = 1 - (height - drawer.height) / height
 
-    const myRegion = regionsBounds[this.props.ui.region]
+    const myRegion = this.props.regions[this.props.ui.region]
+    
+    if (myRegion.bounds) {
+      // get the total latitude and longitude width and height:
+      const totalLat = myRegion.bounds.north - myRegion.bounds.south
+      const totalLng = myRegion.bounds.east - myRegion.bounds.west
 
-    // get the total latitude and longitude width and height:
-    const totalLat = myRegion.north - myRegion.south
-    const totalLng = myRegion.east - myRegion.west
-
-    const bounds = {
-      nw: {
-        lat: myRegion.north + PAD_DEGREES,
-        lng: myRegion.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
-      },
-      se: {
-        lat: myRegion.south - totalLat * (drawerHeightRatio * 2) - PAD_DEGREES,
-        lng: myRegion.east + PAD_DEGREES
+      const bounds = {
+        nw: {
+          lat: myRegion.bounds.north + PAD_DEGREES,
+          lng: myRegion.bounds.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
+        },
+        se: {
+          lat: myRegion.bounds.south - totalLat * (drawerHeightRatio * 2) - PAD_DEGREES,
+          lng: myRegion.bounds.east + PAD_DEGREES
+        }
       }
+      const mapCenter = fitBounds(bounds, { width, height })
+      this.setState({
+        loaded: true,
+        lat: mapCenter.center.lat,
+        lng: mapCenter.center.lng,
+        zoom: mapCenter.zoom
+      })
+    } else {
+      this.setState({
+        loaded: true,
+        lat: myRegion.lat,
+        lng: myRegion.lng,
+        zoom: myRegion.zoom
+      })
     }
 
-    const mapCenter = fitBounds(bounds, { width, height })
-
-    this.setState({
-      loaded: true,
-      lat: mapCenter.center.lat,
-      lng: mapCenter.center.lng,
-      zoom: mapCenter.zoom
-    })
   }
   render () {
     return (
       <GoogleMapReact
-        ref={this.mapLoaded.bind(this)}
         zoom={this.state.zoom}
         center={{ lat: this.state.lat, lng: this.state.lng }}
         options={{ fullscreenControl: false }}
-        onGoogleApiLoaded={this.mapLoaded2}
-        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={this.mapLoaded}
       >
         {_.map(this.props.venues, venue => (
           <VenueTeaser

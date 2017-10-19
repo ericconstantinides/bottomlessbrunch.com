@@ -11,6 +11,14 @@ export default (state = {}, action) => {
       return {...state, [action.payload._id]: action.payload}
     case constants.REGION_DELETE:
       return _.omit(state, action.payload)
+    case constants.REGIONS_CALC_BOUNDS:
+      let newState = {}
+      // cycle through all the regions adding the bounds:
+      _.map(state, (region, id) => {
+        newState[id] = region
+        newState[id].bounds = action.payload[id]
+      })
+      return newState
     default:
       return state
   }

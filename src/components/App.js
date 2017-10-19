@@ -26,7 +26,13 @@ class App extends Component {
       // add a callback to fetchUiRegion using history
       this.props.fetchUiRegion
     )
-    this.props.fetchVenues()
+    this.props.fetchVenues(this.props.calcRegionsBoundsByVenues)
+
+    this.props.setUiBrowserSize()
+    window.addEventListener('resize', this.props.setUiBrowserSize)
+  }
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.props.setUiBrowserSize)
   }
   componentDidUpdate (prevProps, prevState) {
     // need to change the position of data-react-helmet="true"
