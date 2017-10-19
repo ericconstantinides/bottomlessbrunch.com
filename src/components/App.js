@@ -29,7 +29,10 @@ class App extends Component {
     this.props.fetchVenues(this.props.calcRegionsBoundsByVenues)
 
     this.props.setUiBrowserSize()
-    window.addEventListener('resize', this.props.setUiBrowserSize)
+    window.addEventListener(
+      'resize',
+      _.debounce(this.props.setUiBrowserSize, 300)
+    )
   }
   componentWillUnmount () {
     window.removeEventListener('resize', this.props.setUiBrowserSize)
@@ -87,10 +90,7 @@ class App extends Component {
       <div>
         <Router history={history}>
           <div className='App'>
-            <MetaData
-              path={history.location.pathname}
-              {...this.props.ui}
-            />
+            <MetaData path={history.location.pathname} {...this.props.ui} />
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}

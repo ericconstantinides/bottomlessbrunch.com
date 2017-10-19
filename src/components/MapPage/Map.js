@@ -33,13 +33,19 @@ class Map extends Component {
     this.props.hoverVenueUi()
   }
   componentDidMount = () => {
-    // need to move this into the region action:
-    // const regionsBounds = getRegionBoundsByVenues(this.props.venues)
-    this.updateDrawer()
-
+    this.updateMapAndDrawer()
   }
-  updateDrawer = () => {
-    // debugger
+  componentDidUpdate (prevProps, prevState) {
+    // update the state's region if the UI region changes:
+    if (
+      this.props.ui.region !== prevProps.ui.region ||
+      this.props.ui.browserSize.width !== prevProps.ui.browserSize.width ||
+      this.props.ui.browserSize.height !== prevProps.ui.browserSize.height
+    ) {
+      this.updateMapAndDrawer()
+    }
+  }
+  updateMapAndDrawer = () => {
     const { width, height } = this.props.ui.browserSize
     let drawer
     if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
@@ -55,7 +61,7 @@ class Map extends Component {
     const drawerHeightRatio = 1 - (height - drawer.height) / height
 
     const myRegion = this.props.regions[this.props.ui.region]
-    
+
     if (myRegion.bounds) {
       // get the total latitude and longitude width and height:
       const totalLat = myRegion.bounds.north - myRegion.bounds.south
@@ -64,10 +70,14 @@ class Map extends Component {
       const bounds = {
         nw: {
           lat: myRegion.bounds.north + PAD_DEGREES,
-          lng: myRegion.bounds.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
+          lng: myRegion.bounds.west -
+            totalLng * (drawerWidthRatio * 2) -
+            PAD_DEGREES
         },
         se: {
-          lat: myRegion.bounds.south - totalLat * (drawerHeightRatio * 2) - PAD_DEGREES,
+          lat: myRegion.bounds.south -
+            totalLat * (drawerHeightRatio * 2) -
+            PAD_DEGREES,
           lng: myRegion.bounds.east + PAD_DEGREES
         }
       }
@@ -86,7 +96,6 @@ class Map extends Component {
         zoom: myRegion.zoom
       })
     }
-
   }
   render () {
     return (
