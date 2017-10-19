@@ -12,7 +12,10 @@ import VenueList from './VenueList'
 class MapPage extends Component {
   constructor (props) {
     super(props)
-    this.state = {drawerOpen: false}
+    this.state = {
+      hoveredVenue: '',
+      drawerOpen: false
+    }
   }
   handleSelectChange = selected => {
     this.props.setUiRegion(
@@ -32,6 +35,12 @@ class MapPage extends Component {
   }
   handleDrawerClick = () => {
     this.setState({ drawerOpen: !this.state.drawerOpen })
+  }
+  handleMouseOver = venue => event => {
+    this.setState({ hoveredVenue: venue._id })
+  }
+  handleMouseLeave = venue => event => {
+    this.setState({ hoveredVenue: '' })
   }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
@@ -61,6 +70,9 @@ class MapPage extends Component {
             zoom={region.zoom}
             minZoom={4}
             venues={this.props.venues}
+            handleMouseOver={this.handleMouseOver}
+            handleMouseLeave={this.handleMouseLeave}
+            hoveredVenue={this.state.hoveredVenue}
             containerElement={<div style={styles} />}
             mapElement={<div style={styles} />}
           />
@@ -74,7 +86,12 @@ class MapPage extends Component {
               <div className='VenueList__inner-handle' />
             </div>
           </Swipeable>
-          <VenueList region={this.props.ui.region} />
+          <VenueList
+            region={this.props.ui.region}
+            handleMouseOver={this.handleMouseOver}
+            handleMouseLeave={this.handleMouseLeave}
+            hoveredVenue={this.state.hoveredVenue}
+          />
         </div>
       </div>
     )

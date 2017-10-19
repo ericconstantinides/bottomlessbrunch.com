@@ -26,12 +26,6 @@ class Map extends Component {
   mapLoaded = ({ map, maps }) => {
     this.setState({ map })
   }
-  handleMouseOver = venue => event => {
-    this.props.hoverVenueUi(venue)
-  }
-  handleMouseLeave = venue => event => {
-    this.props.hoverVenueUi()
-  }
   componentDidMount = () => {
     this.updateMapAndDrawer()
   }
@@ -112,10 +106,10 @@ class Map extends Component {
             {...venue}
             lat={venue.lat}
             lng={venue.lng}
-            handleMouseOver={this.handleMouseOver}
-            handleMouseLeave={this.handleMouseLeave}
+            handleMouseOver={this.props.handleMouseOver}
+            handleMouseLeave={this.props.handleMouseLeave}
+            hoveredVenue={this.props.hoveredVenue}
             venue={venue}
-            hoveredId={this.props.ui.venueHover._id}
             regionSlug={this.props.regions[venue.regionId].slug}
           />
         ))}

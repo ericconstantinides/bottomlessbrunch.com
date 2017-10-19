@@ -8,12 +8,6 @@ import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
 
 class VenueList extends Component {
-  handleMouseOver = venue => event => {
-    this.props.hoverVenueUi(venue)
-  }
-  handleMouseLeave = venue => event => {
-    this.props.hoverVenueUi()
-  }
   componentDidUpdate (prevProps, prevState) {
     // put the venueList back at the top for a new region:
     if (prevProps.ui.region !== this.props.ui.region) {
@@ -30,11 +24,11 @@ class VenueList extends Component {
         <VenueTeaser
           key={venue._id}
           altClass='VenueListItem'
-          handleMouseOver={this.handleMouseOver}
-          handleMouseLeave={this.handleMouseLeave}
+          handleMouseOver={this.props.handleMouseOver}
+          handleMouseLeave={this.props.handleMouseLeave}
+          hoveredVenue={this.props.hoveredVenue}
           venue={venue}
           regionName={this.props.regions[venue.regionId].name}
-          hoveredId={this.props.ui.venueHover._id}
           regionSlug={this.props.regions[venue.regionId].slug}
         />
       )

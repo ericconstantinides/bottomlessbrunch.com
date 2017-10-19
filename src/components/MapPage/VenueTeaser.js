@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { compileDays } from '../../lib/myHelpers'
 
 const VenueTeaser = ({
-  hoveredId,
+  hoveredVenue,
   venue,
   regionSlug,
   regionName,
@@ -11,7 +11,7 @@ const VenueTeaser = ({
   handleMouseLeave,
   altClass
 }) => {
-  const hovered = venue._id === hoveredId ? 'is-hovered' : 'not-hovered'
+  const hovered = venue._id === hoveredVenue ? 'is-hovered' : 'not-hovered'
 
   const renderedImage = venue.gData && venue.gData.images
     ? <div

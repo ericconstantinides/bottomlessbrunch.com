@@ -4,7 +4,6 @@ const initialState = {
   venueOpenId: '',
   leftNavOpen: true,
   region: '',
-  venueHover: {},
   browserSize: {
     width: 0,
     height: 0
@@ -25,10 +24,6 @@ export default function (state = initialState, action) {
       return { ...state, venueOpenId: action.payload }
     case constants.UI_UNSET_VENUE:
       return { ...state, venueOpenId: '' }
-    case constants.UI_VENUE_HOVER_ON:
-      return { ...state, venueHover: action.payload.venue }
-    case constants.UI_VENUE_HOVER_OFF:
-      return { ...state, venueHover: {} }
     case constants.UI_SET_BROWSER_SIZE:
       return {
         ...state,
