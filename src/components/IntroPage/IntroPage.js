@@ -9,7 +9,7 @@ import Logo from '../common/Logo'
 
 class IntroPage extends Component {
   handleSelectChange = selected => {
-    this.props.setUiRegion(selected.value)
+    this.props.setUiRegion(this.props.regions[selected.value])
     this.props.history.replace(this.props.regions[selected.value].slug)
   }
   componentDidMount () {

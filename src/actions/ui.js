@@ -1,26 +1,25 @@
 import constants from '../actions/types'
 import { parsePath } from '../lib/myHelpers'
 
-export function fetchUiRegion (regions, history) {
+export function fetchUiRegion (regionsArray, history) {
   const parsedHistory = parsePath(history.location.pathname)
   // first check if the region is in the path and set it
   if (parsedHistory[0]) {
-    const pickedPathRegion = regions.filter(
+    const pickedPathRegion = regionsArray.filter(
       region => region.slug === parsedHistory[0]
     )
     if (pickedPathRegion.length) {
-      return setUiRegion(pickedPathRegion[0]._id)
+      return setUiRegion(pickedPathRegion[0])
     }
   }
   // second see if region is in local storage and set it:
   const pickedStorageRegionId = window.localStorage.getItem('regionId')
-  const pickedStorageRegion = regions.filter(
+  const pickedStorageRegion = regionsArray.filter(
     region => region._id === pickedStorageRegionId
   )
   if (pickedStorageRegion.length) {
     return setUiRegion(
-      pickedStorageRegionId,
-      pickedStorageRegion[0].slug,
+      pickedStorageRegion[0],
       history
     )
   }
@@ -28,21 +27,17 @@ export function fetchUiRegion (regions, history) {
   return unsetUiRegion()
 }
 
-export function setUiRegion (regionId, slug, history) {
-  window.localStorage.setItem('regionId', regionId)
+export function setUiRegion (region, history) {
+  window.localStorage.setItem('regionId', region._id)
   if (
-    slug &&
     history &&
     parsePath(history.location.pathname)[0] !== 'admin'
   ) {
-    history.push('/' + slug)
+    history.push('/' + region.slug)
   }
   return {
     type: constants.UI_SET_REGION,
-    payload: {
-      _id: regionId,
-      name: 'TBD'
-    }
+    payload: region
   }
 }
 

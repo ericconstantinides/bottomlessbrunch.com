@@ -21,8 +21,7 @@ class MapPage extends Component {
   }
   handleSelectChange = selected => {
     this.props.setUiRegion(
-      selected.value,
-      this.props.regions[selected.value].slug,
+      this.props.regions[selected.value],
       this.props.history
     )
   }

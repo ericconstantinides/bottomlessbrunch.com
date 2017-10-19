@@ -6,7 +6,9 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 
 class Region extends Component {
-  componentWillMount = () => { this.props.setUiRegion(this.props.region._id) }
+  componentWillMount = () => {
+    this.props.setUiRegion(this.props.region)
+  }
   render = () => <div className='Region' style={{display: 'none'}} />
 }
 
