@@ -1,3 +1,21 @@
+html.html--MapPage,
+body.body--MapPage {
+  // Prevent overscroll/bounce in iOS MobileSafari
+  // https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/
+  position: fixed;
+  overflow: hidden;
+}
+html.html--MapPage,
+body.body--MapPage,
+body.body--MapPage #root,
+.App--MapPage,
+.MapPage {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  overflow: hidden;
+}
+
 .MapPage {
   height: 100vh;
   width: 100vw;

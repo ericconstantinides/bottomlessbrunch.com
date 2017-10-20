@@ -9,13 +9,3 @@ body {
   width: calc(100% - 2em);
   margin: 0 auto;
 }
-html,
-body,
-#root,
-.App,
-.MapPage {
-  display: flex;
-  flex-flow: column;
-  flex: 1;
-  overflow: hidden;
-}

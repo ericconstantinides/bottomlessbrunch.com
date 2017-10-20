@@ -20,9 +20,13 @@ class MapPage extends Component {
     }
   }
   componentDidMount () {
+    document.documentElement.classList.add('html--MapPage')
+    document.body.classList.add('body--MapPage')
     this.props.addUiAppClass(['App--MapPage'])
   }
   componentWillUnmount() {
+    document.documentElement.classList.remove('html--MapPage')
+    document.body.classList.remove('body--MapPage')
     this.props.removeUiAppClass(['App--MapPage'])
   }
   handleRegionsModalClick = () => {

@@ -60,16 +60,6 @@ body {
   width: calc(100% - 2em);
   margin: 0 auto; }
 
-html,
-body,
-#root,
-.App,
-.MapPage {
-  display: flex;
-  flex-flow: column;
-  flex: 1;
-  overflow: hidden; }
-
 body {
   font-family: "Raleway", sans-serif;
   font-weight: 400;
@@ -267,8 +257,7 @@ a * {
   display: inline-block;
   margin-left: 22px; }
 
-.Logo,
-.Logo__sub-title {
+.Logo {
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
   color: white;
@@ -305,39 +294,51 @@ a * {
     top: 0.5rem;
     left: 100%; }
 
-#root .Logo__sub-title {
-  font-size: 1em;
-  text-transform: uppercase;
-  margin-top: -0.35em; }
+.Region__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-size: 1.25em;
+  color: #b36740;
+  text-transform: uppercase; }
+  .Region__title:after {
+    content: '';
+    display: block;
+    margin-left: 0.5em;
+    border-top: 0.4em solid #b36740;
+    border-left: 0.3em solid transparent;
+    border-right: 0.3em solid transparent; }
 
-.IntroPage .Logo {
+.App--IntroPage .Logo {
   color: white; }
 
-.IntroPage .Logo__sub-title {
-  display: none; }
+.App--MapPage .Region__title {
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.35), 1px 0px 0px rgba(255, 255, 255, 0.35), 1px -1px 0px rgba(255, 255, 255, 0.35), 0px 1px 0px rgba(255, 255, 255, 0.35), 0px -1px 0px rgba(255, 255, 255, 0.35), -1px 1px 0px rgba(255, 255, 255, 0.35), -1px 0px 0px rgba(255, 255, 255, 0.35), -1px -1px 0px rgba(255, 255, 255, 0.35); }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
-  #root .Region ~ .MapPage .Logo {
+  .App--MapPage .Logo {
     font-size: 1.65em; } }
 
 @media only screen and (max-width: 767px) {
-  #root .Region ~ .MapPage .Logo__outer-container {
+  .App--MapPage .Logo__outer-container {
     background: rgba(255, 255, 255, 0.625); } }
 
-.VenuePage ~ .MapPage .Logo__container {
+.App--VenuePage .Region__title {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); }
+
+.App--VenuePage .Logo__container {
   margin-left: 0;
   background: none; }
 
-.VenuePage ~ .MapPage .Logo {
+.App--VenuePage .Logo {
   color: white;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); }
 
-.VenuePage ~ .MapPage .Logo,
-.VenuePage ~ .MapPage .Logo__sub-title {
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); }
-
 @media only screen and (min-width: 768px) {
-  .VenuePage ~ .MapPage .Logo {
+  .App--VenuePage .Logo {
     font-size: 1.75em; } }
 
 @media only screen and (max-width: 767px) {
@@ -348,25 +349,6 @@ a * {
     font-size: 1.4em;
     line-height: 1.3;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); } }
-
-.Region__title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: bold;
-  font-size: 1.25em;
-  color: #b36740;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.35), 1px 0px 0px rgba(255, 255, 255, 0.35), 1px -1px 0px rgba(255, 255, 255, 0.35), 0px 1px 0px rgba(255, 255, 255, 0.35), 0px -1px 0px rgba(255, 255, 255, 0.35), -1px 1px 0px rgba(255, 255, 255, 0.35), -1px 0px 0px rgba(255, 255, 255, 0.35), -1px -1px 0px rgba(255, 255, 255, 0.35); }
-  .Region__title:after {
-    content: '';
-    display: block;
-    margin-left: 0.5em;
-    border-top: 0.4em solid #b36740;
-    border-left: 0.3em solid transparent;
-    border-right: 0.3em solid transparent; }
 
 .RegionsModal__container {
   position: fixed;
@@ -423,18 +405,6 @@ a * {
   @media only screen and (max-width: 500px) {
     .RegionsModal__subheader {
       font-size: 2.5rem; } }
-
-html,
-html ~ body {
-  position: fixed;
-  overflow: hidden; }
-
-html.IntroPage,
-body.IntroPage,
-body.IntroPage #root,
-body.IntroPage .App {
-  position: static;
-  overflow: visible; }
 
 .Splash {
   position: relative;
@@ -2057,6 +2027,21 @@ body.IntroPage .App {
       width: 100%;
       padding-left: 2rem;
       padding-right: 2rem; } }
+
+html.html--MapPage,
+body.body--MapPage {
+  position: fixed;
+  overflow: hidden; }
+
+html.html--MapPage,
+body.body--MapPage,
+body.body--MapPage #root,
+.App--MapPage,
+.MapPage {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  overflow: hidden; }
 
 .MapPage {
   height: 100vh;

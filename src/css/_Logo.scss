@@ -10,8 +10,7 @@
   display: inline-block;
   margin-left: 22px;
 }
-.Logo,
-.Logo__sub-title {
+.Logo {
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
   color: white;
@@ -52,23 +51,48 @@
     left: 100%;
   }
 }
-#root .Logo__sub-title {
-  font-size: 1em;
+
+.Region__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  @include ubuntuBold;
+  font-size: 1.25em;
+  color: #b36740;
   text-transform: uppercase;
-  margin-top: -0.35em;
+  &:after {
+    content: '';
+    display: block;
+    margin-left: 0.5em;
+    border-top: 0.4em solid #b36740;
+    border-left: 0.3em solid transparent;
+    border-right: 0.3em solid transparent;
+  }
 }
+
+
+
 // INTRO PAGE:
-.IntroPage {
+.App--IntroPage {
   .Logo {
     color: white;
-  }
-  .Logo__sub-title {
-    display: none;
   }
 }
 
 // MAP PAGE:
-#root .Region ~ .MapPage {
+.App--MapPage {
+  .Region__title {
+    text-shadow:
+      1px 1px 0px rgba(255,255,255, 0.35),
+      1px 0px 0px rgba(255,255,255, 0.35),
+      1px -1px 0px rgba(255,255,255, 0.35),
+      0px 1px 0px rgba(255,255,255, 0.35),
+      0px -1px 0px rgba(255,255,255, 0.35),
+      -1px 1px 0px rgba(255,255,255, 0.35),
+      -1px 0px 0px rgba(255,255,255, 0.35),
+      -1px -1px 0px rgba(255,255,255, 0.35);
+  }
   @media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
     .Logo {
       font-size: 1.65em;
@@ -82,7 +106,10 @@
 }
 
 // VENUE PAGE:
-.VenuePage ~ .MapPage {
+.App--VenuePage {
+  .Region__title {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
+  }
   .Logo__container {
     margin-left: 0;
     background: none;
@@ -91,20 +118,9 @@
     color: white;
     text-shadow: 2px 2px 1px rgba(black, 0.5);
   }
-  .Logo,
-  .Logo__sub-title {
-    text-shadow: 2px 2px 1px rgba(black, 0.5);
-  }
   @media only screen and (min-width: $bp-medium + 1) {
     .Logo {
       font-size: 1.75em;
-    }
-  }
-  @media only screen and (max-width: $bp-medium) {
-    .Logo__container {
-      // background: rgba(black,0.5);
-      // width: auto;
-      // height: auto;
     }
   }
 }
@@ -121,33 +137,5 @@
     font-size: 1.4em;
     line-height: 1.3;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
-  }
-}
-
-.Region__title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  @include ubuntuBold;
-  font-size: 1.25em;
-  color: #b36740;
-  text-transform: uppercase;
-  text-shadow:
-    1px 1px 0px rgba(255,255,255, 0.35),
-    1px 0px 0px rgba(255,255,255, 0.35),
-    1px -1px 0px rgba(255,255,255, 0.35),
-    0px 1px 0px rgba(255,255,255, 0.35),
-    0px -1px 0px rgba(255,255,255, 0.35),
-    -1px 1px 0px rgba(255,255,255, 0.35),
-    -1px 0px 0px rgba(255,255,255, 0.35),
-    -1px -1px 0px rgba(255,255,255, 0.35);
-  &:after {
-    content: '';
-    display: block;
-    margin-left: 0.5em;
-    border-top: 0.4em solid #b36740;
-    border-left: 0.3em solid transparent;
-    border-right: 0.3em solid transparent;
   }
 }
