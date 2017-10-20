@@ -59,10 +59,10 @@ html:not(.IntroPage) ~ body {
   text-transform: uppercase;
   border: 1px solid #ecad62;
   padding: 0.5em 1.5em;
-  background: rgba(black, 0.75);
+  background: rgba(black, 0.25);
   transition: 0.15s;
   &:hover {
-    background: red;
+    background: black;
   }
 }
 .Splash__footer {

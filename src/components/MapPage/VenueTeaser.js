@@ -21,9 +21,7 @@ const VenueTeaser = ({
     : ''
   const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
   return (
-    <Link
-      regionName={regionName}
-      to={`/${regionSlug}/${venue.slug}`}
+    <article
       className={`VenueTeaser ${altClass} ${hovered}`}
       onMouseEnter={handleMouseOver(venue)}
       onMouseLeave={handleMouseLeave(venue)}
@@ -33,35 +31,42 @@ const VenueTeaser = ({
           className={`VenueTeaser__marker-container ${altClass}__marker-container`}
         >
           <span className={`VenueTeaser__marker ${altClass}__marker`} />
-        </div>}
-      <div className={`VenueTeaser__inner ${altClass}__inner`}>
-        {renderedImage}
-        <div className={`VenueTeaser__content ${altClass}__content`}>
-          <h3 className={`VenueTeaser__title ${altClass}__title`}>
-            {venue.name}
-          </h3>
-          {venue.address &&
-            <p className={`VenueTeaser__p ${altClass}__p`}>
-              {venue.address.street}, {venue.address.city}
-            </p>}
-          {funTimes &&
-            <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
-              <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>
-                Go Bottomless
-              </h4>
-              {funTimes.map((fun, i) => (
-                <p key={i} className={`VenueTeaser__p ${altClass}__p`}>
-                  <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
-                </p>
-              ))}
-            </div>}
-          <button className={`VenueTeaser__more-info ${altClass}__more-info`}>
-            <span className='text'>More Info</span>
-            <span className='chevron'>»</span>
-          </button>
         </div>
-      </div>
-    </Link>
+      }
+      {/* THE VENUETEASER__INNER is where the real link should be... */}
+      <Link
+        regionName={regionName}
+        to={`/${regionSlug}/${venue.slug}`}
+      >
+        <div className={`VenueTeaser__inner ${altClass}__inner`}>
+          {renderedImage}
+          <div className={`VenueTeaser__content ${altClass}__content`}>
+            <h3 className={`VenueTeaser__title ${altClass}__title`}>
+              {venue.name}
+            </h3>
+            {venue.address &&
+              <p className={`VenueTeaser__p ${altClass}__p`}>
+                {venue.address.street}, {venue.address.city}
+              </p>}
+            {funTimes &&
+              <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
+                <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>
+                  Go Bottomless
+                </h4>
+                {funTimes.map((fun, i) => (
+                  <p key={i} className={`VenueTeaser__p ${altClass}__p`}>
+                    <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
+                  </p>
+                ))}
+              </div>}
+            <button className={`VenueTeaser__more-info ${altClass}__more-info`}>
+              <span className='text'>More Info</span>
+              <span className='chevron'>»</span>
+            </button>
+          </div>
+        </div>
+      </Link>
+    </article>
   )
 }
 
