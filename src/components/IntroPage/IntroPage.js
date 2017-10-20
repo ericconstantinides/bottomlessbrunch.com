@@ -43,7 +43,7 @@ class IntroPage extends Component {
           <div className='Splash__inner'>
             <h1 className='Splash__title'>I'm thirsty for brunch in...</h1>
             <RegionSelect
-              region={this.props.ui.activeRegionObj._id}
+              region={this.props.ui.activeRegion._id}
               history={this.props.history}
               handleChange={this.handleSelectChange}
               options={regionSelectOptions}

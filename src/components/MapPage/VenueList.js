@@ -10,14 +10,14 @@ import VenueTeaser from './VenueTeaser'
 class VenueList extends Component {
   componentDidUpdate (prevProps, prevState) {
     // put the venueList back at the top for a new region:
-    if (prevProps.ui.activeRegionObj._id !== this.props.ui.activeRegionObj._id) {
+    if (prevProps.ui.activeRegion._id !== this.props.ui.activeRegion._id) {
       this.refs.VenueList.scrollTop = 0
     }
   }
   renderTeasers = () => {
     const reduced = reduceVenuesByRegion(
       this.props.venues,
-      this.props.ui.activeRegionObj._id
+      this.props.ui.activeRegion._id
     )
     return _.map(reduced, venue => {
       return (
