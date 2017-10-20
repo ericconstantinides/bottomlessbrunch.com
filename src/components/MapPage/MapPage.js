@@ -19,6 +19,12 @@ class MapPage extends Component {
       drawerSmoothScroll: false
     }
   }
+  componentDidMount () {
+    this.props.addUiAppClass(['App--MapPage'])
+  }
+  componentWillUnmount() {
+    this.props.removeUiAppClass(['App--MapPage'])
+  }
   handleRegionsModalClick = () => {
     this.props.showUiRegionsModal()
   }
@@ -93,7 +99,6 @@ class MapPage extends Component {
       return { hoveredVenue: venue._id }
     })
   }
-
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>

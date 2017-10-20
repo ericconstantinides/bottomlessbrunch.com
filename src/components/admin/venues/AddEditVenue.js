@@ -15,7 +15,9 @@ import {
   fetchGooglePlacesEditVenueDetail,
   fetchYelpPhoneSearchEditVenueDetail,
   fetchYelpMetaEditVenueDetail,
-  resetEditVenue
+  resetEditVenue,
+  addUiAppClass,
+  removeUiAppClass
 } from '../../../actions'
 import { usaMap, DATE_LONG, BRUNCH_TIMES } from '../../../config'
 import Marker from '../../common/Marker'
@@ -45,6 +47,12 @@ class venueForm extends Component {
       address: ''
     }
     this.onChange = address => this.setState({ address })
+  }
+  componentDidMount () {
+    this.props.addUiAppClass(['App--AddEditVenue'])
+  }
+  componentWillUnmount() {
+    this.props.removeUiAppClass(['App--AddEditVenue'])
   }
   renderField (field) {
     const { touched, error } = field.meta
@@ -718,7 +726,9 @@ export default connect(mapStateToProps, {
   fetchGooglePlacesEditVenueDetail,
   fetchYelpPhoneSearchEditVenueDetail,
   fetchYelpMetaEditVenueDetail,
-  resetEditVenue
+  resetEditVenue,
+  addUiAppClass,
+  removeUiAppClass
 })(
   reduxForm({
     form: 'venueForm',

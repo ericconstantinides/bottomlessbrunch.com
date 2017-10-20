@@ -16,11 +16,13 @@ class IntroPage extends Component {
   componentDidMount () {
     document.documentElement.classList.add('IntroPage')
     document.body.classList.add('IntroPage')
+    this.props.addUiAppClass(['App--IntroPage'])
 
   }
   componentWillUnmount () {
     document.documentElement.classList.remove('IntroPage')
     document.body.classList.remove('IntroPage')
+    this.props.removeUiAppClass(['App--IntroPage'])
   }
   render () {
     return (

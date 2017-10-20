@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { ConnectedRouter as Router } from 'react-router-redux'
 import { Route } from 'react-router'
+import cx from 'classnames'
 
 import * as actions from '../actions'
 import { parsePath, reduceVenuesByRegion } from '../lib/myHelpers'
@@ -41,8 +42,8 @@ class App extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.props.setUiBrowserSize)
   }
-  componentDidUpdate (prevProps, prevState) {
-    // need to change the position of data-react-helmet="true"
+  /* componentDidUpdate (prevProps, prevState) {
+    // this changes the position of data-react-helmet="true"
     const metaElements = document.querySelectorAll('[data-react-helmet]')
     metaElements.forEach(metaEl => {
       let tempAttributes = []
@@ -56,7 +57,7 @@ class App extends Component {
         metaEl.setAttribute(attr.name, attr.value)
       })
     })
-  }
+  } */
   render () {
     const regionRoutes = _.map(this.props.regions, region => (
       <Route
@@ -91,9 +92,9 @@ class App extends Component {
     }
     const parsedHistory = parsePath(history.location.pathname)
     return (
-      <div>
+      <div className={cx('App', this.props.ui.appClass)}>
         <Router history={history}>
-          <div className='App'>
+          <div>
             <MetaData path={history.location.pathname} {...this.props.ui} />
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />

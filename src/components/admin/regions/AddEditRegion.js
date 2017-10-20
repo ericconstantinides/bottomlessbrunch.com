@@ -11,7 +11,12 @@ import {
 import { geocodeByPlaceId } from 'react-places-autocomplete'
 import MapSearch from '../../MapSearch'
 import GoogleMapReact from 'google-map-react'
-import { addRegion, editRegion } from '../../../actions'
+import {
+  addRegion,
+  editRegion,
+  addUiAppClass,
+  removeUiAppClass
+} from '../../../actions'
 import { usaMap } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 
@@ -30,6 +35,12 @@ class AddEditRegion extends Component {
       }
     }
     this.onChange = address => this.setState({ address })
+  }
+  componentDidMount () {
+    this.props.addUiAppClass(['App--AddEditRegion'])
+  }
+  componentWillUnmount () {
+    this.props.removeUiAppClass(['App--AddEditRegion'])
   }
   renderField (field) {
     const { touched, error } = field.meta
@@ -132,10 +143,7 @@ class AddEditRegion extends Component {
       <div className='AddEdit AddEditRegion site-container'>
         {title}
         {/* the handleSubmit is from redux-form */}
-        <form
-          className='AddEdit__form'
-          onSubmit={handleSubmit(this.onSubmit)}
-        >
+        <form className='AddEdit__form' onSubmit={handleSubmit(this.onSubmit)}>
           <div className='AddEdit__col-left'>
             <Field lbl='Region Name' name='name' component={this.renderField} />
             <Field lbl='State' name='state' component={this.renderField} />
@@ -195,7 +203,7 @@ class AddEditRegion extends Component {
                   zoom={this.state.zoom}
                   center={{ lat: this.state.lat, lng: this.state.lng }}
                   onChange={this.handleMapMoved}
-                  options={{fullscreenControl: false}}
+                  options={{ fullscreenControl: false }}
                 />
               </div>
             </div>
@@ -242,7 +250,9 @@ function mapStateToProps (state, ownProps) {
 export default connect(mapStateToProps, {
   addRegion,
   editRegion,
-  fieldValue
+  fieldValue,
+  addUiAppClass,
+  removeUiAppClass
 })(
   reduxForm({
     form: 'addEditRegion',

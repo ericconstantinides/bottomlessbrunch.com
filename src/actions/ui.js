@@ -80,3 +80,24 @@ export function showUiRegionsModal () {
 export function hideUiRegionsModal () {
   return { type: constants.UI_HIDE_REGIONS_MODAL }
 }
+
+export function setUiAppClass (classes) {
+  return {
+    type: constants.UI_SET_APP_CLASS,
+    payload: classes
+  }
+}
+
+export function addUiAppClass (classes) {
+  return {
+    type: constants.UI_ADD_TO_APP_CLASS,
+    payload: classes
+  }
+}
+
+export function removeUiAppClass (classes) {
+  return {
+    type: constants.UI_REMOVE_FROM_APP_CLASS,
+    payload: classes
+  }
+}

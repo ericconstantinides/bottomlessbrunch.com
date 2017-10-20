@@ -41,10 +41,14 @@ class VenuePage extends Component {
       nextSlug: '/' + regionSlug + '/' + venues[nextId].slug,
       prevSlug: '/' + regionSlug + '/' + venues[prevId].slug
     })
+    this.props.removeUiAppClass(['App--MapPage'])
+    this.props.addUiAppClass(['App--VenuePage'])
   }
   componentWillUnmount () {
     // unset the venueUI:
     this.props.unsetUiVenue()
+    this.props.removeUiAppClass(['App--VenuePage'])
+    this.props.addUiAppClass(['App--MapPage'])
   }
   handlePrev = () => {
     this.props.history.push(this.state.prevSlug)
