@@ -243,6 +243,14 @@ strong {
   #root .Select-control {
     height: 24px; } }
 
+.Region__title {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  color: #b36740;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.35), 1px 0px 0px rgba(255, 255, 255, 0.35), 1px -1px 0px rgba(255, 255, 255, 0.35), 0px 1px 0px rgba(255, 255, 255, 0.35), 0px -1px 0px rgba(255, 255, 255, 0.35), -1px 1px 0px rgba(255, 255, 255, 0.35), -1px 0px 0px rgba(255, 255, 255, 0.35), -1px -1px 0px rgba(255, 255, 255, 0.35); }
+
 html:not(.IntroPage),
 html:not(.IntroPage) ~ body {
   position: fixed;
