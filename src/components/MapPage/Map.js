@@ -110,6 +110,7 @@ class Map extends Component {
             lng={venue.lng}
             handleMouseOver={this.props.handleMouseOver}
             handleMouseLeave={this.props.handleMouseLeave}
+            toggleMarkerClick={this.props.toggleMarkerClick}
             hoveredVenue={this.props.hoveredVenue}
             venue={venue}
             regionSlug={this.props.regions[venue.regionId].slug}

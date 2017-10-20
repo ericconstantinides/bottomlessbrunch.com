@@ -26,6 +26,7 @@ class VenueList extends Component {
           altClass='VenueListItem'
           handleMouseOver={this.props.handleMouseOver}
           handleMouseLeave={this.props.handleMouseLeave}
+          toggleMarkerClick={this.props.toggleMarkerClick}
           hoveredVenue={this.props.hoveredVenue}
           venue={venue}
           regionName={this.props.regions[venue.regionId].name}

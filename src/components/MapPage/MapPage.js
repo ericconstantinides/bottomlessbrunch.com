@@ -84,6 +84,16 @@ class MapPage extends Component {
   handleMouseLeave = venue => event => {
     this.setState({ hoveredVenue: '' })
   }
+  toggleMarkerClick = venue => event => {
+    // I NEED TO MOVE THE MAP AROUND TO DISPLAY THE HOVERED MARKER THE BEST
+    this.setState((prevState, props) => {
+      if (prevState.hoveredVenue === venue._id) {
+        return {hoveredVenue: ''}
+      }
+      return { hoveredVenue: venue._id }
+    })
+  }
+
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
@@ -118,6 +128,7 @@ class MapPage extends Component {
             venues={this.props.venues}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
+            toggleMarkerClick={this.toggleMarkerClick}
             hoveredVenue={this.state.hoveredVenue}
             containerElement={<div style={styles} />}
             mapElement={<div style={styles} />}
@@ -148,6 +159,7 @@ class MapPage extends Component {
             region={this.props.ui.activeRegion._id}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
+            toggleMarkerClick={this.toggleMarkerClick}
             hoveredVenue={this.state.hoveredVenue}
             drawerSmoothScroll={this.state.drawerSmoothScroll}
           />

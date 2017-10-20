@@ -9,6 +9,7 @@ const VenueTeaser = ({
   regionName,
   handleMouseOver,
   handleMouseLeave,
+  toggleMarkerClick,
   altClass
 }) => {
   const hovered = venue._id === hoveredVenue ? 'is-hovered' : 'not-hovered'
@@ -25,6 +26,7 @@ const VenueTeaser = ({
       className={`VenueTeaser ${altClass} ${hovered}`}
       onMouseEnter={handleMouseOver(venue)}
       onMouseLeave={handleMouseLeave(venue)}
+      onClick={toggleMarkerClick(venue)}
     >
       {altClass === 'MapItem' &&
         <div
