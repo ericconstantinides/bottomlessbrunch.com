@@ -1,0 +1,17 @@
+.RegionsModal__container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(black, 0.75);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+.RegionsModal {
+  text-align: center;
+  background: white;
+}

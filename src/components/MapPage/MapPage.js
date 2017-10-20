@@ -19,6 +19,9 @@ class MapPage extends Component {
       drawerSmoothScroll: false
     }
   }
+  handleRegionsModalClick = () => {
+    this.props.showUiRegionsModal()
+  }
   handleSelectChange = selected => {
     this.props.setUiRegion(
       this.props.regions[selected.value],
@@ -99,11 +102,12 @@ class MapPage extends Component {
       <div className='MapPage'>
         <Logo
           /* subTitle={region.name} */
-          region={this.props.ui.activeRegion._id}
+          region={this.props.ui.activeRegion}
           history={this.props.history}
           handleChange={this.handleSelectChange}
           options={regionOptions}
           handleLogoClick={this.handleLogoClick}
+          handleRegionsModalClick={this.handleRegionsModalClick}
         />
         <div className='MapPage__Map-container'>
           <Map

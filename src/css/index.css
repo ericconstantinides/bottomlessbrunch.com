@@ -244,12 +244,30 @@ strong {
     height: 24px; } }
 
 .Region__title {
+  cursor: pointer;
   font-family: "Ubuntu", sans-serif;
   font-weight: bold;
   font-size: 1em;
   color: #b36740;
   text-transform: uppercase;
   text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.35), 1px 0px 0px rgba(255, 255, 255, 0.35), 1px -1px 0px rgba(255, 255, 255, 0.35), 0px 1px 0px rgba(255, 255, 255, 0.35), 0px -1px 0px rgba(255, 255, 255, 0.35), -1px 1px 0px rgba(255, 255, 255, 0.35), -1px 0px 0px rgba(255, 255, 255, 0.35), -1px -1px 0px rgba(255, 255, 255, 0.35); }
+
+.RegionsModal__container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column; }
+
+.RegionsModal {
+  text-align: center;
+  background: white; }
 
 html:not(.IntroPage),
 html:not(.IntroPage) ~ body {

@@ -13,13 +13,22 @@ const Logo = props => {
         >
           {SITE_NAME}
         </h1>
-        <RegionSelect
-          region={props.region}
-          history={props.history}
-          handleChange={props.handleChange}
-          options={props.options}
-          className='Logo__sub-title'
-        />
+        {props.region &&
+          <div>
+            <h2
+              className='Region__title'
+              onClick={props.handleRegionsModalClick}
+            >
+              {props.region.name}
+            </h2>
+            {/* <RegionSelect
+              region={props.region._id}
+              history={props.history}
+              handleChange={props.handleChange}
+              options={props.options}
+              className='Logo__sub-title'
+            /> */}
+          </div>}
       </div>
     </div>
   )

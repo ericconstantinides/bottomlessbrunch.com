@@ -72,3 +72,11 @@ export function setUiBrowserSize () {
     }
   }
 }
+
+export function showUiRegionsModal () {
+  return { type: constants.UI_SHOW_REGIONS_MODAL }
+}
+
+export function hideUiRegionsModal () {
+  return { type: constants.UI_HIDE_REGIONS_MODAL }
+}

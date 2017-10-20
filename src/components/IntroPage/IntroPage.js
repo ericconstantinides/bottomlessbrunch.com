@@ -8,6 +8,9 @@ import * as actions from '../../actions'
 import Logo from '../common/Logo'
 
 class IntroPage extends Component {
+  handleRegionsModalClick = () => {
+    this.props.showUiRegionsModal()
+  }
   handleSelectChange = selected => {
     this.props.setUiRegion(this.props.regions[selected.value])
     this.props.history.replace(this.props.regions[selected.value].slug)
@@ -25,7 +28,9 @@ class IntroPage extends Component {
     }))
     return (
       <div className='IntroPage'>
-        <Logo />
+        <Logo
+          handleRegionsModalClick={this.handleRegionsModalClick}
+        />
         <div className='Splash'>
           <video
             className='Splash__video'

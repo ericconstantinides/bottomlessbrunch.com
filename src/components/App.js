@@ -13,12 +13,16 @@ import Region from './Region'
 import IntroPage from './IntroPage/IntroPage'
 import VenuePage from './VenuePage/VenuePage'
 import Admin from './admin'
+import RegionsModal from './common/RegionsModal'
 
 import createHistory from 'history/createBrowserHistory'
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
 
 class App extends Component {
+  handleRegionsLinkClick = () => {
+    this.props.hideUiRegionsModal()
+  }
   componentDidMount () {
     // get the regions and the venues
     this.props.fetchRegions(
@@ -101,6 +105,13 @@ class App extends Component {
             {parsedHistory[0] !== 'admin' &&
               _.isEmpty(this.props.ui.activeRegion) &&
               <IntroPage history={history} />}
+            {this.props.ui.regionsModalActive &&
+              <RegionsModal
+                regions={this.props.regions}
+                activeRegion={this.props.activeRegion}
+                handleRegionsLinkClick={this.handleRegionsLinkClick}
+              />
+            }
           </div>
         </Router>
       </div>

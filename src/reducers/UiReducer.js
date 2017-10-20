@@ -4,6 +4,7 @@ const initialState = {
   venueOpenId: '',
   leftNavOpen: true,
   activeRegion: {}, // <- this is temporary name
+  regionsModalActive: false,
   browserSize: {
     width: 0,
     height: 0
@@ -32,7 +33,10 @@ export default function (state = initialState, action) {
           height: action.payload.height
         }
       }
-
+    case constants.UI_SHOW_REGIONS_MODAL:
+      return {...state, regionsModalActive: true}
+    case constants.UI_HIDE_REGIONS_MODAL:
+      return {...state, regionsModalActive: false}
     default:
       return state
   }
