@@ -14,4 +14,38 @@
 .RegionsModal {
   text-align: center;
   background: white;
+  display: flex;
+  flex-flow: column;
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 260px;
+  max-height: 55vh;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.RegionsModal__link {
+  @include ubuntuBold;
+  font-weight: 500;
+  font-size: 1.5em;
+  color: #f45a26;
+  padding: 0.25em 0.5em;
+  border-bottom: 1px solid #ffbfaa;
+  transition: 0.15s;
+  &:focus,
+  &:active,
+  &:hover {
+    text-decoration: none;
+    background: whitesmoke;
+    color: darken(#f45a26, 15%);
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.RegionsModal__subheader {
+  @include ubuntuCondensed;
+  color: white;
+  @include responsive(font-size, 5);
+  text-align: center;
+  margin-bottom: 0.5em;
 }

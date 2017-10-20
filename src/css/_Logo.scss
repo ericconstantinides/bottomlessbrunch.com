@@ -173,8 +173,10 @@
   }
 }
 
-// NEW AND NOT YET IMPLEMENTED:
 .Region__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   @include ubuntuBold;
   font-size: 1em;
@@ -189,4 +191,12 @@
     -1px 1px 0px rgba(255,255,255, 0.35),
     -1px 0px 0px rgba(255,255,255, 0.35),
     -1px -1px 0px rgba(255,255,255, 0.35);
+  &:after {
+    content: '';
+    display: block;
+    margin-left: 0.5em;
+    border-top: 0.55em solid #b36740;
+    border-left: 0.4em solid transparent;
+    border-right: 0.4em solid transparent;
+  }
 }

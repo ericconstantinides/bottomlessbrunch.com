@@ -4,19 +4,29 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 const RegionsModal = props => {
-  const regions = _.map(props.regions, region => (
-    <div key={region._id} className='RegionsModal__item'>
+  const regions = _
+    .chain(props.regions)
+    .filter(region => region.bounds)
+    .map(region => (
       <Link
-        className='u-d-b'
+        key={region._id}
+        className='RegionsModal__link'
         to={`/${region.slug}`}
-        onClick={props.handleRegionsLinkClick}
+        onClick={props.handleCloseRegionsModalClick}
       >
         {region.name}
       </Link>
-    </div>
-  ))
+    ))
+    .value()
   return (
-    <div className='RegionsModal__container'>
+    <div
+      className='RegionsModal__container'
+      onClick={props.handleCloseRegionsModalClick}
+    >
+      <h2 className='RegionsModal__subheader'>
+        I'm thirsty for<br />
+        brunch in...
+      </h2>
       <div className='RegionsModal'>
         {regions}
       </div>

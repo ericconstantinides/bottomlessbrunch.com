@@ -20,7 +20,7 @@ import createHistory from 'history/createBrowserHistory'
 const history = createHistory()
 
 class App extends Component {
-  handleRegionsLinkClick = () => {
+  handleCloseRegionsModalClick = () => {
     this.props.hideUiRegionsModal()
   }
   componentDidMount () {
@@ -109,7 +109,7 @@ class App extends Component {
               <RegionsModal
                 regions={this.props.regions}
                 activeRegion={this.props.activeRegion}
-                handleRegionsLinkClick={this.handleRegionsLinkClick}
+                handleCloseRegionsModalClick={this.handleCloseRegionsModalClick}
               />
             }
           </div>

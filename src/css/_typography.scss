@@ -19,6 +19,10 @@ strong {
   font-weight: 600;
 }
 
+@mixin ubuntuCondensed {
+  font-family: $UbuntuCondensed;
+  font-weight: 500;
+}
 @mixin ubuntuBold {
   font-family: $Ubuntu;
   font-weight: bold;

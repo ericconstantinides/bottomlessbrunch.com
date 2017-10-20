@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
-import RegionSelect from '../common/RegionSelect'
 
 import * as actions from '../../actions'
 
@@ -22,15 +20,9 @@ class IntroPage extends Component {
     document.documentElement.classList.remove('IntroPage')
   }
   render () {
-    const regionSelectOptions = _.map(this.props.regions, region => ({
-      value: region._id,
-      label: region.name
-    }))
     return (
       <div className='IntroPage'>
-        <Logo
-          handleRegionsModalClick={this.handleRegionsModalClick}
-        />
+        <Logo handleRegionsModalClick={this.handleRegionsModalClick} />
         <div className='Splash'>
           <video
             className='Splash__video'
@@ -47,13 +39,12 @@ class IntroPage extends Component {
           </video>
           <div className='Splash__inner'>
             <h1 className='Splash__title'>I'm thirsty for brunch in...</h1>
-            <RegionSelect
-              region={this.props.ui.activeRegion._id}
-              history={this.props.history}
-              handleChange={this.handleSelectChange}
-              options={regionSelectOptions}
+            <div
               className='Splash__RegionSelect'
-            />
+              onClick={this.handleRegionsModalClick}
+            >
+              Choose Region
+            </div>
           </div>
           <div className='Splash__footer'>
             <span className='Splash__footer-link'>About</span>
@@ -67,7 +58,10 @@ class IntroPage extends Component {
           />
           <div className='playout has-image-right has-image-width-60p has-body-width-60p'>
             <div className='playout__image-container'>
-              <img src='/images/photo__tray-of-mimosas.jpg' alt='Tray Of Bottomless Mimosas' />
+              <img
+                src='/images/photo__tray-of-mimosas.jpg'
+                alt='Tray Of Bottomless Mimosas'
+              />
             </div>
             <div className='playout__body'>
               <h2 className='IntroPage__title playout__title u-mb-0'>
@@ -82,7 +76,10 @@ class IntroPage extends Component {
           </div>
           <div className='playout has-image-left has-image-width-75p has-body-width-40p'>
             <div className='playout__image-container'>
-              <img src='/images/photo__Eric-and-Becky-Looking-At-Each-Other.jpg' alt='Cheers With Bottomless Mimosas' />
+              <img
+                src='/images/photo__Eric-and-Becky-Looking-At-Each-Other.jpg'
+                alt='Cheers With Bottomless Mimosas'
+              />
             </div>
             <div className='playout__body'>
               <h2 className='IntroPage__title playout__title u-mb-0'>
@@ -90,7 +87,7 @@ class IntroPage extends Component {
               </h2>
               <div className='u-mt-1 u-kill-last-margin'>
                 <p>
-                  Bottomless Brunch is the brainchild of 
+                  Bottomless Brunch is the brainchild of{' '}
                 </p>
               </div>
             </div>

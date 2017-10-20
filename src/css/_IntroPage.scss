@@ -43,6 +43,7 @@ html:not(.IntroPage) ~ body {
   width: 50vw;
   max-width: 520px;
   min-width: 300px;
+  text-align: center;
 }
 .Splash__title {
   @include responsive(font-size, 6);
@@ -50,8 +51,19 @@ html:not(.IntroPage) ~ body {
   margin-bottom: 0.25em;
 }
 .Splash__RegionSelect {
-  width: 250px;
-  margin: 0 auto;
+  display: inline-block;
+  cursor: pointer;
+  @include ubuntuBold;
+  font-weight: 500;
+  font-size: 1em;
+  text-transform: uppercase;
+  border: 1px solid #ecad62;
+  padding: 0.5em 1.5em;
+  background: rgba(black, 0.75);
+  transition: 0.15s;
+  &:hover {
+    background: red;
+  }
 }
 .Splash__footer {
   @include ubuntuBold;

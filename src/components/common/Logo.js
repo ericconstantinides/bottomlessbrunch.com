@@ -1,5 +1,4 @@
 import React from 'react'
-import RegionSelect from './RegionSelect'
 import { SITE_NAME, SITE_SLOGAN } from '../../config'
 
 const Logo = props => {
@@ -18,16 +17,10 @@ const Logo = props => {
             <h2
               className='Region__title'
               onClick={props.handleRegionsModalClick}
+              title='Choose your Bottomless region...'
             >
               {props.region.name}
             </h2>
-            {/* <RegionSelect
-              region={props.region._id}
-              history={props.history}
-              handleChange={props.handleChange}
-              options={props.options}
-              className='Logo__sub-title'
-            /> */}
           </div>}
       </div>
     </div>
