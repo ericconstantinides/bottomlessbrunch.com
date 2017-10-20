@@ -85,7 +85,7 @@ class MapPage extends Component {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
     }
-    const region = this.props.regions[this.props.ui.region]
+    const region = this.props.ui.activeRegionObj
     const styles = { height: `100%`, width: `100%` }
     // cycle through the regions and filter out the ones without bounds
     let regionOptions = Object.entries(this.props.regions)
@@ -99,7 +99,7 @@ class MapPage extends Component {
       <div className='MapPage'>
         <Logo
           /* subTitle={region.name} */
-          region={this.props.ui.region}
+          region={this.props.ui.activeRegionObj._id}
           history={this.props.history}
           handleChange={this.handleSelectChange}
           options={regionOptions}
@@ -141,7 +141,7 @@ class MapPage extends Component {
           </Swipeable>
           <VenueList
             handleScroll={this.handleVenueListScroll}
-            region={this.props.ui.region}
+            region={this.props.ui.activeRegionObj._id}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
             hoveredVenue={this.state.hoveredVenue}

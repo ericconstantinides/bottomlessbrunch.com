@@ -32,9 +32,10 @@ class Map extends Component {
   componentDidUpdate (prevProps, prevState) {
     // update the state's region if the UI region changes:
     if (
-      this.props.ui.region !== prevProps.ui.region ||
-      this.props.ui.browserSize.width !== prevProps.ui.browserSize.width ||
-      this.props.ui.browserSize.height !== prevProps.ui.browserSize.height
+      !_.isEmpty(this.props.ui.activeRegionObj) &&
+      (this.props.ui.activeRegionObj._id !== prevProps.ui.activeRegionObj._id ||
+        this.props.ui.browserSize.width !== prevProps.ui.browserSize.width ||
+        this.props.ui.browserSize.height !== prevProps.ui.browserSize.height)
     ) {
       this.updateMapAndDrawer()
     }
@@ -54,7 +55,7 @@ class Map extends Component {
     const drawerWidthRatio = 1 - (width - drawer.width) / width
     const drawerHeightRatio = 1 - (height - drawer.height) / height
 
-    const myRegion = this.props.regions[this.props.ui.region]
+    const myRegion = this.props.ui.activeRegionObj
 
     if (myRegion.bounds) {
       // get the total latitude and longitude width and height:

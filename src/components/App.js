@@ -96,10 +96,10 @@ class App extends Component {
             {venueRoutes}
             {regionRoutes}
             {parsedHistory[0] !== 'admin' &&
-              this.props.ui.region &&
+              !_.isEmpty(this.props.ui.activeRegionObj) &&
               <MapPage history={history} />}
             {parsedHistory[0] !== 'admin' &&
-              !this.props.ui.region &&
+              _.isEmpty(this.props.ui.activeRegionObj) &&
               <IntroPage history={history} />}
           </div>
         </Router>
@@ -110,11 +110,11 @@ class App extends Component {
 
 function mapStateToProps ({ venues, regions, ui }) {
   // get the region name:
-  if (ui.region && Object.entries(regions).length) {
-    ui.regionName = regions[ui.region].name
-    ui.regionState = regions[ui.region].state
+  if (!_.isEmpty(ui.activeRegionObj)) {
+    ui.regionName = ui.activeRegionObj.name
+    ui.regionState = ui.activeRegionObj.state
     if (Object.entries(venues).length) {
-      ui.numOfVenues = _.size(reduceVenuesByRegion(venues, ui.region))
+      ui.numOfVenues = _.size(reduceVenuesByRegion(venues, ui.activeRegionObj._id))
     }
   }
   // get the venue name:

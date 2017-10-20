@@ -3,8 +3,7 @@ import constants from '../actions/types'
 const initialState = {
   venueOpenId: '',
   leftNavOpen: true,
-  region: '',
-  regionObj: {}, // <- this is temporary name
+  activeRegionObj: {}, // <- this is temporary name
   browserSize: {
     width: 0,
     height: 0
@@ -19,9 +18,9 @@ export default function (state = initialState, action) {
       return { ...state, venueOpenId: false }
     case constants.UI_SET_REGION:
       // NEED TO ADD REGION NAME HERE:
-      return { ...state, regionObj: action.payload, region: action.payload._id }
+      return { ...state, activeRegionObj: action.payload }
     case constants.UI_UNSET_REGION:
-      return { ...state, regionObj: {}, region: '' }
+      return { ...state, activeRegionObj: {} }
     case constants.UI_SET_VENUE:
       return { ...state, venueOpenId: action.payload }
     case constants.UI_UNSET_VENUE:
