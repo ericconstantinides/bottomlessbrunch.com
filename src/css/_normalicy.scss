@@ -1,0 +1,56 @@
+//---------------------------------------------------------
+// Erics Normalicy
+//---------------------------------------------------------
+html {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  min-height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+body {
+  flex: 1 0 0%;
+  overflow-x: hidden;
+}
+* {
+  &,&:before,&:after {
+    box-sizing: inherit;
+    background-repeat: no-repeat;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+body,
+figure,
+li {
+  margin: 0;
+  padding: 0;
+}
+img,
+input,
+textarea,
+svg {
+  max-width: 100%;
+}
+img {
+  height: auto;
+  border: none;
+  vertical-align: middle;
+}
+table {
+  border-collapse: collapse;
+  tbody {
+    border-top: none;
+  }
+}
+ul,ol,p {
+  padding: 0;
+  margin: 0 0 1em;
+}
+[type=reset],
+[type=submit],
+button,
+html [type=button] {
+  -webkit-appearance: button;
+}

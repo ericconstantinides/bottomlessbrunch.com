@@ -15,9 +15,12 @@ class IntroPage extends Component {
   }
   componentDidMount () {
     document.documentElement.classList.add('IntroPage')
+    document.body.classList.add('IntroPage')
+
   }
   componentWillUnmount () {
     document.documentElement.classList.remove('IntroPage')
+    document.body.classList.remove('IntroPage')
   }
   render () {
     return (
@@ -43,7 +46,7 @@ class IntroPage extends Component {
               className='Splash__RegionSelect'
               onClick={this.handleRegionsModalClick}
             >
-              Choose Region
+              Choose Region...
             </div>
           </div>
           <div className='Splash__footer'>

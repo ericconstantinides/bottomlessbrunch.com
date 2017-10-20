@@ -1,10 +1,18 @@
-html:not(.IntroPage),
-html:not(.IntroPage) ~ body {
+html,
+html ~ body {
   // Prevent overscroll/bounce in iOS MobileSafari
   // https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/
   position: fixed;
   overflow: hidden;
 }
+html.IntroPage,
+body.IntroPage,
+body.IntroPage #root,
+body.IntroPage .App {
+  position: static;
+  overflow: visible;
+}
+
 .Splash {
   position: relative;
   height: 100vh;

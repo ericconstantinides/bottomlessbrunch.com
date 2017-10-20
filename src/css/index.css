@@ -1,5 +1,55 @@
 @charset "UTF-8";
 html {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100%;
+  display: flex;
+  flex-flow: column nowrap; }
+
+body {
+  flex: 1 0 0%;
+  overflow-x: hidden; }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  background-repeat: no-repeat; }
+
+*:focus {
+  outline: none; }
+
+body,
+figure,
+li {
+  margin: 0;
+  padding: 0; }
+
+img,
+input,
+textarea,
+svg {
+  max-width: 100%; }
+
+img {
+  height: auto;
+  border: none;
+  vertical-align: middle; }
+
+table {
+  border-collapse: collapse; }
+  table tbody {
+    border-top: none; }
+
+ul, ol, p {
+  padding: 0;
+  margin: 0 0 1em; }
+
+[type=reset],
+[type=submit],
+button,
+html [type=button] {
+  -webkit-appearance: button; }
+
+html {
   height: 100%; }
 
 body {
@@ -25,11 +75,26 @@ body {
   font-weight: 400;
   line-height: 1.2; }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1em; }
+
 h1 {
   font-family: "Ubuntu Condensed", sans-serif; }
 
+.small,
+small {
+  font-size: 80%;
+  font-weight: 400; }
+
 strong {
   font-weight: 600; }
+
+a, a:hover, a:focus, a:active,
+a *:hover,
+a *:focus,
+a *:active,
+a * {
+  text-decoration: none; }
 
 /*---------------------------------------------------------
 // Responsive Ratio
@@ -83,6 +148,84 @@ strong {
   width: 100%;
   height: 100%;
   margin: auto; }
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #464a4c;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: .25rem;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; }
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out; }
+
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c; }
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #419641; }
+
+.btn-primary {
+  color: #fff;
+  background-color: #0275d8;
+  border-color: #0275d8; }
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #025aa5;
+  border-color: #01549b; }
+
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d9534f; }
+
+.btn-danger:hover {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #c12e2a; }
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #0275d8;
+  border-color: #0275d8; }
+
+.btn.disabled, .btn:disabled {
+  cursor: not-allowed;
+  opacity: .65; }
+
+.btn-group-sm > .btn,
+.btn-sm {
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  border-radius: .2rem; }
 
 .SocialMediaShareButton {
   display: flex;
@@ -281,10 +424,17 @@ strong {
     .RegionsModal__subheader {
       font-size: 2.5rem; } }
 
-html:not(.IntroPage),
-html:not(.IntroPage) ~ body {
+html,
+html ~ body {
   position: fixed;
   overflow: hidden; }
+
+html.IntroPage,
+body.IntroPage,
+body.IntroPage #root,
+body.IntroPage .App {
+  position: static;
+  overflow: visible; }
 
 .Splash {
   position: relative;
