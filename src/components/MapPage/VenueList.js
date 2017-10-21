@@ -36,14 +36,14 @@ class VenueList extends Component {
       )
     })
   }
-  handleRegionsModalClick = () => {
-    this.props.showUiRegionsModal()
-  }
-  handleLogoClick = () => {
-    this.props.unsetUiVenue()
-    this.props.unsetUiRegion()
-    this.props.history.push('/')
-  }
+  // handleRegionsModalClick = () => {
+  //   this.props.showUiRegionsModal()
+  // }
+  // handleLogoClick = () => {
+  //   this.props.unsetUiVenue()
+  //   this.props.unsetUiRegion()
+  //   this.props.history.push('/')
+  // }
   render () {
     const style = this.props.drawerSmoothScroll
       ? {
@@ -59,11 +59,11 @@ class VenueList extends Component {
         onTouchMove={this.props.handleScroll}
         style={style}
       >
-        <Logo
+        {/* <Logo
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}
           region={this.props.ui.activeRegion}
-        />
+        /> */}
         {this.renderTeasers()}
       </div>
     )

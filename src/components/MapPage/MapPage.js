@@ -29,20 +29,20 @@ class MapPage extends Component {
     document.body.classList.remove('body--MapPage')
     this.props.removeUiAppClass(['App--MapPage'])
   }
-  // handleRegionsModalClick = () => {
-  //   this.props.showUiRegionsModal()
-  // }
   // handleSelectChange = selected => {
   //   this.props.setUiRegion(
   //     this.props.regions[selected.value],
   //     this.props.history
   //   )
   // }
-  // handleLogoClick = () => {
-  //   this.props.unsetUiVenue()
-  //   this.props.unsetUiRegion()
-  //   this.props.history.push('/')
-  // }
+  handleRegionsModalClick = () => {
+    this.props.showUiRegionsModal()
+  }
+  handleLogoClick = () => {
+    this.props.unsetUiVenue()
+    this.props.unsetUiRegion()
+    this.props.history.push('/')
+  }
   openDrawer = () => {
     this.setState((prevState, props) => ({
       drawerOpen: true,
@@ -112,11 +112,6 @@ class MapPage extends Component {
     const drawerState = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
-        {/* <Logo
-          region={this.props.ui.activeRegion}
-          handleLogoClick={this.handleLogoClick}
-          handleRegionsModalClick={this.handleRegionsModalClick}
-        /> */}
         <div className='MapPage__Map-container'>
           <Map
             cursorPos={this.props.cursorPos}
@@ -136,6 +131,11 @@ class MapPage extends Component {
           className={`MapPage__VenueList-container MapPage__VenueList--width ${drawerState}`}
           style={{transform: `translateY(${this.state.drawerVertOffset}px)`}}
         >
+          <Logo
+            region={this.props.ui.activeRegion}
+            handleLogoClick={this.handleLogoClick}
+            handleRegionsModalClick={this.handleRegionsModalClick}
+          />
           <Swipeable
             onSwiping={this.handleSwiping}
             onSwipedUp={this.handleSwipedUp}

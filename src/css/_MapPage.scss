@@ -33,7 +33,7 @@ body.body--MapPage #root,
 }
 .MapPage__VenueList-container {
   background: rgba(white, 0.5);
-  padding: 0.5em 0 0.5em;
+  padding: 0;
   position: absolute;
   overflow: hidden;
   top: 0;
@@ -129,7 +129,7 @@ body.body--MapPage #root,
 }
 .VenueTeaser__inner {
   display: flex;
-  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   min-height: 150px;
   transition: 0.15s;
   &:hover {
@@ -265,11 +265,10 @@ body.body--MapPage #root,
     bottom: 0;
     left: 0;
     width: auto;
-    // padding-top: 0em;
     transition: 0.5s;
     &.is-closed {
       height: 35vh;
-      bottom: -30px;
+      // bottom: -30px;
       .VenueList {
         overflow-y: hidden;
       }

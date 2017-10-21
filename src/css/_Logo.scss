@@ -1,10 +1,11 @@
 .Logo__container {
   text-align: center;
   z-index: 1;
-  background-image: linear-gradient(to bottom, transparent 0%, transparent 34%, white 36%);
+  // background-image: linear-gradient(to bottom, transparent 0%, transparent 34%, white 36%);
+  background: white;
   margin: 0 0.5em 0.5em;
-  padding: 0 0.5em;
-  box-shadow: 0 2px 2px -1px rgba(0,0,0,0.25);
+  padding: 0.5em 0.5em 0;
+  box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.25);
 }
 .Logo {
   display: flex;
@@ -58,8 +59,8 @@
   // }
 }
 .Logo__orange {
-  width: 3em;
-  margin-left: 0.5em;
+  width: 15%;
+  margin: 0 0.5em;
   // height: 1em;
 }
 
@@ -107,25 +108,77 @@
 }
 
 .App--MapPage {
-  .Region__title {
-    text-shadow:
-      1px 1px 0px rgba(255,255,255, 0.35),
-      1px 0px 0px rgba(255,255,255, 0.35),
-      1px -1px 0px rgba(255,255,255, 0.35),
-      0px 1px 0px rgba(255,255,255, 0.35),
-      0px -1px 0px rgba(255,255,255, 0.35),
-      -1px 1px 0px rgba(255,255,255, 0.35),
-      -1px 0px 0px rgba(255,255,255, 0.35),
-      -1px -1px 0px rgba(255,255,255, 0.35);
-  }
+  // .Region__title {
+  //   text-shadow:
+  //     1px 1px 0px rgba(255,255,255, 0.35),
+  //     1px 0px 0px rgba(255,255,255, 0.35),
+  //     1px -1px 0px rgba(255,255,255, 0.35),
+  //     0px 1px 0px rgba(255,255,255, 0.35),
+  //     0px -1px 0px rgba(255,255,255, 0.35),
+  //     -1px 1px 0px rgba(255,255,255, 0.35),
+  //     -1px 0px 0px rgba(255,255,255, 0.35),
+  //     -1px -1px 0px rgba(255,255,255, 0.35);
+  // }
   @media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
     .Logo__title {
       font-size: 1.65em;
     }
   }
   @media only screen and (max-width: $bp-medium) {
-    .Logo__outer-container {
-      background: rgba(white, 0.625);
+    .Logo__container {
+      order: 1;
+      margin: 0;
+      // background: yellow;
+      background: rgba(white, 0.5);
+      background: #eaeaea;
+      border-top: 1px solid #ddd;
+      height: 50px;
+      padding: 0.5em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .Logo {
+      flex-flow: row-reverse;
+    }
+    .Logo__image {
+      height: 20px;
+      width: 130px;
+      // display: none;
+    }
+    .Logo__title {
+      // display: block;
+      font-size: 1.1em;
+      white-space: nowrap;
+    }
+    .Logo__orange {
+      width: auto;
+      height: 26px;
+    }
+    .Logo__region-title {
+      padding-bottom: 0;
+      letter-spacing: 0;
+      font-size: 0.875em;
+    }
+  }
+  @media only screen and (max-width: $bp-medium-small) {
+    .Logo__container {
+      height: 50px;
+    }
+    .Logo__orange {
+      height: 20px;
+      margin: 0 0.25em 0 0;
+    }
+    .Logo__title {
+      font-size: 0.9em;
+    }
+  }
+  @media only screen and (max-width: $bp-small) {
+    .Logo__image {
+      width: 100px;
+    }
+    .Logo__region-title {
+      font-size: 0.75em;
     }
   }
 }
@@ -149,13 +202,6 @@
   }
 }
 @media only screen and (max-width: $bp-medium) {
-  .Logo__outer-container {
-    // background: rgba(255, 255, 255, 0.625);
-  }
-  .Logo__container {
-    padding: 0.125em 0.5em;
-    // background: rgba(255,255,255,0.625);
-  }
   .Logo__title {
     font-size: 1.4em;
     line-height: 1.3;

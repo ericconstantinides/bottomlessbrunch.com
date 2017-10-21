@@ -248,10 +248,10 @@ a * {
 .Logo__container {
   text-align: center;
   z-index: 1;
-  background-image: linear-gradient(to bottom, transparent 0%, transparent 34%, white 36%);
+  background: white;
   margin: 0 0.5em 0.5em;
-  padding: 0 0.5em;
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.25); }
+  padding: 0.5em 0.5em 0;
+  box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.25); }
 
 .Logo {
   display: flex;
@@ -287,8 +287,8 @@ a * {
       font-size: 1.5rem; } }
 
 .Logo__orange {
-  width: 3em;
-  margin-left: 0.5em; }
+  width: 15%;
+  margin: 0 0.5em; }
 
 .Logo__region-title {
   display: flex;
@@ -329,16 +329,52 @@ a * {
 .App--IntroPage .Logo__image {
   display: none; }
 
-.App--MapPage .Region__title {
-  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.35), 1px 0px 0px rgba(255, 255, 255, 0.35), 1px -1px 0px rgba(255, 255, 255, 0.35), 0px 1px 0px rgba(255, 255, 255, 0.35), 0px -1px 0px rgba(255, 255, 255, 0.35), -1px 1px 0px rgba(255, 255, 255, 0.35), -1px 0px 0px rgba(255, 255, 255, 0.35), -1px -1px 0px rgba(255, 255, 255, 0.35); }
-
 @media only screen and (min-width: 768px) and (max-width: 900px) {
   .App--MapPage .Logo__title {
     font-size: 1.65em; } }
 
 @media only screen and (max-width: 767px) {
-  .App--MapPage .Logo__outer-container {
-    background: rgba(255, 255, 255, 0.625); } }
+  .App--MapPage .Logo__container {
+    order: 1;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.5);
+    background: #eaeaea;
+    border-top: 1px solid #ddd;
+    height: 50px;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+  .App--MapPage .Logo {
+    flex-flow: row-reverse; }
+  .App--MapPage .Logo__image {
+    height: 20px;
+    width: 130px; }
+  .App--MapPage .Logo__title {
+    font-size: 1.1em;
+    white-space: nowrap; }
+  .App--MapPage .Logo__orange {
+    width: auto;
+    height: 26px; }
+  .App--MapPage .Logo__region-title {
+    padding-bottom: 0;
+    letter-spacing: 0;
+    font-size: 0.875em; } }
+
+@media only screen and (max-width: 600px) {
+  .App--MapPage .Logo__container {
+    height: 50px; }
+  .App--MapPage .Logo__orange {
+    height: 20px;
+    margin: 0 0.25em 0 0; }
+  .App--MapPage .Logo__title {
+    font-size: 0.9em; } }
+
+@media only screen and (max-width: 480px) {
+  .App--MapPage .Logo__image {
+    width: 100px; }
+  .App--MapPage .Logo__region-title {
+    font-size: 0.75em; } }
 
 .App--VenuePage .Region__title {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); }
@@ -356,8 +392,6 @@ a * {
     font-size: 1.75em; } }
 
 @media only screen and (max-width: 767px) {
-  .Logo__container {
-    padding: 0.125em 0.5em; }
   .Logo__title {
     font-size: 1.4em;
     line-height: 1.3;
@@ -2073,7 +2107,7 @@ body.body--MapPage #root,
 
 .MapPage__VenueList-container {
   background: rgba(255, 255, 255, 0.5);
-  padding: 0.5em 0 0.5em;
+  padding: 0;
   position: absolute;
   overflow: hidden;
   top: 0;
@@ -2160,7 +2194,7 @@ body.body--MapPage #root,
 
 .VenueTeaser__inner {
   display: flex;
-  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   min-height: 150px;
   transition: 0.15s; }
   .VenueTeaser__inner:hover {
@@ -2284,8 +2318,7 @@ body.body--MapPage #root,
     width: auto;
     transition: 0.5s; }
     .MapPage__VenueList-container.is-closed {
-      height: 35vh;
-      bottom: -30px; }
+      height: 35vh; }
       .MapPage__VenueList-container.is-closed .VenueList {
         overflow-y: hidden; }
     .MapPage__VenueList-container.is-open {
