@@ -57,30 +57,34 @@ export const PAD_DEGREES = 0.0125
 
 export const SLIDER_SETTINGS = {
   arrows: true,
-  infinite: true,
+  infinite: false,
   centerMode: true,
   slidesToShow: 1,
   initialSlide: 0,
   accessibility: true,
   // dots: true,
   touchThreshold: 17,
-  centerPadding: '8vw',
+  // centerPadding: '8vw',
   prevArrow: (
-    <div className='team-slider__arrow team-slider__arrow--prev'>
-      <div className='team-slider__inner-arrow team-slider__inner-arrow--prev' />
+    <div>
+      <div className='VenueSlider__arrow VenueSlider__arrow--prev'>
+        <div className='VenueSlider__inner-arrow VenueSlider__inner-arrow--prev' />
+      </div>
     </div>
   ),
   nextArrow: (
-    <div className='team-slider__arrow team-slider__arrow--next'>
-      <div className='team-slider__inner-arrow team-slider__inner-arrow--next' />
+    <div>
+      <div className='VenueSlider__arrow VenueSlider__arrow--next'>
+        <div className='VenueSlider__inner-arrow VenueSlider__inner-arrow--next' />
+      </div>
     </div>
-  ),
-  responsive: [
-    {
-      breakpoint: 620,
-      settings: {
-        centerPadding: '5vw'
-      }
-    }
-  ]
+  )
+  // responsive: [
+  //   {
+  //     breakpoint: 620,
+  //     settings: {
+  //       centerPadding: '5vw'
+  //     }
+  //   }
+  // ]
 }

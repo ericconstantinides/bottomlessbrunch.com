@@ -377,19 +377,19 @@ a * {
   .App--MapPage .Logo__region-title {
     font-size: 0.75em; } }
 
-.App--VenuePage .Region__title {
+.App--VenueSlider .Region__title {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); }
 
-.App--VenuePage .Logo__container {
+.App--VenueSlider .Logo__container {
   margin-left: 0;
   background: none; }
 
-.App--VenuePage .Logo__title {
+.App--VenueSlider .Logo__title {
   color: white;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); }
 
 @media only screen and (min-width: 768px) {
-  .App--VenuePage .Logo__title {
+  .App--VenueSlider .Logo__title {
     font-size: 1.75em; } }
 
 @media only screen and (max-width: 767px) {
@@ -2352,43 +2352,38 @@ body.body--MapPage #root,
   .VenueListItem__image-container {
     width: calc(50% - 0.5em); } }
 
-.VenuePage {
+.VenueSlider {
+  background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  z-index: 1;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  left: 100%;
   width: 100%;
-  overflow: hidden;
-  color: white; }
+  bottom: 0;
+  z-index: 100000;
+  opacity: 0;
+  transition: left 0s 0.5s, opacity 0.5s, transform 0.5s;
+  transform: translate3d(0, 5vh, 0);
+  left: 0;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: left 0s 0s, opacity 0.5s, transform 0.5s; }
 
-.VenuePage + .MapPage .MapPage__container {
+.VenueSliderItem + .MapPage .MapPage__container {
   filter: saturate(0.25) opacity(0.65); }
 
-.VenuePage__inner1 {
-  height: calc(100% - 1em);
-  width: calc(100% - 1em);
-  margin: 0.5em;
-  background: #333333;
-  z-index: -1;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-  border-radius: 4px; }
-
-.VenuePage__inner1,
-.VenuePage__inner2 {
-  overflow: hidden;
+.VenueSliderItem {
   display: flex;
   flex-flow: column;
-  align-items: center;
-  justify-content: center; }
+  width: calc(100vw - 100px);
+  height: 100vh;
+  text-align: center; }
 
-.VenuePage__inner2 {
-  height: 100%;
-  width: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  text-align: center;
-  padding: 6em 1em; }
+.VenueSliderItem__inner1 {
+  background: #333333; }
 
-.VenuePage__bg {
+.VenueSliderItem__bg {
   position: absolute;
   top: 0;
   right: 0;
@@ -2399,7 +2394,8 @@ body.body--MapPage #root,
   background-size: cover;
   background-position: center center; }
 
-.VenuePage__title {
+.VenueSliderItem__title {
+  text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   font-weight: bold;
   color: white;
@@ -2408,7 +2404,7 @@ body.body--MapPage #root,
   font-size: 3.5em;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); }
 
-.VenuePage__sub-title {
+.VenueSliderItem__sub-title {
   font-family: 'Open Sans Condensed', sans-serif;
   font-weight: bold;
   color: #f8af00;
@@ -2418,101 +2414,55 @@ body.body--MapPage #root,
   text-transform: uppercase;
   padding: 0.4em 0.5em; }
 
-.VenuePage__day {
+.VenueSliderItem__day {
   margin-bottom: 0; }
 
-.VenuePage__left-col {
+.VenueSliderItem__left-col {
   padding: 1em 1.7em; }
 
-.VenuePage__prev,
-.VenuePage__next,
-.VenuePage__close {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  right: 0.5em;
-  top: 0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  cursor: pointer; }
-  .VenuePage__prev:hover,
-  .VenuePage__next:hover,
-  .VenuePage__close:hover {
-    text-decoration: none;
-    color: inherit; }
-
-.VenuePage__inner-close {
-  transform: rotate(45deg); }
-
-.VenuePage__inner-prev,
-.VenuePage__inner-next,
-.VenuePage__inner-close {
-  font-size: 5em;
-  font-weight: 300;
-  color: white;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); }
-
-.VenuePage__prev,
-.VenuePage__next {
-  top: 50%; }
-
-.VenuePage__prev {
-  left: 0.5rem; }
-
-.VenuePage__next {
-  right: 0.5rem; }
-
-.VenuePage__inner-prev,
-.VenuePage__inner-next {
-  font-size: 7em;
-  line-height: 0;
-  margin-top: -0.25em; }
-
-.VenuePage__top-meta,
-.VenuePage__ratings {
+.VenueSliderItem__top-meta,
+.VenueSliderItem__ratings {
   width: 600px;
   max-width: 100%;
   display: flex;
   margin-left: -1em;
   margin-bottom: 1.5em; }
 
-.VenuePage__hours,
-.VenuePage__address,
-.VenuePage__ratings-item {
+.VenueSliderItem__hours,
+.VenueSliderItem__address,
+.VenueSliderItem__ratings-item {
   margin-left: 1em;
   flex: 1 0 0;
   justify-content: center;
   text-align: center; }
 
-.VenuePage__ratings-stars,
-.VenuePage__ratings-item {
+.VenueSliderItem__ratings-stars,
+.VenueSliderItem__ratings-item {
   display: flex;
   align-items: center; }
 
-.VenuePage__ratings-title {
+.VenueSliderItem__ratings-title {
   margin-right: 1em; }
 
-.VenuePage__hours-title,
-.VenuePage__address-title,
-.VenuePage__ratings-title {
+.VenueSliderItem__hours-title,
+.VenueSliderItem__address-title,
+.VenueSliderItem__ratings-title {
   font-family: 'Open Sans Condensed', sans-serif;
   font-weight: bold;
   margin-bottom: 0;
   font-size: 1em;
   color: #f8af00; }
 
-.VenuePage__top-meta {
+.VenueSliderItem__top-meta {
   display: flex;
   margin-left: -1em; }
 
-.VenuePage__address-p,
-.VenuePage__hours-p {
+.VenueSliderItem__address-p,
+.VenueSliderItem__hours-p {
   margin-bottom: 0;
   line-height: 1.3; }
 
-.VenuePage__middle {
+.VenueSliderItem__middle {
   display: flex;
   border: 1px solid #df9600;
   justify-content: center;
@@ -2520,70 +2470,70 @@ body.body--MapPage #root,
   margin-bottom: 2em;
   padding: 0.25em; }
 
-.VenuePage__middle-center {
+.VenueSliderItem__middle-center {
   display: flex;
   flex-flow: column; }
 
-.VenuePage__middle-right,
-.VenuePage__middle-left,
-.VenuePage__middle-center-top,
-.VenuePage__middle-center-bottom {
+.VenueSliderItem__middle-right,
+.VenueSliderItem__middle-left,
+.VenueSliderItem__middle-center-top,
+.VenueSliderItem__middle-center-bottom {
   background: white;
   padding: 0.5em;
   margin: 0.25em;
   text-align: center; }
 
-.VenuePage__middle-right,
-.VenuePage__middle-left {
+.VenueSliderItem__middle-right,
+.VenueSliderItem__middle-left {
   width: 30%;
   flex: 1 1 auto; }
 
-.VenuePage__middle-center {
+.VenueSliderItem__middle-center {
   width: 250px;
   flex: 0 0 auto; }
 
-.VenuePage__middle-center-top,
-.VenuePage__middle-center-bottom {
+.VenueSliderItem__middle-center-top,
+.VenueSliderItem__middle-center-bottom {
   flex: 1; }
 
-.VenuePage__middle-meta-title,
-.VenuePage__middle-title {
+.VenueSliderItem__middle-meta-title,
+.VenueSliderItem__middle-title {
   font-family: 'Open Sans Condensed', sans-serif;
   color: #f45a26;
   font-weight: bold; }
 
-.VenuePage__middle-meta-title {
+.VenueSliderItem__middle-meta-title {
   font-size: 1.25em;
   line-height: 1;
   margin-bottom: 0; }
 
-.VenuePage__middle-meta-p {
+.VenueSliderItem__middle-meta-p {
   font-weight: 600; }
-  .VenuePage__middle-meta:last-child .VenuePage__middle-meta-p {
+  .VenueSliderItem__middle-meta:last-child .VenueSliderItem__middle-meta-p {
     margin-bottom: 0; }
 
-.VenuePage__middle-p {
+.VenueSliderItem__middle-p {
   margin-bottom: 0; }
 
-.VenuePage__duo {
+.VenueSliderItem__duo {
   width: 100%;
   margin-bottom: 0.35em;
   display: flex;
   justify-content: center; }
-  .VenuePage__duo:last-child {
+  .VenueSliderItem__duo:last-child {
     margin-bottom: 0; }
 
-.VenuePage__duo-left,
-.VenuePage__duo-right {
+.VenueSliderItem__duo-left,
+.VenueSliderItem__duo-right {
   line-height: 1.1;
   margin-bottom: 0; }
 
-.VenuePage__duo-left {
+.VenueSliderItem__duo-left {
   font-weight: 600;
   text-align: left;
   margin-right: 0.25em; }
 
-.VenuePage__image-container {
+.VenueSliderItem__image-container {
   height: 150px;
   width: 100%;
   display: flex;
@@ -2594,7 +2544,7 @@ body.body--MapPage #root,
   border-bottom: 1px solid #bc8940;
   padding: 0.5em 0.25em; }
 
-.VenuePage__image {
+.VenueSliderItem__image {
   display: block;
   height: 100%;
   width: auto;
@@ -2602,38 +2552,102 @@ body.body--MapPage #root,
   transition: 0.15s; }
 
 @media only screen and (max-width: 767px) {
-  .VenuePage__inner2 {
+  .VenueSliderItem__inner2 {
     height: auto;
     display: block; } }
 
 @media only screen and (max-width: 600px) {
-  .VenuePage__middle {
+  .VenueSliderItem__middle {
     flex-flow: column;
     align-items: center; }
-  .VenuePage__middle-center {
+  .VenueSliderItem__middle-center {
     order: -1; }
-  .VenuePage__middle-center {
+  .VenueSliderItem__middle-center {
     width: 100%; }
-  .VenuePage__middle-left,
-  .VenuePage__middle-right {
+  .VenueSliderItem__middle-left,
+  .VenueSliderItem__middle-right {
     width: calc(100% - 0.5em); }
-  .VenuePage__close {
+  .VenueSliderItem__close {
     top: 0;
     right: 0; }
-  .VenuePage__prev {
+  .VenueSliderItem__prev {
     display: none; }
-  .VenuePage__next {
+  .VenueSliderItem__next {
     display: none; } }
 
-.sliderTemp {
+.VenueSlider__arrow,
+.VenueSlider__close {
+  position: fixed;
+  right: 3.25vw;
+  top: 2.5vh;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(68, 68, 68, 0.65);
+  cursor: pointer;
+  z-index: 1;
+  transition: opacity 0.5s; }
+  .VenueSlider__arrow.slick-disabled,
+  .VenueSlider__close.slick-disabled {
+    opacity: 0;
+    pointer-events: none; }
+
+html.touch .VenueSlider__arrow {
+  display: none !important; }
+
+.VenueSlider__inner-arrow,
+.VenueSlider__inner-close {
+  position: relative; }
+  .VenueSlider__inner-arrow:before, .VenueSlider__inner-arrow:after,
+  .VenueSlider__inner-close:before,
+  .VenueSlider__inner-close:after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 18px;
+    background-color: white;
+    width: 4px;
+    height: 26px;
+    transform-origin: center center; }
+  .VenueSlider__inner-arrow:before,
+  .VenueSlider__inner-close:before {
+    transform: rotate(45deg); }
+  .VenueSlider__inner-arrow:after,
+  .VenueSlider__inner-close:after {
+    transform: rotate(-45deg); }
+
+.VenueSlider__inner-arrow--prev:before, .VenueSlider__inner-arrow--prev:after {
+  height: 13px;
+  left: 17px; }
+
+.VenueSlider__inner-arrow--prev:before {
+  top: 10px; }
+
+.VenueSlider__inner-arrow--prev:after {
+  top: 16px; }
+
+.VenueSlider__inner-arrow--next:before, .VenueSlider__inner-arrow--next:after {
+  height: 13px;
+  left: auto;
+  right: 17px; }
+
+.VenueSlider__inner-arrow--next:after {
+  top: 10px; }
+
+.VenueSlider__inner-arrow--next:before {
+  top: 16px; }
+
+.VenueSlider__arrow {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100px;
-  height: 50px;
-  background: yellow;
-  overflow: hidden;
-  z-index: 2; }
+  top: 50%;
+  margin-top: -20px; }
+
+.VenueSlider__arrow--next {
+  right: 3.25vw; }
+
+.VenueSlider__arrow--prev {
+  right: auto;
+  left: 3.25vw; }
 
 .AdminVenues,
 .AdminRegions {
