@@ -52,6 +52,7 @@ class venueForm extends Component {
     this.props.addUiAppClass(['App--AddEditVenue'])
   }
   componentWillUnmount() {
+    this.props.resetEditVenue()
     this.props.removeUiAppClass(['App--AddEditVenue'])
   }
   renderField (field) {
@@ -416,9 +417,6 @@ class venueForm extends Component {
         </div>}
     </div>
   )
-  componentWillUnmount () {
-    this.props.resetEditVenue()
-  }
   handleCompileYelp = () => {
     if (_.has(this.props.thisForm.venueForm.values, 'yId')) {
       this.props.fetchYelpMetaEditVenueDetail(
@@ -454,7 +452,7 @@ class venueForm extends Component {
       : _.has(this.props.initialValues, 'gData')
           ? this.props.initialValues.gData
           : {}
-    yMeta = Object.entries(yMetaObj).map(([k, v]) => {
+    yMeta = _.map(yMetaObj, ([k, v]) => {
       const v2 = v === true ? 'true' : v === false ? 'false' : v
       const v3 = Array.isArray(v2) ? v2.join(', ') : v2
       const v4 = k === 'fetchedTime'

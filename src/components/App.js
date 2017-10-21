@@ -125,12 +125,12 @@ function mapStateToProps ({ venues, regions, ui }) {
   if (!_.isEmpty(ui.activeRegion)) {
     ui.regionName = ui.activeRegion.name
     ui.regionState = ui.activeRegion.state
-    if (Object.entries(venues).length) {
+    if (!_.isEmpty(venues)) {
       ui.numOfVenues = _.size(reduceVenuesByRegion(venues, ui.activeRegion._id))
     }
   }
   // get the venue name:
-  if (ui.venueOpenId && Object.entries(venues).length) {
+  if (ui.venueOpenId && !_.isEmpty(venues)) {
     ui.venueName = venues[ui.venueOpenId].name
   }
   return { venues, regions, ui }

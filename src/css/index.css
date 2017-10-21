@@ -245,28 +245,33 @@ a * {
   .SocialMediaShareButton--twitter:hover {
     background: #ea5103; }
 
-.Logo__outer-container {
-  height: 0;
-  width: 0;
-  z-index: 1;
-  position: relative; }
-
 .Logo__container {
-  padding: 0.5em 1em;
   text-align: center;
-  display: inline-block;
-  margin-left: 22px; }
+  z-index: 1;
+  background-image: linear-gradient(to bottom, transparent 0%, transparent 34%, white 36%);
+  margin: 0 0.5em 0.5em;
+  padding: 0 0.5em;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.25); }
 
 .Logo {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.Logo__image {
+  display: block;
+  background-image: url(/images/logo__bottomless-brunch--gradient.png);
+  width: 292px;
+  height: 33px;
+  background-size: contain;
+  background-position: center center;
+  cursor: pointer; }
+
+.Logo__title {
+  display: none;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
-  color: white;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75);
-  white-space: nowrap; }
-
-.Logo {
-  position: relative;
-  font-size: 2.25em;
   font-size: 2.25em;
   font-size: 8vw;
   line-height: 1.4;
@@ -275,51 +280,60 @@ a * {
   margin: 0;
   cursor: pointer; }
   @media only screen and (min-width: 451px) {
-    .Logo {
+    .Logo__title {
       font-size: 2.25rem; } }
   @media only screen and (max-width: 300px) {
-    .Logo {
+    .Logo__title {
       font-size: 1.5rem; } }
-  .Logo:after {
-    content: "";
-    filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
-    display: block;
-    background-image: url(/images/icon__split-orange--cond.png);
-    width: 1.25em;
-    height: 1em;
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin: 0 0 0 10px;
-    position: absolute;
-    top: 0.5rem;
-    left: 100%; }
 
-.Region__title {
+.Logo__orange {
+  width: 3em;
+  margin-left: 0.5em; }
+
+.Logo__region-title {
   display: flex;
   align-items: center;
   justify-content: center;
+  letter-spacing: 0.0125em;
   cursor: pointer;
   font-family: "Ubuntu", sans-serif;
   font-weight: bold;
-  font-size: 1.25em;
-  color: #b36740;
-  text-transform: uppercase; }
-  .Region__title:after {
+  font-size: 1em;
+  color: black;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0.125em 0 0.5em; }
+  .Logo__region-title:after {
     content: '';
     display: block;
     margin-left: 0.5em;
-    border-top: 0.4em solid #b36740;
+    border-top: 0.4em solid black;
     border-left: 0.3em solid transparent;
     border-right: 0.3em solid transparent; }
 
+.App--IntroPage .Logo__container {
+  height: 0;
+  padding: 0; }
+
 .App--IntroPage .Logo {
-  color: white; }
+  position: relative;
+  z-index: 1;
+  justify-content: flex-start;
+  padding: 0.5em; }
+
+.App--IntroPage .Logo__title {
+  display: block;
+  color: white;
+  cursor: default; }
+
+.App--IntroPage .Logo__image {
+  display: none; }
 
 .App--MapPage .Region__title {
   text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.35), 1px 0px 0px rgba(255, 255, 255, 0.35), 1px -1px 0px rgba(255, 255, 255, 0.35), 0px 1px 0px rgba(255, 255, 255, 0.35), 0px -1px 0px rgba(255, 255, 255, 0.35), -1px 1px 0px rgba(255, 255, 255, 0.35), -1px 0px 0px rgba(255, 255, 255, 0.35), -1px -1px 0px rgba(255, 255, 255, 0.35); }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
-  .App--MapPage .Logo {
+  .App--MapPage .Logo__title {
     font-size: 1.65em; } }
 
 @media only screen and (max-width: 767px) {
@@ -333,19 +347,18 @@ a * {
   margin-left: 0;
   background: none; }
 
-.App--VenuePage .Logo {
+.App--VenuePage .Logo__title {
   color: white;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); }
 
 @media only screen and (min-width: 768px) {
-  .App--VenuePage .Logo {
+  .App--VenuePage .Logo__title {
     font-size: 1.75em; } }
 
 @media only screen and (max-width: 767px) {
   .Logo__container {
-    margin-left: 0;
     padding: 0.125em 0.5em; }
-  .Logo {
+  .Logo__title {
     font-size: 1.4em;
     line-height: 1.3;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); } }
@@ -2055,10 +2068,12 @@ body.body--MapPage #root,
   bottom: 0;
   left: 0; }
 
+.MapPage__VenueList--width {
+  width: 390px; }
+
 .MapPage__VenueList-container {
-  background: rgba(255, 255, 255, 0.75);
-  padding: 6em 0 0.5em;
-  width: 390px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.5em 0 0.5em;
   position: absolute;
   overflow: hidden;
   top: 0;
@@ -2253,20 +2268,20 @@ body.body--MapPage #root,
     display: none; } }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
-  .MapPage__VenueList-container {
-    width: 320px;
-    padding-top: 4.6em; }
+  .MapPage__VenueList--width {
+    width: 320px; }
   .VenueListItem__image-container {
     width: 140px; } }
 
 @media only screen and (max-width: 767px) {
+  .MapPage__VenueList--width {
+    width: 100%; }
   .MapPage__VenueList-container {
     top: auto;
     right: 0;
     bottom: 0;
     left: 0;
     width: auto;
-    padding-top: 0em;
     transition: 0.5s; }
     .MapPage__VenueList-container.is-closed {
       height: 35vh;

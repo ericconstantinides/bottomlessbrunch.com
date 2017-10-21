@@ -5,6 +5,7 @@ import _ from 'lodash'
 import { reduceVenuesByRegion } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 
+import Logo from '../common/Logo'
 import VenueTeaser from './VenueTeaser'
 
 class VenueList extends Component {
@@ -35,7 +36,14 @@ class VenueList extends Component {
       )
     })
   }
-
+  handleRegionsModalClick = () => {
+    this.props.showUiRegionsModal()
+  }
+  handleLogoClick = () => {
+    this.props.unsetUiVenue()
+    this.props.unsetUiRegion()
+    this.props.history.push('/')
+  }
   render () {
     const style = this.props.drawerSmoothScroll
       ? {
@@ -51,6 +59,11 @@ class VenueList extends Component {
         onTouchMove={this.props.handleScroll}
         style={style}
       >
+        <Logo
+          handleLogoClick={this.handleLogoClick}
+          handleRegionsModalClick={this.handleRegionsModalClick}
+          region={this.props.ui.activeRegion}
+        />
         {this.renderTeasers()}
       </div>
     )

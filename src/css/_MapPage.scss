@@ -28,10 +28,12 @@ body.body--MapPage #root,
   bottom: 0;
   left: 0;
 }
-.MapPage__VenueList-container {
-  background: rgba(white, 0.75);
-  padding: 6em 0 0.5em;
+.MapPage__VenueList--width {
   width: 390px;
+}
+.MapPage__VenueList-container {
+  background: rgba(white, 0.5);
+  padding: 0.5em 0 0.5em;
   position: absolute;
   overflow: hidden;
   top: 0;
@@ -243,22 +245,27 @@ body.body--MapPage #root,
   }
 }
 @media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
-  .MapPage__VenueList-container {
+  .MapPage__VenueList--width {
     width: 320px;
-    padding-top: 4.6em;
   }
+  // .MapPage__VenueList-container {
+  //   padding-top: 4.6em;
+  // }
   .VenueListItem__image-container {
     width: 140px;
   }
 }
 @media only screen and (max-width: $bp-medium) {
+  .MapPage__VenueList--width {
+    width: 100%;
+  }
   .MapPage__VenueList-container {
     top: auto;
     right: 0;
     bottom: 0;
     left: 0;
     width: auto;
-    padding-top: 0em;
+    // padding-top: 0em;
     transition: 0.5s;
     &.is-closed {
       height: 35vh;

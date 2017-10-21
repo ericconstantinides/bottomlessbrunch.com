@@ -9,13 +9,12 @@ class IntroPage extends Component {
   handleRegionsModalClick = () => {
     this.props.showUiRegionsModal()
   }
-  handleSelectChange = selected => {
-    this.props.setUiRegion(this.props.regions[selected.value])
-    this.props.history.replace(this.props.regions[selected.value].slug)
-  }
+  // handleSelectChange = selected => {
+  //   this.props.setUiRegion(this.props.regions[selected.value])
+  //   this.props.history.replace(this.props.regions[selected.value].slug)
+  // }
   componentDidMount () {
     this.props.addUiAppClass(['App--IntroPage'])
-
   }
   componentWillUnmount () {
     this.props.removeUiAppClass(['App--IntroPage'])
@@ -23,7 +22,9 @@ class IntroPage extends Component {
   render () {
     return (
       <div className='IntroPage'>
-        <Logo handleRegionsModalClick={this.handleRegionsModalClick} />
+        <Logo
+          handleRegionsModalClick={this.handleRegionsModalClick}
+        />
         <div className='Splash'>
           <video
             className='Splash__video'

@@ -1,25 +1,31 @@
-.Logo__outer-container {
-  height: 0;
-  width: 0;
-  z-index: 1;
-  position: relative;
-}
 .Logo__container {
-  padding: 0.5em 1em;
   text-align: center;
-  display: inline-block;
-  margin-left: 22px;
+  z-index: 1;
+  background-image: linear-gradient(to bottom, transparent 0%, transparent 34%, white 36%);
+  margin: 0 0.5em 0.5em;
+  padding: 0 0.5em;
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,0.25);
 }
 .Logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // flex-flow: row-reverse;
+}
+.Logo__image {
+  display: block;
+  background-image: url(/images/logo__bottomless-brunch--gradient.png);
+  width: 292px;
+  height: 33px;
+  background-size: contain;
+  background-position: center center;
+  cursor: pointer;
+}
+.Logo__title {
+  display: none;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
-  color: white;
   text-shadow: 2px 2px 1px rgba(black, 0.75);
-  white-space: nowrap;
-}
-.Logo {
-  position: relative;
-  font-size: 2.25em;
   @include responsive(font-size, 2.25, 1.5, 450);
   line-height: 1.4;
   letter-spacing: -0.06em;
@@ -36,51 +42,70 @@
   //   -1px 1px 0px rgba(#fed05b, 1),
   //   -1px 0px 0px rgba(#fed05b, 1),
   //   -1px -1px 0px rgba(#fed05b, 1);
-  &:after {
-    content: "";
-    filter: drop-shadow(1px 1px rgba(black,0.5));
-    display: block;
-    background-image: url(/images/icon__split-orange--cond.png);
-    width: 1.25em;
-    height: 1em;
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin: 0 0 0 10px;
-    position: absolute;
-    top: 0.5rem;
-    left: 100%;
-  }
+  // &:after {
+  //   content: "";
+  //   filter: drop-shadow(1px 1px rgba(black,0.5));
+  //   display: block;
+  //   background-image: url(/images/icon__split-orange--cond.png);
+  //   width: 1.25em;
+  //   height: 1em;
+  //   background-repeat: no-repeat;
+  //   background-size: contain;
+  //   margin: 0 0 0 10px;
+  //   position: absolute;
+  //   top: 0.5rem;
+  //   left: 100%;
+  // }
+}
+.Logo__orange {
+  width: 3em;
+  margin-left: 0.5em;
+  // height: 1em;
 }
 
-.Region__title {
+.Logo__region-title {
   display: flex;
   align-items: center;
   justify-content: center;
+  letter-spacing: 0.0125em;
   cursor: pointer;
   @include ubuntuBold;
-  font-size: 1.25em;
-  color: #b36740;
+  font-size: 1em;
+  color: black;
   text-transform: uppercase;
+  margin: 0;
+  padding: 0.125em 0 0.5em;
   &:after {
     content: '';
     display: block;
     margin-left: 0.5em;
-    border-top: 0.4em solid #b36740;
+    border-top: 0.4em solid black;
     border-left: 0.3em solid transparent;
     border-right: 0.3em solid transparent;
   }
 }
 
-
-
-// INTRO PAGE:
 .App--IntroPage {
+  .Logo__container {
+    height: 0;
+    padding: 0;
+  }
   .Logo {
+    position: relative;
+    z-index: 1;
+    justify-content: flex-start;
+    padding: 0.5em;
+  }
+  .Logo__title {
+    display: block;
     color: white;
+    cursor: default;
+  }
+  .Logo__image {
+    display: none;
   }
 }
 
-// MAP PAGE:
 .App--MapPage {
   .Region__title {
     text-shadow:
@@ -94,7 +119,7 @@
       -1px -1px 0px rgba(255,255,255, 0.35);
   }
   @media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
-    .Logo {
+    .Logo__title {
       font-size: 1.65em;
     }
   }
@@ -105,7 +130,6 @@
   }
 }
 
-// VENUE PAGE:
 .App--VenuePage {
   .Region__title {
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
@@ -114,12 +138,12 @@
     margin-left: 0;
     background: none;
   }
-  .Logo {
+  .Logo__title {
     color: white;
     text-shadow: 2px 2px 1px rgba(black, 0.5);
   }
   @media only screen and (min-width: $bp-medium + 1) {
-    .Logo {
+    .Logo__title {
       font-size: 1.75em;
     }
   }
@@ -129,11 +153,10 @@
     // background: rgba(255, 255, 255, 0.625);
   }
   .Logo__container {
-    margin-left: 0;
     padding: 0.125em 0.5em;
     // background: rgba(255,255,255,0.625);
   }
-  .Logo {
+  .Logo__title {
     font-size: 1.4em;
     line-height: 1.3;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
