@@ -24,7 +24,7 @@
 .VenuePage__inner1,
 .VenuePage__inner2 {
   overflow: hidden;
-  position: relative;
+  // position: relative;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -266,11 +266,11 @@
     display: block;
   }
   .VenuePage__bg {
-    position: fixed;
-    top: 0.5em;
-    right: 0.5em;
-    bottom: 0.5em;
-    left: 0.5em;
+    // position: fixed;
+    // top: 0.5em;
+    // right: 0.5em;
+    // bottom: 0.5em;
+    // left: 0.5em;
   }
 }
 @media only screen and (max-width: $bp-medium-small) {
@@ -289,16 +289,16 @@
     width: (calc(100% - 0.5em))
   }
   .VenuePage__inner1 {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
+    // height: 100%;
+    // width: 100%;
+    // margin: 0;
+    // border-radius: 0;
   }
   .VenuePage__bg {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    // top: 0;
+    // right: 0;
+    // bottom: 0;
+    // left: 0;
   }
   .VenuePage__close {
     top: 0;
@@ -313,7 +313,9 @@
 }
 
 
-
+.App--VenuePage {
+  position: relative;
+}
 
 
 

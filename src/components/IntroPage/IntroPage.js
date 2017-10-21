@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 
 import * as actions from '../../actions'
 
@@ -15,6 +16,7 @@ class IntroPage extends Component {
   // }
   componentDidMount () {
     this.props.addUiAppClass(['App--IntroPage'])
+    viewportUnitsBuggyfill.init()
   }
   componentWillUnmount () {
     this.props.removeUiAppClass(['App--IntroPage'])

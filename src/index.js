@@ -6,7 +6,7 @@ import reduxThunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 // allows us to run 100vh in safari:
-import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
+// import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 
 import reducers from './reducers' // Or wherever you keep your reducers
 
@@ -44,7 +44,7 @@ ReactDOM.render(
 // registerServiceWorker()
 
 // Initialize viewportUnitsBuggyfill
-viewportUnitsBuggyfill.init()
+// viewportUnitsBuggyfill.init()
 // Also hook viewportUnitsBuggyfill to resize event (if it was initialized)
 // if (document.getElementById('patched-viewport')) {
 //   window.addEventListener('resize', viewportUnitsBuggyfill.refresh, true)

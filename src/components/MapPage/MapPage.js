@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Swipeable from 'react-swipeable'
+import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 import _ from 'lodash'
 
 import * as actions from '../../actions'
@@ -23,6 +24,7 @@ class MapPage extends Component {
     document.documentElement.classList.add('html--MapPage')
     document.body.classList.add('body--MapPage')
     this.props.addUiAppClass(['App--MapPage'])
+    viewportUnitsBuggyfill.init()
   }
   componentWillUnmount() {
     document.documentElement.classList.remove('html--MapPage')
