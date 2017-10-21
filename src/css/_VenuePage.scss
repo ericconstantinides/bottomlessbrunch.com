@@ -313,10 +313,16 @@
 }
 
 
-.App--VenuePage {
-  position: relative;
+.sliderTemp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 50px;
+  background: yellow;
+  overflow: hidden;
+  z-index: 2;
 }
-
 
 
 

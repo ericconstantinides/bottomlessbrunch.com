@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const googleGa = 'UA-21524856-1'
 export const GOOGLE_API_KEY = 'AIzaSyDsJWQDeqiFe-Chw1tBWfitg_7rGSWmHTU'
 export const SITE_NAME = 'Bottomless Brunch'
@@ -52,3 +54,33 @@ export const DRAWER = {
 }
 
 export const PAD_DEGREES = 0.0125
+
+export const SLIDER_SETTINGS = {
+  arrows: true,
+  infinite: true,
+  centerMode: true,
+  slidesToShow: 1,
+  initialSlide: 0,
+  accessibility: true,
+  // dots: true,
+  touchThreshold: 17,
+  centerPadding: '8vw',
+  prevArrow: (
+    <div className='team-slider__arrow team-slider__arrow--prev'>
+      <div className='team-slider__inner-arrow team-slider__inner-arrow--prev' />
+    </div>
+  ),
+  nextArrow: (
+    <div className='team-slider__arrow team-slider__arrow--next'>
+      <div className='team-slider__inner-arrow team-slider__inner-arrow--next' />
+    </div>
+  ),
+  responsive: [
+    {
+      breakpoint: 620,
+      settings: {
+        centerPadding: '5vw'
+      }
+    }
+  ]
+}

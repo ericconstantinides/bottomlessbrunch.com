@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { ConnectedRouter as Router } from 'react-router-redux'
 import { Route } from 'react-router'
+import Slider from 'react-slick'
 import cx from 'classnames'
 
+import { SLIDER_SETTINGS } from '../config'
 import * as actions from '../actions'
 import { parsePath, reduceVenuesByRegion } from '../lib/myHelpers'
 
@@ -93,6 +95,16 @@ class App extends Component {
     const parsedHistory = parsePath(history.location.pathname)
     return (
       <div className={cx('App', this.props.ui.appClass)}>
+        <div className='sliderTemp'>
+          <Slider {...SLIDER_SETTINGS}>
+            <div><h3>1</h3></div>
+            <div><h3>2</h3></div>
+            <div><h3>3</h3></div>
+            <div><h3>4</h3></div>
+            <div><h3>5</h3></div>
+            <div><h3>6</h3></div>
+          </Slider>
+        </div>
         <Router history={history}>
           <div>
             <MetaData path={history.location.pathname} {...this.props.ui} />
