@@ -338,7 +338,7 @@ a * {
     order: 1;
     margin: 0;
     background: rgba(255, 255, 255, 0.5);
-    background: #eaeaea;
+    background: #f1f1f1;
     border-top: 1px solid #ddd;
     height: 50px;
     padding: 0.5em;
@@ -404,15 +404,20 @@ a * {
   position: relative; }
 
 .Logo__beta-title {
-  width: 56px;
+  width: 36px;
   position: absolute;
-  right: -20px;
+  left: 100%;
   bottom: 0;
-  transform: rotate(-17deg);
-  background: rgba(255, 255, 255, 0.7);
-  padding: 0.25em 0.5em;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); }
+  margin-left: 8px; }
+  @media only screen and (min-width: 768px) {
+    .Logo__beta-title {
+      left: auto;
+      right: 0;
+      width: 40px;
+      bottom: -4px;
+      background: rgba(255, 255, 255, 0.5);
+      box-sizing: content-box;
+      padding: 0.2em; } }
 
 .RegionsModal__container {
   position: fixed;

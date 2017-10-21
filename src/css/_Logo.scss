@@ -130,7 +130,7 @@
       margin: 0;
       // background: yellow;
       background: rgba(white, 0.5);
-      background: #eaeaea;
+      background: #f1f1f1;
       border-top: 1px solid #ddd;
       height: 50px;
       padding: 0.5em;
@@ -216,13 +216,18 @@
   position: relative;
 }
 .Logo__beta-title {
-  width: 56px;
+  width: 36px;
   position: absolute;
-  right: -20px;
+  left: 100%;
   bottom: 0;
-  transform: rotate(-17deg);
-  background: rgba(white, 0.7);
-  padding: 0.25em 0.5em;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px rgba(black, 0.3);
+  margin-left: 8px;
+  @media only screen and (min-width: $bp-medium + 1) {
+    left: auto;
+    right: 0;
+    width: 40px;
+    bottom: -4px;
+    background: rgba(255,255,255,0.5);
+    box-sizing: content-box;
+    padding: 0.2em;
+  }
 }
