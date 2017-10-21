@@ -15,8 +15,10 @@ const Logo = props => {
         <div
           onClick={props.handleLogoClick}
           title={SITE_SLOGAN}
-          className='Logo__image'
-        />
+          className='Logo__image Logo__beta-container'
+        >
+          <img src='/images/text__beta.png' className='Logo__beta-title' />
+        </div>
         <img
           className='Logo__orange'
           src='/images/icon__split-orange--cond.png'

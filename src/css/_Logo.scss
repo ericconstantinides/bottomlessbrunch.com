@@ -208,3 +208,21 @@
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
   }
 }
+
+/*
+ * BETA
+ */
+.Logo__beta-container {
+  position: relative;
+}
+.Logo__beta-title {
+  width: 56px;
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  transform: rotate(-17deg);
+  background: rgba(white, 0.7);
+  padding: 0.25em 0.5em;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(black, 0.3);
+}
