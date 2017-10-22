@@ -73,7 +73,7 @@ class IntroPage extends Component {
               </h2>
               <div className='u-mt-1 u-kill-last-margin'>
                 <p>
-                  Bottomless Brunch is your guide to a good time. Whether it's a Splendid Saturday or a Sunday Funday, Bottomless Brunch has you covered. We've scoured the country finding the best places for endless drinks and bottomless refreshments. But please, whatever you do, don't call it a Boozy Brunch. We're better than that.
+                  Bottomless Brunch, as you've probably guessed, is your guide to boundless day drinking. We have scoured the country looking for the all the spots for unlimited drinks and bottomless refreshment. Whether you're looking for a Sunday Funday spot or are new in town, we've got you covered. One thing, please, whatever you do, don't call it a Boozy Brunch. We're better than that.
                 </p>
               </div>
             </div>
@@ -91,7 +91,7 @@ class IntroPage extends Component {
               </h2>
               <div className='u-mt-1 u-kill-last-margin'>
                 <p>
-                  Bottomless Brunch is the brainchild of{' '}
+                  Bottomless Brunch is the brainchild of Eric and Becky Constantinides. It started because I (Eric), was always looking for a great place to have brunch but didn't want to worry about drinks.
                 </p>
               </div>
             </div>
