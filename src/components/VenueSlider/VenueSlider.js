@@ -37,6 +37,11 @@ class VenueSlider extends Component {
     // })
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
+
+    // need to go to the correct index here:
+    let index = 3 // TEMP
+    // need to have this done in the state...
+    // this.refs.slickSlider.slickGoTo(index)
   }
   shouldComponentUpdate (nextProps, nextState) {
     return false
@@ -47,6 +52,9 @@ class VenueSlider extends Component {
     this.props.unsetUiVenue()
     this.props.removeUiAppClass(['App--VenueSlider'])
     this.props.addUiAppClass(['App--MapPage'])
+  }
+  handleSliderChange = (index) => {
+    // need to update the slug here:
   }
   handleShare = service => event => {
     console.log(service)
@@ -67,7 +75,11 @@ class VenueSlider extends Component {
         <Link to={`/${regionSlug}`} className='VenueSlider__close'>
           <div className='VenueSlider__inner-close' />
         </Link>
-        <Slider {...SLIDER_SETTINGS}>
+        <Slider
+          {...SLIDER_SETTINGS}
+          ref='slickSlider'
+          afterChange={this.handleSliderChange}
+        >
           {sliderItems}
         </Slider>
       </div>

@@ -2361,7 +2361,7 @@ body.body--MapPage #root,
   left: 100%;
   width: 100%;
   bottom: 0;
-  z-index: 100000;
+  z-index: 1;
   opacity: 0;
   transition: left 0s 0.5s, opacity 0.5s, transform 0.5s;
   transform: translate3d(0, 5vh, 0);
@@ -2369,6 +2369,9 @@ body.body--MapPage #root,
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition: left 0s 0s, opacity 0.5s, transform 0.5s; }
+  .VenueSlider .slick-next,
+  .VenueSlider .slick-prev {
+    z-index: 1; }
 
 .VenueSliderItem + .MapPage .MapPage__container {
   filter: saturate(0.25) opacity(0.65); }
@@ -2378,7 +2381,8 @@ body.body--MapPage #root,
   flex-flow: column;
   width: calc(100vw - 100px);
   height: 100vh;
-  text-align: center; }
+  text-align: center;
+  padding: 0 0.5em; }
 
 .VenueSliderItem__inner1 {
   background: #333333; }

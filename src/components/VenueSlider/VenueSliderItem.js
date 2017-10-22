@@ -16,7 +16,6 @@ class VenueSliderItem extends React.Component {
   }
   render () {
     const { venue } = this.props
-    console.log(venue)
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
     if (!venue.googlePlacesData) venue.googlePlacesData = {}
