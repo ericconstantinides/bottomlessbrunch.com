@@ -60,11 +60,11 @@ export const SLIDER_SETTINGS = {
   infinite: false,
   centerMode: true,
   slidesToShow: 1,
-  initialSlide: 0,
+  // initialSlide: 0,
   accessibility: true,
   // dots: true,
   touchThreshold: 17,
-  // centerPadding: '8vw',
+  centerPadding: '20px',
   prevArrow: (
     <div>
       <div className='VenueSlider__arrow VenueSlider__arrow--prev'>

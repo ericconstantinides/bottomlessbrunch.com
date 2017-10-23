@@ -17,7 +17,7 @@ const Logo = props => {
           title={SITE_SLOGAN}
           className='Logo__image Logo__beta-container'
         >
-          <img src='/images/text__beta.png' className='Logo__beta-title' />
+          <img src='/images/text__beta.png' className='Logo__beta-title' alt='Bottomless Brunch' />
         </div>
         <img
           className='Logo__orange'

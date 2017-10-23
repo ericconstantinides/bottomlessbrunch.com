@@ -4,7 +4,6 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import Slider from 'react-slick'
-// import objectFunctions from '../../lib/ObjectFunctions'
 import { reduceVenuesByRegion } from '../../lib/myHelpers'
 
 import { SLIDER_SETTINGS } from '../../config'
@@ -15,36 +14,43 @@ class VenueSlider extends Component {
   constructor () {
     super()
     this.state = {
-      nextSlug: '',
-      prevSlug: ''
+      activeSlide: 0,
+      sliderItems: []
     }
   }
   componentDidMount () {
-    const { venue, venues, venueId, regionSlug } = this.props
-
     // set the venueUI:
-    this.props.setUiVenue(venueId)
-
+    this.props.setUiVenue(this.props.venue._id)
     // get the venue detail
-    this.props.fetchGooglePlacesVenueDetail(venue)
+    this.props.fetchGooglePlacesVenueDetail(this.props.venue)
 
-    // const nextId = objectFunctions.keys.next(reducedVenues, venueId)
-    // const prevId = objectFunctions.keys.previous(reducedVenues, venueId)
-
-    // this.setState({
-    //   nextSlug: '/' + regionSlug + '/' + venues[nextId].slug,
-    //   prevSlug: '/' + regionSlug + '/' + venues[prevId].slug
-    // })
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
-
-    // need to go to the correct index here:
-    let index = 3 // TEMP
-    // need to have this done in the state...
-    // this.refs.slickSlider.slickGoTo(index)
   }
   shouldComponentUpdate (nextProps, nextState) {
     return false
+  }
+  componentWillMount() {
+    const { venues, venueId } = this.props
+    // reduce the venues by region to get all your slider items!
+    const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)
+    let index = 0
+    const sliderItems = _.map(reducedVenues, (venue, id) => {
+      // get the initial slide for the slider:
+      if (id === this.props.venue._id) {
+        this.setState({activeSlide: index})
+      }
+      index++
+      return (
+        <VenueSliderItem
+          key={id}
+          venue={venue}
+          history={this.props.history}
+        />
+      )
+    })
+
+    this.setState({sliderItems})
   }
   
   componentWillUnmount () {
@@ -54,33 +60,29 @@ class VenueSlider extends Component {
     this.props.addUiAppClass(['App--MapPage'])
   }
   handleSliderChange = (index) => {
+    this.setState({activeSlide: index})
+    console.log('slider changed to index:', this.state.activeSlide)
+    console.log('details:', this.state.sliderItems[this.state.activeSlide].props.venue.slug)
+    this.props.history.push(`/${this.props.regionSlug}/${this.state.sliderItems[this.state.activeSlide].props.venue.slug}`)
     // need to update the slug here:
   }
   handleShare = service => event => {
     console.log(service)
   }
   render () {
-    const { venue, venues, venueId, regionSlug } = this.props
-    // reduce the venues by region to get all your slider items!
-    const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)
-    const sliderItems = _.map(reducedVenues, (venue, i) => (
-      <VenueSliderItem
-        key={i}
-        venue={venue}
-        history={this.props.history}
-      />
-    ))
+    console.log('VenueSlider: render() @', new Date())
     return (
       <div className='VenueSlider'>
-        <Link to={`/${regionSlug}`} className='VenueSlider__close'>
+        <Link to={`/${this.props.regionSlug}`} className='VenueSlider__close'>
           <div className='VenueSlider__inner-close' />
         </Link>
         <Slider
           {...SLIDER_SETTINGS}
+          initialSlide={this.state.activeSlide}
           ref='slickSlider'
           afterChange={this.handleSliderChange}
         >
-          {sliderItems}
+          {this.state.sliderItems}
         </Slider>
       </div>
     )

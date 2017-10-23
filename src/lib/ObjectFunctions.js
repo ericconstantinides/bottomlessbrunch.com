@@ -4,11 +4,11 @@
   objectFunctions.keys.previous(someObj, 11)
 
 */
-const oFunctions = {}
-oFunctions.keys = {}
+const objectFunctions = {}
+objectFunctions.keys = {}
 
-// NEXT KEY
-oFunctions.keys.next = function (myObject, id) {
+// get the next key in an object
+objectFunctions.keys.next = function (myObject, id) {
   const stringId = id.toString()
   let keys = Object.keys(myObject)
   let index = keys.indexOf(stringId)
@@ -20,8 +20,8 @@ oFunctions.keys.next = function (myObject, id) {
   return keys[nextIndex]
 }
 
-// PREVIOUS KEY
-oFunctions.keys.previous = function (myObject, id) {
+// Get the previous key in an object.
+objectFunctions.keys.previous = function (myObject, id) {
   const stringId = id.toString()
   let keys = Object.keys(myObject)
   let index = keys.indexOf(stringId)
@@ -35,4 +35,4 @@ oFunctions.keys.previous = function (myObject, id) {
   return keys[previousIndex]
 }
 
-export default oFunctions
+export default objectFunctions

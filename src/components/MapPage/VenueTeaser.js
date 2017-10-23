@@ -38,6 +38,7 @@ const VenueTeaser = ({
       {/* THE VENUETEASER__INNER is where the real link should be... */}
       <Link
         regionName={regionName}
+        venue={venue}
         to={`/${regionSlug}/${venue.slug}`}
       >
         <div className={`VenueTeaser__inner ${altClass}__inner`}>

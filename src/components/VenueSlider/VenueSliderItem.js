@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Star from 'react-stars'
 import { ShareButtons, generateShareIcon } from 'react-share'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import { SITE_DOMAIN } from '../../config'
 import {
@@ -10,9 +10,12 @@ import {
   compileDays
 } from '../../lib/myHelpers'
 
-class VenueSliderItem extends React.Component {
-  shouldComponentUpdate (nextProps, nextState) {
-    return false
+class VenueSliderItem extends Component {
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   return false
+  // }
+  componentDidUpdate (prevProps, prevState) {
+    console.log('VenueSliderItem: componentDidUpdate()')
   }
   render () {
     const { venue } = this.props
@@ -58,6 +61,7 @@ class VenueSliderItem extends React.Component {
     const { FacebookShareButton, TwitterShareButton } = ShareButtons
     const FacebookIcon = generateShareIcon('facebook')
     const TwitterIcon = generateShareIcon('twitter')
+    console.log('VenueSliderItem: render()')
     return (
       <div className='VenueSliderItem slick-slide'>
         <div className='VenueSliderItem__inner1'>
@@ -66,12 +70,6 @@ class VenueSliderItem extends React.Component {
               className='VenueSliderItem__bg'
               style={{ backgroundImage: bgStyle }}
             />
-            <Link
-              to={`/${this.props.regionSlug}`}
-              className='VenueSliderItem__close'
-            >
-              <span className='VenueSliderItem__inner-close'>+</span>
-            </Link>
             <h1 className='VenueSliderItem__title'>{venue.name}</h1>
             <h2 className='VenueSliderItem__sub-title'>{displayHood}</h2>
             <div className='VenueSliderItem__ratings'>
