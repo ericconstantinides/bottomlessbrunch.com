@@ -5,48 +5,42 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../actions'
 import { SITE_DOMAIN } from '../../config'
-import {
-  roundHalf,
-  compileGoogleHours,
-  compileDays
-} from '../../lib/myHelpers'
+import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
 
 class VenueSliderItem extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isActive: false
+      fetched: false
     }
   }
   shouldComponentUpdate (nextProps, nextState) {
-    // only update if it's the active venue:
-    return nextProps.activeId === nextProps.venue._id
-    // return false
+    if (nextProps.venue._id === nextProps.activeId ||
+      nextProps.venue._id === nextProps.nextId ||
+      nextProps.venue._id === nextProps.prevId) {
+      return true
+    }
+    return false
   }
   componentWillMount () {
-    if (this.props.activeId === this.props.venue._id) {
-      // this.setState({ isActive: true })
-      this.props.fetchGooglePlacesVenueDetail(this.props.venue)
-    } else {
-      // this.setState({ isActive: false })
-    }
+    this.fetchData()
   }
-  componentWillUnmount () {
-    console.log('VenueSliderItem: componentWillUnmount ()')
-  }
-
   componentDidUpdate (prevProps, prevState) {
-    // console.log('VenueSliderItem: componentDidUpdate()')
-    // console.log(this.props.ui.venueOpenId)
-    if (this.props.activeId === this.props.venue._id) {
-      // this.setState({ isActive: true })
+    this.fetchData()
+  }
+  fetchData () {
+    if (
+      !this.state.fetched &&
+      (this.props.venue._id === this.props.activeId ||
+        this.props.venue._id === this.props.nextId ||
+        this.props.venue._id === this.props.prevId)
+    ) {
+      this.setState({ fetched: true })
       this.props.fetchGooglePlacesVenueDetail(this.props.venue)
-    } else {
-      // this.setState({ isActive: false })
     }
   }
   render () {
-    console.log('VenueSliderItem: render()')
+    console.log(this.props)
     const { venue } = this.props
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
@@ -57,7 +51,12 @@ class VenueSliderItem extends Component {
       photos = venue.googlePlacesData.photos
         .map(photo => photo.getUrl({ maxWidth: 800, maxHeight: 500 }))
         .map((photoUrl, i) => (
-          <img key={i} className='VenueSliderItem__image' src={photoUrl} alt='' />
+          <img
+            key={i}
+            className='VenueSliderItem__image'
+            src={photoUrl}
+            alt=''
+          />
         ))
       bgStyle =
         'url(' +
@@ -90,25 +89,24 @@ class VenueSliderItem extends Component {
     const { FacebookShareButton, TwitterShareButton } = ShareButtons
     const FacebookIcon = generateShareIcon('facebook')
     const TwitterIcon = generateShareIcon('twitter')
-    if (this.props.activeId !== this.props.venue._id) {
+    if (!this.state.fetched) {
       return (
         <article className='VenueSliderItem slick-slide'>
-          <div className='VenueSliderItem__inner1'>
-            <div className='VenueSliderItem__inner2'>
-              Loading...
-            </div>
+          <div className='VenueSliderItem__inner'>
+            Loading...
           </div>
         </article>
       )
     }
     return (
       <article className='VenueSliderItem slick-slide'>
-        <div className='VenueSliderItem__inner1'
+        <div
+          className='VenueSliderItem__inner'
           style={{ backgroundImage: bgStyle }}
         >
           <h1 className='VenueSliderItem__title'>{venue.name}</h1>
-          <p style={{color: 'white'}}>{venue._id}</p>
-          <p style={{color: 'white'}}>{this.props.activeId}</p>
+          <p style={{ color: 'white' }}>{venue._id}</p>
+          <p style={{ color: 'white' }}>{this.props.activeId}</p>
           <h2 className='VenueSliderItem__sub-title'>{displayHood}</h2>
           <div className='VenueSliderItem__ratings'>
             {venue.googlePlacesData &&
@@ -237,20 +235,14 @@ class VenueSliderItem extends Component {
                 url={`${SITE_DOMAIN}${this.props.history.location.pathname}`}
                 hashtag='#bottomlessbrunch'
               >
-                <FacebookIcon
-                  iconBgStyle={{ fill: 'transparent' }}
-                  size={40}
-                />
+                <FacebookIcon iconBgStyle={{ fill: 'transparent' }} size={40} />
                 <span>Share on Facebook</span>
               </FacebookShareButton>
               <TwitterShareButton
                 url={`${SITE_DOMAIN}${this.props.history.location.pathname}`}
                 hashtag='#bottomlessbrunch'
               >
-                <TwitterIcon
-                  iconBgStyle={{ fill: 'transparent' }}
-                  size={40}
-                />
+                <TwitterIcon iconBgStyle={{ fill: 'transparent' }} size={40} />
                 <span>Share on Twitter</span>
               </TwitterShareButton>
             </div>

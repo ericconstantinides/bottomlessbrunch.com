@@ -64,7 +64,7 @@ export const SLIDER_SETTINGS = {
   accessibility: true,
   // dots: true,
   touchThreshold: 17,
-  centerPadding: '20px',
+  centerPadding: '32px',
   prevArrow: (
     <div>
       <div className='VenueSlider__arrow VenueSlider__arrow--prev'>
@@ -78,13 +78,13 @@ export const SLIDER_SETTINGS = {
         <div className='VenueSlider__inner-arrow VenueSlider__inner-arrow--next' />
       </div>
     </div>
-  )
-  // responsive: [
-  //   {
-  //     breakpoint: 620,
-  //     settings: {
-  //       centerPadding: '5vw'
-  //     }
-  //   }
-  // ]
+  ),
+  responsive: [
+    {
+      breakpoint: 620,
+      settings: {
+        centerPadding: '10px'
+      }
+    }
+  ]
 }

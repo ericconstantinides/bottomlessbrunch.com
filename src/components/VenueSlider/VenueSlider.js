@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import Slider from 'react-slick'
-import { reduceVenuesByRegion } from '../../lib/myHelpers'
+import { reduceVenuesByRegion, objectFunctions } from '../../lib/myHelpers'
 
 import { SLIDER_SETTINGS } from '../../config'
 import * as actions from '../../actions'
@@ -13,11 +13,12 @@ import VenueSliderItem from './VenueSliderItem'
 class VenueSlider extends Component {
   constructor (props) {
     super()
+    const reducedVenues = reduceVenuesByRegion(props.venues, props.venues[props.venue._id].regionId)
     this.state = {
       activeSlideIndex: 0,
       activeSlideId: props.venue._id,
-      nextSlideId: '',
-      prevSlideId: ''
+      nextId: objectFunctions.keys.next(reducedVenues, props.venue._id),
+      prevId: objectFunctions.keys.prev(reducedVenues, props.venue._id)
     }
   }
   componentDidMount () {
@@ -48,9 +49,14 @@ class VenueSlider extends Component {
     this.setState({activeSlideIndex: index})
     const { venues, venue } = this.props
     const reducedVenues = reduceVenuesByRegion(venues, venues[venue._id].regionId)
+
     _.map(reducedVenues, venue => {
       if (venue.index === index) {
-        this.setState({activeSlideId: venue._id})
+        this.setState((prevState, props) => ({
+          activeSlideId: venue._id,
+          nextId: objectFunctions.keys.next(reducedVenues, venue._id),
+          prevId: objectFunctions.keys.prev(reducedVenues, venue._id)
+        }))
       }
     })
     // const { venue } = this.state.sliderItems[this.state.activeSlide].props
@@ -76,6 +82,8 @@ class VenueSlider extends Component {
           key={id}
           venue={venue}
           activeId={this.state.activeSlideId}
+          nextId={this.state.nextId}
+          prevId={this.state.prevId}
           history={this.props.history}
         />
       )
@@ -91,7 +99,6 @@ class VenueSlider extends Component {
           ref='slickSlider'
           afterChange={this.handleSliderChange}
           beforeChange={this.handleSliderBeforeChange}
-          renderedTime={new Date()}
         >
           {/* I WANT CHANGES TO BE SENT HERE: */}
           {sliderItems}
