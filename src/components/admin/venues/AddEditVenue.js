@@ -452,7 +452,7 @@ class venueForm extends Component {
       : _.has(this.props.initialValues, 'gData')
           ? this.props.initialValues.gData
           : {}
-    yMeta = _.map(yMetaObj, ([k, v]) => {
+    yMeta = _.map(yMetaObj, (v, k) => {
       const v2 = v === true ? 'true' : v === false ? 'false' : v
       const v3 = Array.isArray(v2) ? v2.join(', ') : v2
       const v4 = k === 'fetchedTime'

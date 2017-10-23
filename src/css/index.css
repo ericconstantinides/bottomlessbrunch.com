@@ -2834,6 +2834,9 @@ button {
 .AddEdit__yMeta div {
   margin-bottom: 0.25em; }
 
+.AddEdit__map-container .MapItem__marker {
+  transform: translateY(-100%); }
+
 .embellish {
   font-weight: bold;
   font-size: 150%;

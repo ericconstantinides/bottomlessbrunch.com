@@ -45,7 +45,7 @@ class ListRegions extends Component {
   }
   render () {
     return (
-      <div className='AdminRegions container'>
+      <div className='AdminRegions site-container'>
         <Link to='/admin/regions/add' className='btn btn-sm btn-primary'>
           Add Region
         </Link>
