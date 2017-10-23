@@ -22,20 +22,10 @@ class VenueSlider extends Component {
     }
   }
   componentDidMount () {
-    console.log('VenueSlider: componentDidMount ()', this.state.activeSlideId)
-
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
   }
-  // shouldComponentUpdate (nextProps, nextState) {
-    // return false
-  // }
-  componentWillMount() {
-
-  }
-  
   componentWillUnmount () {
-    console.log('VenueSlider: componentDidUnmount ()')
     // unset the venueUI:
     this.props.unsetUiVenue()
     this.props.removeUiAppClass(['App--VenueSlider'])
@@ -57,22 +47,16 @@ class VenueSlider extends Component {
           nextId: objectFunctions.keys.next(reducedVenues, venue._id),
           prevId: objectFunctions.keys.prev(reducedVenues, venue._id)
         }))
+        const activeVenue = reducedVenues[venue._id]
+        this.props.history.push(`/${this.props.regionSlug}/${activeVenue.slug}`)
+        this.props.setUiVenue(this.state.activeSlideId)
       }
     })
-    // const { venue } = this.state.sliderItems[this.state.activeSlide].props
-    // console.log('slider changed to index:', this.state.activeSlide)
-    // console.log('details:', this.state.sliderItems[this.state.activeSlide].props.venue.slug)
-    // need to update the slug here:
-    // this.props.history.push(`/${this.props.regionSlug}/${venue.slug}`)
-
-    // this.props.setUiVenue(venue._id)
   }
   handleShare = service => event => {
     console.log(service)
   }
   render () {
-    console.log(this.state.activeSlideId)
-    // console.log('VenueSlider: render() @', new Date())
     const { venues, venueId } = this.props
     // reduce the venues by region to get all your slider items!
     const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)

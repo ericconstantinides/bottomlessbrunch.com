@@ -40,7 +40,6 @@ class VenueSliderItem extends Component {
     }
   }
   render () {
-    console.log(this.props)
     const { venue } = this.props
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
@@ -66,7 +65,6 @@ class VenueSliderItem extends Component {
         }) +
         ')'
     }
-    // console.log(venue.name)
     const funTimes = compileDays(
       venue.funTimes,
       'Bottomless Brunch',
@@ -105,8 +103,6 @@ class VenueSliderItem extends Component {
           style={{ backgroundImage: bgStyle }}
         >
           <h1 className='VenueSliderItem__title'>{venue.name}</h1>
-          <p style={{ color: 'white' }}>{venue._id}</p>
-          <p style={{ color: 'white' }}>{this.props.activeId}</p>
           <h2 className='VenueSliderItem__sub-title'>{displayHood}</h2>
           <div className='VenueSliderItem__ratings'>
             {venue.googlePlacesData &&
