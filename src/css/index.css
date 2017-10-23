@@ -2392,7 +2392,11 @@ body.body--MapPage #root,
   height: 100%;
   position: relative;
   padding: 1em;
-  z-index: 1; }
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll; }
 
 .VenueSliderItem__bg {
   position: absolute;

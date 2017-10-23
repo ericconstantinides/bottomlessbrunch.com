@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Star from 'react-stars'
 import { ShareButtons, generateShareIcon } from 'react-share'
-// import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
+import * as actions from '../../actions'
 import { SITE_DOMAIN } from '../../config'
 import {
   roundHalf,
@@ -11,13 +12,37 @@ import {
 } from '../../lib/myHelpers'
 
 class VenueSliderItem extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isActive: false
+    }
+  }
   // shouldComponentUpdate (nextProps, nextState) {
-  //   return false
+    // return false
   // }
+  componentWillMount () {
+    if (this.props.activeId === this.props.venue._id) {
+      this.props.fetchGooglePlacesVenueDetail(this.props.venue)
+    }
+  }
+  componentWillUnmount () {
+    console.log('VenueSliderItem: componentWillUnmount ()')
+  }
+  componentWillReceiveProps (nextProps) {
+    // THIS GETS CALLED A FUCKING SHITLOAD
+    // console.log('VenueSliderITEM: componentWillReceiveProps: ', nextProps.ui.venueOpenId)
+  }
+
   componentDidUpdate (prevProps, prevState) {
-    console.log('VenueSliderItem: componentDidUpdate()')
+    // console.log('VenueSliderItem: componentDidUpdate()')
+    // console.log(this.props.ui.venueOpenId)
+    if (this.props.activeId === this.props.venue._id) {
+      this.props.fetchGooglePlacesVenueDetail(this.props.venue)
+    }
   }
   render () {
+    console.log('VenueSliderItem: render()')
     const { venue } = this.props
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
@@ -61,7 +86,6 @@ class VenueSliderItem extends Component {
     const { FacebookShareButton, TwitterShareButton } = ShareButtons
     const FacebookIcon = generateShareIcon('facebook')
     const TwitterIcon = generateShareIcon('twitter')
-    console.log('VenueSliderItem: render()')
     return (
       <div className='VenueSliderItem slick-slide'>
         <div className='VenueSliderItem__inner1'>
@@ -71,6 +95,8 @@ class VenueSliderItem extends Component {
               style={{ backgroundImage: bgStyle }}
             />
             <h1 className='VenueSliderItem__title'>{venue.name}</h1>
+            <p style={{color: 'white'}}>{venue._id}</p>
+            <p style={{color: 'white'}}>{this.props.activeId}</p>
             <h2 className='VenueSliderItem__sub-title'>{displayHood}</h2>
             <div className='VenueSliderItem__ratings'>
               {venue.googlePlacesData &&
@@ -227,4 +253,8 @@ class VenueSliderItem extends Component {
   }
 }
 
-export default VenueSliderItem
+function mapStateToProps ({ ui }) {
+  return { ui }
+}
+
+export default connect(mapStateToProps, actions)(VenueSliderItem)

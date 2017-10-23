@@ -11,66 +11,73 @@ import * as actions from '../../actions'
 import VenueSliderItem from './VenueSliderItem'
 
 class VenueSlider extends Component {
-  constructor () {
+  constructor (props) {
     super()
     this.state = {
-      activeSlide: 0,
-      sliderItems: []
+      activeSlideIndex: 0,
+      activeSlideId: props.venue._id
     }
   }
   componentDidMount () {
-    // set the venueUI:
-    this.props.setUiVenue(this.props.venue._id)
-    // get the venue detail
-    this.props.fetchGooglePlacesVenueDetail(this.props.venue)
+    console.log('VenueSlider: componentDidMount ()')
 
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
   }
-  shouldComponentUpdate (nextProps, nextState) {
-    return false
-  }
+  // shouldComponentUpdate (nextProps, nextState) {
+    // return false
+  // }
   componentWillMount() {
-    const { venues, venueId } = this.props
-    // reduce the venues by region to get all your slider items!
-    const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)
-    let index = 0
-    const sliderItems = _.map(reducedVenues, (venue, id) => {
-      // get the initial slide for the slider:
-      if (id === this.props.venue._id) {
-        this.setState({activeSlide: index})
-      }
-      index++
-      return (
-        <VenueSliderItem
-          key={id}
-          venue={venue}
-          history={this.props.history}
-        />
-      )
-    })
 
-    this.setState({sliderItems})
   }
   
   componentWillUnmount () {
+    console.log('VenueSlider: componentDidUnmount ()')
     // unset the venueUI:
     this.props.unsetUiVenue()
     this.props.removeUiAppClass(['App--VenueSlider'])
     this.props.addUiAppClass(['App--MapPage'])
   }
+  handleSliderBeforeChange = (index) => {
+    console.log('pre index:', index)
+  }
   handleSliderChange = (index) => {
-    this.setState({activeSlide: index})
-    console.log('slider changed to index:', this.state.activeSlide)
-    console.log('details:', this.state.sliderItems[this.state.activeSlide].props.venue.slug)
-    this.props.history.push(`/${this.props.regionSlug}/${this.state.sliderItems[this.state.activeSlide].props.venue.slug}`)
+    console.log('post index:', index)
+    this.setState({activeSlideIndex: index})
+    const { venues, venue } = this.props
+    const reducedVenues = reduceVenuesByRegion(venues, venues[venue._id].regionId)
+    _.map(reducedVenues, venue => {
+      if (venue.index === index) {
+        this.setState({activeSlideId: venue._id})
+      }
+    })
+    // const { venue } = this.state.sliderItems[this.state.activeSlide].props
+    // console.log('slider changed to index:', this.state.activeSlide)
+    // console.log('details:', this.state.sliderItems[this.state.activeSlide].props.venue.slug)
     // need to update the slug here:
+    // this.props.history.push(`/${this.props.regionSlug}/${venue.slug}`)
+
+    // this.props.setUiVenue(venue._id)
   }
   handleShare = service => event => {
     console.log(service)
   }
   render () {
-    console.log('VenueSlider: render() @', new Date())
+    console.log(this.state.activeSlideId)
+    // console.log('VenueSlider: render() @', new Date())
+    const { venues, venueId } = this.props
+    // reduce the venues by region to get all your slider items!
+    const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)
+    const sliderItems = _.map(reducedVenues, (venue, id) => {
+      return (
+        <VenueSliderItem
+          key={id}
+          venue={venue}
+          activeId={this.state.activeSlideId}
+          history={this.props.history}
+        />
+      )
+    })
     return (
       <div className='VenueSlider'>
         <Link to={`/${this.props.regionSlug}`} className='VenueSlider__close'>
@@ -78,11 +85,14 @@ class VenueSlider extends Component {
         </Link>
         <Slider
           {...SLIDER_SETTINGS}
-          initialSlide={this.state.activeSlide}
+          initialSlide={reducedVenues[this.props.venue._id].index}
           ref='slickSlider'
           afterChange={this.handleSliderChange}
+          beforeChange={this.handleSliderBeforeChange}
+          renderedTime={new Date()}
         >
-          {this.state.sliderItems}
+          {/* I WANT CHANGES TO BE SENT HERE: */}
+          {sliderItems}
         </Slider>
       </div>
     )

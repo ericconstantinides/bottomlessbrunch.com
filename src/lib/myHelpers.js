@@ -12,7 +12,11 @@ export function reduceVenuesByRegion (venues, regionId) {
   const reduced = _.filter(venues, venue => {
     if (venue.regionId === regionId && !venue.unpublish) return venue
   })
-  return _.mapKeys(reduced, '_id')
+  const reducedWithIndex = reduced.map((venue, index) => {
+    venue.index = index
+    return venue
+  })
+  return _.mapKeys(reducedWithIndex, '_id')
 }
 
 /**

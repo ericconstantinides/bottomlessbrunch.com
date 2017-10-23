@@ -53,6 +53,10 @@
   position: relative;
   padding: 1em;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
 }
 .VenueSliderItem__inner1,
 .VenueSliderItem__inner2 {
