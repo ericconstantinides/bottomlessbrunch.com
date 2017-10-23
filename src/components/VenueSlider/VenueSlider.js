@@ -15,11 +15,13 @@ class VenueSlider extends Component {
     super()
     this.state = {
       activeSlideIndex: 0,
-      activeSlideId: props.venue._id
+      activeSlideId: props.venue._id,
+      nextSlideId: '',
+      prevSlideId: ''
     }
   }
   componentDidMount () {
-    console.log('VenueSlider: componentDidMount ()')
+    console.log('VenueSlider: componentDidMount ()', this.state.activeSlideId)
 
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])

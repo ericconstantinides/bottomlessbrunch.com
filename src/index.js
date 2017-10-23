@@ -44,7 +44,7 @@ ReactDOM.render(
 // registerServiceWorker()
 
 // Initialize viewportUnitsBuggyfill
-viewportUnitsBuggyfill.init()
+// viewportUnitsBuggyfill.init()
 // Also hook viewportUnitsBuggyfill to resize event (if it was initialized)
 // if (document.getElementById('patched-viewport')) {
 //   window.addEventListener('resize', viewportUnitsBuggyfill.refresh, true)

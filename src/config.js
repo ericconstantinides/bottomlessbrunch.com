@@ -57,7 +57,7 @@ export const PAD_DEGREES = 0.0125
 
 export const SLIDER_SETTINGS = {
   arrows: true,
-  infinite: false,
+  infinite: true,
   centerMode: true,
   slidesToShow: 1,
   // initialSlide: 0,
