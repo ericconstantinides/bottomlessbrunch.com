@@ -2390,6 +2390,8 @@ body.body--MapPage #root,
   @media only screen and (max-width: 620px) {
     .VenueSliderItem {
       width: calc(100vw - 20px); } }
+  .VenueSliderItem.is-active .VenueSliderItem__inner > * {
+    opacity: 1; }
 
 .VenueSliderItem__inner {
   height: 100%;
@@ -2451,7 +2453,7 @@ body.body--MapPage #root,
       max-width: 100%; } }
 
 .VenueSliderItem__ratings {
-  margin-bottom: 1.5em; }
+  margin-bottom: 1em; }
 
 .VenueSliderItem__top-meta,
 .VenueSliderItem__ratings {

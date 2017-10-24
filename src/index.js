@@ -6,7 +6,7 @@ import reduxThunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 // allows us to run 100vh in safari:
-import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
+// import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 
 import reducers from './reducers' // Or wherever you keep your reducers
 

@@ -9,6 +9,9 @@ import { reduceVenuesByRegion, objectFunctions } from '../../lib/myHelpers'
 import { SLIDER_SETTINGS } from '../../config'
 import * as actions from '../../actions'
 import VenueSliderItem from './VenueSliderItem'
+let mounted = 1
+let updated = 1
+let unmounted = 1
 
 class VenueSlider extends Component {
   constructor (props) {
@@ -22,24 +25,32 @@ class VenueSlider extends Component {
     }
   }
   componentDidMount () {
+    console.log('slider: MOUNTED:', mounted++)
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
   }
+  // shouldComponentUpdate (nextProps, nextState) {
+    // return false
+  // }
+  
+  componentDidUpdate (prevProps, prevState) {
+    // console.log('slider: UPDATED:', updated++)
+  }
   componentWillUnmount () {
     // unset the venueUI:
+    console.log('slider: UNMOUNTED:', unmounted++)
     this.props.unsetUiVenue()
     this.props.removeUiAppClass(['App--VenueSlider'])
     this.props.addUiAppClass(['App--MapPage'])
   }
-  handleSliderBeforeChange = (index) => {
-    console.log('pre index:', index)
+  handleSliderBeforeChange = (prevIndex, index) => {
+
   }
   handleSliderChange = (index) => {
-    console.log('post index:', index)
+    // console.log('post index:', index)
     this.setState({activeSlideIndex: index})
     const { venues, venue } = this.props
     const reducedVenues = reduceVenuesByRegion(venues, venues[venue._id].regionId)
-
     _.map(reducedVenues, venue => {
       if (venue.index === index) {
         this.setState((prevState, props) => ({
@@ -47,8 +58,8 @@ class VenueSlider extends Component {
           nextId: objectFunctions.keys.next(reducedVenues, venue._id),
           prevId: objectFunctions.keys.prev(reducedVenues, venue._id)
         }))
-        const activeVenue = reducedVenues[venue._id]
-        this.props.history.push(`/${this.props.regionSlug}/${activeVenue.slug}`)
+        // const activeVenue = reducedVenues[venue._id]
+        // this.props.history.push(`/${this.props.regionSlug}/${activeVenue.slug}`)
         this.props.setUiVenue(this.state.activeSlideId)
       }
     })
@@ -61,6 +72,10 @@ class VenueSlider extends Component {
     // reduce the venues by region to get all your slider items!
     const reducedVenues = reduceVenuesByRegion(venues, venues[venueId].regionId)
     const sliderItems = _.map(reducedVenues, (venue, id) => {
+      // MAKE THIS SMARTER
+      // ADD isActive={true/false}
+      // ADD isNext={true/false}
+      // ADD isPrev={true/false}
       return (
         <VenueSliderItem
           key={id}
@@ -69,6 +84,9 @@ class VenueSlider extends Component {
           nextId={this.state.nextId}
           prevId={this.state.prevId}
           history={this.props.history}
+          isActive={id === this.state.activeSlideId}
+          isNext={id === this.state.nextId}
+          isPrev={id === this.state.prevId}
         />
       )
     })

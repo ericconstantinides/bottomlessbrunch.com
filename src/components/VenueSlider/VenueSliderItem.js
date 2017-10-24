@@ -2,50 +2,67 @@ import React, { Component } from 'react'
 import Star from 'react-stars'
 import { ShareButtons, generateShareIcon } from 'react-share'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import cx from 'classnames'
 
 import * as actions from '../../actions'
 import { SITE_DOMAIN } from '../../config'
 import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
+let mounted = 1
+let updated = 1
+let unmounted = 1
+let rendered = 1
 
 class VenueSliderItem extends Component {
   constructor (props) {
     super(props)
     this.state = {
       fetched: false,
-      isActive: false
+      fetching: false,
+      isActive: false,
+      isUpcoming: false
     }
   }
+  componentDidMount () {
+    console.log('Item: MOUNTED:', mounted++)
+    if (this.props.isActive || this.props.isNext || this.props.isPrev) {
+      this.props.fetchGooglePlacesVenueDetail(this.props.venue)
+      this.setState({ fetching: true })
+      if (this.props.isActive) {
+        this.setState({ isActive: true })
+      }
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (!_.isEmpty(nextProps.venue.googlePlacesData)) {
+      this.setState({ fetched: true })
+    } else if ((nextProps.isPrev || nextProps.isNext) && !this.state.fetching) {
+      this.props.fetchGooglePlacesVenueDetail(nextProps.venue)
+      this.setState({ fetching: true })
+    }
+    this.setState({ isActive: nextProps.isActive })
+  }
+
   shouldComponentUpdate (nextProps, nextState) {
     if (
-      nextProps.venue._id === nextProps.activeId ||
-      nextProps.venue._id === nextProps.nextId ||
-      nextProps.venue._id === nextProps.prevId
+      nextState.fetched !== this.state.fetched ||
+      nextState.isActive !== this.state.isActive
     ) {
       return true
     }
     return false
   }
-  componentWillMount () {
-    this.fetchData()
-  }
   componentDidUpdate (prevProps, prevState) {
-    this.fetchData()
+    console.log('Item: UPDATED:', updated++)
   }
-  fetchData () {
-    if (
-      !this.state.fetched &&
-      (this.props.venue._id === this.props.activeId ||
-        this.props.venue._id === this.props.nextId ||
-        this.props.venue._id === this.props.prevId)
-    ) {
-      this.setState({ fetched: true })
-      this.props.fetchGooglePlacesVenueDetail(this.props.venue)
-    }
+
+  componentWillUnmount () {
+    console.log('Item: UNMOUNTED:', unmounted++)
   }
+
   render () {
+    console.log('Item: RENDERED:', rendered++)
     const { venue } = this.props
-    const isActive = this.props.venue._id === this.props.activeId
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
     if (!venue.googlePlacesData) venue.googlePlacesData = {}
@@ -94,7 +111,7 @@ class VenueSliderItem extends Component {
     const TwitterIcon = generateShareIcon('twitter')
     if (!this.state.fetched) {
       return (
-        <article className='VenueSliderItem slick-slide'>
+        <article className='VenueSliderItem slick-slide not-active'>
           <div className='VenueSliderItem__inner'>
             <div className='VenueSliderItem__content'>
               Loading...
@@ -106,8 +123,8 @@ class VenueSliderItem extends Component {
     return (
       <article
         className={cx('VenueSliderItem', 'slick-slide', {
-          'is-active': isActive,
-          'not-active': !isActive
+          'is-active': this.props.isActive,
+          'not-active': !this.props.isActive
         })}
       >
         <div

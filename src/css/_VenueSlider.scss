@@ -2,6 +2,7 @@
   filter: saturate(0.25) opacity(0.65);
 }
 $venueSliderItemSidePadding: 2vw;
+
 .VenueSlider {
   background: rgba(0,0,0,0.5);
   position: absolute;
@@ -42,7 +43,13 @@ $venueSliderItemSidePadding: 2vw;
   @media only screen and (max-width: 620px) {
     width: calc(100vw - 20px);
   }
-  
+  .VenueSliderItem__inner > * {
+    // transition: 0.15s;
+    // opacity: 0;
+  }
+  &.is-active .VenueSliderItem__inner > * {
+    opacity: 1;
+  }
 }
 .VenueSliderItem__inner {
   height: 100%;
@@ -106,7 +113,7 @@ $venueSliderItemSidePadding: 2vw;
   }
 }
 .VenueSliderItem__ratings {
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
 
 .VenueSliderItem__top-meta,
