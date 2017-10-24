@@ -2,7 +2,7 @@ import React from 'react'
 
 const Marker = () => {
   return (
-    <div class='VenueTeaser__marker MapItem__marker' />
+    <div className='VenueTeaser__marker MapItem__marker' />
   )
 }
 

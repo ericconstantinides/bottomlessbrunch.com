@@ -10,7 +10,7 @@ import { SLIDER_SETTINGS } from '../../config'
 import * as actions from '../../actions'
 import VenueSliderItem from './VenueSliderItem'
 let mounted = 1
-let updated = 1
+// let updated = 1
 let unmounted = 1
 
 class VenueSlider extends Component {

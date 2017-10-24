@@ -14,7 +14,6 @@ const MetaData = ({
   numOfVenues
 }) => {
   let pageTitle
-  console.log(path)
   const parsedHistory = parsePath(path)
   if (parsedHistory[0] === 'admin') {
     pageTitle = `${parsedHistory.join(' | ').toUpperCase()} | Bottomless Brunch`
