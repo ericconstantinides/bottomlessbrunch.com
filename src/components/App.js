@@ -95,7 +95,7 @@ class App extends Component {
       <div className={cx('App', this.props.ui.appClass)}>
         <Router history={history}>
           <div>
-            <MetaData path={history.location.pathname} {...this.props.ui} />
+            <MetaData venues={this.props.venues} path={history.location.pathname} {...this.props.ui} />
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
             {venueRoutes}

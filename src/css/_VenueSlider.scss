@@ -1,6 +1,7 @@
 .App--VenueSlider .MapPage__container {
   filter: saturate(0.25) opacity(0.65);
 }
+$venueSliderItemSidePadding: 2vw;
 .VenueSlider {
   background: rgba(0,0,0,0.5);
   position: absolute;
@@ -44,21 +45,28 @@
   
 }
 .VenueSliderItem__inner {
-  border-radius: 4px;
-  background: #333333;
-
   height: 100%;
   position: relative;
-  padding: 4vw 2vw;
   z-index: 1;
+  display: flex;
+  flex-flow: column;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+
+  border-radius: 4px;
+  padding: 4vw $venueSliderItemSidePadding;
 
   background-color: rgba(black, 0.65);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center center;
-
+  // vertical center it if there's room:
+  > *:first-child { margin-top: auto; }
+  > *:last-child { margin-bottom: auto; }
+}
+.VenueSliderItem__content {
+  margin: 0 auto;
+  max-width: 800px;
 }
 .VenueSliderItem__title {
   text-align: center;
@@ -79,6 +87,7 @@
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75);
   text-transform: uppercase;
   padding: 0.4em 0.5em;
+  margin-bottom: 0.75em;
 }
 .VenueSliderItem__day {
   margin-bottom: 0;
@@ -86,16 +95,23 @@
 .VenueSliderItem__left-col {
   padding: 1em 1.7em;
 }
-
-.VenueSliderItem__top-meta,
-.VenueSliderItem__ratings {
-  max-width: 100%;
-  display: flex;
-  max-width: 550px;
-  margin: 0 auto 1.5em;
+.VenueSliderItem__ratings-and-hours {
+  // max-width: 550px;
+  margin: 0 auto 1em;
+  background: rgba(0,0,0,0.25);
+  padding: 0.75em 0.5em;
+  border-radius: 4px;
   @media only screen and (max-width: 550px) {
     max-width: 100%
   }
+}
+.VenueSliderItem__ratings {
+  margin-bottom: 1.5em;
+}
+
+.VenueSliderItem__top-meta,
+.VenueSliderItem__ratings {
+  display: flex;
 
 }
 .VenueSliderItem__hours,
@@ -170,6 +186,7 @@
   font-family: 'Open Sans Condensed', sans-serif;
   color: #f45a26;
   font-weight: bold;
+  margin-bottom: 0.25em;
 }
 .VenueSliderItem__middle-meta-title {
   font-size: 1.25em;
@@ -207,7 +224,7 @@
 
 .VenueSliderItem__image-container {
   height: 150px;
-  width: 100%;
+  // width: 100%;
   display: flex;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
@@ -215,6 +232,8 @@
   border-top: 1px solid #bc8940;
   border-bottom: 1px solid #bc8940;
   padding: 0.5em 0.25em;
+  margin-left: ($venueSliderItemSidePadding * -1);
+  margin-right: ($venueSliderItemSidePadding * -1);
 }
 .VenueSliderItem__image {
   display: block;

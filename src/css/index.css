@@ -2392,18 +2392,27 @@ body.body--MapPage #root,
       width: calc(100vw - 20px); } }
 
 .VenueSliderItem__inner {
-  border-radius: 4px;
-  background: #333333;
   height: 100%;
   position: relative;
-  padding: 4vw 2vw;
   z-index: 1;
+  display: flex;
+  flex-flow: column;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  padding: 4vw 2vw;
   background-color: rgba(0, 0, 0, 0.65);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center center; }
+  .VenueSliderItem__inner > *:first-child {
+    margin-top: auto; }
+  .VenueSliderItem__inner > *:last-child {
+    margin-bottom: auto; }
+
+.VenueSliderItem__content {
+  margin: 0 auto;
+  max-width: 800px; }
 
 .VenueSliderItem__title {
   text-align: center;
@@ -2423,7 +2432,8 @@ body.body--MapPage #root,
   font-size: 1.05em;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75);
   text-transform: uppercase;
-  padding: 0.4em 0.5em; }
+  padding: 0.4em 0.5em;
+  margin-bottom: 0.75em; }
 
 .VenueSliderItem__day {
   margin-bottom: 0; }
@@ -2431,16 +2441,21 @@ body.body--MapPage #root,
 .VenueSliderItem__left-col {
   padding: 1em 1.7em; }
 
+.VenueSliderItem__ratings-and-hours {
+  margin: 0 auto 1em;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.75em 0.5em;
+  border-radius: 4px; }
+  @media only screen and (max-width: 550px) {
+    .VenueSliderItem__ratings-and-hours {
+      max-width: 100%; } }
+
+.VenueSliderItem__ratings {
+  margin-bottom: 1.5em; }
+
 .VenueSliderItem__top-meta,
 .VenueSliderItem__ratings {
-  max-width: 100%;
-  display: flex;
-  max-width: 550px;
-  margin: 0 auto 1.5em; }
-  @media only screen and (max-width: 550px) {
-    .VenueSliderItem__top-meta,
-    .VenueSliderItem__ratings {
-      max-width: 100%; } }
+  display: flex; }
 
 .VenueSliderItem__hours,
 .VenueSliderItem__address,
@@ -2512,7 +2527,8 @@ body.body--MapPage #root,
 .VenueSliderItem__middle-title {
   font-family: 'Open Sans Condensed', sans-serif;
   color: #f45a26;
-  font-weight: bold; }
+  font-weight: bold;
+  margin-bottom: 0.25em; }
 
 .VenueSliderItem__middle-meta-title {
   font-size: 1.25em;
@@ -2547,14 +2563,15 @@ body.body--MapPage #root,
 
 .VenueSliderItem__image-container {
   height: 150px;
-  width: 100%;
   display: flex;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   background: rgba(0, 0, 0, 0.5);
   border-top: 1px solid #bc8940;
   border-bottom: 1px solid #bc8940;
-  padding: 0.5em 0.25em; }
+  padding: 0.5em 0.25em;
+  margin-left: -2vw;
+  margin-right: -2vw; }
 
 .VenueSliderItem__image {
   display: block;

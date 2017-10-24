@@ -1,21 +1,30 @@
 import React from 'react'
 import Helmet from 'react-helmet'
+import _ from 'lodash'
 
 import { SITE_NAME, SITE_SLOGAN, SITE_DOMAIN, SITE_IMAGE } from '../../config'
 
-const MetaData = ({ region, regionName, regionState, venueOpenId, venueName, path, numOfVenues }) => {
-  const pageTitle = region && venueOpenId
-    ? `${venueName} in ${regionName} for Bottomless Brunch` // venue
-    : region
-        ? `${regionName} Bottomless Brunch & Mimosas Locations` // region
+const MetaData = ({
+  activeRegion,
+  venueOpenId,
+  venues,
+  path,
+  numOfVenues
+}) => {
+  const venueName = venueOpenId && venues ? venues[venueOpenId].name : ''
+  const pageTitle = !_.isEmpty(activeRegion) && venueOpenId
+    ? `${venueName} in ${activeRegion.name} has Bottomless Brunch` // venue
+    : !_.isEmpty(activeRegion)
+        ? `${activeRegion.name} Bottomless Brunch & Bottomless Mimosas` // region
         : `${SITE_NAME}: ${SITE_SLOGAN}` // homepage
   let description
-  if (region && venueOpenId) {
-    description = `Check out {$venueName} in ${regionName}`
-  } else if (region) {
-    description = `Check out these ${numOfVenues} places for Bottomless Brunch and Mimosas in ${regionName}, ${regionState}`
+  if (!_.isEmpty(activeRegion) && venueOpenId) {
+    description = `Check out {$venueOpenId} in ${activeRegion.name}`
+  } else if (!_.isEmpty(activeRegion)) {
+    description = `Check out these ${numOfVenues} places for Bottomless Brunch and Mimosas in ${activeRegion.name}, ${activeRegion.state}`
   } else {
-    description = 'Check out Bottomless Brunch. Your guide to all the best Bottomless Mimosas and everything in between'
+    description =
+      'Check out Bottomless Brunch. Your guide to all the best Bottomless Mimosas and everything in between'
   }
   return (
     <Helmet>

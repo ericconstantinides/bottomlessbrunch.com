@@ -25,10 +25,10 @@ export const usaMap = {
     sw: { lat: 22.410132469242768, lng: -126.1250427 }
   }
 }
-
+// this should ideally be done in the region:
 export const BRUNCH_TIMES = {
-  START: '10:00AM',
-  END: '3:00PM',
+  START: '11:00AM',
+  END: '4:00PM',
   DAYS: ['Saturday', 'Sunday']
 }
 
