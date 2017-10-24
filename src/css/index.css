@@ -2407,6 +2407,8 @@ body.body--MapPage #root,
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center center; }
+  .VenueSliderItem__inner > * {
+    flex: 0 0 auto; }
   .VenueSliderItem__inner > *:first-child {
     margin-top: auto; }
   .VenueSliderItem__inner > *:last-child {

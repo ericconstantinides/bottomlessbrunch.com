@@ -84,6 +84,7 @@ class VenueSlider extends Component {
           nextId={this.state.nextId}
           prevId={this.state.prevId}
           history={this.props.history}
+          regionSlug={this.props.regionSlug}
           isActive={id === this.state.activeSlideId}
           isNext={id === this.state.nextId}
           isPrev={id === this.state.prevId}

@@ -54,6 +54,12 @@ class VenueSliderItem extends Component {
   }
   componentDidUpdate (prevProps, prevState) {
     console.log('Item: UPDATED:', updated++)
+    if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
+      // this dismounts and mounts the whole slider but I suppose it's worth it:
+      this.props.history.push(
+        `/${this.props.regionSlug}/${this.props.venue.slug}`
+      )
+    }
   }
 
   componentWillUnmount () {

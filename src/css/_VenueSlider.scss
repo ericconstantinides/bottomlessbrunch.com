@@ -68,6 +68,7 @@ $venueSliderItemSidePadding: 2vw;
   background-size: cover;
   background-position: center center;
   // vertical center it if there's room:
+  > * { flex: 0 0 auto; }
   > *:first-child { margin-top: auto; }
   > *:last-child { margin-bottom: auto; }
 }
