@@ -360,14 +360,52 @@ html.touch .VenueSlider__arrow {
   // margin-left: -20px;
 }
 
-@media only screen and (max-width: $bp-medium-small) {
-  .VenueSliderItem {
-    font-size: 0.825em;
+.VenueSliderItem__image-container {
+  // pointer-events: none;
+}
+
+@media only screen and (max-width: $bp-medium + 1) {
+  .VenueSliderItem__content {
+    padding: 8vh 0;
   }
-  .VenueSliderItem__address-p,
-  .VenueSliderItem__hours-p {
-    font-size: 0.875em;
+  .VenueSliderItem__middle {
+    margin-bottom: 1em;
+  }
+  .VenueSliderItem__image-container {
+    flex-flow: row wrap;
+    overflow: visible;
+    height: auto;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    border: 1px solid #bc8940;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .VenueSliderItem__image {
+    width: calc(33.333% - 0.5em);
+    height: 150px;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+}
+@media only screen and (max-width: $bp-medium-small) {
+  .VenueSliderItem__image {
+    width: calc(50% - 0.5em);
+    height: 150px;
   }
 }
 
+@media only screen and (max-width: $bp-small) {
+  .VenueSliderItem__content {
+    width: 100%;
+  }
+  .VenueSliderItem__top-meta {
+    flex-flow: column;
+  }
+  .VenueSliderItem__address {
+    margin-bottom: 1em;
+  }
+}
 

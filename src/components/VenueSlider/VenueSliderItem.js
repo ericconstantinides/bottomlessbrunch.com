@@ -8,10 +8,10 @@ import cx from 'classnames'
 import * as actions from '../../actions'
 import { SITE_DOMAIN } from '../../config'
 import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
-let mounted = 1
-let updated = 1
-let unmounted = 1
-let rendered = 1
+// let mounted = 1
+// let updated = 1
+// let unmounted = 1
+// let rendered = 1
 
 class VenueSliderItem extends Component {
   constructor (props) {
@@ -24,7 +24,7 @@ class VenueSliderItem extends Component {
     }
   }
   componentDidMount () {
-    console.log('Item: MOUNTED:', mounted++)
+    // console.log('Item: MOUNTED:', mounted++)
     if (this.props.isActive || this.props.isNext || this.props.isPrev) {
       this.props.fetchGooglePlacesVenueDetail(this.props.venue)
       this.setState({ fetching: true })
@@ -53,7 +53,7 @@ class VenueSliderItem extends Component {
     return false
   }
   componentDidUpdate (prevProps, prevState) {
-    console.log('Item: UPDATED:', updated++)
+    // console.log('Item: UPDATED:', updated++)
     if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
       // this dismounts and mounts the whole slider but I suppose it's worth it:
       this.props.history.push(
@@ -63,11 +63,10 @@ class VenueSliderItem extends Component {
   }
 
   componentWillUnmount () {
-    console.log('Item: UNMOUNTED:', unmounted++)
+    // console.log('Item: UNMOUNTED:', unmounted++)
   }
-
   render () {
-    console.log('Item: RENDERED:', rendered++)
+    // console.log('Item: RENDERED:', rendered++)
     const { venue } = this.props
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
