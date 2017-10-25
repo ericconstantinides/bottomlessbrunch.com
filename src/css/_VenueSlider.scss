@@ -43,26 +43,6 @@ $venueSliderItemSidePadding: 2vw;
   @media only screen and (max-width: 620px) {
     width: calc(100vw - 20px);
   }
-  .VenueSliderItem__inner > * {
-    transition: opacity 0.5s;
-    opacity: 0;
-    // transform: translateY(100px)
-  }
-  // &.is-active .VenueSliderItem__inner > * {
-  //   opacity: 1;
-  // }
-}
-@for $i from 0 through 50 { // make a big number just in case
-  .VenueSlider [currentslide='#{$i}'] + .slick-list .slideNum-#{$i} {
-    .VenueSliderItem__inner {
-      background-color: rgba(black, 0.65);
-      > * {
-        opacity: 1;
-        transition: 1s;
-        // transform: translateY(0)
-       }
-    }  
-  }
 }
 
 .VenueSliderItem__inner {
@@ -77,15 +57,31 @@ $venueSliderItemSidePadding: 2vw;
   border-radius: 4px;
   padding: 4vw $venueSliderItemSidePadding;
 
-  transition: 0.5s;
   background-color: rgba(black, 0.8);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center center;
-  // vertical center it if there's room:
-  > * { flex: 0 0 auto; }
+
+  transition: 0.3s; // speed of the background changes
+  > * {
+    flex: 0 0 auto;
+    transition: opacity 0.5s; // speed back out
+    opacity: 0;
+  }
   > *:first-child { margin-top: auto; }
   > *:last-child { margin-bottom: auto; }
+}
+@for $i from 0 through 50 { // make a big number just in case
+  .VenueSlider [currentslide='#{$i}'] + .slick-list .slideNum-#{$i} {
+    .VenueSliderItem__inner {
+      background-color: rgba(black, 0.65);
+      > * {
+        opacity: 1;
+        transition: 0.75s; // speed in
+        // transform: translateY(0)
+       }
+    }  
+  }
 }
 .VenueSliderItem__content {
   margin: 0 auto;
@@ -402,8 +398,6 @@ html.touch .VenueSlider__arrow {
   margin-bottom: 0.25em;
   flex: 0 0 auto;
   object-fit: cover;
-}
-@media only screen and (max-width: $bp-medium + 1) {
 }
 @media only screen and (max-width: $bp-medium-small) {
   .VenueSliderItem__image {

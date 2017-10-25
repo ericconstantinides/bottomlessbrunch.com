@@ -110,19 +110,8 @@
     width: 40px;
   }
 }
-
+.App--VenueSlider,
 .App--MapPage {
-  // .Region__title {
-  //   text-shadow:
-  //     1px 1px 0px rgba(255,255,255, 0.35),
-  //     1px 0px 0px rgba(255,255,255, 0.35),
-  //     1px -1px 0px rgba(255,255,255, 0.35),
-  //     0px 1px 0px rgba(255,255,255, 0.35),
-  //     0px -1px 0px rgba(255,255,255, 0.35),
-  //     -1px 1px 0px rgba(255,255,255, 0.35),
-  //     -1px 0px 0px rgba(255,255,255, 0.35),
-  //     -1px -1px 0px rgba(255,255,255, 0.35);
-  // }
   @media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
     .Logo__title {
       font-size: 1.65em;
@@ -186,24 +175,6 @@
   }
 }
 
-.App--VenueSlider {
-  .Region__title {
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
-  }
-  .Logo__container {
-    margin-left: 0;
-    background: none;
-  }
-  .Logo__title {
-    color: white;
-    text-shadow: 2px 2px 1px rgba(black, 0.5);
-  }
-  @media only screen and (min-width: $bp-medium + 1) {
-    .Logo__title {
-      font-size: 1.75em;
-    }
-  }
-}
 @media only screen and (max-width: $bp-medium) {
   .Logo__title {
     font-size: 1.4em;
@@ -240,7 +211,7 @@
   .App--IntroPage & {
     line-height: 1.2;
   }
-  @media only screen and (max-width: $bp-medium + 1) {
+  @media only screen and (max-width: $bp-medium) {
     font-size: 0.825rem;
     .App--IntroPage & {
       font-size: 1rem;
