@@ -53,14 +53,14 @@ class VenueSliderItem extends Component {
     }
     return false
   }
-  componentDidUpdate (prevProps, prevState) {
+  // componentDidUpdate (prevProps, prevState) {
     // console.log('Item: UPDATED:', updated++)
-    if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
-      this.props.history.push(
-        `/${this.props.regionSlug}/${this.props.venues[this.props.venueId].slug}`
-      )
-    }
-  }
+    // if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
+    //   this.props.history.push(
+    //     `/${this.props.regionSlug}/${this.props.venues[this.props.venueId].slug}`
+    //   )
+    // }
+  // }
 
   componentWillUnmount () {
     // console.log('Item: UNMOUNTED:', unmounted++)

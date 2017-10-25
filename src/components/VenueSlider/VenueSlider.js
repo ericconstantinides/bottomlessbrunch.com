@@ -107,7 +107,7 @@ class VenueSlider extends Component {
           prevId: objectFunctions.keys.prev(this.props.ui.regionVenues, venue._id)
         }))
         // const activeVenue = reducedVenues[venue._id]
-        // this.props.history.push(`/${this.props.region.slug}/${venue.slug}`)
+        this.props.history.push(`/${this.props.region.slug}/${venue.slug}`)
         this.props.setUiVenue(
           this.state.openId,
           this.state.prevId,
