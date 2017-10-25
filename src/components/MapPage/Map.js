@@ -40,6 +40,12 @@ class Map extends Component {
       this.updateMapAndDrawer()
     }
   }
+  handleMapClick = props => {
+    // props = {x, y, lat, lng, event}
+    if (this.props.hoveredVenue) {
+      this.props.clearMarkers()
+    }
+  }
   updateMapAndDrawer = () => {
     const { width, height } = this.props.ui.browserSize
     let drawer
@@ -100,6 +106,7 @@ class Map extends Component {
         options={{ fullscreenControl: false }}
         onGoogleApiLoaded={this.mapLoaded}
         yesIWantToUseGoogleMapApiInternals
+        onClick={this.handleMapClick}
       >
         {_.map(this.props.venues, venue => (
           <VenueTeaser

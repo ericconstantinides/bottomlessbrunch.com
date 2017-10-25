@@ -105,6 +105,9 @@ class MapPage extends Component {
       return { hoveredVenue: venue._id }
     })
   }
+  clearMarkers = () => {
+    this.setState({hoveredVenue: ''})
+  }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
@@ -124,6 +127,7 @@ class MapPage extends Component {
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
             toggleMarkerClick={this.toggleMarkerClick}
+            clearMarkers={this.clearMarkers}
             hoveredVenue={this.state.hoveredVenue}
             containerElement={<div style={styles} />}
             mapElement={<div style={styles} />}
