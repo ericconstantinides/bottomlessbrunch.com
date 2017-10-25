@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import RegionSelect from '../../common/RegionSelect'
 import _ from 'lodash'
 import * as actions from '../../../actions'
 
 
-const AdminVenue = ({ _id, name, lat, lng, zoom, gData, handleDelete }) => {
+const AdminVenueTeaser = ({ _id, name, lat, lng, zoom, gData, handleDelete, currentRegion }) => {
   return (
     <div className='AdminVenue'>
       <hr />
@@ -35,31 +36,62 @@ const AdminVenue = ({ _id, name, lat, lng, zoom, gData, handleDelete }) => {
 }
 
 class ListVenues extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      region: ''
+    }
+  }
+  
   handleDelete = (_id, name) => event => {
     if (window.confirm(`Are you sure you want to delete "${name}"`)) {
       this.props.deleteVenue(_id, this.props.history)
     }
   }
+  handleSelectChange = selected => {
+    // this.props.setUiRegion(this.props.regions[selected.value])
+    this.setState({region: selected.value})
+    // this.props.history.replace(this.props.regions[selected.value].slug)
+  }
   render () {
+    const regionSelectOptions = _.map(this.props.regions, region => ({
+      value: region._id,
+      label: region.name
+    }))
+    regionSelectOptions.unshift({value: '', label: 'All Regions'})
     return (
       <div className='AdminVenues site-container'>
         <Link to='/admin/venues/add' className='btn btn-sm btn-success'>
           Add Venue
         </Link>
-        {_.map(this.props.venues, region => (
-          <AdminVenue
-            key={region._id}
-            {...region}
-            handleDelete={this.handleDelete}
-          />
-        ))}
+          {/* region={this.props.ui.activeRegion._id} */}
+        <RegionSelect
+          history={this.props.history}
+          handleChange={this.handleSelectChange}
+          options={regionSelectOptions}
+          className='Admin__RegionSelect'
+        />
+        {this.state.region &&
+          <h1>{this.props.regions[this.state.region].name}</h1>
+        }
+        {_.map(this.props.venues, venue => {
+          if (!this.state.region || this.state.region === venue.regionId) {
+            return (
+              <AdminVenueTeaser
+                key={venue._id}
+                {...venue}
+                handleDelete={this.handleDelete}
+              />
+            )
+          }
+        })}
       </div>
     )
   }
 }
 
-function mapStateToProps ({ venues }) {
-  return { venues }
+function mapStateToProps ({ venues, regions }) {
+  return { venues, regions }
 }
 
 export default connect(mapStateToProps, actions)(ListVenues)

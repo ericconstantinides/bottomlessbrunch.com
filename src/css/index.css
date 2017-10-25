@@ -2952,6 +2952,12 @@ button {
   font-weight: bold;
   text-transform: uppercase; }
 
+.Admin__RegionSelect .Select-menu-outer {
+  max-height: 100vh; }
+
+.Admin__RegionSelect .Select-menu {
+  max-height: calc(100vh - 2px); }
+
 .btn + .btn {
   margin-left: 0.375em; }
 

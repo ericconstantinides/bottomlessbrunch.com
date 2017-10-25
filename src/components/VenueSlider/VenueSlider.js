@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import Slider from 'react-slick'
-import { reduceVenuesByRegion, getVenueBySlug, objectFunctions } from '../../lib/myHelpers'
+import { getVenueBySlug, objectFunctions } from '../../lib/myHelpers'
 
 import { SLIDER_SETTINGS } from '../../config'
 import * as actions from '../../actions'
