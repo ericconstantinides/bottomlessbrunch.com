@@ -6,6 +6,8 @@ import _ from 'lodash'
 const RegionsModal = props => {
   const regions = _
     .chain(props.regions)
+    // only choose regions which have bounds
+    // (regions with venues are the only ones with bounds)
     .filter(region => region.bounds)
     .map(region => (
       <Link

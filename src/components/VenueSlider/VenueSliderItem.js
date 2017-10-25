@@ -25,19 +25,21 @@ class VenueSliderItem extends Component {
   }
   componentDidMount () {
     // console.log('Item: MOUNTED:', mounted++)
-    if (this.props.isActive || this.props.isNext || this.props.isPrev) {
-      this.props.fetchGooglePlacesVenueDetail(this.props.venue)
-      this.setState({ fetching: true })
-      if (this.props.isActive) {
-        this.setState({ isActive: true })
-      }
-    }
+    // if ((this.props.isActive || this.props.isNext || this.props.isPrev)) {
+    //   this.props.fetchGooglePlacesVenueDetail(this.props.venue)
+    //   this.setState({ fetching: true })
+    //   if (this.props.isActive) {
+    //     this.setState({ isActive: true })
+    //   }
+    // }
   }
   componentWillReceiveProps (nextProps) {
-    if (!_.isEmpty(nextProps.venue.googlePlacesData)) {
+    if (!_.isEmpty(nextProps.venues[nextProps.venueId].googlePlacesData)) {
       this.setState({ fetched: true })
-    } else if ((nextProps.isPrev || nextProps.isNext) && !this.state.fetching) {
-      this.props.fetchGooglePlacesVenueDetail(nextProps.venue)
+    } else if ((nextProps.isActive || nextProps.isPrev || nextProps.isNext) && !this.state.fetching) {
+      this.props.fetchGooglePlacesVenueDetail(
+        nextProps.venues[nextProps.venueId]
+      )
       this.setState({ fetching: true })
     }
     this.setState({ isActive: nextProps.isActive })
@@ -57,7 +59,7 @@ class VenueSliderItem extends Component {
     if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
       // this dismounts and mounts the whole slider but I suppose it's worth it:
       this.props.history.push(
-        `/${this.props.regionSlug}/${this.props.venue.slug}`
+        `/${this.props.regionSlug}/${this.props.venues[this.props.venueId].slug}`
       )
     }
   }
@@ -66,8 +68,11 @@ class VenueSliderItem extends Component {
     // console.log('Item: UNMOUNTED:', unmounted++)
   }
   render () {
+    if (_.isEmpty(this.props.venues)) {
+      return <div>waiting...</div>
+    }
     // console.log('Item: RENDERED:', rendered++)
-    const { venue } = this.props
+    const venue = this.props.venues[this.props.venueId]
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
     if (!venue.googlePlacesData) venue.googlePlacesData = {}
@@ -114,17 +119,17 @@ class VenueSliderItem extends Component {
     const { FacebookShareButton, TwitterShareButton } = ShareButtons
     const FacebookIcon = generateShareIcon('facebook')
     const TwitterIcon = generateShareIcon('twitter')
-    if (!this.state.fetched) {
-      return (
-        <article className='VenueSliderItem slick-slide not-active'>
-          <div className='VenueSliderItem__inner'>
-            <div className='VenueSliderItem__content'>
-              Loading...
-            </div>
-          </div>
-        </article>
-      )
-    }
+    // if (!this.props.isActive) {
+    //   return (
+    //     <article className='VenueSliderItem slick-slide not-active'>
+    //       <div className='VenueSliderItem__inner'>
+    //         <div className='VenueSliderItem__content'>
+    //           Loading...
+    //         </div>
+    //       </div>
+    //     </article>
+    //   )
+    // }
     return (
       <article
         className={cx('VenueSliderItem', 'slick-slide', {
@@ -296,8 +301,8 @@ class VenueSliderItem extends Component {
   }
 }
 
-function mapStateToProps ({ ui }) {
-  return { ui }
+function mapStateToProps ({ venues, ui }) {
+  return { venues, ui }
 }
 
 export default connect(mapStateToProps, actions)(VenueSliderItem)

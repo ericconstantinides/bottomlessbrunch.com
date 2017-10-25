@@ -1,5 +1,5 @@
 import constants from '../actions/types'
-import { parsePath } from '../lib/myHelpers'
+import { parsePath, reduceVenuesByRegion } from '../lib/myHelpers'
 
 export function fetchUiRegion (regionsArray, history) {
   const parsedHistory = parsePath(history.location.pathname)
@@ -49,16 +49,34 @@ export function unsetUiRegion () {
   }
 }
 
-export function setUiVenue (venueId) {
+export function setUiVenue (openId, prevId, nextId) {
   return {
     type: constants.UI_SET_VENUE,
-    payload: venueId
+    payload: {
+      openId, prevId, nextId
+    }
   }
 }
 
 export function unsetUiVenue () {
   return {
     type: constants.UI_UNSET_VENUE,
+    payload: null
+  }
+}
+
+export function setUiRegionVenues (venues, region) {
+  // get the reduced venues
+  const reducedVenues = reduceVenuesByRegion(venues, region._id)
+  return {
+    type: constants.UI_SET_REGION_VENUES,
+    payload: reducedVenues
+  }
+}
+
+export function unsetUiRegionVenues () {
+  return {
+    type: constants.UI_UNSET_REGION_VENUES,
     payload: null
   }
 }

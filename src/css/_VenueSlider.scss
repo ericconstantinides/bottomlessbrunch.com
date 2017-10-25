@@ -240,8 +240,8 @@ $venueSliderItemSidePadding: 2vw;
   border-top: 1px solid #bc8940;
   border-bottom: 1px solid #bc8940;
   padding: 0.5em 0.25em;
-  margin-left: ($venueSliderItemSidePadding * -1);
-  margin-right: ($venueSliderItemSidePadding * -1);
+  // margin-left: ($venueSliderItemSidePadding * -1);
+  // margin-right: ($venueSliderItemSidePadding * -1);
 }
 .VenueSliderItem__image {
   display: block;
@@ -364,31 +364,31 @@ html.touch .VenueSlider__arrow {
   // pointer-events: none;
 }
 
+.VenueSliderItem__content {
+  padding: 9vh 0;
+}
+.VenueSliderItem__middle {
+  margin-bottom: 1em;
+}
+.VenueSliderItem__image-container {
+  flex-flow: row wrap;
+  overflow: visible;
+  height: auto;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  border: 1px solid #bc8940;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.VenueSliderItem__image {
+  width: calc(33.333% - 0.5em);
+  height: 150px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  flex: 0 0 auto;
+  object-fit: cover;
+}
 @media only screen and (max-width: $bp-medium + 1) {
-  .VenueSliderItem__content {
-    padding: 8vh 0;
-  }
-  .VenueSliderItem__middle {
-    margin-bottom: 1em;
-  }
-  .VenueSliderItem__image-container {
-    flex-flow: row wrap;
-    overflow: visible;
-    height: auto;
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
-    border: 1px solid #bc8940;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-  .VenueSliderItem__image {
-    width: calc(33.333% - 0.5em);
-    height: 150px;
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-    flex: 0 0 auto;
-    object-fit: cover;
-  }
 }
 @media only screen and (max-width: $bp-medium-small) {
   .VenueSliderItem__image {

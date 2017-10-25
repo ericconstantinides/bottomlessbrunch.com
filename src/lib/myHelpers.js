@@ -19,6 +19,13 @@ export function reduceVenuesByRegion (venues, regionId) {
   return _.mapKeys(reducedWithIndex, '_id')
 }
 
+export function getVenueBySlug (venues, slug) {
+  const venue = _.filter(venues, venue => {
+    if (venue.slug === slug) return venue
+  })
+  return venue[0]
+}
+
 /**
  * Rounds the number to nearest half decimal
  * @param {Number} num

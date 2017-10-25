@@ -2579,9 +2579,7 @@ body.body--MapPage #root,
   background: rgba(0, 0, 0, 0.5);
   border-top: 1px solid #bc8940;
   border-bottom: 1px solid #bc8940;
-  padding: 0.5em 0.25em;
-  margin-left: -2vw;
-  margin-right: -2vw; }
+  padding: 0.5em 0.25em; }
 
 .VenueSliderItem__image {
   display: block;
@@ -2683,27 +2681,29 @@ html.touch .VenueSlider__arrow {
   right: auto;
   left: 3.25vw; }
 
-@media only screen and (max-width: 768px) {
-  .VenueSliderItem__content {
-    padding: 8vh 0; }
-  .VenueSliderItem__middle {
-    margin-bottom: 1em; }
-  .VenueSliderItem__image-container {
-    flex-flow: row wrap;
-    overflow: visible;
-    height: auto;
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
-    border: 1px solid #bc8940;
-    margin-left: 0 !important;
-    margin-right: 0 !important; }
-  .VenueSliderItem__image {
-    width: calc(33.333% - 0.5em);
-    height: 150px;
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-    flex: 0 0 auto;
-    object-fit: cover; } }
+.VenueSliderItem__content {
+  padding: 9vh 0; }
+
+.VenueSliderItem__middle {
+  margin-bottom: 1em; }
+
+.VenueSliderItem__image-container {
+  flex-flow: row wrap;
+  overflow: visible;
+  height: auto;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  border: 1px solid #bc8940;
+  margin-left: 0 !important;
+  margin-right: 0 !important; }
+
+.VenueSliderItem__image {
+  width: calc(33.333% - 0.5em);
+  height: 150px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  flex: 0 0 auto;
+  object-fit: cover; }
 
 @media only screen and (max-width: 600px) {
   .VenueSliderItem__image {

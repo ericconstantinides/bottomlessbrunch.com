@@ -16,9 +16,10 @@ import VenueSlider from './VenueSlider/VenueSlider'
 import Admin from './admin'
 import RegionsModal from './common/RegionsModal'
 
-import createHistory from 'history/createBrowserHistory'
+// import createHistory from 'history/createBrowserHistory'
 // Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory()
+// let rendered = 0
+
 
 class App extends Component {
   handleCloseRegionsModalClick = () => {
@@ -27,7 +28,7 @@ class App extends Component {
   componentDidMount () {
     // get the regions and the venues
     this.props.fetchRegions(
-      history,
+      this.props.history,
       // add a callback to fetchUiRegion using history
       this.props.fetchUiRegion
     )
@@ -39,6 +40,16 @@ class App extends Component {
       _.debounce(this.props.setUiBrowserSize, 300)
     )
   }
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   console.log(rendered++)
+  //   if (rendered <= 10) {
+  //     console.log('App Rendered')
+  //     return true
+  //   }
+  //   console.log('App NOT Rendered')
+  //   return false
+  // }
+  
   componentWillUnmount () {
     window.removeEventListener('resize', this.props.setUiBrowserSize)
   }
@@ -66,46 +77,46 @@ class App extends Component {
         render={props => <Region {...props} region={region} />}
       />
     ))
-    // create the Venue Routes:
-    let venueRoutes = null
-    if (!_.isEmpty(this.props.regions) && !_.isEmpty(this.props.venues)) {
-      venueRoutes = _.map(this.props.venues, venue => {
-        return (
+    let venueSliderRoutes
+    if (!_.isEmpty(this.props.regions)) {
+      venueSliderRoutes = _
+        .chain(this.props.regions)
+        // only choose regions which have bounds
+        // (regions with venues are the only ones with bounds)
+        .filter(region => region.bounds)
+        .map(region => (
           <Route
-            key={venue._id}
-            path={`/${this.props.regions[venue.regionId].slug}/${venue.slug}`}
-            render={props => {
-              // the {...props} give us history stuffs
-              return (
-                <VenueSlider
-                  {...props}
-                  venue={venue}
-                  venueId={venue._id}
-                  gpId={venue.gpId}
-                  regionSlug={this.props.regions[venue.regionId].slug}
-                />
-              )
-            }}
+            key={region._id}
+            path={`/${region.slug}/*`}
+            region={region}
+            history={this.props.history}
+            render={props => (
+              <VenueSlider
+                history={props.history}
+                match={props.match}
+                region={region}
+              />
+            )}
           />
-        )
-      })
+        ))
+        .value()
     }
-    const parsedHistory = parsePath(history.location.pathname)
+    const parsedHistory = parsePath(this.props.history.location.pathname)
     return (
       <div className={cx('App', this.props.ui.appClass)}>
-        <Router history={history}>
+        <Router history={this.props.history}>
           <div>
-            <MetaData venues={this.props.venues} path={history.location.pathname} {...this.props.ui} />
+            <MetaData venues={this.props.venues} path={this.props.history.location.pathname} {...this.props.ui} />
             {/* <Route exact path='/' component={MapPage} /> */}
             <Route path='/admin' render={props => <Admin {...props} />} />
-            {venueRoutes}
+            {venueSliderRoutes}
             {regionRoutes}
             {parsedHistory[0] !== 'admin' &&
               !_.isEmpty(this.props.ui.activeRegion) &&
-              <MapPage history={history} />}
+              <MapPage history={this.props.history} />}
             {parsedHistory[0] !== 'admin' &&
               _.isEmpty(this.props.ui.activeRegion) &&
-              <IntroPage history={history} />}
+              <IntroPage history={this.props.history} />}
             {this.props.ui.regionsModalActive &&
               <RegionsModal
                 regions={this.props.regions}
