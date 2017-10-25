@@ -44,13 +44,27 @@ $venueSliderItemSidePadding: 2vw;
     width: calc(100vw - 20px);
   }
   .VenueSliderItem__inner > * {
-    // transition: 0.15s;
-    // opacity: 0;
+    transition: opacity 0.5s;
+    opacity: 0;
+    // transform: translateY(100px)
   }
-  &.is-active .VenueSliderItem__inner > * {
-    opacity: 1;
+  // &.is-active .VenueSliderItem__inner > * {
+  //   opacity: 1;
+  // }
+}
+@for $i from 0 through 50 { // make a big number just in case
+  .VenueSlider [currentslide='#{$i}'] + .slick-list .slideNum-#{$i} {
+    .VenueSliderItem__inner {
+      background-color: rgba(black, 0.65);
+      > * {
+        opacity: 1;
+        transition: 1s;
+        // transform: translateY(0)
+       }
+    }  
   }
 }
+
 .VenueSliderItem__inner {
   height: 100%;
   position: relative;
@@ -63,7 +77,8 @@ $venueSliderItemSidePadding: 2vw;
   border-radius: 4px;
   padding: 4vw $venueSliderItemSidePadding;
 
-  background-color: rgba(black, 0.65);
+  transition: 0.5s;
+  background-color: rgba(black, 0.8);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center center;

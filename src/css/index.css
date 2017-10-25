@@ -340,11 +340,12 @@ a * {
 @media only screen and (max-width: 767px) {
   .App--MapPage .Logo__container {
     order: 1;
+    flex: 0 0 auto;
     margin: 0;
     background: rgba(255, 255, 255, 0.5);
     background: #f1f1f1;
     border-top: 1px solid #ddd;
-    height: 50px;
+    height: 56px;
     padding: 0.5em;
     display: flex;
     align-items: center;
@@ -361,13 +362,12 @@ a * {
     width: auto;
     height: 26px; }
   .App--MapPage .Logo__region-title {
-    padding-bottom: 0;
+    padding: 0;
     letter-spacing: 0;
-    font-size: 0.875em; } }
+    font-size: 0.95em;
+    height: 56px; } }
 
 @media only screen and (max-width: 600px) {
-  .App--MapPage .Logo__container {
-    height: 50px; }
   .App--MapPage .Logo__orange {
     height: 20px;
     margin: 0 0.25em 0 0; }
@@ -376,9 +376,9 @@ a * {
 
 @media only screen and (max-width: 480px) {
   .App--MapPage .Logo__image {
-    width: 100px; }
+    width: 120px; }
   .App--MapPage .Logo__region-title {
-    font-size: 0.75em; } }
+    font-size: 0.85em; } }
 
 .App--VenueSlider .Region__title {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); }
@@ -2396,8 +2396,315 @@ body.body--MapPage #root,
   @media only screen and (max-width: 620px) {
     .VenueSliderItem {
       width: calc(100vw - 20px); } }
-  .VenueSliderItem.is-active .VenueSliderItem__inner > * {
-    opacity: 1; }
+  .VenueSliderItem .VenueSliderItem__inner > * {
+    transition: opacity 0.5s;
+    opacity: 0; }
+
+.VenueSlider [currentslide='0'] + .slick-list .slideNum-0 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='0'] + .slick-list .slideNum-0 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='1'] + .slick-list .slideNum-1 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='1'] + .slick-list .slideNum-1 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='2'] + .slick-list .slideNum-2 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='2'] + .slick-list .slideNum-2 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='3'] + .slick-list .slideNum-3 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='3'] + .slick-list .slideNum-3 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='4'] + .slick-list .slideNum-4 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='4'] + .slick-list .slideNum-4 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='5'] + .slick-list .slideNum-5 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='5'] + .slick-list .slideNum-5 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='6'] + .slick-list .slideNum-6 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='6'] + .slick-list .slideNum-6 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='7'] + .slick-list .slideNum-7 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='7'] + .slick-list .slideNum-7 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='8'] + .slick-list .slideNum-8 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='8'] + .slick-list .slideNum-8 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='9'] + .slick-list .slideNum-9 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='9'] + .slick-list .slideNum-9 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='10'] + .slick-list .slideNum-10 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='10'] + .slick-list .slideNum-10 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='11'] + .slick-list .slideNum-11 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='11'] + .slick-list .slideNum-11 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='12'] + .slick-list .slideNum-12 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='12'] + .slick-list .slideNum-12 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='13'] + .slick-list .slideNum-13 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='13'] + .slick-list .slideNum-13 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='14'] + .slick-list .slideNum-14 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='14'] + .slick-list .slideNum-14 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='15'] + .slick-list .slideNum-15 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='15'] + .slick-list .slideNum-15 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='16'] + .slick-list .slideNum-16 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='16'] + .slick-list .slideNum-16 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='17'] + .slick-list .slideNum-17 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='17'] + .slick-list .slideNum-17 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='18'] + .slick-list .slideNum-18 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='18'] + .slick-list .slideNum-18 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='19'] + .slick-list .slideNum-19 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='19'] + .slick-list .slideNum-19 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='20'] + .slick-list .slideNum-20 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='20'] + .slick-list .slideNum-20 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='21'] + .slick-list .slideNum-21 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='21'] + .slick-list .slideNum-21 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='22'] + .slick-list .slideNum-22 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='22'] + .slick-list .slideNum-22 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='23'] + .slick-list .slideNum-23 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='23'] + .slick-list .slideNum-23 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='24'] + .slick-list .slideNum-24 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='24'] + .slick-list .slideNum-24 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='25'] + .slick-list .slideNum-25 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='25'] + .slick-list .slideNum-25 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='26'] + .slick-list .slideNum-26 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='26'] + .slick-list .slideNum-26 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='27'] + .slick-list .slideNum-27 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='27'] + .slick-list .slideNum-27 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='28'] + .slick-list .slideNum-28 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='28'] + .slick-list .slideNum-28 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='29'] + .slick-list .slideNum-29 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='29'] + .slick-list .slideNum-29 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='30'] + .slick-list .slideNum-30 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='30'] + .slick-list .slideNum-30 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='31'] + .slick-list .slideNum-31 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='31'] + .slick-list .slideNum-31 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='32'] + .slick-list .slideNum-32 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='32'] + .slick-list .slideNum-32 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='33'] + .slick-list .slideNum-33 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='33'] + .slick-list .slideNum-33 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='34'] + .slick-list .slideNum-34 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='34'] + .slick-list .slideNum-34 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='35'] + .slick-list .slideNum-35 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='35'] + .slick-list .slideNum-35 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='36'] + .slick-list .slideNum-36 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='36'] + .slick-list .slideNum-36 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='37'] + .slick-list .slideNum-37 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='37'] + .slick-list .slideNum-37 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='38'] + .slick-list .slideNum-38 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='38'] + .slick-list .slideNum-38 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='39'] + .slick-list .slideNum-39 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='39'] + .slick-list .slideNum-39 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='40'] + .slick-list .slideNum-40 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='40'] + .slick-list .slideNum-40 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='41'] + .slick-list .slideNum-41 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='41'] + .slick-list .slideNum-41 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='42'] + .slick-list .slideNum-42 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='42'] + .slick-list .slideNum-42 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='43'] + .slick-list .slideNum-43 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='43'] + .slick-list .slideNum-43 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='44'] + .slick-list .slideNum-44 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='44'] + .slick-list .slideNum-44 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='45'] + .slick-list .slideNum-45 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='45'] + .slick-list .slideNum-45 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='46'] + .slick-list .slideNum-46 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='46'] + .slick-list .slideNum-46 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='47'] + .slick-list .slideNum-47 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='47'] + .slick-list .slideNum-47 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='48'] + .slick-list .slideNum-48 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='48'] + .slick-list .slideNum-48 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='49'] + .slick-list .slideNum-49 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='49'] + .slick-list .slideNum-49 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
+
+.VenueSlider [currentslide='50'] + .slick-list .slideNum-50 .VenueSliderItem__inner {
+  background-color: rgba(0, 0, 0, 0.65); }
+  .VenueSlider [currentslide='50'] + .slick-list .slideNum-50 .VenueSliderItem__inner > * {
+    opacity: 1;
+    transition: 1s; }
 
 .VenueSliderItem__inner {
   height: 100%;
@@ -2409,7 +2716,8 @@ body.body--MapPage #root,
   -webkit-overflow-scrolling: touch;
   border-radius: 4px;
   padding: 4vw 2vw;
-  background-color: rgba(0, 0, 0, 0.65);
+  transition: 0.5s;
+  background-color: rgba(0, 0, 0, 0.8);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center center; }

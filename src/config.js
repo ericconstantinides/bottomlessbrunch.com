@@ -60,6 +60,8 @@ export const SLIDER_SETTINGS = {
   infinite: true,
   centerMode: true,
   slidesToShow: 1,
+  adaptiveHeight: false,
+  speed: 300,
   // initialSlide: 0,
   accessibility: true,
   // dots: true,

@@ -123,6 +123,7 @@ class VenueSlider extends Component {
     if (_.isEmpty(this.props.ui.regionVenues)) {
       return <div>No Venues Available</div>
     }
+    let slideNum = 0
     const sliderItems = _.map(this.props.ui.regionVenues, venue => {
       // MAKE THIS SMARTER
       // ADD isActive={true/false}
@@ -132,6 +133,7 @@ class VenueSlider extends Component {
         <VenueSliderItem
           key={venue._id}
           venueId={venue._id}
+          slideNum={slideNum++}
           history={this.props.history}
           regionSlug={this.props.region.slug}
           isActive={venue._id === this.state.openId}

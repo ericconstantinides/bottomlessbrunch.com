@@ -47,8 +47,7 @@ class VenueSliderItem extends Component {
 
   shouldComponentUpdate (nextProps, nextState) {
     if (
-      nextState.fetched !== this.state.fetched ||
-      nextState.isActive !== this.state.isActive
+      nextState.fetched !== this.state.fetched
     ) {
       return true
     }
@@ -57,7 +56,6 @@ class VenueSliderItem extends Component {
   componentDidUpdate (prevProps, prevState) {
     // console.log('Item: UPDATED:', updated++)
     if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
-      // this dismounts and mounts the whole slider but I suppose it's worth it:
       this.props.history.push(
         `/${this.props.regionSlug}/${this.props.venues[this.props.venueId].slug}`
       )
@@ -130,12 +128,10 @@ class VenueSliderItem extends Component {
     //     </article>
     //   )
     // }
+    const slideNumClass = 'slideNum-' + this.props.slideNum
     return (
       <article
-        className={cx('VenueSliderItem', 'slick-slide', {
-          'is-active': this.props.isActive,
-          'not-active': !this.props.isActive
-        })}
+        className={cx('VenueSliderItem', 'slick-slide', slideNumClass)}
       >
         <div
           className='VenueSliderItem__inner'

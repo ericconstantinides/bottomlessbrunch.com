@@ -131,12 +131,13 @@
   @media only screen and (max-width: $bp-medium) {
     .Logo__container {
       order: 1;
+      flex: 0 0 auto;
       margin: 0;
       // background: yellow;
       background: rgba(white, 0.5);
       background: #f1f1f1;
       border-top: 1px solid #ddd;
-      height: 50px;
+      height: 56px;
       padding: 0.5em;
       display: flex;
       align-items: center;
@@ -160,15 +161,13 @@
       height: 26px;
     }
     .Logo__region-title {
-      padding-bottom: 0;
+      padding: 0;
       letter-spacing: 0;
-      font-size: 0.875em;
+      font-size: 0.95em;
+      height: 56px;
     }
   }
   @media only screen and (max-width: $bp-medium-small) {
-    .Logo__container {
-      height: 50px;
-    }
     .Logo__orange {
       height: 20px;
       margin: 0 0.25em 0 0;
@@ -179,10 +178,10 @@
   }
   @media only screen and (max-width: $bp-small) {
     .Logo__image {
-      width: 100px;
+      width: 120px;
     }
     .Logo__region-title {
-      font-size: 0.75em;
+      font-size: 0.85em;
     }
   }
 }
