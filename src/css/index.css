@@ -330,6 +330,9 @@ a * {
 .App--IntroPage .Logo__image {
   display: none; }
 
+.App--IntroPage .Logo__orange {
+  width: 40px; }
+
 @media only screen and (min-width: 768px) and (max-width: 900px) {
   .App--MapPage .Logo__title {
     font-size: 1.65em; } }
@@ -401,24 +404,27 @@ a * {
 /*
  * BETA
  */
-.Logo__beta-container {
+.Logo__beta-container,
+.Logo__title {
   position: relative; }
 
 .Logo__beta-title {
-  width: 36px;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: white;
+  line-height: 0.9;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25), 1px 0px 1px rgba(0, 0, 0, 0.25), 1px -1px 1px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25), 0px -1px 1px rgba(0, 0, 0, 0.25), -1px 1px 1px rgba(0, 0, 0, 0.25), -1px 0px 1px rgba(0, 0, 0, 0.25), -1px -1px 1px rgba(0, 0, 0, 0.25);
   position: absolute;
-  left: 100%;
-  bottom: 0;
-  margin-left: 8px; }
-  @media only screen and (min-width: 768px) {
+  right: 7%;
+  bottom: -10%; }
+  .App--IntroPage .Logo__beta-title {
+    line-height: 1.2; }
+  @media only screen and (max-width: 768px) {
     .Logo__beta-title {
-      left: auto;
-      right: 0;
-      width: 40px;
-      bottom: -4px;
-      background: rgba(255, 255, 255, 0.5);
-      box-sizing: content-box;
-      padding: 0.2em; } }
+      font-size: 0.825rem; }
+      .App--IntroPage .Logo__beta-title {
+        font-size: 1rem; } }
 
 .RegionsModal__container {
   position: fixed;

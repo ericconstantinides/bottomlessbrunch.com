@@ -11,13 +11,14 @@ const Logo = props => {
           onClick={props.handleLogoClick}
         >
           {SITE_NAME}
+          <span className='Logo__beta-title'>beta</span>
         </h1>
         <div
           onClick={props.handleLogoClick}
           title={SITE_SLOGAN}
           className='Logo__image Logo__beta-container'
         >
-          <img src='/images/text__beta.png' className='Logo__beta-title' alt='Bottomless Brunch' />
+          <span className='Logo__beta-title'>beta</span>
         </div>
         <img
           className='Logo__orange'
