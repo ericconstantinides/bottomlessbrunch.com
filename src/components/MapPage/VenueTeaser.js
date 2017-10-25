@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { compileDays } from '../../lib/myHelpers'
-let rendered = 1
 
 class VenueTeaser extends Component {
   constructor (props) {
@@ -28,7 +27,6 @@ class VenueTeaser extends Component {
       toggleMarkerClick,
       altClass
     } = this.props
-    console.log(`VenueTeaser render() #${rendered++}: ${venue.name}`)
     const hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
 
     const renderedImage = venue.gData && venue.gData.images
