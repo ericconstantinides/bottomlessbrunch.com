@@ -44,16 +44,15 @@ class VenueTeaser extends Component {
         onClick={toggleMarkerClick(venue)}
       >
         {altClass === 'MapItem' &&
-          <div
-            className={`VenueTeaser__marker-container ${altClass}__marker-container`}
-          >
-            <span className={`VenueTeaser__marker ${altClass}__marker`} />
+          <div className='MapItem__marker-container'>
+            <span className='MapItem__mimosa' />
+            <span className='MapItem__marker' />
           </div>
         }
         {/* THE VENUETEASER__INNER is where the real link should be... */}
         <Link
           regionName={regionName}
-          venue={venue}
+          className={`VenueTeaser__link ${altClass}__link`}
           to={`/${regionSlug}/${venue.slug}`}
         >
           <div className={`VenueTeaser__inner ${altClass}__inner`}>

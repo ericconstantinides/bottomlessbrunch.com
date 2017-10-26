@@ -91,7 +91,9 @@ class MapPage extends Component {
     this.openDrawer()
   }
   handleMouseOver = venue => event => {
-    this.setState({ hoveredVenue: venue._id })
+    this.setState({
+      hoveredVenue: venue._id
+    })
   }
   handleMouseLeave = venue => event => {
     this.setState({ hoveredVenue: '' })
