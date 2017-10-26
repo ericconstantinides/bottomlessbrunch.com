@@ -2192,7 +2192,8 @@ body.body--MapPage #root,
   border-radius: 100px;
   border: 11px solid rgba(255, 155, 0, 0.5);
   background-clip: content-box;
-  box-shadow: 0px 0px 2px 1px rgba(255, 0, 207, 0.75); }
+  box-shadow: 0px 0px 2px 1px rgba(255, 0, 207, 0.75);
+  transition: 0.15s; }
 
 .MapItem__inner {
   display: none;

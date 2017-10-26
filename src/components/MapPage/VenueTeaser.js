@@ -75,7 +75,20 @@ class VenueTeaser extends Component {
                       <strong>{fun.day}</strong> {fun.startTime} - {fun.endTime}
                     </p>
                   ))}
-                </div>}
+                </div>
+              }
+              {venue.funItems.length > 0 &&
+                <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
+                  <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>
+                    Bottomless Deals
+                  </h4>
+                  {venue.funItems.map((item, i) => (
+                    <p key={i} className={`VenueTeaser__p ${altClass}__p`}>
+                      <strong>${item.price}</strong> {item.name}
+                    </p>
+                  ))}
+                </div>
+              }
               <button className={`VenueTeaser__more-info ${altClass}__more-info`}>
                 <span className='text'>More Info</span>
                 <span className='chevron'>»</span>
