@@ -36,7 +36,10 @@ class VenueSliderItem extends Component {
   componentWillReceiveProps (nextProps) {
     if (!_.isEmpty(nextProps.venues[nextProps.venueId].googlePlacesData)) {
       this.setState({ fetched: true })
-    } else if ((nextProps.isActive || nextProps.isPrev || nextProps.isNext) && !this.state.fetching) {
+    } else if (
+      (nextProps.isActive || nextProps.isPrev || nextProps.isNext) &&
+      !this.state.fetching
+    ) {
       this.props.fetchGooglePlacesVenueDetail(
         nextProps.venues[nextProps.venueId]
       )
@@ -46,20 +49,18 @@ class VenueSliderItem extends Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    if (
-      nextState.fetched !== this.state.fetched
-    ) {
+    if (nextState.fetched !== this.state.fetched) {
       return true
     }
     return false
   }
   // componentDidUpdate (prevProps, prevState) {
-    // console.log('Item: UPDATED:', updated++)
-    // if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
-    //   this.props.history.push(
-    //     `/${this.props.regionSlug}/${this.props.venues[this.props.venueId].slug}`
-    //   )
-    // }
+  // console.log('Item: UPDATED:', updated++)
+  // if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
+  //   this.props.history.push(
+  //     `/${this.props.regionSlug}/${this.props.venues[this.props.venueId].slug}`
+  //   )
+  // }
   // }
 
   componentWillUnmount () {
@@ -130,9 +131,7 @@ class VenueSliderItem extends Component {
     // }
     const slideNumClass = 'slideNum-' + this.props.slideNum
     return (
-      <article
-        className={cx('VenueSliderItem', 'slick-slide', slideNumClass)}
-      >
+      <article className={cx('VenueSliderItem', 'slick-slide', slideNumClass)}>
         <div
           className='VenueSliderItem__inner'
           style={{ backgroundImage: bgStyle }}
@@ -175,7 +174,9 @@ class VenueSliderItem extends Component {
                   </p>
                 </div>
                 <div className='VenueSliderItem__hours'>
-                  <h3 className='VenueSliderItem__hours-title'>Hours</h3>
+                  <h3 className='VenueSliderItem__hours-title'>
+                    Regular Hours
+                  </h3>
                   {hours &&
                     hours.map((item, i) => (
                       <p key={i} className='VenueSliderItem__hours-p'>

@@ -35,7 +35,7 @@ class VenueTeaser extends Component {
         style={{ backgroundImage: `url(${venue.gData.images.large[0].url})` }}
         />
       : ''
-    const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
+    // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     return (
       <article
         className={`VenueTeaser ${altClass} ${hovered}`}
@@ -65,7 +65,7 @@ class VenueTeaser extends Component {
                 <p className={`VenueTeaser__p ${altClass}__p`}>
                   {venue.address.street}, {venue.address.city}
                 </p>}
-              {funTimes &&
+              {/* {funTimes &&
                 <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
                   <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>
                     Go Bottomless
@@ -76,7 +76,7 @@ class VenueTeaser extends Component {
                     </p>
                   ))}
                 </div>
-              }
+              } */}
               {venue.funItems.length > 0 &&
                 <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
                   <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>

@@ -102,6 +102,8 @@ body.body--MapPage #root,
 }
 .MapItem__marker {
   display: block;
+  position: relative;
+  z-index: -1;
   width: 32px;
   height: 32px;
   border-radius: 100px;
@@ -109,6 +111,15 @@ body.body--MapPage #root,
   background-clip: content-box;
   box-shadow: 0px 0px 2px 1px rgba(255, 0, 207, 0.75);
   transition: 0.15s;
+  &:after {
+    content: '';
+    background: rgba(white, 0.5);
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 100px;
+    transition: 0.15s;
+  }
 }
 .MapItem__inner {
   display: none;
@@ -130,6 +141,10 @@ body.body--MapPage #root,
   }
   .MapItem__marker {
     border: 11px solid rgba(255, 155, 0, 0.75);
+    z-index: 0;
+    &:after {
+      // background: rgba(white, 1);
+    }
   }
   .MapItem__inner {
     display: block;
