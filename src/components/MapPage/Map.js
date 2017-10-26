@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
-import { fitBounds } from 'google-map-react/utils'
 import _ from 'lodash'
 
-import { usaMap, DRAWER, PAD_DEGREES } from '../../config'
+import { usaMap } from '../../config'
+import { getMapCoordsByViewport } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
 
@@ -47,56 +47,11 @@ class Map extends Component {
     }
   }
   updateMapAndDrawer = () => {
-    const { width, height } = this.props.ui.browserSize
-    let drawer
-    if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
-      drawer = DRAWER.sm
-    } else if (width >= DRAWER.md.starts && width <= DRAWER.md.ends) {
-      drawer = DRAWER.md
-    } else {
-      drawer = DRAWER.lg
-    }
-
-    // figure out the drawer ratio:
-    const drawerWidthRatio = 1 - (width - drawer.width) / width
-    const drawerHeightRatio = 1 - (height - drawer.height) / height
-
-    const myRegion = this.props.ui.activeRegion
-
-    if (myRegion.bounds) {
-      // get the total latitude and longitude width and height:
-      const totalLat = myRegion.bounds.north - myRegion.bounds.south
-      const totalLng = myRegion.bounds.east - myRegion.bounds.west
-
-      const bounds = {
-        nw: {
-          lat: myRegion.bounds.north + PAD_DEGREES,
-          lng: myRegion.bounds.west -
-            totalLng * (drawerWidthRatio * 2) -
-            PAD_DEGREES
-        },
-        se: {
-          lat: myRegion.bounds.south -
-            totalLat * (drawerHeightRatio * 2) -
-            PAD_DEGREES,
-          lng: myRegion.bounds.east + PAD_DEGREES
-        }
-      }
-      const mapCenter = fitBounds(bounds, { width, height })
-      this.setState({
-        loaded: true,
-        lat: mapCenter.center.lat,
-        lng: mapCenter.center.lng,
-        zoom: mapCenter.zoom
-      })
-    } else {
-      this.setState({
-        loaded: true,
-        lat: myRegion.lat,
-        lng: myRegion.lng,
-        zoom: myRegion.zoom
-      })
-    }
+    const { activeRegion: region, browserSize } = this.props.ui
+    const { lat, lng, zoom } = !_.isEmpty(region.bounds)
+      ? getMapCoordsByViewport(region, browserSize)
+      : this.props.ui.activeRegion
+    this.setState({ loaded: true, lat, lng, zoom })
   }
   render () {
     return (

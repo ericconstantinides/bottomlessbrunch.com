@@ -1,5 +1,6 @@
 /* global google */
 import { fitBounds } from 'google-map-react/utils'
+import { DRAWER, PAD_DEGREES } from '../config'
 import _ from 'lodash'
 
 /**
@@ -300,11 +301,57 @@ objectFunctions.keys.prev = function (myObject, id) {
   let prevIndex = (index -= 1)
   if (prevIndex < 0) {
     // we're at the beginning, so send the last:
-    return (
-      Object.keys(myObject)[Object.keys(myObject).length - 1]
-    )
+    return Object.keys(myObject)[Object.keys(myObject).length - 1]
   }
   return keys[prevIndex]
 }
 
 export { objectFunctions }
+
+/**
+ * getMapCoordsByViewport returns a revised mapCenter (lat, lng, zoom)
+ * taking into account the drawer (if any), sidebar, and viewport
+ *
+ * @export
+ * @param {object} region
+ * @param {object} browserSize
+ * @returns { { lat, lng, zoom } } mapCenter
+ */
+export function getMapCoordsByViewport (region, browserSize) {
+  const { width, height } = browserSize
+  let drawer
+  if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
+    drawer = DRAWER.sm
+  } else if (width >= DRAWER.md.starts && width <= DRAWER.md.ends) {
+    drawer = DRAWER.md
+  } else {
+    drawer = DRAWER.lg
+  }
+
+  // figure out the drawer ratio:
+  const drawerWidthRatio = 1 - (width - drawer.width) / width
+  const drawerHeightRatio = 1 - (height - drawer.height) / height
+
+  // get the total latitude and longitude width and height:
+  const totalLat = region.bounds.north - region.bounds.south
+  const totalLng = region.bounds.east - region.bounds.west
+
+  const bounds = {
+    nw: {
+      lat: region.bounds.north + PAD_DEGREES,
+      lng: region.bounds.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
+    },
+    se: {
+      lat: region.bounds.south -
+        totalLat * (drawerHeightRatio * 2) -
+        PAD_DEGREES,
+      lng: region.bounds.east + PAD_DEGREES
+    }
+  }
+  const fitted = fitBounds(bounds, { width, height })
+  return {
+    lat: fitted.center.lat,
+    lng: fitted.center.lng,
+    zoom: fitted.zoom
+  }
+}
