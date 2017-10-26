@@ -130,6 +130,26 @@ body.body--MapPage #root,
   flex-flow: column;
   background: white;
   box-shadow: 0 0 1px 1px rgba(black, 0.1);
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: 120px;
+    left: -15px;
+    border-right: 16px solid white;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    transition: 0.15s;
+    pointer-events: none;
+  }
+  &:after {
+    z-index: -1;
+    filter: drop-shadow(0 0 1px rgba(black, 0.35));
+  }
+  &:hover:before {
+    border-right-color: whitesmoke;
+  }
 }
 /* Hover */
 .MapItem.is-hovered {
