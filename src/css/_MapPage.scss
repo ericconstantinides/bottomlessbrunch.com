@@ -66,23 +66,23 @@ body.body--MapPage #root,
   background-size: contain;
   background-repeat: no-repeat;
 
-  background-image: url(/images/clip-art--mimosa-v4.png);
+  background-image: url(/images/clip-art--mimosa-v6.png);
   transition: 0.15s;
   transform-origin: center bottom;
+  &:after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    left: -8px;
+    border-radius: 100px;
+    border: 11px solid rgba(255, 155, 0, 0.5);
+    position: absolute;
+    bottom: -14px;
+    background-clip: content-box;
+    box-shadow: 0px 0px 2px 1px rgba(255, 0, 207, 0.75);
+  }
 }
-/* span.VenueTeaser__marker:after {
-  content: '';
-  display: block;
-  background: rgba(255,255,255,0.7);
-  width: 26px;
-  height: 26px;
-  z-index: -1;
-  border-radius: 100px;
-  border: 10px solid rgba(255, 149, 61, 0.84);
-  position: absolute;
-  bottom: -13px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-} */
 /* Hover */
 .VenueTeaser:focus,
 .VenueTeaser:hover,
@@ -92,8 +92,15 @@ body.body--MapPage #root,
 .VenueTeaser.is-hovered {
   z-index: 1;
 }
-.MapItem.is-hovered .MapItem__marker {
-  transform: rotate(15deg);
+.MapItem.is-hovered {
+  .MapItem__marker {
+    transform: rotate(15deg);
+    &:after {
+      z-index: -1;
+      border: 11px solid rgba(255, 155, 0, 0.75);
+      // box-shadow: none;
+    }
+  }
 }
 .MapItem.is-hovered .MapItem__inner {
   display: flex;
@@ -147,6 +154,7 @@ body.body--MapPage #root,
   width: 200px;
   flex-flow: column;
   background: white;
+  box-shadow: 0 0 1px 1px rgba(black, 0.1);
 }
 .VenueTeaser__image-container {
   width: 160px;
@@ -282,5 +290,8 @@ body.body--MapPage #root,
 @media only screen and (max-width: $bp-small) {
   .VenueListItem__image-container {
     width: calc(50% - 0.5em);
+  }
+  .MapItem__inner {
+    width: 180px;
   }
 }
