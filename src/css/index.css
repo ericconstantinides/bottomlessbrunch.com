@@ -294,22 +294,21 @@ a * {
   display: flex;
   align-items: center;
   justify-content: center;
-  letter-spacing: 0.0125em;
   cursor: pointer;
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.25em;
+  line-height: 0.9;
   color: black;
-  text-transform: uppercase;
   margin: 0;
   padding: 0.125em 0 0.5em; }
   .Logo__region-title:after {
     content: '';
     display: block;
     margin-left: 0.5em;
-    border-top: 0.4em solid black;
-    border-left: 0.3em solid transparent;
-    border-right: 0.3em solid transparent; }
+    border-top: 0.35em solid black;
+    border-left: 0.25em solid transparent;
+    border-right: 0.25em solid transparent; }
 
 .App--IntroPage .Logo__container {
   height: 0;
