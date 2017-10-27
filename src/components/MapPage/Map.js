@@ -30,11 +30,6 @@ class Map extends Component {
         this.props.ui.browserSize.width !== prevProps.ui.browserSize.width ||
         this.props.ui.browserSize.height !== prevProps.ui.browserSize.height)
     ) {
-      // console.log(this.props.ui.activeRegion)
-      // this.props.setMainMap({
-        
-      // })
-      console.log(this.props.mainMap)
       this.updateMapAndDrawer({ size: this.props.mainMap.size })
     }
   }

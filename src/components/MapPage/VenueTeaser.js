@@ -28,9 +28,6 @@ class VenueTeaser extends Component {
     }
     return false
   }
-  // componentDidMount () {
-  // console.log(this.domVenue.offsetTop)
-  // }
   componentDidUpdate (prevProps, prevState) {
     // after the element is active and it's a MapItem...
     // Now we check if it's been positioned
@@ -41,12 +38,14 @@ class VenueTeaser extends Component {
     ) {
       // We set Positioning now:
       const elPos = this.domVenue.getBoundingClientRect()
-      const teaserSide = elPos.right > this.props.mainMap.size.width
-        ? 'left'
-        : 'right'
-      // debugger
-      const topVert = elPos.top < 0 ? elPos.top * -1 + offsetPadding : 0
-      this.setState({ offVert: topVert, teaserSide, isPositioned: true })
+      const { size } = this.props.mainMap
+      const teaserSide = elPos.right > size.width ? 'left' : 'right'
+      const offVert = elPos.top < 0
+        ? elPos.top * -1 + offsetPadding
+        : elPos.bottom > size.height
+            ? (elPos.bottom - size.height + offsetPadding) * -1
+            : 0
+      this.setState({ offVert, teaserSide, isPositioned: true })
     }
     // reset everything if going inActive:
     if (prevState.isActive && !this.state.isActive) {
@@ -64,15 +63,8 @@ class VenueTeaser extends Component {
       toggleMarkerClick,
       altClass
     } = this.props
-    let hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
-    let positioned = this.state.isPositioned
-      ? 'is-positioned'
-      : 'not-positioned'
-    let side = this.state.teaserSide === 'right' ? 'is-right' : 'is-left'
-
-    // DEBUG:
-    // hovered = 'is-hovered'
-    // side = 'is-right'
+    const hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
+    const side = this.state.teaserSide === 'right' ? 'is-right' : 'is-left'
 
     const offsetStyles = altClass === 'MapItem'
       ? { transform: `translateY(${this.state.offVert}px)` }
@@ -87,7 +79,7 @@ class VenueTeaser extends Component {
     // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     return (
       <article
-        className={`VenueTeaser ${altClass} ${hovered} ${positioned} ${side}`}
+        className={`VenueTeaser ${altClass} ${hovered} ${side}`}
         onMouseEnter={handleMouseOver(venue)}
         onMouseLeave={handleMouseLeave(venue)}
         onClick={toggleMarkerClick(venue)}
