@@ -66,9 +66,6 @@ body.body--MapPage #root,
 }
 .MapItem__marker-container {
   cursor: default;
-  // width: 30px;
-  // height: 74px;
-  // padding-right: 32px;
   border-radius: 100px;
   &:before {
     // create an artificial area to help hover into the teaser:
@@ -77,8 +74,6 @@ body.body--MapPage #root,
     bottom: -12px;
     height: 96px;
     width: 32px;
-    left: 16px;
-    border-radius: 50% 0 0 30%;
     z-index: -1;
   }
 }
@@ -124,20 +119,18 @@ body.body--MapPage #root,
 .MapItem__inner {
   display: none;
   position: absolute;
-  bottom: -120px;
-  left: 40px;
+  top: -115px;
   width: 200px;
   flex-flow: column;
   background: white;
   box-shadow: 0 0 1px 1px rgba(black, 0.1);
+}
+.MapItem__pointer {
   &:before,
   &:after {
-    content: '';
     position: absolute;
     z-index: 1;
-    bottom: 120px;
-    left: -15px;
-    border-right: 16px solid white;
+    bottom: 8px;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     transition: 0.15s;
@@ -151,19 +144,63 @@ body.body--MapPage #root,
     border-right-color: whitesmoke;
   }
 }
+// Teaser Side:
+.MapItem.is-right {
+  .MapItem__marker-container {
+    &:before {
+      left: 16px;
+      border-radius: 50% 0 0 30%;
+    }
+  }
+  .MapItem__pointer {
+    &:before,
+    &:after {
+      left: 24px;
+      border-right: 16px solid white;
+    }
+  }
+  .MapItem__inner {
+    left: 40px;
+  }
+}
+.MapItem.is-left {
+  .MapItem__marker-container {
+    &:before {
+      left: -8px;
+      border-radius: 0 50% 30% 0;
+    }
+  }
+  .MapItem__pointer {
+    &:before,
+    &:after {
+      right: -8px;
+      border-left: 16px solid white;
+    }
+  }
+  .MapItem__inner {
+    right: 8px;
+  }
+}
+
 /* Hover */
 .MapItem.is-hovered {
   .MapItem__marker-container:before {
     display: block;
   }
-  .MapItem__mimosa {
+  &.is-right .MapItem__mimosa {
     transform: rotate(15deg);
+  }
+  &.is-left .MapItem__mimosa {
+    transform: rotate(-15deg);
   }
   .MapItem__marker {
     border: 11px solid rgba(255, 155, 0, 0.75);
     z-index: 0;
+  }
+  .MapItem__pointer {
+    &:before,
     &:after {
-      // background: rgba(white, 1);
+      content: '';
     }
   }
   .MapItem__inner {
@@ -197,16 +234,16 @@ body.body--MapPage #root,
   }
 }
 .VenueTeaser__inner {
-  margin-bottom: 0.5em;
   min-height: 150px;
   transition: 0.15s;
-  &:hover {
-    background-color: whitesmoke;
-  }
 }
 .VenueListItem__inner {
   display: flex;
   border: 1px solid #ddd;
+  margin-bottom: 0.5em;
+  &:hover {
+    background-color: whitesmoke;
+  }
 }
 .VenueTeaser__image-container {
   width: 160px;
@@ -280,10 +317,6 @@ body.body--MapPage #root,
   display: flex;
   align-items: center;
   line-height: 1.1;
-  .chevron {
-    margin-left: 0.25em;
-    font-size: 1.25em;
-  }
 }
 .VenueList__handle {
   height: 40px;

@@ -86,6 +86,11 @@ a *:active,
 a * {
   text-decoration: none; }
 
+.chevron-after:after {
+  margin-left: 0.25em;
+  font-size: 1.25em;
+  content: '»'; }
+
 /*---------------------------------------------------------
 // Responsive Ratio
 //-------------------------------------------------------*/
@@ -2164,8 +2169,6 @@ body.body--MapPage #root,
     bottom: -12px;
     height: 96px;
     width: 32px;
-    left: 16px;
-    border-radius: 50% 0 0 30%;
     z-index: -1; }
 
 .MapItem__mimosa {
@@ -2207,39 +2210,66 @@ body.body--MapPage #root,
 .MapItem__inner {
   display: none;
   position: absolute;
-  bottom: -120px;
-  left: 40px;
+  top: -115px;
   width: 200px;
   flex-flow: column;
   background: white;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1); }
-  .MapItem__inner:before, .MapItem__inner:after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    bottom: 120px;
-    left: -15px;
-    border-right: 16px solid white;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    transition: 0.15s;
-    pointer-events: none; }
-  .MapItem__inner:after {
-    z-index: -1;
-    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.35)); }
-  .MapItem__inner:hover:before {
-    border-right-color: whitesmoke; }
+
+.MapItem__pointer:before, .MapItem__pointer:after {
+  position: absolute;
+  z-index: 1;
+  bottom: 8px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  transition: 0.15s;
+  pointer-events: none; }
+
+.MapItem__pointer:after {
+  z-index: -1;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.35)); }
+
+.MapItem__pointer:hover:before {
+  border-right-color: whitesmoke; }
+
+.MapItem.is-right .MapItem__marker-container:before {
+  left: 16px;
+  border-radius: 50% 0 0 30%; }
+
+.MapItem.is-right .MapItem__pointer:before, .MapItem.is-right .MapItem__pointer:after {
+  left: 24px;
+  border-right: 16px solid white; }
+
+.MapItem.is-right .MapItem__inner {
+  left: 40px; }
+
+.MapItem.is-left .MapItem__marker-container:before {
+  left: -8px;
+  border-radius: 0 50% 30% 0; }
+
+.MapItem.is-left .MapItem__pointer:before, .MapItem.is-left .MapItem__pointer:after {
+  right: -8px;
+  border-left: 16px solid white; }
+
+.MapItem.is-left .MapItem__inner {
+  right: 8px; }
 
 /* Hover */
 .MapItem.is-hovered .MapItem__marker-container:before {
   display: block; }
 
-.MapItem.is-hovered .MapItem__mimosa {
+.MapItem.is-hovered.is-right .MapItem__mimosa {
   transform: rotate(15deg); }
+
+.MapItem.is-hovered.is-left .MapItem__mimosa {
+  transform: rotate(-15deg); }
 
 .MapItem.is-hovered .MapItem__marker {
   border: 11px solid rgba(255, 155, 0, 0.75);
   z-index: 0; }
+
+.MapItem.is-hovered .MapItem__pointer:before, .MapItem.is-hovered .MapItem__pointer:after {
+  content: ''; }
 
 .MapItem.is-hovered .MapItem__inner {
   display: block; }
@@ -2267,15 +2297,15 @@ body.body--MapPage #root,
     margin-top: 0; }
 
 .VenueTeaser__inner {
-  margin-bottom: 0.5em;
   min-height: 150px;
   transition: 0.15s; }
-  .VenueTeaser__inner:hover {
-    background-color: whitesmoke; }
 
 .VenueListItem__inner {
   display: flex;
-  border: 1px solid #ddd; }
+  border: 1px solid #ddd;
+  margin-bottom: 0.5em; }
+  .VenueListItem__inner:hover {
+    background-color: whitesmoke; }
 
 .VenueTeaser__image-container {
   width: 160px;
@@ -2345,9 +2375,6 @@ body.body--MapPage #root,
   display: flex;
   align-items: center;
   line-height: 1.1; }
-  .VenueTeaser__more-info .chevron {
-    margin-left: 0.25em;
-    font-size: 1.25em; }
 
 .VenueList__handle {
   height: 40px;

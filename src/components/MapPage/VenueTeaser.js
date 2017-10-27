@@ -6,12 +6,13 @@ class VenueTeaser extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isActive: false
+      isActive: false,
+      teaserSide: 'right'
     }
   }
   componentWillReceiveProps (nextProps) {
     // set the isActve bool based on if this venue is the hovered venue:
-    this.setState({isActive: nextProps.venue._id === nextProps.hoveredVenue})
+    this.setState({ isActive: nextProps.venue._id === nextProps.hoveredVenue })
   }
   shouldComponentUpdate (nextProps, nextState) {
     // return TRUE if there's a change in the isActive bool
@@ -27,7 +28,12 @@ class VenueTeaser extends Component {
       toggleMarkerClick,
       altClass
     } = this.props
-    const hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
+    let hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
+    let side = this.state.teaserSide === 'right' ? 'is-right' : 'is-left'
+
+    // DEBUG:
+    // hovered = 'is-hovered'
+    side = 'is-right'
 
     const renderedImage = venue.gData && venue.gData.images
       ? <div
@@ -38,7 +44,7 @@ class VenueTeaser extends Component {
     // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     return (
       <article
-        className={`VenueTeaser ${altClass} ${hovered}`}
+        className={`VenueTeaser ${altClass} ${hovered} ${side}`}
         onMouseEnter={handleMouseOver(venue)}
         onMouseLeave={handleMouseLeave(venue)}
         onClick={toggleMarkerClick(venue)}
@@ -47,8 +53,8 @@ class VenueTeaser extends Component {
           <div className='MapItem__marker-container'>
             <span className='MapItem__mimosa' />
             <span className='MapItem__marker' />
-          </div>
-        }
+            <span className='MapItem__pointer' />
+          </div>}
         {/* THE VENUETEASER__INNER is where the real link should be... */}
         <Link
           regionName={regionName}
@@ -79,7 +85,9 @@ class VenueTeaser extends Component {
               } */}
               {venue.funItems.length > 0 &&
                 <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
-                  <h4 className={`VenueTeaser__sub-title ${altClass}__sub-title`}>
+                  <h4
+                    className={`VenueTeaser__sub-title ${altClass}__sub-title`}
+                  >
                     Bottomless Deals
                   </h4>
                   {venue.funItems.map((item, i) => (
@@ -87,11 +95,11 @@ class VenueTeaser extends Component {
                       <strong>${item.price}</strong> {item.name}
                     </p>
                   ))}
-                </div>
-              }
-              <button className={`VenueTeaser__more-info ${altClass}__more-info`}>
-                <span className='text'>More Info</span>
-                <span className='chevron'>»</span>
+                </div>}
+              <button
+                className={`VenueTeaser__more-info ${altClass}__more-info`}
+              >
+                <span className='text chevron-after'>More Info</span>
               </button>
             </div>
           </div>
