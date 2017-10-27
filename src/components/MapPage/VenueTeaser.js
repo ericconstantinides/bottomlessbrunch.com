@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 // import { compileDays } from '../../lib/myHelpers'
 
+const offsetPadding = 4
+
 class VenueTeaser extends Component {
   constructor (props) {
     super(props)
     this.state = {
       isActive: false,
-      teaserSide: 'right'
+      isPositioned: false,
+      teaserSide: 'right',
+      offVert: 0
     }
   }
   componentWillReceiveProps (nextProps) {
@@ -16,8 +20,40 @@ class VenueTeaser extends Component {
   }
   shouldComponentUpdate (nextProps, nextState) {
     // return TRUE if there's a change in the isActive bool
-    return nextState.isActive !== this.state.isActive
+    if (
+      nextState.isActive !== this.state.isActive ||
+      this.state.isPositioned !== nextState.isPositioned
+    ) {
+      return true
+    }
+    return false
   }
+  // componentDidMount () {
+  // console.log(this.domVenue.offsetTop)
+  // }
+  componentDidUpdate (prevProps, prevState) {
+    // after the element is active and it's a MapItem...
+    // Now we check if it's been positioned
+    if (
+      this.state.isActive &&
+      this.props.altClass === 'MapItem' &&
+      !this.state.isPositioned
+    ) {
+      // We set Positioning now:
+      const elPos = this.domVenue.getBoundingClientRect()
+      const teaserSide = elPos.right > this.props.mainMap.size.width
+        ? 'left'
+        : 'right'
+      // debugger
+      const topVert = elPos.top < 0 ? elPos.top * -1 + offsetPadding : 0
+      this.setState({ offVert: topVert, teaserSide, isPositioned: true })
+    }
+    // reset everything if going inActive:
+    if (prevState.isActive && !this.state.isActive) {
+      this.setState({ offVert: 0, teaserSide: 'right', isPositioned: false })
+    }
+  }
+
   render () {
     const {
       venue,
@@ -29,11 +65,18 @@ class VenueTeaser extends Component {
       altClass
     } = this.props
     let hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
+    let positioned = this.state.isPositioned
+      ? 'is-positioned'
+      : 'not-positioned'
     let side = this.state.teaserSide === 'right' ? 'is-right' : 'is-left'
 
     // DEBUG:
     // hovered = 'is-hovered'
-    side = 'is-right'
+    // side = 'is-right'
+
+    const offsetStyles = altClass === 'MapItem'
+      ? { transform: `translateY(${this.state.offVert}px)` }
+      : {}
 
     const renderedImage = venue.gData && venue.gData.images
       ? <div
@@ -44,7 +87,7 @@ class VenueTeaser extends Component {
     // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     return (
       <article
-        className={`VenueTeaser ${altClass} ${hovered} ${side}`}
+        className={`VenueTeaser ${altClass} ${hovered} ${positioned} ${side}`}
         onMouseEnter={handleMouseOver(venue)}
         onMouseLeave={handleMouseLeave(venue)}
         onClick={toggleMarkerClick(venue)}
@@ -61,7 +104,13 @@ class VenueTeaser extends Component {
           className={`VenueTeaser__link ${altClass}__link`}
           to={`/${regionSlug}/${venue.slug}`}
         >
-          <div className={`VenueTeaser__inner ${altClass}__inner`}>
+          <div
+            ref={ven => {
+              this.domVenue = ven
+            }}
+            style={offsetStyles}
+            className={`VenueTeaser__inner ${altClass}__inner`}
+          >
             {renderedImage}
             <div className={`VenueTeaser__content ${altClass}__content`}>
               <h3 className={`VenueTeaser__title ${altClass}__title`}>

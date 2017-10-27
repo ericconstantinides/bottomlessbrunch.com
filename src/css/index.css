@@ -2222,7 +2222,6 @@ body.body--MapPage #root,
   bottom: 8px;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  transition: 0.15s;
   pointer-events: none; }
 
 .MapItem__pointer:after {
@@ -2297,13 +2296,13 @@ body.body--MapPage #root,
     margin-top: 0; }
 
 .VenueTeaser__inner {
-  min-height: 150px;
-  transition: 0.15s; }
+  min-height: 150px; }
 
 .VenueListItem__inner {
   display: flex;
   border: 1px solid #ddd;
-  margin-bottom: 0.5em; }
+  margin-bottom: 0.5em;
+  transition: 0.15s; }
   .VenueListItem__inner:hover {
     background-color: whitesmoke; }
 

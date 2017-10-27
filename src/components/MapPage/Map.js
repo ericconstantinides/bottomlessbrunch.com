@@ -10,6 +10,7 @@ import VenueTeaser from './VenueTeaser'
 class Map extends Component {
   constructor () {
     super()
+    this.item = ''
     this.state = {
       address: '',
       map: {}
@@ -60,18 +61,18 @@ class Map extends Component {
         zoom={this.props.mainMap.zoom}
         center={this.props.mainMap.center}
         options={{ fullscreenControl: false }}
-        onGoogleApiLoaded={this.mapLoaded}
         onChange={this.handleMapChange}
-        yesIWantToUseGoogleMapApiInternals
         onClick={this.handleMapClick}
       >
         {_.map(this.props.venues, venue => (
           <VenueTeaser
             key={venue._id}
+            ref={venue._id}
             altClass='MapItem'
             {...venue}
             lat={venue.lat}
             lng={venue.lng}
+            mainMap={this.props.mainMap}
             handleMouseOver={this.props.handleMouseOver}
             handleMouseLeave={this.props.handleMouseLeave}
             toggleMarkerClick={this.props.toggleMarkerClick}

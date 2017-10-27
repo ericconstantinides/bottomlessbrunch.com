@@ -1,3 +1,5 @@
+import ReactDOM from 'react-dom'
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Swipeable from 'react-swipeable'
@@ -91,6 +93,9 @@ class MapPage extends Component {
     this.openDrawer()
   }
   handleMouseOver = venue => event => {
+    // console.log(venue._id)
+    // const fun = ReactDOM.findDOMNode(this.refs[venue._id])
+    // console.log(fun)
     this.setState({
       hoveredVenue: venue._id
     })
@@ -114,17 +119,13 @@ class MapPage extends Component {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
     }
-    const region = this.props.ui.activeRegion
+    // const region = this.props.ui.activeRegion
     const styles = { height: `100%`, width: `100%` }
     const drawerState = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
         <div className='MapPage__Map-container'>
           <Map
-            cursorPos={this.props.cursorPos}
-            center={{ lat: region.lat, lng: region.lng }}
-            zoom={region.zoom}
-            minZoom={4}
             venues={this.props.venues}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
