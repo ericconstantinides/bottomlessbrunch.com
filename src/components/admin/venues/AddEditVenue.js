@@ -41,8 +41,8 @@ class venueForm extends Component {
     super(props)
     this.state = {
       zoom: USA_MAP.zoom,
-      lat: USA_MAP.lat,
-      lng: USA_MAP.lng,
+      lat: USA_MAP.center.lat,
+      lng: USA_MAP.center.lng,
       marker: false,
       address: ''
     }

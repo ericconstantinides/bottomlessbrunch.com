@@ -314,11 +314,11 @@ export { objectFunctions }
  *
  * @export
  * @param {object} region
- * @param {object} browserSize
+ * @param {object} size: browser width and height
  * @returns { { lat, lng, zoom } } mapCenter
  */
-export function getMapCoordsByViewport (region, browserSize) {
-  const { width, height } = browserSize
+export function getMapCoordsByViewport (region, size) {
+  const { width, height } = size
   let drawer
   if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
     drawer = DRAWER.sm
@@ -336,22 +336,23 @@ export function getMapCoordsByViewport (region, browserSize) {
   const totalLat = region.bounds.north - region.bounds.south
   const totalLng = region.bounds.east - region.bounds.west
 
+  const north = region.bounds.north + PAD_DEGREES
+  const south =
+    region.bounds.south - totalLat * (drawerHeightRatio * 2) - PAD_DEGREES
+  const west =
+    region.bounds.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
+  const east = region.bounds.east + PAD_DEGREES
+
   const bounds = {
-    nw: {
-      lat: region.bounds.north + PAD_DEGREES,
-      lng: region.bounds.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
-    },
-    se: {
-      lat: region.bounds.south -
-        totalLat * (drawerHeightRatio * 2) -
-        PAD_DEGREES,
-      lng: region.bounds.east + PAD_DEGREES
-    }
+    ne: { lat: north, lng: east },
+    nw: { lat: north, lng: west },
+    se: { lat: south, lng: east },
+    sw: { lat: south, lng: west }
   }
-  const fitted = fitBounds(bounds, { width, height })
-  return {
-    lat: fitted.center.lat,
-    lng: fitted.center.lng,
-    zoom: fitted.zoom
-  }
+  const marginBounds = bounds
+
+  const fitted = fitBounds(bounds, size)
+  // UPDATE THIS WITH FULL MAINMAP REDUX SUPPORT
+  // = { bounds, center, marginBounds, size: {width, height}, zoom }
+  return {bounds, center: fitted.center, marginBounds, size, zoom: fitted.zoom}
 }

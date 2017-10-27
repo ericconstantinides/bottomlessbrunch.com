@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
-import { USA_MAP } from '../../config'
 import { getMapCoordsByViewport } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
@@ -12,23 +11,16 @@ class Map extends Component {
   constructor () {
     super()
     this.state = {
-      zoom: USA_MAP.zoom,
-      lat: USA_MAP.lat,
-      lng: USA_MAP.lng,
       address: '',
-      loaded: false,
-      mapSize: {
-        width: 0,
-        height: 0
-      }
+      map: {}
     }
   }
   mapLoaded = ({ map, maps }) => {
     this.setState({ map })
   }
-  componentDidMount = () => {
-    this.updateMapAndDrawer()
-  }
+  // componentDidMount = () => {
+  //   this.updateMapAndDrawer()
+  // }
   componentDidUpdate (prevProps, prevState) {
     // update the state's region if the UI region changes:
     if (
@@ -37,8 +29,16 @@ class Map extends Component {
         this.props.ui.browserSize.width !== prevProps.ui.browserSize.width ||
         this.props.ui.browserSize.height !== prevProps.ui.browserSize.height)
     ) {
-      this.updateMapAndDrawer()
+      // console.log(this.props.ui.activeRegion)
+      // this.props.setMainMap({
+        
+      // })
+      console.log(this.props.mainMap)
+      this.updateMapAndDrawer({ size: this.props.mainMap.size })
     }
+  }
+  handleMapChange = coords => {
+    this.updateMapAndDrawer(coords)
   }
   handleMapClick = props => {
     // props = {x, y, lat, lng, event}
@@ -46,20 +46,22 @@ class Map extends Component {
       this.props.clearMarkers()
     }
   }
-  updateMapAndDrawer = () => {
-    const { activeRegion: region, browserSize } = this.props.ui
-    const { lat, lng, zoom } = !_.isEmpty(region.bounds)
-      ? getMapCoordsByViewport(region, browserSize)
+  updateMapAndDrawer = ({size}) => {
+    const { activeRegion: region } = this.props.ui
+    const coords = !_.isEmpty(region.bounds)
+      ? getMapCoordsByViewport(region, size)
       : this.props.ui.activeRegion
-    this.setState({ loaded: true, lat, lng, zoom })
+    
+    this.props.setMainMap(coords)
   }
   render () {
     return (
       <GoogleMapReact
-        zoom={this.state.zoom}
-        center={{ lat: this.state.lat, lng: this.state.lng }}
+        zoom={this.props.mainMap.zoom}
+        center={this.props.mainMap.center}
         options={{ fullscreenControl: false }}
         onGoogleApiLoaded={this.mapLoaded}
+        onChange={this.handleMapChange}
         yesIWantToUseGoogleMapApiInternals
         onClick={this.handleMapClick}
       >
@@ -83,8 +85,8 @@ class Map extends Component {
   }
 }
 
-function mapStateToProps ({ ui, regions }) {
-  return { ui, regions }
+function mapStateToProps ({ ui, regions, mainMap }) {
+  return { ui, regions, mainMap }
 }
 
 export default connect(mapStateToProps, actions)(Map)

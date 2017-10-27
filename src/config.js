@@ -16,8 +16,10 @@ export const DATE_LONG = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export const USA_MAP = {
   zoom: 4,
-  lat: 38.1510752,
-  lng: -95.8457796,
+  center: {
+    lat: 38.1510752,
+    lng: -95.8457796
+  },
   bounds: {
     nw: { lat: 49.5335125, lng: -126.1250427 },
     ne: { lat: 49.5335125, lng: -64.468826475 },

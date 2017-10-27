@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { compileDays } from '../../lib/myHelpers'
+// import { compileDays } from '../../lib/myHelpers'
 
 class VenueTeaser extends Component {
   constructor (props) {
