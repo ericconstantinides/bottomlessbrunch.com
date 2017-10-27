@@ -1,7 +1,7 @@
 /* global google */
 import constants from '../actions/types'
 import { fetchTimeout } from '../config'
-let fetchNum = 1
+// let fetchNum = 1
 
 let fetchTimeoutMs = fetchTimeout * 1000 * 60
 
@@ -18,7 +18,7 @@ export function fetchGooglePlacesVenueDetail ({ _id, googlePlacesData, gpId }) {
       new Date()
   ) {
     return dispatch => {
-      console.log('fetchGooglePlacesVenueDetail:', fetchNum++)
+      // console.log('fetchGooglePlacesVenueDetail:', fetchNum++)
       googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
         if (status === 'OK') {
           return dispatch(setGooglePlacesVenueDetail(_id, place))

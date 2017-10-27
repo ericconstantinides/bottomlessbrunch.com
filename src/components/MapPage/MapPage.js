@@ -1,5 +1,3 @@
-import ReactDOM from 'react-dom'
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Swipeable from 'react-swipeable'
@@ -93,9 +91,6 @@ class MapPage extends Component {
     this.openDrawer()
   }
   handleMouseOver = venue => event => {
-    // console.log(venue._id)
-    // const fun = ReactDOM.findDOMNode(this.refs[venue._id])
-    // console.log(fun)
     this.setState({
       hoveredVenue: venue._id
     })

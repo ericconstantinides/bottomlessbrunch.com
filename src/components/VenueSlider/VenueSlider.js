@@ -9,9 +9,9 @@ import { getVenueBySlug, objectFunctions } from '../../lib/myHelpers'
 import { SLIDER_SETTINGS } from '../../config'
 import * as actions from '../../actions'
 import VenueSliderItem from './VenueSliderItem'
-let mounted = 1
+// let mounted = 1
 // let updated = 1
-let unmounted = 1
+// let unmounted = 1
 
 class VenueSlider extends Component {
   constructor (props) {
@@ -32,7 +32,7 @@ class VenueSlider extends Component {
     }
   }
   componentDidMount () {
-    console.log('slider: MOUNTED:', mounted++)
+    // console.log('slider: MOUNTED:', mounted++)
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
   }
@@ -88,7 +88,7 @@ class VenueSlider extends Component {
   }
   componentWillUnmount () {
     // unset the venueUI:
-    console.log('slider: UNMOUNTED:', unmounted++)
+    // console.log('slider: UNMOUNTED:', unmounted++)
     this.props.unsetUiRegionVenues()
     this.props.unsetUiVenue()
     this.props.removeUiAppClass(['App--VenueSlider'])
