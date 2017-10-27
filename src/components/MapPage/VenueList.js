@@ -20,7 +20,8 @@ class VenueList extends Component {
       this.props.venues,
       this.props.ui.activeRegion._id
     )
-    return _.map(reduced, venue => {
+    const sorted = _.sortBy(reduced, venue => venue.name)
+    return _.map(sorted, venue => {
       return (
         <VenueTeaser
           key={venue._id}
