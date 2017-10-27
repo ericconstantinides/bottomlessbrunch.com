@@ -1,12 +1,12 @@
 import constants from '../actions/types'
 
-export * from './regions'
-export * from './venues'
-export * from './gData'
-export * from './yData'
-export * from './ui'
+export * from './regionsActions'
+export * from './venuesActions'
+export * from './gDataActions'
+export * from './yDataActions'
+export * from './uiActions'
+export * from './mainMapActions'
 
-// TODO: THIS DOESN'T WORK EITHER
 export function apiError (error) {
   return {
     type: constants.API_ERROR,

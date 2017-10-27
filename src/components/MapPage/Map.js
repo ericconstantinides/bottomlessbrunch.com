@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
-import { usaMap } from '../../config'
+import { USA_MAP } from '../../config'
 import { getMapCoordsByViewport } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
@@ -12,9 +12,9 @@ class Map extends Component {
   constructor () {
     super()
     this.state = {
-      zoom: usaMap.zoom,
-      lat: usaMap.lat,
-      lng: usaMap.lng,
+      zoom: USA_MAP.zoom,
+      lat: USA_MAP.lat,
+      lng: USA_MAP.lng,
       address: '',
       loaded: false,
       mapSize: {

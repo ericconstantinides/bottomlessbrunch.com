@@ -17,16 +17,16 @@ import {
   addUiAppClass,
   removeUiAppClass
 } from '../../../actions'
-import { usaMap } from '../../../config'
+import { USA_MAP } from '../../../config'
 import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
 
 class AddEditRegion extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      zoom: usaMap.zoom,
-      lat: usaMap.lat,
-      lng: usaMap.lng,
+      zoom: USA_MAP.zoom,
+      lat: USA_MAP.lat,
+      lng: USA_MAP.lng,
       address: '',
       loaded: false,
       mapSize: {
@@ -85,7 +85,7 @@ class AddEditRegion extends Component {
       // get the real dimensions for the usa map
       this.setState({
         loaded: true,
-        map: fitBoundsGoogleReady(usaMap.bounds, position.size)
+        map: fitBoundsGoogleReady(USA_MAP.bounds, position.size)
       })
     }
     // let's set the size of the map:

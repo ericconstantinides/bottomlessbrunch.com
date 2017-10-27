@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const googleGa = 'UA-21524856-1'
+export const GOOGLE_GA = 'UA-21524856-1'
 export const GOOGLE_API_KEY = 'AIzaSyDsJWQDeqiFe-Chw1tBWfitg_7rGSWmHTU'
 export const SITE_NAME = 'Bottomless Brunch'
 export const SITE_SLOGAN = 'The Bottomless Mimosas & Drinks Guide'
@@ -14,7 +14,7 @@ export const fetchTimeout = 60
 export const ROOT_URL = ''
 export const DATE_LONG = { year: 'numeric', month: 'long', day: 'numeric' }
 
-export const usaMap = {
+export const USA_MAP = {
   zoom: 4,
   lat: 38.1510752,
   lng: -95.8457796,
