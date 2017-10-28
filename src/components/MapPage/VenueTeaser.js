@@ -38,7 +38,7 @@ class VenueTeaser extends Component {
     ) {
       // We set Positioning now:
       const elPos = this.domVenue.getBoundingClientRect()
-      const { size } = this.props.mainMap
+      const { size } = this.props
       const teaserSide = elPos.right > size.width ? 'left' : 'right'
       const offVert = elPos.top < 0
         ? elPos.top * -1 + offsetPadding

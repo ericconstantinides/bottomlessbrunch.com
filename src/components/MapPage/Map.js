@@ -67,7 +67,7 @@ class Map extends Component {
             {...venue}
             lat={venue.lat}
             lng={venue.lng}
-            mainMap={this.props.mainMap}
+            size={this.props.mainMap.size}
             handleMouseOver={this.props.handleMouseOver}
             handleMouseLeave={this.props.handleMouseLeave}
             toggleMarkerClick={this.props.toggleMarkerClick}
