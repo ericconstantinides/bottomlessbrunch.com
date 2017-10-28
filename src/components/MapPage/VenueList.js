@@ -20,7 +20,7 @@ class VenueList extends Component {
       this.props.venues,
       this.props.ui.activeRegion._id
     )
-    const sorted = _.sortBy(reduced, venue => venue.name)
+    const sorted = _.sortBy(reduced, venue => venue.name.toUpperCase())
     return _.map(sorted, venue => {
       return (
         <VenueTeaser
