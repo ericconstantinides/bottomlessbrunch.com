@@ -21,7 +21,7 @@ import {
 } from '../../../actions'
 import { USA_MAP, DATE_LONG, BRUNCH_TIMES } from '../../../config'
 import Marker from '../../common/Marker'
-import { times, days, timeCategories, states } from '../../../enumerables'
+import { times, days, timeCategories, states } from '../../../lib/enumerables'
 import {
   findClosestRegion,
   getAddy,
