@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
+import ReactGA from 'react-ga'
+import { GOOGLE_GA } from './config'
 // allows us to run 100vh in safari:
 // import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 
@@ -15,8 +17,18 @@ import './css/index.css'
 
 import App from './components/App'
 
+ReactGA.initialize(GOOGLE_GA)
+function addAnalytics () {
+  ReactGA.set({ page: history.location.pathname + history.location.search })
+  ReactGA.pageview(history.location.pathname + history.location.search)
+}
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
+history.listen((location, action) => {
+  addAnalytics()
+})
+// run it on initial load:
+addAnalytics()
 
 // Build the middleware for intercepting and dispatching navigation actions
 const middleware = routerMiddleware(history)
