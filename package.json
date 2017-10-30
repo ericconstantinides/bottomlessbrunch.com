@@ -40,7 +40,7 @@
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "full": "concurrently 'npm run start' 'nodemon ../server/index.js' 'npm run watch-css'"
+    "full": "concurrently 'npm run start' 'nodemon ../server/server.js' 'npm run watch-css'"
   },
   "devDependencies": {
     "concurrently": "^3.5.0",
