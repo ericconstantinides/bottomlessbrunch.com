@@ -47,11 +47,12 @@ class VenueSlider extends Component {
           nextProps.ui.regionVenues,
           nextProps.match.params[0]
         )
+        const nextId = objectFunctions.keys.next(nextProps.ui.regionVenues, venue._id)
+        const prevId = objectFunctions.keys.prev(nextProps.ui.regionVenues, venue._id)
         this.setState((prevstate, props) => ({
-          openId: venue._id,
-          nextId: objectFunctions.keys.next(nextProps.ui.regionVenues, venue._id),
-          prevId: objectFunctions.keys.prev(nextProps.ui.regionVenues, venue._id),
+          openId: venue._id, nextId, prevId
         }))
+        this.props.setUiVenue(venue._id, nextId, prevId)
       }
     }
     // load the venues when
@@ -101,18 +102,14 @@ class VenueSlider extends Component {
     this.setState({ openIndex: index })
     _.map(this.props.ui.regionVenues, venue => {
       if (venue.index === index) {
+        const nextId = objectFunctions.keys.next(this.props.ui.regionVenues, venue._id)
+        const prevId = objectFunctions.keys.prev(this.props.ui.regionVenues, venue._id)
         this.setState((prevState, props) => ({
-          openId: venue._id,
-          nextId: objectFunctions.keys.next(this.props.ui.regionVenues, venue._id),
-          prevId: objectFunctions.keys.prev(this.props.ui.regionVenues, venue._id)
+          openId: venue._id, nextId, prevId
         }))
         // const activeVenue = reducedVenues[venue._id]
         this.props.history.push(`/${this.props.region.slug}/${venue.slug}`)
-        this.props.setUiVenue(
-          this.state.openId,
-          this.state.prevId,
-          this.state.nextId
-        )
+        this.props.setUiVenue(venue._id, nextId, prevId)
       }
     })
   }

@@ -20,7 +20,7 @@ const MetaData = ({
   } else {
     const venueName = venueOpenId && venues ? venues[venueOpenId].name : ''
     pageTitle = !_.isEmpty(activeRegion) && venueOpenId
-      ? `${venueName} in ${activeRegion.name} has Bottomless Brunch` // venue
+      ? `${venueName} in ${activeRegion.name}, ${activeRegion.state} for Bottomless Brunch` // venue
       : !_.isEmpty(activeRegion)
           ? `${activeRegion.name} Bottomless Brunch & Bottomless Mimosas` // region
           : `${SITE_NAME}: ${SITE_SLOGAN}` // homepage
