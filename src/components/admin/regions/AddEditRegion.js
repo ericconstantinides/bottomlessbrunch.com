@@ -18,7 +18,11 @@ import {
   removeUiAppClass
 } from '../../../actions'
 import { USA_MAP } from '../../../config'
-import { convertToBounds, fitBoundsGoogleReady } from '../../../lib/myHelpers'
+import {
+  convertToBounds,
+  fitBoundsGoogleReady,
+  getAddy
+} from '../../../lib/myHelpers'
 
 class AddEditRegion extends Component {
   constructor (props) {
@@ -34,7 +38,6 @@ class AddEditRegion extends Component {
         height: 0
       }
     }
-    this.onChange = address => this.setState({ address })
   }
   componentDidMount () {
     this.props.addUiAppClass(['App--AddEditRegion'])
@@ -93,6 +96,9 @@ class AddEditRegion extends Component {
       mapSize: { width: position.size.width, height: position.size.height }
     })
   }
+  handleGoogleAutoselectChange = address => {
+    this.setState({ address })
+  }
   // Fires on Google AutoSelect selection:
   handleSelect = (address, placeId) => {
     geocodeByPlaceId(placeId)
@@ -101,23 +107,20 @@ class AddEditRegion extends Component {
         const {
           b: { b: lngWest, f: lngEast },
           f: { b: latSouth, f: latNorth }
-        } = geometry.bounds
+        } = geometry.viewport
         const bounds = convertToBounds(latNorth, latSouth, lngWest, lngEast)
         this.props.fieldValue(
           'addEditRegion',
           'name',
-          address_components[0].long_name
+          getAddy(address_components, 'locality', 'long_name')
         )
         this.props.fieldValue(
           'addEditRegion',
           'state',
-          address_components[2].short_name
+          getAddy(address_components, 'administrative_area_level_1')
+
         )
         this.props.fieldValue('addEditRegion', 'gpId', placeId)
-        // this.props.fieldValue('addEditRegion', 'bounds.latNorth', latNorth)
-        // this.props.fieldValue('addEditRegion', 'bounds.latSouth', latSouth)
-        // this.props.fieldValue('addEditRegion', 'bounds.lngWest', lngWest)
-        // this.props.fieldValue('addEditRegion', 'bounds.lngEast', lngEast)
         this.setState((prevState, props) => {
           const { position: { lat, lng }, zoom } = fitBoundsGoogleReady(
             bounds,
@@ -190,7 +193,7 @@ class AddEditRegion extends Component {
           <div className='AddEdit__col-right'>
             <MapSearch
               address={this.state.address}
-              onChange={this.onChange}
+              onChange={this.handleGoogleAutoselectChange}
               placeholder='Search for City...'
               handleSelect={this.handleSelect}
               types={['(cities)']}
