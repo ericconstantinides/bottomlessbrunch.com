@@ -2577,13 +2577,12 @@ body.body--MapPage #root,
     margin-bottom: 0; }
 
 .VenueTeaser__more-info {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: bold;
   background-color: transparent;
   color: #c84a01;
-  text-transform: uppercase;
-  border-radius: 100px;
   border: none;
-  font-size: 0.65em;
-  font-weight: bold;
+  font-size: 0.75em;
   margin: auto auto 0 0;
   line-height: 1;
   padding: 0;
