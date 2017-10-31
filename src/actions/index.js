@@ -6,6 +6,7 @@ export * from './gDataActions'
 export * from './yDataActions'
 export * from './uiActions'
 export * from './mainMapActions'
+export * from './adminActions'
 
 export function apiError (error) {
   return {

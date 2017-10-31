@@ -8,6 +8,12 @@ import AddEditVenue from './venues/AddEditVenue'
 import ListVenues from './venues/ListVenues'
 
 const Admin = props => {
+  if (!props.admin || !props.admin.isFetched) {
+    return <div>LOADING...</div>
+  }
+  if (!props.admin.isAdmin) {
+    return <div>NOT AUTHORIZED</div>
+  }
   return (
     <Router history={props.history}>
       <div>

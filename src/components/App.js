@@ -33,6 +33,7 @@ class App extends Component {
       this.props.fetchUiRegion
     )
     this.props.fetchVenues(this.props.calcRegionsBoundsByVenues)
+    this.props.fetchEnvironment()
 
     this.props.setUiBrowserSize()
     window.addEventListener(
@@ -108,7 +109,7 @@ class App extends Component {
           <div>
             <MetaData venues={this.props.venues} path={this.props.history.location.pathname} {...this.props.ui} />
             {/* <Route exact path='/' component={MapPage} /> */}
-            <Route path='/admin' render={props => <Admin {...props} />} />
+            <Route path='/admin' render={props => <Admin {...props} admin={this.props.admin} />} />
             {venueSliderRoutes}
             {regionRoutes}
             {parsedHistory[0] !== 'admin' &&
@@ -131,7 +132,7 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ venues, regions, ui }) {
+function mapStateToProps ({ venues, regions, ui, admin }) {
   // get the region name:
   if (!_.isEmpty(ui.activeRegion)) {
     ui.regionName = ui.activeRegion.name
@@ -144,7 +145,7 @@ function mapStateToProps ({ venues, regions, ui }) {
   if (ui.venueOpenId && !_.isEmpty(venues)) {
     ui.venueName = venues[ui.venueOpenId].name
   }
-  return { venues, regions, ui }
+  return { venues, regions, ui, admin }
 }
 
 export default connect(mapStateToProps, actions)(App)

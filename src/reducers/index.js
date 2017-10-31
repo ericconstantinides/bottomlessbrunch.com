@@ -4,6 +4,7 @@ import VenuesReducer from './VenuesReducer'
 import EditVenueFieldsReducer from './EditVenueFieldsReducer'
 import UiReducer from './UiReducer'
 import MainMapReducer from './MainMapReducer'
+import AdminReducer from './AdminReducer'
 
 const reducers = {
   regions: RegionsReducer,
@@ -11,7 +12,8 @@ const reducers = {
   editVenueFields: EditVenueFieldsReducer,
   form: formReducer,
   ui: UiReducer,
-  mainMap: MainMapReducer
+  mainMap: MainMapReducer,
+  admin: AdminReducer
 }
 
 export default reducers
