@@ -25,6 +25,9 @@ button {
 }
 .AddEdit {
   padding-top: 0.5em;
+  h1 {
+    margin: 0 0 0.25em;
+  }
 }
 .AddEdit .form-group {
   display: flex;
@@ -39,6 +42,13 @@ button {
 }
 .AddEdit__form > * {
   margin-left: 1em;
+}
+.AddEdit__back {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  margin-bottom: 0.5em;
+  display: block;
 }
 .AddEdit__form .form-control {
   font-size: inherit;

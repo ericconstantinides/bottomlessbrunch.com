@@ -310,11 +310,12 @@ body.body--MapPage #root,
   // display: inline-block;
   margin: auto auto 0 0;
   line-height: 1;
-  // padding: 0.25em 0.5em;
-  padding: 0;
+  padding: 0.25em 0 0;
   display: flex;
   align-items: center;
   line-height: 1.1;
+  border-top: 1px solid #eaeaea;
+  width: 100%;
 }
 .VenueList__handle {
   height: 40px;

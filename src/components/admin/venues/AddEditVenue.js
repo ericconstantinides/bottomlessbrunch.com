@@ -50,7 +50,7 @@ class venueForm extends Component {
   componentDidMount () {
     this.props.addUiAppClass(['App--AddEditVenue'])
   }
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.props.resetEditVenue()
     this.props.removeUiAppClass(['App--AddEditVenue'])
   }
@@ -465,7 +465,9 @@ class venueForm extends Component {
       : ''
     return (
       <div className='AddEdit venueForm site-container'>
-        <Link to='/admin/venues'>« Back to Venues</Link>
+        <Link className='AddEdit__back chevron-before' to='/admin/venues'>
+          Back to Venues
+        </Link>
         <form className='AddEdit__form' onSubmit={handleSubmit(this.onSubmit)}>
           <div className='AddEdit__col-1'>
             {title}
@@ -483,7 +485,7 @@ class venueForm extends Component {
                   yesIWantToUseGoogleMapApiInternals
                   zoom={this.state.zoom - 1}
                   center={{ lat: this.state.lat, lng: this.state.lng }}
-                  options={{fullscreenControl: false}}
+                  options={{ fullscreenControl: false }}
                   style={{
                     height: '300px',
                     position: 'relative',
@@ -537,11 +539,7 @@ class venueForm extends Component {
                     component={renderField}
                     externalLink
                   />
-                  <Field
-                    lbl='Yelp ID'
-                    name='yId'
-                    component={renderField}
-                  />
+                  <Field lbl='Yelp ID' name='yId' component={renderField} />
                   <Field
                     lbl='Facebook URL'
                     name='facebookUrl'
@@ -636,11 +634,10 @@ class venueForm extends Component {
             </div>
           </div>
           <div className='AddEdit__col-2'>
-            {gDataObj.images && 
+            {gDataObj.images &&
               <div className='AddEdit__image-wrapper'>
                 <img src={gDataObj.images.large[0].url} alt='' />
-              </div>
-            }
+              </div>}
             <div className='AddEdit__field-wrapper'>
               <FieldArray name='funTimes' component={this.renderFunTimes} />
               <FieldArray name='funItems' component={this.renderMenuItems} />

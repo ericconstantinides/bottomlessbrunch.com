@@ -54,6 +54,13 @@ a {
   &:after {
     margin-left: 0.25em;
     font-size: 1.25em;
-    content: '»';
+    content: '\BB';
+  }
+}
+.chevron-before {
+  &:before {
+    margin-right: 0.25em;
+    font-size: 1.25em;
+    content: '\AB';
   }
 }
