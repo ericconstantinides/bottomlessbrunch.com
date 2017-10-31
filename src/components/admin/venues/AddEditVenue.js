@@ -46,7 +46,6 @@ class venueForm extends Component {
       marker: false,
       address: ''
     }
-    this.onChange = address => this.setState({ address })
   }
   componentDidMount () {
     this.props.addUiAppClass(['App--AddEditVenue'])
@@ -155,6 +154,9 @@ class venueForm extends Component {
       })
     }
   }
+  handleGoogleAutoselectChange = address => {
+    this.setState({ address })
+  }
   // Fires on Google AutoSelect selection:
   handleGoogleAutoSelect = (address, placeId) => {
     // set the gpId
@@ -175,9 +177,6 @@ class venueForm extends Component {
           this.props.fetchYelpPhoneSearchEditVenueDetail,
           this.props.fetchYelpMetaEditVenueDetail
         )
-        // this.props.fetchYelpPhoneSearchEditVenueDetail({
-        //   international_phone_number: '+1 408 929-5501'
-        // })
       })
       .catch(error => console.error(error))
     // this.setState({ address, placeId })
@@ -472,7 +471,7 @@ class venueForm extends Component {
             {title}
             <MapSearch
               address={this.state.address}
-              onChange={this.onChange}
+              onChange={this.handleGoogleAutoselectChange}
               placeholder='Search for Venue...'
               handleSelect={this.handleGoogleAutoSelect}
               types={['establishment']}
