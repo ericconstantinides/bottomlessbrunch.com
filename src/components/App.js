@@ -105,11 +105,18 @@ class App extends Component {
     const parsedHistory = parsePath(this.props.history.location.pathname)
     return (
       <div className={cx('App', this.props.ui.appClass)}>
+        <MetaData
+          venues={this.props.venues}
+          path={this.props.history.location.pathname}
+          {...this.props.ui}
+        />
         <Router history={this.props.history}>
           <div>
-            <MetaData venues={this.props.venues} path={this.props.history.location.pathname} {...this.props.ui} />
             {/* <Route exact path='/' component={MapPage} /> */}
-            <Route path='/admin' render={props => <Admin {...props} admin={this.props.admin} />} />
+            <Route
+              path='/admin'
+              render={props => <Admin {...props} admin={this.props.admin} />}
+            />
             {venueSliderRoutes}
             {regionRoutes}
             {parsedHistory[0] !== 'admin' &&
@@ -125,9 +132,9 @@ class App extends Component {
                 handleCloseRegionsModalClick={this.handleCloseRegionsModalClick}
               />
             }
-          </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
+    </div>
     )
   }
 }
