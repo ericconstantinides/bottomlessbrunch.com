@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import constants from '../actions/types'
-import slugify from '../lib/Slug'
+import { slugify } from '../lib/myHelpers'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
