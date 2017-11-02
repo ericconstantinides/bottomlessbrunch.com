@@ -37,6 +37,38 @@ export function roundHalf (num) {
 }
 
 /**
+ * slugify turns normal text into a lowercase slug suitable for a URI
+ *
+ * @export
+ * @param {String} str
+ * @returns {String} slugified string
+ */
+export function slugify (str) {
+  return str
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/[^\w-]+/g, '') // Remove all non-word chars
+    .replace(/--+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of string
+    .replace(/-+$/, '') // Trim - from end of string
+}
+
+/**
+ * camelize creates a camelCase from a string
+ *
+ * @export
+ * @param {String} str
+ * @returns {String}
+ */
+export function camelize (str) {
+  return str
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('')
+}
+
+/**
  * Parses a pathName and returns it as an array
  * @param {String} fullPath
  * @return {Array}
