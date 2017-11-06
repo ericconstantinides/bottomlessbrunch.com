@@ -41,6 +41,10 @@ class MapPage extends Component {
     this.props.addUiAppClass(['App--MapPage'])
     // viewportUnitsBuggyfill.init()
   }
+  componentDidUpdate (prevProps, prevState) {
+    console.log('cdu: MapPage.js')
+  }
+  
   componentWillUnmount () {
     document.documentElement.classList.remove('html--MapPage')
     document.body.classList.remove('body--MapPage')
@@ -78,6 +82,7 @@ class MapPage extends Component {
   }
   handleDragStart = e => {
     if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
+    console.log('handleDragStart')
     // this is extremely important for iOS (but gives a warnign in chrome):
     e.preventDefault()
     clearInterval(this.state.intervalId)
@@ -97,14 +102,25 @@ class MapPage extends Component {
       momentumDistance: 0
     })
   }
+  // this is where we actually move the items
+  handleDragging = e => {
+    if (!this.state.dragItemPressed) return
+    if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
+    console.log('handleDragging')
+    e.preventDefault()
+    const pageY = e.targetTouches ? e.targetTouches[0].pageY : e.pageY
+    const dragDistance = pageY - this.state.cursorY
+    const dragItemGoToY = dragDistance + this.state.dragItemY
+    this.moveItems(dragItemGoToY)
+  }
   handleDragEnd = e => {
     if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
+    console.log('handleDragEnd')
     this.setState({ dragItemPressed: false })
     clearInterval(this.state.intervalId)
     const timestamp = Date.now()
     const newDragItemY = this.getYPosition(this.refs.dragItem)
     const travelled = newDragItemY - this.state.dragItemY
-    console.log({travelled})
     if (
       (this.state.velocity > 10 || this.state.velocity < -10) &&
       Math.abs(travelled) > 20
@@ -120,21 +136,25 @@ class MapPage extends Component {
         }
       })
     }
-  }
-  // this is where we actually move the items
-  handleDragging = e => {
-    if (!this.state.dragItemPressed) return
-    if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
     e.preventDefault()
-    const pageY = e.targetTouches ? e.targetTouches[0].pageY : e.pageY
-    const dragDistance = pageY - this.state.cursorY
-    const dragItemGoToY = dragDistance + this.state.dragItemY
-    this.moveItems(dragItemGoToY)
   }
-
+  handleScrolling = e => {
+    if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
+    this.setState((state, props) => {
+      return { 
+        dragItemY: this.getYPosition(this.refs.dragItem),
+        linkedDragItemY: this.getYPosition(this.refs.linkedDragItem)
+       }
+    }, this.moveItems(this.state.dragItemY - e.deltaY))
+  }
   moveItems = goToYUnbounded => {
     const { dragItem, linkedDragItem } = this.refs
-    const { dragItemY, linkedDragItemY } = this.state
+    let { dragItemY, linkedDragItemY } = this.state
+    if (dragItemY === 0 || linkedDragItemY === 0 ) {
+      dragItemY = this.getYPosition(this.refs.dragItem)
+      linkedDragItemY = this.getYPosition(this.refs.linkedDragItem)
+      this.setState({dragItemY, linkedDragItemY})
+    }
     const dragItemHeight = dragItem.offsetHeight
     // make sure we're within our scrolling bounds:
     const goToY = goToYUnbounded <= -dragItemHeight
@@ -205,7 +225,11 @@ class MapPage extends Component {
     const drawerState = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
-        <div className='MapPage__Map-container' ref='linkedDragItem'>
+        <div
+          className='MapPage__Map-container'
+          ref='linkedDragItem'
+          style={{transform: 'translateY(0px)'}}
+        >
           <Map
             venues={this.props.venues}
             handleMouseOver={this.handleMouseOver}
@@ -228,10 +252,10 @@ class MapPage extends Component {
           onMouseDown={this.handleDragStart}
           onTouchStart={this.handleDragStart}
           onTouchEnd={this.handleDragEnd}
-          onMouseLeave={this.handleDragEnd}
           onMouseUp={this.handleDragEnd}
           onTouchMove={this.handleDragging}
           onMouseMove={this.handleDragging}
+          onWheel={this.handleScrolling}
         >
           <VenueList
             history={this.props.history}
