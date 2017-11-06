@@ -9,6 +9,12 @@ import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
 
 class VenueList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      slideState: {}
+    } 
+  }
   componentDidUpdate (prevProps, prevState) {
     // put the venueList back at the top for a new region:
     if (prevProps.ui.activeRegion._id !== this.props.ui.activeRegion._id) {
@@ -37,34 +43,9 @@ class VenueList extends Component {
       )
     })
   }
-  // handleRegionsModalClick = () => {
-  //   this.props.showUiRegionsModal()
-  // }
-  // handleLogoClick = () => {
-  //   this.props.unsetUiVenue()
-  //   this.props.unsetUiRegion()
-  //   this.props.history.push('/')
-  // }
   render () {
-    const style = this.props.drawerSmoothScroll
-      ? {
-        WebkitOverflowScrolling: 'touch',
-        overflowY: 'scroll'
-      }
-      : {}
     return (
-      <div
-        className='VenueList'
-        ref='VenueList'
-        onScroll={this.props.handleScroll}
-        onTouchMove={this.props.handleScroll}
-        style={style}
-      >
-        {/* <Logo
-          handleLogoClick={this.handleLogoClick}
-          handleRegionsModalClick={this.handleRegionsModalClick}
-          region={this.props.ui.activeRegion}
-        /> */}
+      <div className='VenueList'>
         {this.renderTeasers()}
       </div>
     )

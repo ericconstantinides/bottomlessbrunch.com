@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import Swipeable from 'react-swipeable'
 // import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 import _ from 'lodash'
 
@@ -10,14 +10,28 @@ import Logo from '../common/Logo'
 import Map from './Map'
 import VenueList from './VenueList'
 
+const LOWEST_Y = 200
+const DRAG_TIMEFRAME = 15 // how often it's rechecking the drag position
+const TIME_CONSTANT = 325 // how often it's autoscrolling
+const MOMENTUM_SPEED = 0.55 // how fast (or slow) to have the momentum
+const MOMENTUM_FRICTION = 0.8 // how loose or tight the momentum should be
+
 class MapPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
       hoveredVenue: '',
-      drawerOpen: false,
-      drawerVertOffset: 0,
-      drawerSmoothScroll: false
+      dragItemPressed: false,
+      dragItemY: 0,
+      linkedDragItemY: 0,
+      cursorY: 0,
+      // new for inertia:
+      timestamp: '',
+      intervalId: '',
+      frame: 0, // how many pixels were dragged during the timeframe
+      velocity: 0, // how fast the last frame was dragged through
+      momentumDistance: 0, // how many pixels to travel based on velocity
+      momentumTargetY: 0 // the y pos that momentum will take the dragItem
     }
   }
   componentDidMount () {
@@ -31,12 +45,6 @@ class MapPage extends Component {
     document.body.classList.remove('body--MapPage')
     this.props.removeUiAppClass(['App--MapPage'])
   }
-  // handleSelectChange = selected => {
-  //   this.props.setUiRegion(
-  //     this.props.regions[selected.value],
-  //     this.props.history
-  //   )
-  // }
   handleRegionsModalClick = () => {
     this.props.showUiRegionsModal()
   }
@@ -45,58 +53,15 @@ class MapPage extends Component {
     this.props.unsetUiRegion()
     this.props.history.push('/')
   }
-  openDrawer = () => {
-    this.setState((prevState, props) => ({
-      drawerOpen: true,
-      drawerVertOffset: 0,
-      drawerSmoothScroll: true
-    }))
-    setTimeout(() => {
-      this.setState((prevState, props) => ({
-        drawerSmoothScroll: true
-      }))
-    }, 1)
-  }
-  // close the drawer:
-  handleSwipedDown = (e, deltaY, isFlick) => {
-    this.setState((prevState, props) => ({
-      drawerOpen: false,
-      drawerVertOffset: 0,
-      drawerSmoothScroll: false
-    }))
-  }
-  // open the drawer:
-  handleSwipedUp = (e, deltaY, isFlick) => {
-    this.openDrawer()
-  }
-  // this on is only for looks
-  handleSwiping = (e, deltaX, deltaY, absX, absY, velocity) => {
-    const restrictedDeltaY = deltaY > 20 ? -20 : deltaY < -20 ? 20 : deltaY * -1
-    this.setState((prevState, props) => ({
-      drawerVertOffset: restrictedDeltaY
-    }))
-  }
-  handleDrawerClick = () => {
-    if (!this.state.drawerOpen) {
-      this.openDrawer()
-    } else {
-      this.setState((prevState, props) => ({
-        drawerOpen: false,
-        drawerVertOffset: 0,
-        drawerSmoothScroll: false
-      }))
+  handleMouseOver = venue => event => {
+    if (this.props.ui.browserSize.width > 768) {
+      this.setState({ hoveredVenue: venue._id })
     }
   }
-  handleVenueListScroll = (e) => {
-    this.openDrawer()
-  }
-  handleMouseOver = venue => event => {
-    this.setState({
-      hoveredVenue: venue._id
-    })
-  }
   handleMouseLeave = venue => event => {
-    this.setState({ hoveredVenue: '' })
+    if (this.props.ui.browserSize.width > 768) {
+      this.setState({ hoveredVenue: '' })
+    }
   }
   toggleMarkerClick = venue => event => {
     // I NEED TO MOVE THE MAP AROUND TO DISPLAY THE HOVERED MARKER THE BEST
@@ -110,6 +75,121 @@ class MapPage extends Component {
   clearMarkers = () => {
     this.setState({hoveredVenue: ''})
   }
+  handleDragStart = e => {
+    if (e.targetTouches) {
+      // this is extremely important for iOS (but gives a warnign in chrome):
+      e.preventDefault()
+    }
+    clearInterval(this.state.intervalId)
+    const dragItemY = this.getYPosition(this.refs.dragItem)
+    const linkedDragItemY = this.getYPosition(this.refs.linkedDragItem)
+    // start trackDragging every DRAG_TIMEFRAME ms:
+    const intervalId = setInterval(this.trackDragging, DRAG_TIMEFRAME)
+    this.setState({
+      dragItemPressed: true,
+      dragItemY,
+      linkedDragItemY,
+      cursorY: e.targetTouches ? e.targetTouches[0].pageY : e.pageY,
+      timestamp: Date.now(),
+      intervalId,
+      frame: 0,
+      velocity: 0,
+      momentumDistance: 0
+    })
+  }
+  handleDragEnd = e => {
+    this.setState({ dragItemPressed: false })
+
+    clearInterval(this.state.intervalId)
+    if (this.state.velocity > 10 || this.state.velocity < -10) {
+      const momentumDistance = MOMENTUM_FRICTION * this.state.velocity
+      const momentumTargetY = Math.round(
+        this.getYPosition(this.refs.dragItem) + momentumDistance
+      )
+      const timestamp = Date.now()
+      window.requestAnimationFrame(this.calculateMomentum)
+      this.setState((state, props) => {
+        return {
+          timestamp,
+          momentumTargetY,
+          momentumDistance
+        }
+      })
+    }
+  }
+  // this is where we actually move the items
+  handleDragging = e => {
+    if (!this.state.dragItemPressed) return
+    const pageY = e.targetTouches ? e.targetTouches[0].pageY : e.pageY
+    const dragDistance = pageY - this.state.cursorY
+    const dragItemGoToY = dragDistance + this.state.dragItemY
+    this.moveItems(dragItemGoToY)
+  }
+
+  moveItems = goToYUnbounded => {
+    const { dragItem, linkedDragItem } = this.refs
+    const { dragItemY, linkedDragItemY } = this.state
+    const dragItemHeight = dragItem.offsetHeight
+    // make sure we're within our scrolling bounds:
+    const goToY = goToYUnbounded <= -dragItemHeight
+      ? -dragItemHeight
+      : goToYUnbounded >= -LOWEST_Y ? -LOWEST_Y : goToYUnbounded
+    const dragDistance = goToY - dragItemY
+    const linkedDragItemGoToY = dragDistance / 2 + linkedDragItemY < 0
+      ? dragDistance / 2 + linkedDragItemY
+      : 0
+    linkedDragItem.style.transform = 'translateY(' + linkedDragItemGoToY + 'px)'
+    dragItem.style.transform = 'translateY(' + goToY + 'px)'
+  }
+  
+  getYPosition = myRef => {
+    const translateY = parseInt(
+      window
+        .getComputedStyle(ReactDOM.findDOMNode(myRef))
+        .transform.split('matrix(1, 0, 0, 1, 0, ')
+        .join('')
+        .split(')')
+        .join(''),
+      10
+    )
+    if (translateY) return translateY
+    return 0
+  }
+
+  // tracks the dragging for enabling inertia
+  trackDragging = () => {
+    const now = Date.now()
+    const elapsed = now - this.state.timestamp
+    const frame = this.getYPosition(this.refs.dragItem)
+    const delta = frame - this.state.frame
+    const v = 1000 * delta / (1 + elapsed)
+    const velocity = MOMENTUM_SPEED * v + 0.2 * this.state.velocity
+    this.setState((state, props) => {
+      return {
+        timestamp: now,
+        frame,
+        velocity
+      }
+    })
+  }
+
+  // activates after letting go of list and still in movment
+  calculateMomentum = () => {
+    if (this.state.momentumDistance) {
+      const elapsed = Date.now() - this.state.timestamp
+      const delta =
+        -this.state.momentumDistance * Math.exp(-elapsed / TIME_CONSTANT)
+      if (delta > 0.5 || delta < -0.5) {
+        // this is where all the momentum is:
+        this.moveItems(this.state.momentumTargetY + delta)
+        window.requestAnimationFrame(this.calculateMomentum)
+      } else {
+        // this is the last of the momentum:
+        this.moveItems(this.state.momentumTargetY)
+        clearInterval(this.state.intervalId)
+      }
+    }
+  }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
@@ -119,7 +199,7 @@ class MapPage extends Component {
     const drawerState = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
-        <div className='MapPage__Map-container'>
+        <div className='MapPage__Map-container' ref='linkedDragItem'>
           <Map
             venues={this.props.venues}
             handleMouseOver={this.handleMouseOver}
@@ -131,40 +211,29 @@ class MapPage extends Component {
             mapElement={<div style={styles} />}
           />
         </div>
-        <div
-          className={`MapPage__VenueList-container MapPage__VenueList--width ${drawerState}`}
-          style={{transform: `translateY(${this.state.drawerVertOffset}px)`}}
-        >
-          <Logo
+          {/* <Logo
             region={this.props.ui.activeRegion}
             handleLogoClick={this.handleLogoClick}
             handleRegionsModalClick={this.handleRegionsModalClick}
-          />
-          <Swipeable
-            onSwiping={this.handleSwiping}
-            onSwipedUp={this.handleSwipedUp}
-            onSwipedDown={this.handleSwipedDown}
-          >
-            {/* stopPropagation */}
-            {/* preventDefaultTouchmoveEvent */}
-            {/* trackMouse */}
-            <div
-              onClick={this.handleDrawerClick}
-              className='VenueList__handle'
-              id='VenueList__handle'
-            >
-              <div className='VenueList__inner-handle' />
-            </div>
-          </Swipeable>
+          /> */}
+        <div
+          className='VenueList__drag'
+          ref='dragItem'
+          onMouseDown={this.handleDragStart}
+          onTouchStart={this.handleDragStart}
+          onTouchEnd={this.handleDragEnd}
+          onMouseLeave={this.handleDragEnd}
+          onMouseUp={this.handleDragEnd}
+          onTouchMove={this.handleDragging}
+          onMouseMove={this.handleDragging}
+        >
           <VenueList
             history={this.props.history}
-            handleScroll={this.handleVenueListScroll}
             region={this.props.ui.activeRegion._id}
             handleMouseOver={this.handleMouseOver}
             handleMouseLeave={this.handleMouseLeave}
             toggleMarkerClick={this.toggleMarkerClick}
             hoveredVenue={this.state.hoveredVenue}
-            drawerSmoothScroll={this.state.drawerSmoothScroll}
           />
         </div>
       </div>

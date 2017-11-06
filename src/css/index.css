@@ -2597,6 +2597,9 @@ body.body--MapPage #root,
   border-top: 1px solid #eaeaea;
   width: 100%; }
 
+/*
+ * Mobile:
+ */
 .VenueList__handle {
   height: 40px;
   display: flex;
@@ -2610,33 +2613,39 @@ body.body--MapPage #root,
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
   border-radius: 100px; }
 
-@media only screen and (min-width: 768px) {
-  .VenueList__handle {
-    display: none; } }
-
 @media only screen and (min-width: 768px) and (max-width: 900px) {
   .MapPage__VenueList--width {
     width: 320px; }
   .VenueListItem__image-container {
     width: 140px; } }
 
+@media only screen and (min-width: 768px) {
+  .VenueList__drag {
+    width: 300px; } }
+
 @media only screen and (max-width: 767px) {
+  .MapPage__Map-container {
+    width: 100%;
+    height: calc(100vh - 200px); }
   .MapPage__VenueList--width {
     width: 100%; }
-  .MapPage__VenueList-container {
-    top: auto;
-    right: 0;
+  .VenueList__drag {
+    position: absolute;
+    top: 100vh;
+    width: 100vw;
+    transform: translateY(-200px);
+    padding-bottom: 81px;
+    background: white; }
+  .VenueList {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    padding-top: 0.5em; }
+  .Logo__container {
+    position: fixed;
     bottom: 0;
     left: 0;
-    width: auto;
-    transition: 0.5s; }
-    .MapPage__VenueList-container.is-closed {
-      height: 35vh; }
-      .MapPage__VenueList-container.is-closed .VenueList {
-        overflow-y: hidden; }
-    .MapPage__VenueList-container.is-open {
-      height: 75vh;
-      bottom: 0; } }
+    right: 0; } }
 
 @media only screen and (max-width: 480px) {
   .VenueListItem__image-container {
