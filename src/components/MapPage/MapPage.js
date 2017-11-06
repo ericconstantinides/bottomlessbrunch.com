@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import * as actions from '../../actions'
+import { DRAWER } from '../../config'
 
 import Logo from '../common/Logo'
 import Map from './Map'
@@ -14,7 +15,7 @@ const LOWEST_Y = 200
 const DRAG_TIMEFRAME = 15 // how often it's rechecking the drag position
 const TIME_CONSTANT = 325 // how often it's autoscrolling
 const MOMENTUM_SPEED = 0.55 // how fast (or slow) to have the momentum
-const MOMENTUM_FRICTION = 0.8 // how loose or tight the momentum should be
+const MOMENTUM_FRICTION = 0.92 // how loose or tight the momentum should be
 
 class MapPage extends Component {
   constructor (props) {
@@ -40,7 +41,7 @@ class MapPage extends Component {
     this.props.addUiAppClass(['App--MapPage'])
     // viewportUnitsBuggyfill.init()
   }
-  componentWillUnmount() {
+  componentWillUnmount () {
     document.documentElement.classList.remove('html--MapPage')
     document.body.classList.remove('body--MapPage')
     this.props.removeUiAppClass(['App--MapPage'])
@@ -54,12 +55,12 @@ class MapPage extends Component {
     this.props.history.push('/')
   }
   handleMouseOver = venue => event => {
-    if (this.props.ui.browserSize.width > 768) {
+    if (this.props.ui.browserSize.width > DRAWER.sm.ends) {
       this.setState({ hoveredVenue: venue._id })
     }
   }
   handleMouseLeave = venue => event => {
-    if (this.props.ui.browserSize.width > 768) {
+    if (this.props.ui.browserSize.width > DRAWER.sm.ends) {
       this.setState({ hoveredVenue: '' })
     }
   }
@@ -67,19 +68,18 @@ class MapPage extends Component {
     // I NEED TO MOVE THE MAP AROUND TO DISPLAY THE HOVERED MARKER THE BEST
     this.setState((prevState, props) => {
       if (prevState.hoveredVenue === venue._id) {
-        return {hoveredVenue: ''}
+        return { hoveredVenue: '' }
       }
       return { hoveredVenue: venue._id }
     })
   }
   clearMarkers = () => {
-    this.setState({hoveredVenue: ''})
+    this.setState({ hoveredVenue: '' })
   }
   handleDragStart = e => {
-    if (e.targetTouches) {
-      // this is extremely important for iOS (but gives a warnign in chrome):
-      e.preventDefault()
-    }
+    if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
+    // this is extremely important for iOS (but gives a warnign in chrome):
+    e.preventDefault()
     clearInterval(this.state.intervalId)
     const dragItemY = this.getYPosition(this.refs.dragItem)
     const linkedDragItemY = this.getYPosition(this.refs.linkedDragItem)
@@ -98,15 +98,19 @@ class MapPage extends Component {
     })
   }
   handleDragEnd = e => {
+    if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
     this.setState({ dragItemPressed: false })
-
     clearInterval(this.state.intervalId)
-    if (this.state.velocity > 10 || this.state.velocity < -10) {
+    const timestamp = Date.now()
+    const newDragItemY = this.getYPosition(this.refs.dragItem)
+    const travelled = newDragItemY - this.state.dragItemY
+    console.log({travelled})
+    if (
+      (this.state.velocity > 10 || this.state.velocity < -10) &&
+      Math.abs(travelled) > 20
+    ) {
       const momentumDistance = MOMENTUM_FRICTION * this.state.velocity
-      const momentumTargetY = Math.round(
-        this.getYPosition(this.refs.dragItem) + momentumDistance
-      )
-      const timestamp = Date.now()
+      const momentumTargetY = Math.round(newDragItemY + momentumDistance)
       window.requestAnimationFrame(this.calculateMomentum)
       this.setState((state, props) => {
         return {
@@ -120,6 +124,8 @@ class MapPage extends Component {
   // this is where we actually move the items
   handleDragging = e => {
     if (!this.state.dragItemPressed) return
+    if (this.props.ui.browserSize.width > DRAWER.sm.ends) return
+    e.preventDefault()
     const pageY = e.targetTouches ? e.targetTouches[0].pageY : e.pageY
     const dragDistance = pageY - this.state.cursorY
     const dragItemGoToY = dragDistance + this.state.dragItemY
@@ -141,7 +147,7 @@ class MapPage extends Component {
     linkedDragItem.style.transform = 'translateY(' + linkedDragItemGoToY + 'px)'
     dragItem.style.transform = 'translateY(' + goToY + 'px)'
   }
-  
+
   getYPosition = myRef => {
     const translateY = parseInt(
       window
@@ -211,11 +217,11 @@ class MapPage extends Component {
             mapElement={<div style={styles} />}
           />
         </div>
-          {/* <Logo
-            region={this.props.ui.activeRegion}
-            handleLogoClick={this.handleLogoClick}
-            handleRegionsModalClick={this.handleRegionsModalClick}
-          /> */}
+        <Logo
+          region={this.props.ui.activeRegion}
+          handleLogoClick={this.handleLogoClick}
+          handleRegionsModalClick={this.handleRegionsModalClick}
+        />
         <div
           className='VenueList__drag'
           ref='dragItem'
