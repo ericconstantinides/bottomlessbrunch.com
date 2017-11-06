@@ -45,7 +45,7 @@ class VenueSlider extends Component {
       if (!this.state.openId) {
         const venue = getVenueBySlug(
           nextProps.ui.regionVenues,
-          nextProps.match.params[0]
+          nextProps.match.params.venueSlug
         )
         const nextId = objectFunctions.keys.next(nextProps.ui.regionVenues, venue._id)
         const prevId = objectFunctions.keys.prev(nextProps.ui.regionVenues, venue._id)
@@ -66,7 +66,7 @@ class VenueSlider extends Component {
     //   if (!this.state.openId) {
     //     const venue = getVenueBySlug(
     //       reducedVenues,
-    //       nextProps.match.params[0]
+    //       nextProps.match.params.region
     //     )
     //     this.setState((prevstate, props) => ({
     //       openId: venue._id,

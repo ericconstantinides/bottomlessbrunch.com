@@ -88,7 +88,7 @@ class App extends Component {
         .map(region => (
           <Route
             key={region._id}
-            path={`/${region.slug}/*`}
+            path={`/${region.slug}/:venueSlug`}
             region={region}
             history={this.props.history}
             render={props => (
