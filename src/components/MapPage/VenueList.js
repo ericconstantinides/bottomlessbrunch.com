@@ -15,12 +15,6 @@ class VenueList extends Component {
       slideState: {}
     } 
   }
-  componentDidUpdate (prevProps, prevState) {
-    // put the venueList back at the top for a new region:
-    if (prevProps.ui.activeRegion._id !== this.props.ui.activeRegion._id) {
-      this.refs.VenueList.scrollTop = 0
-    }
-  }
   renderTeasers = () => {
     const reduced = reduceVenuesByRegion(
       this.props.venues,
@@ -46,6 +40,9 @@ class VenueList extends Component {
   render () {
     return (
       <div className='VenueList'>
+        <div className='VenueList__handle'>
+          <div className='VenueList__inner-handle' />
+        </div>
         {this.renderTeasers()}
       </div>
     )

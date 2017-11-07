@@ -474,10 +474,14 @@ a * {
 .Logo__container {
   text-align: center;
   z-index: 1;
-  background: white;
+  background: rgba(255, 255, 255, 0.75);
+  height: 90px; }
+
+.Logo__inner-container {
+  box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.25);
   margin: 0 0.5em 0.5em;
-  padding: 0.5em 0.5em 0;
-  box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.25); }
+  background: white;
+  padding: 0.5em 0.5em 0; }
 
 .Logo {
   display: flex;
@@ -536,10 +540,10 @@ a * {
     border-left: 0.25em solid transparent;
     border-right: 0.25em solid transparent; }
 
-.App--IntroPage .Logo__container {
-  height: 0;
-  padding: 0;
-  margin: 0; }
+.App--IntroPage .Logo__container,
+.App--IntroPage .Logo__inner-container {
+  background: transparent;
+  box-shadow: none; }
 
 .App--IntroPage .Logo {
   position: relative;
@@ -564,19 +568,6 @@ a * {
     font-size: 1.65em; } }
 
 @media only screen and (max-width: 767px) {
-  .App--VenueSlider .Logo__container,
-  .App--MapPage .Logo__container {
-    order: 1;
-    flex: 0 0 auto;
-    margin: 0;
-    background: rgba(255, 255, 255, 0.5);
-    background: #f1f1f1;
-    border-top: 1px solid #ddd;
-    height: 56px;
-    padding: 0.5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; }
   .App--VenueSlider .Logo,
   .App--MapPage .Logo {
     flex-flow: row-reverse; }
@@ -654,7 +645,7 @@ a * {
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.75);
-  z-index: 1;
+  z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2366,11 +2357,6 @@ body.body--MapPage #root,
   display: flex;
   flex-flow: column; }
 
-.VenueList {
-  overflow-y: scroll;
-  height: 100%;
-  -webkit-overflow-scrolling: touch; }
-
 .MapItem {
   display: flex;
   position: relative;
@@ -2601,17 +2587,27 @@ body.body--MapPage #root,
  * Mobile:
  */
 .VenueList__handle {
-  height: 40px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center; }
 
 .VenueList__inner-handle {
   background: #a7a7a7;
-  height: 6px;
-  width: 80px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+  height: 4px;
+  width: 34px;
   border-radius: 100px; }
+
+.VenueList {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.75); }
+
+.MapPage__Map-inner-container {
+  height: 100%; }
+
+.Logo__container {
+  z-index: 3; }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
   .MapPage__VenueList--width {
@@ -2620,18 +2616,33 @@ body.body--MapPage #root,
     width: 140px; } }
 
 @media only screen and (min-width: 768px) {
-  .VenueList__drag {
-    height: 100vh;
-    position: relative;
+  .VenueList__handle,
+  .VenueList__spacer {
+    display: none; }
+  .Logo__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 390px; }
+  .VenueList {
+    padding-top: 0.5em;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     width: 390px;
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(0) !important; } }
+    top: 90px;
+    bottom: 0;
+    position: absolute; } }
 
 @media only screen and (max-width: 767px) {
+  .Logo__container {
+    height: 56px; }
+  .Logo__inner-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0;
+    margin: 0; }
   .MapPage {
     display: block; }
-  .Logo__container {
-    z-index: 3; }
   .MapPage__inner {
     height: 100%;
     overflow: auto;
@@ -2643,18 +2654,12 @@ body.body--MapPage #root,
     height: calc(100vh - 200px);
     z-index: 1; }
   .MapPage__Map-inner-container {
-    height: 100%;
     padding-top: 56px; }
   .MapPage__VenueList--width {
     width: 100%; }
   .VenueList__spacer {
     height: calc(100vh - 200px);
     width: 1px; }
-  .VenueList {
-    overflow: visible;
-    padding-top: 0.5em;
-    position: relative;
-    z-index: 2; }
   .Logo__container {
     position: fixed;
     top: 0;
@@ -2666,12 +2671,6 @@ body.body--MapPage #root,
     width: calc(50% - 0.5em); }
   .MapItem__inner {
     width: 180px; } }
-
-.VenueListItem__link.red {
-  outline: 4px solid red; }
-
-.VenueListItem__link.green {
-  outline: 4px solid green; }
 
 .App--VenueSlider .MapPage__container {
   filter: saturate(0.25) opacity(0.65); }
@@ -2685,7 +2684,7 @@ body.body--MapPage #root,
   left: 100%;
   width: 100%;
   bottom: 0;
-  z-index: 1;
+  z-index: 3;
   opacity: 0;
   transition: left 0s 0.5s, opacity 0.5s, transform 0.5s;
   transform: translate3d(0, 5vh, 0);
@@ -3339,6 +3338,10 @@ html.touch .VenueSlider__arrow {
     flex-flow: column; }
   .VenueSliderItem__address {
     margin-bottom: 1em; } }
+
+@media only screen and (max-width: 767px) {
+  .VenueSlider {
+    top: 56px; } }
 
 .AdminVenues,
 .AdminRegions {

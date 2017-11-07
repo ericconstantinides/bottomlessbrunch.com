@@ -22,13 +22,13 @@ class Map extends Component {
   // componentDidMount = () => {
   //   this.updateMapAndDrawer()
   // }
-  shouldComponentUpdate (nextProps, nextState) {
-    if (_.isEqual(this.props.mainMap, nextProps.mainMap)) {
-      return false
-    }
-    console.log('cdu: Map.js')
-    return true
-  }
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   if (_.isEqual(this.props.mainMap, nextProps.mainMap)) {
+  //     return false
+  //   }
+  //   console.log('cdu: Map.js')
+  //   return true
+  // }
   
   componentDidUpdate (prevProps, prevState) {
     // update the state's region if the UI region changes:

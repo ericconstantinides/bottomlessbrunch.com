@@ -2,10 +2,14 @@
   text-align: center;
   z-index: 1;
   // background-image: linear-gradient(to bottom, transparent 0%, transparent 34%, white 36%);
-  background: white;
-  margin: 0 0.5em 0.5em;
-  padding: 0.5em 0.5em 0;
+  background: rgba(white, 0.75);
+  height: 90px;
+}
+.Logo__inner-container {
   box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.25);
+  margin: 0 0.5em 0.5em;
+  background: white;
+  padding: 0.5em 0.5em 0;
 }
 .Logo {
   display: flex;
@@ -86,10 +90,10 @@
 }
 
 .App--IntroPage {
-  .Logo__container {
-    height: 0;
-    padding: 0;
-    margin: 0;
+  .Logo__container,
+  .Logo__inner-container {
+    background: transparent;
+    box-shadow: none;
   }
   .Logo {
     position: relative;
@@ -118,18 +122,18 @@
   }
   @media only screen and (max-width: $bp-medium) {
     .Logo__container {
-      order: 1;
-      flex: 0 0 auto;
-      margin: 0;
-      // background: yellow;
-      background: rgba(white, 0.5);
-      background: #f1f1f1;
-      border-top: 1px solid #ddd;
-      height: 56px;
-      padding: 0.5em;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      // order: 1;
+      // flex: 0 0 auto;
+      // margin: 0;
+      // // background: yellow;
+      // background: rgba(white, 0.5);
+      // background: #f1f1f1;
+      // border-top: 1px solid #ddd;
+      // height: 56px;
+      // padding: 0.5em;
+      // display: flex;
+      // align-items: center;
+      // justify-content: space-between;
     }
     .Logo {
       flex-flow: row-reverse;

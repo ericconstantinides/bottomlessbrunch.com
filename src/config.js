@@ -39,7 +39,7 @@ export const DRAWER = {
     starts: 0,
     ends: 768,
     width: 0,
-    height: 300
+    height: 1
   },
   md: {
     starts: 768,

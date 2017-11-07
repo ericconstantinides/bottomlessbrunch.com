@@ -12,7 +12,7 @@ $venueSliderItemSidePadding: 2vw;
   left: 100%;
   width: 100%;
   bottom: 0;
-  z-index: 1;
+  z-index: 3;
   opacity: 0;
   transition: left 0s 0.5s, opacity 0.5s, transform 0.5s;
   transform: translate3d(0, 5vh, 0);
@@ -415,6 +415,11 @@ html.touch .VenueSlider__arrow {
   }
   .VenueSliderItem__address {
     margin-bottom: 1em;
+  }
+}
+@media only screen and (max-width: $bp-medium) {
+  .VenueSlider {
+    top: 56px;
   }
 }
 
