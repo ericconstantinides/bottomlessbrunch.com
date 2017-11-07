@@ -540,25 +540,35 @@ a * {
     border-left: 0.25em solid transparent;
     border-right: 0.25em solid transparent; }
 
+.App--VenueSlider .Logo__container,
+.App--IntroPage .Logo__container {
+  width: auto; }
+
+.App--VenueSlider .Logo__container,
+.App--VenueSlider .Logo__inner-container,
 .App--IntroPage .Logo__container,
 .App--IntroPage .Logo__inner-container {
   background: transparent;
   box-shadow: none; }
 
+.App--VenueSlider .Logo,
 .App--IntroPage .Logo {
   position: relative;
   z-index: 1;
   justify-content: flex-start;
   padding: 0.5em; }
 
+.App--VenueSlider .Logo__title,
 .App--IntroPage .Logo__title {
   display: block;
   color: white;
   cursor: default; }
 
+.App--VenueSlider .Logo__image,
 .App--IntroPage .Logo__image {
   display: none; }
 
+.App--VenueSlider .Logo__orange,
 .App--IntroPage .Logo__orange {
   width: 40px; }
 
@@ -630,11 +640,13 @@ a * {
   position: absolute;
   right: 7%;
   bottom: -10%; }
+  .App--VenueSlider .Logo__beta-title,
   .App--IntroPage .Logo__beta-title {
     line-height: 1.2; }
   @media only screen and (max-width: 767px) {
     .Logo__beta-title {
       font-size: 0.825rem; }
+      .App--VenueSlider .Logo__beta-title,
       .App--IntroPage .Logo__beta-title {
         font-size: 1rem; } }
 

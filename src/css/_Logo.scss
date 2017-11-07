@@ -88,8 +88,11 @@
     border-right: 0.25em solid transparent;
   }
 }
-
+.App--VenueSlider,
 .App--IntroPage {
+  .Logo__container {
+    width: auto;
+  }
   .Logo__container,
   .Logo__inner-container {
     background: transparent;
@@ -211,11 +214,13 @@
   position: absolute;
   right: 7%;
   bottom: -10%;
+  .App--VenueSlider &,
   .App--IntroPage & {
     line-height: 1.2;
   }
   @media only screen and (max-width: $bp-medium) {
     font-size: 0.825rem;
+    .App--VenueSlider &,
     .App--IntroPage & {
       font-size: 1rem;
     }
