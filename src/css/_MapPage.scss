@@ -339,15 +339,6 @@ body.body--MapPage #root,
 .Logo__container {
   z-index: 3;
 }
-// medium to medium large style stuff:
-@media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
-  .MapPage__VenueList--width {
-    width: 320px;
-  }
-  .VenueListItem__image-container {
-    width: 140px;
-  }
-}
 // this is everything on desktop:
 @media only screen and (min-width: $bp-medium + 1) {
   .VenueList__handle,
@@ -368,6 +359,19 @@ body.body--MapPage #root,
     top: 90px;
     bottom: 0;
     position: absolute;
+  }
+}
+// medium to medium large style stuff:
+@media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
+  .App--MapPage {
+    .VenueList,
+    .Logo__container,
+    .MapPage__VenueList--width {
+      width: 320px;
+    }
+    .VenueListItem__image-container {
+      width: 140px;
+    }
   }
 }
 // style the drag scroller:

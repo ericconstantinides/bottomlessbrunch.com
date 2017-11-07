@@ -2609,12 +2609,6 @@ body.body--MapPage #root,
 .Logo__container {
   z-index: 3; }
 
-@media only screen and (min-width: 768px) and (max-width: 900px) {
-  .MapPage__VenueList--width {
-    width: 320px; }
-  .VenueListItem__image-container {
-    width: 140px; } }
-
 @media only screen and (min-width: 768px) {
   .VenueList__handle,
   .VenueList__spacer {
@@ -2632,6 +2626,14 @@ body.body--MapPage #root,
     top: 90px;
     bottom: 0;
     position: absolute; } }
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+  .App--MapPage .VenueList,
+  .App--MapPage .Logo__container,
+  .App--MapPage .MapPage__VenueList--width {
+    width: 320px; }
+  .App--MapPage .VenueListItem__image-container {
+    width: 140px; } }
 
 @media only screen and (max-width: 767px) {
   .Logo__container {
@@ -2674,6 +2676,15 @@ body.body--MapPage #root,
 
 .App--VenueSlider .MapPage__container {
   filter: saturate(0.25) opacity(0.65); }
+
+@media only screen and (min-width: 768px) {
+  .App--VenueSlider .Logo__inner-container,
+  .App--VenueSlider .Logo__container {
+    background: transparent; }
+  .App--VenueSlider .Logo__region-title {
+    color: white; }
+    .App--VenueSlider .Logo__region-title:after {
+      border-top-color: white; } }
 
 .VenueSlider {
   background: rgba(0, 0, 0, 0.5);
@@ -2721,11 +2732,18 @@ body.body--MapPage #root,
   -webkit-overflow-scrolling: touch;
   border-radius: 4px;
   padding: 4vw 2vw;
-  background-color: rgba(0, 0, 0, 0.8);
-  background-blend-mode: multiply;
   background-size: cover;
   background-position: center center;
   transition: 0.3s; }
+  .VenueSliderItem__inner:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: rgba(10, 5, 0, 0.6); }
   .VenueSliderItem__inner > * {
     flex: 0 0 auto;
     transition: opacity 0.5s;
