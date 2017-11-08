@@ -17,3 +17,6 @@ body {
     width: 320px;
   }
 }
+@mixin transparencyBackground {
+  background: rgba(black, 0.4);
+}

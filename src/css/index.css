@@ -488,14 +488,22 @@ a * {
   flex-flow: column;
   justify-content: center;
   z-index: 3;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   height: 56px; }
 
 .SiteHeader__inner {
   display: flex;
   flex-flow: row-reverse nowrap;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  font-size: 1em;
+  font-size: 3.2vw; }
+  @media only screen and (min-width: 501px) {
+    .SiteHeader__inner {
+      font-size: 1rem; } }
+  @media only screen and (max-width: 325px) {
+    .SiteHeader__inner {
+      font-size: 0.65rem; } }
 
 @media only screen and (max-width: 767px) {
   .SiteHeader__inner {
@@ -549,8 +557,6 @@ a * {
     border-right: 0.25em solid transparent; }
 
 @media only screen and (max-width: 767px) {
-  .SiteHeader {
-    font-size: 0.75em; }
   .SiteHeader__inner {
     justify-content: space-around; }
   .logo {
@@ -2554,7 +2560,7 @@ body.body--MapPage #root,
 .VenueList {
   position: relative;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.3); }
+  background: rgba(0, 0, 0, 0.4); }
 
 .MapPage__Map-inner-container {
   height: 100%; }
