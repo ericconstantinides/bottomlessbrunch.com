@@ -18,8 +18,8 @@ body {
   }
 }
 .layout__transparency-bg {
-  background: rgba(black, 0.6);
+  background: rgba(#333, 0.6);
   .App--VenueSlider & {
-    background: black;
+    background: rgba(#555, 0.9);
   }
 }
