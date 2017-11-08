@@ -4,7 +4,7 @@ import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 
 import * as actions from '../../actions'
 
-import Logo from '../common/Logo'
+import SiteHeader from '../common/SiteHeader'
 
 class IntroPage extends Component {
   handleRegionsModalClick = () => {
@@ -24,7 +24,7 @@ class IntroPage extends Component {
   render () {
     return (
       <div className='IntroPage'>
-        <Logo
+        <SiteHeader
           handleRegionsModalClick={this.handleRegionsModalClick}
         />
         <div className='Splash'>

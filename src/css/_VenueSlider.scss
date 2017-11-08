@@ -70,21 +70,10 @@ $venueSliderItemSidePadding: 2vw;
 
   border-radius: 4px;
   padding: 4vw $venueSliderItemSidePadding;
-
-  // background-blend-mode: multiply;
+  background-color: rgba(black, 0.8);
+  background-blend-mode: multiply;
   background-size: cover;
   background-position: center center;
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    background-color: rgba(10, 5, 0, 0.6);
-
-  }
 
   transition: 0.3s; // speed of the background changes
   > * {

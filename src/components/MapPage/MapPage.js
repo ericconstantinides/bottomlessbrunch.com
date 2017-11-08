@@ -7,7 +7,7 @@ import _ from 'lodash'
 import * as actions from '../../actions'
 import { DRAWER } from '../../config'
 
-import Logo from '../common/Logo'
+import SiteHeader from '../common/SiteHeader'
 import Map from './Map'
 import VenueList from './VenueList'
 
@@ -87,7 +87,7 @@ class MapPage extends Component {
     const drawerState = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
-        <Logo
+        <SiteHeader
           region={this.props.ui.activeRegion}
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}

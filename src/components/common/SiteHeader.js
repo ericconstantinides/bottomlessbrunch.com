@@ -1,10 +1,10 @@
 import React from 'react'
 import { SITE_NAME, SITE_SLOGAN } from '../../config'
 
-const Logo = props => {
+const SiteHeader = props => {
   return (
-    <div className='Logo__container'>
-      <div className='Logo__inner-container'>
+    <div className='SiteHeader'>
+      <div className='SiteHeader__inner'>
         <div className='Logo'>
           <h1
             className='Logo__title'
@@ -14,13 +14,6 @@ const Logo = props => {
             {SITE_NAME}
             <span className='Logo__beta-title'>beta</span>
           </h1>
-          <div
-            onClick={props.handleLogoClick}
-            title={SITE_SLOGAN}
-            className='Logo__image Logo__beta-container'
-          >
-            <span className='Logo__beta-title'>beta</span>
-          </div>
           <img
             className='Logo__orange'
             src='/images/icon__split-orange--cond.png'
@@ -44,4 +37,4 @@ const Logo = props => {
   )
 }
 
-export default Logo
+export default SiteHeader

@@ -336,20 +336,11 @@ body.body--MapPage #root,
 .MapPage__Map-inner-container {
   height: 100%;
 }
-.Logo__container {
-  z-index: 3;
-}
 // this is everything on desktop:
 @media only screen and (min-width: $bp-medium + 1) {
   .VenueList__handle,
   .VenueList__spacer {
     display: none;
-  }
-  .Logo__container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 390px;
   }
   .VenueList {
     padding-top: 0.5em;
@@ -365,7 +356,6 @@ body.body--MapPage #root,
 @media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
   .App--MapPage {
     .VenueList,
-    .Logo__container,
     .MapPage__VenueList--width {
       width: 320px;
     }
@@ -377,15 +367,6 @@ body.body--MapPage #root,
 // style the drag scroller:
 // on mobile and ipad: (up to 768px)
 @media only screen and (max-width: $bp-medium) {
-  .Logo__container {
-    height: 56px;
-  }
-  .Logo__inner-container {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 0;
-    margin: 0;
-  }
   .MapPage {
     display: block;
   }
@@ -401,24 +382,12 @@ body.body--MapPage #root,
     height: calc(100vh - 200px);
     z-index: 1;
   }
-  .MapPage__Map-inner-container {
-    padding-top: 56px;
-  }
   .MapPage__VenueList--width {
     width: 100%;
   }
   .VenueList__spacer {
     height: calc(100vh - 200px);
     width: 1px;
-  }
-  .VenueList {
-
-  }
-  .Logo__container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
   }
 }
 @media only screen and (max-width: $bp-small) {

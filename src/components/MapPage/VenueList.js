@@ -5,7 +5,6 @@ import _ from 'lodash'
 import { reduceVenuesByRegion } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 
-// import Logo from '../common/Logo'
 import VenueTeaser from './VenueTeaser'
 
 class VenueList extends Component {
