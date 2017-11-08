@@ -1,4 +1,3 @@
-/* global google */
 import { fitBounds } from 'google-map-react/utils'
 import { DRAWER, PAD_DEGREES } from '../config'
 import _ from 'lodash'

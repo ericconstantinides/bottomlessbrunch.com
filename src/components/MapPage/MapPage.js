@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 // import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 import _ from 'lodash'
@@ -10,8 +9,6 @@ import { DRAWER } from '../../config'
 import SiteHeader from '../common/SiteHeader'
 import Map from './Map'
 import VenueList from './VenueList'
-
-const LOWEST_Y = 200
 
 class MapPage extends Component {
   constructor (props) {
@@ -84,7 +81,6 @@ class MapPage extends Component {
     }
     // const region = this.props.ui.activeRegion
     const styles = { height: `100%`, width: `100%` }
-    const drawerState = this.state.drawerOpen ? 'is-open' : 'is-closed'
     return (
       <div className='MapPage'>
         <SiteHeader
