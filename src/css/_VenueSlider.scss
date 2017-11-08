@@ -18,9 +18,8 @@
 $venueSliderItemSidePadding: 2vw;
 
 .VenueSlider {
-  background: rgba(0,0,0,0.5);
   position: absolute;
-  top: 0;
+  top: 56px;
   left: 0;
   right: 0;
   left: 100%;
@@ -47,7 +46,7 @@ $venueSliderItemSidePadding: 2vw;
   flex-flow: column;
   width: calc(100vw - 64px);
   height: calc(100vh - 1em);
-  margin: 0.5em 0;
+  margin: 0 0 0.5em;
   text-align: center;
   padding: 0 0.25em;
   color: white;
@@ -430,9 +429,3 @@ html.touch .VenueSlider__arrow {
     margin-bottom: 1em;
   }
 }
-@media only screen and (max-width: $bp-medium) {
-  .VenueSlider {
-    top: 56px;
-  }
-}
-

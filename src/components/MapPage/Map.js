@@ -65,6 +65,7 @@ class Map extends Component {
         center={this.props.mainMap.center}
         options={{
           fullscreenControl: false,
+          zoomControl: false,
           styles: [
             {
                 "featureType": "all",

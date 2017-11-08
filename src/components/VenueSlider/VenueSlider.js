@@ -140,7 +140,7 @@ class VenueSlider extends Component {
       )
     })
     return (
-      <div className='VenueSlider'>
+      <div className='VenueSlider layout__transparency-bg'>
         <Link to={`/${this.props.region.slug}`} className='VenueSlider__close'>
           <div className='VenueSlider__inner-close' />
         </Link>

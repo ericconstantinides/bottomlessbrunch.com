@@ -3,7 +3,7 @@ import { SITE_NAME, SITE_SLOGAN } from '../../config'
 
 const SiteHeader = props => {
   return (
-    <div className='SiteHeader'>
+    <div className='SiteHeader layout__transparency-bg'>
       <div className='SiteHeader__inner'>
         <div className='logo'>
           <h1

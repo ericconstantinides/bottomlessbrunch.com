@@ -61,12 +61,17 @@ body {
   margin: 0 auto; }
 
 @media only screen and (min-width: 901px) {
-  .App--MapPage .layout__sidebar-width {
+  .layout__sidebar-width {
     width: 390px; } }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
-  .App--MapPage .layout__sidebar-width {
+  .layout__sidebar-width {
     width: 320px; } }
+
+.layout__transparency-bg {
+  background: rgba(0, 0, 0, 0.6); }
+  .App--VenueSlider .layout__transparency-bg {
+    background: black; }
 
 body {
   font-family: "Raleway", sans-serif;
@@ -479,6 +484,9 @@ a * {
   .SocialMediaShareButton--twitter:hover {
     background: #ea5103; }
 
+/*
+ * Site Header
+ */
 .SiteHeader {
   position: fixed;
   top: 0;
@@ -488,7 +496,6 @@ a * {
   flex-flow: column;
   justify-content: center;
   z-index: 3;
-  background: rgba(0, 0, 0, 0.4);
   height: 56px; }
 
 .SiteHeader__inner {
@@ -507,7 +514,8 @@ a * {
 
 @media only screen and (max-width: 767px) {
   .SiteHeader__inner {
-    flex-flow: row nowrap; } }
+    flex-flow: row nowrap;
+    padding: 0 0.75em; } }
 
 /*
  * logo
@@ -521,7 +529,7 @@ a * {
 .logo__title {
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.75em;
   line-height: 1.4;
   letter-spacing: -0.06em;
   color: white;
@@ -557,31 +565,11 @@ a * {
     border-right: 0.25em solid transparent; }
 
 @media only screen and (max-width: 767px) {
-  .SiteHeader__inner {
-    justify-content: space-around; }
   .logo {
     flex: 0 0 auto; }
   .logo__title,
   .logo__region-title {
     text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); } }
-
-/*
- * Intro and Venue Slider
- */
-.App--VenueSlider .SiteHeader,
-.App--IntroPage .SiteHeader {
-  width: auto; }
-
-.App--VenueSlider .logo,
-.App--IntroPage .logo {
-  position: relative;
-  z-index: 1;
-  justify-content: flex-start; }
-
-.App--VenueSlider .logo__title,
-.App--IntroPage .logo__title {
-  display: block;
-  cursor: default; }
 
 /*
  * BETA
@@ -2559,8 +2547,7 @@ body.body--MapPage #root,
 
 .VenueList {
   position: relative;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.4); }
+  z-index: 2; }
 
 .MapPage__Map-inner-container {
   height: 100%; }
@@ -2588,10 +2575,8 @@ body.body--MapPage #root,
     overflow: auto;
     -webkit-overflow-scrolling: touch; }
   .MapPage__Map-container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 165px);
+    bottom: auto;
     z-index: 1; }
   .MapPage__VenueList--width {
     width: 100%; }
@@ -2618,9 +2603,8 @@ body.body--MapPage #root,
       border-top-color: white; } }
 
 .VenueSlider {
-  background: rgba(0, 0, 0, 0.5);
   position: absolute;
-  top: 0;
+  top: 56px;
   left: 0;
   right: 0;
   left: 100%;
@@ -2643,7 +2627,7 @@ body.body--MapPage #root,
   flex-flow: column;
   width: calc(100vw - 64px);
   height: calc(100vh - 1em);
-  margin: 0.5em 0;
+  margin: 0 0 0.5em;
   text-align: center;
   padding: 0 0.25em;
   color: white; }
@@ -3280,10 +3264,6 @@ html.touch .VenueSlider__arrow {
     flex-flow: column; }
   .VenueSliderItem__address {
     margin-bottom: 1em; } }
-
-@media only screen and (max-width: 767px) {
-  .VenueSlider {
-    top: 56px; } }
 
 .AdminVenues,
 .AdminRegions {

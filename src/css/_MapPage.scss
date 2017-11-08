@@ -328,7 +328,6 @@ body.body--MapPage #root,
 .VenueList {
   position: relative;
   z-index: 2;
-  @include transparencyBackground;
 }
 .MapPage__Map-inner-container {
   height: 100%;
@@ -365,10 +364,8 @@ body.body--MapPage #root,
     -webkit-overflow-scrolling: touch;
   }
   .MapPage__Map-container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 165px);
+    bottom: auto;
     z-index: 1;
   }
   .MapPage__VenueList--width {

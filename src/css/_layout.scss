@@ -9,7 +9,7 @@ body {
   width: calc(100% - 2em);
   margin: 0 auto;
 }
-.App--MapPage .layout__sidebar-width {
+.layout__sidebar-width {
   @media only screen and (min-width: $bp-medium-large + 1) {
     width: 390px;
   }
@@ -17,6 +17,9 @@ body {
     width: 320px;
   }
 }
-@mixin transparencyBackground {
-  background: rgba(black, 0.4);
+.layout__transparency-bg {
+  background: rgba(black, 0.6);
+  .App--VenueSlider & {
+    background: black;
+  }
 }

@@ -1,3 +1,6 @@
+/*
+ * Site Header
+ */
 .SiteHeader {
   position: fixed;
   top: 0;
@@ -8,7 +11,6 @@
   flex-flow: column;
   justify-content: center;
   z-index: 3;
-  @include transparencyBackground;
   height: 56px;
 }
 .SiteHeader__inner {
@@ -23,6 +25,7 @@
 @media only screen and (max-width: $bp-medium) {
   .SiteHeader__inner {
     flex-flow: row nowrap;
+    padding: 0 0.75em;
   }
 }
 /*
@@ -37,7 +40,7 @@
 .logo__title {
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.75em;
   line-height: 1.4;
   letter-spacing: -0.06em;
   color: white;
@@ -74,36 +77,10 @@
 }
 // on mobile up to 767px
 @media only screen and (max-width: $bp-medium) {
-  // .SiteHeader {
-  //   font-size: 0.75em;
-  // }
-  .SiteHeader__inner {
-    justify-content: space-around;
-  }
-  .logo {
-    flex: 0 0 auto;
-  }
+  .logo { flex: 0 0 auto; }
   .logo__title,
   .logo__region-title {
     text-shadow: 2px 2px 1px rgba(black, 0.75);
-  }
-}
-/*
- * Intro and Venue Slider
- */
-.App--VenueSlider,
-.App--IntroPage {
-  .SiteHeader {
-    width: auto;
-  }
-  .logo {
-    position: relative;
-    z-index: 1;
-    justify-content: flex-start;
-  }
-  .logo__title {
-    display: block;
-    cursor: default;
   }
 }
 
