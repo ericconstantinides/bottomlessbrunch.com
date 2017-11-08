@@ -26,15 +26,15 @@ $venueSliderItemSidePadding: 2vw;
   width: 100%;
   bottom: 0;
   z-index: 3;
-  opacity: 0;
-  transition: left 0s 0.5s, opacity 0.5s, transform 0.5s;
-  transform: translate3d(0, 5vh, 0);
 
   // from .is-active:
   left: 0;
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition: left 0s 0s, opacity 0.5s, transform 0.5s;
+
+  padding-top: 0.5em;
+  background: rgba(#333, 0.75);
 
   .slick-next,
   .slick-prev {

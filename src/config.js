@@ -37,7 +37,7 @@ export const BRUNCH_TIMES = {
 export const DRAWER = {
   sm: {
     starts: 0,
-    ends: 768,
+    ends: 767,
     width: 0,
     height: 1
   },

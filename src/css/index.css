@@ -69,9 +69,7 @@ body {
     width: 320px; } }
 
 .layout__transparency-bg {
-  background: rgba(51, 51, 51, 0.6); }
-  .App--VenueSlider .layout__transparency-bg {
-    background: rgba(85, 85, 85, 0.9); }
+  background: rgba(0, 0, 0, 0.6); }
 
 body {
   font-family: "Raleway", sans-serif;
@@ -2612,13 +2610,12 @@ body.body--MapPage #root,
   width: 100%;
   bottom: 0;
   z-index: 3;
-  opacity: 0;
-  transition: left 0s 0.5s, opacity 0.5s, transform 0.5s;
-  transform: translate3d(0, 5vh, 0);
   left: 0;
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  transition: left 0s 0s, opacity 0.5s, transform 0.5s; }
+  transition: left 0s 0s, opacity 0.5s, transform 0.5s;
+  padding-top: 0.5em;
+  background: rgba(51, 51, 51, 0.75); }
   .VenueSlider .slick-next,
   .VenueSlider .slick-prev {
     z-index: 1; }
