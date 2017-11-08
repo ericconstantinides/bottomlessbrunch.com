@@ -270,39 +270,6 @@ export function compileGoogleHours (gData) {
   }
 }
 
-export function offsetCenter (latlng, zoom, offsetx, offsety) {
-  // latlng is the apparent centre-point
-  // offsetx is the distance you want that point to move to the right, in pixels
-  // offsety is the distance you want that point to move upwards, in pixels
-  // offset can be negative
-  // offsetx and offsety are both optional
-
-  const map = new google.maps.Map(document.createElement('div'), {
-    center: latlng,
-    zoom: zoom
-  })
-  console.log(map)
-  google.maps.event.addListenerOnce(map, 'projection_changed', () => {
-    console.log(map)
-    debugger
-    const scale = Math.pow(2, map.getZoom())
-    const worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng)
-    const pixelOffset = new google.maps.Point(
-      offsetx / scale || 0,
-      offsety / scale || 0
-    )
-    const worldCoordinateNewCenter = new google.maps.Point(
-      worldCoordinateCenter.x - pixelOffset.x,
-      worldCoordinateCenter.y + pixelOffset.y
-    )
-    const newCenter = map
-      .getProjection()
-      .fromPointToLatLng(worldCoordinateNewCenter)
-    console.log(newCenter)
-  })
-  // map.setCenter(newCenter)
-}
-
 // Object Helper Functions
 /*
   objectFunctions.keys.next(someObj, 4)

@@ -60,6 +60,14 @@ body {
   width: calc(100% - 2em);
   margin: 0 auto; }
 
+@media only screen and (min-width: 901px) {
+  .App--MapPage .layout__sidebar-width {
+    width: 390px; } }
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+  .App--MapPage .layout__sidebar-width {
+    width: 320px; } }
+
 body {
   font-family: "Raleway", sans-serif;
   font-weight: 400;
@@ -472,29 +480,40 @@ a * {
     background: #ea5103; }
 
 .SiteHeader {
-  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   z-index: 3;
   background: rgba(0, 0, 0, 0.3);
-  height: 90px; }
+  height: 56px; }
 
 .SiteHeader__inner {
-  margin: 0 0.5em 0.5em;
-  padding: 0.5em 0.5em 0; }
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  align-items: center;
+  justify-content: space-between; }
+
+@media only screen and (max-width: 767px) {
+  .SiteHeader__inner {
+    flex-flow: row nowrap; } }
 
 /*
- * Logo
+ * logo
  */
-.Logo {
+.logo {
+  flex: 1 0 auto;
   display: flex;
   align-items: center;
   justify-content: center; }
 
-.Logo__title {
+.logo__title {
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75);
-  font-size: 2.25em;
-  font-size: 8vw;
+  font-size: 2em;
   line-height: 1.4;
   letter-spacing: -0.06em;
   color: white;
@@ -502,36 +521,43 @@ a * {
   cursor: pointer;
   white-space: nowrap;
   position: relative; }
-  @media only screen and (min-width: 451px) {
-    .Logo__title {
-      font-size: 2.25rem; } }
-  @media only screen and (max-width: 300px) {
-    .Logo__title {
-      font-size: 1.5rem; } }
 
-.Logo__orange {
-  width: 15%;
+.logo__title,
+.logo__region-title {
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); }
+
+.logo__orange {
+  width: 3em;
   margin: 0 0.5em; }
 
-.Logo__region-title {
+.logo__region-title {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-family: "Open Sans Condensed", sans-serif;
   font-weight: bold;
-  font-size: 1.25em;
-  line-height: 0.9;
+  font-size: 1.425em;
   color: white;
-  margin: 0;
-  padding: 0.125em 0 0.5em; }
-  .Logo__region-title:after {
+  margin: 0; }
+  .logo__region-title:after {
     content: '';
     display: block;
     margin-left: 0.5em;
     border-top: 0.35em solid white;
     border-left: 0.25em solid transparent;
     border-right: 0.25em solid transparent; }
+
+@media only screen and (max-width: 767px) {
+  .SiteHeader {
+    font-size: 0.75em; }
+  .SiteHeader__inner {
+    justify-content: space-around; }
+  .logo {
+    flex: 0 0 auto; }
+  .logo__title,
+  .logo__region-title {
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); } }
 
 /*
  * Intro and Venue Slider
@@ -540,76 +566,24 @@ a * {
 .App--IntroPage .SiteHeader {
   width: auto; }
 
-.App--VenueSlider .Logo,
-.App--IntroPage .Logo {
+.App--VenueSlider .logo,
+.App--IntroPage .logo {
   position: relative;
   z-index: 1;
   justify-content: flex-start; }
 
-.App--VenueSlider .Logo__title,
-.App--IntroPage .Logo__title {
+.App--VenueSlider .logo__title,
+.App--IntroPage .logo__title {
   display: block;
   cursor: default; }
-
-@media only screen and (max-width: 767px) {
-  .Logo {
-    flex-flow: row-reverse; }
-  .Logo__orange {
-    width: auto;
-    height: 26px; }
-  .Logo__region-title {
-    padding: 0;
-    letter-spacing: 0;
-    font-size: 1em;
-    height: 56px; } }
-
-@media only screen and (max-width: 600px) {
-  .Logo__orange {
-    height: 20px;
-    margin: 0 0.25em 0 0; } }
-
-@media only screen and (max-width: 480px) {
-  .Logo__image {
-    width: 120px; }
-  .Logo__region-title {
-    font-size: 0.85em; } }
-
-@media only screen and (max-width: 767px) {
-  .Logo__title {
-    font-size: 1.4em;
-    line-height: 1.3;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75); } }
-
-@media only screen and (min-width: 768px) {
-  .VenueList__handle,
-  .VenueList__spacer {
-    display: none; }
-  .SiteHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 390px; } }
-
-@media only screen and (max-width: 767px) {
-  .SiteHeader {
-    height: 56px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0; }
-  .SiteHeader__inner {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 0;
-    margin: 0; } }
 
 /*
  * BETA
  */
-.Logo__beta-container {
+.logo__beta-container {
   position: relative; }
 
-.Logo__beta-title {
+.logo__beta-title {
   font-family: "Courier New", monospace;
   font-weight: bold;
   font-size: 1.25rem;
@@ -619,15 +593,6 @@ a * {
   position: absolute;
   right: 7%;
   bottom: -10%; }
-  .App--VenueSlider .Logo__beta-title,
-  .App--IntroPage .Logo__beta-title {
-    line-height: 1.2; }
-  @media only screen and (max-width: 767px) {
-    .Logo__beta-title {
-      font-size: 0.825rem; }
-      .App--VenueSlider .Logo__beta-title,
-      .App--IntroPage .Logo__beta-title {
-        font-size: 1rem; } }
 
 .RegionsModal__container {
   position: fixed;
@@ -2334,9 +2299,6 @@ body.body--MapPage #root,
   bottom: 0;
   left: 0; }
 
-.MapPage__VenueList--width {
-  width: 390px; }
-
 .MapPage__VenueList-container {
   background: rgba(255, 255, 255, 0.5);
   padding: 0;
@@ -2498,7 +2460,7 @@ body.body--MapPage #root,
 
 .VenueListItem__inner {
   display: flex;
-  border: 1px solid #ddd;
+  border: 1px solid #6f6f6f;
   margin-bottom: 0.5em;
   transition: 0.15s; }
   .VenueListItem__inner:hover {
@@ -2592,7 +2554,7 @@ body.body--MapPage #root,
 .VenueList {
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.75); }
+  background: rgba(0, 0, 0, 0.3); }
 
 .MapPage__Map-inner-container {
   height: 100%; }
@@ -2602,19 +2564,14 @@ body.body--MapPage #root,
   .VenueList__spacer {
     display: none; }
   .VenueList {
-    padding-top: 0.5em;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    width: 390px;
-    top: 90px;
+    top: 56px;
     bottom: 0;
     position: absolute; } }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
-  .App--MapPage .VenueList,
-  .App--MapPage .MapPage__VenueList--width {
-    width: 320px; }
-  .App--MapPage .VenueListItem__image-container {
+  .VenueListItem__image-container {
     width: 140px; } }
 
 @media only screen and (max-width: 767px) {

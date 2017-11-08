@@ -5,25 +5,25 @@ const SiteHeader = props => {
   return (
     <div className='SiteHeader'>
       <div className='SiteHeader__inner'>
-        <div className='Logo'>
+        <div className='logo'>
           <h1
-            className='Logo__title'
+            className='logo__title'
             title={SITE_SLOGAN}
             onClick={props.handleLogoClick}
           >
             {SITE_NAME}
-            <span className='Logo__beta-title'>beta</span>
+            <span className='logo__beta-title'>beta</span>
           </h1>
           <img
-            className='Logo__orange'
+            className='logo__orange'
             src='/images/icon__split-orange--cond.png'
             alt='Bottomless Brunch'
           />
         </div>
         {props.region &&
-          <div className='Logo__region'>
+          <div className='logo__region layout__sidebar-width'>
             <h2
-              className='Logo__region-title'
+              className='logo__region-title'
               onClick={props.handleRegionsModalClick}
               title='Choose your Bottomless region...'
             >
@@ -31,7 +31,6 @@ const SiteHeader = props => {
             </h2>
           </div>
         }
-
       </div>
     </div>
   )

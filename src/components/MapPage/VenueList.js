@@ -38,7 +38,7 @@ class VenueList extends Component {
   }
   render () {
     return (
-      <div className='VenueList'>
+      <div className='VenueList layout__sidebar-width'>
         <div className='VenueList__handle'>
           <div className='VenueList__inner-handle' />
         </div>

@@ -28,9 +28,6 @@ body.body--MapPage #root,
   bottom: 0;
   left: 0;
 }
-.MapPage__VenueList--width {
-  width: 390px;
-}
 .MapPage__VenueList-container {
   background: rgba(white, 0.5);
   padding: 0;
@@ -231,7 +228,7 @@ body.body--MapPage #root,
 }
 .VenueListItem__inner {
   display: flex;
-  border: 1px solid #ddd;
+  border: 1px solid #6f6f6f;
   margin-bottom: 0.5em;
   transition: 0.15s;
   &:hover {
@@ -331,7 +328,7 @@ body.body--MapPage #root,
 .VenueList {
   position: relative;
   z-index: 2;
-  background: rgba(white, 0.75);
+  background: rgba(black, 0.3);
 }
 .MapPage__Map-inner-container {
   height: 100%;
@@ -343,25 +340,17 @@ body.body--MapPage #root,
     display: none;
   }
   .VenueList {
-    padding-top: 0.5em;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    width: 390px;
-    top: 90px;
+    top: 56px;
     bottom: 0;
     position: absolute;
   }
 }
 // medium to medium large style stuff:
 @media only screen and (min-width: $bp-medium + 1) and (max-width: $bp-medium-large) {
-  .App--MapPage {
-    .VenueList,
-    .MapPage__VenueList--width {
-      width: 320px;
-    }
-    .VenueListItem__image-container {
-      width: 140px;
-    }
+  .VenueListItem__image-container {
+    width: 140px;
   }
 }
 // style the drag scroller:
