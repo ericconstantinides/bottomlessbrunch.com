@@ -12,29 +12,7 @@ class VenueList extends Component {
     super(props)
     this.state = {
       slideState: {}
-    } 
-  }
-  renderTeasers = () => {
-    const reduced = reduceVenuesByRegion(
-      this.props.venues,
-      this.props.ui.activeRegion._id
-    )
-    const sorted = _.sortBy(reduced, venue => venue.name.toUpperCase())
-    return _.map(sorted, venue => {
-      return (
-        <VenueTeaser
-          key={venue._id}
-          altClass='VenueListItem'
-          handleMouseOver={this.props.handleMouseOver}
-          handleMouseLeave={this.props.handleMouseLeave}
-          toggleMarkerClick={this.props.toggleMarkerClick}
-          hoveredVenue={this.props.hoveredVenue}
-          venue={venue}
-          regionName={this.props.regions[venue.regionId].name}
-          regionSlug={this.props.regions[venue.regionId].slug}
-        />
-      )
-    })
+    }
   }
   render () {
     return (
@@ -42,14 +20,26 @@ class VenueList extends Component {
         <div className='VenueList__handle'>
           <div className='VenueList__inner-handle' />
         </div>
-        {this.renderTeasers()}
+        {_.map(this.props.mainMap.visibleVenues, venue =>
+          <VenueTeaser
+            key={venue._id}
+            altClass='VenueListItem'
+            handleMouseOver={this.props.handleMouseOver}
+            handleMouseLeave={this.props.handleMouseLeave}
+            toggleMarkerClick={this.props.toggleMarkerClick}
+            hoveredVenue={this.props.hoveredVenue}
+            venue={venue}
+            regionName={this.props.regions[venue.regionId].name}
+            regionSlug={this.props.regions[venue.regionId].slug}
+          />
+        )}
       </div>
     )
   }
 }
 
-function mapStateToProps ({ regions, venues, ui }) {
-  return { regions, venues, ui }
+function mapStateToProps ({ regions, venues, ui, mainMap }) {
+  return { regions, venues, ui, mainMap }
 }
 
 export default connect(mapStateToProps, actions)(VenueList)

@@ -6,6 +6,7 @@ import _ from 'lodash'
 import { getMapCoordsByViewport, checkMap } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
+import { SHOW_VENUES_ZOOM_LEVEL } from '../../config'
 
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
@@ -43,7 +44,16 @@ class Map extends Component {
 
   handleMapChange = coords => {
     console.log('handleMapChange', coords)
-    this.props.updateMainMapSize(coords.size)
+    // update the maps size if the coords size has changed:
+    if (!_.isEqual(this.props.mainMap.size, coords.size)) {
+      this.props.updateMainMapSize(coords.size)
+    }
+    if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
+      this.props.getMainMapVisibleVenues(this.props.venues, coords)
+    } else {
+      // RUN AN ACTION THAT HIDES ALL VENUES
+    }
+    // checkMap(this.props.venues, coords)
     // this.updateMapAndDrawer(coords)
   }
   handleMapClick = props => {

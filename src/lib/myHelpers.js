@@ -370,8 +370,9 @@ export function getMapCoordsByViewport (region, size) {
  * @param {Object} coords
  */
 export function checkMap (venues, coords) {
+  console.log('checkMap()')
   // console.log(coords, venues)
-  const { ne, sw } = coords.bounds
+/*   const { ne, sw } = coords.bounds
   const inBoundVenues = _.pickBy(venues, venue => {
     return (
       venue.lat <= ne.lat &&
@@ -379,6 +380,6 @@ export function checkMap (venues, coords) {
       venue.lng <= ne.lng &&
       venue.lng >= sw.lng
     )
-  })
+  }) */
   // console.log(inBoundVenues)
 }

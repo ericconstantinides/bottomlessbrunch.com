@@ -27,6 +27,9 @@ export const USA_MAP = {
     sw: { lat: 22.410132469242768, lng: -126.1250427 }
   }
 }
+
+export const SHOW_VENUES_ZOOM_LEVEL = 11
+
 // this should ideally be done in the region:
 export const BRUNCH_TIMES = {
   START: '10:00AM',
