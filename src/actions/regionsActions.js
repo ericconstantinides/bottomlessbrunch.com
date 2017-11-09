@@ -2,24 +2,20 @@ import axios from 'axios'
 import _ from 'lodash'
 
 import constants from '../actions/types'
-import { slugify } from '../lib/myHelpers'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
 export function fetchRegions (history, callback) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/regions`).then(response => {
-      const regionsWithSlug = response.data.map(region => {
-        region.slug = slugify(region.name)
-        return region
-      })
+      const regions = response.data
       // calling fetchUiRegion for all intents and purposes:
       if (callback) {
-        callback(regionsWithSlug, history)
+        callback(regions, history)
       }
       dispatch({
         type: constants.REGIONS_FETCH,
-        payload: regionsWithSlug
+        payload: regions
       })
     })
   }

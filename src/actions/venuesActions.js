@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 import constants from '../actions/types'
-import { slugify } from '../lib/myHelpers'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
@@ -9,23 +8,15 @@ export function fetchVenues (callback) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
       // filter out the unpublished venues and add slugs:
-      const venuesWithSlug = response.data
+      const venues = response.data
         .filter(venue => !venue.unpublish)
-        .map(venue => {
-          const nameSlug = slugify(venue.name)
-          const neighSlug = venue.neighborhood
-            ? '-' + slugify(venue.neighborhood)
-            : ''
-          venue.slug = nameSlug + neighSlug
-          return venue
-        })
       // calling calcRegionsBoundsByVenues for all intents and purposes:
       if (callback) {
-        callback(venuesWithSlug)
+        callback(venues)
       }
       dispatch({
         type: constants.VENUES_FETCH,
-        payload: venuesWithSlug
+        payload: venues
       })
     })
   }
