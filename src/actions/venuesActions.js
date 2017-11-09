@@ -7,9 +7,12 @@ import { apiError } from './index'
 export function fetchVenues (callback) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
-      // filter out the unpublished venues and add slugs:
+      // add the minimal fetched level:
       const venues = response.data
-        .filter(venue => !venue.unpublish)
+        .map(venue => {
+          venue.fetchedLevel = 'minimal'
+          return venue
+        })
       // calling calcRegionsBoundsByVenues for all intents and purposes:
       if (callback) {
         callback(venues)
@@ -19,6 +22,18 @@ export function fetchVenues (callback) {
         payload: venues
       })
     })
+  }
+}
+export function fetchVenueDetail (id, detailLevel = 'full') {
+  return function (dispatch) {
+    axios.get(`${ROOT_URL}/api/v1/venues/${id}?detailLevel=${detailLevel}`)
+      .then(response => {
+        response.data.fetchedLevel = detailLevel
+        dispatch({
+          type: constants.VENUE_FETCH_DETAIL,
+          payload: response.data
+        })
+      })
   }
 }
 
