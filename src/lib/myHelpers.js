@@ -352,5 +352,33 @@ export function getMapCoordsByViewport (region, size) {
   const fitted = fitBounds(bounds, size)
   // UPDATE THIS WITH FULL MAINMAP REDUX SUPPORT
   // = { bounds, center, marginBounds, size: {width, height}, zoom }
-  return {bounds, center: fitted.center, marginBounds, size, zoom: fitted.zoom}
+  return {
+    bounds,
+    center: fitted.center,
+    marginBounds,
+    size,
+    zoom: fitted.zoom
+  }
+}
+
+/**
+ * checkMap checks the current map to see what venues and regions lie within
+ * checkMap determines what teasers need to be loaded (and what teasers need to
+ *   be unmounted)
+ * @export
+ * @param {Object} venues
+ * @param {Object} coords
+ */
+export function checkMap (venues, coords) {
+  // console.log(coords, venues)
+  const { ne, sw } = coords.bounds
+  const inBoundVenues = _.pickBy(venues, venue => {
+    return (
+      venue.lat <= ne.lat &&
+      venue.lat >= sw.lat &&
+      venue.lng <= ne.lng &&
+      venue.lng >= sw.lng
+    )
+  })
+  // console.log(inBoundVenues)
 }

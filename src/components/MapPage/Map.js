@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
-import { getMapCoordsByViewport } from '../../lib/myHelpers'
+import { getMapCoordsByViewport, checkMap } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
 
@@ -18,33 +18,33 @@ class Map extends Component {
       map: {}
     }
   }
-  mapLoaded = ({ map, maps }) => {
-    this.setState({ map })
-  }
-  // componentDidMount = () => {
-  //   this.updateMapAndDrawer()
+  // mapLoaded = ({ map, maps }) => {
+  //   this.setState({ map })
   // }
-  // shouldComponentUpdate (nextProps, nextState) {
-  //   if (_.isEqual(this.props.mainMap, nextProps.mainMap)) {
-  //     return false
-  //   }
-  //   console.log('cdu: Map.js')
-  //   return true
-  // }
-  
-  componentDidUpdate (prevProps, prevState) {
-    // update the state's region if the UI region changes:
-    if (
-      !_.isEmpty(this.props.ui.activeRegion) &&
-      (this.props.ui.activeRegion._id !== prevProps.ui.activeRegion._id ||
-        this.props.ui.browserSize.width !== prevProps.ui.browserSize.width ||
-        this.props.ui.browserSize.height !== prevProps.ui.browserSize.height)
-    ) {
-      this.updateMapAndDrawer({ size: this.props.mainMap.size })
+  componentDidMount = () => {
+    console.log(this.props.ui.activeRegion)
+    if (this.props.ui.activeRegion) {
+      const { zoom, lat, lng} = this.props.ui.activeRegion
+      this.props.setMainMap({zoom, center: {lat, lng} })
     }
   }
+  componentWillReceiveProps (nextProps) {
+    // update the state's region if the UI region changes:
+    if (
+      !_.isEmpty(nextProps.ui.activeRegion) &&
+      (nextProps.ui.activeRegion._id !== this.props.ui.activeRegion._id)
+    ) {
+      // why am I updating it to my redux value and not the value of the region?
+      // this.updateMapAndDrawer({ size: this.props.mainMap.size })
+      const { zoom, lat, lng} = nextProps.ui.activeRegion
+      this.props.setMainMap({zoom, center: {lat, lng} })
+    }
+  }
+
   handleMapChange = coords => {
-    this.updateMapAndDrawer(coords)
+    console.log('handleMapChange', coords)
+    this.props.updateMainMapSize(coords.size)
+    // this.updateMapAndDrawer(coords)
   }
   handleMapClick = props => {
     // props = {x, y, lat, lng, event}
@@ -52,13 +52,18 @@ class Map extends Component {
       this.props.clearMarkers()
     }
   }
-  updateMapAndDrawer = ({size}) => {
+  updateMapAndDrawer = mapCoords => {
+    console.log(mapCoords)
+    const { size } = mapCoords
     const { activeRegion: region } = this.props.ui
     const coords = !_.isEmpty(region.bounds)
       ? getMapCoordsByViewport(region, size)
       : this.props.ui.activeRegion
-    
+    // update redux:
     this.props.setMainMap(coords)
+    if (this.props.venues) {
+      checkMap(this.props.venues, coords)
+    }
   }
   render () {
     return (
@@ -95,8 +100,8 @@ class Map extends Component {
   }
 }
 
-function mapStateToProps ({ ui, regions, mainMap }) {
-  return { ui, regions, mainMap }
+function mapStateToProps ({ ui, regions, venues, mainMap }) {
+  return { ui, regions, venues, mainMap }
 }
 
 export default connect(mapStateToProps, actions)(Map)

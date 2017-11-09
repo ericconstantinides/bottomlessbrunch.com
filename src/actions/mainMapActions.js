@@ -7,3 +7,10 @@ export function setMainMap (coords) {
     payload: coords
   }
 }
+// size = {width: n, height: n}
+export function updateMainMapSize (size) {
+  return {
+    type: constants.MAIN_MAP_UPDATE_SIZE,
+    payload: size
+  }
+}
