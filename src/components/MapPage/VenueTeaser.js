@@ -124,7 +124,7 @@ class VenueTeaser extends Component {
                   ))}
                 </div>
               } */}
-              {venue.funItems.length > 0 &&
+              {venue.funItems && venue.funItems.length > 0 &&
                 <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
                   <h4
                     className={`VenueTeaser__sub-title ${altClass}__sub-title`}
