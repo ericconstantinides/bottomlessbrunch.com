@@ -70,13 +70,6 @@ class VenueTeaser extends Component {
     const offsetStyles = altClass === 'MapItem'
       ? { transform: `translateY(${this.state.offVert}px)` }
       : {}
-
-    const renderedImage = venue.gData && venue.gData.images
-      ? <div
-        className={`VenueTeaser__image-container ${altClass}__image-container`}
-        style={{ backgroundImage: `url(${venue.gData.images.large[0].url})` }}
-        />
-      : ''
     // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     return (
       <article
@@ -104,7 +97,11 @@ class VenueTeaser extends Component {
             style={offsetStyles}
             className={`VenueTeaser__inner ${altClass}__inner`}
           >
-            {renderedImage}
+            {venue.thumbUrl &&
+              <div
+                className={`VenueTeaser__image-container ${altClass}__image-container`}
+                style={{ backgroundImage: `url(${venue.thumbUrl})` }}
+              />}
             <div className={`VenueTeaser__content ${altClass}__content`}>
               <h3 className={`VenueTeaser__title ${altClass}__title`}>
                 {venue.name}
