@@ -21,8 +21,9 @@ class VenueTeaser extends Component {
   shouldComponentUpdate (nextProps, nextState) {
     // return TRUE if there's a change in the isActive bool
     if (
-      nextState.isActive !== this.state.isActive ||
-      this.state.isPositioned !== nextState.isPositioned
+      this.state.isActive !== nextState.isActive ||
+      this.state.isPositioned !== nextState.isPositioned ||
+      this.props.venue.fetchedLevel !== nextProps.venue.fetchedLevel
     ) {
       return true
     }

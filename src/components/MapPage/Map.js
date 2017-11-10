@@ -25,20 +25,20 @@ class Map extends Component {
   componentDidMount = () => {
     console.log(this.props.ui.activeRegion)
     if (this.props.ui.activeRegion) {
-      const { zoom, lat, lng} = this.props.ui.activeRegion
-      this.props.setMainMap({zoom, center: {lat, lng} })
+      const { zoom, lat, lng } = this.props.ui.activeRegion
+      this.props.setMainMap({ zoom, center: { lat, lng } })
     }
   }
   componentWillReceiveProps (nextProps) {
     // update the state's region if the UI region changes:
     if (
       !_.isEmpty(nextProps.ui.activeRegion) &&
-      (nextProps.ui.activeRegion._id !== this.props.ui.activeRegion._id)
+      nextProps.ui.activeRegion._id !== this.props.ui.activeRegion._id
     ) {
       // why am I updating it to my redux value and not the value of the region?
       // this.updateMapAndDrawer({ size: this.props.mainMap.size })
-      const { zoom, lat, lng} = nextProps.ui.activeRegion
-      this.props.setMainMap({zoom, center: {lat, lng} })
+      const { zoom, lat, lng } = nextProps.ui.activeRegion
+      this.props.setMainMap({ zoom, center: { lat, lng } })
     }
   }
 
@@ -49,7 +49,11 @@ class Map extends Component {
       this.props.updateMainMapSize(coords.size)
     }
     if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
-      this.props.getMainMapVisibleVenues(this.props.venues, coords)
+      this.props.getMainMapVisibleVenues(
+        this.props.venues,
+        coords,
+        this.props.fetchVenueDetail
+      )
     } else {
       // RUN AN ACTION THAT HIDES ALL VENUES
     }

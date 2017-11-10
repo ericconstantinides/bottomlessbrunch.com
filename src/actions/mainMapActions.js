@@ -16,17 +16,22 @@ export function updateMainMapSize (size) {
   }
 }
 
-export function getMainMapVisibleVenues (venues, coords) {
+export function getMainMapVisibleVenues (venues, coords, fetchVenueDetail) {
   const { ne, sw } = coords.bounds
-  const visibleVenues = _.pickBy(venues, venue => {
-    return (
+  let visibleVenues = []
+  _.map(venues, venue => {
+    if (
       venue.lat <= ne.lat &&
       venue.lat >= sw.lat &&
       venue.lng <= ne.lng &&
       venue.lng >= sw.lng
-    )
+    ) {
+      visibleVenues.push(venue._id)
+      if (venue.fetchedLevel === 'minimal') {
+        fetchVenueDetail(venue._id, 'teaser')
+      }
+    }
   })
-  console.log(visibleVenues)
   // now from the visibleVenues, we need to determine the visibleVenues
   const visibleRegions = 'tbd'
   return {
