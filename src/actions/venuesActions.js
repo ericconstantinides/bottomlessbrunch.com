@@ -4,7 +4,7 @@ import constants from '../actions/types'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
-export function fetchVenues (callback) {
+export function fetchVenues (calcRegionsMeta) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
       // add the minimal fetched level:
@@ -13,10 +13,8 @@ export function fetchVenues (callback) {
           venue.fetchedLevel = 'minimal'
           return venue
         })
-      // calling calcRegionsBoundsByVenues for all intents and purposes:
-      if (callback) {
-        callback(venues)
-      }
+      // calling calcRegionsMeta
+      calcRegionsMeta(venues)
       dispatch({
         type: constants.VENUES_FETCH,
         payload: venues

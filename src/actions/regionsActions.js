@@ -5,14 +5,12 @@ import constants from '../actions/types'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
-export function fetchRegions (history, callback) {
+export function fetchRegions (history, fetchUiRegion) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/regions`).then(response => {
       const regions = response.data
-      // calling fetchUiRegion for all intents and purposes:
-      if (callback) {
-        callback(regions, history)
-      }
+      // calling fetchUiRegion:
+      fetchUiRegion(regions, history)
       dispatch({
         type: constants.REGIONS_FETCH,
         payload: regions
@@ -69,32 +67,37 @@ export function deleteRegion (region, history) {
   }
 }
 
-export function calcRegionsBoundsByVenues (venues) {
+export function calcRegionsMeta (venues) {
+  // now I need to add how many venues per region:
   let regionsObject = {}
   _.map(venues, venue => {
     if (!regionsObject[venue.regionId]) {
       regionsObject[venue.regionId] = {
-        north: venue.lat,
-        south: venue.lat,
-        east: venue.lng,
-        west: venue.lng
+        venuesAvailable: 1,
+        bounds: {
+          north: (venue.lat),
+          south: (venue.lat),
+          east: (venue.lng),
+          west: (venue.lng)
+        }
       }
     } else {
       const region = regionsObject[venue.regionId]
-      if (venue.lat > region.north) {
-        region.north = venue.lat
-      } else if (venue.lat < region.south) {
-        region.south = venue.lat
+      region.venuesAvailable = ++region.venuesAvailable
+      if (venue.lat > region.bounds.north) {
+        region.bounds.north = venue.lat
+      } else if (venue.lat < region.bounds.south) {
+        region.bounds.south = venue.lat
       }
-      if (venue.lng > region.east) {
-        region.east = venue.lng
-      } else if (venue.lng < region.west) {
-        region.west = venue.lng
+      if (venue.lng > region.bounds.east) {
+        region.bounds.east = venue.lng
+      } else if (venue.lng < region.bounds.west) {
+        region.bounds.west = venue.lng
       }
     }
   })
   return {
-    type: constants.REGIONS_CALC_BOUNDS,
+    type: constants.REGIONS_CALC_META,
     payload: regionsObject
   }
 }

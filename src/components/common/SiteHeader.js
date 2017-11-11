@@ -6,12 +6,11 @@ const SiteHeader = props => {
   let returnButton = ''
   let regionName = 'Choose Region'
   if (!_.isEmpty(props.visibleRegions)) {
-    console.log('props.visibleRegions:', props.visibleRegions)
     const keys = _.keysIn(props.visibleRegions)
     if (keys.length === 1) {
       if (
         props.visibleRegions[keys[0]].venuesVisible <
-        props.visibleRegions[keys[0]].venuesAvailable
+        props.regions[keys[0]].venuesAvailable
       ) {
         regionName = props.visibleRegions[keys[0]].name
         returnButton = (

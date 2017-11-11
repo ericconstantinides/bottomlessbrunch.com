@@ -85,6 +85,7 @@ class MapPage extends Component {
       <div className='MapPage'>
         <SiteHeader
           region={this.props.ui.activeRegion}
+          regions={this.props.regions}
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}
           visibleRegions={this.props.visibleRegions}

@@ -66,16 +66,6 @@ export function getMainMapVisibleVenues (
       }
     })
   }
-  // count how many venues are possible (this shouldn't be done here... we should move this to when I load the regions and venues...)
-  _.map(visibleRegionsObj, region => {
-    let venuesAvailable = 0
-    _.map(venues, venue => {
-      if (venue.regionId === region._id) {
-        venuesAvailable++
-      }
-    })
-    region.venuesAvailable = venuesAvailable
-  })
   return {
     type: constants.MAIN_MAP_SET_VISIBLE_VENUES,
     payload: { visibleVenuesArr, visibleRegionsObj }

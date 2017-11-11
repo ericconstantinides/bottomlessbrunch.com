@@ -32,7 +32,7 @@ class App extends Component {
       // add a callback to fetchUiRegion using history
       this.props.fetchUiRegion
     )
-    this.props.fetchVenues(this.props.calcRegionsBoundsByVenues)
+    this.props.fetchVenues(this.props.calcRegionsMeta)
     this.props.fetchEnvironment()
 
     this.props.setUiBrowserSize()
