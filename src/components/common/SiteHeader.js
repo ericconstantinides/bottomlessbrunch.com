@@ -4,6 +4,7 @@ import { SITE_NAME, SITE_SLOGAN } from '../../config'
 
 const SiteHeader = props => {
   let returnButton = ''
+  let regionName = 'Choose Region'
   if (!_.isEmpty(props.visibleRegions)) {
     console.log('props.visibleRegions:', props.visibleRegions)
     const keys = _.keysIn(props.visibleRegions)
@@ -12,24 +13,17 @@ const SiteHeader = props => {
         props.visibleRegions[keys[0]].venuesVisible <
         props.visibleRegions[keys[0]].venuesAvailable
       ) {
+        regionName = props.visibleRegions[keys[0]].name
         returnButton = (
           <div className='button button--orange-black is-smaller'>
-            reset {props.visibleRegions[keys[0]].name}
+            reset
           </div>
         )
       } else {
-        returnButton = (
-          <div className='button button--orange-black is-smaller'>
-            {props.visibleRegions[keys[0]].name}
-          </div>
-        )
+        regionName = props.visibleRegions[keys[0]].name
       }
     } else {
-      returnButton = (
-        <div className='button button--orange-black is-smaller'>
-          Multiple Regions
-        </div>
-      )
+      regionName = 'Multiple Regions'
     }
   }
   return (
@@ -57,7 +51,7 @@ const SiteHeader = props => {
               onClick={props.handleRegionsModalClick}
               title='Choose your Bottomless region...'
             >
-              {props.region.name}
+              {regionName}
             </h2>
             {returnButton}
           </div>}
