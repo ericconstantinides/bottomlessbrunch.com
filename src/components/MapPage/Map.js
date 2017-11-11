@@ -80,20 +80,15 @@ class Map extends Component {
       checkMap(this.props.venues, coords)
     }
   }
-  render () {
-    return (
-      <GoogleMapReact
-        zoom={this.props.mainMap.zoom}
-        center={this.props.mainMap.center}
-        options={{
-          fullscreenControl: false,
-          zoomControl: false,
-          styles: mapStyle
-        }}
-        onChange={this.handleMapChange}
-        onClick={this.handleMapClick}
-      >
-        {_.map(this.props.venues, venue => (
+  renderVenueTeasers = () => {
+    let mapItemVenueTeasers = []
+    _.map(this.props.venues, venue => {
+      // check if its in visible regions and only render it then:
+      if (
+        this.props.mainMap.visibleRegionsObj &&
+        this.props.mainMap.visibleRegionsObj[venue.regionId]
+      ) {
+        mapItemVenueTeasers.push(
           <VenueTeaser
             key={venue._id}
             ref={venue._id}
@@ -109,7 +104,25 @@ class Map extends Component {
             venue={venue}
             regionSlug={this.props.regions[venue.regionId].slug}
           />
-        ))}
+        )
+      }
+    })
+    return mapItemVenueTeasers
+  }
+  render () {
+    return (
+      <GoogleMapReact
+        zoom={this.props.mainMap.zoom}
+        center={this.props.mainMap.center}
+        options={{
+          fullscreenControl: false,
+          zoomControl: false,
+          styles: mapStyle
+        }}
+        onChange={this.handleMapChange}
+        onClick={this.handleMapClick}
+      >
+        {this.renderVenueTeasers()}
       </GoogleMapReact>
     )
   }
