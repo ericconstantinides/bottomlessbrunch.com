@@ -51,6 +51,7 @@ class Map extends Component {
     if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
       this.props.getMainMapVisibleVenues(
         this.props.venues,
+        this.props.regions,
         coords,
         this.props.fetchVenueDetail
       )

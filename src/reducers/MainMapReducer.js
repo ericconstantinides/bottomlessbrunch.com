@@ -8,8 +8,8 @@ const initialState = {
   size: { width: 0, height: 0 },
   zoom: USA_MAP.zoom,
   loaded: false,
-  visibleVenues: [],
-  visibleRegions: []
+  visibleVenuesArr: [],
+  visibleRegionsObj: {}
 }
 
 export default function (state = initialState, action) {
@@ -19,7 +19,8 @@ export default function (state = initialState, action) {
     case constants.MAIN_MAP_UPDATE_SIZE:
       return { ...state, size: action.payload, loaded: true }
     case constants.MAIN_MAP_SET_VISIBLE_VENUES:
-      return { ...state, visibleVenues: action.payload.visibleVenues }
+      const { visibleVenuesArr, visibleRegionsObj } = action.payload
+      return { ...state, visibleVenuesArr, visibleRegionsObj }
     default:
       return state
   }

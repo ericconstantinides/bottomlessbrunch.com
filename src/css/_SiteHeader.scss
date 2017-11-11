@@ -50,14 +50,22 @@
   position: relative;
 }
 .logo__title,
-.logo__region-title {
+.SiteHeader__region-title {
   text-shadow: 2px 2px 1px rgba(black, 0.75);
 }
 .logo__orange {
   width: 3em;
   margin: 0 0.5em;
 }
-.logo__region-title {
+.SiteHeader__region {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > .button {
+    margin-left: 1em;
+  }
+}
+.SiteHeader__region-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +88,7 @@
 @media only screen and (max-width: $bp-medium) {
   .logo { flex: 0 0 auto; }
   .logo__title,
-  .logo__region-title {
+  .SiteHeader__region-title {
     text-shadow: 2px 2px 1px rgba(black, 0.75);
   }
 }

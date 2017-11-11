@@ -44,7 +44,7 @@ class IntroPage extends Component {
           <div className='Splash__inner'>
             <h1 className='Splash__title'>I'm thirsty for brunch in...</h1>
             <div
-              className='Splash__RegionSelect'
+              className='button--orange-black'
               onClick={this.handleRegionsModalClick}
             >
               Choose Region...

@@ -1,7 +1,37 @@
+import _ from 'lodash'
 import React from 'react'
 import { SITE_NAME, SITE_SLOGAN } from '../../config'
 
 const SiteHeader = props => {
+  let returnButton = ''
+  if (!_.isEmpty(props.visibleRegions)) {
+    console.log('props.visibleRegions:', props.visibleRegions)
+    const keys = _.keysIn(props.visibleRegions)
+    if (keys.length === 1) {
+      if (
+        props.visibleRegions[keys[0]].venuesVisible <
+        props.visibleRegions[keys[0]].venuesAvailable
+      ) {
+        returnButton = (
+          <div className='button button--orange-black is-smaller'>
+            reset {props.visibleRegions[keys[0]].name}
+          </div>
+        )
+      } else {
+        returnButton = (
+          <div className='button button--orange-black is-smaller'>
+            {props.visibleRegions[keys[0]].name}
+          </div>
+        )
+      }
+    } else {
+      returnButton = (
+        <div className='button button--orange-black is-smaller'>
+          Multiple Regions
+        </div>
+      )
+    }
+  }
   return (
     <div className='SiteHeader layout__transparency-bg'>
       <div className='SiteHeader__inner'>
@@ -21,16 +51,16 @@ const SiteHeader = props => {
           />
         </div>
         {props.region &&
-          <div className='logo__region layout__sidebar-width'>
+          <div className='SiteHeader__region layout__sidebar-width'>
             <h2
-              className='logo__region-title'
+              className='SiteHeader__region-title'
               onClick={props.handleRegionsModalClick}
               title='Choose your Bottomless region...'
             >
               {props.region.name}
             </h2>
-          </div>
-        }
+            {returnButton}
+          </div>}
       </div>
     </div>
   )

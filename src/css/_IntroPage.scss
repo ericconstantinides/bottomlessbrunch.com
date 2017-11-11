@@ -43,21 +43,6 @@
   text-align: center;
   margin-bottom: 0.25em;
 }
-.Splash__RegionSelect {
-  display: inline-block;
-  cursor: pointer;
-  @include ubuntuBold;
-  font-weight: 500;
-  font-size: 1em;
-  text-transform: uppercase;
-  border: 1px solid #ecad62;
-  padding: 0.5em 1.5em;
-  background: rgba(black, 0.25);
-  transition: 0.15s;
-  &:hover {
-    background: black;
-  }
-}
 .Splash__footer {
   @include ubuntuBold;
   position: absolute;

@@ -454,6 +454,27 @@ a * {
   font-size: .875rem;
   border-radius: .2rem; }
 
+.button--orange-black {
+  display: inline-block;
+  cursor: pointer;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-weight: 500;
+  font-size: 1em;
+  text-transform: uppercase;
+  border: 1px solid #ecad62;
+  padding: 0.5em 1.5em;
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+  transition: 0.15s; }
+  .button--orange-black:hover {
+    background: black; }
+  .button--orange-black.is-smaller {
+    padding: 0.25em 0.5em;
+    font-size: 0.6875em;
+    opacity: 0.75;
+    background: black; }
+
 .SocialMediaShareButton {
   display: flex;
   justify-content: flex-start;
@@ -537,14 +558,21 @@ a * {
   position: relative; }
 
 .logo__title,
-.logo__region-title {
+.SiteHeader__region-title {
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); }
 
 .logo__orange {
   width: 3em;
   margin: 0 0.5em; }
 
-.logo__region-title {
+.SiteHeader__region {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .SiteHeader__region > .button {
+    margin-left: 1em; }
+
+.SiteHeader__region-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -554,7 +582,7 @@ a * {
   font-size: 1.425em;
   color: white;
   margin: 0; }
-  .logo__region-title:after {
+  .SiteHeader__region-title:after {
     content: '';
     display: block;
     margin-left: 0.5em;
@@ -567,7 +595,7 @@ a * {
   .logo {
     flex: 0 0 auto; }
   .logo__title,
-  .logo__region-title {
+  .SiteHeader__region-title {
     text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); } }
 
 /*
@@ -690,21 +718,6 @@ a * {
   @media only screen and (max-width: 500px) {
     .Splash__title {
       font-size: 3rem; } }
-
-.Splash__RegionSelect {
-  display: inline-block;
-  cursor: pointer;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: bold;
-  font-weight: 500;
-  font-size: 1em;
-  text-transform: uppercase;
-  border: 1px solid #ecad62;
-  padding: 0.5em 1.5em;
-  background: rgba(0, 0, 0, 0.25);
-  transition: 0.15s; }
-  .Splash__RegionSelect:hover {
-    background: black; }
 
 .Splash__footer {
   font-family: "Ubuntu", sans-serif;

@@ -1,3 +1,25 @@
+.button--orange-black {
+  display: inline-block;
+  cursor: pointer;
+  @include ubuntuBold;
+  font-weight: 500;
+  font-size: 1em;
+  text-transform: uppercase;
+  border: 1px solid #ecad62;
+  padding: 0.5em 1.5em;
+  background: rgba(black, 0.25);
+  color: white;
+  transition: 0.15s;
+  &:hover {
+    background: black;
+  }
+  &.is-smaller {
+    padding: 0.25em 0.5em;
+    font-size: 0.6875em;
+    opacity: 0.75;
+    background: black;
+  }
+}
 .SocialMediaShareButton {
   display: flex;
   justify-content: flex-start;

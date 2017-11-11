@@ -21,8 +21,8 @@ class VenueList extends Component {
         <div className='VenueList__handle'>
           <div className='VenueList__inner-handle' />
         </div>
-        {this.props.mainMap.visibleVenues &&
-          this.props.mainMap.visibleVenues.map(id => {
+        {this.props.mainMap.visibleVenuesArr &&
+          this.props.mainMap.visibleVenuesArr.map(id => {
             return (
               <VenueTeaser
                 key={id}

@@ -87,6 +87,7 @@ class MapPage extends Component {
           region={this.props.ui.activeRegion}
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}
+          visibleRegions={this.props.visibleRegions}
         />
         <div
           className='MapPage__inner'
@@ -129,8 +130,8 @@ class MapPage extends Component {
   }
 }
 
-function mapStateToProps ({ regions, venues, ui }) {
-  return { regions, venues, ui }
+function mapStateToProps ({ regions, venues, ui, mainMap }) {
+  return { regions, venues, ui, visibleRegions: mainMap.visibleRegionsObj }
 }
 
 export default connect(mapStateToProps, actions)(MapPage)
