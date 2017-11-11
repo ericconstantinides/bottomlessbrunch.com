@@ -81,16 +81,6 @@ export function unsetUiRegionVenues () {
   }
 }
 
-export function setUiBrowserSize () {
-  return {
-    type: constants.UI_SET_BROWSER_SIZE,
-    payload: {
-      width: window.innerWidth,
-      height: window.innerHeight
-    }
-  }
-}
-
 export function showUiRegionsModal () {
   return { type: constants.UI_SHOW_REGIONS_MODAL }
 }
