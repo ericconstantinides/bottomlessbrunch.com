@@ -34,12 +34,6 @@ class App extends Component {
     )
     this.props.fetchVenues(this.props.calcRegionsMeta)
     this.props.fetchEnvironment()
-
-    this.props.setUiBrowserSize()
-    window.addEventListener(
-      'resize',
-      _.debounce(this.props.setUiBrowserSize, 300)
-    )
   }
   // shouldComponentUpdate (nextProps, nextState) {
   //   console.log(rendered++)
@@ -50,10 +44,7 @@ class App extends Component {
   //   console.log('App NOT Rendered')
   //   return false
   // }
-  
-  componentWillUnmount () {
-    window.removeEventListener('resize', this.props.setUiBrowserSize)
-  }
+
   /* componentDidUpdate (prevProps, prevState) {
     // this changes the position of data-react-helmet="true"
     const metaElements = document.querySelectorAll('[data-react-helmet]')

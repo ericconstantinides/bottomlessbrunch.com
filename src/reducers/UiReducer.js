@@ -11,11 +11,7 @@ const initialState = {
   // appClass possible values are:
   // [introPage, mapPage, venue, admin, adminVenue, adminRegion, regionModal]
   appClass: [],
-  regionsModalActive: false,
-  browserSize: {
-    width: 0,
-    height: 0
-  }
+  regionsModalActive: false
 }
 
 export default function (state = initialState, action) {
@@ -42,14 +38,6 @@ export default function (state = initialState, action) {
       return { ...state, regionVenues: action.payload }
     case constants.UI_UNSET_REGION_VENUES:
       return { ...state, regionVenues: {} }
-    case constants.UI_SET_BROWSER_SIZE:
-      return {
-        ...state,
-        browserSize: {
-          width: action.payload.width,
-          height: action.payload.height
-        }
-      }
     case constants.UI_SHOW_REGIONS_MODAL:
       return { ...state, regionsModalActive: true }
     case constants.UI_HIDE_REGIONS_MODAL:

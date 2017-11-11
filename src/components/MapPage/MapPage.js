@@ -45,12 +45,12 @@ class MapPage extends Component {
     this.props.history.push('/')
   }
   handleMouseOver = venue => event => {
-    if (this.props.ui.browserSize.width > DRAWER.sm.ends) {
+    if (this.props.mainMap.size.width > DRAWER.sm.ends) {
       this.setState({ hoveredVenue: venue._id })
     }
   }
   handleMouseLeave = venue => event => {
-    if (this.props.ui.browserSize.width > DRAWER.sm.ends) {
+    if (this.props.mainMap.size.width > DRAWER.sm.ends) {
       this.setState({ hoveredVenue: '' })
     }
   }
