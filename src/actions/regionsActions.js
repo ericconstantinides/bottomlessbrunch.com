@@ -63,11 +63,19 @@ export function deleteRegion (region, history) {
       .catch(error => dispatch(apiError(error.response.data.error)))
   }
 }
-
+/**
+ * Gets the "real" bounds based on the region's venues.
+ * Counts the venues available within each region.
+ *
+ * @export
+ * @param {any} venues
+ * @returns redux object
+ */
 export function calcRegionsMeta (venues) {
-  // now I need to add how many venues per region:
   let regionsObject = {}
+  // cycle through all the venues to get the Regions Meta
   _.map(venues, venue => {
+    // if it's the first one, set all of the values based on it
     if (!regionsObject[venue.regionId]) {
       regionsObject[venue.regionId] = {
         venuesAvailable: 1,
@@ -80,7 +88,7 @@ export function calcRegionsMeta (venues) {
       }
     } else {
       const region = regionsObject[venue.regionId]
-      region.venuesAvailable = ++region.venuesAvailable
+      region.venuesAvailable++
       if (venue.lat > region.bounds.north) {
         region.bounds.north = venue.lat
       } else if (venue.lat < region.bounds.south) {

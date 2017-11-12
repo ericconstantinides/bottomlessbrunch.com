@@ -1,5 +1,5 @@
 import constants from '../actions/types'
-import { parsePath, reduceVenuesByRegion } from '../lib/myHelpers'
+import { reduceVenuesByRegion } from '../lib/myHelpers'
 
 export function setUiVenue (openId, prevId, nextId) {
   return {

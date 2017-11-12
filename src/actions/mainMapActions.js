@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import constants from './types'
+import { getRegionCoordsByViewport } from '../lib/myHelpers'
 
 export function setMainMap (coords) {
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
@@ -8,6 +9,16 @@ export function setMainMap (coords) {
     payload: coords
   }
 }
+
+export function setMainMapByRegion (region, size) {
+  const coords = getRegionCoordsByViewport(region, size)
+  window.localStorage.setItem('mainMap', JSON.stringify(coords))
+  return {
+    type: constants.MAIN_MAP_SET,
+    payload: coords
+  }
+}
+
 export function unsetMainMap () {
   window.localStorage.removeItem('mainMap')
   return {

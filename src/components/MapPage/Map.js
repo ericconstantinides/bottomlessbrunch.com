@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
-import { getMapCoordsByViewport, checkMap } from '../../lib/myHelpers'
+import { getRegionCoordsByViewport, checkMap } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
 import { SHOW_VENUES_ZOOM_LEVEL } from '../../config'
@@ -74,7 +74,7 @@ class Map extends Component {
     const { size } = mapCoords
     const { activeRegion: region } = this.props.ui
     const coords = !_.isEmpty(region.bounds)
-      ? getMapCoordsByViewport(region, size)
+      ? getRegionCoordsByViewport(region, size)
       : this.props.ui.activeRegion
     // update redux:
     this.props.setMainMap(coords)

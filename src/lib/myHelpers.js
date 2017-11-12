@@ -307,7 +307,7 @@ objectFunctions.keys.prev = function (myObject, id) {
 export { objectFunctions }
 
 /**
- * getMapCoordsByViewport returns a revised mapCenter (lat, lng, zoom)
+ * getRegionCoordsByViewport returns a revised mapCenter (lat, lng, zoom)
  * taking into account the drawer (if any), sidebar, and viewport
  *
  * @export
@@ -315,7 +315,7 @@ export { objectFunctions }
  * @param {object} size: browser width and height
  * @returns { { lat, lng, zoom } } mapCenter
  */
-export function getMapCoordsByViewport (region, size) {
+export function getRegionCoordsByViewport (region, size) {
   const { width, height } = size
   let drawer
   if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {

@@ -20,7 +20,6 @@ import RegionsModal from './common/RegionsModal'
 // Create a history of your choosing (we're using a browser history in this case)
 // let rendered = 0
 
-
 class App extends Component {
   componentDidMount () {
     // get the regions and the venues
@@ -55,10 +54,12 @@ class App extends Component {
       })
     })
   } */
-  handleRegionSelect = (_id) => event => {
+  handleRegionSelect = _id => event => {
     // go to the region's coords (and then coords will set the slug)
-    const { zoom, lat, lng } = this.props.regions[_id]
-    this.props.setMainMap({ zoom, center: { lat, lng } })
+    this.props.setMainMapByRegion(
+      this.props.regions[_id],
+      this.props.mainMap.size
+    )
     this.props.hideUiRegionsModal()
   }
   handleCloseRegionsModalClick = () => {
@@ -79,8 +80,7 @@ class App extends Component {
     }
     let venueSliderRoutes
     if (!_.isEmpty(this.props.regions)) {
-      venueSliderRoutes = _
-        .chain(this.props.regions)
+      venueSliderRoutes = _.chain(this.props.regions)
         // only choose regions which have bounds
         // (regions with venues are the only ones with bounds)
         .filter(region => region.bounds)
@@ -130,11 +130,10 @@ class App extends Component {
                 activeRegion={this.props.activeRegion}
                 handleCloseRegionsModalClick={this.handleCloseRegionsModalClick}
                 handleRegionSelect={this.handleRegionSelect}
-              />
-            }
-        </div>
-      </Router>
-    </div>
+              />}
+          </div>
+        </Router>
+      </div>
     )
   }
 }

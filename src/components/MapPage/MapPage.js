@@ -14,7 +14,7 @@ class MapPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      hoveredVenue: '',
+      hoveredVenue: ''
     }
   }
   componentDidMount () {
@@ -30,7 +30,7 @@ class MapPage extends Component {
       this.refs.dragItem.scrollTop = 0
     }
   }
-  
+
   componentWillUnmount () {
     document.documentElement.classList.remove('html--MapPage')
     document.body.classList.remove('body--MapPage')
@@ -68,15 +68,16 @@ class MapPage extends Component {
   handleScroll = e => {
     const { dragItem, linkedDragItem, linkedDragItemInner } = this.refs
     const { scrollTop } = dragItem
-    linkedDragItem.style.transform =
-      'translate3d(0,' + -scrollTop + 'px, 0)'
+    linkedDragItem.style.transform = 'translate3d(0,' + -scrollTop + 'px, 0)'
     linkedDragItemInner.style.transform =
-      'translate3d(0,' + (scrollTop / 2) + 'px, 0)'
+      'translate3d(0,' + scrollTop / 2 + 'px, 0)'
   }
-  handleRegionSelect = (_id) => event => {
+  handleRegionSelect = _id => event => {
     // go to the region's coords (and then coords will set the slug)
-    const { zoom, lat, lng } = this.props.regions[_id]
-    this.props.setMainMap({ zoom, center: { lat, lng } })
+    this.props.setMainMapByRegion(
+      this.props.regions[_id],
+      this.props.mainMap.size
+    )
     this.props.hideUiRegionsModal()
   }
   render () {
@@ -102,10 +103,7 @@ class MapPage extends Component {
           ref='dragItem'
           onScroll={this.handleScroll}
         >
-          <div
-            className='MapPage__Map-container'
-            ref='linkedDragItem'
-          >
+          <div className='MapPage__Map-container' ref='linkedDragItem'>
             <div
               className='MapPage__Map-inner-container'
               ref='linkedDragItemInner'
@@ -140,7 +138,13 @@ class MapPage extends Component {
 }
 
 function mapStateToProps ({ regions, venues, ui, mainMap }) {
-  return { regions, venues, ui, mainMap, visibleRegions: mainMap.visibleRegionsObj }
+  return {
+    regions,
+    venues,
+    ui,
+    mainMap,
+    visibleRegions: mainMap.visibleRegionsObj
+  }
 }
 
 export default connect(mapStateToProps, actions)(MapPage)
