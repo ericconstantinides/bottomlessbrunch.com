@@ -86,6 +86,8 @@ class MapPage extends Component {
         <SiteHeader
           region={this.props.ui.activeRegion}
           regions={this.props.regions}
+          regionTitle={this.props.mainMap.regionTitle}
+          regionReset={this.props.mainMap.regionReset}
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}
           visibleRegions={this.props.visibleRegions}
@@ -112,6 +114,7 @@ class MapPage extends Component {
                 hoveredVenue={this.state.hoveredVenue}
                 containerElement={<div style={styles} />}
                 mapElement={<div style={styles} />}
+                history={this.props.history}
               />
             </div>
           </div>
@@ -132,7 +135,7 @@ class MapPage extends Component {
 }
 
 function mapStateToProps ({ regions, venues, ui, mainMap }) {
-  return { regions, venues, ui, visibleRegions: mainMap.visibleRegionsObj }
+  return { regions, venues, ui, mainMap, visibleRegions: mainMap.visibleRegionsObj }
 }
 
 export default connect(mapStateToProps, actions)(MapPage)

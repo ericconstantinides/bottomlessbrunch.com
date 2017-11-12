@@ -53,7 +53,8 @@ class Map extends Component {
         this.props.venues,
         this.props.regions,
         coords,
-        this.props.fetchVenueDetail
+        this.props.fetchVenueDetail,
+        this.props.history
       )
     } else {
       // RUN AN ACTION THAT HIDES ALL VENUES
