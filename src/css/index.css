@@ -648,7 +648,8 @@ a * {
   color: #f45a26;
   padding: 0.25em 0.5em;
   border-bottom: 1px solid #ffbfaa;
-  transition: 0.15s; }
+  transition: 0.15s;
+  cursor: pointer; }
   .RegionsModal__link:focus, .RegionsModal__link:active, .RegionsModal__link:hover {
     text-decoration: none;
     background: whitesmoke;
