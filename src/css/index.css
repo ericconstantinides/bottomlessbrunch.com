@@ -470,6 +470,7 @@ a * {
   .button--orange-black:hover {
     background: black; }
   .button--orange-black.is-smaller {
+    text-align: center;
     padding: 0.25em 0.5em;
     font-size: 0.6875em;
     opacity: 0.75;
@@ -576,6 +577,7 @@ a * {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   cursor: pointer;
   font-family: "Open Sans Condensed", sans-serif;
   font-weight: bold;
