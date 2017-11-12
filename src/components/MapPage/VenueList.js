@@ -13,7 +13,7 @@ class VenueList extends Component {
     }
   }
   componentDidUpdate (prevProps, prevState) {
-    console.log('cdu: VenueList')
+    // console.log('cdu: VenueList')
   }
   render () {
     return (

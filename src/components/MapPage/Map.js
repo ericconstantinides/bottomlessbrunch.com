@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
-import { getRegionCoordsByViewport, checkMap } from '../../lib/myHelpers'
+// import { getRegionCoordsByViewport, checkMap } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import VenueTeaser from './VenueTeaser'
-import { SHOW_VENUES_ZOOM_LEVEL } from '../../config'
 
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
@@ -22,14 +21,14 @@ class Map extends Component {
   // mapLoaded = ({ map, maps }) => {
   //   this.setState({ map })
   // }
-  componentDidMount = () => {
+/*   componentDidMount = () => {
     console.log(this.props.ui.activeRegion)
     if (this.props.ui.activeRegion) {
       const { zoom, lat, lng } = this.props.ui.activeRegion
       this.props.setMainMap({ zoom, center: { lat, lng } })
     }
-  }
-  componentWillReceiveProps (nextProps) {
+  } */
+/*   componentWillReceiveProps (nextProps) {
     // update the state's region if the UI region changes:
     if (
       !_.isEmpty(nextProps.ui.activeRegion) &&
@@ -40,26 +39,22 @@ class Map extends Component {
       const { zoom, lat, lng } = nextProps.ui.activeRegion
       this.props.setMainMap({ zoom, center: { lat, lng } })
     }
-  }
+  } */
 
   handleMapChange = coords => {
-    console.log('handleMapChange', coords)
+    // console.log('handleMapChange:', coords)
     // update the maps size if the coords size has changed:
     if (!_.isEqual(this.props.mainMap.size, coords.size)) {
       this.props.updateMainMapSize(coords.size)
     }
     this.props.setMainMap(coords)
-    if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
-      this.props.getMainMapVisibleVenues(
-        this.props.venues,
-        this.props.regions,
-        coords,
-        this.props.fetchVenueDetail,
-        this.props.history
-      )
-    } else {
-      // RUN AN ACTION THAT HIDES ALL VENUES
-    }
+    this.props.getMainMapVisibleVenues(
+      this.props.venues,
+      this.props.regions,
+      coords,
+      this.props.fetchVenueDetail,
+      this.props.history
+    )
     // checkMap(this.props.venues, coords)
     // this.updateMapAndDrawer(coords)
   }
@@ -69,8 +64,7 @@ class Map extends Component {
       this.props.clearMarkers()
     }
   }
-  updateMapAndDrawer = mapCoords => {
-    console.log(mapCoords)
+/*   updateMapAndDrawer = mapCoords => {
     const { size } = mapCoords
     const { activeRegion: region } = this.props.ui
     const coords = !_.isEmpty(region.bounds)
@@ -81,7 +75,7 @@ class Map extends Component {
     if (this.props.venues) {
       checkMap(this.props.venues, coords)
     }
-  }
+  } */
   renderVenueTeasers = () => {
     let mapItemVenueTeasers = []
     _.map(this.props.venues, venue => {

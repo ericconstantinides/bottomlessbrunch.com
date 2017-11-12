@@ -6,7 +6,7 @@ import { Route } from 'react-router'
 import cx from 'classnames'
 
 import * as actions from '../actions'
-import { parsePath, reduceVenuesByRegion } from '../lib/myHelpers'
+import { parsePath } from '../lib/myHelpers'
 
 import MetaData from './common/MetaData'
 import MapPage from './MapPage/MapPage'
@@ -68,7 +68,7 @@ class App extends Component {
   render () {
     let regionRoutes = ''
     // only create regionRoutes if our map isn't loaded:
-    console.log('this.props.mainMap.loaded:', this.props.mainMap.loaded)
+    // console.log('this.props.mainMap.loaded:', this.props.mainMap.loaded)
     if (!this.props.mainMap.loaded) {
       regionRoutes = _.map(this.props.regions, region => (
         <Route
@@ -139,18 +139,6 @@ class App extends Component {
 }
 
 function mapStateToProps ({ venues, regions, mainMap, ui, admin }) {
-  // get the region name:
-  if (!_.isEmpty(ui.activeRegion)) {
-    ui.regionName = ui.activeRegion.name
-    ui.regionState = ui.activeRegion.state
-    if (!_.isEmpty(venues)) {
-      ui.numOfVenues = _.size(reduceVenuesByRegion(venues, ui.activeRegion._id))
-    }
-  }
-  // get the venue name:
-  if (ui.venueOpenId && !_.isEmpty(venues)) {
-    ui.venueName = venues[ui.venueOpenId].name
-  }
   return { venues, regions, mainMap, ui, admin }
 }
 
