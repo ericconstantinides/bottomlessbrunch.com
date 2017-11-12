@@ -30,8 +30,6 @@ export default function (state = initialState, action) {
         venueNextId: false,
         venuePrevId: false
       }
-    case constants.UI_SET_REGION:
-      return { ...state, activeRegion: action.payload }
     case constants.UI_UNSET_REGION:
       return { ...state, activeRegion: {} }
     case constants.UI_SET_REGION_VENUES:

@@ -37,20 +37,25 @@ class VenueSlider extends Component {
     this.props.addUiAppClass(['App--VenueSlider'])
   }
   componentWillReceiveProps (nextProps) {
-    if (!_.isEmpty(nextProps.venues) && _.isEmpty(nextProps.ui.regionVenues)) {
-      nextProps.setUiRegionVenues(nextProps.venues, nextProps.region)
-    }
-    if (!_.isEmpty(nextProps.ui.regionVenues)) {
-      // console.log(nextProps.ui.regionVenues)
+    if (!_.isEmpty(nextProps.mainMap.visibleVenuesArr) && 1 === 2) {
+      // console.log(nextProps.mainMap.visibleVenuesArr)
       if (!this.state.openId) {
         const venue = getVenueBySlug(
-          nextProps.ui.regionVenues,
+          nextProps.mainMap.visibleVenuesArr,
           nextProps.match.params.venueSlug
         )
-        const nextId = objectFunctions.keys.next(nextProps.ui.regionVenues, venue._id)
-        const prevId = objectFunctions.keys.prev(nextProps.ui.regionVenues, venue._id)
+        const nextId = objectFunctions.keys.next(
+          nextProps.mainMap.visibleVenuesArr,
+          venue._id
+        )
+        const prevId = objectFunctions.keys.prev(
+          nextProps.mainMap.visibleVenuesArr,
+          venue._id
+        )
         this.setState((prevstate, props) => ({
-          openId: venue._id, nextId, prevId
+          openId: venue._id,
+          nextId,
+          prevId
         }))
         this.props.setUiVenue(venue._id, nextId, prevId)
       }
@@ -76,9 +81,9 @@ class VenueSlider extends Component {
     //   }
     // }
   }
-  
+
   // shouldComponentUpdate (nextProps, nextState) {
-  //   if (_.isEmpty(nextProps.ui.regionVenues)) {
+  //   if (_.isEmpty(nextProps.mainMap.visibleVenuesArr)) {
   //     return true
   //   }
   //   return false
@@ -100,12 +105,20 @@ class VenueSlider extends Component {
   handleSliderChange = index => {
     // console.log('post index:', index)
     this.setState({ openIndex: index })
-    _.map(this.props.ui.regionVenues, venue => {
+    _.map(this.props.mainMap.visibleVenuesArr, venue => {
       if (venue.index === index) {
-        const nextId = objectFunctions.keys.next(this.props.ui.regionVenues, venue._id)
-        const prevId = objectFunctions.keys.prev(this.props.ui.regionVenues, venue._id)
+        const nextId = objectFunctions.keys.next(
+          this.props.mainMap.visibleVenuesArr,
+          venue._id
+        )
+        const prevId = objectFunctions.keys.prev(
+          this.props.mainMap.visibleVenuesArr,
+          venue._id
+        )
         this.setState((prevState, props) => ({
-          openId: venue._id, nextId, prevId
+          openId: venue._id,
+          nextId,
+          prevId
         }))
         // const activeVenue = reducedVenues[venue._id]
         this.props.history.push(`/${this.props.region.slug}/${venue.slug}`)
@@ -117,28 +130,36 @@ class VenueSlider extends Component {
     console.log(service)
   }
   render () {
-    if (_.isEmpty(this.props.ui.regionVenues)) {
+    if (_.isEmpty(this.props.mainMap.visibleVenuesArr)) {
       return <div>No Venues Available</div>
     }
     let slideNum = 0
-    const sliderItems = _.map(this.props.ui.regionVenues, venue => {
-      // MAKE THIS SMARTER
-      // ADD isActive={true/false}
-      // ADD isNext={true/false}
-      // ADD isPrev={true/false}
-      return (
-        <VenueSliderItem
-          key={venue._id}
-          venueId={venue._id}
-          slideNum={slideNum++}
-          history={this.props.history}
-          regionSlug={this.props.region.slug}
-          isActive={venue._id === this.state.openId}
-          isNext={venue._id === this.state.nextId}
-          isPrev={venue._id === this.state.prevId}
-        />
-      )
-    })
+    let initialSlide = 0
+    const sliderItems = this.props.mainMap.visibleVenuesArr.map(
+      (venueId, index) => {
+        // MAKE THIS SMARTER
+        // ADD isActive={true/false}
+        // ADD isNext={true/false}
+        // ADD isPrev={true/false}
+        const venue = this.props.venues[venueId]
+        if (venue._id === this.state.openId) {
+          initialSlide = index
+        }
+        return (
+          <VenueSliderItem
+            key={venue._id}
+            venueId={venue._id}
+            slideNum={slideNum++}
+            history={this.props.history}
+            regionSlug={this.props.region.slug}
+            isActive={venue._id === this.state.openId}
+            isNext={venue._id === this.state.nextId}
+            isPrev={venue._id === this.state.prevId}
+            index={index}
+          />
+        )
+      }
+    )
     return (
       <div className='VenueSlider'>
         <Link to={`/${this.props.region.slug}`} className='VenueSlider__close'>
@@ -146,7 +167,7 @@ class VenueSlider extends Component {
         </Link>
         <Slider
           {...SLIDER_SETTINGS}
-          initialSlide={this.props.ui.regionVenues[this.state.openId].index}
+          initialSlide={initialSlide}
           ref='slickSlider'
           afterChange={this.handleSliderChange}
           beforeChange={this.handleSliderBeforeChange}
@@ -158,8 +179,8 @@ class VenueSlider extends Component {
   }
 }
 
-function mapStateToProps ({ venues, regions, ui }) {
-  return { venues, regions, ui }
+function mapStateToProps ({ venues, regions, ui, mainMap }) {
+  return { venues, regions, ui, mainMap }
 }
 
 export default connect(mapStateToProps, actions)(VenueSlider)

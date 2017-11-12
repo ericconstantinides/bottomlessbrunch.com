@@ -88,7 +88,7 @@ class VenueTeaser extends Component {
         <Link
           regionName={regionName}
           className={`VenueTeaser__link ${altClass}__link`}
-          to={`/${regionSlug}/${venue.slug}`}
+          to={`/${venue.slug}`}
         >
           <div
             ref={ven => {

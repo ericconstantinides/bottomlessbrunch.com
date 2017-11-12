@@ -32,6 +32,10 @@ class VenueSliderItem extends Component {
     //     this.setState({ isActive: true })
     //   }
     // }
+    const venue = this.props.venues[this.props.venueId]
+    if (venue.fetchedLevel !== 'full') {
+      this.props.fetchVenueDetail(venue._id, 'full')
+    }
   }
   componentWillReceiveProps (nextProps) {
     if (!_.isEmpty(nextProps.venues[nextProps.venueId].googlePlacesData)) {
@@ -52,7 +56,8 @@ class VenueSliderItem extends Component {
     if (nextState.fetched !== this.state.fetched) {
       return true
     }
-    return false
+    // return false
+    return true
   }
   // componentDidUpdate (prevProps, prevState) {
   // console.log('Item: UPDATED:', updated++)
@@ -67,11 +72,11 @@ class VenueSliderItem extends Component {
     // console.log('Item: UNMOUNTED:', unmounted++)
   }
   render () {
-    if (_.isEmpty(this.props.venues)) {
-      return <div>waiting...</div>
+    const venue = this.props.venues[this.props.venueId]
+    if (venue.fetchedLevel !== 'full') {
+      return <div>Loading...</div>
     }
     // console.log('Item: RENDERED:', rendered++)
-    const venue = this.props.venues[this.props.venueId]
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
     if (!venue.googlePlacesData) venue.googlePlacesData = {}

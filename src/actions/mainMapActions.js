@@ -15,7 +15,7 @@ export function setMainMapByRegion (region, size) {
   // get the width and height if it's not known yet:
   size.width = size.width === 0 ? window.innerWidth : size.width
   size.height = size.height === 0 ? window.innerHeight : size.height
-  
+
   const coords = getRegionCoordsByViewport(region, size)
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
