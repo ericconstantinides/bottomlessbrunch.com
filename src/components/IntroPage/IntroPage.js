@@ -17,11 +17,19 @@ class IntroPage extends Component {
   componentWillUnmount () {
     this.props.removeUiAppClass(['App--IntroPage'])
   }
+  handleRegionSelect = _id => event => {
+    // go to the region's coords (and then coords will set the slug)
+    this.props.setMainMapByRegion(
+      this.props.regions[_id],
+      this.props.mainMap.size
+    )
+    this.props.hideUiRegionsModal()
+  }
   render () {
     return (
       <div className='IntroPage'>
         <SiteHeader
-          handleRegionsModalClick={this.handleRegionsModalClick}
+          handleRegionSelect={this.handleRegionSelect}
         />
         <div className='Splash'>
           <video
@@ -98,8 +106,8 @@ class IntroPage extends Component {
   }
 }
 
-function mapStateToProps ({ regions, ui }) {
-  return { regions, ui }
+function mapStateToProps ({ regions, ui, mainMap }) {
+  return { regions, ui, mainMap }
 }
 
 export default connect(mapStateToProps, actions)(IntroPage)

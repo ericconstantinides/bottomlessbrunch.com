@@ -127,7 +127,6 @@ class App extends Component {
             {this.props.ui.regionsModalActive &&
               <RegionsModal
                 regions={this.props.regions}
-                activeRegion={this.props.activeRegion}
                 handleCloseRegionsModalClick={this.handleCloseRegionsModalClick}
                 handleRegionSelect={this.handleRegionSelect}
               />}

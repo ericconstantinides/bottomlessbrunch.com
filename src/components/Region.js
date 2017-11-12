@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 
 class Region extends Component {
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.props.setMainMapByRegion(this.props.region, this.props.mainMap.size)
   }
   render = () => <div className='Region' style={{display: 'none'}} />

@@ -89,14 +89,11 @@ class MapPage extends Component {
     return (
       <div className='MapPage'>
         <SiteHeader
-          region={this.props.ui.activeRegion}
-          regions={this.props.regions}
           regionTitle={this.props.mainMap.regionTitle}
           regionReset={this.props.mainMap.regionReset}
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}
           handleRegionSelect={this.handleRegionSelect}
-          visibleRegions={this.props.visibleRegions}
         />
         <div
           className='MapPage__inner'

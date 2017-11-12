@@ -31,7 +31,7 @@ const SiteHeader = props => {
             alt='Bottomless Brunch'
           />
         </div>
-        {props.region &&
+        {props.handleRegionsModalClick &&
           <div className='SiteHeader__region layout__sidebar-width'>
             <h2
               className='SiteHeader__region-title'
