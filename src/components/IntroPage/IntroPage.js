@@ -10,10 +10,6 @@ class IntroPage extends Component {
   handleRegionsModalClick = () => {
     this.props.showUiRegionsModal()
   }
-  // handleSelectChange = selected => {
-  //   this.props.setUiRegion(this.props.regions[selected.value])
-  //   this.props.history.replace(this.props.regions[selected.value].slug)
-  // }
   componentDidMount () {
     this.props.addUiAppClass(['App--IntroPage'])
     viewportUnitsBuggyfill.init()

@@ -5,15 +5,12 @@ import constants from '../actions/types'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
-export function fetchRegions (history, fetchUiRegion) {
+export function fetchRegions () {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/regions`).then(response => {
-      const regions = response.data
-      // calling fetchUiRegion:
-      fetchUiRegion(regions, history)
       dispatch({
         type: constants.REGIONS_FETCH,
-        payload: regions
+        payload: response.data
       })
     })
   }

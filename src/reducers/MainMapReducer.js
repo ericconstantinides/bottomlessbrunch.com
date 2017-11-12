@@ -18,6 +18,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case constants.MAIN_MAP_SET:
       return { ...action.payload, loaded: true }
+    case constants.MAIN_MAP_UNSET:
+      return initialState
     case constants.MAIN_MAP_UPDATE_SIZE:
       return { ...state, size: action.payload, loaded: true }
     case constants.MAIN_MAP_SET_VISIBLE_VENUES_AND_REGIONS:

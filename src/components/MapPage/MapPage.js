@@ -40,8 +40,7 @@ class MapPage extends Component {
     this.props.showUiRegionsModal()
   }
   handleLogoClick = () => {
-    this.props.unsetUiVenue()
-    this.props.unsetUiRegion()
+    this.props.unsetMainMap()
     this.props.history.push('/')
   }
   handleMouseOver = venue => event => {

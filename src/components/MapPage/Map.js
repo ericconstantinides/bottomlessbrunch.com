@@ -48,6 +48,7 @@ class Map extends Component {
     if (!_.isEqual(this.props.mainMap.size, coords.size)) {
       this.props.updateMainMapSize(coords.size)
     }
+    this.props.setMainMap(coords)
     if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
       this.props.getMainMapVisibleVenues(
         this.props.venues,

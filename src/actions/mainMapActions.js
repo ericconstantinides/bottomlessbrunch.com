@@ -2,17 +2,32 @@ import _ from 'lodash'
 import constants from './types'
 
 export function setMainMap (coords) {
-  // console.log('settings coords:', coords)
+  window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
     type: constants.MAIN_MAP_SET,
     payload: coords
   }
 }
+export function unsetMainMap () {
+  window.localStorage.removeItem('mainMap')
+  return {
+    type: constants.MAIN_MAP_UNSET,
+    payload: null
+  }
+}
+export function fetchMainMap () {
+  const mainMap = window.localStorage.getItem('mainMap')
+  if (!mainMap) return unsetMainMap()
+  return {
+    type: constants.MAIN_MAP_SET,
+    payload: JSON.parse(mainMap)
+  }
+}
 // size = {width: n, height: n}
-export function updateMainMapSize (size) {
+export function updateMainMapSize (mapSize) {
   return {
     type: constants.MAIN_MAP_UPDATE_SIZE,
-    payload: size
+    payload: mapSize
   }
 }
 

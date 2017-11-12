@@ -27,12 +27,9 @@ class App extends Component {
   }
   componentDidMount () {
     // get the regions and the venues
-    this.props.fetchRegions(
-      this.props.history,
-      // add a callback to fetchUiRegion using history
-      this.props.fetchUiRegion
-    )
+    this.props.fetchRegions()
     this.props.fetchVenues(this.props.calcRegionsMeta)
+    this.props.fetchMainMap()
     this.props.fetchEnvironment()
   }
   // shouldComponentUpdate (nextProps, nextState) {
@@ -111,10 +108,10 @@ class App extends Component {
             {venueSliderRoutes}
             {regionRoutes}
             {parsedHistory[0] !== 'admin' &&
-              !_.isEmpty(this.props.ui.activeRegion) &&
+              this.props.mainMap.loaded &&
               <MapPage history={this.props.history} />}
             {parsedHistory[0] !== 'admin' &&
-              _.isEmpty(this.props.ui.activeRegion) &&
+              !this.props.mainMap.loaded &&
               <IntroPage history={this.props.history} />}
             {this.props.ui.regionsModalActive &&
               <RegionsModal
@@ -130,7 +127,7 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ venues, regions, ui, admin }) {
+function mapStateToProps ({ venues, regions, mainMap, ui, admin }) {
   // get the region name:
   if (!_.isEmpty(ui.activeRegion)) {
     ui.regionName = ui.activeRegion.name
@@ -143,7 +140,7 @@ function mapStateToProps ({ venues, regions, ui, admin }) {
   if (ui.venueOpenId && !_.isEmpty(venues)) {
     ui.venueName = venues[ui.venueOpenId].name
   }
-  return { venues, regions, ui, admin }
+  return { venues, regions, mainMap, ui, admin }
 }
 
 export default connect(mapStateToProps, actions)(App)

@@ -49,9 +49,7 @@ class ListVenues extends Component {
     }
   }
   handleSelectChange = selected => {
-    // this.props.setUiRegion(this.props.regions[selected.value])
     this.setState({region: selected.value})
-    // this.props.history.replace(this.props.regions[selected.value].slug)
   }
   render () {
     const regionSelectOptions = _.map(this.props.regions, region => ({
