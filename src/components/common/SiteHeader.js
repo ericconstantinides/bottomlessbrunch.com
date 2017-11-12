@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import React from 'react'
 import { SITE_NAME, SITE_SLOGAN } from '../../config'
 
@@ -6,12 +5,12 @@ const SiteHeader = props => {
   let regionButton = ''
   if (props.regionReset) {
     regionButton = (
-      <Link
-        to={props.regionReset}
+      <div
+        onClick={props.handleRegionSelect(props.regionReset)}
         className='button button--orange-black is-smaller'
       >
         Show All
-      </Link>
+      </div>
     )
   }
   return (

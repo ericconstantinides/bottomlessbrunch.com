@@ -108,7 +108,7 @@ export function getMainMapVisibleVenues (
       ) {
         // PARTIAL SINGLE REGION:
         history.push('/' + regions[visibleRegionsObj[keys[0]]._id].slug)
-        regionReset = '/' + regions[visibleRegionsObj[keys[0]]._id].slug
+        regionReset = keys[0]
         regionTitle = visibleRegionsObj[keys[0]].name
       } else {
         // FULL SINGLE REGION:

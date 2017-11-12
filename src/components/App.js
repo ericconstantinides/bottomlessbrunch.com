@@ -67,6 +67,7 @@ class App extends Component {
   render () {
     let regionRoutes = ''
     // only create regionRoutes if our map isn't loaded:
+    console.log('this.props.mainMap.loaded:', this.props.mainMap.loaded)
     if (!this.props.mainMap.loaded) {
       regionRoutes = _.map(this.props.regions, region => (
         <Route

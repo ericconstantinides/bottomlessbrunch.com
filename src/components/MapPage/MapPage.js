@@ -73,7 +73,12 @@ class MapPage extends Component {
     linkedDragItemInner.style.transform =
       'translate3d(0,' + (scrollTop / 2) + 'px, 0)'
   }
-
+  handleRegionSelect = (_id) => event => {
+    // go to the region's coords (and then coords will set the slug)
+    const { zoom, lat, lng } = this.props.regions[_id]
+    this.props.setMainMap({ zoom, center: { lat, lng } })
+    this.props.hideUiRegionsModal()
+  }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
@@ -89,6 +94,7 @@ class MapPage extends Component {
           regionReset={this.props.mainMap.regionReset}
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}
+          handleRegionSelect={this.handleRegionSelect}
           visibleRegions={this.props.visibleRegions}
         />
         <div
