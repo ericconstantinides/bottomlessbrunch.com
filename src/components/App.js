@@ -22,9 +22,6 @@ import RegionsModal from './common/RegionsModal'
 
 
 class App extends Component {
-  handleCloseRegionsModalClick = () => {
-    this.props.hideUiRegionsModal()
-  }
   componentDidMount () {
     // get the regions and the venues
     this.props.fetchRegions()
@@ -58,14 +55,27 @@ class App extends Component {
       })
     })
   } */
+  handleRegionSelect = (_id) => event => {
+    // go to the region's coords (and then coords will set the slug)
+    const { zoom, lat, lng } = this.props.regions[_id]
+    this.props.setMainMap({ zoom, center: { lat, lng } })
+    this.props.hideUiRegionsModal()
+  }
+  handleCloseRegionsModalClick = () => {
+    this.props.hideUiRegionsModal()
+  }
   render () {
-    const regionRoutes = _.map(this.props.regions, region => (
-      <Route
-        key={region._id}
-        path={`/${region.slug}`}
-        render={props => <Region {...props} region={region} />}
-      />
-    ))
+    let regionRoutes = ''
+    // only create regionRoutes if our map isn't loaded:
+    if (!this.props.mainMap.loaded) {
+      regionRoutes = _.map(this.props.regions, region => (
+        <Route
+          key={region._id}
+          path={`/${region.slug}`}
+          render={props => <Region {...props} region={region} />}
+        />
+      ))
+    }
     let venueSliderRoutes
     if (!_.isEmpty(this.props.regions)) {
       venueSliderRoutes = _
@@ -118,6 +128,7 @@ class App extends Component {
                 regions={this.props.regions}
                 activeRegion={this.props.activeRegion}
                 handleCloseRegionsModalClick={this.handleCloseRegionsModalClick}
+                handleRegionSelect={this.handleRegionSelect}
               />
             }
         </div>

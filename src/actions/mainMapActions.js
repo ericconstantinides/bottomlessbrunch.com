@@ -93,6 +93,7 @@ export function getMainMapVisibleVenues (
       } else {
         // NO REGION:
         // we need to call the thing that changes the region
+        history.replace('/')
       }
     })
   } else {
@@ -106,17 +107,17 @@ export function getMainMapVisibleVenues (
         regions[keys[0]].venuesAvailable
       ) {
         // PARTIAL SINGLE REGION:
-        // history.push('/' + regions[visibleRegionsObj[keys[0]]._id].slug)
+        history.push('/' + regions[visibleRegionsObj[keys[0]]._id].slug)
         regionReset = '/' + regions[visibleRegionsObj[keys[0]]._id].slug
         regionTitle = visibleRegionsObj[keys[0]].name
       } else {
         // FULL SINGLE REGION:
-        // history.push('/' + regions[visibleRegionsObj[keys[0]]._id].slug)
+        history.push('/' + regions[visibleRegionsObj[keys[0]]._id].slug)
         regionTitle = visibleRegionsObj[keys[0]].name
       }
     } else {
       // MULTIPLE REGIONS
-      // history.replace('/')
+      history.replace('/')
       regionTitle = 'Multiple Regions'
     }
   }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import _ from 'lodash'
 
@@ -10,14 +9,13 @@ const RegionsModal = props => {
     // (regions with venues are the only ones with bounds)
     .filter(region => region.bounds)
     .map(region => (
-      <Link
+      <div
         key={region._id}
         className='RegionsModal__link'
-        to={`/${region.slug}`}
-        onClick={props.handleCloseRegionsModalClick}
+        onClick={props.handleRegionSelect(region._id)}
       >
         {region.name}
-      </Link>
+      </div>
     ))
     .value()
   return (
