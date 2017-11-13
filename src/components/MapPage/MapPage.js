@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 import _ from 'lodash'
+import cx from 'classnames'
 
 import * as actions from '../../actions'
 import { DRAWER } from '../../config'
@@ -81,17 +82,24 @@ class MapPage extends Component {
     this.props.hideUiRegionsModal()
   }
   handleVenueTeaserLinkClick = _id => event => {
-    const {mainMap: {visibleVenuesArr: visVenues}, venues, history} = this.props
+    const {
+      mainMap: { visibleVenuesArr: visVenues },
+      venues,
+      history
+    } = this.props
     this.props.setUiVenue(venues, visVenues, visVenues.indexOf(_id), history)
   }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
     }
-    // const region = this.props.ui.activeRegion
+    const hasVenues =
+      !!(this.props.mainMap.visibleVenuesArr &&
+      this.props.mainMap.visibleVenuesArr.length)
+    const hasVenuesClass = hasVenues ? 'has-venues' : 'no-venues'
     const styles = { height: `100%`, width: `100%` }
     return (
-      <div className='MapPage'>
+      <div className={cx('MapPage', hasVenuesClass)}>
         <SiteHeader
           regionTitle={this.props.mainMap.regionTitle}
           regionReset={this.props.mainMap.regionReset}
@@ -124,16 +132,17 @@ class MapPage extends Component {
             </div>
           </div>
           <div className='VenueList__spacer' />
-          <VenueList
-            history={this.props.history}
-            region={this.props.ui.activeRegion._id}
-            handleMouseOver={this.handleMouseOver}
-            handleMouseLeave={this.handleMouseLeave}
-            toggleMarkerClick={this.toggleMarkerClick}
-            hoveredVenue={this.state.hoveredVenue}
-            dragState={this.state.dragItemPressed}
-            handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
-          />
+          {hasVenues &&
+            <VenueList
+              history={this.props.history}
+              region={this.props.ui.activeRegion._id}
+              handleMouseOver={this.handleMouseOver}
+              handleMouseLeave={this.handleMouseLeave}
+              toggleMarkerClick={this.toggleMarkerClick}
+              hoveredVenue={this.state.hoveredVenue}
+              dragState={this.state.dragItemPressed}
+              handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
+            />}
         </div>
       </div>
     )

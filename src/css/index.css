@@ -2596,6 +2596,8 @@ body.body--MapPage #root,
     height: calc(100vh - 165px);
     bottom: auto;
     z-index: 1; }
+    .MapPage.no-venues .MapPage__Map-container {
+      height: 100vh; }
   .MapPage__VenueList--width {
     width: 100%; }
   .VenueList__spacer {
