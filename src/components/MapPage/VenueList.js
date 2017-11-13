@@ -22,25 +22,24 @@ class VenueList extends Component {
           <div className='VenueList__inner-handle' />
         </div>
         {this.props.mainMap.visibleVenuesArr &&
-          this.props.mainMap.visibleVenuesArr.map(id => {
-            return (
-              <VenueTeaser
-                key={id}
-                altClass='VenueListItem'
-                handleMouseOver={this.props.handleMouseOver}
-                handleMouseLeave={this.props.handleMouseLeave}
-                toggleMarkerClick={this.props.toggleMarkerClick}
-                hoveredVenue={this.props.hoveredVenue}
-                venue={this.props.venues[id]}
-                regionName={
-                  this.props.regions[this.props.venues[id].regionId].name
-                }
-                regionSlug={
-                  this.props.regions[this.props.venues[id].regionId].slug
-                }
-              />
-            )
-          })}
+          this.props.mainMap.visibleVenuesArr.map((id, index) => (
+            <VenueTeaser
+              key={id}
+              altClass='VenueListItem'
+              handleMouseOver={this.props.handleMouseOver}
+              handleMouseLeave={this.props.handleMouseLeave}
+              toggleMarkerClick={this.props.toggleMarkerClick}
+              hoveredVenue={this.props.hoveredVenue}
+              venue={this.props.venues[id]}
+              regionName={
+                this.props.regions[this.props.venues[id].regionId].name
+              }
+              regionSlug={
+                this.props.regions[this.props.venues[id].regionId].slug
+              }
+              handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
+            />
+          ))}
       </div>
     )
   }

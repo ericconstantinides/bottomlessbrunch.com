@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 // import { compileDays } from '../../lib/myHelpers'
 
 const offsetPadding = 4
@@ -53,11 +52,9 @@ class VenueTeaser extends Component {
       this.setState({ offVert: 0, teaserSide: 'right', isPositioned: false })
     }
   }
-
   render () {
     const {
       venue,
-      regionSlug,
       regionName,
       handleMouseOver,
       handleMouseLeave,
@@ -85,10 +82,11 @@ class VenueTeaser extends Component {
             <span className='MapItem__pointer' />
           </div>}
         {/* THE VENUETEASER__INNER is where the real link should be... */}
-        <Link
+        <div
           regionName={regionName}
           className={`VenueTeaser__link ${altClass}__link`}
           to={`/${venue.slug}`}
+          onClick={this.props.handleVenueTeaserLinkClick(venue._id)}
         >
           <div
             ref={ven => {
@@ -142,7 +140,7 @@ class VenueTeaser extends Component {
               </button>
             </div>
           </div>
-        </Link>
+        </div>
       </article>
     )
   }

@@ -80,6 +80,10 @@ class MapPage extends Component {
     )
     this.props.hideUiRegionsModal()
   }
+  handleVenueTeaserLinkClick = _id => event => {
+    const {mainMap: {visibleVenuesArr: visVenues}, venues, history} = this.props
+    this.props.setUiVenue(venues, visVenues, visVenues.indexOf(_id), history)
+  }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
@@ -115,6 +119,7 @@ class MapPage extends Component {
                 containerElement={<div style={styles} />}
                 mapElement={<div style={styles} />}
                 history={this.props.history}
+                handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
               />
             </div>
           </div>
@@ -127,6 +132,7 @@ class MapPage extends Component {
             toggleMarkerClick={this.toggleMarkerClick}
             hoveredVenue={this.state.hoveredVenue}
             dragState={this.state.dragItemPressed}
+            handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
           />
         </div>
       </div>

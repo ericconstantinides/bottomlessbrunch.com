@@ -99,6 +99,7 @@ class Map extends Component {
             hoveredVenue={this.props.hoveredVenue}
             venue={venue}
             regionSlug={this.props.regions[venue.regionId].slug}
+            handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
           />
         )
       }

@@ -1,12 +1,25 @@
 import constants from '../actions/types'
-import { reduceVenuesByRegion } from '../lib/myHelpers'
+import { reduceVenuesByRegion, movePointer } from '../lib/myHelpers'
 
-export function setUiVenue (openId, prevId, nextId) {
+export function setUiVenueTBD (openId, prevId, nextId) {
   return {
     type: constants.UI_SET_VENUE,
     payload: {
       openId, prevId, nextId
     }
+  }
+}
+
+export function setUiVenue (venues, visVenues, currIndex, history) {
+  const nextIndex = movePointer(visVenues, currIndex, 'next')
+  const prevIndex = movePointer(visVenues, currIndex, 'prev')
+  const openId = venues[visVenues[currIndex]]._id
+  const prevId = venues[visVenues[prevIndex]]._id
+  const nextId = venues[visVenues[nextIndex]]._id
+  history.push('/' + venues[visVenues[currIndex]].slug)
+  return {
+    type: constants.UI_SET_VENUE,
+    payload: { openId, prevId, nextId }
   }
 }
 

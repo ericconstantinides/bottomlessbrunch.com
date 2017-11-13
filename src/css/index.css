@@ -2464,6 +2464,9 @@ body.body--MapPage #root,
   .VenueListItem:first-child .VenueListItem__inner {
     margin-top: 0; }
 
+.VenueTeaser__link {
+  cursor: pointer; }
+
 .VenueTeaser__inner {
   min-height: 150px; }
 

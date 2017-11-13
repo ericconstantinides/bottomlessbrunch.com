@@ -57,7 +57,7 @@ class VenueSlider extends Component {
           nextId,
           prevId
         }))
-        this.props.setUiVenue(venue._id, nextId, prevId)
+        this.props.setUiVenueTBD(venue._id, nextId, prevId)
       }
     }
     // load the venues when
@@ -102,27 +102,13 @@ class VenueSlider extends Component {
   }
   handleSliderBeforeChange = (prevIndex, index) => {}
 
-  handleSliderChange = index => {
-    // console.log('post index:', index)
-    this.setState({ openIndex: index })
-    _.map(this.props.mainMap.visibleVenuesArr, venue => {
-      if (venue.index === index) {
-        const nextId = objectFunctions.keys.next(
-          this.props.mainMap.visibleVenuesArr,
-          venue._id
-        )
-        const prevId = objectFunctions.keys.prev(
-          this.props.mainMap.visibleVenuesArr,
-          venue._id
-        )
-        this.setState((prevState, props) => ({
-          openId: venue._id,
-          nextId,
-          prevId
-        }))
-        // const activeVenue = reducedVenues[venue._id]
-        this.props.history.push(`/${this.props.region.slug}/${venue.slug}`)
-        this.props.setUiVenue(venue._id, nextId, prevId)
+  handleSliderChange = sliderPos => {
+    // console.log('post sliderPos:', sliderPos)
+    this.setState({ openIndex: sliderPos })
+    const {mainMap: {visibleVenuesArr: visVenues}, venues, history} = this.props
+    this.props.mainMap.visibleVenuesArr.forEach((venueId, index) => {
+      if (index === sliderPos) {
+        this.props.setUiVenue(venues, visVenues, index, history)
       }
     })
   }
@@ -142,7 +128,7 @@ class VenueSlider extends Component {
         // ADD isNext={true/false}
         // ADD isPrev={true/false}
         const venue = this.props.venues[venueId]
-        if (venue._id === this.state.openId) {
+        if (venue._id === this.props.ui.venueOpenId) {
           initialSlide = index
         }
         return (
@@ -152,9 +138,9 @@ class VenueSlider extends Component {
             slideNum={slideNum++}
             history={this.props.history}
             regionSlug={this.props.region.slug}
-            isActive={venue._id === this.state.openId}
-            isNext={venue._id === this.state.nextId}
-            isPrev={venue._id === this.state.prevId}
+            isActive={venue._id === this.props.ui.venueOpenId}
+            isPrev={venue._id === this.props.ui.venuePrevId}
+            isNext={venue._id === this.props.ui.venueNextId}
             index={index}
           />
         )

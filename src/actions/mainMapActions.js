@@ -110,8 +110,9 @@ export function getMainMapVisibleVenues (
           }
         } else {
           // NO REGION:
-          // we need to call the thing that changes the region
-          history.replace('/')
+          if (history.location.pathname !== '/') {
+            history.replace('/')
+          }
         }
       })
     }
@@ -127,17 +128,25 @@ export function getMainMapVisibleVenues (
           regions[keys[0]].venuesAvailable
         ) {
           // PARTIAL SINGLE REGION:
-          history.push('/' + regions[visibleRegionsObj[keys[0]]._id].slug)
+          const slug = '/' + regions[visibleRegionsObj[keys[0]]._id].slug
+          if (history.location.pathname !== slug) {
+            history.push(slug)
+          }
           regionReset = keys[0]
           regionTitle = visibleRegionsObj[keys[0]].name
         } else {
           // FULL SINGLE REGION:
-          history.push('/' + regions[visibleRegionsObj[keys[0]]._id].slug)
+          const slug = '/' + regions[visibleRegionsObj[keys[0]]._id].slug
+          if (history.location.pathname !== slug) {
+            history.push(slug)
+          }
           regionTitle = visibleRegionsObj[keys[0]].name
         }
       } else {
         // MULTIPLE REGIONS
-        history.replace('/')
+        if (history.location.pathname !== '/') {
+          history.replace('/')
+        }
         regionTitle = 'Multiple Regions'
       }
     }

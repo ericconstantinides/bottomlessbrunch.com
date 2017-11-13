@@ -305,6 +305,29 @@ objectFunctions.keys.prev = function (myObject, id) {
 }
 
 export { objectFunctions }
+/**
+ * movePointer loops through an array to find the next or previous index
+ *
+ * @export
+ * @param {Array} arr is the original array
+ * @param {Integer} currIndex is current position
+ * @param {String} goTo is either 'next' or 'prev'
+ * @returns {Integer}
+ */
+export function movePointer (arr, currIndex, goTo = 'next') {
+  const topIndex = arr.length - 1
+  if (goTo === 'next') {
+    if (currIndex >= topIndex) {
+      return 0
+    }
+    return currIndex + 1
+  }
+  // previous:
+  if (currIndex <= 0) {
+    return topIndex
+  }
+  return currIndex - 1
+}
 
 /**
  * getRegionCoordsByViewport returns a revised mapCenter (lat, lng, zoom)
