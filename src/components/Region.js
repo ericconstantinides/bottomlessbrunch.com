@@ -8,7 +8,7 @@ import * as actions from '../actions'
 
 class Region extends Component {
   componentDidMount = () => {
-    this.props.setMainMapByRegion(this.props.region, this.props.mainMap.size)
+    this.props.setMainMapByRegion(this.props.region, this.props.mainMap.coords)
   }
   render = () => <div className='Region' style={{display: 'none'}} />
 }

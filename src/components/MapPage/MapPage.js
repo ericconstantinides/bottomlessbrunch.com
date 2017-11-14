@@ -45,12 +45,12 @@ class MapPage extends Component {
     this.props.history.push('/')
   }
   handleMouseOver = venue => event => {
-    if (this.props.mainMap.size.width > DRAWER.sm.ends) {
+    if (this.props.mainMap.coords.size.width > DRAWER.sm.ends) {
       this.setState({ hoveredVenue: venue._id })
     }
   }
   handleMouseLeave = venue => event => {
-    if (this.props.mainMap.size.width > DRAWER.sm.ends) {
+    if (this.props.mainMap.coords.size.width > DRAWER.sm.ends) {
       this.setState({ hoveredVenue: '' })
     }
   }
@@ -77,7 +77,7 @@ class MapPage extends Component {
     // go to the region's coords (and then coords will set the slug)
     this.props.setMainMapByRegion(
       this.props.regions[_id],
-      this.props.mainMap.size
+      this.props.mainMap.coords
     )
     this.props.hideUiRegionsModal()
   }

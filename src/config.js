@@ -14,18 +14,32 @@ export const fetchTimeout = 60
 export const ROOT_URL = ''
 export const DATE_LONG = { year: 'numeric', month: 'long', day: 'numeric' }
 
-export const USA_MAP = {
-  zoom: 4,
-  center: {
-    lat: 38.1510752,
-    lng: -95.8457796
-  },
+export const USA_MAP_COORDS = {
   bounds: {
     nw: { lat: 49.5335125, lng: -126.1250427 },
     ne: { lat: 49.5335125, lng: -64.468826475 },
     se: { lat: 22.410132469242768, lng: -64.468826475 },
     sw: { lat: 22.410132469242768, lng: -126.1250427 }
-  }
+  },
+  center: {
+    lat: 38.1510752,
+    lng: -95.8457796
+  },
+  marginBounds: {
+    nw: { lat: 49.5335125, lng: -126.1250427 },
+    ne: { lat: 49.5335125, lng: -64.468826475 },
+    se: { lat: 22.410132469242768, lng: -64.468826475 },
+    sw: { lat: 22.410132469242768, lng: -126.1250427 }
+  },
+  marginCenter: {
+    lat: 38.1510752,
+    lng: -95.8457796
+  },
+  size: {
+    height: 0,
+    width: 0
+  },
+  zoom: 4
 }
 
 export const SHOW_VENUES_ZOOM_LEVEL = 10

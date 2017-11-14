@@ -367,7 +367,7 @@ body.body--MapPage #root,
     -webkit-overflow-scrolling: touch;
   }
   .MapPage__Map-container {
-    height: calc(100vh - 165px);
+    height: 100%;
     bottom: auto;
     z-index: 1;
     .MapPage.no-venues & {

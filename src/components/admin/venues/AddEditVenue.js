@@ -19,7 +19,7 @@ import {
   addUiAppClass,
   removeUiAppClass
 } from '../../../actions'
-import { USA_MAP, DATE_LONG, BRUNCH_TIMES } from '../../../config'
+import { USA_MAP_COORDS, DATE_LONG, BRUNCH_TIMES } from '../../../config'
 import Marker from '../../common/Marker'
 import { times, days, timeCategories, states } from '../../../lib/enumerables'
 import {
@@ -40,9 +40,9 @@ class venueForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      zoom: USA_MAP.zoom,
-      lat: USA_MAP.center.lat,
-      lng: USA_MAP.center.lng,
+      zoom: USA_MAP_COORDS.zoom,
+      lat: USA_MAP_COORDS.center.lat,
+      lng: USA_MAP_COORDS.center.lng,
       marker: false,
       address: ''
     }

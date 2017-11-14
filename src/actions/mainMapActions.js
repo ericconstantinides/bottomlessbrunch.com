@@ -50,7 +50,6 @@ export function setMainMap (coords) {
     se: { lat: marginSouth, lng: marginEast },
     sw: { lat: marginSouth, lng: marginWest }
   }
-
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
     type: constants.MAIN_MAP_SET,
@@ -58,16 +57,16 @@ export function setMainMap (coords) {
   }
 }
 
-export function setMainMapByRegion (region, size) {
+export function setMainMapByRegion (region, coords) {
   // get the width and height if it's not known yet:
-  size.width = size.width === 0 ? window.innerWidth : size.width
-  size.height = size.height === 0 ? window.innerHeight : size.height
+  coords.size.width = coords.size.width === 0 ? window.innerWidth : coords.size.width
+  coords.size.height = coords.size.height === 0 ? window.innerHeight : coords.size.height
 
-  const coords = getRegionCoordsByViewport(region, size)
-  window.localStorage.setItem('mainMap', JSON.stringify(coords))
+  const regionCoords = getRegionCoordsByViewport(region, coords)
+  window.localStorage.setItem('mainMap', JSON.stringify(regionCoords))
   return {
     type: constants.MAIN_MAP_SET,
-    payload: coords
+    payload: regionCoords
   }
 }
 
@@ -79,11 +78,11 @@ export function unsetMainMap () {
   }
 }
 export function fetchMainMap () {
-  const mainMap = window.localStorage.getItem('mainMap')
-  if (!mainMap) return unsetMainMap()
+  const mainMapCoords = window.localStorage.getItem('mainMap')
+  if (!mainMapCoords) return unsetMainMap()
   return {
     type: constants.MAIN_MAP_SET,
-    payload: JSON.parse(mainMap)
+    payload: JSON.parse(mainMapCoords)
   }
 }
 // size = {width: n, height: n}

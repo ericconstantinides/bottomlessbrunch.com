@@ -42,7 +42,7 @@ class Map extends Component {
       nextProps.ui.activeRegion._id !== this.props.ui.activeRegion._id
     ) {
       // why am I updating it to my redux value and not the value of the region?
-      // this.updateMapAndDrawer({ size: this.props.mainMap.size })
+      // this.updateMapAndDrawer({ size: this.props.mainMap.coords.size })
       const { zoom, lat, lng } = nextProps.ui.activeRegion
       this.props.setMainMap({ zoom, center: { lat, lng } })
     }
@@ -51,7 +51,7 @@ class Map extends Component {
   handleMapChange = coords => {
     // console.log('handleMapChange:', coords)
     // update the maps size if the coords size has changed:
-    if (!_.isEqual(this.props.mainMap.size, coords.size)) {
+    if (!_.isEqual(this.props.mainMap.coords.size, coords.size)) {
       this.props.updateMainMapSize(coords.size)
     }
     this.props.setMainMap(coords)
@@ -102,7 +102,7 @@ class Map extends Component {
             {...venue}
             lat={venue.lat}
             lng={venue.lng}
-            size={this.props.mainMap.size}
+            size={this.props.mainMap.coords.size}
             handleMouseOver={this.props.handleMouseOver}
             handleMouseLeave={this.props.handleMouseLeave}
             toggleMarkerClick={this.props.toggleMarkerClick}
@@ -142,8 +142,8 @@ class Map extends Component {
     return regionMarkers
   }
   debugMarginBounds = () => {
-    if (this.props.mainMap.marginBounds) {
-      return _.map(this.props.mainMap.marginBounds, (mBounder, key) => (
+    if (this.props.mainMap.coords && this.props.mainMap.coords.marginBounds) {
+      return _.map(this.props.mainMap.coords.marginBounds, (mBounder, key) => (
         <MBounder
           key={key}
           title={key}
@@ -166,10 +166,13 @@ class Map extends Component {
     }
   }
   render () {
+    if (!this.props.mainMap) {
+      return <div>Loading...</div>
+    }
     return (
       <GoogleMapReact
-        zoom={this.props.mainMap.zoom}
-        center={this.props.mainMap.center}
+        zoom={this.props.mainMap.coords.zoom}
+        center={this.props.mainMap.coords.center}
         options={{
           fullscreenControl: false,
           zoomControl: false,

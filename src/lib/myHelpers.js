@@ -338,8 +338,9 @@ export function movePointer (arr, currIndex, goTo = 'next') {
  * @param {object} size: browser width and height
  * @returns { { lat, lng, zoom } } mapCenter
  */
-export function getRegionCoordsByViewport (region, size) {
-  const { width, height } = size
+export function getRegionCoordsByViewport (region, coords) {
+  console.log('here')
+  const { width, height } = coords.size
   let drawer
   if (width >= DRAWER.sm_old.starts && width <= DRAWER.sm_old.ends) {
     drawer = DRAWER.sm_old
@@ -372,14 +373,14 @@ export function getRegionCoordsByViewport (region, size) {
   }
   const marginBounds = bounds
 
-  const fitted = fitBounds(bounds, size)
+  const fitted = fitBounds(bounds, coords.size)
   // UPDATE THIS WITH FULL MAINMAP REDUX SUPPORT
   // = { bounds, center, marginBounds, size: {width, height}, zoom }
   return {
     bounds,
     center: fitted.center,
     marginBounds,
-    size,
+    size: coords.size,
     zoom: fitted.zoom
   }
 }
