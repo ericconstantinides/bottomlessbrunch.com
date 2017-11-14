@@ -1,9 +1,44 @@
 import _ from 'lodash'
 import constants from './types'
 import { getRegionCoordsByViewport } from '../lib/myHelpers'
-import { SHOW_VENUES_ZOOM_LEVEL } from '../config'
+import { DRAWER, SHOW_VENUES_ZOOM_LEVEL } from '../config'
 
 export function setMainMap (coords) {
+  // this is where I want to figure out the marginBounds:
+  const { width, height } = coords.size
+  let drawer
+  if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
+    drawer = DRAWER.sm
+  } else if (width >= DRAWER.md.starts && width <= DRAWER.md.ends) {
+    drawer = DRAWER.md
+  } else {
+    drawer = DRAWER.lg
+  }
+  // figure out the drawer ratio:
+  const drawerWidthRatio = 1 - (width - drawer.width) / width
+  const drawerHeightRatio = 1 - (height - drawer.height) / height
+
+  const {
+    ne: { lat: north, lng: east },
+    sw: { lat: south, lng: west }
+  } = coords.bounds
+
+  // get the total latitude and longitude width and height:
+  const totalLat = north - south
+  const totalLng = east - west
+
+  const marginNorth = north
+  const marginSouth = south + totalLat * drawerHeightRatio
+  const marginWest = west + totalLng * drawerWidthRatio
+  const marginEast = east
+
+  coords.marginBounds = {
+    ne: { lat: marginNorth, lng: marginEast },
+    nw: { lat: marginNorth, lng: marginWest },
+    se: { lat: marginSouth, lng: marginEast },
+    sw: { lat: marginSouth, lng: marginWest }
+  }
+
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
     type: constants.MAIN_MAP_SET,

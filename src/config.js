@@ -58,7 +58,8 @@ export const DRAWER = {
   }
 }
 
-export const PAD_DEGREES = 0.0125
+// export const PAD_DEGREES = 0.0125
+export const PAD_DEGREES = 0
 
 export const SLIDER_SETTINGS = {
   arrows: true,

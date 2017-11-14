@@ -3616,6 +3616,33 @@ button {
 .AddEdit .Select-input {
   height: 32px; }
 
+.MBounder {
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 100px;
+  margin: -50px 0 0 -50px;
+  position: relative; }
+
+.MBounder__title {
+  color: white;
+  font-size: 2rem;
+  text-shadow: 1px 1px 1px black, 1px 0px 1px black, 1px -1px 1px black, 0px 1px 1px black, 0px -1px 1px black, -1px 1px 1px black, -1px 0px 1px black, -1px -1px 1px black;
+  position: absolute; }
+  .MBounder.ne .MBounder__title {
+    bottom: 0;
+    left: 0; }
+  .MBounder.se .MBounder__title {
+    top: 0;
+    left: 0; }
+  .MBounder.sw .MBounder__title {
+    top: 0;
+    right: 0; }
+  .MBounder.nw .MBounder__title {
+    bottom: 0;
+    right: 0; }
+
 .u-c-w * {
   color: white; }
 

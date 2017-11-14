@@ -5,11 +5,24 @@ import _ from 'lodash'
 
 // import { getRegionCoordsByViewport, checkMap } from '../../lib/myHelpers'
 import * as actions from '../../actions'
-import { SHOW_VENUES_ZOOM_LEVEL } from '../../config'
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
 import VenueTeaser from './VenueTeaser'
 import RegionMarker from '../common/RegionMarker'
+
+const MBounder = props => {
+  return (
+    <div className={`MBounder ${props.title}`}
+      key={props.key}
+      lat={props.lat}
+      lng={props.lng}
+    >
+      <div className='MBounder__title'>
+        {props.title}
+      </div>
+    </div>
+  )
+}
 
 class Map extends Component {
   // mapLoaded = ({ map, maps }) => {
@@ -42,15 +55,13 @@ class Map extends Component {
       this.props.updateMainMapSize(coords.size)
     }
     this.props.setMainMap(coords)
-    // if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
-      this.props.getMainMapVisibleVenues(
-        this.props.venues,
-        this.props.regions,
-        coords,
-        this.props.fetchVenueDetail,
-        this.props.history
-      )
-    // }
+    this.props.getMainMapVisibleVenues(
+      this.props.venues,
+      this.props.regions,
+      coords,
+      this.props.fetchVenueDetail,
+      this.props.history
+    )
     // checkMap(this.props.venues, coords)
     // this.updateMapAndDrawer(coords)
   }
@@ -130,6 +141,18 @@ class Map extends Component {
     })
     return regionMarkers
   }
+  debugToDelete = () => {
+    if (this.props.mainMap.marginBounds) {
+      return _.map(this.props.mainMap.marginBounds, (mBounder, key) => (
+        <MBounder
+          key={key}
+          title={key}
+          lat={mBounder.lat}
+          lng={mBounder.lng}
+        />
+      ))
+    }
+  }
   render () {
     return (
       <GoogleMapReact
@@ -145,6 +168,7 @@ class Map extends Component {
       >
         {this.renderVenueTeasers()}
         {this.renderRegionMarkers()}
+        {this.debugToDelete()}
       </GoogleMapReact>
     )
   }
