@@ -3,6 +3,7 @@
 }
 @media only screen and (min-width: $bp-medium + 1) {
   .App--VenueSlider {
+    .SiteHeader,
     .Logo__inner-container,
     .Logo__container {
       background: transparent;
@@ -19,7 +20,7 @@ $venueSliderItemSidePadding: 2vw;
 
 .VenueSlider {
   position: absolute;
-  top: 56px;
+  top: 0;
   left: 0;
   right: 0;
   left: 100%;
@@ -307,7 +308,6 @@ $venueSliderItemSidePadding: 2vw;
 .VenueSlider__close {
   position: fixed;
   right: 3.25vw;
-  top: 2.5vh;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -320,6 +320,9 @@ $venueSliderItemSidePadding: 2vw;
     opacity: 0;
     pointer-events: none;
   }
+}
+.VenueSlider__close {
+  top: 60px;
 }
 html.touch .VenueSlider__arrow {
   display: none !important;

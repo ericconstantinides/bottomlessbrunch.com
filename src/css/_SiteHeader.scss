@@ -19,7 +19,7 @@
   flex-flow: row-reverse nowrap;
   align-items: center;
   justify-content: space-between;
-  @include responsive(font-size, 1, 0.65, 500)
+  @include responsive(font-size, 1, 0.65, 600)
 }
 // on mobile up to 767px
 @media only screen and (max-width: $bp-medium) {
@@ -118,4 +118,47 @@
  position: absolute;
  right: 7%;
  bottom: -10%;
+}
+
+/*
+ * SiteHeader -- Stacked Logo
+ */
+@media only screen and (min-width: $bp-medium + 1) {
+  .App--MapPage {
+    .SiteHeader.layout__stacked-logo {
+      height: 100px;
+      .SiteHeader__inner {
+        flex-flow: column;
+      }
+      + .MapPage__inner .VenueList {
+        top: 100px;
+      }
+    }
+    .SiteHeader:not(.layout__stacked-logo) {
+      width: auto !important;
+    }
+  }
+}
+.App--VenueSlider,
+.App--IntroPage {
+  .SiteHeader {
+    background: transparent;
+    width: 100%;
+  }
+  .logo {
+    flex: 1 0 auto;
+  }
+}
+.App--VenueSlider {
+  .SiteHeader__inner {
+    flex-flow: row nowrap;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+  }
+  .logo {
+    justify-content: flex-start;
+  }
+  .SiteHeader__region {
+    width: auto;
+  }
 }

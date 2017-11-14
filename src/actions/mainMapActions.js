@@ -160,6 +160,9 @@ export function getMainMapVisibleVenues (
       }
     }
   } else {
+    if (history.location.pathname !== '/') {
+      history.replace('/')
+    }
     return {
       type: constants.MAIN_MAP_SET_ONLY_REGIONS,
       payload: regionTitle

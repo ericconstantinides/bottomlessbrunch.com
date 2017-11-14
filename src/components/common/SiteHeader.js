@@ -14,7 +14,7 @@ const SiteHeader = props => {
     )
   }
   return (
-    <div className='SiteHeader layout__transparency-bg'>
+    <div className='SiteHeader layout__stacked-logo layout__sidebar-width layout__transparency-bg'>
       <div className='SiteHeader__inner'>
         <div className='logo'>
           <h1
@@ -23,7 +23,7 @@ const SiteHeader = props => {
             onClick={props.handleLogoClick}
           >
             {SITE_NAME}
-            <span className='logo__beta-title'>beta</span>
+            {/* <span className='logo__beta-title'>beta</span> */}
           </h1>
           <img
             className='logo__orange'

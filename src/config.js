@@ -28,7 +28,7 @@ export const USA_MAP = {
   }
 }
 
-export const SHOW_VENUES_ZOOM_LEVEL = 10
+export const SHOW_VENUES_ZOOM_LEVEL = 9
 
 // this should ideally be done in the region:
 export const BRUNCH_TIMES = {

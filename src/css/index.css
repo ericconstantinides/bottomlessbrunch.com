@@ -69,7 +69,7 @@ body {
     width: 320px; } }
 
 .layout__transparency-bg {
-  background: rgba(0, 0, 0, 0.6); }
+  background: rgba(0, 0, 0, 0.75); }
 
 body {
   font-family: "Raleway", sans-serif;
@@ -472,7 +472,7 @@ a * {
   .button--orange-black.is-smaller {
     text-align: center;
     padding: 0.25em 0.5em;
-    font-size: 0.6875em;
+    font-size: 0.75em;
     opacity: 0.75;
     background: black; }
 
@@ -524,11 +524,11 @@ a * {
   align-items: center;
   justify-content: space-between;
   font-size: 1em;
-  font-size: 3.2vw; }
-  @media only screen and (min-width: 501px) {
+  font-size: 2.66667vw; }
+  @media only screen and (min-width: 601px) {
     .SiteHeader__inner {
       font-size: 1rem; } }
-  @media only screen and (max-width: 325px) {
+  @media only screen and (max-width: 390px) {
     .SiteHeader__inner {
       font-size: 0.65rem; } }
 
@@ -616,6 +616,39 @@ a * {
   position: absolute;
   right: 7%;
   bottom: -10%; }
+
+/*
+ * SiteHeader -- Stacked Logo
+ */
+@media only screen and (min-width: 768px) {
+  .App--MapPage .SiteHeader.layout__stacked-logo {
+    height: 100px; }
+    .App--MapPage .SiteHeader.layout__stacked-logo .SiteHeader__inner {
+      flex-flow: column; }
+    .App--MapPage .SiteHeader.layout__stacked-logo + .MapPage__inner .VenueList {
+      top: 100px; }
+  .App--MapPage .SiteHeader:not(.layout__stacked-logo) {
+    width: auto !important; } }
+
+.App--VenueSlider .SiteHeader,
+.App--IntroPage .SiteHeader {
+  background: transparent;
+  width: 100%; }
+
+.App--VenueSlider .logo,
+.App--IntroPage .logo {
+  flex: 1 0 auto; }
+
+.App--VenueSlider .SiteHeader__inner {
+  flex-flow: row nowrap;
+  padding-left: 0.75em;
+  padding-right: 0.75em; }
+
+.App--VenueSlider .logo {
+  justify-content: flex-start; }
+
+.App--VenueSlider .SiteHeader__region {
+  width: auto; }
 
 .RegionsModal__container {
   position: fixed;
@@ -2647,6 +2680,7 @@ body.body--MapPage #root,
   filter: saturate(0.25) opacity(0.65); }
 
 @media only screen and (min-width: 768px) {
+  .App--VenueSlider .SiteHeader,
   .App--VenueSlider .Logo__inner-container,
   .App--VenueSlider .Logo__container {
     background: transparent; }
@@ -2657,7 +2691,7 @@ body.body--MapPage #root,
 
 .VenueSlider {
   position: absolute;
-  top: 56px;
+  top: 0;
   left: 0;
   right: 0;
   left: 100%;
@@ -3210,7 +3244,6 @@ body.body--MapPage #root,
 .VenueSlider__close {
   position: fixed;
   right: 3.25vw;
-  top: 2.5vh;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -3222,6 +3255,9 @@ body.body--MapPage #root,
   .VenueSlider__close.slick-disabled {
     opacity: 0;
     pointer-events: none; }
+
+.VenueSlider__close {
+  top: 60px; }
 
 html.touch .VenueSlider__arrow {
   display: none !important; }
