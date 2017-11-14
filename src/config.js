@@ -28,7 +28,7 @@ export const USA_MAP = {
   }
 }
 
-export const SHOW_VENUES_ZOOM_LEVEL = 9
+export const SHOW_VENUES_ZOOM_LEVEL = 10
 
 // this should ideally be done in the region:
 export const BRUNCH_TIMES = {
@@ -39,18 +39,42 @@ export const BRUNCH_TIMES = {
 
 export const DRAWER = {
   sm: {
+    bp_starts: 0,
+    bp_ends: 767,
+    offset_top: 56,
+    offset_bottom: 200,
+    offset_left: 0,
+    offset_right: 0
+  },
+  md: {
+    bp_starts: 768,
+    bp_ends: 900,
+    offset_top: 0,
+    offset_bottom: 0,
+    offset_left: 320,
+    offset_right: 0
+  },
+  lg: {
+    bp_starts: 901,
+    bp_ends: 99999,
+    offset_top: 0,
+    offset_bottom: 0,
+    offset_left: 390,
+    offset_right: 0
+  },
+  sm_old: {
     starts: 0,
     ends: 767,
     width: 0,
     height: 1
   },
-  md: {
+  md_old: {
     starts: 768,
     ends: 900,
     width: 320,
     height: 0
   },
-  lg: {
+  lg_old: {
     starts: 901,
     ends: 99999,
     width: 390,

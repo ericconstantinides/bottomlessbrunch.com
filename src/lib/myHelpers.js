@@ -341,12 +341,12 @@ export function movePointer (arr, currIndex, goTo = 'next') {
 export function getRegionCoordsByViewport (region, size) {
   const { width, height } = size
   let drawer
-  if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
-    drawer = DRAWER.sm
-  } else if (width >= DRAWER.md.starts && width <= DRAWER.md.ends) {
-    drawer = DRAWER.md
+  if (width >= DRAWER.sm_old.starts && width <= DRAWER.sm_old.ends) {
+    drawer = DRAWER.sm_old
+  } else if (width >= DRAWER.md_old.starts && width <= DRAWER.md_old.ends) {
+    drawer = DRAWER.md_old
   } else {
-    drawer = DRAWER.lg
+    drawer = DRAWER.lg_old
   }
 
   // figure out the drawer ratio:

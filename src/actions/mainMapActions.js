@@ -5,31 +5,37 @@ import { DRAWER, SHOW_VENUES_ZOOM_LEVEL } from '../config'
 
 export function setMainMap (coords) {
   // this is where I want to figure out the marginBounds:
-  const { width, height } = coords.size
-  let drawer
-  if (width >= DRAWER.sm.starts && width <= DRAWER.sm.ends) {
-    drawer = DRAWER.sm
-  } else if (width >= DRAWER.md.starts && width <= DRAWER.md.ends) {
-    drawer = DRAWER.md
-  } else {
-    drawer = DRAWER.lg
-  }
-  // figure out the drawer ratio:
-  const drawerWidthRatio = 1 - (width - drawer.width) / width
-  const drawerHeightRatio = 1 - (height - drawer.height) / height
-
+  const { width: brwsrWidth, height: brwsrHeight } = coords.size
   const {
     ne: { lat: north, lng: east },
     sw: { lat: south, lng: west }
   } = coords.bounds
 
+  let drawer
+  if (brwsrWidth >= DRAWER.sm.bp_starts && brwsrWidth <= DRAWER.sm.bp_ends) {
+    drawer = DRAWER.sm
+  } else if (brwsrWidth >= DRAWER.md.bp_starts && brwsrWidth <= DRAWER.md.bp_ends) {
+    drawer = DRAWER.md
+  } else {
+    drawer = DRAWER.lg
+  }
+
+  drawer.width = brwsrWidth - drawer.offset_left - drawer.offset_right
+  drawer.height = brwsrHeight - drawer.offset_bottom
+
+  // figure out the drawer ratio:
+  drawer.widthRatio = 1 - drawer.width / brwsrWidth
+  drawer.heightRatio = 1 - drawer.height / brwsrHeight
+
+  drawer.offset_top_ratio = drawer.offset_top / brwsrHeight
+// debugger
   // get the total latitude and longitude width and height:
   const totalLat = north - south
   const totalLng = east - west
 
-  const marginNorth = north
-  const marginSouth = south + totalLat * drawerHeightRatio
-  const marginWest = west + totalLng * drawerWidthRatio
+  const marginNorth = north - totalLat * drawer.offset_top_ratio
+  const marginSouth = south + totalLat * drawer.heightRatio
+  const marginWest = west + totalLng * drawer.widthRatio
   const marginEast = east
 
   // now we'll create the marginCenter:

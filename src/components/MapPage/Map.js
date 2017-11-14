@@ -12,7 +12,7 @@ import RegionMarker from '../common/RegionMarker'
 
 const MBounder = props => {
   return (
-    <div className={`MBounder ${props.title}`}
+    <div className={`MBounder is-${props.title}`}
       key={props.key}
       lat={props.lat}
       lng={props.lng}
@@ -180,8 +180,8 @@ class Map extends Component {
       >
         {this.renderVenueTeasers()}
         {this.renderRegionMarkers()}
-        {/* {this.debugMarginBounds()} */}
-        {/* {this.debugMarginCenter()} */}
+        {this.debugMarginBounds()}
+        {this.debugMarginCenter()}
       </GoogleMapReact>
     )
   }

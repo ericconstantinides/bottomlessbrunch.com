@@ -15,20 +15,30 @@
   font-size: 2rem;
   @include text-border(black);
   position: absolute;
-  .MBounder.ne & {
+  .MBounder.is-ne & {
     bottom: 0;
     left: 0;
   }
-  .MBounder.se & {
+  .MBounder.is-se & {
     top: 0;
     left: 0;
   }
-  .MBounder.sw & {
+  .MBounder.is-sw & {
     top: 0;
     right: 0;
   }
-  .MBounder.nw & {
+  .MBounder.is-nw & {
     bottom: 0;
     right: 0;
+  }
+  .MBounder.is-center & {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
   }
 }
