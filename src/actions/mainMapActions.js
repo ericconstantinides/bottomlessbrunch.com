@@ -54,12 +54,12 @@ export function getMainMapVisibleVenues (
   fetchVenueDetail,
   history
 ) {
+  let regionTitle = 'Choose Region'
   if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
+    let regionReset = ''
     const { ne, sw } = coords.bounds
     let visibleVenuesArr = []
     let visibleRegionsObj = {}
-    let regionReset = ''
-    let regionTitle = 'Choose Region'
     // loop through all the venues:
     _.map(venues, venue => {
       // check if the venue is within the map's coords:
@@ -85,8 +85,8 @@ export function getMainMapVisibleVenues (
           visibleRegionsObj[venue.regionId].venuesVisible++
         }
         // finally, since the venue is visible, we need to get more data for it:
-        if (venue.fetchedLevel === 'minimal') {
-          fetchVenueDetail(venue._id, 'teaser')
+        if (venue.fetchedLevel !== 'full') {
+          fetchVenueDetail(venue._id, 'full')
         }
       }
     })
@@ -160,6 +160,9 @@ export function getMainMapVisibleVenues (
       }
     }
   } else {
-    // DO SOMETHING HERE TO SHOW A SINGLE, CLICKABLE, REGION
+    return {
+      type: constants.MAIN_MAP_SET_ONLY_REGIONS,
+      payload: regionTitle
+    }
   }
 }

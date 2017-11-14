@@ -36,6 +36,14 @@ export default function (state = initialState, action) {
         regionTitle,
         regionReset
       }
+    case constants.MAIN_MAP_SET_ONLY_REGIONS:
+      return {
+        ...state,
+        visibleVenuesArr: [],
+        visibleRegionsObj: {},
+        regionTitle: action.payload,
+        regionReset: ''
+      }
     default:
       return state
   }

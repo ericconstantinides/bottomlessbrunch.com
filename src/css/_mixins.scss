@@ -117,3 +117,15 @@
 		}
 	}
 }
+
+@mixin text-border($color, $size: 1px, $blur: 1px) {
+	text-shadow:
+		#{$size} #{$size} #{$blur} $color,
+		#{$size} 0px #{$blur} $color,
+		#{$size} -#{$size} #{$blur} $color,
+		0px #{$size} #{$blur} $color,
+		0px -#{$size} #{$blur} $color,
+		-#{$size} #{$size} #{$blur} $color,
+		-#{$size} 0px #{$blur} $color,
+		-#{$size} -#{$size} #{$blur} $color;
+}

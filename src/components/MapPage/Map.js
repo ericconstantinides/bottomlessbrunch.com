@@ -5,30 +5,24 @@ import _ from 'lodash'
 
 // import { getRegionCoordsByViewport, checkMap } from '../../lib/myHelpers'
 import * as actions from '../../actions'
-import VenueTeaser from './VenueTeaser'
-
+import { SHOW_VENUES_ZOOM_LEVEL } from '../../config'
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
+import VenueTeaser from './VenueTeaser'
+import RegionMarker from '../common/RegionMarker'
+
 class Map extends Component {
-  constructor () {
-    super()
-    this.item = ''
-    this.state = {
-      address: '',
-      map: {}
-    }
-  }
   // mapLoaded = ({ map, maps }) => {
   //   this.setState({ map })
   // }
-/*   componentDidMount = () => {
+  /*   componentDidMount = () => {
     console.log(this.props.ui.activeRegion)
     if (this.props.ui.activeRegion) {
       const { zoom, lat, lng } = this.props.ui.activeRegion
       this.props.setMainMap({ zoom, center: { lat, lng } })
     }
   } */
-/*   componentWillReceiveProps (nextProps) {
+  /*   componentWillReceiveProps (nextProps) {
     // update the state's region if the UI region changes:
     if (
       !_.isEmpty(nextProps.ui.activeRegion) &&
@@ -48,13 +42,15 @@ class Map extends Component {
       this.props.updateMainMapSize(coords.size)
     }
     this.props.setMainMap(coords)
-    this.props.getMainMapVisibleVenues(
-      this.props.venues,
-      this.props.regions,
-      coords,
-      this.props.fetchVenueDetail,
-      this.props.history
-    )
+    // if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
+      this.props.getMainMapVisibleVenues(
+        this.props.venues,
+        this.props.regions,
+        coords,
+        this.props.fetchVenueDetail,
+        this.props.history
+      )
+    // }
     // checkMap(this.props.venues, coords)
     // this.updateMapAndDrawer(coords)
   }
@@ -64,7 +60,7 @@ class Map extends Component {
       this.props.clearMarkers()
     }
   }
-/*   updateMapAndDrawer = mapCoords => {
+  /*   updateMapAndDrawer = mapCoords => {
     const { size } = mapCoords
     const { activeRegion: region } = this.props.ui
     const coords = !_.isEmpty(region.bounds)
@@ -76,6 +72,9 @@ class Map extends Component {
       checkMap(this.props.venues, coords)
     }
   } */
+  handleRegionClick = _id => event => {
+    console.log('go to this region:', this.props.regions[_id].name)
+  }
   renderVenueTeasers = () => {
     let mapItemVenueTeasers = []
     _.map(this.props.venues, venue => {
@@ -106,6 +105,31 @@ class Map extends Component {
     })
     return mapItemVenueTeasers
   }
+  renderRegionMarkers = () => {
+    let regionMarkers = []
+    // render region markers for all the other regions:
+    // console.log(this.props.mainMap.visibleRegionsObj)
+    _.map(this.props.regions, region => {
+      // if no visibleRegions at all - OR - this region is not visible
+      if (
+        (!this.props.mainMap.visibleRegionsObj ||
+        !this.props.mainMap.visibleRegionsObj[region._id]) &&
+        region.venuesAvailable
+      ) {
+        regionMarkers.push(
+          <RegionMarker
+            key={region._id}
+            lat={region.lat}
+            lng={region.lng}
+            regionId={region._id}
+            regionName={region.name}
+            handleRegionSelect={this.props.handleRegionSelect}
+          />
+        )
+      }
+    })
+    return regionMarkers
+  }
   render () {
     return (
       <GoogleMapReact
@@ -120,6 +144,7 @@ class Map extends Component {
         onClick={this.handleMapClick}
       >
         {this.renderVenueTeasers()}
+        {this.renderRegionMarkers()}
       </GoogleMapReact>
     )
   }

@@ -128,6 +128,7 @@ class MapPage extends Component {
                 mapElement={<div style={styles} />}
                 history={this.props.history}
                 handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
+                handleRegionSelect={this.handleRegionSelect}
               />
             </div>
           </div>
