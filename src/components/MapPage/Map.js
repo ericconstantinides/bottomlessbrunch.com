@@ -141,7 +141,7 @@ class Map extends Component {
     })
     return regionMarkers
   }
-  debugToDelete = () => {
+  debugMarginBounds = () => {
     if (this.props.mainMap.marginBounds) {
       return _.map(this.props.mainMap.marginBounds, (mBounder, key) => (
         <MBounder
@@ -151,6 +151,18 @@ class Map extends Component {
           lng={mBounder.lng}
         />
       ))
+    }
+  }
+  debugMarginCenter = () => {
+    if (this.props.mainMap.marginCenter) {
+      return (
+        <MBounder
+          key='center'
+          title='center'
+          lat={this.props.mainMap.marginCenter.lat}
+          lng={this.props.mainMap.marginCenter.lng}
+        />
+      )
     }
   }
   render () {
@@ -168,7 +180,8 @@ class Map extends Component {
       >
         {this.renderVenueTeasers()}
         {this.renderRegionMarkers()}
-        {this.debugToDelete()}
+        {/* {this.debugMarginBounds()} */}
+        {/* {this.debugMarginCenter()} */}
       </GoogleMapReact>
     )
   }

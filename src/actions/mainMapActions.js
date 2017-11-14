@@ -32,6 +32,12 @@ export function setMainMap (coords) {
   const marginWest = west + totalLng * drawerWidthRatio
   const marginEast = east
 
+  // now we'll create the marginCenter:
+  coords.marginCenter = {
+    lat: marginSouth + ((marginNorth - marginSouth) / 2),
+    lng: marginEast - ((marginEast - marginWest) / 2)
+  }
+
   coords.marginBounds = {
     ne: { lat: marginNorth, lng: marginEast },
     nw: { lat: marginNorth, lng: marginWest },
@@ -92,7 +98,7 @@ export function getMainMapVisibleVenues (
   let regionTitle = 'Choose Region'
   if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
     let regionReset = ''
-    const { ne, sw } = coords.bounds
+    const { ne, sw } = coords.marginBounds
     let visibleVenuesArr = []
     let visibleRegionsObj = {}
     // loop through all the venues:
@@ -132,10 +138,10 @@ export function getMainMapVisibleVenues (
         // debugger
         if (
           region.bounds &&
-          coords.center.lat <= region.bounds.north &&
-          coords.center.lat >= region.bounds.south &&
-          coords.center.lng <= region.bounds.east &&
-          coords.center.lng >= region.bounds.west
+          coords.marginCenter.lat <= region.bounds.north &&
+          coords.marginCenter.lat >= region.bounds.south &&
+          coords.marginCenter.lng <= region.bounds.east &&
+          coords.marginCenter.lng >= region.bounds.west
         ) {
           // SINGLE REGION
           visibleRegionsObj[region._id] = {
