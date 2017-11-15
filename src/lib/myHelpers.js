@@ -329,6 +329,21 @@ export function movePointer (arr, currIndex, goTo = 'next') {
   return currIndex - 1
 }
 
+export function getDrawerSize (brwsrWidth, brwsrHeight) {
+  let drawer
+  if (brwsrWidth >= DRAWER.sm.bp_starts && brwsrWidth <= DRAWER.sm.bp_ends) {
+    drawer = DRAWER.sm
+  } else if (
+    brwsrWidth >= DRAWER.md.bp_starts &&
+    brwsrWidth <= DRAWER.md.bp_ends
+  ) {
+    drawer = DRAWER.md
+  } else {
+    drawer = DRAWER.lg
+  }
+  return drawer
+}
+
 /**
  * getRegionCoordsByViewport returns a revised mapCenter (lat, lng, zoom)
  * taking into account the drawer (if any), sidebar, and viewport
@@ -338,72 +353,118 @@ export function movePointer (arr, currIndex, goTo = 'next') {
  * @param {object} size: browser width and height
  * @returns { { lat, lng, zoom } } mapCenter
  */
-export function getRegionCoordsByViewport (region, coords) {
-  console.log('here')
-  const { width, height } = coords.size
-  let drawer
-  if (width >= DRAWER.sm_old.starts && width <= DRAWER.sm_old.ends) {
-    drawer = DRAWER.sm_old
-  } else if (width >= DRAWER.md_old.starts && width <= DRAWER.md_old.ends) {
-    drawer = DRAWER.md_old
-  } else {
-    drawer = DRAWER.lg_old
+export function getViewportOffset (bounds, center, browserSize) {
+  const { width: brwsrWidth, height: brwsrHeight } = browserSize
+  const drawer = getDrawerSize(brwsrWidth, brwsrHeight)
+
+  // figure out the visible hole you're putting the area into:
+  const visibleWidth = brwsrWidth - drawer.offset_left - drawer.offset_right
+  const visibleHeight = brwsrHeight - drawer.offset_top - drawer.offset_bottom
+
+  const size = { width: visibleWidth, height: visibleHeight }
+  // I only really care about the fitted.zoom in fitted:
+
+  const fitted = fitBounds(bounds, size)
+  // zoom starts at 10, so we subtract 9 from zoom to find the divider
+  const fudgeDivider = fitted.zoom - 9
+  let fudgeLat = drawer.fudge_lat_at_zoom_ten
+  let fudgeLng = drawer.fudge_lng_at_zoom_ten
+  if (fudgeDivider > 1) {
+    for (let index = 1; index < fudgeDivider; index++) {
+      fudgeLat = fudgeLat / 2
+      fudgeLng = fudgeLng / 2
+    }
+  }
+  // debugger
+  let fidgedMoveUp
+  if (fitted.zoom === 10) { fidgedMoveUp = 0.78 }
+  if (fitted.zoom === 11) { fidgedMoveUp = 0.039 }
+  if (fitted.zoom === 12) { fidgedMoveUp = 0.0195 }
+  if (fitted.zoom === 13) { fidgedMoveUp = 0.00975 }
+  if (fitted.zoom === 14) { fidgedMoveUp = 0.004875 }
+  if (fitted.zoom === 15) { fidgedMoveUp = 0.0024375 }
+
+  const returnCenter = {
+    lat: fitted.center.lat - fudgeLat,
+    lng: fitted.center.lng - fudgeLng
   }
 
+  // debugger
+  return {center: returnCenter, zoom: fitted.zoom}
+  // return fitted
+  // debugger
+/*
   // figure out the drawer ratio:
-  const drawerWidthRatio = 1 - (width - drawer.width) / width
-  const drawerHeightRatio = 1 - (height - drawer.height) / height
+  const drawerWidthRatio = 1 - (brwsrWidth - drawer.offset_left - drawer.offset_right) / brwsrWidth
+  const drawerHeightRatio = 1 - (brwsrHeight - drawer.offset_top - drawer.offset_bottom) / brwsrHeight
 
-  // get the total latitude and longitude width and height:
-  const totalLat = region.bounds.north - region.bounds.south
-  const totalLng = region.bounds.east - region.bounds.west
+  const north = bounds.north
+  const south = bounds.south - totalLat * (drawerHeightRatio * 2)
+  const west = bounds.west - totalLng * (drawerWidthRatio * 2)
+  const east = bounds.east
 
-  const north = region.bounds.north + PAD_DEGREES
-  const south =
-    region.bounds.south - totalLat * (drawerHeightRatio * 2) - PAD_DEGREES
-  const west =
-    region.bounds.west - totalLng * (drawerWidthRatio * 2) - PAD_DEGREES
-  const east = region.bounds.east + PAD_DEGREES
+  bounds.ne = { lat: north, lng: east }
+  bounds.nw = { lat: north, lng: west }
+  bounds.se = { lat: south, lng: east }
+  bounds.sw = { lat: south, lng: west }
+  const size2 = browserSize
+  const fitted2 = fitBounds(bounds, size2)
 
-  const bounds = {
-    ne: { lat: north, lng: east },
-    nw: { lat: north, lng: west },
-    se: { lat: south, lng: east },
-    sw: { lat: south, lng: west }
-  }
-  const marginBounds = bounds
+  return fitted2 */
 
-  const fitted = fitBounds(bounds, coords.size)
-  // UPDATE THIS WITH FULL MAINMAP REDUX SUPPORT
-  // = { bounds, center, marginBounds, size: {width, height}, zoom }
-  return {
-    bounds,
-    center: fitted.center,
-    marginBounds,
-    size: coords.size,
-    zoom: fitted.zoom
-  }
+
+  // const fitted = fitBounds(bounds, coords.size)
+  // // UPDATE THIS WITH FULL MAINMAP REDUX SUPPORT
+  // // = { bounds, center, marginBounds, size: {width, height}, zoom }
+  // return {
+  //   bounds,
+  //   center: fitted.center,
+  //   marginBounds,
+  //   size: coords.size,
+  //   zoom: fitted.zoom
+  // }
 }
 
-/**
- * checkMap checks the current map to see what venues and regions lie within
- * checkMap determines what teasers need to be loaded (and what teasers need to
- *   be unmounted)
- * @export
- * @param {Object} venues
- * @param {Object} coords
- */
-export function checkMap (venues, coords) {
-  console.log('checkMap()')
-  // console.log(coords, venues)
-/*   const { ne, sw } = coords.bounds
-  const inBoundVenues = _.pickBy(venues, venue => {
-    return (
-      venue.lat <= ne.lat &&
-      venue.lat >= sw.lat &&
-      venue.lng <= ne.lng &&
-      venue.lng >= sw.lng
-    )
-  }) */
-  // console.log(inBoundVenues)
+export function getMarginBounds (bounds, browserSize) {
+  // console.log({bounds})
+  const { width: brwsrWidth, height: brwsrHeight } = browserSize
+  const drawer = getDrawerSize(brwsrWidth, brwsrHeight)
+
+  const {
+    ne: { lat: north, lng: east },
+    sw: { lat: south, lng: west }
+  } = bounds
+
+  drawer.width = brwsrWidth - drawer.offset_left - drawer.offset_right
+  drawer.height = brwsrHeight - drawer.offset_bottom
+
+  // figure out the drawer ratio:
+  drawer.widthRatio = 1 - drawer.width / brwsrWidth
+  drawer.heightRatio = 1 - drawer.height / brwsrHeight
+
+  drawer.offset_top_ratio = drawer.offset_top / brwsrHeight
+  // get the total latitude and longitude width and height:
+  const totalLat = north - south
+  const totalLng = east - west
+
+  const marginNorth = north - totalLat * drawer.offset_top_ratio
+  const marginSouth = south + totalLat * drawer.heightRatio
+  const marginWest = west + totalLng * drawer.widthRatio
+  const marginEast = east
+
+  // now we'll create the marginCenter:
+  const coords = {}
+  coords.marginCenter = {
+    lat: marginSouth + (marginNorth - marginSouth) / 2,
+    lng: marginEast - (marginEast - marginWest) / 2
+  }
+  // coords.center = coords.marginCenter
+
+  coords.marginBounds = {
+    ne: { lat: marginNorth, lng: marginEast },
+    nw: { lat: marginNorth, lng: marginWest },
+    se: { lat: marginSouth, lng: marginEast },
+    sw: { lat: marginSouth, lng: marginWest }
+  }
+  return coords
 }

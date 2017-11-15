@@ -8,9 +8,14 @@ import * as actions from '../actions'
 
 class Region extends Component {
   componentDidMount = () => {
-    this.props.setMainMapByRegion(this.props.region, this.props.mainMap.coords)
+    if (this.props.mainMap && this.props.mainMap.coords) {
+      this.props.setMainMapByRegion(
+        this.props.region,
+        this.props.mainMap.coords
+      )
+    }
   }
-  render = () => <div className='Region' style={{display: 'none'}} />
+  render = () => <div className='Region' style={{ display: 'none' }} />
 }
 
 export default connect(null, actions)(Region)

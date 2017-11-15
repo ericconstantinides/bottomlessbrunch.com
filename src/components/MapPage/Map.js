@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
-// import { getRegionCoordsByViewport, checkMap } from '../../lib/myHelpers'
 import * as actions from '../../actions'
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
@@ -11,8 +10,10 @@ import VenueTeaser from './VenueTeaser'
 import RegionMarker from '../common/RegionMarker'
 
 const MBounder = props => {
+  const className = 'MBounder is-' + props.title
   return (
-    <div className={`MBounder is-${props.title}`}
+    <div
+      className={className}
       key={props.key}
       lat={props.lat}
       lng={props.lng}
@@ -48,22 +49,31 @@ class Map extends Component {
     }
   } */
 
+  // shouldComponentUpdate (nextProps, nextState) {
+    // debugger
+    // return true
+  // }
+  
+  
+
   handleMapChange = coords => {
     // console.log('handleMapChange:', coords)
     // update the maps size if the coords size has changed:
     if (!_.isEqual(this.props.mainMap.coords.size, coords.size)) {
       this.props.updateMainMapSize(coords.size)
     }
+    // console.log(coords)
+    // coords.marginCenter = coords.center
+
     this.props.setMainMap(coords)
+
     this.props.getMainMapVisibleVenues(
       this.props.venues,
       this.props.regions,
-      coords,
+      this.props.mainMap.coords,
       this.props.fetchVenueDetail,
       this.props.history
     )
-    // checkMap(this.props.venues, coords)
-    // this.updateMapAndDrawer(coords)
   }
   handleMapClick = props => {
     // props = {x, y, lat, lng, event}
@@ -71,18 +81,6 @@ class Map extends Component {
       this.props.clearMarkers()
     }
   }
-  /*   updateMapAndDrawer = mapCoords => {
-    const { size } = mapCoords
-    const { activeRegion: region } = this.props.ui
-    const coords = !_.isEmpty(region.bounds)
-      ? getRegionCoordsByViewport(region, size)
-      : this.props.ui.activeRegion
-    // update redux:
-    this.props.setMainMap(coords)
-    if (this.props.venues) {
-      checkMap(this.props.venues, coords)
-    }
-  } */
   handleRegionClick = _id => event => {
     console.log('go to this region:', this.props.regions[_id].name)
   }
@@ -124,7 +122,7 @@ class Map extends Component {
       // if no visibleRegions at all - OR - this region is not visible
       if (
         (!this.props.mainMap.visibleRegionsObj ||
-        !this.props.mainMap.visibleRegionsObj[region._id]) &&
+          !this.props.mainMap.visibleRegionsObj[region._id]) &&
         region.venuesAvailable
       ) {
         regionMarkers.push(
@@ -144,35 +142,92 @@ class Map extends Component {
   debugMarginBounds = () => {
     if (this.props.mainMap.coords && this.props.mainMap.coords.marginBounds) {
       return _.map(this.props.mainMap.coords.marginBounds, (mBounder, key) => (
-        <MBounder
-          key={key}
-          title={key}
-          lat={mBounder.lat}
-          lng={mBounder.lng}
-        />
+        <MBounder key={key} title={key} lat={mBounder.lat} lng={mBounder.lng} />
       ))
     }
   }
+  debugRegionBounds = () => {
+    if (!_.isEmpty(this.props.regions)) {
+      return _.map(this.props.regions, (region, key) => {
+        const regionDebugger = []
+        if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.ne)) {
+          regionDebugger.push(<MBounder
+            key='r-ne'
+            title='r-ne'
+            lat={region.bounds.ne.lat}
+            lng={region.bounds.ne.lng}
+          />)
+        }
+        if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.nw)) {
+          regionDebugger.push(<MBounder
+            key='r-nw'
+            title='r-nw'
+            lat={region.bounds.nw.lat}
+            lng={region.bounds.nw.lng}
+          />)
+        }
+        if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.sw)) {
+          regionDebugger.push(<MBounder
+            key='r-sw'
+            title='r-sw'
+            lat={region.bounds.sw.lat}
+            lng={region.bounds.sw.lng}
+          />)
+        }
+        if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.se)) {
+          regionDebugger.push(<MBounder
+            key='r-se'
+            title='r-se'
+            lat={region.bounds.se.lat}
+            lng={region.bounds.se.lng}
+          />)
+        }
+        return regionDebugger
+      })
+    }
+  }
   debugMarginCenter = () => {
-    if (this.props.mainMap.marginCenter) {
+    if (
+      this.props.mainMap &&
+      this.props.mainMap.coords &&
+      this.props.mainMap.coords.marginCenter
+    ) {
       return (
         <MBounder
           key='center'
           title='center'
-          lat={this.props.mainMap.marginCenter.lat}
-          lng={this.props.mainMap.marginCenter.lng}
+          lat={this.props.mainMap.coords.marginCenter.lat}
+          lng={this.props.mainMap.coords.marginCenter.lng}
         />
       )
     }
   }
+  debugRegionCenter = () => {
+    if (!_.isEmpty(this.props.regions)) {
+      return _.map(this.props.regions, (region, key) => {
+        const regionDebugger = []
+        // console.log(region)
+        if (!_.isEmpty(region.calcCenter)) {
+          regionDebugger.push(<MBounder
+            key='r-center'
+            title='r-center'
+            lat={region.calcCenter.lat}
+            lng={region.calcCenter.lng}
+          />)
+        }
+        return regionDebugger
+      })
+    }
+  }
   render () {
-    if (!this.props.mainMap) {
+    if (!(this.props.mainMap && this.props.mainMap.coords)) {
       return <div>Loading...</div>
     }
+    const center = this.props.mainMap.coords.center ? this.props.mainMap.coords.center : {lat: 38.1510752, lng: -95.8457796}
     return (
       <GoogleMapReact
         zoom={this.props.mainMap.coords.zoom}
-        center={this.props.mainMap.coords.center}
+        center={center}
         options={{
           fullscreenControl: false,
           zoomControl: false,
@@ -185,6 +240,8 @@ class Map extends Component {
         {this.renderRegionMarkers()}
         {this.debugMarginBounds()}
         {this.debugMarginCenter()}
+        {this.debugRegionCenter()}
+        {this.debugRegionBounds()}
       </GoogleMapReact>
     )
   }

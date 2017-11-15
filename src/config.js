@@ -58,7 +58,9 @@ export const DRAWER = {
     offset_top: 56,
     offset_bottom: 200,
     offset_left: 0,
-    offset_right: 0
+    offset_right: 0,
+    fudge_lat_at_zoom_ten: 0.078,
+    fudge_lng_at_zoom_ten: 0
   },
   md: {
     bp_starts: 768,
@@ -66,7 +68,9 @@ export const DRAWER = {
     offset_top: 0,
     offset_bottom: 0,
     offset_left: 320,
-    offset_right: 0
+    offset_right: 0,
+    fudge_lat_at_zoom_ten: 0,
+    fudge_lng_at_zoom_ten: 0.22
   },
   lg: {
     bp_starts: 901,
@@ -74,25 +78,9 @@ export const DRAWER = {
     offset_top: 0,
     offset_bottom: 0,
     offset_left: 390,
-    offset_right: 0
-  },
-  sm_old: {
-    starts: 0,
-    ends: 767,
-    width: 0,
-    height: 1
-  },
-  md_old: {
-    starts: 768,
-    ends: 900,
-    width: 320,
-    height: 0
-  },
-  lg_old: {
-    starts: 901,
-    ends: 99999,
-    width: 390,
-    height: 0
+    offset_right: 0,
+    fudge_lat_at_zoom_ten: 0,
+    fudge_lng_at_zoom_ten: 0.268
   }
 }
 

@@ -3624,24 +3624,55 @@ button {
   border-radius: 100px;
   margin: -50px 0 0 -50px;
   position: relative; }
+  .MBounder.is-r-center {
+    background: green; }
+  .MBounder.is-r-ne, .MBounder.is-r-se, .MBounder.is-r-sw, .MBounder.is-r-nw {
+    background: transparent;
+    border-radius: 0;
+    filter: drop-shadow(0 0 1px white); }
+    .MBounder.is-r-ne .MBounder__title, .MBounder.is-r-se .MBounder__title, .MBounder.is-r-sw .MBounder__title, .MBounder.is-r-nw .MBounder__title {
+      display: none; }
+  .MBounder.is-r-ne {
+    margin: 0 0 0 -100px;
+    border-top: 4px solid black;
+    border-right: 4px solid black; }
+  .MBounder.is-r-se {
+    margin: -100px 0 0 -100px;
+    border-bottom: 4px solid black;
+    border-right: 4px solid black; }
+  .MBounder.is-r-sw {
+    margin: -100px 0 0 0;
+    border-bottom: 4px solid black;
+    border-left: 4px solid black; }
+  .MBounder.is-r-nw {
+    margin: 0 -100px 0 0;
+    border-top: 4px solid black;
+    border-left: 4px solid black; }
 
 .MBounder__title {
   color: white;
   font-size: 2rem;
   text-shadow: 1px 1px 1px black, 1px 0px 1px black, 1px -1px 1px black, 0px 1px 1px black, 0px -1px 1px black, -1px 1px 1px black, -1px 0px 1px black, -1px -1px 1px black;
   position: absolute; }
+  .MBounder.is-r-ne .MBounder__title,
   .MBounder.is-ne .MBounder__title {
     bottom: 0;
     left: 0; }
+  .MBounder.is-r-se .MBounder__title,
   .MBounder.is-se .MBounder__title {
     top: 0;
     left: 0; }
+  .MBounder.is-r-sw .MBounder__title,
   .MBounder.is-sw .MBounder__title {
     top: 0;
     right: 0; }
+  .MBounder.is-r-nw .MBounder__title,
   .MBounder.is-nw .MBounder__title {
     bottom: 0;
     right: 0; }
+  .MBounder.is-r-center .MBounder__title {
+    white-space: nowrap; }
+  .MBounder.is-r-center .MBounder__title,
   .MBounder.is-center .MBounder__title {
     top: 0;
     right: 0;

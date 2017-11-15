@@ -18,6 +18,7 @@ export default (state = {}, action) => {
         newState[id] = region
         if (action.payload[id] && action.payload[id].bounds) {
           newState[id].bounds = action.payload[id].bounds
+          newState[id].calcCenter = action.payload[id].calcCenter
           newState[id].venuesAvailable = action.payload[id].venuesAvailable
         }
       })

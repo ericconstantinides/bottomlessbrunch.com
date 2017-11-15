@@ -101,6 +101,20 @@ export function calcRegionsMeta (venues) {
       }
     }
   })
+  // now just populate the bounds for easy use later on:
+  _.map(regionsObject, region => {
+    const { north, south, east, west } = region.bounds
+    region.bounds.ne = { lat: north, lng: east }
+    region.bounds.nw = { lat: north, lng: west }
+    region.bounds.se = { lat: south, lng: east }
+    region.bounds.sw = { lat: south, lng: west }
+
+    // now let's get a calculated center. Basically an average of the bounds:
+    region.calcCenter = {
+      lat: south + (north - south) / 2,
+      lng: east + (west - east) / 2
+    }
+  })
   return {
     type: constants.REGIONS_CALC_META,
     payload: regionsObject

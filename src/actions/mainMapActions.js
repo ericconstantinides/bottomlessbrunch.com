@@ -1,55 +1,15 @@
 import _ from 'lodash'
+import { fitBounds } from 'google-map-react/utils'
 import constants from './types'
-import { getRegionCoordsByViewport } from '../lib/myHelpers'
-import { DRAWER, SHOW_VENUES_ZOOM_LEVEL } from '../config'
+import { getViewportOffset, getMarginBounds } from '../lib/myHelpers'
+import { SHOW_VENUES_ZOOM_LEVEL } from '../config'
 
 export function setMainMap (coords) {
   // this is where I want to figure out the marginBounds:
-  const { width: brwsrWidth, height: brwsrHeight } = coords.size
-  const {
-    ne: { lat: north, lng: east },
-    sw: { lat: south, lng: west }
-  } = coords.bounds
+  const marginCoords = getMarginBounds(coords.bounds, coords.size)
 
-  let drawer
-  if (brwsrWidth >= DRAWER.sm.bp_starts && brwsrWidth <= DRAWER.sm.bp_ends) {
-    drawer = DRAWER.sm
-  } else if (brwsrWidth >= DRAWER.md.bp_starts && brwsrWidth <= DRAWER.md.bp_ends) {
-    drawer = DRAWER.md
-  } else {
-    drawer = DRAWER.lg
-  }
-
-  drawer.width = brwsrWidth - drawer.offset_left - drawer.offset_right
-  drawer.height = brwsrHeight - drawer.offset_bottom
-
-  // figure out the drawer ratio:
-  drawer.widthRatio = 1 - drawer.width / brwsrWidth
-  drawer.heightRatio = 1 - drawer.height / brwsrHeight
-
-  drawer.offset_top_ratio = drawer.offset_top / brwsrHeight
-// debugger
-  // get the total latitude and longitude width and height:
-  const totalLat = north - south
-  const totalLng = east - west
-
-  const marginNorth = north - totalLat * drawer.offset_top_ratio
-  const marginSouth = south + totalLat * drawer.heightRatio
-  const marginWest = west + totalLng * drawer.widthRatio
-  const marginEast = east
-
-  // now we'll create the marginCenter:
-  coords.marginCenter = {
-    lat: marginSouth + ((marginNorth - marginSouth) / 2),
-    lng: marginEast - ((marginEast - marginWest) / 2)
-  }
-
-  coords.marginBounds = {
-    ne: { lat: marginNorth, lng: marginEast },
-    nw: { lat: marginNorth, lng: marginWest },
-    se: { lat: marginSouth, lng: marginEast },
-    sw: { lat: marginSouth, lng: marginWest }
-  }
+  coords = { ...coords, ...marginCoords }
+  console.log({coords})
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
     type: constants.MAIN_MAP_SET,
@@ -59,14 +19,29 @@ export function setMainMap (coords) {
 
 export function setMainMapByRegion (region, coords) {
   // get the width and height if it's not known yet:
-  coords.size.width = coords.size.width === 0 ? window.innerWidth : coords.size.width
-  coords.size.height = coords.size.height === 0 ? window.innerHeight : coords.size.height
+  coords.size.width = coords.size.width === 0
+    ? window.innerWidth
+    : coords.size.width
+  coords.size.height = coords.size.height === 0
+    ? window.innerHeight
+    : coords.size.height
 
-  const regionCoords = getRegionCoordsByViewport(region, coords)
-  window.localStorage.setItem('mainMap', JSON.stringify(regionCoords))
+  const fitted = getViewportOffset(
+    region.bounds,
+    region.calcCenter,
+    coords.size
+  )
+  const newCoords = {...coords, ...fitted}
+
+  // debugger
+  // coords.center = fitted.center
+  // coords.zoom = fitted.zoom
+  // coords = {...coords, ...regionMargined}
+
+  window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
     type: constants.MAIN_MAP_SET,
-    payload: regionCoords
+    payload: newCoords
   }
 }
 
@@ -140,13 +115,13 @@ export function getMainMapVisibleVenues (
     // check if we're inside a region, just no venues are currently visible:
     if (_.isEmpty(visibleRegionsObj)) {
       _.map(regions, region => {
-        // debugger
+        const center = coords.marginCenter ? coords.marginCenter : coords.center
         if (
           region.bounds &&
-          coords.marginCenter.lat <= region.bounds.north &&
-          coords.marginCenter.lat >= region.bounds.south &&
-          coords.marginCenter.lng <= region.bounds.east &&
-          coords.marginCenter.lng >= region.bounds.west
+          center.lat <= region.bounds.north &&
+          center.lat >= region.bounds.south &&
+          center.lng <= region.bounds.east &&
+          center.lng >= region.bounds.west
         ) {
           // SINGLE REGION
           visibleRegionsObj[region._id] = {
