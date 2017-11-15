@@ -26,6 +26,16 @@ export function getVenueBySlug (venues, slug) {
   return venue[0]
 }
 
+export function getRegionByPath (regions, path) {
+  const parsedPath = parsePath(path)
+  if (parsedPath.length >= 1) {
+    const region = _.filter(regions, region => {
+      if (parsedPath[0] === region.slug) return region
+    })[0]
+    if (region) return region
+  }
+}
+
 /**
  * Rounds the number to nearest half decimal
  * @param {Number} num
