@@ -1,6 +1,9 @@
 .App--VenueSlider .MapPage__container {
   filter: saturate(0.25) opacity(0.65);
 }
+.App--VenueSlider .SiteHeader__region .button {
+  display: none;
+}
 @media only screen and (min-width: $bp-medium + 1) {
   .App--VenueSlider {
     .SiteHeader,
