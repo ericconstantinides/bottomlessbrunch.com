@@ -231,7 +231,6 @@ body.body--MapPage #root,
 }
 .VenueListItem__inner {
   display: flex;
-  border: 1px solid #6f6f6f;
   margin-bottom: 0.5em;
   transition: 0.15s;
   &:hover {
@@ -315,7 +314,7 @@ body.body--MapPage #root,
  * Mobile:
  */
 .VenueList__handle {
-  height: 35px;
+  height: 20px;
   // cursor: -webkit-grab;
   display: flex;
   align-items: center;

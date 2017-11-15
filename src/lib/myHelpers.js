@@ -1,5 +1,5 @@
 import { fitBounds } from 'google-map-react/utils'
-import { DRAWER, PAD_DEGREES } from '../config'
+import { DRAWER } from '../config'
 import _ from 'lodash'
 
 /**
@@ -353,7 +353,7 @@ export function getDrawerSize (brwsrWidth, brwsrHeight) {
  * @param {object} size: browser width and height
  * @returns { { lat, lng, zoom } } mapCenter
  */
-export function getViewportOffset (bounds, center, browserSize) {
+export function getViewportOffset (bounds, browserSize) {
   const { width: brwsrWidth, height: brwsrHeight } = browserSize
   const drawer = getDrawerSize(brwsrWidth, brwsrHeight)
 
@@ -375,54 +375,12 @@ export function getViewportOffset (bounds, center, browserSize) {
       fudgeLng = fudgeLng / 2
     }
   }
-  // debugger
-  let fidgedMoveUp
-  if (fitted.zoom === 10) { fidgedMoveUp = 0.78 }
-  if (fitted.zoom === 11) { fidgedMoveUp = 0.039 }
-  if (fitted.zoom === 12) { fidgedMoveUp = 0.0195 }
-  if (fitted.zoom === 13) { fidgedMoveUp = 0.00975 }
-  if (fitted.zoom === 14) { fidgedMoveUp = 0.004875 }
-  if (fitted.zoom === 15) { fidgedMoveUp = 0.0024375 }
 
   const returnCenter = {
     lat: fitted.center.lat - fudgeLat,
     lng: fitted.center.lng - fudgeLng
   }
-
-  // debugger
   return {center: returnCenter, zoom: fitted.zoom}
-  // return fitted
-  // debugger
-/*
-  // figure out the drawer ratio:
-  const drawerWidthRatio = 1 - (brwsrWidth - drawer.offset_left - drawer.offset_right) / brwsrWidth
-  const drawerHeightRatio = 1 - (brwsrHeight - drawer.offset_top - drawer.offset_bottom) / brwsrHeight
-
-  const north = bounds.north
-  const south = bounds.south - totalLat * (drawerHeightRatio * 2)
-  const west = bounds.west - totalLng * (drawerWidthRatio * 2)
-  const east = bounds.east
-
-  bounds.ne = { lat: north, lng: east }
-  bounds.nw = { lat: north, lng: west }
-  bounds.se = { lat: south, lng: east }
-  bounds.sw = { lat: south, lng: west }
-  const size2 = browserSize
-  const fitted2 = fitBounds(bounds, size2)
-
-  return fitted2 */
-
-
-  // const fitted = fitBounds(bounds, coords.size)
-  // // UPDATE THIS WITH FULL MAINMAP REDUX SUPPORT
-  // // = { bounds, center, marginBounds, size: {width, height}, zoom }
-  // return {
-  //   bounds,
-  //   center: fitted.center,
-  //   marginBounds,
-  //   size: coords.size,
-  //   zoom: fitted.zoom
-  // }
 }
 
 export function getMarginBounds (bounds, browserSize) {

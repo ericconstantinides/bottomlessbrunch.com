@@ -65,8 +65,6 @@ class Map extends Component {
       )
     }
   }
-  
-  
 
   handleMapChange = coords => {
     // console.log('handleMapChange:', coords)

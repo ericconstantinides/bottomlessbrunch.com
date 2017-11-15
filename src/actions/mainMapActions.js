@@ -8,7 +8,7 @@ export function setMainMap (coords) {
   const marginCoords = getMarginBounds(coords.bounds, coords.size)
 
   coords = { ...coords, ...marginCoords }
-  console.log({coords})
+
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
     type: constants.MAIN_MAP_SET,
@@ -25,11 +25,7 @@ export function setMainMapByRegion (region, coords) {
     ? window.innerHeight
     : coords.size.height
 
-  const fitted = getViewportOffset(
-    region.bounds,
-    region.calcCenter,
-    coords.size
-  )
+  const fitted = getViewportOffset(region.bounds, coords.size)
   const newCoords = {...coords, ...fitted}
 
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
