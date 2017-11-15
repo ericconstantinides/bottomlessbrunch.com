@@ -9,7 +9,7 @@ const SiteHeader = props => {
         onClick={props.handleRegionSelect(props.regionReset)}
         className='button button--orange-black is-smaller'
       >
-        Show All
+        Re-Center
       </div>
     )
   }
