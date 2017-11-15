@@ -222,6 +222,11 @@ body.body--MapPage #root,
       margin-top: 0;
     }
   }
+  &:last-child {
+    .VenueListItem__inner {
+      margin-bottom: 0;
+    }
+  }
 }
 .VenueTeaser__link {
   cursor: pointer;
@@ -330,6 +335,7 @@ body.body--MapPage #root,
 .VenueList {
   position: relative;
   z-index: 2;
+  padding-bottom: 0.5em;
 }
 .MapPage__Map-inner-container {
   height: 100%;
