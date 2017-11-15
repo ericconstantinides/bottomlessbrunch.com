@@ -54,6 +54,18 @@ class Map extends Component {
     // return true
   // }
   
+  componentWillReceiveProps (nextProps) {
+    if (!_.isEqual(this.props.mainMap.coords, nextProps.mainMap.coords)) {
+      nextProps.getMainMapVisibleVenues(
+        nextProps.venues,
+        nextProps.regions,
+        nextProps.mainMap.coords,
+        nextProps.fetchVenueDetail,
+        nextProps.history
+      )
+    }
+  }
+  
   
 
   handleMapChange = coords => {
