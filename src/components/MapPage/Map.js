@@ -26,34 +26,13 @@ const MBounder = props => {
 }
 
 class Map extends Component {
-  // mapLoaded = ({ map, maps }) => {
-  //   this.setState({ map })
-  // }
-  /*   componentDidMount = () => {
-    console.log(this.props.ui.activeRegion)
-    if (this.props.ui.activeRegion) {
-      const { zoom, lat, lng } = this.props.ui.activeRegion
-      this.props.setMainMap({ zoom, center: { lat, lng } })
-    }
-  } */
-  /*   componentWillReceiveProps (nextProps) {
-    // update the state's region if the UI region changes:
-    if (
-      !_.isEmpty(nextProps.ui.activeRegion) &&
-      nextProps.ui.activeRegion._id !== this.props.ui.activeRegion._id
-    ) {
-      // why am I updating it to my redux value and not the value of the region?
-      // this.updateMapAndDrawer({ size: this.props.mainMap.coords.size })
-      const { zoom, lat, lng } = nextProps.ui.activeRegion
-      this.props.setMainMap({ zoom, center: { lat, lng } })
-    }
-  } */
-
-  // shouldComponentUpdate (nextProps, nextState) {
-    // debugger
-    // return true
-  // }
-  
+  componentDidMount () {
+    this.props.setInitialMapLocation(
+      this.props.mainMap.coords,
+      this.props.regions,
+      this.props.history
+    )
+  }
   componentWillReceiveProps (nextProps) {
     if (!_.isEqual(this.props.mainMap.coords, nextProps.mainMap.coords)) {
       nextProps.getMainMapVisibleVenues(
