@@ -26,13 +26,6 @@ const MBounder = props => {
 }
 
 class Map extends Component {
-  componentDidMount () {
-    this.props.setInitialMapLocation(
-      this.props.mainMap.coords,
-      this.props.regions,
-      this.props.history
-    )
-  }
   componentWillReceiveProps (nextProps) {
     if (!_.isEqual(this.props.mainMap.coords, nextProps.mainMap.coords)) {
       nextProps.getMainMapVisibleVenues(
