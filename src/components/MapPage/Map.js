@@ -238,10 +238,10 @@ class Map extends Component {
       >
         {this.renderVenueTeasers()}
         {this.renderRegionMarkers()}
-        {this.debugMarginBounds()}
+        {/* {this.debugMarginBounds()}
         {this.debugMarginCenter()}
         {this.debugRegionCenter()}
-        {this.debugRegionBounds()}
+        {this.debugRegionBounds()} */}
       </GoogleMapReact>
     )
   }

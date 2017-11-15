@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import { fitBounds } from 'google-map-react/utils'
 import constants from './types'
 import { getViewportOffset, getMarginBounds } from '../lib/myHelpers'
 import { SHOW_VENUES_ZOOM_LEVEL } from '../config'
@@ -32,11 +31,6 @@ export function setMainMapByRegion (region, coords) {
     coords.size
   )
   const newCoords = {...coords, ...fitted}
-
-  // debugger
-  // coords.center = fitted.center
-  // coords.zoom = fitted.zoom
-  // coords = {...coords, ...regionMargined}
 
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
