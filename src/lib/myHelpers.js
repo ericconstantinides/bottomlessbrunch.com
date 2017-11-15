@@ -364,17 +364,31 @@ export function getViewportOffset (bounds, browserSize) {
   const size = { width: visibleWidth, height: visibleHeight }
   // I only really care about the fitted.zoom in fitted:
 
-  const fitted = fitBounds(bounds, size)
-  // zoom starts at 10, so we subtract 9 from zoom to find the divider
-  const fudgeDivider = fitted.zoom - 9
-  let fudgeLat = drawer.fudge_lat_at_zoom_ten
-  let fudgeLng = drawer.fudge_lng_at_zoom_ten
-  if (fudgeDivider > 1) {
-    for (let index = 1; index < fudgeDivider; index++) {
-      fudgeLat = fudgeLat / 2
-      fudgeLng = fudgeLng / 2
+  const fittedPrePadding = fitBounds(bounds, size)
+
+  // fudging starts at zoom 20, so we subtract from 20 to see how much to mult.
+  const fudgeMultiplier = 20 - fittedPrePadding.zoom
+  let fudgeLat = drawer.fudge_lat_at_zoom_twenty
+  let fudgeLng = drawer.fudge_lng_at_zoom_twenty
+  let pad = 0.000048828125
+  if (fudgeMultiplier > 1) {
+    for (let index = 0; index < fudgeMultiplier; index++) {
+      fudgeLat = fudgeLat * 2
+      fudgeLng = fudgeLng * 2
+      pad = pad * 2
     }
   }
+  // don't pad zoom <= 10 so that small devices don't get a zoomed out view:
+  pad = fittedPrePadding.zoom <= 10 ? 0 : pad
+  // now we add some padding and run fitzoom again:
+
+  const pBounds = {}
+  pBounds.ne = {lat: bounds.ne.lat + pad, lng: bounds.ne.lng + pad}
+  pBounds.nw = {lat: bounds.nw.lat + pad, lng: bounds.nw.lng - pad}
+  pBounds.se = {lat: bounds.se.lat - pad, lng: bounds.se.lng + pad}
+  pBounds.sw = {lat: bounds.sw.lat - pad, lng: bounds.sw.lng - pad}
+
+  const fitted = fitBounds(pBounds, size)
 
   const returnCenter = {
     lat: fitted.center.lat - fudgeLat,

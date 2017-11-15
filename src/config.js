@@ -42,7 +42,7 @@ export const USA_MAP_COORDS = {
   zoom: 4
 }
 
-export const SHOW_VENUES_ZOOM_LEVEL = 10
+export const SHOW_VENUES_ZOOM_LEVEL = 9
 
 // this should ideally be done in the region:
 export const BRUNCH_TIMES = {
@@ -60,7 +60,9 @@ export const DRAWER = {
     offset_left: 0,
     offset_right: 0,
     fudge_lat_at_zoom_ten: 0.078,
-    fudge_lng_at_zoom_ten: 0
+    fudge_lng_at_zoom_ten: 0,
+    fudge_lat_at_zoom_twenty: 0.000076171875,
+    fudge_lng_at_zoom_twenty: 0
   },
   md: {
     bp_starts: 768,
@@ -70,7 +72,9 @@ export const DRAWER = {
     offset_left: 320,
     offset_right: 0,
     fudge_lat_at_zoom_ten: 0,
-    fudge_lng_at_zoom_ten: 0.22
+    fudge_lng_at_zoom_ten: 0.22,
+    fudge_lat_at_zoom_twenty: 0,
+    fudge_lng_at_zoom_twenty: 0.00021484375
   },
   lg: {
     bp_starts: 901,
@@ -80,7 +84,9 @@ export const DRAWER = {
     offset_left: 390,
     offset_right: 0,
     fudge_lat_at_zoom_ten: 0,
-    fudge_lng_at_zoom_ten: 0.268
+    fudge_lng_at_zoom_ten: 0.268,
+    fudge_lat_at_zoom_twenty: 0,
+    fudge_lng_at_zoom_twenty: 0.00026171875
   }
 }
 
