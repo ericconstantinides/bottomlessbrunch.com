@@ -621,13 +621,13 @@ a * {
  * SiteHeader -- Stacked Logo
  */
 @media only screen and (min-width: 768px) {
-  .App--MapPage .SiteHeader.layout__stacked-logo {
+  .App--MapPage:not(.App--VenueSlider) .SiteHeader.layout__stacked-logo {
     height: 100px; }
-    .App--MapPage .SiteHeader.layout__stacked-logo .SiteHeader__inner {
+    .App--MapPage:not(.App--VenueSlider) .SiteHeader.layout__stacked-logo .SiteHeader__inner {
       flex-flow: column; }
-    .App--MapPage .SiteHeader.layout__stacked-logo + .MapPage__inner .VenueList {
+    .App--MapPage:not(.App--VenueSlider) .SiteHeader.layout__stacked-logo + .MapPage__inner .VenueList {
       top: 100px; }
-  .App--MapPage .SiteHeader:not(.layout__stacked-logo) {
+  .App--MapPage:not(.App--VenueSlider) .SiteHeader:not(.layout__stacked-logo) {
     width: auto !important; } }
 
 @media only screen and (min-width: 768px) {
@@ -3222,6 +3222,7 @@ body.body--MapPage #root,
 
 .VenueSliderItem__image-container {
   height: 150px;
+  min-height: 300px;
   display: flex;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;

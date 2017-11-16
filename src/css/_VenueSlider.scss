@@ -259,6 +259,7 @@ $venueSliderItemSidePadding: 2vw;
 
 .VenueSliderItem__image-container {
   height: 150px;
+  min-height: 300px;
   // width: 100%;
   display: flex;
   overflow: scroll;
@@ -387,10 +388,6 @@ html.touch .VenueSlider__arrow {
   right: auto;
   left: 3.25vw;
   // margin-left: -20px;
-}
-
-.VenueSliderItem__image-container {
-  // pointer-events: none;
 }
 
 .VenueSliderItem__content {
