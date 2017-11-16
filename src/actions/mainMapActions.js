@@ -178,6 +178,10 @@ export function getMainMapVisibleVenues (
         regionTitle = 'Multiple Regions'
       }
     }
+    visibleVenuesArr.sort((idA, idB) => (
+        (Math.abs(venues[idB].lat) + Math.abs(venues[idB].lng)) -
+        (Math.abs(venues[idA].lat) + Math.abs(venues[idA].lng))
+    ))
     return {
       type: constants.MAIN_MAP_SET_VISIBLE_VENUES_AND_REGIONS,
       payload: {
