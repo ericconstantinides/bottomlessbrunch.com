@@ -710,11 +710,6 @@ function validate (values) {
 function mapStateToProps (state, ownProps) {
   // if we have an id, load the id venue:
   if (ownProps.match.params.id) {
-    // if (!_.isEmpty(state.venues)) {
-    //   if (state.venues[ownProps.match.params.id].fetchedLevel === 'minimal') {
-    //     ownProps.fetchVenueDetail(ownProps.match.params.id, 'full')
-    //   }
-    // }
     return {
       thisForm: state.form,
       initialValues: state.venues[ownProps.match.params.id],
