@@ -17,7 +17,6 @@ class VenueList extends Component {
         nextProps.mainMap.visibleVenuesArr
       )
     ) {
-      console.log('scroll to the top')
       this.refs.VenueList.scrollTop = 0
     }
   }
