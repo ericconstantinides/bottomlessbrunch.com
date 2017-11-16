@@ -15,6 +15,7 @@ import {
   fetchGooglePlacesEditVenueDetail,
   fetchYelpPhoneSearchEditVenueDetail,
   fetchYelpMetaEditVenueDetail,
+  fetchVenueDetail,
   resetEditVenue,
   addUiAppClass,
   removeUiAppClass
@@ -50,30 +51,16 @@ class venueForm extends Component {
   componentDidMount () {
     this.props.addUiAppClass(['App--AddEditVenue'])
   }
-  componentWillUnmount () {
-    this.props.resetEditVenue()
-    this.props.removeUiAppClass(['App--AddEditVenue'])
-  }
-  renderField (field) {
-    const { touched, error } = field.meta
-    const fieldType = field.type ? field.type : 'text'
-    const className = `venueForm__form-group form-group ${touched && error ? 'has-danger' : ''} ${field.className ? field.className : ''}`
-    let link = field.externalLink && field.input.value
-      ? <span> | <Link target='_blank' to={field.input.value}>link</Link></span>
-      : ''
-    if (field.input.name === 'yId' && field.input.value) {
-      const href = YELP_PREFIX + field.input.value + YELP_SUFFIX
-      link = <span> | <Link target='_blank' to={href}>link</Link></span>
+  componentWillReceiveProps (nextProps) {
+    // once the venue is loaded in, we update it to full:
+    if (
+      _.isEmpty(this.props.initialValues) &&
+      !_.isEmpty(nextProps.initialValues)
+    ) {
+      if (nextProps.initialValues.fetchedLevel === 'minimal') {
+        this.props.fetchVenueDetail(nextProps.initialValues._id, 'full')
+      }
     }
-    return (
-      <div className={className}>
-        <label className='AddEdit__label'>{field.lbl} {link}</label>
-        <input className='form-control' type={fieldType} {...field.input} />
-        <small className='text-help'>
-          {touched ? error : ''}
-        </small>
-      </div>
-    )
   }
   componentDidUpdate (prevProps, prevState) {
     // Only run the field update IF: We have gData and no PrevGdata -OR-
@@ -129,6 +116,31 @@ class venueForm extends Component {
         this.props.fieldValue('venueForm', fieldObj.field, data)
       })
     }
+  }
+  componentWillUnmount () {
+    this.props.resetEditVenue()
+    this.props.removeUiAppClass(['App--AddEditVenue'])
+  }
+  renderField (field) {
+    const { touched, error } = field.meta
+    const fieldType = field.type ? field.type : 'text'
+    const className = `venueForm__form-group form-group ${touched && error ? 'has-danger' : ''} ${field.className ? field.className : ''}`
+    let link = field.externalLink && field.input.value
+      ? <span> | <Link target='_blank' to={field.input.value}>link</Link></span>
+      : ''
+    if (field.input.name === 'yId' && field.input.value) {
+      const href = YELP_PREFIX + field.input.value + YELP_SUFFIX
+      link = <span> | <Link target='_blank' to={href}>link</Link></span>
+    }
+    return (
+      <div className={className}>
+        <label className='AddEdit__label'>{field.lbl} {link}</label>
+        <input className='form-control' type={fieldType} {...field.input} />
+        <small className='text-help'>
+          {touched ? error : ''}
+        </small>
+      </div>
+    )
   }
   // gets called after successful validation:
   onSubmit = values => {
@@ -698,6 +710,11 @@ function validate (values) {
 function mapStateToProps (state, ownProps) {
   // if we have an id, load the id venue:
   if (ownProps.match.params.id) {
+    // if (!_.isEmpty(state.venues)) {
+    //   if (state.venues[ownProps.match.params.id].fetchedLevel === 'minimal') {
+    //     ownProps.fetchVenueDetail(ownProps.match.params.id, 'full')
+    //   }
+    // }
     return {
       thisForm: state.form,
       initialValues: state.venues[ownProps.match.params.id],
@@ -720,6 +737,7 @@ export default connect(mapStateToProps, {
   fetchGooglePlacesEditVenueDetail,
   fetchYelpPhoneSearchEditVenueDetail,
   fetchYelpMetaEditVenueDetail,
+  fetchVenueDetail,
   resetEditVenue,
   addUiAppClass,
   removeUiAppClass
