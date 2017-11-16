@@ -8,9 +8,10 @@ import { apiError } from './index'
 export function fetchRegions () {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/regions`).then(response => {
+      const sorted = _.sortBy(response.data, region => region.name)
       dispatch({
         type: constants.REGIONS_FETCH,
-        payload: response.data
+        payload: sorted
       })
     })
   }
@@ -80,10 +81,10 @@ export function calcRegionsMeta (venues) {
       regionsObject[venue.regionId] = {
         venuesAvailable: 1,
         bounds: {
-          north: (venue.lat),
-          south: (venue.lat),
-          east: (venue.lng),
-          west: (venue.lng)
+          north: venue.lat,
+          south: venue.lat,
+          east: venue.lng,
+          west: venue.lng
         }
       }
     } else {

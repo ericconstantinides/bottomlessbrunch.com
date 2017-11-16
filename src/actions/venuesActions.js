@@ -8,11 +8,10 @@ export function fetchVenues (calcRegionsMeta) {
   return function (dispatch) {
     axios.get(`${ROOT_URL}/api/v1/venues`).then(response => {
       // add the minimal fetched level:
-      const venues = response.data
-        .map(venue => {
-          venue.fetchedLevel = 'minimal'
-          return venue
-        })
+      const venues = response.data.map(venue => {
+        venue.fetchedLevel = 'minimal'
+        return venue
+      })
       // calling calcRegionsMeta
       calcRegionsMeta(venues)
       dispatch({
@@ -24,7 +23,8 @@ export function fetchVenues (calcRegionsMeta) {
 }
 export function fetchVenueDetail (id, detailLevel = 'full') {
   return function (dispatch) {
-    axios.get(`${ROOT_URL}/api/v1/venues/${id}?detailLevel=${detailLevel}`)
+    axios
+      .get(`${ROOT_URL}/api/v1/venues/${id}?detailLevel=${detailLevel}`)
       .then(response => {
         response.data.fetchedLevel = detailLevel
         dispatch({
