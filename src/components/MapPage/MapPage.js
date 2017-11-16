@@ -24,14 +24,6 @@ class MapPage extends Component {
     this.props.addUiAppClass(['App--MapPage'])
     // viewportUnitsBuggyfill.init()
   }
-  componentDidUpdate (prevProps, prevState) {
-    // console.log('cdu: MapPage.js')
-    // put the venueList back at the top for a new region:
-    if (prevProps.ui.activeRegion._id !== this.props.ui.activeRegion._id) {
-      this.refs.dragItem.scrollTop = 0
-    }
-  }
-
   componentWillUnmount () {
     document.documentElement.classList.remove('html--MapPage')
     document.body.classList.remove('body--MapPage')

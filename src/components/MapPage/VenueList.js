@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import * as actions from '../../actions'
 
@@ -9,9 +10,23 @@ class VenueList extends Component {
   componentDidUpdate (prevProps, prevState) {
     // console.log('cdu: VenueList')
   }
+  componentWillReceiveProps (nextProps) {
+    if (
+      !_.isEqual(
+        this.props.mainMap.visibleVenuesArr,
+        nextProps.mainMap.visibleVenuesArr
+      )
+    ) {
+      console.log('scroll to the top')
+      this.refs.VenueList.scrollTop = 0
+    }
+  }
+
   render () {
     return (
-      <div className='VenueList layout__sidebar-width layout__transparency-bg'>
+      <div
+        className='VenueList layout__sidebar-width layout__transparency-bg' ref='VenueList'
+      >
         <div className='VenueList__handle'>
           <div className='VenueList__inner-handle' />
         </div>
@@ -24,12 +39,8 @@ class VenueList extends Component {
             toggleMarkerClick={this.props.toggleMarkerClick}
             hoveredVenue={this.props.hoveredVenue}
             venue={this.props.venues[id]}
-            regionName={
-              this.props.regions[this.props.venues[id].regionId].name
-            }
-            regionSlug={
-              this.props.regions[this.props.venues[id].regionId].slug
-            }
+            regionName={this.props.regions[this.props.venues[id].regionId].name}
+            regionSlug={this.props.regions[this.props.venues[id].regionId].slug}
             handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
           />
         ))}
