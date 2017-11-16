@@ -11,7 +11,7 @@ const AdminVenueTeaser = ({ _id, name, lat, lng, zoom, gData, handleDelete, curr
     <div className='AdminVenue'>
       <hr />
       <div className='AdminVenue__inner'>
-        {gData.images && 
+        {gData && gData.images && 
           <img src={gData.images.thumb[0].url} alt='' />
         }
         <Link
@@ -42,7 +42,27 @@ class ListVenues extends Component {
       region: ''
     }
   }
+  componentDidMount () {
+    // we came here from another page but we still have minimal fetched:
+    if (!_.isEmpty(this.props.venues)) { 
+      _.map(this.props.venues, venue => {
+        if (venue.fetchedLevel === 'minimal') {
+          this.props.fetchVenueDetail(venue._id, 'full')
+        }
+      })
+    }
+  }
   
+  componentWillReceiveProps (nextProps) {
+    // once the venues are loaded in, we update them to full:
+    if (_.isEmpty(this.props.venues) && !_.isEmpty(nextProps.venues)) {
+      _.map(nextProps.venues, venue => {
+        if (venue.fetchedLevel === 'minimal') {
+          this.props.fetchVenueDetail(venue._id, 'full')
+        }
+      })
+    }
+  }
   handleDelete = (_id, name) => event => {
     if (window.confirm(`Are you sure you want to delete "${name}"`)) {
       this.props.deleteVenue(_id, this.props.history)
