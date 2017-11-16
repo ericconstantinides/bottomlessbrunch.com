@@ -1,8 +1,7 @@
 import _ from 'lodash'
 import constants from './types'
 // import { parsePath } from '../lib/myHelpers'
-import { getViewportOffset, getMarginBounds, getRegionByPath } from '../lib/myHelpers'
-import { SHOW_VENUES_ZOOM_LEVEL } from '../config'
+import { getViewportOffset, getMarginBounds, getRegionByPath, getDrawerSize } from '../lib/myHelpers'
 
 // export function initMainMap (regions, history) {
 //   return {
@@ -80,8 +79,9 @@ export function getMainMapVisibleVenues (
   fetchVenueDetail,
   history
 ) {
+  const drawer = getDrawerSize(coords.size.width, coords.size.height)
   let regionTitle = 'Choose Region'
-  if (coords.zoom >= SHOW_VENUES_ZOOM_LEVEL) {
+  if (coords.zoom >= drawer.show_venues_zoom_level) {
     let regionReset = ''
     const { ne, sw } = coords.marginBounds
     let visibleVenuesArr = []
