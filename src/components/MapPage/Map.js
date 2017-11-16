@@ -117,8 +117,8 @@ class Map extends Component {
         regionMarkers.push(
           <RegionMarker
             key={region._id}
-            lat={region.lat}
-            lng={region.lng}
+            lat={region.calcCenter.lat}
+            lng={region.calcCenter.lng}
             regionId={region._id}
             regionName={region.name}
             handleRegionSelect={this.props.handleRegionSelect}
