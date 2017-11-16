@@ -25,9 +25,20 @@ class App extends Component {
     // get the regions and the venues
     this.props.fetchRegions()
     this.props.fetchVenues(this.props.calcRegionsMeta)
-    this.props.fetchMainMap()
     this.props.fetchEnvironment()
   }
+  componentWillReceiveProps (nextProps) {
+    if (!_.isEmpty(nextProps.regions) && !_.isEmpty(nextProps.venues)) {
+      if (!nextProps.mainMap.loaded) {
+        this.props.getInitialMapLocation(
+          this.props.mainMap.coords,
+          this.props.regions,
+          this.props.history
+        )
+      }
+    }
+  }
+  
   // shouldComponentUpdate (nextProps, nextState) {
   //   console.log(rendered++)
   //   if (rendered <= 10) {
@@ -66,18 +77,18 @@ class App extends Component {
     this.props.hideUiRegionsModal()
   }
   render () {
-    let regionRoutes = ''
-    // only create regionRoutes if our map isn't loaded:
-    // console.log('this.props.mainMap.loaded:', this.props.mainMap.loaded)
-    if (!this.props.mainMap.loaded) {
-      regionRoutes = _.map(this.props.regions, region => (
-        <Route
-          key={region._id}
-          path={`/${region.slug}`}
-          render={props => <Region {...props} region={region} />}
-        />
-      ))
-    }
+    // let regionRoutes = ''
+    // // only create regionRoutes if our map isn't loaded:
+    // // console.log('this.props.mainMap.loaded:', this.props.mainMap.loaded)
+    // if (!this.props.mainMap.loaded) {
+    //   regionRoutes = _.map(this.props.regions, region => (
+    //     <Route
+    //       key={region._id}
+    //       path={`/${region.slug}`}
+    //       render={props => <Region {...props} region={region} />}
+    //     />
+    //   ))
+    // }
     let venueSliderRoutes
     if (!_.isEmpty(this.props.regions)) {
       venueSliderRoutes = _.chain(this.props.regions)
@@ -117,7 +128,7 @@ class App extends Component {
               render={props => <Admin {...props} admin={this.props.admin} />}
             />
             {venueSliderRoutes}
-            {regionRoutes}
+            {/* {regionRoutes} */}
             {parsedHistory[0] !== 'admin' &&
               this.props.mainMap.loaded &&
               <MapPage history={this.props.history} />}

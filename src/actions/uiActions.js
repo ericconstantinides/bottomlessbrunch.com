@@ -74,3 +74,17 @@ export function removeUiAppClass (classes) {
     payload: classes
   }
 }
+
+export function showUiResetRegion () {
+  return {
+    type: constants.UI_CHANGE_RESET_REGION_BUTTON,
+    payload: true
+  }
+}
+
+export function hideUiResetRegion () {
+  return {
+    type: constants.UI_CHANGE_RESET_REGION_BUTTON,
+    payload: false
+  }
+}

@@ -450,3 +450,10 @@ export function getMarginBounds (bounds, browserSize) {
   }
   return coords
 }
+
+export function closeEnough (numberA, numberB, difference = 0.00001) {
+  if (Math.abs(numberA - numberB) <= difference) {
+    return true
+  }
+  return false
+}

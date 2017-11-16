@@ -79,6 +79,7 @@ class MapPage extends Component {
       this.props.regions[_id],
       this.props.mainMap.coords
     )
+    // this.props.hideUiResetRegion()
     this.props.hideUiRegionsModal()
   }
   handleVenueTeaserLinkClick = _id => event => {
@@ -106,6 +107,7 @@ class MapPage extends Component {
           handleLogoClick={this.handleLogoClick}
           handleRegionsModalClick={this.handleRegionsModalClick}
           handleRegionSelect={this.handleRegionSelect}
+          regionResetButton={this.props.ui.regionResetButton}
         />
         <div
           className='MapPage__inner'

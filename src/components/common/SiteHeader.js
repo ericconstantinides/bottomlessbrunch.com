@@ -3,7 +3,7 @@ import { SITE_NAME, SITE_SLOGAN } from '../../config'
 
 const SiteHeader = props => {
   let regionButton = ''
-  if (props.regionReset) {
+  if (props.regionReset && props.regionResetButton) {
     regionButton = (
       <div
         onClick={props.handleRegionSelect(props.regionReset)}

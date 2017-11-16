@@ -139,6 +139,17 @@
     }
   }
 }
+.MapPage.no-venues .SiteHeader {
+  @media only screen and (min-width: $bp-medium + 1) {
+    border-radius: 7px;
+    margin: 0.5em;
+    width: calc(320px - 1em);
+    height: calc(100px - 1em);
+  }
+  @media only screen and (min-width: $bp-medium-large + 1) {
+    width: calc(390px - 1em);
+  }
+}
 .App--VenueSlider,
 .App--IntroPage {
   .SiteHeader {

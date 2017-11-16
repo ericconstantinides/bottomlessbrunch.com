@@ -1,7 +1,30 @@
 import _ from 'lodash'
 import constants from './types'
-import { getViewportOffset, getMarginBounds } from '../lib/myHelpers'
+// import { parsePath } from '../lib/myHelpers'
+import { getViewportOffset, getMarginBounds, getRegionByPath } from '../lib/myHelpers'
 import { SHOW_VENUES_ZOOM_LEVEL } from '../config'
+
+// export function initMainMap (regions, history) {
+//   return {
+//     type: constants.MAIN_MAP_SET,
+//     payload: JSON.parse(mainMapCoords)
+//   }
+// }
+
+// I will get the slug from the path and also the storage to figure
+// out the initial map state:
+export function getInitialMapLocation (coords, regions, history) {
+  const region = getRegionByPath(regions, history.location.pathname)
+  if (region) {
+    return setMainMapByRegion(region, coords)
+  }
+  const mainMapCoords = window.localStorage.getItem('mainMap')
+  if (!mainMapCoords) return unsetMainMap()
+  return {
+    type: constants.MAIN_MAP_SET,
+    payload: JSON.parse(mainMapCoords)
+  }
+}
 
 export function setMainMap (coords) {
   // this is where I want to figure out the marginBounds:
@@ -42,14 +65,6 @@ export function unsetMainMap () {
     payload: null
   }
 }
-export function fetchMainMap () {
-  const mainMapCoords = window.localStorage.getItem('mainMap')
-  if (!mainMapCoords) return unsetMainMap()
-  return {
-    type: constants.MAIN_MAP_SET,
-    payload: JSON.parse(mainMapCoords)
-  }
-}
 // size = {width: n, height: n}
 export function updateMainMapSize (mapSize) {
   return {
@@ -83,7 +98,7 @@ export function getMainMapVisibleVenues (
         // add the venue to the visibleVenuesArr:
         visibleVenuesArr.push(venue._id)
         // VISIBLE REGIONS LOGIC:
-        // check if this region has been saved yet:
+        // check if this region has been recorded yet:
         if (!visibleRegionsObj[venue.regionId]) {
           // if not, add it to visibleRegionsObj
           visibleRegionsObj[venue.regionId] = {
@@ -127,7 +142,7 @@ export function getMainMapVisibleVenues (
         }
       })
     }
-    // check it again if we filled something in from POST VENUE CHECKING:
+    // check visibleRegionsObj again if it changed from right above:
     if (!_.isEmpty(visibleRegionsObj)) {
       // visibleRegionsObj has data. let's do some checks on it:
       const keys = _.keysIn(visibleRegionsObj)
@@ -151,6 +166,8 @@ export function getMainMapVisibleVenues (
           if (history.location.pathname !== slug) {
             history.push(slug)
           }
+          // This should only show when the coords are different:
+          regionReset = keys[0]
           regionTitle = visibleRegionsObj[keys[0]].name
         }
       } else {

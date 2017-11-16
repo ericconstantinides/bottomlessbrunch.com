@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
 import * as actions from '../../actions'
+import { closeEnough } from '../../lib/myHelpers'
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
 import VenueTeaser from './VenueTeaser'
@@ -12,12 +13,7 @@ import RegionMarker from '../common/RegionMarker'
 const MBounder = props => {
   const className = 'MBounder is-' + props.title
   return (
-    <div
-      className={className}
-      key={props.key}
-      lat={props.lat}
-      lng={props.lng}
-    >
+    <div className={className} key={props.key} lat={props.lat} lng={props.lng}>
       <div className='MBounder__title'>
         {props.title}
       </div>
@@ -39,10 +35,21 @@ class Map extends Component {
   }
 
   handleMapChange = coords => {
+    // this.props.showUiResetRegion()
     // console.log('handleMapChange:', coords)
     // update the maps size if the coords size has changed:
     if (!_.isEqual(this.props.mainMap.coords.size, coords.size)) {
       this.props.updateMainMapSize(coords.size)
+    }
+    // check if they values are "close enough" to warrant showing the recenter
+    if (
+      closeEnough(this.props.mainMap.coords.center.lat, coords.center.lat) &&
+      closeEnough(this.props.mainMap.coords.center.lng, coords.center.lng) &&
+      this.props.mainMap.coords.zoom === coords.zoom
+    ) {
+      this.props.hideUiResetRegion()
+    } else {
+      this.props.showUiResetRegion()
     }
     // console.log(coords)
     // coords.marginCenter = coords.center
@@ -133,36 +140,44 @@ class Map extends Component {
       return _.map(this.props.regions, (region, key) => {
         const regionDebugger = []
         if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.ne)) {
-          regionDebugger.push(<MBounder
-            key='r-ne'
-            title='r-ne'
-            lat={region.bounds.ne.lat}
-            lng={region.bounds.ne.lng}
-          />)
+          regionDebugger.push(
+            <MBounder
+              key='r-ne'
+              title='r-ne'
+              lat={region.bounds.ne.lat}
+              lng={region.bounds.ne.lng}
+            />
+          )
         }
         if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.nw)) {
-          regionDebugger.push(<MBounder
-            key='r-nw'
-            title='r-nw'
-            lat={region.bounds.nw.lat}
-            lng={region.bounds.nw.lng}
-          />)
+          regionDebugger.push(
+            <MBounder
+              key='r-nw'
+              title='r-nw'
+              lat={region.bounds.nw.lat}
+              lng={region.bounds.nw.lng}
+            />
+          )
         }
         if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.sw)) {
-          regionDebugger.push(<MBounder
-            key='r-sw'
-            title='r-sw'
-            lat={region.bounds.sw.lat}
-            lng={region.bounds.sw.lng}
-          />)
+          regionDebugger.push(
+            <MBounder
+              key='r-sw'
+              title='r-sw'
+              lat={region.bounds.sw.lat}
+              lng={region.bounds.sw.lng}
+            />
+          )
         }
         if (!_.isEmpty(region.bounds) && !_.isEmpty(region.bounds.se)) {
-          regionDebugger.push(<MBounder
-            key='r-se'
-            title='r-se'
-            lat={region.bounds.se.lat}
-            lng={region.bounds.se.lng}
-          />)
+          regionDebugger.push(
+            <MBounder
+              key='r-se'
+              title='r-se'
+              lat={region.bounds.se.lat}
+              lng={region.bounds.se.lng}
+            />
+          )
         }
         return regionDebugger
       })
@@ -190,12 +205,14 @@ class Map extends Component {
         const regionDebugger = []
         // console.log(region)
         if (!_.isEmpty(region.calcCenter)) {
-          regionDebugger.push(<MBounder
-            key='r-center'
-            title='r-center'
-            lat={region.calcCenter.lat}
-            lng={region.calcCenter.lng}
-          />)
+          regionDebugger.push(
+            <MBounder
+              key='r-center'
+              title='r-center'
+              lat={region.calcCenter.lat}
+              lng={region.calcCenter.lng}
+            />
+          )
         }
         return regionDebugger
       })
@@ -205,7 +222,9 @@ class Map extends Component {
     if (!(this.props.mainMap && this.props.mainMap.coords)) {
       return <div>Loading...</div>
     }
-    const center = this.props.mainMap.coords.center ? this.props.mainMap.coords.center : {lat: 38.1510752, lng: -95.8457796}
+    const center = this.props.mainMap.coords.center
+      ? this.props.mainMap.coords.center
+      : { lat: 38.1510752, lng: -95.8457796 }
     return (
       <GoogleMapReact
         zoom={this.props.mainMap.coords.zoom}

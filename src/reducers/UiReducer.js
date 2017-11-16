@@ -11,7 +11,8 @@ const initialState = {
   // appClass possible values are:
   // [introPage, mapPage, venue, admin, adminVenue, adminRegion, regionModal]
   appClass: [],
-  regionsModalActive: false
+  regionsModalActive: false,
+  regionResetButton: true
 }
 
 export default function (state = initialState, action) {
@@ -46,6 +47,8 @@ export default function (state = initialState, action) {
       return { ...state, appClass: _.union(state.appClass, action.payload) }
     case constants.UI_REMOVE_FROM_APP_CLASS:
       return { ...state, appClass: _.pull(state.appClass, ...action.payload) }
+    case constants.UI_CHANGE_RESET_REGION_BUTTON:
+      return { ...state, regionResetButton: action.payload }
     default:
       return state
   }
