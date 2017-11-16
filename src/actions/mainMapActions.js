@@ -1,7 +1,13 @@
 import _ from 'lodash'
 import constants from './types'
 // import { parsePath } from '../lib/myHelpers'
-import { getViewportOffset, getMarginBounds, getRegionByPath, getDrawerSize } from '../lib/myHelpers'
+import {
+  getViewportOffset,
+  getMarginBounds,
+  getRegionByPath,
+  getDrawerSize,
+  parsePath
+} from '../lib/myHelpers'
 
 // export function initMainMap (regions, history) {
 //   return {
@@ -48,7 +54,7 @@ export function setMainMapByRegion (region, coords) {
     : coords.size.height
 
   const fitted = getViewportOffset(region.bounds, coords.size)
-  const newCoords = {...coords, ...fitted}
+  const newCoords = { ...coords, ...fitted }
 
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
   return {
@@ -80,6 +86,7 @@ export function getMainMapVisibleVenues (
   history
 ) {
   const drawer = getDrawerSize(coords.size.width, coords.size.height)
+  const parsedPath = parsePath(history.location.pathname)
   let regionTitle = 'Choose Region'
   if (coords.zoom >= drawer.show_venues_zoom_level) {
     let regionReset = ''
@@ -154,16 +161,16 @@ export function getMainMapVisibleVenues (
           regions[keys[0]].venuesAvailable
         ) {
           // PARTIAL SINGLE REGION:
-          const slug = '/' + regions[visibleRegionsObj[keys[0]]._id].slug
-          if (history.location.pathname !== slug) {
+          const slug = regions[visibleRegionsObj[keys[0]]._id].slug
+          if (parsedPath.length <= 1 && parsedPath[0] !== slug) {
             history.push(slug)
           }
           regionReset = keys[0]
           regionTitle = visibleRegionsObj[keys[0]].name
         } else {
           // FULL SINGLE REGION:
-          const slug = '/' + regions[visibleRegionsObj[keys[0]]._id].slug
-          if (history.location.pathname !== slug) {
+          const slug = regions[visibleRegionsObj[keys[0]]._id].slug
+          if (parsedPath.length <= 1 && parsedPath[0] !== slug) {
             history.push(slug)
           }
           // This should only show when the coords are different:
@@ -172,7 +179,7 @@ export function getMainMapVisibleVenues (
         }
       } else {
         // MULTIPLE REGIONS
-        if (history.location.pathname !== '/') {
+        if (parsedPath.length === 1) {
           history.replace('/')
         }
         regionTitle = 'Multiple Regions'
