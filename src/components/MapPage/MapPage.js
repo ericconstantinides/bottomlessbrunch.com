@@ -45,12 +45,12 @@ class MapPage extends Component {
     this.props.history.push('/')
   }
   handleMouseOver = venue => event => {
-    if (this.props.mainMap.coords.size.width > DRAWER.sm.ends) {
+    if (this.props.mainMap.coords.size.width > DRAWER.sm.bp_ends) {
       this.setState({ hoveredVenue: venue._id })
     }
   }
   handleMouseLeave = venue => event => {
-    if (this.props.mainMap.coords.size.width > DRAWER.sm.ends) {
+    if (this.props.mainMap.coords.size.width > DRAWER.sm.bp_ends) {
       this.setState({ hoveredVenue: '' })
     }
   }
@@ -99,6 +99,7 @@ class MapPage extends Component {
       this.props.mainMap.visibleVenuesArr.length)
     const hasVenuesClass = hasVenues ? 'has-venues' : 'no-venues'
     const styles = { height: `100%`, width: `100%` }
+
     return (
       <div className={cx('MapPage', hasVenuesClass)}>
         <SiteHeader
