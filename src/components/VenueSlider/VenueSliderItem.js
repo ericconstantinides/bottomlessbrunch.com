@@ -20,32 +20,10 @@ class VenueSliderItem extends Component {
     }
   }
   componentDidMount () {
-    // console.log('Item: MOUNTED:', mounted++)
-    // if ((this.props.isActive || this.props.isNext || this.props.isPrev)) {
-    //   this.props.fetchGooglePlacesVenueDetail(this.props.venue)
-    //   this.setState({ fetching: true })
-    //   if (this.props.isActive) {
-    //     this.setState({ isActive: true })
-    //   }
-    // }
-    // console.log(this.props)
-    // const venue = this.props.venues[this.props.venueId]
-    // if (this.props.isActive && venue.fetchedLevel !== 'full') {
-    //   this.props.fetchVenueDetail(venue._id, 'full')
-    // }
+    // this.handleGooglePlacesData(this.props)
   }
   componentWillReceiveProps (nextProps) {
-    if (!_.isEmpty(nextProps.venues[nextProps.venueId].googlePlacesData)) {
-      this.setState({ fetched: true })
-    } else if (
-      (nextProps.isActive || nextProps.isPrev || nextProps.isNext) &&
-      !this.state.fetching
-    ) {
-      this.props.fetchGooglePlacesVenueDetail(
-        nextProps.venues[nextProps.venueId]
-      )
-      this.setState({ fetching: true })
-    }
+    // this.handleGooglePlacesData(nextProps)
     this.setState({ isActive: nextProps.isActive })
   }
 
@@ -70,9 +48,6 @@ class VenueSliderItem extends Component {
   }
   render () {
     const venue = this.props.venues[this.props.venueId]
-    if (venue.fetchedLevel !== 'full') {
-      return <div>Loading...</div>
-    }
     // console.log('Item: RENDERED:', rendered++)
     // only go here if we have data:
     const hours = compileGoogleHours(venue.googlePlacesData)
@@ -98,19 +73,25 @@ class VenueSliderItem extends Component {
         }) +
         ')'
     }
-    const funTimes = compileDays(
-      venue.funTimes,
-      'Bottomless Brunch',
-      venue.name
-    )
+    let funTimes = ''
+    if (venue.funTimes) { 
+      funTimes = compileDays(
+        venue.funTimes,
+        'Bottomless Brunch',
+        venue.name
+      )
+    }
     const displayHood = venue.neighborhood
       ? venue.neighborhood
-      : venue.address.city
+      : venue.address && venue.address.city
+        ? venue.address.city
+        : ''
 
-    const alcohol = !venue.yMeta.alcohol
+    const alcohol = !(venue.yMeta && venue.yMeta.alcohol)
       ? false
       : venue.yMeta.alcohol.replace(/&amp;/g, '&')
-    const ambience = !venue.yMeta.ambience
+
+    const ambience = !(venue.yMeta && venue.yMeta.ambience)
       ? false
       : Array.isArray(venue.yMeta.ambience)
           ? venue.yMeta.ambience.length === 2
@@ -169,11 +150,13 @@ class VenueSliderItem extends Component {
               <div className='VenueSliderItem__top-meta'>
                 <div className='VenueSliderItem__address'>
                   <h3 className='VenueSliderItem__address-title'>Address</h3>
-                  <p className='VenueSliderItem__address-p'>
-                    {venue.address.street}<br />
-                    {venue.address.city}<br />
-                    {venue.phone}
-                  </p>
+                  {venue.address &&
+                    <p className='VenueSliderItem__address-p'>
+                      {venue.address.street}<br />
+                      {venue.address.city}<br />
+                      {venue.phone}
+                    </p>
+                  }
                 </div>
                 <div className='VenueSliderItem__hours'>
                   <h3 className='VenueSliderItem__hours-title'>
@@ -190,7 +173,7 @@ class VenueSliderItem extends Component {
             </div>
             <div className='VenueSliderItem__middle'>
               <div className='VenueSliderItem__middle-left'>
-                {venue.yMeta.outdoorSeating !== undefined &&
+                {venue.yMeta && venue.yMeta.outdoorSeating &&
                   <div className='VenueSliderItem__middle-meta'>
                     <h4 className='VenueSliderItem__middle-meta-title'>
                       Outside Seating
@@ -199,7 +182,7 @@ class VenueSliderItem extends Component {
                       {venue.yMeta.outdoorSeating ? 'Yes' : 'No'}
                     </p>
                   </div>}
-                {venue.yMeta.takesReservations !== undefined &&
+                {venue.yMeta && venue.yMeta.takesReservations &&
                   <div className='VenueSliderItem__middle-meta'>
                     <h4 className='VenueSliderItem__middle-meta-title'>
                       Takes Reservations
@@ -227,7 +210,7 @@ class VenueSliderItem extends Component {
                     </p>
                   </div>}
               </div>
-              {(funTimes || venue.funItems.length) &&
+              {(funTimes || (venue.funItems && venue.funItems.length)) &&
                 <div className='VenueSliderItem__middle-center'>
                   {funTimes &&
                     <div className='VenueSliderItem__middle-center-top'>

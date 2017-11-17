@@ -9,7 +9,8 @@ const googlePlaces = new google.maps.places.PlacesService(
   document.createElement('div')
 )
 
-export function fetchGooglePlacesVenueDetail ({ _id, googlePlacesData, gpId }) {
+export function fetchGooglePlacesVenueDetail (venue) {
+  const { _id, googlePlacesData, gpId } = venue
   // check the fetchedTime and don't refetch if fewer than fetchTimeout:
   if (
     !googlePlacesData ||

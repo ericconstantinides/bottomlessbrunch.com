@@ -14,16 +14,19 @@ class VenueSlider extends Component {
   constructor (props) {
     super()
     this.state = {
-      sliderReady: false
+      sliderReady: false,
+      fetchedGData: {}
     }
   }
   componentDidMount () {
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
     this.getSliderReady(this.props)
+    // this.handleGooglePlacesData(this.props)
   }
   componentWillReceiveProps (nextProps) {
     this.getSliderReady(nextProps)
+    this.handleGooglePlacesData(nextProps)
   }
   componentWillUnmount () {
     // unset the venueUI:
@@ -52,7 +55,35 @@ class VenueSlider extends Component {
       }
     }
   }
-  handleSliderBeforeChange = (prevIndex, index) => {}
+  handleGooglePlacesData = props => {
+    // console.log('sliderPos', props.ui.sliderPosition)
+    if (props.ui.sliderPosition && props.mainMap.visibleVenuesArr) {
+      const {
+        ui: { sliderPosition: current },
+        venues,
+        mainMap: { visibleVenuesArr: visVenues }
+      } = props
+      const prev = movePointer(visVenues, current, 'prev')
+      const next = movePointer(visVenues, current, 'next')
+      let staggeredNum = 0
+      ;[
+        visVenues[current],
+        visVenues[next],
+        visVenues[prev]
+      ].forEach((venueId) => {
+        if (!this.state.fetchedGData[venueId]) {
+          let fetchedGData = this.state.fetchedGData
+          fetchedGData[venueId] = venueId
+          this.setState({ fetchedGData })
+          setTimeout(() => {
+            props.fetchGooglePlacesVenueDetail(venues[venueId])
+          }, (staggeredNum * 350));
+          staggeredNum++
+        }
+      })
+    }
+  }
+  // handleSliderBeforeChange = (prevIndex, index) => {}
 
   handleSliderChange = sliderPos => {
     const {
@@ -100,8 +131,8 @@ class VenueSlider extends Component {
           initialSlide={this.props.ui.sliderPosition}
           ref='slickSlider'
           afterChange={this.handleSliderChange}
-          beforeChange={this.handleSliderBeforeChange}
         >
+          {/* beforeChange={this.handleSliderBeforeChange} */}
           {sliderItems}
         </Slider>
       </div>
