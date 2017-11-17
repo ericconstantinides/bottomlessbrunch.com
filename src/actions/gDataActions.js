@@ -12,25 +12,25 @@ const googlePlaces = new google.maps.places.PlacesService(
 export function fetchGooglePlacesVenueDetail (venue) {
   const { _id, googlePlacesData, gpId } = venue
   // check the fetchedTime and don't refetch if fewer than fetchTimeout:
-  if (
-    !googlePlacesData ||
-    !googlePlacesData.fetchedTime ||
-    new Date(googlePlacesData.fetchedTime.getTime() + fetchTimeoutMs) <
-      new Date()
-  ) {
-    return dispatch => {
-      // console.log('fetchGooglePlacesVenueDetail:', fetchNum++)
-      googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
-        if (status === 'OK') {
-          return dispatch(setGooglePlacesVenueDetail(_id, place))
-        }
-        // TODO: this needs to return a DISPATCH to an API error.
-        // See: udemy-advanced-redux-auth/client/src/actions/index.js
-        throw new Error(`Error thrown: ${status}`)
-      })
-    }
+  // if (
+  //   !googlePlacesData ||
+  //   !googlePlacesData.fetchedTime ||
+  //   new Date(googlePlacesData.fetchedTime.getTime() + fetchTimeoutMs) <
+  //     new Date()
+  // ) {
+  return dispatch => {
+    // console.log('fetchGooglePlacesVenueDetail:', fetchNum++)
+    googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
+      if (status === 'OK') {
+        return dispatch(setGooglePlacesVenueDetail(_id, place))
+      }
+      // TODO: this needs to return a DISPATCH to an API error.
+      // See: udemy-advanced-redux-auth/client/src/actions/index.js
+      throw new Error(`Error thrown: ${status}`)
+    })
   }
-  return dispatch => dispatch(cancelFetchGooglePlacesVenueDetail())
+  // }
+  // return dispatch => dispatch(cancelFetchGooglePlacesVenueDetail())
 }
 
 export function cancelFetchGooglePlacesVenueDetail () {

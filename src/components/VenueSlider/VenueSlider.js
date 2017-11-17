@@ -65,7 +65,7 @@ class VenueSlider extends Component {
       } = props
       const prev = movePointer(visVenues, current, 'prev')
       const next = movePointer(visVenues, current, 'next')
-      let staggeredNum = 0
+      // let staggeredNum = 0
       ;[
         visVenues[current],
         visVenues[next],
@@ -75,10 +75,10 @@ class VenueSlider extends Component {
           let fetchedGData = this.state.fetchedGData
           fetchedGData[venueId] = venueId
           this.setState({ fetchedGData })
-          setTimeout(() => {
-            props.fetchGooglePlacesVenueDetail(venues[venueId])
-          }, (staggeredNum * 350));
-          staggeredNum++
+          props.fetchGooglePlacesVenueDetail(venues[venueId])
+          // setTimeout(() => {
+          // }, (staggeredNum * 350));
+          // staggeredNum++
         }
       })
     }
