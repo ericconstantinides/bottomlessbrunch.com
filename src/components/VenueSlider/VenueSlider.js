@@ -44,7 +44,6 @@ class VenueSlider extends Component {
           props.venues,
           props.region.slug + '/' + props.match.params.venueSlug
         )
-        props.fetchVenueDetail(venue._id, 'full')
         props.setUiSliderPosition(
           venue._id,
           props.mainMap.visibleVenuesArr,
@@ -59,13 +58,10 @@ class VenueSlider extends Component {
     const {
       mainMap: { visibleVenuesArr: visVenues },
       venues,
-      history
+      history,
+      setUiSliderPosition
     } = this.props
-    this.props.mainMap.visibleVenuesArr.forEach((venueId, index) => {
-      if (index === sliderPos) {
-        this.props.setUiSliderPosition(venueId, visVenues, venues, history)
-      }
-    })
+    setUiSliderPosition(visVenues[sliderPos], visVenues, venues, history)
   }
   handleShare = service => event => {
     console.log(service)

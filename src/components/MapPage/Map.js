@@ -35,8 +35,6 @@ class Map extends Component {
   }
 
   handleMapChange = coords => {
-    // this.props.showUiResetRegion()
-    // console.log('handleMapChange:', coords)
     // update the maps size if the coords size has changed:
     if (!_.isEqual(this.props.mainMap.coords.size, coords.size)) {
       this.props.updateMainMapSize(coords.size)
@@ -51,18 +49,7 @@ class Map extends Component {
     } else {
       this.props.showUiResetRegion()
     }
-    // console.log(coords)
-    // coords.marginCenter = coords.center
-
     this.props.setMainMap(coords)
-
-    this.props.getMainMapVisibleVenues(
-      this.props.venues,
-      this.props.regions,
-      this.props.mainMap.coords,
-      this.props.fetchVenueDetail,
-      this.props.history
-    )
   }
   handleMapClick = props => {
     // props = {x, y, lat, lng, event}

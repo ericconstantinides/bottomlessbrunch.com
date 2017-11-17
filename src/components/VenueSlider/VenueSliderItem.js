@@ -8,10 +8,6 @@ import cx from 'classnames'
 import * as actions from '../../actions'
 import { SITE_DOMAIN } from '../../config'
 import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
-// let mounted = 1
-// let updated = 1
-// let unmounted = 1
-// let rendered = 1
 
 class VenueSliderItem extends Component {
   constructor (props) {
@@ -32,10 +28,11 @@ class VenueSliderItem extends Component {
     //     this.setState({ isActive: true })
     //   }
     // }
-    const venue = this.props.venues[this.props.venueId]
-    if (venue.fetchedLevel !== 'full') {
-      this.props.fetchVenueDetail(venue._id, 'full')
-    }
+    // console.log(this.props)
+    // const venue = this.props.venues[this.props.venueId]
+    // if (this.props.isActive && venue.fetchedLevel !== 'full') {
+    //   this.props.fetchVenueDetail(venue._id, 'full')
+    // }
   }
   componentWillReceiveProps (nextProps) {
     if (!_.isEmpty(nextProps.venues[nextProps.venueId].googlePlacesData)) {
