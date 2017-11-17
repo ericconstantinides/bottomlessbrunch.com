@@ -26,8 +26,10 @@ import { times, days, timeCategories, states } from '../../../lib/enumerables'
 import {
   findClosestRegion,
   getAddy,
-  stripDashesSpaces
+  stripDashesSpaces,
+  slugify
 } from '../../../lib/myHelpers'
+import mapStyle from '../../../mapStyles/bottomlessbrunch.json'
 
 const YELP_PREFIX = 'https://www.yelp.com/biz/'
 const YELP_SUFFIX = '?q=bottomless'
@@ -63,12 +65,18 @@ class venueForm extends Component {
     }
   }
   componentDidUpdate (prevProps, prevState) {
+    // this updates field data based on gData
     // Only run the field update IF: We have gData and no PrevGdata -OR-
     // the old place_id is different than the new place_id
     const { gData } = this.props.editVenueFields
     const { gData: prevGdata } = prevProps.editVenueFields
     if (gData && (!prevGdata || gData.place_id !== prevGdata.place_id)) {
+      const { regionId } = this.props.thisForm.venueForm.values
+      const regionSlug = this.props.regions[regionId].slug
       const { address_components: address } = gData
+      const neighborhood = getAddy(address, 'neighborhood')
+        ? getAddy(address, 'neighborhood')
+        : getAddy(address, 'sublocality') ? getAddy(address, 'sublocality') : ''
       const replacements = [
         { field: 'name', data: gData.name },
         { field: 'website', data: gData.website },
@@ -94,11 +102,13 @@ class venueForm extends Component {
         { field: 'address.zip', data: getAddy(address, 'postal_code') },
         {
           field: 'neighborhood',
-          data: getAddy(address, 'neighborhood')
-            ? getAddy(address, 'neighborhood')
-            : getAddy(address, 'sublocality')
-                ? getAddy(address, 'sublocality')
-                : ''
+          data: neighborhood
+        },
+        {
+          field: 'slug',
+          data: regionSlug + '/' + slugify(gData.name) + (neighborhood
+            ? '-' + slugify(neighborhood)
+            : '')
         }
       ]
       replacements.forEach(fieldObj => {
@@ -141,21 +151,6 @@ class venueForm extends Component {
         </small>
       </div>
     )
-  }
-  // gets called after successful validation:
-  onSubmit = values => {
-    // attach yData, yMeta, and gData here:
-    const { gData, yData, yMeta } = this.props.editVenueFields
-    if (gData) values.gData = gData
-    if (yData) values.yData = yData
-    if (yMeta) values.yMeta = yMeta
-
-    const { addVenue, editVenue, history, match } = this.props
-    if (match.params.id) {
-      editVenue(match.params.id, values, history)
-    } else {
-      addVenue(values, history)
-    }
   }
   handleMapLoaded = map => {
     // we have a venue already:
@@ -442,6 +437,21 @@ class venueForm extends Component {
       )
     }
   }
+  // gets called after successful validation:
+  onSubmit = values => {
+    // attach yData, yMeta, and gData here:
+    const { gData, yData, yMeta } = this.props.editVenueFields
+    if (gData) values.gData = gData
+    if (yData) values.yData = yData
+    if (yMeta) values.yMeta = yMeta
+
+    const { addVenue, editVenue, history, match } = this.props
+    if (match.params.id) {
+      editVenue(match.params.id, values, history)
+    } else {
+      addVenue(values, history)
+    }
+  }
   render () {
     // pull out the redux-form handleSubmit function from props:
     const { handleSubmit, pristine, submitting, thisForm } = this.props
@@ -497,7 +507,10 @@ class venueForm extends Component {
                   yesIWantToUseGoogleMapApiInternals
                   zoom={this.state.zoom - 1}
                   center={{ lat: this.state.lat, lng: this.state.lng }}
-                  options={{ fullscreenControl: false }}
+                  options={{
+                    fullscreenControl: false,
+                    styles: mapStyle
+                  }}
                   style={{
                     height: '300px',
                     position: 'relative',
@@ -606,6 +619,12 @@ class venueForm extends Component {
                     name='globalPhone'
                     component={renderField}
                     className='flex-basis-25p'
+                  />
+                  <Field
+                    lbl='Slug'
+                    name='slug'
+                    component={renderField}
+                    className='flex-basis-66p'
                   />
                   <Field
                     lbl='Google Places ID'
