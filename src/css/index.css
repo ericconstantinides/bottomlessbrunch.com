@@ -504,6 +504,23 @@ a * {
   .SocialMediaShareButton--twitter:hover {
     background: #ea5103; }
 
+.Loading {
+  background: black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: "Ubuntu Condensed", sans-serif;
+  font-size: 3rem;
+  position: relative;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
 /*
  * Site Header
  */
