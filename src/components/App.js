@@ -10,7 +10,7 @@ import { parsePath } from '../lib/myHelpers'
 
 import MetaData from './common/MetaData'
 import MapPage from './MapPage/MapPage'
-import Region from './Region'
+// import Region from './Region'
 import IntroPage from './IntroPage/IntroPage'
 import VenueSlider from './VenueSlider/VenueSlider'
 import Admin from './admin'
@@ -101,13 +101,15 @@ class App extends Component {
             path={`/${region.slug}/:venueSlug`}
             region={region}
             history={this.props.history}
-            render={props => (
-              <VenueSlider
-                history={props.history}
-                match={props.match}
-                region={region}
-              />
-            )}
+            render={props => {
+              return (
+                <VenueSlider
+                  history={props.history}
+                  match={props.match}
+                  region={region}
+                />
+              )
+            }}
           />
         ))
         .value()
