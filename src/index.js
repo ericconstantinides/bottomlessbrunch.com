@@ -8,7 +8,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import ReactGA from 'react-ga'
 import { GOOGLE_GA } from './config'
 // allows us to run 100vh in safari:
-// import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
+import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 
 import reducers from './reducers' // Or wherever you keep your reducers
 
@@ -56,7 +56,7 @@ ReactDOM.render(
 // registerServiceWorker()
 
 // Initialize viewportUnitsBuggyfill
-// viewportUnitsBuggyfill.init()
+viewportUnitsBuggyfill.init()
 // Also hook viewportUnitsBuggyfill to resize event (if it was initialized)
 // if (document.getElementById('patched-viewport')) {
 //   window.addEventListener('resize', viewportUnitsBuggyfill.refresh, true)

@@ -147,7 +147,7 @@ class App extends Component {
                 handleRegionSelect={this.handleRegionSelect}
               />}
             {parsedHistory[0] !== 'admin' && !this.props.ui.siteReady &&
-              <div className='Loading'>Site Loading...</div>
+              <div className='Loading'>Pouring <br/>Mimosas...</div>
             }
           </div>
         </Router>
