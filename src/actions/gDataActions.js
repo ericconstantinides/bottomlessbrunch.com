@@ -73,9 +73,9 @@ function fetchGooglePlacesEditVenuePhotos (place) {
       height: photo.height
     }))
     place.images.thumb = place.photos.map(photo => ({
-      url: photo.getUrl({ maxWidth: 150, maxHeight: 150 }),
-      width: 150,
-      height: 150
+      url: photo.getUrl({ maxWidth: 320, maxHeight: 320 }),
+      width: 320,
+      height: 320
     }))
     place.images.large = place.photos.map(photo => ({
       url: photo.getUrl({ maxWidth: 800, maxHeight: 800 }),
