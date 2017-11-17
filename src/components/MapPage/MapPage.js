@@ -47,7 +47,6 @@ class MapPage extends Component {
     }
   }
   toggleMarkerClick = venue => event => {
-    // I NEED TO MOVE THE MAP AROUND TO DISPLAY THE HOVERED MARKER THE BEST
     this.setState((prevState, props) => {
       if (prevState.hoveredVenue === venue._id) {
         return { hoveredVenue: '' }
@@ -80,7 +79,7 @@ class MapPage extends Component {
       venues,
       history
     } = this.props
-    this.props.setUiVenue(venues, visVenues, visVenues.indexOf(_id), history)
+    this.props.setUiSliderPosition(_id, visVenues, venues, history)
   }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {

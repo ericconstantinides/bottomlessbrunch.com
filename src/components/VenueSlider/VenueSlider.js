@@ -4,111 +4,66 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import Slider from 'react-slick'
-import { getVenueBySlug, objectFunctions } from '../../lib/myHelpers'
+import { getVenueBySlug, movePointer } from '../../lib/myHelpers'
 
 import { SLIDER_SETTINGS } from '../../config'
 import * as actions from '../../actions'
 import VenueSliderItem from './VenueSliderItem'
-// let mounted = 1
-// let updated = 1
-// let unmounted = 1
 
 class VenueSlider extends Component {
   constructor (props) {
     super()
-    // const reducedVenues = reduceVenuesByRegion(
-    //   props.venues,
-    //   props.venues[props.venue._id].regionId
-    // )
     this.state = {
-      // openId: props.venue._id,
-      // nextId: objectFunctions.keys.next(reducedVenues, props.venue._id),
-      // prevId: objectFunctions.keys.prev(reducedVenues, props.venue._id)
-      openIndex: 0,
-      openId: false,
-      prevId: false,
-      nextId: false,
-      reducedVenues: {}
+      sliderReady: false
     }
   }
   componentDidMount () {
-    // console.log('slider: MOUNTED:', mounted++)
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
+    this.getSliderReady(this.props)
   }
   componentWillReceiveProps (nextProps) {
-    if (!_.isEmpty(nextProps.mainMap.visibleVenuesArr) && 1 === 2) {
-      // console.log(nextProps.mainMap.visibleVenuesArr)
-      if (!this.state.openId) {
-        const venue = getVenueBySlug(
-          nextProps.mainMap.visibleVenuesArr,
-          nextProps.match.params.venueSlug
-        )
-        const nextId = objectFunctions.keys.next(
-          nextProps.mainMap.visibleVenuesArr,
-          venue._id
-        )
-        const prevId = objectFunctions.keys.prev(
-          nextProps.mainMap.visibleVenuesArr,
-          venue._id
-        )
-        this.setState((prevstate, props) => ({
-          openId: venue._id,
-          nextId,
-          prevId
-        }))
-        this.props.setUiVenueTBD(venue._id, nextId, prevId)
-      }
-    }
-    // load the venues when
-    // a) the venues are loaded AND
-    // b) the reducedVenues isn't yet set
-    // if (!_.isEmpty(nextProps.venues)) {
-    //   const reducedVenues = reduceVenuesByRegion(
-    //     nextProps.venues,
-    //     nextProps.region._id
-    //   )
-    //   if (!this.state.openId) {
-    //     const venue = getVenueBySlug(
-    //       reducedVenues,
-    //       nextProps.match.params.region
-    //     )
-    //     this.setState((prevstate, props) => ({
-    //       openId: venue._id,
-    //       nextId: objectFunctions.keys.next(reducedVenues, venue._id),
-    //       prevId: objectFunctions.keys.prev(reducedVenues, venue._id),
-    //     }))
-    //   }
-    // }
-  }
-
-  // shouldComponentUpdate (nextProps, nextState) {
-  //   if (_.isEmpty(nextProps.mainMap.visibleVenuesArr)) {
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  componentDidUpdate (prevProps, prevState) {
-    // console.log('slider: UPDATED:', updated++)
+    this.getSliderReady(nextProps)
   }
   componentWillUnmount () {
     // unset the venueUI:
-    // console.log('slider: UNMOUNTED:', unmounted++)
     this.props.unsetUiRegionVenues()
     this.props.unsetUiVenue()
     this.props.removeUiAppClass(['App--VenueSlider'])
     this.props.addUiAppClass(['App--MapPage'])
   }
+  getSliderReady = props => {
+    // check if the slider has been set already and if we have visibleVenuesArr
+    if (!this.state.sliderReady && !_.isEmpty(props.mainMap.visibleVenuesArr)) {
+      // ok, now do we have a sliderPosition?
+      if (props.ui.sliderPosition !== false) {
+        this.setState({ sliderReady: true })
+      } else {
+        // get the positon from the slug (no history because we're already here)
+        const venue = getVenueBySlug(
+          props.venues,
+          props.region.slug + '/' + props.match.params.venueSlug
+        )
+        props.fetchVenueDetail(venue._id, 'full')
+        props.setUiSliderPosition(
+          venue._id,
+          props.mainMap.visibleVenuesArr,
+          props.venues
+        )
+      }
+    }
+  }
   handleSliderBeforeChange = (prevIndex, index) => {}
 
   handleSliderChange = sliderPos => {
-    // console.log('post sliderPos:', sliderPos)
-    this.setState({ openIndex: sliderPos })
-    const {mainMap: {visibleVenuesArr: visVenues}, venues, history} = this.props
+    const {
+      mainMap: { visibleVenuesArr: visVenues },
+      venues,
+      history
+    } = this.props
     this.props.mainMap.visibleVenuesArr.forEach((venueId, index) => {
       if (index === sliderPos) {
-        this.props.setUiVenue(venues, visVenues, index, history)
+        this.props.setUiSliderPosition(venueId, visVenues, venues, history)
       }
     })
   }
@@ -116,36 +71,29 @@ class VenueSlider extends Component {
     console.log(service)
   }
   render () {
-    if (_.isEmpty(this.props.mainMap.visibleVenuesArr)) {
-      return <div>No Venues Available</div>
+    if (!this.state.sliderReady) {
+      return <div>Loading...</div>
     }
-    let slideNum = 0
-    let initialSlide = 0
-    const sliderItems = this.props.mainMap.visibleVenuesArr.map(
-      (venueId, index) => {
-        // MAKE THIS SMARTER
-        // ADD isActive={true/false}
-        // ADD isNext={true/false}
-        // ADD isPrev={true/false}
-        const venue = this.props.venues[venueId]
-        if (venue._id === this.props.ui.venueOpenId) {
-          initialSlide = index
-        }
-        return (
-          <VenueSliderItem
-            key={venue._id}
-            venueId={venue._id}
-            slideNum={slideNum++}
-            history={this.props.history}
-            regionSlug={this.props.region.slug}
-            isActive={venue._id === this.props.ui.venueOpenId}
-            isPrev={venue._id === this.props.ui.venuePrevId}
-            isNext={venue._id === this.props.ui.venueNextId}
-            index={index}
-          />
-        )
-      }
-    )
+    const { visibleVenuesArr: visVenues } = this.props.mainMap
+    const { sliderPosition } = this.props.ui
+    const prevPointer = movePointer(visVenues, sliderPosition, 'prev')
+    const nextPointer = movePointer(visVenues, sliderPosition, 'next')
+    const sliderItems = visVenues.map((venueId, index) => {
+      const venue = this.props.venues[venueId]
+      return (
+        <VenueSliderItem
+          key={venue._id}
+          venueId={venue._id}
+          slideNum={index}
+          history={this.props.history}
+          regionSlug={this.props.region.slug}
+          isActive={venue._id === visVenues[sliderPosition]}
+          isPrev={venue._id === visVenues[prevPointer]}
+          isNext={venue._id === visVenues[nextPointer]}
+          index={index}
+        />
+      )
+    })
     return (
       <div className='VenueSlider'>
         <Link to={`/${this.props.region.slug}`} className='VenueSlider__close'>
@@ -153,7 +101,7 @@ class VenueSlider extends Component {
         </Link>
         <Slider
           {...SLIDER_SETTINGS}
-          initialSlide={initialSlide}
+          initialSlide={this.props.ui.sliderPosition}
           ref='slickSlider'
           afterChange={this.handleSliderChange}
           beforeChange={this.handleSliderBeforeChange}

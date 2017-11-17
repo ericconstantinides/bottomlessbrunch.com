@@ -2,9 +2,7 @@ import constants from '../actions/types'
 import _ from 'lodash'
 
 const initialState = {
-  venueOpenId: false,
-  venueNextId: false,
-  venuePrevId: false,
+  sliderPosition: false,
   regionVenues: {},
   leftNavOpen: true,
   activeRegion: {},
@@ -17,20 +15,10 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case constants.UI_SET_VENUE:
-      return {
-        ...state,
-        venueOpenId: action.payload.openId,
-        venueNextId: action.payload.nextId,
-        venuePrevId: action.payload.prevId
-      }
-    case constants.UI_UNSET_VENUE:
-      return {
-        ...state,
-        venueOpenId: false,
-        venueNextId: false,
-        venuePrevId: false
-      }
+    case constants.UI_SET_SLIDER_POSITION:
+      return { ...state, sliderPosition: action.payload }
+    case constants.UI_UNSET_SLIDER_POSITION:
+      return { ...state, sliderPosition: false }
     case constants.UI_UNSET_REGION:
       return { ...state, activeRegion: {} }
     case constants.UI_SET_REGION_VENUES:

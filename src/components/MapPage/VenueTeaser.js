@@ -85,7 +85,6 @@ class VenueTeaser extends Component {
         <div
           regionName={regionName}
           className={`VenueTeaser__link ${altClass}__link`}
-          to={`/${venue.slug}`}
           onClick={this.props.handleVenueTeaserLinkClick(venue._id)}
         >
           <div

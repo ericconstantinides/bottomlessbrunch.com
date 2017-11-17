@@ -1,31 +1,29 @@
 import constants from '../actions/types'
-import { reduceVenuesByRegion, movePointer } from '../lib/myHelpers'
+import { reduceVenuesByRegion } from '../lib/myHelpers'
 
 export function setUiVenueTBD (openId, prevId, nextId) {
   return {
-    type: constants.UI_SET_VENUE,
+    type: constants.UI_SET_SLIDER_POSITION,
     payload: {
       openId, prevId, nextId
     }
   }
 }
 
-export function setUiVenue (venues, visVenues, currIndex, history) {
-  const nextIndex = movePointer(visVenues, currIndex, 'next')
-  const prevIndex = movePointer(visVenues, currIndex, 'prev')
-  const openId = venues[visVenues[currIndex]]._id
-  const prevId = venues[visVenues[prevIndex]]._id
-  const nextId = venues[visVenues[nextIndex]]._id
-  history.push('/' + venues[visVenues[currIndex]].slug)
+export function setUiSliderPosition (_id, visVenues, venues, history) {
+  const pointer = visVenues.indexOf(_id)
+  if (history) {
+    history.push('/' + venues[_id].slug)
+  }
   return {
-    type: constants.UI_SET_VENUE,
-    payload: { openId, prevId, nextId }
+    type: constants.UI_SET_SLIDER_POSITION,
+    payload: pointer
   }
 }
 
 export function unsetUiVenue () {
   return {
-    type: constants.UI_UNSET_VENUE,
+    type: constants.UI_UNSET_SLIDER_POSITION,
     payload: null
   }
 }
