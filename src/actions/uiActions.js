@@ -1,6 +1,13 @@
 import constants from '../actions/types'
 import { reduceVenuesByRegion } from '../lib/myHelpers'
 
+export function activateUiSite () {
+  return {
+    type: constants.UI_ACTIVATE_SITE,
+    payload: true
+  }
+}
+
 export function setUiVenueTBD (openId, prevId, nextId) {
   return {
     type: constants.UI_SET_SLIDER_POSITION,

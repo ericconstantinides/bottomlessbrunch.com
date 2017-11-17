@@ -29,11 +29,14 @@ class App extends Component {
   }
   componentWillReceiveProps (nextProps) {
     if (!_.isEmpty(nextProps.regions) && !_.isEmpty(nextProps.venues)) {
+      if (!nextProps.ui.siteReady) {
+        this.props.activateUiSite()
+      }
       if (!nextProps.mainMap.loaded) {
-        this.props.getInitialMapLocation(
-          this.props.mainMap.coords,
-          this.props.regions,
-          this.props.history
+        nextProps.getInitialMapLocation(
+          nextProps.mainMap.coords,
+          nextProps.regions,
+          nextProps.history
         )
       }
     }
@@ -132,10 +135,10 @@ class App extends Component {
             {venueSliderRoutes}
             {/* {regionRoutes} */}
             {parsedHistory[0] !== 'admin' &&
-              this.props.mainMap.loaded &&
+              this.props.mainMap.loaded && this.props.ui.siteReady &&
               <MapPage history={this.props.history} />}
             {parsedHistory[0] !== 'admin' &&
-              !this.props.mainMap.loaded &&
+              !this.props.mainMap.loaded && this.props.ui.siteReady &&
               <IntroPage history={this.props.history} />}
             {this.props.ui.regionsModalActive &&
               <RegionsModal
