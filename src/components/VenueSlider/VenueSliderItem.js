@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Star from 'react-stars'
 import { ShareButtons, generateShareIcon } from 'react-share'
 import { connect } from 'react-redux'
-import _ from 'lodash'
+// import _ from 'lodash'
 import cx from 'classnames'
 
 import * as actions from '../../actions'
