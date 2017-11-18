@@ -1,16 +1,17 @@
 /* global google */
 import constants from '../actions/types'
-import { fetchTimeout } from '../config'
+// import { fetchTimeout } from '../config'
 // let fetchNum = 1
 
-let fetchTimeoutMs = fetchTimeout * 1000 * 60
+// let fetchTimeoutMs = fetchTimeout * 1000 * 60
 
 const googlePlaces = new google.maps.places.PlacesService(
   document.createElement('div')
 )
 
 export function fetchGooglePlacesVenueDetail (venue) {
-  const { _id, googlePlacesData, gpId } = venue
+  // const { _id, googlePlacesData, gpId } = venue
+  const { _id, gpId } = venue
   // check the fetchedTime and don't refetch if fewer than fetchTimeout:
   // if (
   //   !googlePlacesData ||
