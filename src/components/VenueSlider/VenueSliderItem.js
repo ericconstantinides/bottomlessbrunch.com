@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Star from 'react-stars'
 import { ShareButtons, generateShareIcon } from 'react-share'
 import { connect } from 'react-redux'
-// import _ from 'lodash'
 import cx from 'classnames'
 
 import * as actions from '../../actions'
@@ -27,13 +26,6 @@ class VenueSliderItem extends Component {
     this.setState({ isActive: nextProps.isActive })
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    if (nextState.fetched !== this.state.fetched) {
-      return true
-    }
-    // return false
-    return true
-  }
   // componentDidUpdate (prevProps, prevState) {
   // console.log('Item: UPDATED:', updated++)
   // if (prevProps.isActive !== this.props.isActive && this.props.isActive) {
@@ -74,18 +66,12 @@ class VenueSliderItem extends Component {
         ')'
     }
     let funTimes = ''
-    if (venue.funTimes) { 
-      funTimes = compileDays(
-        venue.funTimes,
-        'Bottomless Brunch',
-        venue.name
-      )
+    if (venue.funTimes) {
+      funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     }
     const displayHood = venue.neighborhood
       ? venue.neighborhood
-      : venue.address && venue.address.city
-        ? venue.address.city
-        : ''
+      : venue.address && venue.address.city ? venue.address.city : ''
 
     const alcohol = !(venue.yMeta && venue.yMeta.alcohol)
       ? false
@@ -129,7 +115,9 @@ class VenueSliderItem extends Component {
                     {venue.googlePlacesData &&
                       venue.googlePlacesData.rating &&
                       <div className='VenueSliderItem__ratings-item'>
-                        <h3 className='VenueSliderItem__ratings-title'>Google</h3>
+                        <h3 className='VenueSliderItem__ratings-title'>
+                          Google
+                        </h3>
                         <Star
                           className='VenueSliderItem__ratings-stars'
                           size={15}
@@ -151,14 +139,15 @@ class VenueSliderItem extends Component {
                   </div>
                   <div className='VenueSliderItem__top-meta'>
                     <div className='VenueSliderItem__address'>
-                      <h3 className='VenueSliderItem__address-title'>Address</h3>
+                      <h3 className='VenueSliderItem__address-title'>
+                        Address
+                      </h3>
                       {venue.address &&
                         <p className='VenueSliderItem__address-p'>
                           {venue.address.street}<br />
                           {venue.address.city}<br />
                           {venue.phone}
-                        </p>
-                      }
+                        </p>}
                     </div>
                     <div className='VenueSliderItem__hours'>
                       <h3 className='VenueSliderItem__hours-title'>
@@ -175,7 +164,8 @@ class VenueSliderItem extends Component {
                 </div>
                 <div className='VenueSliderItem__middle'>
                   <div className='VenueSliderItem__middle-left'>
-                    {venue.yMeta && venue.yMeta.outdoorSeating &&
+                    {venue.yMeta &&
+                      venue.yMeta.outdoorSeating &&
                       <div className='VenueSliderItem__middle-meta'>
                         <h4 className='VenueSliderItem__middle-meta-title'>
                           Outside Seating
@@ -184,7 +174,8 @@ class VenueSliderItem extends Component {
                           {venue.yMeta.outdoorSeating ? 'Yes' : 'No'}
                         </p>
                       </div>}
-                    {venue.yMeta && venue.yMeta.takesReservations &&
+                    {venue.yMeta &&
+                      venue.yMeta.takesReservations &&
                       <div className='VenueSliderItem__middle-meta'>
                         <h4 className='VenueSliderItem__middle-meta-title'>
                           Takes Reservations
@@ -221,7 +212,9 @@ class VenueSliderItem extends Component {
                           </h3>
                           {funTimes.map((fun, i) => (
                             <div key={i} className='VenueSliderItem__duo'>
-                              <p className='VenueSliderItem__duo-left'>{fun.day}</p>
+                              <p className='VenueSliderItem__duo-left'>
+                                {fun.day}
+                              </p>
                               <p className='VenueSliderItem__duo-right'>
                                 {fun.startTime} - {fun.endTime}
                               </p>
@@ -279,11 +272,8 @@ class VenueSliderItem extends Component {
               <div className='VenueSliderItem__image-container'>
                 {photos}
               </div>
-            </div>
-          }
-          {!venue.name &&
-            <h1>Loading...</h1>
-          }
+            </div>}
+          {!venue.name && <h1>Loading...</h1>}
         </div>
       </article>
     )

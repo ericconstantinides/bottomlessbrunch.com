@@ -36,7 +36,7 @@ class App extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (!_.isEmpty(nextProps.regions) && !_.isEmpty(nextProps.venues)) {
-      if (!nextProps.ui.siteReady) {
+      if (!nextProps.ui.siteDataReady) {
         this.props.activateUiSite()
       }
       if (!nextProps.mainMap.loaded) {
@@ -145,11 +145,11 @@ class App extends Component {
             {/* {regionRoutes} */}
             {parsedHistory[0] !== 'admin' &&
               this.props.mainMap.loaded &&
-              this.props.ui.siteReady &&
+              this.props.ui.siteDataReady &&
               <MapPage history={this.props.history} />}
             {parsedHistory[0] !== 'admin' &&
               !this.props.mainMap.loaded &&
-              this.props.ui.siteReady &&
+              this.props.ui.siteDataReady &&
               <IntroPage history={this.props.history} />}
             {this.props.ui.regionsModalActive &&
               <RegionsModal
@@ -158,7 +158,7 @@ class App extends Component {
                 handleRegionSelect={this.handleRegionSelect}
               />}
             {parsedHistory[0] !== 'admin' &&
-              !this.props.ui.siteReady &&
+              !this.props.ui.siteDataReady &&
               <div className='Loading'>Pouring <br />Mimosas...</div>}
           </div>
         </Router>

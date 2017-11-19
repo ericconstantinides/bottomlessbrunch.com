@@ -20,7 +20,6 @@ export function fetchGooglePlacesVenueDetail (venue) {
   //     new Date()
   // ) {
   return dispatch => {
-    // console.log('fetchGooglePlacesVenueDetail:', fetchNum++)
     googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
       if (status === 'OK') {
         return dispatch(setGooglePlacesVenueDetail(_id, place))
@@ -44,8 +43,7 @@ export function cancelFetchGooglePlacesVenueDetail () {
 function setGooglePlacesVenueDetail (_id, place) {
   return {
     type: constants.VENUE_FETCH_GOOGLE_PLACES_DETAIL,
-    _id: _id,
-    payload: { ...place, fetchedTime: new Date() }
+    payload: { _id, googlePlacesData: place, fetchedTime: new Date() }
   }
 }
 

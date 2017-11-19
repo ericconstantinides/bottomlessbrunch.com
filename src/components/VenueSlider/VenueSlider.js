@@ -57,7 +57,10 @@ class VenueSlider extends Component {
   }
   handleGooglePlacesData = props => {
     // console.log('sliderPos', props.ui.sliderPosition)
-    if (props.ui.sliderPosition && props.mainMap.visibleVenuesArr) {
+    if (
+      props.ui.sliderPosition !== false &&
+      props.mainMap.visibleVenuesArr.length > 0
+    ) {
       const {
         ui: { sliderPosition: current },
         venues,
@@ -70,12 +73,20 @@ class VenueSlider extends Component {
         visVenues[current],
         visVenues[next],
         visVenues[prev]
-      ].forEach((venueId) => {
+      ].forEach(venueId => {
         if (!this.state.fetchedGData[venueId]) {
           let fetchedGData = this.state.fetchedGData
           fetchedGData[venueId] = venueId
           this.setState({ fetchedGData })
-          props.fetchGooglePlacesVenueDetail(venues[venueId])
+          if (venues[venueId].fetchedLevel !== 'full') {
+            props.fetchVenueDetail(
+              venueId,
+              'full',
+              props.fetchGooglePlacesVenueDetail
+            )
+          } else {
+            props.fetchGooglePlacesVenueDetail(venues[venueId])
+          }
           // setTimeout(() => {
           // }, (staggeredNum * 350));
           // staggeredNum++

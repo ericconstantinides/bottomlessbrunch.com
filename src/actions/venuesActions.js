@@ -21,12 +21,15 @@ export function fetchVenues (calcRegionsMeta) {
     })
   }
 }
-export function fetchVenueDetail (id, detailLevel = 'full') {
+export function fetchVenueDetail (id, detailLevel = 'full', callback) {
   return function (dispatch) {
     axios
       .get(`${ROOT_URL}/api/v1/venues/${id}?detailLevel=${detailLevel}`)
       .then(response => {
         response.data.fetchedLevel = detailLevel
+        if (callback) {
+          callback(response.data)
+        }
         dispatch({
           type: constants.VENUE_FETCH_DETAIL,
           payload: response.data

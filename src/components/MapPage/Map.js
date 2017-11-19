@@ -210,13 +210,10 @@ class Map extends Component {
     if (!(this.props.mainMap && this.props.mainMap.coords)) {
       return <div>Loading...</div>
     }
-    const center = this.props.mainMap.coords.center
-      ? this.props.mainMap.coords.center
-      : { lat: 38.1510752, lng: -95.8457796 }
     return (
       <GoogleMapReact
         zoom={this.props.mainMap.coords.zoom}
-        center={center}
+        center={this.props.mainMap.coords.center}
         options={{
           fullscreenControl: false,
           zoomControl: false,
