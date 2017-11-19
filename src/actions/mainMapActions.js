@@ -45,14 +45,10 @@ export function setMainMap (coords) {
 
 export function setMainMapByRegion (region, coords, drawer) {
   // get the width and height if it's not known yet:
-  coords.size.width = coords.size.width === 0
-    ? window.innerWidth
-    : coords.size.width
-  coords.size.height = coords.size.height === 0
-    ? window.innerHeight
-    : coords.size.height
+  coords.size.width = drawer.brwsrWidth
+  coords.size.height = drawer.brwsrHeight
 
-  const fitted = getViewportOffset(region.bounds, coords.size, drawer)
+  const fitted = getViewportOffset(region.bounds, drawer)
   const newCoords = { ...coords, ...fitted }
 
   window.localStorage.setItem('mainMap', JSON.stringify(coords))

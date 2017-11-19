@@ -363,8 +363,8 @@ export function getDrawerSize (brwsrWidth, brwsrHeight) {
  * @param {object} size: browser width and height
  * @returns { { lat, lng, zoom } } mapCenter
  */
-export function getViewportOffset (bounds, browserSize, drawer) {
-  const { width: brwsrWidth, height: brwsrHeight } = browserSize
+export function getViewportOffset (bounds, drawer) {
+  const { brwsrWidth, brwsrHeight } = drawer
 
   // figure out the visible hole you're putting the area into:
   const visibleWidth = brwsrWidth - drawer.offset_left - drawer.offset_right
