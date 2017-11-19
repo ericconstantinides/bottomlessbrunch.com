@@ -11,7 +11,8 @@ class Region extends Component {
     if (this.props.mainMap && this.props.mainMap.coords) {
       this.props.setMainMapByRegion(
         this.props.region,
-        this.props.mainMap.coords
+        this.props.mainMap.coords,
+        this.props.ui.drawer
       )
     }
   }

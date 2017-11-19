@@ -5,7 +5,6 @@ import {
   getViewportOffset,
   getMarginBounds,
   getRegionByPath,
-  getDrawerSize,
   parsePath
 } from '../lib/myHelpers'
 
@@ -18,10 +17,10 @@ import {
 
 // I will get the slug from the path and also the storage to figure
 // out the initial map state:
-export function getInitialMapLocation (coords, regions, history) {
+export function getInitialMapLocation (coords, regions, history, drawer) {
   const region = getRegionByPath(regions, history.location.pathname)
   if (region) {
-    return setMainMapByRegion(region, coords)
+    return setMainMapByRegion(region, coords, drawer)
   }
   const mainMapCoords = window.localStorage.getItem('mainMap')
   if (!mainMapCoords) return unsetMainMap()
@@ -44,7 +43,7 @@ export function setMainMap (coords) {
   }
 }
 
-export function setMainMapByRegion (region, coords) {
+export function setMainMapByRegion (region, coords, drawer) {
   // get the width and height if it's not known yet:
   coords.size.width = coords.size.width === 0
     ? window.innerWidth
@@ -53,7 +52,7 @@ export function setMainMapByRegion (region, coords) {
     ? window.innerHeight
     : coords.size.height
 
-  const fitted = getViewportOffset(region.bounds, coords.size)
+  const fitted = getViewportOffset(region.bounds, coords.size, drawer)
   const newCoords = { ...coords, ...fitted }
 
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
@@ -83,9 +82,9 @@ export function getMainMapVisibleVenues (
   regions,
   coords,
   fetchVenueDetail,
-  history
+  history,
+  drawer
 ) {
-  const drawer = getDrawerSize(coords.size.width, coords.size.height)
   const parsedPath = parsePath(history.location.pathname)
   let regionTitle = 'Choose Region'
   if (coords.zoom >= drawer.show_venues_zoom_level) {

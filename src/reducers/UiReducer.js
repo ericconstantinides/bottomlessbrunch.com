@@ -7,6 +7,7 @@ const initialState = {
   leftNavOpen: true,
   activeRegion: {},
   siteReady: false,
+  drawer: {},
   // appClass possible values are:
   // [introPage, mapPage, venue, admin, adminVenue, adminRegion, regionModal]
   appClass: [],
@@ -18,6 +19,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case constants.UI_ACTIVATE_SITE:
       return { ...state, siteReady: true }
+    case constants.UI_SET_DRAWER:
+      return { ...state, drawer: action.payload }
     case constants.UI_SET_SLIDER_POSITION:
       return { ...state, sliderPosition: action.payload }
     case constants.UI_UNSET_SLIDER_POSITION:

@@ -1,5 +1,5 @@
 import constants from '../actions/types'
-import { reduceVenuesByRegion } from '../lib/myHelpers'
+import { reduceVenuesByRegion, getDrawerSize } from '../lib/myHelpers'
 
 export function activateUiSite () {
   return {
@@ -8,11 +8,25 @@ export function activateUiSite () {
   }
 }
 
+export function setDrawer () {
+  const { innerWidth: brwsrWidth, innerHeight: brwsrHeight } = window
+  return {
+    type: constants.UI_SET_DRAWER,
+    payload: {
+      ...getDrawerSize(brwsrWidth, brwsrHeight),
+      brwsrWidth,
+      brwsrHeight
+    }
+  }
+}
+
 export function setUiVenueTBD (openId, prevId, nextId) {
   return {
     type: constants.UI_SET_SLIDER_POSITION,
     payload: {
-      openId, prevId, nextId
+      openId,
+      prevId,
+      nextId
     }
   }
 }

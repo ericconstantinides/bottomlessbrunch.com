@@ -19,7 +19,8 @@ class IntroPage extends Component {
     // go to the region's coords (and then coords will set the slug)
     this.props.setMainMapByRegion(
       this.props.regions[_id],
-      this.props.mainMap.coords
+      this.props.mainMap.coords,
+      this.props.ui.drawer
     )
     this.props.hideUiRegionsModal()
   }

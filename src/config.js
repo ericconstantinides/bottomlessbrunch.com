@@ -51,6 +51,7 @@ export const BRUNCH_TIMES = {
 
 export const DRAWER = {
   sm: {
+    name: 'sm',
     bp_starts: 0,
     bp_ends: 767,
     offset_top: 56,
@@ -64,6 +65,7 @@ export const DRAWER = {
     show_venues_zoom_level: 9
   },
   md: {
+    name: 'md',
     bp_starts: 768,
     bp_ends: 900,
     offset_top: 0,
@@ -77,6 +79,7 @@ export const DRAWER = {
     show_venues_zoom_level: 10
   },
   lg: {
+    name: 'lg',
     bp_starts: 901,
     bp_ends: 99999,
     offset_top: 0,

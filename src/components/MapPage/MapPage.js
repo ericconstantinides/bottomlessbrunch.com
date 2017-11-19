@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import * as viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 import _ from 'lodash'
 import cx from 'classnames'
 
 import * as actions from '../../actions'
-import { DRAWER } from '../../config'
 
 import SiteHeader from '../common/SiteHeader'
 import Map from './Map'
@@ -21,7 +19,6 @@ class MapPage extends Component {
   componentDidMount () {
     this.props.addUiAppClass(['App--MapPage'])
     window.addEventListener('scroll', this.handleScroll)
-    // viewportUnitsBuggyfill.init()
   }
   componentWillUnmount () {
     this.props.removeUiAppClass(['App--MapPage'])
@@ -35,12 +32,12 @@ class MapPage extends Component {
     this.props.history.push('/')
   }
   handleMouseOver = venue => event => {
-    if (this.props.mainMap.coords.size.width > DRAWER.sm.bp_ends) {
+    if (this.props.ui.drawer.name !== 'sm') {
       this.setState({ hoveredVenue: venue._id })
     }
   }
   handleMouseLeave = venue => event => {
-    if (this.props.mainMap.coords.size.width > DRAWER.sm.bp_ends) {
+    if (this.props.ui.drawer.name !== 'sm') {
       this.setState({ hoveredVenue: '' })
     }
   }
@@ -66,7 +63,8 @@ class MapPage extends Component {
     // go to the region's coords (and then coords will set the slug)
     this.props.setMainMapByRegion(
       this.props.regions[_id],
-      this.props.mainMap.coords
+      this.props.mainMap.coords,
+      this.props.ui.drawer
     )
     // this.props.hideUiResetRegion()
     this.props.hideUiRegionsModal()

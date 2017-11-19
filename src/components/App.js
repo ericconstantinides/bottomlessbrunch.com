@@ -26,7 +26,14 @@ class App extends Component {
     this.props.fetchRegions()
     this.props.fetchVenues(this.props.calcRegionsMeta)
     this.props.fetchEnvironment()
+
+    this.props.setDrawer()
+    window.addEventListener(
+      'resize',
+      _.debounce(() => this.props.setDrawer(), 250)
+    )
   }
+
   componentWillReceiveProps (nextProps) {
     if (!_.isEmpty(nextProps.regions) && !_.isEmpty(nextProps.venues)) {
       if (!nextProps.ui.siteReady) {
@@ -36,12 +43,13 @@ class App extends Component {
         nextProps.getInitialMapLocation(
           nextProps.mainMap.coords,
           nextProps.regions,
-          nextProps.history
+          nextProps.history,
+          nextProps.ui.drawer
         )
       }
     }
   }
-  
+
   // shouldComponentUpdate (nextProps, nextState) {
   //   console.log(rendered++)
   //   if (rendered <= 10) {
@@ -72,7 +80,8 @@ class App extends Component {
     // go to the region's coords (and then coords will set the slug)
     this.props.setMainMapByRegion(
       this.props.regions[_id],
-      this.props.mainMap.coords
+      this.props.mainMap.coords,
+      this.props.ui.drawer
     )
     this.props.hideUiRegionsModal()
   }
@@ -135,10 +144,12 @@ class App extends Component {
             {venueSliderRoutes}
             {/* {regionRoutes} */}
             {parsedHistory[0] !== 'admin' &&
-              this.props.mainMap.loaded && this.props.ui.siteReady &&
+              this.props.mainMap.loaded &&
+              this.props.ui.siteReady &&
               <MapPage history={this.props.history} />}
             {parsedHistory[0] !== 'admin' &&
-              !this.props.mainMap.loaded && this.props.ui.siteReady &&
+              !this.props.mainMap.loaded &&
+              this.props.ui.siteReady &&
               <IntroPage history={this.props.history} />}
             {this.props.ui.regionsModalActive &&
               <RegionsModal
@@ -146,9 +157,9 @@ class App extends Component {
                 handleCloseRegionsModalClick={this.handleCloseRegionsModalClick}
                 handleRegionSelect={this.handleRegionSelect}
               />}
-            {parsedHistory[0] !== 'admin' && !this.props.ui.siteReady &&
-              <div className='Loading'>Pouring <br/>Mimosas...</div>
-            }
+            {parsedHistory[0] !== 'admin' &&
+              !this.props.ui.siteReady &&
+              <div className='Loading'>Pouring <br />Mimosas...</div>}
           </div>
         </Router>
       </div>

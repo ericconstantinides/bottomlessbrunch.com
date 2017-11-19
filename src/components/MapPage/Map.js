@@ -29,7 +29,8 @@ class Map extends Component {
         nextProps.regions,
         nextProps.mainMap.coords,
         nextProps.fetchVenueDetail,
-        nextProps.history
+        nextProps.history,
+        nextProps.ui.drawer
       )
     }
   }
