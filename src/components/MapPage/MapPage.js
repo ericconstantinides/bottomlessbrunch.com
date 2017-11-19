@@ -19,15 +19,13 @@ class MapPage extends Component {
     }
   }
   componentDidMount () {
-    document.documentElement.classList.add('html--MapPage')
-    document.body.classList.add('body--MapPage')
     this.props.addUiAppClass(['App--MapPage'])
+    window.addEventListener('scroll', this.handleScroll)
     // viewportUnitsBuggyfill.init()
   }
   componentWillUnmount () {
-    document.documentElement.classList.remove('html--MapPage')
-    document.body.classList.remove('body--MapPage')
     this.props.removeUiAppClass(['App--MapPage'])
+    window.removeEventListener('scroll', this.handleScroll)
   }
   handleRegionsModalClick = () => {
     this.props.showUiRegionsModal()
@@ -58,11 +56,11 @@ class MapPage extends Component {
     this.setState({ hoveredVenue: '' })
   }
   handleScroll = e => {
-    const { dragItem, linkedDragItem, linkedDragItemInner } = this.refs
-    const { scrollTop } = dragItem
-    linkedDragItem.style.transform = 'translate3d(0,' + -scrollTop + 'px, 0)'
-    linkedDragItemInner.style.transform =
-      'translate3d(0,' + scrollTop / 2 + 'px, 0)'
+    window.requestAnimationFrame(this.scrollLoop)
+  }
+  scrollLoop = () => {
+    this.refs.linkedDragItem.style.transform =
+      'translate3d(0,' + window.scrollY / 2 + 'px, 0)'
   }
   handleRegionSelect = _id => event => {
     // go to the region's coords (and then coords will set the slug)
@@ -101,11 +99,7 @@ class MapPage extends Component {
           handleRegionSelect={this.handleRegionSelect}
           regionResetButton={this.props.ui.regionResetButton}
         />
-        <div
-          className='MapPage__inner'
-          ref='dragItem'
-          onScroll={this.handleScroll}
-        >
+        <div className='MapPage__inner'>
           <div className='MapPage__Map-container' ref='linkedDragItem'>
             <div
               className='MapPage__Map-inner-container'
@@ -135,7 +129,6 @@ class MapPage extends Component {
               handleMouseLeave={this.handleMouseLeave}
               toggleMarkerClick={this.toggleMarkerClick}
               hoveredVenue={this.state.hoveredVenue}
-              dragState={this.state.dragItemPressed}
               handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
             />}
         </div>

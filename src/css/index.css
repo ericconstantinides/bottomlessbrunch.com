@@ -519,7 +519,8 @@ a * {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0; }
+  left: 0;
+  text-align: center; }
 
 /*
  * Site Header
@@ -2342,16 +2343,16 @@ a * {
       padding-left: 2rem;
       padding-right: 2rem; } }
 
-html.html--MapPage,
-body.body--MapPage {
+html.html--VenueSlider,
+body.body--VenueSlider {
   position: fixed;
   overflow: hidden; }
 
-html.html--MapPage,
-body.body--MapPage,
-body.body--MapPage #root,
-.App--MapPage,
-.MapPage {
+html.html--VenueSlider,
+body.body--VenueSlider,
+body.body--VenueSlider #root,
+.App--VenueSlider,
+.App--VenueSlider .VenueSlider {
   display: flex;
   flex-flow: column;
   flex: 1;
@@ -2360,6 +2361,9 @@ body.body--MapPage #root,
 .MapPage {
   height: 100vh;
   width: 100vw;
+  position: relative; }
+
+.MapPage {
   position: relative; }
 
 .MapPage__Map-container {
@@ -2443,7 +2447,6 @@ body.body--MapPage #root,
   top: -115px;
   width: 200px;
   flex-flow: column;
-  background: white;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1); }
 
 .MapItem__pointer:before, .MapItem__pointer:after {
@@ -2520,12 +2523,15 @@ body.body--MapPage #root,
  */
 .VenueListItem {
   display: block;
-  margin: 0 0.5em;
-  background: white; }
-  .VenueListItem:first-child .VenueListItem__inner {
-    margin-top: 0; }
-  .VenueListItem:last-child .VenueListItem__inner {
+  margin: 0 0.5em 0.5em; }
+  .VenueListItem:last-child {
     margin-bottom: 0; }
+
+.VenueListItem,
+.MapItem__inner {
+  background: white;
+  border-radius: 4px;
+  overflow: hidden; }
 
 .VenueTeaser__link {
   cursor: pointer; }
@@ -2535,7 +2541,6 @@ body.body--MapPage #root,
 
 .VenueListItem__inner {
   display: flex;
-  margin-bottom: 0.5em;
   transition: 0.15s; }
   .VenueListItem__inner:hover {
     background-color: whitesmoke; }
@@ -2651,10 +2656,6 @@ body.body--MapPage #root,
 @media only screen and (max-width: 767px) {
   .MapPage {
     display: block; }
-  .MapPage__inner {
-    height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch; }
   .MapPage__Map-container {
     height: 100%;
     bottom: auto;
@@ -2663,6 +2664,8 @@ body.body--MapPage #root,
       height: 100vh; }
   .MapPage__VenueList--width {
     width: 100%; }
+  .VenueList {
+    border-radius: 4px 4px 0 0; }
   .VenueList__spacer {
     height: calc(100vh - 200px);
     width: 1px; } }
