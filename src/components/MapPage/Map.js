@@ -219,6 +219,7 @@ class Map extends Component {
         options={{
           fullscreenControl: false,
           zoomControl: false,
+          gestureHandling: 'greedy',
           styles: mapStyle
         }}
         onChange={this.handleMapChange}

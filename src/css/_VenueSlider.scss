@@ -87,7 +87,7 @@ $venueSliderItemSidePadding: 2vw;
   > *:first-child { margin-top: auto; }
   > *:last-child { margin-bottom: auto; }
 }
-@for $i from 0 through 50 { // make a big number just in case
+@for $i from 0 through 75 { // make a big number just in case
   .VenueSlider [currentslide='#{$i}'] + .slick-list .slideNum-#{$i} {
     .VenueSliderItem__inner {
       background-color: rgba(black, 0.65);
@@ -281,6 +281,9 @@ $venueSliderItemSidePadding: 2vw;
 
 // MOBILE:
 @media only screen and (max-width: $bp-medium-small) {
+  .VenueSliderItem__inner {
+    padding: 0;
+  }
   .VenueSliderItem__middle {
     flex-flow: column;
     align-items: center;
