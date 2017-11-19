@@ -38,12 +38,13 @@ class VenueTeaser extends Component {
     ) {
       // We set Positioning now:
       const elPos = this.domVenue.getBoundingClientRect()
-      const { size } = this.props
-      const teaserSide = elPos.right > size.width ? 'left' : 'right'
-      const offVert = elPos.top < 0
-        ? elPos.top * -1 + offsetPadding
-        : elPos.bottom > size.height
-            ? (elPos.bottom - size.height + offsetPadding) * -1
+      const { offset_top: offsetTop, offset_bottom: offsetBottom, brwsrHeight, brwsrWidth } = this.props.drawer
+      const newBottom = brwsrHeight - offsetBottom
+      const teaserSide = elPos.right > brwsrWidth ? 'left' : 'right'
+      const offVert = elPos.top < offsetTop
+        ? elPos.top * -1 + offsetTop + offsetPadding
+        : elPos.bottom > newBottom
+            ? (elPos.bottom - newBottom + offsetPadding) * -1
             : 0
       this.setState({ offVert, teaserSide, isPositioned: true })
     }

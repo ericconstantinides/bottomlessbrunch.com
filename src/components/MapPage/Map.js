@@ -77,7 +77,6 @@ class Map extends Component {
             {...venue}
             lat={venue.lat}
             lng={venue.lng}
-            size={this.props.mainMap.coords.size}
             handleMouseOver={this.props.handleMouseOver}
             handleMouseLeave={this.props.handleMouseLeave}
             toggleMarkerClick={this.props.toggleMarkerClick}
@@ -85,6 +84,7 @@ class Map extends Component {
             venue={venue}
             regionSlug={this.props.regions[venue.regionId].slug}
             handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
+            drawer={this.props.ui.drawer}
           />
         )
       }
