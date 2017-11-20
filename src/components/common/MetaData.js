@@ -20,16 +20,16 @@ const MetaData = ({
   } else {
     const venueName = activeVenue && venues ? venues[activeVenue].name : ''
     pageTitle = activeRegion && activeVenue
-      ? `${venueName} in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch` // venue
+      ? `${venueName} in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch & Mimosas` // venue
       : activeRegion
-          ? `${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch & Bottomless Mimosas` // region
+          ? `The ${regions[activeRegion].venuesAvailable} best places in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch & Mimosas` // region
           : `${SITE_NAME}: ${SITE_SLOGAN}` // homepage
   }
   let description
   if (activeRegion && activeVenue) {
-    description = `Check out {$activeVenue} in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch and Mimosas`
+    description = `Check out {$activeVenue} in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch & Mimosas`
   } else if (activeRegion) {
-    description = `Check out these ${regions[activeRegion].venuesAvailable} restaurants and bars in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch and Mimosas`
+    description = `Check out these ${regions[activeRegion].venuesAvailable} restaurants and bars in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch & Mimosas`
   } else {
     description =
       'Check out Bottomless Brunch. Your guide to all the best Bottomless Mimosas and everything in between'
