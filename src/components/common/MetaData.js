@@ -27,9 +27,9 @@ const MetaData = ({
   }
   let description
   if (activeRegion && activeVenue) {
-    description = `Check out {$activeVenue} in ${regions[activeRegion].name}`
+    description = `Check out {$activeVenue} in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch and Mimosas`
   } else if (activeRegion) {
-    description = `Check out these ${regions[activeRegion].venuesAvailable} restaurants and bars for Bottomless Brunch and Mimosas in ${regions[activeRegion].name}, ${regions[activeRegion].state}`
+    description = `Check out these ${regions[activeRegion].venuesAvailable} restaurants and bars in ${regions[activeRegion].name}, ${regions[activeRegion].state} for Bottomless Brunch and Mimosas`
   } else {
     description =
       'Check out Bottomless Brunch. Your guide to all the best Bottomless Mimosas and everything in between'
