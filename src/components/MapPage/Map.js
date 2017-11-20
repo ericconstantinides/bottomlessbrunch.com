@@ -22,19 +22,26 @@ const MBounder = props => {
 }
 
 class Map extends Component {
+  // componentDidMount () {
+    // running this here is too early because it screws up the sliderPosition
+    // this.handleGettingVisibleVenues(this.props)
+  // }
   componentWillReceiveProps (nextProps) {
     if (!_.isEqual(this.props.mainMap.coords, nextProps.mainMap.coords)) {
-      nextProps.getMainMapVisibleVenues(
-        nextProps.venues,
-        nextProps.regions,
-        nextProps.mainMap.coords,
-        nextProps.fetchVenueDetail,
-        nextProps.history,
-        nextProps.ui.drawer
-      )
+      this.handleGettingVisibleVenues(nextProps)
     }
   }
-
+  handleGettingVisibleVenues = props => {
+    props.getMainMapVisibleVenues(
+      props.venues,
+      props.regions,
+      props.mainMap.coords,
+      props.fetchVenueDetail,
+      props.history,
+      props.ui.drawer,
+      props.setUiActiveRegion
+    )
+  }
   handleMapChange = coords => {
     // update the maps size if the coords size has changed:
     if (!_.isEqual(this.props.mainMap.coords.size, coords.size)) {

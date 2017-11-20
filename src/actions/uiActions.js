@@ -20,6 +20,13 @@ export function setDrawer () {
   }
 }
 
+export function setUiActiveRegion (regionId) {
+  return {
+    type: constants.UI_SET_ACTIVE_REGION,
+    payload: regionId
+  }
+}
+
 export function setUiVenueSliderPosition (_id, visVenues, venues, history) {
   const pointer = visVenues.indexOf(_id)
   if (history) {
@@ -27,6 +34,7 @@ export function setUiVenueSliderPosition (_id, visVenues, venues, history) {
   }
   return {
     type: constants.UI_SET_VENUE_SLIDER_POINTER,
+    _id,
     payload: pointer
   }
 }

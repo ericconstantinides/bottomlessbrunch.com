@@ -79,7 +79,8 @@ export function getMainMapVisibleVenues (
   coords,
   fetchVenueDetail,
   history,
-  drawer
+  drawer,
+  setUiActiveRegion
 ) {
   const parsedPath = parsePath(history.location.pathname)
   let regionTitle = 'Choose Region'
@@ -138,6 +139,7 @@ export function getMainMapVisibleVenues (
           }
         } else {
           // NO REGION:
+          setUiActiveRegion(false)
           if (history.location.pathname !== '/') {
             history.replace('/')
           }
@@ -157,6 +159,7 @@ export function getMainMapVisibleVenues (
         ) {
           // PARTIAL SINGLE REGION:
           const slug = regions[visibleRegionsObj[keys[0]]._id].slug
+          setUiActiveRegion(visibleRegionsObj[keys[0]]._id)
           if (parsedPath.length <= 1 && parsedPath[0] !== slug) {
             history.push(slug)
           }
@@ -165,6 +168,7 @@ export function getMainMapVisibleVenues (
         } else {
           // FULL SINGLE REGION:
           const slug = regions[visibleRegionsObj[keys[0]]._id].slug
+          setUiActiveRegion(visibleRegionsObj[keys[0]]._id)
           if (parsedPath.length <= 1 && parsedPath[0] !== slug) {
             history.push(slug)
           }
@@ -174,6 +178,7 @@ export function getMainMapVisibleVenues (
         }
       } else {
         // MULTIPLE REGIONS
+        setUiActiveRegion(false)
         if (parsedPath.length === 1) {
           history.replace('/')
         }
@@ -194,6 +199,7 @@ export function getMainMapVisibleVenues (
       }
     }
   } else {
+    setUiActiveRegion(false)
     if (history.location.pathname !== '/') {
       history.replace('/')
     }

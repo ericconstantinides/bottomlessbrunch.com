@@ -3,9 +3,9 @@ import _ from 'lodash'
 
 const initialState = {
   sliderPosition: false,
-  regionVenues: {},
   leftNavOpen: true,
-  activeRegion: {},
+  activeRegion: false,
+  activeVenue: false,
   siteDataReady: false,
   drawer: {},
   // appClass possible values are:
@@ -21,10 +21,12 @@ export default function (state = initialState, action) {
       return { ...state, siteDataReady: true }
     case constants.UI_SET_DRAWER:
       return { ...state, drawer: action.payload }
+    case constants.UI_SET_ACTIVE_REGION:
+      return { ...state, activeRegion: action.payload }
     case constants.UI_SET_VENUE_SLIDER_POINTER:
-      return { ...state, sliderPosition: action.payload }
+      return {...state, sliderPosition: action.payload, activeVenue: action._id}
     case constants.UI_UNSET_VENUE_SLIDER_POINTER:
-      return { ...state, sliderPosition: false }
+      return { ...state, sliderPosition: false, activeVenue: false }
     case constants.UI_SHOW_REGIONS_MODAL:
       return { ...state, regionsModalActive: true }
     case constants.UI_HIDE_REGIONS_MODAL:

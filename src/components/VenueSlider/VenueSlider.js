@@ -21,7 +21,7 @@ class VenueSlider extends Component {
   componentDidMount () {
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
-    this.getVenueSliderReady(this.props)
+    // this.getVenueSliderReady(this.props)
     // this.handleGooglePlacesData(this.props)
   }
   componentWillReceiveProps (nextProps) {
@@ -54,8 +54,8 @@ class VenueSlider extends Component {
     }
   }
   handleGooglePlacesData = props => {
-    // console.log('sliderPos', props.ui.sliderPosition)
     if (
+      props.ui.activeRegion &&
       props.ui.sliderPosition !== false &&
       props.mainMap.visibleVenuesArr.length > 0
     ) {

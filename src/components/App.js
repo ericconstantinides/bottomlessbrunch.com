@@ -131,8 +131,11 @@ class App extends Component {
       <div className={cx('App', this.props.ui.appClass)}>
         <MetaData
           venues={this.props.venues}
+          regions={this.props.regions}
           path={this.props.history.location.pathname}
+          activeRegion={this.props.ui.activeRegion}
           {...this.props.ui}
+          activeVenue={this.props.ui.activeVenue}
         />
         <Router history={this.props.history}>
           <div>

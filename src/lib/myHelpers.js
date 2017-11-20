@@ -355,7 +355,7 @@ export function getDrawerSize (brwsrWidth, brwsrHeight) {
 }
 
 /**
- * getRegionCoordsByViewport returns a revised mapCenter (lat, lng, zoom)
+ * getViewportOffset returns a revised mapCenter (lat, lng, zoom)
  * taking into account the drawer (if any), sidebar, and viewport
  *
  * @export
