@@ -77,6 +77,11 @@ class App extends Component {
     })
   } */
   handleRegionSelect = _id => event => {
+    // if we have an active region, kill it first:
+    if (this.props.ui.activeVenue) {
+      this.props.unsetUiVenueSliderPosition()
+      this.props.history.replace('/')
+    }
     // go to the region's coords (and then coords will set the slug)
     this.props.setMainMapByRegion(
       this.props.regions[_id],
@@ -102,7 +107,7 @@ class App extends Component {
     //   ))
     // }
     let venueSliderRoutes
-    if (!_.isEmpty(this.props.regions)) {
+    if (this.props.ui.siteDataReady) {
       venueSliderRoutes = _.chain(this.props.regions)
         // only choose regions which have bounds
         // (regions with venues are the only ones with bounds)
