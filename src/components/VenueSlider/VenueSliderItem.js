@@ -146,7 +146,8 @@ class VenueSliderItem extends Component {
                         <p className='VenueSliderItem__address-p'>
                           {venue.address.street}<br />
                           {venue.address.city}<br />
-                          {venue.phone}
+                          {venue.phone}<br />
+                          <a className='u-mt-1 button button--orange-black is-smaller' href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(venue.name)}&destination_place_id=${venue.gpId}`} target='_blank'>Get Directions</a>
                         </p>}
                     </div>
                     <div className='VenueSliderItem__hours'>
