@@ -55,7 +55,7 @@ class VenueSlider extends Component {
   }
   handleGooglePlacesData = props => {
     if (
-      props.ui.activeRegion &&
+      props.ui.siteDataReady &&
       props.ui.sliderPosition !== false &&
       props.mainMap.visibleVenuesArr.length > 0
     ) {
