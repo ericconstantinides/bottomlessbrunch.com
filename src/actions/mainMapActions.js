@@ -8,24 +8,18 @@ import {
   parsePath
 } from '../lib/myHelpers'
 
-// export function initMainMap (regions, history) {
-//   return {
-//     type: constants.MAIN_MAP_SET,
-//     payload: JSON.parse(mainMapCoords)
-//   }
-// }
-
 // I will get the slug from the path and also the storage to figure
 // out the initial map state:
 export function getInitialMapLocation (coords, regions, history, drawer) {
   const region = getRegionByPath(regions, history.location.pathname)
   if (region) {
-    return setMainMapByRegion(region, coords, drawer)
+    return setMainMapByRegion(region, coords, drawer, 'path')
   }
   const mainMapCoords = window.localStorage.getItem('mainMap')
   if (!mainMapCoords) return unsetMainMap()
   return {
-    type: constants.MAIN_MAP_SET,
+    type: constants.MAIN_MAP_INITIAL_SET,
+    initialCoordsFrom: 'storage',
     payload: JSON.parse(mainMapCoords)
   }
 }
@@ -43,7 +37,7 @@ export function setMainMap (coords) {
   }
 }
 
-export function setMainMapByRegion (region, coords, drawer) {
+export function setMainMapByRegion (region, coords, drawer, initialCoordsFrom) {
   // get the width and height if it's not known yet:
   coords.size.width = drawer.brwsrWidth
   coords.size.height = drawer.brwsrHeight
@@ -52,6 +46,13 @@ export function setMainMapByRegion (region, coords, drawer) {
   const newCoords = { ...coords, ...fitted }
 
   window.localStorage.setItem('mainMap', JSON.stringify(coords))
+  if (initialCoordsFrom) {
+    return {
+      type: constants.MAIN_MAP_INITIAL_SET,
+      initialCoordsFrom: 'path',
+      payload: newCoords
+    }
+  }
   return {
     type: constants.MAIN_MAP_SET,
     payload: newCoords

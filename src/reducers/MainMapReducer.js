@@ -4,6 +4,7 @@ import { USA_MAP_COORDS } from '../config'
 const initialState = {
   coords: USA_MAP_COORDS,
   loaded: false,
+  initialCoordsFrom: false,
   visibleVenuesArr: [],
   visibleRegionsObj: {},
   regionTitle: '',
@@ -12,6 +13,8 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case constants.MAIN_MAP_INITIAL_SET:
+      return { ...state, coords: action.payload, loaded: true, initialCoordsFrom: action.initialCoordsFrom }
     case constants.MAIN_MAP_SET:
       return { ...state, coords: action.payload, loaded: true }
     case constants.MAIN_MAP_UNSET:

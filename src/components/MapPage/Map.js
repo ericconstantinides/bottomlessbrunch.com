@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
 import * as actions from '../../actions'
-import { closeEnough, parsePath } from '../../lib/myHelpers'
+import { closeEnough } from '../../lib/myHelpers'
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
 import VenueTeaser from './VenueTeaser'
@@ -22,27 +22,23 @@ const MBounder = props => {
 }
 
 class Map extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      initialFetch: false
+    }
+  }
+
   componentDidMount () {
-    if (this.props.ui.siteDataReady && parsePath(this.props.history.location.pathname).length <= 1 ) {
-      // Only run this if we're not in a venue sliderPosition
+    if (this.props.mainMap.initialCoordsFrom === 'storage') {
       this.handleGettingVisibleVenues(this.props)
     }
   }
+  
   componentWillReceiveProps (nextProps) {
     if (!_.isEqual(this.props.mainMap.coords, nextProps.mainMap.coords)) {
       this.handleGettingVisibleVenues(nextProps)
     }
-  }
-  handleGettingVisibleVenues = props => {
-    props.getMainMapVisibleVenues(
-      props.venues,
-      props.regions,
-      props.mainMap.coords,
-      props.fetchVenueDetail,
-      props.history,
-      props.ui.drawer,
-      props.setUiActiveRegion
-    )
   }
   handleMapChange = coords => {
     // update the maps size if the coords size has changed:
@@ -60,6 +56,17 @@ class Map extends Component {
       this.props.showUiResetRegion()
     }
     this.props.setMainMap(coords)
+  }
+  handleGettingVisibleVenues = props => {
+    props.getMainMapVisibleVenues(
+      props.venues,
+      props.regions,
+      props.mainMap.coords,
+      props.fetchVenueDetail,
+      props.history,
+      props.ui.drawer,
+      props.setUiActiveRegion
+    )
   }
   handleMapClick = props => {
     // props = {x, y, lat, lng, event}
