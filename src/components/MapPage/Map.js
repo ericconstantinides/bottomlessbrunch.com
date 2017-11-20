@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
 import * as actions from '../../actions'
-import { closeEnough } from '../../lib/myHelpers'
+import { closeEnough, parsePath } from '../../lib/myHelpers'
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
 import VenueTeaser from './VenueTeaser'
@@ -22,10 +22,12 @@ const MBounder = props => {
 }
 
 class Map extends Component {
-  // componentDidMount () {
-    // running this here is too early because it screws up the sliderPosition
-    // this.handleGettingVisibleVenues(this.props)
-  // }
+  componentDidMount () {
+    if (this.props.ui.siteDataReady && parsePath(this.props.history.location.pathname).length <= 1 ) {
+      // Only run this if we're not in a venue sliderPosition
+      this.handleGettingVisibleVenues(this.props)
+    }
+  }
   componentWillReceiveProps (nextProps) {
     if (!_.isEqual(this.props.mainMap.coords, nextProps.mainMap.coords)) {
       this.handleGettingVisibleVenues(nextProps)
