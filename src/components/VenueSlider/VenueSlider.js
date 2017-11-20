@@ -21,21 +21,19 @@ class VenueSlider extends Component {
   componentDidMount () {
     this.props.removeUiAppClass(['App--MapPage'])
     this.props.addUiAppClass(['App--VenueSlider'])
-    this.getSliderReady(this.props)
+    this.getVenueSliderReady(this.props)
     // this.handleGooglePlacesData(this.props)
   }
   componentWillReceiveProps (nextProps) {
-    this.getSliderReady(nextProps)
+    this.getVenueSliderReady(nextProps)
     this.handleGooglePlacesData(nextProps)
   }
   componentWillUnmount () {
-    // unset the venueUI:
-    this.props.unsetUiRegionVenues()
-    this.props.unsetUiVenue()
+    this.props.unsetUiVenueSliderPosition()
     this.props.removeUiAppClass(['App--VenueSlider'])
     this.props.addUiAppClass(['App--MapPage'])
   }
-  getSliderReady = props => {
+  getVenueSliderReady = props => {
     // check if the slider has been set already and if we have visibleVenuesArr
     if (!this.state.sliderReady && !_.isEmpty(props.mainMap.visibleVenuesArr)) {
       // ok, now do we have a sliderPosition?
@@ -47,7 +45,7 @@ class VenueSlider extends Component {
           props.venues,
           props.region.slug + '/' + props.match.params.venueSlug
         )
-        props.setUiSliderPosition(
+        props.setUiVenueSliderPosition(
           venue._id,
           props.mainMap.visibleVenuesArr,
           props.venues
@@ -101,9 +99,9 @@ class VenueSlider extends Component {
       mainMap: { visibleVenuesArr: visVenues },
       venues,
       history,
-      setUiSliderPosition
+      setUiVenueSliderPosition
     } = this.props
-    setUiSliderPosition(visVenues[sliderPos], visVenues, venues, history)
+    setUiVenueSliderPosition(visVenues[sliderPos], visVenues, venues, history)
   }
   handleShare = service => event => {
     console.log(service)

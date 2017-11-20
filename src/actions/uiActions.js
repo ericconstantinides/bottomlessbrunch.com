@@ -1,5 +1,5 @@
 import constants from '../actions/types'
-import { reduceVenuesByRegion, getDrawerSize } from '../lib/myHelpers'
+import { getDrawerSize } from '../lib/myHelpers'
 
 export function activateUiSite () {
   return {
@@ -20,47 +20,20 @@ export function setDrawer () {
   }
 }
 
-export function setUiVenueTBD (openId, prevId, nextId) {
-  return {
-    type: constants.UI_SET_SLIDER_POSITION,
-    payload: {
-      openId,
-      prevId,
-      nextId
-    }
-  }
-}
-
-export function setUiSliderPosition (_id, visVenues, venues, history) {
+export function setUiVenueSliderPosition (_id, visVenues, venues, history) {
   const pointer = visVenues.indexOf(_id)
   if (history) {
     history.push('/' + venues[_id].slug)
   }
   return {
-    type: constants.UI_SET_SLIDER_POSITION,
+    type: constants.UI_SET_VENUE_SLIDER_POINTER,
     payload: pointer
   }
 }
 
-export function unsetUiVenue () {
+export function unsetUiVenueSliderPosition () {
   return {
-    type: constants.UI_UNSET_SLIDER_POSITION,
-    payload: null
-  }
-}
-
-export function setUiRegionVenues (venues, region) {
-  // get the reduced venues
-  const reducedVenues = reduceVenuesByRegion(venues, region._id)
-  return {
-    type: constants.UI_SET_REGION_VENUES,
-    payload: reducedVenues
-  }
-}
-
-export function unsetUiRegionVenues () {
-  return {
-    type: constants.UI_UNSET_REGION_VENUES,
+    type: constants.UI_UNSET_VENUE_SLIDER_POINTER,
     payload: null
   }
 }

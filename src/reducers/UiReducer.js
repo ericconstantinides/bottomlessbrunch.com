@@ -21,16 +21,10 @@ export default function (state = initialState, action) {
       return { ...state, siteDataReady: true }
     case constants.UI_SET_DRAWER:
       return { ...state, drawer: action.payload }
-    case constants.UI_SET_SLIDER_POSITION:
+    case constants.UI_SET_VENUE_SLIDER_POINTER:
       return { ...state, sliderPosition: action.payload }
-    case constants.UI_UNSET_SLIDER_POSITION:
+    case constants.UI_UNSET_VENUE_SLIDER_POINTER:
       return { ...state, sliderPosition: false }
-    case constants.UI_UNSET_REGION:
-      return { ...state, activeRegion: {} }
-    case constants.UI_SET_REGION_VENUES:
-      return { ...state, regionVenues: action.payload }
-    case constants.UI_UNSET_REGION_VENUES:
-      return { ...state, regionVenues: {} }
     case constants.UI_SHOW_REGIONS_MODAL:
       return { ...state, regionsModalActive: true }
     case constants.UI_HIDE_REGIONS_MODAL:

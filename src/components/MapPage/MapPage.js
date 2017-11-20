@@ -75,7 +75,7 @@ class MapPage extends Component {
       venues,
       history
     } = this.props
-    this.props.setUiSliderPosition(_id, visVenues, venues, history)
+    this.props.setUiVenueSliderPosition(_id, visVenues, venues, history)
   }
   render () {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
