@@ -804,6 +804,27 @@ a * {
     padding-top: 3px;
     padding-right: 0.75em; }
 
+.Splash__footer-link:after {
+  content: '|';
+  font-weight: normal;
+  margin: 0 0.75em; }
+
+.Splash__footer-link:last-child:after {
+  content: none; }
+
+.Splash__footer-link--email {
+  color: black;
+  display: flex;
+  align-items: center; }
+  .Splash__footer-link--email:before {
+    content: '';
+    display: block;
+    background-image: url(/images/envelope.svg);
+    height: 12px;
+    width: 17px;
+    background-size: contain;
+    margin-right: 0.25em; }
+
 .IntroPage__about {
   background: url(/images/bg__orange-bubbly--cmprsd.png) no-repeat;
   background-position: 0% 100%;

@@ -55,6 +55,7 @@ class IntroPage extends Component {
           </div>
           <div className='Splash__footer'>
             <span className='Splash__footer-link'>About</span>
+            <a  className='Splash__footer-link Splash__footer-link--email' href="mailto:eric+bb@ericconstantinides.com?subject=Contact from BottomlessBrunch.com">Contact</a>
           </div>
         </div>
         <div className='IntroPage__about'>
