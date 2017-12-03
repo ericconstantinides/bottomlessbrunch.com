@@ -100,6 +100,9 @@ class IntroPage extends Component {
               </div>
             </div>
           </div>
+          <p className='site-container IntroPage__footer'>
+            Copyright {new Date().getFullYear()} Eric Constantinides
+          </p>
         </div>
       </div>
     )
