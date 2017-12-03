@@ -76,7 +76,7 @@ class VenueSlider extends Component {
           let fetchedGData = this.state.fetchedGData
           fetchedGData[venueId] = venueId
           this.setState({ fetchedGData })
-          if (venues[venueId].fetchedLevel !== 'full') {
+          if (venues[venueId] && venues[venueId].fetchedLevel !== 'full') {
             props.fetchVenueDetail(
               venueId,
               'full',
