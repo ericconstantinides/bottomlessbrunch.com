@@ -34,13 +34,15 @@ class Map extends Component {
       this.handleGettingVisibleVenues(this.props)
     }
   }
-  
+
   componentWillReceiveProps (nextProps) {
     if (!_.isEqual(this.props.mainMap.coords, nextProps.mainMap.coords)) {
       this.handleGettingVisibleVenues(nextProps)
     }
   }
   handleMapChange = coords => {
+    // don't update the map if the slider is active:
+    if (this.props.ui.activeVenue) return
     // update the maps size if the coords size has changed:
     if (!_.isEqual(this.props.mainMap.coords.size, coords.size)) {
       this.props.updateMainMapSize(coords.size)
