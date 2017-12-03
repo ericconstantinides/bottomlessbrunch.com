@@ -35,13 +35,13 @@
     "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "full": "concurrently 'npm run start' 'nodemon ../server/server.js' 'npm run watch-css'"
+    "dev": "concurrently 'npm run client' 'nodemon ../server/server.js' 'npm run watch-css'"
   },
   "devDependencies": {
     "concurrently": "^3.5.0",
