@@ -540,20 +540,17 @@ a * {
   display: flex;
   flex-flow: row-reverse nowrap;
   align-items: center;
-  justify-content: space-between;
-  font-size: 1em;
-  font-size: 2.66667vw; }
-  @media only screen and (min-width: 601px) {
-    .SiteHeader__inner {
-      font-size: 1rem; } }
-  @media only screen and (max-width: 390px) {
-    .SiteHeader__inner {
-      font-size: 0.65rem; } }
+  justify-content: space-between; }
 
 @media only screen and (max-width: 767px) {
   .SiteHeader__inner {
     flex-flow: row nowrap;
-    padding: 0 0.75em; } }
+    padding: 0 0.75em;
+    font-size: 0.875em; } }
+
+@media only screen and (max-width: 480px) {
+  .SiteHeader__inner {
+    font-size: 0.55em; } }
 
 /*
  * logo
