@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
 
 import Slider from 'react-slick'
 import { getVenueBySlug, movePointer } from '../../lib/myHelpers'
@@ -32,6 +33,7 @@ class VenueSlider extends Component {
     this.props.unsetUiVenueSliderPosition()
     this.props.removeUiAppClass(['App--VenueSlider'])
     this.props.addUiAppClass(['App--MapPage'])
+    this.setState({sliderReady: false})
   }
   getVenueSliderReady = props => {
     // check if the slider has been set already and if we have visibleVenuesArr
@@ -131,19 +133,28 @@ class VenueSlider extends Component {
       )
     })
     return (
-      <div className='VenueSlider'>
-        <Link to={`/${this.props.region.slug}`} className='VenueSlider__close'>
-          <div className='VenueSlider__inner-close' />
-        </Link>
-        <Slider
-          {...SLIDER_SETTINGS}
-          initialSlide={this.props.ui.sliderPosition}
-          ref='slickSlider'
-          afterChange={this.handleSliderChange}
+      <div>
+        <CSSTransition
+          in={this.state.sliderReady}
+          timeout={500}
+          classNames='Monkey'
         >
-          {/* beforeChange={this.handleSliderBeforeChange} */}
-          {sliderItems}
-        </Slider>
+          {(status) => (
+            <div className='VenueSlider'>
+              <Link to={`/${this.props.region.slug}`} className='VenueSlider__close'>
+                <div className='VenueSlider__inner-close' />
+              </Link>
+              <Slider
+                {...SLIDER_SETTINGS}
+                initialSlide={this.props.ui.sliderPosition}
+                afterChange={this.handleSliderChange}
+                >
+                {/* beforeChange={this.handleSliderBeforeChange} */}
+                {sliderItems}
+              </Slider>
+            </div>
+          )}
+        </CSSTransition>
       </div>
     )
   }
