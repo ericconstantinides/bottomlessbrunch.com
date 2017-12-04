@@ -451,8 +451,5 @@ export function getMarginBounds (bounds, browserSize) {
 }
 
 export function closeEnough (numberA, numberB, difference = 0.00001) {
-  if (Math.abs(numberA - numberB) <= difference) {
-    return true
-  }
-  return false
+  return Math.abs(numberA - numberB) <= difference
 }
