@@ -50,7 +50,10 @@ class VenueTeaser extends Component {
     }
     // reset everything if going inActive:
     if (prevState.isActive && !this.state.isActive) {
-      this.setState({ offVert: 0, teaserSide: 'right', isPositioned: false })
+      // wait 150ms for the off transition to finish:
+      setTimeout(() => {
+        this.setState({ offVert: 0, teaserSide: 'right', isPositioned: false })
+      }, 150)
     }
   }
   render () {
