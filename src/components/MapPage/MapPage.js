@@ -41,9 +41,10 @@ class MapPage extends Component {
       this.setState({ hoveredVenue: '' })
     }
   }
-  toggleMarkerClick = venue => event => {
+  toggleMarkerClick = (venue, area) => event => {
     this.setState((prevState, props) => {
-      if (prevState.hoveredVenue === venue._id) {
+      // clear out the hoveredVenue from the map:
+      if (prevState.hoveredVenue === venue._id || area === 'VenueListItem') {
         return { hoveredVenue: '' }
       }
       return { hoveredVenue: venue._id }

@@ -77,7 +77,7 @@ class VenueTeaser extends Component {
         className={`VenueTeaser ${altClass} ${hovered} ${side}`}
         onMouseEnter={handleMouseOver(venue)}
         onMouseLeave={handleMouseLeave(venue)}
-        onClick={toggleMarkerClick(venue)}
+        onClick={toggleMarkerClick(venue, altClass)}
       >
         {altClass === 'MapItem' &&
           <div className='MapItem__marker-container'>
