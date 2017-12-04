@@ -2468,7 +2468,6 @@ body.body--VenueSlider #root,
     transition: 0.15s; }
 
 .MapItem__inner {
-  display: none;
   position: absolute;
   top: -115px;
   width: 200px;
@@ -2513,6 +2512,14 @@ body.body--VenueSlider #root,
   right: 8px; }
 
 /* Hover */
+.MapItem__pointer,
+.MapItem__inner {
+  opacity: 0;
+  transition: 0s 0.15s, opacity 0.15s; }
+
+.MapItem:not(.is-hovered) .MapItem__inner {
+  top: -10000px; }
+
 .MapItem.is-hovered .MapItem__marker-container:before {
   display: block; }
 
@@ -2529,8 +2536,10 @@ body.body--VenueSlider #root,
 .MapItem.is-hovered .MapItem__pointer:before, .MapItem.is-hovered .MapItem__pointer:after {
   content: ''; }
 
+.MapItem.is-hovered .MapItem__pointer,
 .MapItem.is-hovered .MapItem__inner {
-  display: block; }
+  opacity: 1;
+  transition: 0s, opacity 0.15s; }
 
 /* Hover */
 .VenueTeaser:focus,
