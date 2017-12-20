@@ -47,13 +47,23 @@ function setGooglePlacesVenueDetail (_id, place) {
   }
 }
 
-export function fetchGooglePlacesEditVenueDetail (gpId, callback1, callback2) {
+export function fetchGooglePlacesEditVenueDetail (
+  gpId,
+  fetchYelpPhoneSearchEditVenueDetail,
+  fetchYelpMetaEditVenueDetail
+) {
   return dispatch => {
     googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
       if (status === 'OK') {
         // I shouldn't have intl phone number here... but
-        if (callback1 && place.international_phone_number) {
-          callback1(place, callback2)
+        if (
+          fetchYelpPhoneSearchEditVenueDetail &&
+          place.international_phone_number
+        ) {
+          fetchYelpPhoneSearchEditVenueDetail(
+            place,
+            fetchYelpMetaEditVenueDetail
+          )
         }
         return dispatch(fetchGooglePlacesEditVenuePhotos(place))
       }

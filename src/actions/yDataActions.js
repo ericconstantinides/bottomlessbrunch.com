@@ -5,7 +5,10 @@ import { stripDashesSpaces } from '../lib/myHelpers'
 
 import { ROOT_URL } from '../config'
 
-export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
+export function fetchYelpPhoneSearchEditVenueDetail (
+  place,
+  fetchYelpMetaEditVenueDetail
+) {
   const phone = place.international_phone_number
   if (phone) {
     const formattedPhone = encodeURI(stripDashesSpaces(phone))
@@ -16,8 +19,12 @@ export function fetchYelpPhoneSearchEditVenueDetail (place, callback) {
         )
         .then(results => {
           if (results.data) {
-            if (callback && results.data[0] && results.data[0].id) {
-              callback(results.data[0].id)
+            if (
+              fetchYelpMetaEditVenueDetail &&
+              results.data[0] &&
+              results.data[0].id
+            ) {
+              fetchYelpMetaEditVenueDetail(results.data[0].id)
             }
             dispatch({
               type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
