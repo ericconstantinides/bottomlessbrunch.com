@@ -47,32 +47,28 @@ function setGooglePlacesVenueDetail (_id, place) {
   }
 }
 
-export function fetchGooglePlacesEditVenueDetail (
-  gpId,
-  fetchYelpPhoneSearchEditVenueDetail,
-  fetchYelpMetaEditVenueDetail
-) {
-  return dispatch => {
+/**
+ * Fetch Google Places Venue Details
+ * https://medium.com/collaborne-engineering/returning-promises-from-redux-action-creators-3035f34fa74b
+ *
+ * @export
+ * @param {string} gpId
+ * @param {function} fetchYelpPhoneSearchEditVenueDetail callback
+ * @param {function} fetchYelpMetaEditVenueDetail callback
+ * @returns {Promise}
+ */
+export const fetchGooglePlacesEditVenueDetail = gpId => dispatch =>
+  new Promise((resolve, reject) => {
     googlePlaces.getDetails({ placeId: gpId }, (place, status) => {
       if (status === 'OK') {
-        // I shouldn't have intl phone number here... but
-        if (
-          fetchYelpPhoneSearchEditVenueDetail &&
-          place.international_phone_number
-        ) {
-          fetchYelpPhoneSearchEditVenueDetail(
-            place,
-            fetchYelpMetaEditVenueDetail
-          )
+        if (place.international_phone_number) {
+          resolve(place.international_phone_number)
         }
         return dispatch(fetchGooglePlacesEditVenuePhotos(place))
       }
-      // TODO: this needs to return a DISPATCH to an API error.
-      // See: udemy-advanced-redux-auth/client/src/actions/index.js
-      throw new Error(`Error thrown: ${status}`)
+      reject(new Error())
     })
-  }
-}
+  })
 
 function fetchGooglePlacesEditVenuePhotos (place) {
   if (place.photos) {

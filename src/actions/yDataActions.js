@@ -5,39 +5,34 @@ import { stripDashesSpaces } from '../lib/myHelpers'
 
 import { ROOT_URL } from '../config'
 
-export function fetchYelpPhoneSearchEditVenueDetail (
-  place,
-  fetchYelpMetaEditVenueDetail
-) {
-  const phone = place.international_phone_number
-  if (phone) {
+/**
+ * Fetches Yelp's data based on the venue's phone number
+ *
+ * @export {function}
+ * @param {object} place
+ * @param {function} fetchYelpMetaEditVenueDetail callback
+ * @returns {Promise}
+ */
+export const fetchYelpPhoneSearchEditVenueDetail = phone => dispatch =>
+  new Promise((resolve, reject) => {
     const formattedPhone = encodeURI(stripDashesSpaces(phone))
-    return function (dispatch) {
-      axios
-        .get(
-          `${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${formattedPhone}`
-        )
-        .then(results => {
-          if (results.data) {
-            if (
-              fetchYelpMetaEditVenueDetail &&
-              results.data[0] &&
-              results.data[0].id
-            ) {
-              fetchYelpMetaEditVenueDetail(results.data[0].id)
-            }
-            dispatch({
-              type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
-              payload: results.data[0]
-            })
-          }
-        })
-    }
-  }
-}
+    axios
+      .get(`${ROOT_URL}/api/v1/methods/yelpPhoneSearch?phone=${formattedPhone}`)
+      .then(results => {
+        if (results.data) {
+          // return the promise to fetchYelpMetaEditVenueDetail()
+          resolve(results.data[0].id)
+          dispatch({
+            type: constants.EDIT_VENUE_FETCH_YELP_PHONE_SEARCH_DETAIL,
+            payload: results.data[0]
+          })
+        }
+        reject(new Error())
+      })
+  })
 
 export function fetchYelpMetaEditVenueDetail (yId) {
-  return function (dispatch) {
+  return dispatch => {
     axios
       .get(`${ROOT_URL}/api/v1/methods/yelpMetaSearch?id=${yId}`)
       .then(results => {

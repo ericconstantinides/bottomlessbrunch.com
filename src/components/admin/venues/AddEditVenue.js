@@ -106,9 +106,10 @@ class venueForm extends Component {
         },
         {
           field: 'slug',
-          data: regionSlug + '/' + slugify(gData.name) + (neighborhood
-            ? '-' + slugify(neighborhood)
-            : '')
+          data: regionSlug +
+            '/' +
+            slugify(gData.name) +
+            (neighborhood ? '-' + slugify(neighborhood) : '')
         }
       ]
       replacements.forEach(fieldObj => {
@@ -179,11 +180,10 @@ class venueForm extends Component {
 
         // get the google places info and send in the
         // yelp search method after:
-        this.props.fetchGooglePlacesEditVenueDetail(
-          placeId,
-          this.props.fetchYelpPhoneSearchEditVenueDetail,
-          this.props.fetchYelpMetaEditVenueDetail
-        )
+        this.props.fetchGooglePlacesEditVenueDetail(placeId)
+          .then(phone => this.props.fetchYelpPhoneSearchEditVenueDetail(phone))
+          .then(yId => this.props.fetchYelpMetaEditVenueDetail(yId))
+          .catch(new Error('ERROR'))
       })
       .catch(error => console.error(error))
     // this.setState({ address, placeId })
