@@ -340,7 +340,7 @@ class venueForm extends Component {
                 <div className='flex-basis-20p'>
                   <label className='AddEdit__label'>Price Includes</label>
                   <Field
-                    name={`${funItem}.options`}
+                    name={`${funItem}.includes`}
                     options={includesOptions}
                     component={SelectInput}
                     clearable={false}

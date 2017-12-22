@@ -122,6 +122,7 @@ module.exports = {
     'Sangria',
     'Rosé',
     'Margarita',
+    'Frozen Margarita',
     'Champagne'
   ],
   drinkIncludes: [
