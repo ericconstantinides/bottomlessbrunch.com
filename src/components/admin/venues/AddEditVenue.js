@@ -22,7 +22,14 @@ import {
 } from '../../../actions'
 import { USA_MAP_COORDS, DATE_LONG, BRUNCH_TIMES } from '../../../config'
 import Marker from '../../common/Marker'
-import { times, days, timeCategories, states } from '../../../lib/enumerables'
+import {
+  times,
+  days,
+  timeCategories,
+  states,
+  drinks,
+  drinkIncludes
+} from '../../../lib/enumerables'
 import {
   findClosestRegion,
   getAddy,
@@ -38,6 +45,8 @@ const stateOptions = states.map(state => ({ label: state, value: state }))
 const timeOptions = times.map(time => ({ label: time, value: time }))
 const dayOptions = days.map(day => ({ label: day, value: day }))
 const timeCatOptions = timeCategories.map(cat => ({ label: cat, value: cat }))
+const drinkOptions = drinks.map(drink => ({ label: drink, value: drink }))
+const includesOptions = drinkIncludes.map(val => ({ label: val, value: val }))
 
 class venueForm extends Component {
   constructor (props) {
@@ -180,7 +189,8 @@ class venueForm extends Component {
 
         // get the google places info and send in the
         // yelp search method after:
-        this.props.fetchGooglePlacesEditVenueDetail(placeId)
+        this.props
+          .fetchGooglePlacesEditVenueDetail(placeId)
           .then(phone => this.props.fetchYelpPhoneSearchEditVenueDetail(phone))
           .then(yId => this.props.fetchYelpMetaEditVenueDetail(yId))
           .catch(new Error('ERROR'))
@@ -302,19 +312,45 @@ class venueForm extends Component {
           {fields.map((funItem, index) => (
             <div className='AddEdit__field-wrapper-container' key={index}>
               <div className='AddEdit__field-wrapper'>
-                <div className='flex-basis-66p'>
+                <div className='flex-basis-20p'>
+                  <label className='AddEdit__label'>Old Drink</label>
                   <Field
                     name={`${funItem}.name`}
                     component={this.renderField}
-                    lbl='Menu Item Name'
                   />
                 </div>
-                <div className='flex-basis-33p'>
+                <div className='flex-basis-20p'>
+                  <label className='AddEdit__label'>Bottomless Drink(s)</label>
+                  <Field
+                    name={`${funItem}.drink`}
+                    options={drinkOptions}
+                    component={SelectInput}
+                    clearable={false}
+                    multi
+                  />
+                </div>
+                <div className='flex-basis-20p'>
                   <Field
                     name={`${funItem}.price`}
                     type='number'
                     component={this.renderField}
                     lbl='Price ($)'
+                  />
+                </div>
+                <div className='flex-basis-20p'>
+                  <label className='AddEdit__label'>Price Includes</label>
+                  <Field
+                    name={`${funItem}.options`}
+                    options={includesOptions}
+                    component={SelectInput}
+                    clearable={false}
+                  />
+                </div>
+                <div className='flex-basis-20p'>
+                  <Field
+                    name={`${funItem}.remarks`}
+                    component={this.renderField}
+                    lbl='Remarks'
                   />
                 </div>
                 <button
