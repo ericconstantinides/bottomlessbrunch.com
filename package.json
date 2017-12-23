@@ -6,7 +6,7 @@
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
     "express": "^4.16.2",
-    "google-map-react": "^0.24.0",
+    "google-map-react": "^0.26.0",
     "google-maps-api": "^2.0.1",
     "history": "^4.7.2",
     "lodash": "^4.17.4",
@@ -24,7 +24,7 @@
     "react-scripts": "1.0.13",
     "react-select": "^1.0.0-rc.10",
     "react-share": "^1.16.0",
-    "react-slick": "^0.15.4",
+    "react-slick": "^0.16.0",
     "react-stars": "https://github.com/zdila/react-stars/tarball/master",
     "react-swipeable": "^4.1.0",
     "react-transition-group": "^2.2.1",
@@ -38,6 +38,7 @@
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -48,5 +49,26 @@
     "node-sass-chokidar": "^0.0.3",
     "redux-devtools-extension": "^2.13.2"
   },
-  "proxy": "http://localhost:3021/"
+  "proxy": "http://localhost:3021/",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/tempPolyfills.js",
+      "!src/setupTests.js"
+    ]
+  },
+  "standard": {
+    "globals": [
+      "jest",
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ]
+  }
 }

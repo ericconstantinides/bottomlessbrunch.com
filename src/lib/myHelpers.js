@@ -1,5 +1,6 @@
 import { fitBounds } from 'google-map-react/utils'
 import { DRAWER } from '../config'
+import { drinkIncludes } from '../lib/enumerables'
 import _ from 'lodash'
 
 /**
@@ -452,4 +453,49 @@ export function getMarginBounds (bounds, browserSize) {
 
 export function closeEnough (numberA, numberB, difference = 0.00001) {
   return Math.abs(numberA - numberB) <= difference
+}
+
+/**
+ * Extrapolates out each drink within the drinks Object
+ *
+ * @param {array} drinks
+ * @returns {array}
+ */
+export const extrapolateDrinks = drinks => {
+  const output = []
+  drinks.forEach(drinkItem => {
+    drinkItem.drink.forEach(drink => {
+      const newDrink = {
+        drink,
+        includes: drinkItem.includes,
+        price: drinkItem.price
+      }
+      if (drinkItem.remarks) {
+        newDrink.remarks = drinkItem.remarks
+      }
+      output.push(newDrink)
+    })
+  })
+  return output
+}
+/**
+ * Extrapolates the included titles into separate objects
+ *
+ * @param {array} drinkIncludes
+ * @param {array} cleansedDrinks
+ * @returns {array} of drinks separated by the drinkIncludes title
+ */
+export const extrapolateIncludes = (cleansedDrinks) => {
+  const output = []
+  drinkIncludes.forEach(title => {
+    const items = cleansedDrinks.filter(drink => drink.includes === title)
+    if (items.length) {
+      const fixedTitle = title.replace('Drink', 'Drinks').replace(' Only', '').replace('Full Course Meal', 'Prix Fixe')
+      output.push({
+        title: 'Bottomless ' + fixedTitle,
+        items
+      })
+    }
+  })
+  return output
 }

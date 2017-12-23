@@ -6,7 +6,13 @@ import cx from 'classnames'
 
 import * as actions from '../../actions'
 import { SITE_DOMAIN } from '../../config'
-import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
+import {
+  roundHalf,
+  compileGoogleHours,
+  compileDays,
+  extrapolateDrinks,
+  extrapolateIncludes
+} from '../../lib/myHelpers'
 
 class VenueSliderItem extends Component {
   constructor (props) {
@@ -19,7 +25,11 @@ class VenueSliderItem extends Component {
     this.setState({ isActive: nextProps.isActive })
   }
   renderBackground = venue => {
-    if (!venue.googlePlacesData.photos || !venue.googlePlacesData.photos[0]) {
+    if (
+      !venue.googlePlacesData ||
+      !venue.googlePlacesData.photos ||
+      !venue.googlePlacesData.photos[0]
+    ) {
       return
     }
     return (
@@ -59,12 +69,13 @@ class VenueSliderItem extends Component {
         </div>}
     </div>
   )
-  renderAddress = venue => (
-    <div className='VenueSliderItem__address'>
-      <h3 className='VenueSliderItem__address-title'>
-        Address
-      </h3>
-      {venue.address &&
+  renderAddress = venue => {
+    if (!venue.address) return
+    return (
+      <div className='VenueSliderItem__address'>
+        <h3 className='VenueSliderItem__address-title'>
+          Address
+        </h3>
         <p className='VenueSliderItem__address-p'>
           {venue.address.street}<br />
           {venue.address.city}<br />
@@ -76,22 +87,25 @@ class VenueSliderItem extends Component {
           >
             Get Directions
           </a>
-        </p>}
-    </div>
-  )
+        </p>
+      </div>
+    )
+  }
   renderRegHours = venue => {
+    if (!venue.googlePlacesData || !venue.googlePlacesData.opening_hours) {
+      return
+    }
     const hours = compileGoogleHours(venue.googlePlacesData)
     return (
       <div className='VenueSliderItem__hours'>
         <h3 className='VenueSliderItem__hours-title'>
           Regular Hours
         </h3>
-        {hours &&
-          hours.map((item, i) => (
-            <p key={i} className='VenueSliderItem__hours-p'>
-              <strong>{item.weekday}:</strong> {item.time}
-            </p>
-          ))}
+        {hours.map((item, i) => (
+          <p key={i} className='VenueSliderItem__hours-p'>
+            <strong>{item.weekday}:</strong> {item.time}
+          </p>
+        ))}
       </div>
     )
   }
@@ -153,41 +167,61 @@ class VenueSliderItem extends Component {
     const funTimes = venue.funTimes
       ? compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
       : ''
-    if (!funTimes.length) return
+    if (!funTimes || !funTimes.length) return
     return (
       <div className='VenueSliderItem__middle-center-top'>
-        <h3 className='VenueSliderItem__middle-title'>
-          Go Bottomless
-        </h3>
-        {funTimes.map((fun, i) => (
-          <div key={i} className='VenueSliderItem__duo'>
-            <p className='VenueSliderItem__duo-left'>
-              {fun.day}
-            </p>
-            <p className='VenueSliderItem__duo-right'>
-              {fun.startTime} - {fun.endTime}
-            </p>
-          </div>
-        ))}
+        <table className='VenueSliderItem__table'>
+          <tbody>
+            <tr>
+              <th colSpan='2'>
+                <h3 className='VenueSliderItem__middle-title'>
+                  Go Bottomless
+                </h3>
+              </th>
+            </tr>
+            {funTimes.map((fun, i) => (
+              <tr key={i} className='VenueSliderItem__duo'>
+                <td className='VenueSliderItem__duo-left'>
+                  {fun.day}
+                </td>
+                <td className='VenueSliderItem__duo-right'>
+                  {fun.startTime} - {fun.endTime}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     )
   }
   renderDrinkItems = venue => {
     if (!venue.funItems.length) return
+    const drinkSections = extrapolateIncludes(extrapolateDrinks(venue.funItems))
     return (
       <div className='VenueSliderItem__middle-center-bottom'>
-        <h3 className='VenueSliderItem__middle-title'>
-          Bottomless Deals
-        </h3>
-        {venue.funItems.map((item, i) => (
-          <div key={i} className='VenueSliderItem__duo'>
-            <p className='VenueSliderItem__duo-left'>
-              ${item.price}
-            </p>
-            <p className='VenueSliderItem__duo-right'>
-              {item.name}
-            </p>
-          </div>
+        {drinkSections.map(section => (
+          <table key={section.title} className='VenueSliderItem__table'>
+            <tbody>
+              <tr>
+                <th colSpan='2'>
+                  <h3 className='VenueSliderItem__middle-title'>
+                    {section.title}
+                  </h3>
+                </th>
+              </tr>
+              {section.items.map((drink, i) => (
+                <tr key={i} className='VenueSliderItem__duo'>
+                  <td className='VenueSliderItem__duo-left'>
+                    ${drink.price}
+                  </td>
+                  <td className='VenueSliderItem__duo-right'>
+                    {drink.drink} {drink.remarks && 
+                    <span>({drink.remarks})</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ))}
       </div>
     )
@@ -223,7 +257,7 @@ class VenueSliderItem extends Component {
     )
   }
   renderPhotos = venue => {
-    if (!venue.googlePlacesData.photos) return
+    if (!venue.googlePlacesData || !venue.googlePlacesData.photos.length) return
     const photos = venue.googlePlacesData.photos
       .map(photo => photo.getUrl({ maxWidth: 800, maxHeight: 500 }))
       .map((photoUrl, i) => (
@@ -238,12 +272,9 @@ class VenueSliderItem extends Component {
 
   render () {
     const venue = this.props.venues[this.props.venueId]
-    // only go here if we have data:
-    if (!venue.googlePlacesData) venue.googlePlacesData = {}
     const displayHood = venue.neighborhood
       ? venue.neighborhood
       : venue.address && venue.address.city ? venue.address.city : ''
-
     const slideNumClass = 'slideNum-' + this.props.slideNum
     return (
       <article className={cx('VenueSliderItem', 'slick-slide', slideNumClass)}>

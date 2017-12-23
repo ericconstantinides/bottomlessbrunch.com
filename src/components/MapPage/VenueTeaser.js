@@ -59,7 +59,6 @@ class VenueTeaser extends Component {
   render () {
     const {
       venue,
-      regionName,
       handleMouseOver,
       handleMouseLeave,
       toggleMarkerClick,
@@ -87,7 +86,6 @@ class VenueTeaser extends Component {
           </div>}
         {/* THE VENUETEASER__INNER is where the real link should be... */}
         <div
-          regionName={regionName}
           className={`VenueTeaser__link ${altClass}__link`}
           onClick={this.props.handleVenueTeaserLinkClick(venue._id)}
         >

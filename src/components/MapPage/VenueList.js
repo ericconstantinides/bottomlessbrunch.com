@@ -38,10 +38,9 @@ class VenueList extends Component {
             toggleMarkerClick={this.props.toggleMarkerClick}
             hoveredVenue={this.props.hoveredVenue}
             venue={this.props.venues[id]}
-            regionName={this.props.regions[this.props.venues[id].regionId].name}
             regionSlug={this.props.regions[this.props.venues[id].regionId].slug}
             handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
-          />
+            />
         ))}
       </div>
     )
