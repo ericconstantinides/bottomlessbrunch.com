@@ -279,7 +279,7 @@ body.body--VenueSlider #root,
 .VenueTeaser__title {
   color: #f45a26;
   font-size: 1.25em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.1em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -306,6 +306,9 @@ body.body--VenueSlider #root,
   p {
     margin-bottom: 0;
   }
+}
+.VenueTeaser__address {
+  margin-bottom: 0.75em;
 }
 
 .VenueTeaser__more-info {

@@ -6,13 +6,9 @@ import cx from 'classnames'
 
 import * as actions from '../../actions'
 import { SITE_DOMAIN } from '../../config'
-import {
-  roundHalf,
-  compileGoogleHours,
-  compileDays,
-  extrapolateDrinks,
-  extrapolateIncludes
-} from '../../lib/myHelpers'
+import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
+
+import Deals from '../common/Deals'
 
 class VenueSliderItem extends Component {
   constructor (props) {
@@ -175,7 +171,7 @@ class VenueSliderItem extends Component {
             <tr>
               <th colSpan='2'>
                 <h3 className='VenueSliderItem__middle-title'>
-                  Go Bottomless
+                  Bottomless Times
                 </h3>
               </th>
             </tr>
@@ -191,38 +187,6 @@ class VenueSliderItem extends Component {
             ))}
           </tbody>
         </table>
-      </div>
-    )
-  }
-  renderDrinkItems = venue => {
-    if (!venue.funItems.length) return
-    const drinkSections = extrapolateIncludes(extrapolateDrinks(venue.funItems))
-    return (
-      <div className='VenueSliderItem__middle-center-bottom'>
-        {drinkSections.map(section => (
-          <table key={section.title} className='VenueSliderItem__table'>
-            <tbody>
-              <tr>
-                <th colSpan='2'>
-                  <h3 className='VenueSliderItem__middle-title'>
-                    {section.title}
-                  </h3>
-                </th>
-              </tr>
-              {section.items.map((drink, i) => (
-                <tr key={i} className='VenueSliderItem__duo'>
-                  <td className='VenueSliderItem__duo-left'>
-                    ${drink.price}
-                  </td>
-                  <td className='VenueSliderItem__duo-right'>
-                    {drink.drink} {drink.remarks && 
-                    <span>({drink.remarks})</span>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ))}
       </div>
     )
   }
@@ -300,7 +264,11 @@ class VenueSliderItem extends Component {
                   {(venue.funItems || venue.funItems) &&
                     <div className='VenueSliderItem__middle-center'>
                       {this.renderFunHours(venue)}
-                      {this.renderDrinkItems(venue)}
+                      <div className='VenueSliderItem__middle-center-bottom'>
+                        {venue.funItems &&
+                          venue.funItems.length &&
+                          <Deals venue={venue} />}
+                      </div>
                     </div>}
                   {this.renderShare()}
                 </div>

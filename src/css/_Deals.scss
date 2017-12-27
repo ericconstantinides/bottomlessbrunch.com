@@ -1,0 +1,49 @@
+.Deals {
+  width: 1px;
+  margin: 0 auto;
+  padding-bottom: 0.25em;
+}
+.Deals__th {
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #f45a26;
+  font-weight: bold;
+  white-space: nowrap;
+  font-size: 1.17em;
+}
+.Deals__td {
+  line-height: 1.1;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+.Deals__td--left {
+  text-align: right;
+  font-weight: 600;
+  padding-right: 0.25em;
+  width: .01%;
+}
+.Deals__td--right {
+  text-align: left;
+}
+/*
+ * Deals Overrides
+ */
+.VenueTeaser {
+  .Deals {
+    width: 100%;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 0.75em;
+  }
+  .Deals__tr {
+    display: flex;
+  }
+  .Deals__td {
+    display: block;
+    width: auto;
+    font-size: 0.825rem;
+  }
+  .Deals__th,
+  .Deals__td--left {
+    text-align: left;
+  }
+}

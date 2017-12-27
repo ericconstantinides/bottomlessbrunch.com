@@ -2608,7 +2608,7 @@ body.body--VenueSlider #root,
 .VenueTeaser__title {
   color: #f45a26;
   font-size: 1.25em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.1em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; }
@@ -2633,6 +2633,9 @@ body.body--VenueSlider #root,
   margin-bottom: 1em; }
   .VenueTeaser__funtimes p {
     margin-bottom: 0; }
+
+.VenueTeaser__address {
+  margin-bottom: 0.75em; }
 
 .VenueTeaser__more-info {
   font-family: "Open Sans Condensed", sans-serif;
@@ -3400,6 +3403,9 @@ body.body--VenueSlider #root,
   line-height: 1;
   margin-bottom: 0; }
 
+.VenueSliderItem__table {
+  margin: 0 auto; }
+
 .VenueSliderItem__middle-meta-p {
   font-weight: 600; }
   .VenueSliderItem__middle-meta:last-child .VenueSliderItem__middle-meta-p {
@@ -3407,32 +3413,6 @@ body.body--VenueSlider #root,
 
 .VenueSliderItem__middle-p {
   margin-bottom: 0; }
-
-.VenueSliderItem__table {
-  width: 1px;
-  margin: 0 auto; }
-  .VenueSliderItem__table + .VenueSliderItem__table {
-    margin-top: 1em; }
-
-.VenueSliderItem__duo {
-  margin-bottom: 0.35em; }
-  .VenueSliderItem__duo:last-child {
-    margin-bottom: 0; }
-
-.VenueSliderItem__duo-left,
-.VenueSliderItem__duo-right {
-  line-height: 1.1;
-  margin-bottom: 0;
-  white-space: nowrap; }
-
-.VenueSliderItem__duo-left {
-  text-align: right;
-  font-weight: 600;
-  padding-right: 0.25em;
-  width: .01%; }
-
-.VenueSliderItem__duo-right {
-  text-align: left; }
 
 .VenueSliderItem__image-container {
   height: 150px;
@@ -3585,6 +3565,53 @@ html.touch .VenueSlider__arrow {
     flex-flow: column; }
   .VenueSliderItem__address {
     margin-bottom: 1em; } }
+
+.Deals {
+  width: 1px;
+  margin: 0 auto;
+  padding-bottom: 0.25em; }
+
+.Deals__th {
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #f45a26;
+  font-weight: bold;
+  white-space: nowrap;
+  font-size: 1.17em; }
+
+.Deals__td {
+  line-height: 1.1;
+  margin-bottom: 0;
+  white-space: nowrap; }
+
+.Deals__td--left {
+  text-align: right;
+  font-weight: 600;
+  padding-right: 0.25em;
+  width: .01%; }
+
+.Deals__td--right {
+  text-align: left; }
+
+/*
+ * Deals Overrides
+ */
+.VenueTeaser .Deals {
+  width: 100%;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 0.75em; }
+
+.VenueTeaser .Deals__tr {
+  display: flex; }
+
+.VenueTeaser .Deals__td {
+  display: block;
+  width: auto;
+  font-size: 0.825rem; }
+
+.VenueTeaser .Deals__th,
+.VenueTeaser .Deals__td--left {
+  text-align: left; }
 
 .AdminVenues,
 .AdminRegions {

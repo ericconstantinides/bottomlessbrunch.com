@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-// import { compileDays } from '../../lib/myHelpers'
+
+import Deals from '../common/Deals'
 
 const offsetPadding = 4
 
@@ -38,7 +39,12 @@ class VenueTeaser extends Component {
     ) {
       // We set Positioning now:
       const elPos = this.domVenue.getBoundingClientRect()
-      const { offset_top: offsetTop, offset_bottom: offsetBottom, brwsrHeight, brwsrWidth } = this.props.drawer
+      const {
+        offset_top: offsetTop,
+        offset_bottom: offsetBottom,
+        brwsrHeight,
+        brwsrWidth
+      } = this.props.drawer
       const newBottom = brwsrHeight - offsetBottom
       const teaserSide = elPos.right > brwsrWidth ? 'left' : 'right'
       const offVert = elPos.top < offsetTop
@@ -106,7 +112,7 @@ class VenueTeaser extends Component {
                 {venue.name}
               </h3>
               {venue.address &&
-                <p className={`VenueTeaser__p ${altClass}__p`}>
+                <p className={`VenueTeaser__address VenueTeaser__p ${altClass}__p`}>
                   {venue.address.street}, {venue.address.city}
                 </p>}
               {/* {funTimes &&
@@ -121,19 +127,9 @@ class VenueTeaser extends Component {
                   ))}
                 </div>
               } */}
-              {venue.funItems && venue.funItems.length > 0 &&
-                <div className={`VenueTeaser__funtimes ${altClass}__funtimes`}>
-                  <h4
-                    className={`VenueTeaser__sub-title ${altClass}__sub-title`}
-                  >
-                    Bottomless Deals
-                  </h4>
-                  {venue.funItems.map((item, i) => (
-                    <p key={i} className={`VenueTeaser__p ${altClass}__p`}>
-                      <strong>${item.price}</strong> {item.name}
-                    </p>
-                  ))}
-                </div>}
+              {venue.funItems &&
+                venue.funItems.length &&
+                <Deals venue={venue} />}
               <button
                 className={`VenueTeaser__more-info ${altClass}__more-info`}
               >
