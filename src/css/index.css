@@ -3616,12 +3616,21 @@ html.touch .VenueSlider__arrow {
   text-transform: uppercase;
   margin-bottom: 0.5em; }
 
+.VenueFilters__description {
+  font-size: 0.75em; }
+  .VenueFilters__item-title + .VenueFilters__description {
+    margin-top: -0.25rem; }
+
 .VenueFilters__checkbox {
   font-size: 0.75em; }
 
-.label.VenueFilters__label {
+.VenueFilters__label {
   display: flex;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 0.325em;
+  line-height: 1; }
+  .VenueFilters__label[disabled] {
+    color: #999; }
 
 .Deals {
   width: 1px;

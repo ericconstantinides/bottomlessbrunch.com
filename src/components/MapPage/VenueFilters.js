@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Slider from 'rc-slider'
+import { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
 import { drinks, drinkIncludes } from '../../lib/enumerables'
@@ -18,13 +18,21 @@ const days = {
 }
 const prices = makeSliderPrices(0, 60)
 const hours = makeSliderHours(7, 17)
+
 const drinksObj = {}
 drinks.forEach((drink, i) => {
-  drinksObj[drink] = true
+  drinksObj[drink] = {
+    disabled: false,
+    checked: true
+  }
 })
+
 const pricesMeta = {}
 drinkIncludes.forEach((priceMeta, i) => {
-  pricesMeta[priceMeta] = true
+  pricesMeta[priceMeta] = {
+    disabled: false,
+    checked: true
+  }
 })
 
 class VenueFilters extends Component {
@@ -54,24 +62,40 @@ class VenueFilters extends Component {
   handlePriceChange = prices => {
     this.setState({ prices })
   }
-  handleDrinkClick = drink => event => {
-    const drinkStatus = !this.state.drinks[drink]
+  handleDrinkClick = drinkName => event => {
+    const drinkChecked = !this.state.drinks[drinkName].checked
+    const drinkDisabled = this.state.drinks[drinkName].disabled
     let drinks = {}
-    if (drink === 'All') {
+    if (drinkName === 'All') {
       Object.keys(this.state.drinks).forEach(drink => {
-        drinks[drink] = drinkStatus
+        drinks[drink] = {
+          disabled: drinkDisabled,
+          checked: drinkChecked
+        }
       })
     } else {
-      drinks = { ...this.state.drinks, [drink]: drinkStatus }
+      drinks = {
+        ...this.state.drinks,
+        [drinkName]: {
+          disabled: drinkDisabled,
+          checked: drinkChecked
+        }
+      }
       // now double check the status of All and if it needs to be updated:
       const allSame = Object.keys(drinks).every(drink => {
         if (drink === 'All') return true
-        return drinks[drink] === drinkStatus
+        return drinks[drink].checked === drinkChecked
       })
       drinks = {
         ...this.state.drinks,
-        [drink]: drinkStatus,
-        All: allSame ? drinkStatus : false
+        [drinkName]: {
+          disabled: drinkDisabled,
+          checked: drinkChecked
+        },
+        All: {
+          disabled: false,
+          checked: allSame ? drinkChecked : false
+        }
       }
     }
     this.setState({ drinks })
@@ -79,7 +103,10 @@ class VenueFilters extends Component {
   handleMetaClick = meta => event => {
     const pricesMeta = {
       ...this.state.pricesMeta,
-      [meta]: !this.state.pricesMeta[meta]
+      [meta]: {
+        disabled: this.state.pricesMeta[meta].disabled,
+        checked: !this.state.pricesMeta[meta].checked
+      }
     }
     this.setState({ pricesMeta })
   }
@@ -87,11 +114,18 @@ class VenueFilters extends Component {
     return drinks.map((drink, i) => {
       return (
         <div className='VenueFilters__checkbox' key={i}>
-          <label className='VenueFilters__label'>
+          <label
+            className='VenueFilters__label'
+            disabled={this.state.drinks[drink].disabled}
+          >
             <input
               name={drink}
               type='checkbox'
-              checked={this.state.drinks[drink]}
+              disabled={this.state.drinks[drink].disabled}
+              checked={
+                this.state.drinks[drink].checked &&
+                  !this.state.drinks[drink].disabled
+              }
               onChange={this.handleDrinkClick(drink)}
             />
             {drink}
@@ -101,14 +135,15 @@ class VenueFilters extends Component {
     })
   }
   renderPricesMeta = () => {
-    return Object.entries(this.state.pricesMeta).map(([meta, val], i) => {
+    return Object.entries(this.state.pricesMeta).map(([meta, metaObj], i) => {
       return (
         <div className='VenueFilters__checkbox' key={i}>
-          <label className='VenueFilters__label'>
+          <label className='VenueFilters__label' disabled={metaObj.disabled}>
             <input
               name={meta}
               type='checkbox'
-              checked={val}
+              disabled={metaObj.disabled}
+              checked={metaObj.checked && !metaObj.disabled}
               onChange={this.handleMetaClick(meta)}
             />
             {meta
@@ -136,8 +171,11 @@ class VenueFilters extends Component {
               {' '}
               {hours[this.state.hours[1]]}
             </h4>
+            <p className='VenueFilters__description'>
+              Availabile at some time within the selected hours
+            </p>
             <div className='VenueFilters__slider-container'>
-              <Slider.Range
+              <Range
                 className='VenueFilters__slider'
                 min={7}
                 max={17}
@@ -158,8 +196,11 @@ class VenueFilters extends Component {
               {' '}
               {days[this.state.days[1]]}
             </h4>
+            <p className='VenueFilters__description'>
+              Available at least one of the selected days
+            </p>
             <div className='VenueFilters__slider-container'>
-              <Slider.Range
+              <Range
                 className='VenueFilters__slider'
                 min={0}
                 max={6}
@@ -184,7 +225,7 @@ class VenueFilters extends Component {
               {this.renderPricesMeta()}
             </div>
             <div className='VenueFilters__slider-container'>
-              <Slider.Range
+              <Range
                 className='VenueFilters__slider'
                 min={0}
                 max={60}
