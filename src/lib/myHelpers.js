@@ -514,7 +514,7 @@ export const makeSliderHours = (start, end) => {
   return hours
 }
 
-export const makeSliderPrices = (start, end, increment = 5) => {
+export const makeSliderPrices = (start, end, increment = 10) => {
   const prices = {}
   for (let i = start; i <= end; i += increment) {
     prices[i] = '$' + i

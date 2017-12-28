@@ -3593,6 +3593,8 @@ html.touch .VenueSlider__arrow {
 
 .VenueFilters__slider-container {
   padding: 0 0.75em 1.25em; }
+  .VenueFilters__slider-container .hide-in-rail {
+    display: none; }
 
 .VenueFilters__item {
   margin-bottom: 1em;

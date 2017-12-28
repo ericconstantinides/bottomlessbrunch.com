@@ -31,6 +31,9 @@
 
 .VenueFilters__slider-container {
   padding: 0 0.75em 1.25em;
+  .hide-in-rail {
+    display: none;
+  }
 }
 .VenueFilters__item {
   margin-bottom: 1em;

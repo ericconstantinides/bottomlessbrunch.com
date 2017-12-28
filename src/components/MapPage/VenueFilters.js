@@ -172,13 +172,13 @@ class VenueFilters extends Component {
           </div>
           <div className='VenueFilters__item'>
             <h4 className='VenueFilters__item-title'>
-              Brunch Price:
+              Bottomless Brunch Price:
               {' '}
-              {prices[this.state.prices[0]]}
+              ${this.state.prices[0]}
               {' '}
               -
               {' '}
-              {prices[this.state.prices[1]]}
+              ${this.state.prices[1]}
             </h4>
             <div className='VenueFilters__horz width-25 u-mb-0_5'>
               {this.renderPricesMeta()}
@@ -189,7 +189,6 @@ class VenueFilters extends Component {
                 min={0}
                 max={60}
                 marks={prices}
-                step={5}
                 onChange={this.handlePriceChange}
                 defaultValue={this.state.prices}
                 allowCross={false}
@@ -197,7 +196,9 @@ class VenueFilters extends Component {
             </div>
           </div>
           <div className='VenueFilters__item'>
-            <h4 className='VenueFilters__item-title'>Drink Options</h4>
+            <h4 className='VenueFilters__item-title'>
+              Bottomless Drink Options
+            </h4>
             <div className='VenueFilters__horz'>
               {this.renderDrinks()}
             </div>
