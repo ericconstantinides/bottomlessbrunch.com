@@ -5,6 +5,7 @@ import _ from 'lodash'
 import * as actions from '../../actions'
 
 import VenueTeaser from './VenueTeaser'
+import VenueFilters from './VenueFilters'
 
 class VenueList extends Component {
   componentDidUpdate (prevProps, prevState) {
@@ -29,6 +30,7 @@ class VenueList extends Component {
         <div className='VenueList__handle'>
           <div className='VenueList__inner-handle' />
         </div>
+        <VenueFilters />
         {this.props.mainMap.visibleVenuesArr.map((id, index) => (
           <VenueTeaser
             key={id}

@@ -499,3 +499,25 @@ export const extrapolateIncludes = (cleansedDrinks) => {
   })
   return output
 }
+
+export const makeSliderHours = (start, end) => {
+  const hours = {}
+  for (let i = start; i <= end; i++) {
+    if (i < 12) {
+      hours[i] = i + 'AM'
+    } else if (i === 12) {
+      hours[i] = i + 'PM'
+    } else {
+      hours[i] = (i - 12) + 'PM'
+    }
+  }
+  return hours
+}
+
+export const makeSliderPrices = (start, end, increment = 5) => {
+  const prices = {}
+  for (let i = start; i <= end; i += increment) {
+    prices[i] = '$' + i
+  }
+  return prices
+}
