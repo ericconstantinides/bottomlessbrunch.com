@@ -1,11 +1,21 @@
 .VenueFilters {
   background-color: white;
   margin: 0 0.5em 0.5em;
-  padding: 0.5em;
+  padding: 1em 0.5em;
   border-radius: 4px;
+  &.not-active {
+    .VenueFilters__inner {
+      display: none;
+    }
+  }
+}
+.VenueFilters__inner {
+  padding-top: 1em;
 }
 .VenueFilters__title {
   font-size: 1.5em;
+  margin-bottom: 0;
+  cursor: pointer;
 }
 .VenueFilters__horz {
   display: flex;
@@ -14,17 +24,29 @@
   > * {
     width: 33.33%;
   }
+  &.width-25 > * {
+    width: 25%;
+  }
 }
 
 .VenueFilters__slider-container {
-  padding: 0 0.75em 2em;
+  padding: 0 0.75em 1.25em;
 }
 .VenueFilters__item {
   margin-bottom: 1em;
-  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #bbb;
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
 }
 .VenueFilters__item-title {
   font-size: 0.925em;
   text-transform: uppercase;
   margin-bottom: 0.5em;
+}
+.VenueFilters__checkbox {
+  font-size: 0.75em;
 }

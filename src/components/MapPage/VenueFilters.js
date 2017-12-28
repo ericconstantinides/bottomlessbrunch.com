@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
-import { drinks } from '../../lib/enumerables'
+import { drinks, drinkIncludes } from '../../lib/enumerables'
 import { makeSliderHours, makeSliderPrices } from '../../lib/myHelpers'
 
 drinks.push('All')
@@ -17,18 +17,26 @@ const days = {
   6: 'Sun'
 }
 const prices = makeSliderPrices(0, 60)
-
 const hours = makeSliderHours(7, 17)
-console.log(hours)
+const drinksObj = {}
+drinks.forEach((drink, i) => {
+  drinksObj[drink] = true
+})
+const pricesMeta = {}
+drinkIncludes.forEach((priceMeta, i) => {
+  pricesMeta[priceMeta] = true
+})
 
 class VenueFilters extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeClass: 'not-active',
+      activeClass: 'is-active',
       hours: [8, 16],
       days: [0, 6],
-      prices: [0, 60]
+      prices: [0, 60],
+      drinks: drinksObj,
+      pricesMeta
     }
   }
   handleFiltersToggle = () => {
@@ -46,12 +54,67 @@ class VenueFilters extends Component {
   handlePriceChange = prices => {
     this.setState({ prices })
   }
+  handleDrinkClick = drink => event => {
+    const drinkStatus = !this.state.drinks[drink]
+    let drinks = {}
+    if (drink === 'All') {
+      Object.keys(this.state.drinks).forEach(drink => {
+        drinks[drink] = drinkStatus
+      })
+    } else {
+      drinks = { ...this.state.drinks, [drink]: drinkStatus }
+      // now double check the status of All and if it needs to be updated:
+      const allSame = Object.keys(drinks).every(drink => {
+        if (drink === 'All') return true
+        return drinks[drink] === drinkStatus
+      })
+      drinks = {
+        ...this.state.drinks,
+        [drink]: drinkStatus,
+        All: allSame ? drinkStatus : false
+      }
+    }
+    this.setState({ drinks })
+  }
+  handleMetaClick = meta => event => {
+    const pricesMeta = {
+      ...this.state.pricesMeta,
+      [meta]: !this.state.pricesMeta[meta]
+    }
+    this.setState({ pricesMeta })
+  }
   renderDrinks = () => {
     return drinks.map((drink, i) => {
       return (
-        <div key={i}>
-          <input type='checkbox' />
-          <label>{drink}</label>
+        <div className='VenueFilters__checkbox' key={i}>
+          <label className='VenueFilters__label'>
+            <input
+              name={drink}
+              type='checkbox'
+              checked={this.state.drinks[drink]}
+              onChange={this.handleDrinkClick(drink)}
+            />
+            {drink}
+          </label>
+        </div>
+      )
+    })
+  }
+  renderPricesMeta = () => {
+    return Object.entries(this.state.pricesMeta).map(([meta, val], i) => {
+      return (
+        <div className='VenueFilters__checkbox' key={i}>
+          <label className='VenueFilters__label'>
+            <input
+              name={meta}
+              type='checkbox'
+              checked={val}
+              onChange={this.handleMetaClick(meta)}
+            />
+            {meta
+              .replace('Drink +', 'w/')
+              .replace('Full Course Meal', 'Prix Fixe')}
+          </label>
         </div>
       )
     })
@@ -117,6 +180,9 @@ class VenueFilters extends Component {
               {' '}
               {prices[this.state.prices[1]]}
             </h4>
+            <div className='VenueFilters__horz width-25 u-mb-0_5'>
+              {this.renderPricesMeta()}
+            </div>
             <div className='VenueFilters__slider-container'>
               <Slider.Range
                 className='VenueFilters__slider'
@@ -129,27 +195,9 @@ class VenueFilters extends Component {
                 allowCross={false}
               />
             </div>
-            <div className='VenueFilters__item VenueFilters__horz'>
-              <div>
-                <input type='checkbox' />
-                <label>Drink Only</label>
-              </div>
-              <div>
-                <input type='checkbox' />
-                <label>w/ Entree</label>
-              </div>
-              <div>
-                <input type='checkbox' />
-                <label>w/ Buffet</label>
-              </div>
-              <div>
-                <input type='checkbox' />
-                <label>w/ Prix Fixe</label>
-              </div>
-            </div>
           </div>
           <div className='VenueFilters__item'>
-            <h4 className='VenueFilters__item-title'>Drinks Available</h4>
+            <h4 className='VenueFilters__item-title'>Drink Options</h4>
             <div className='VenueFilters__horz'>
               {this.renderDrinks()}
             </div>
