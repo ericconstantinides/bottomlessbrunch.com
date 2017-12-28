@@ -21,7 +21,6 @@ class VenueList extends Component {
       this.refs.VenueList.scrollTop = 0
     }
   }
-
   render () {
     return (
       <div
