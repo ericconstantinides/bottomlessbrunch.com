@@ -155,6 +155,15 @@ class VenueFilters extends Component {
     })
   }
   render () {
+    const displayHours = this.state.hours[0] === this.state.hours[1]
+      ? hours[this.state.hours[0]]
+      : hours[this.state.hours[0]] + ' - ' + hours[this.state.hours[1]]
+    const displayDays = this.state.days[0] === this.state.days[1]
+      ? days[this.state.days[0]]
+      : days[this.state.days[0]] + ' - ' + days[this.state.days[1]]
+    const displayPrices = this.state.prices[0] === this.state.prices[1]
+      ? '$' + this.state.prices[0]
+      : '$' + this.state.prices[0] + ' - ' + '$' + this.state.prices[1]
     return (
       <div className={`VenueFilters ${this.state.activeClass}`}>
         <h3 className='VenueFilters__title' onClick={this.handleFiltersToggle}>
@@ -163,16 +172,10 @@ class VenueFilters extends Component {
         <div className='VenueFilters__inner'>
           <div className='VenueFilters__item'>
             <h4 className='VenueFilters__item-title'>
-              Brunch Hours:
-              {' '}
-              {hours[this.state.hours[0]]}
-              {' '}
-              -
-              {' '}
-              {hours[this.state.hours[1]]}
+              Brunch Hours: {displayHours}
             </h4>
             <p className='VenueFilters__description'>
-              Availabile at some time within the selected hours
+              Brunch available at some time within the selected hours
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
@@ -188,16 +191,10 @@ class VenueFilters extends Component {
           </div>
           <div className='VenueFilters__item'>
             <h4 className='VenueFilters__item-title'>
-              Brunch Days:
-              {' '}
-              {days[this.state.days[0]]}
-              {' '}
-              -
-              {' '}
-              {days[this.state.days[1]]}
+              Brunch Days: {displayDays}
             </h4>
             <p className='VenueFilters__description'>
-              Available at least one of the selected days
+              Brunch available at least one of the selected days
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
@@ -213,13 +210,7 @@ class VenueFilters extends Component {
           </div>
           <div className='VenueFilters__item'>
             <h4 className='VenueFilters__item-title'>
-              Bottomless Brunch Price:
-              {' '}
-              ${this.state.prices[0]}
-              {' '}
-              -
-              {' '}
-              ${this.state.prices[1]}
+              Bottomless Brunch Price: {displayPrices}
             </h4>
             <div className='VenueFilters__horz width-25 u-mb-0_5'>
               {this.renderPricesMeta()}
