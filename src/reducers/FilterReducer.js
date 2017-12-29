@@ -4,9 +4,9 @@ import { toCheckboxObj } from '../lib/myHelpers'
 
 const initialState = {
   timeMin: 7,
-  timeMax: 13,
+  timeMax: 17,
   timeStart: 7,
-  timeEnd: 13,
+  timeEnd: 17,
   dayMin: 0,
   dayMax: 6,
   dayStart: 0,

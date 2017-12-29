@@ -5,7 +5,7 @@ import 'rc-slider/assets/index.css'
 
 import * as filterActions from '../../actions/filterActions'
 
-import { drinks, drinkIncludes, days } from '../../lib/enumerables'
+import { days } from '../../lib/enumerables'
 import {
   makeTimeMarks,
   makePriceMarks,
@@ -14,37 +14,10 @@ import {
   numDayToStr
 } from '../../lib/myHelpers'
 
-drinks.push('All')
-
-const drinksObj = {}
-drinks.forEach((drink, i) => {
-  drinksObj[drink] = {
-    disabled: false,
-    checked: true
-  }
-})
-
-const pricesMeta = {}
-drinkIncludes.forEach((priceMeta, i) => {
-  pricesMeta[priceMeta] = {
-    disabled: false,
-    checked: true
-  }
-})
-
 class VenueFilters extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      activeClass: 'is-active',
-      // these are ranges:
-      hours: [8, 16],
-      days: [0, 6],
-      prices: [0, 60],
-      // see these are checkboxes:
-      drinks: drinksObj,
-      pricesMeta
-    }
+    this.state = { activeClass: 'is-active' }
   }
   handleFiltersToggle = () => {
     const activeClass = this.state.activeClass === 'not-active'
@@ -62,42 +35,7 @@ class VenueFilters extends Component {
     this.props.updateFilter({ priceStart: prices[0], priceEnd: prices[1] })
   }
   handleDrinkClick = drinkName => event => {
-    const drinkChecked = !this.state.drinks[drinkName].checked
-    const drinkDisabled = this.state.drinks[drinkName].disabled
-    let drinks = {}
-    if (drinkName === 'All') {
-      Object.keys(this.state.drinks).forEach(drink => {
-        drinks[drink] = {
-          disabled: drinkDisabled,
-          checked: drinkChecked
-        }
-      })
-    } else {
-      drinks = {
-        ...this.state.drinks,
-        [drinkName]: {
-          disabled: drinkDisabled,
-          checked: drinkChecked
-        }
-      }
-      // now double check the status of All and if it needs to be updated:
-      const allSame = Object.keys(drinks).every(drink => {
-        if (drink === 'All') return true
-        return drinks[drink].checked === drinkChecked
-      })
-      drinks = {
-        ...this.state.drinks,
-        [drinkName]: {
-          disabled: drinkDisabled,
-          checked: drinkChecked
-        },
-        All: {
-          disabled: false,
-          checked: allSame ? drinkChecked : false
-        }
-      }
-    }
-    this.setState({ drinks })
+    this.props.toggleDrink(this.props.filters.drinks, drinkName)
   }
   handleMetaClick = metaName => event => {
     this.props.togglePriceMeta(this.props.filters.priceMeta, metaName)
