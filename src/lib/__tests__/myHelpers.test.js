@@ -94,12 +94,25 @@ describe('myHelpers', () => {
     expect(myHelpers.stringTimeToNumber('12:00PM')).toEqual(12)
     expect(myHelpers.stringTimeToNumber('12:30PM')).toEqual(12.5)
   })
-
+  it('should convert number time to a string', () => {
+    expect(myHelpers.numTimeToString(10)).toEqual('10:00AM')
+    expect(myHelpers.numTimeToString(20.5)).toEqual('8:30PM')
+    expect(myHelpers.numTimeToString(0)).toEqual('12:00AM')
+    expect(myHelpers.numTimeToString(0.5)).toEqual('12:30AM')
+    expect(myHelpers.numTimeToString(12)).toEqual('12:00PM')
+    expect(myHelpers.numTimeToString(12.5)).toEqual('12:30PM')
+  })
   it('should convert a day into an int string', () => {
-    expect(myHelpers.stringDayToInt('Monday', days)).toEqual(0)
-    expect(myHelpers.stringDayToInt('tues', days)).toEqual(1)
-    expect(myHelpers.stringDayToInt('saturday', days)).toEqual(5)
-    expect(myHelpers.stringDayToInt('we', days)).toEqual(2)
+    expect(myHelpers.stringDayToNum('Monday', days)).toEqual(0)
+    expect(myHelpers.stringDayToNum('tues', days)).toEqual(1)
+    expect(myHelpers.stringDayToNum('saturday', days)).toEqual(5)
+    expect(myHelpers.stringDayToNum('we', days)).toEqual(2)
+  })
+  it('should convert a number day into a string', () => {
+    expect(myHelpers.numDayToStr(0, days)).toEqual('Monday')
+    expect(myHelpers.numDayToStr(1, days, 3)).toEqual('Tue')
+    expect(myHelpers.numDayToStr(5, days)).toEqual('Saturday')
+    expect(myHelpers.numDayToStr(2, days, 2)).toEqual('We')
   })
 
   it('should extrapolate times', () => {

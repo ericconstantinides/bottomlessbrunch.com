@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
-import { drinks, drinkIncludes } from '../../lib/enumerables'
-import { makeSliderHours, makeSliderPrices } from '../../lib/myHelpers'
+import * as filterActions from '../../actions/filterActions'
+
+import { drinks, drinkIncludes, days } from '../../lib/enumerables'
+import {
+  makeSliderHours,
+  makeSliderPrices,
+  makeDayMarks,
+  numTimeToString,
+  numDayToStr
+} from '../../lib/myHelpers'
 
 drinks.push('All')
 
-const days = {
-  0: 'Mon',
-  1: 'Tue',
-  2: 'Wed',
-  3: 'Thu',
-  4: 'Fri',
-  5: 'Sat',
-  6: 'Sun'
-}
 const prices = makeSliderPrices(0, 60)
-const hours = makeSliderHours(7, 17)
 
 const drinksObj = {}
 drinks.forEach((drink, i) => {
@@ -157,12 +156,17 @@ class VenueFilters extends Component {
     })
   }
   render () {
+    const { filters } = this.props
     const displayHours = this.state.hours[0] === this.state.hours[1]
-      ? hours[this.state.hours[0]]
-      : hours[this.state.hours[0]] + ' - ' + hours[this.state.hours[1]]
+      ? numTimeToString(this.state.hours[0])
+      : numTimeToString(this.state.hours[0]) +
+          ' - ' +
+          numTimeToString(this.state.hours[1])
     const displayDays = this.state.days[0] === this.state.days[1]
-      ? days[this.state.days[0]]
-      : days[this.state.days[0]] + ' - ' + days[this.state.days[1]]
+      ? numDayToStr(this.state.days[0], days)
+      : numDayToStr(this.state.days[0], days) +
+          ' - ' +
+          numDayToStr(this.state.days[1], days)
     const displayPrices = this.state.prices[0] === this.state.prices[1]
       ? '$' + this.state.prices[0]
       : '$' + this.state.prices[0] + ' - $' + this.state.prices[1]
@@ -177,16 +181,16 @@ class VenueFilters extends Component {
               Brunch Hours: {displayHours}
             </h4>
             <p className='VenueFilters__description'>
-              Brunch available for the selected hours but not necessarily all the hours
+              Brunch available for the selected hours but not necessarily all the selected hours
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
                 className='VenueFilters__slider'
-                min={7}
-                max={17}
-                marks={hours}
+                min={filters.timeStart}
+                max={filters.timeEnd}
+                marks={makeSliderHours(filters.timeStart, filters.timeEnd)}
                 onChange={this.handleTimeChange}
-                defaultValue={this.state.hours}
+                defaultValue={[filters.timeStart, filters.timeEnd]}
                 allowCross={false}
               />
             </div>
@@ -196,14 +200,14 @@ class VenueFilters extends Component {
               Brunch Days: {displayDays}
             </h4>
             <p className='VenueFilters__description'>
-              Brunch available for the selected days but not necessarily all the days
+              Brunch available on the selected days but not necessarily on all the selected days
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
                 className='VenueFilters__slider'
                 min={0}
                 max={6}
-                marks={days}
+                marks={makeDayMarks(days, 3)}
                 onChange={this.handleDayChange}
                 defaultValue={this.state.days}
                 allowCross={false}
@@ -242,5 +246,8 @@ class VenueFilters extends Component {
     )
   }
 }
+const mapStateToProps = ({ filters }) => {
+  return { filters }
+}
 
-export default VenueFilters
+export default connect(mapStateToProps, filterActions)(VenueFilters)

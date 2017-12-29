@@ -14,7 +14,7 @@ const reducers = {
   form: formReducer,
   ui: UiReducer,
   mainMap: MainMapReducer,
-  filter: FilterReducer,
+  filters: FilterReducer,
   admin: AdminReducer
 }
 

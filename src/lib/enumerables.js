@@ -424,6 +424,28 @@ module.exports = {
     'Drink + Buffet',
     'Drink + Full Course Meal'
   ],
+  drinkIncludesFull: {
+    'Drink Only': {
+      label: 'Drink Only',
+      disabled: false,
+      checked: true
+    },
+    'Drink + Entree': {
+      label: 'w/ Entree',
+      disabled: false,
+      checked: true
+    },
+    'Drink + Buffet': {
+      label: 'w/ Buffet',
+      disabled: false,
+      checked: true
+    },
+    'Drink + Full Course Meal': {
+      label: 'w/ Prix Fixe',
+      disabled: false,
+      checked: true
+    }
+  },
   states: [
     'AL',
     'AK',

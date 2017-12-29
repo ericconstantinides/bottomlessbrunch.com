@@ -515,7 +515,7 @@ export const extrapolateTimes = (times, daysEnum) => {
     timeItem.days.forEach(day => {
       output.push({
         category: timeItem.category,
-        day: stringDayToInt(day, daysEnum),
+        day: stringDayToNum(day, daysEnum),
         startTime: stringTimeToNumber(timeItem.startTime),
         endTime: stringTimeToNumber(timeItem.endTime)
       })
@@ -562,16 +562,68 @@ export const stringTimeToNumber = str => {
   const intTime = parseInt(strippedTime, 10)
   return intTime + decimalToAdd + milTimeToAdd
 }
-
 /**
- * Coverts a day string like "Saturday" to an like 6
+ * Coverts a number time like 20.5 to a string like "8:30PM"
  *
  * @export function
- * @param {string} str
+ * @param {float} num
  * @returns {string}
  */
-export const stringDayToInt = (day, allDays) => {
+export const numTimeToString = num => {
+  const colonPlus = num % 1 === 0 ? ':00' : ':30'
+  const fNum = Math.floor(num)
+  const nonMilTime = fNum === 0 ? 12 + fNum : fNum > 12 ? fNum - 12 : fNum
+  const amOrPm = num < 12 ? 'AM' : 'PM'
+  return nonMilTime + colonPlus + amOrPm
+}
+
+/**
+ * Coverts a day string like "Saturday" to string like 6
+ *
+ * @export function
+ * @param {string} day
+ * @param {array} array of days
+ * @returns {integer}
+ */
+export const stringDayToNum = (day, allDays) => {
   const smallDays = allDays.map(aDay => aDay.substring(0, 2).toLowerCase())
   const thisSmallDay = day.substring(0, 2).toLowerCase()
   return smallDays.indexOf(thisSmallDay)
+}
+
+/**
+ * Coverts a day number like 6 to a string like "Saturday"
+ *
+ * @export function
+ * @param {integer} number
+ * @param {array} array of days
+ * @param {length} - optional - length of day string
+ * @returns {string} day
+ */
+export const numDayToStr = (num, allDays, length) => {
+  if (length === undefined) return allDays[num]
+  return allDays[num].substring(0, length)
+}
+
+/**
+ * Make an array of labels into an object of checkbox-ready items
+ *
+ * @export function
+ * @param {array} arr
+ * @returns {object}
+ */
+export const toCheckboxObj = arr => {
+  const checkboxObj = {}
+  arr.forEach(item => {
+    checkboxObj[item] = {
+      label: item,
+      disabled: false,
+      checked: true
+    }
+  })
+  return checkboxObj
+}
+
+export const makeDayMarks = (days, length) => {
+  return days.map(day => day.substring(0, length))
 }
