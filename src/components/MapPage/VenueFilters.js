@@ -175,7 +175,7 @@ class VenueFilters extends Component {
               Brunch Hours: {displayHours}
             </h4>
             <p className='VenueFilters__description'>
-              Brunch available at some time within the selected hours
+              Brunch available at some time within the selected hours but not necessarily all hours
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
