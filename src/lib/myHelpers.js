@@ -393,10 +393,10 @@ export function getViewportOffset (bounds, drawer) {
   // now we add some padding and run fitzoom again:
 
   const pBounds = {}
-  pBounds.ne = {lat: bounds.ne.lat + pad, lng: bounds.ne.lng + pad}
-  pBounds.nw = {lat: bounds.nw.lat + pad, lng: bounds.nw.lng - pad}
-  pBounds.se = {lat: bounds.se.lat - pad, lng: bounds.se.lng + pad}
-  pBounds.sw = {lat: bounds.sw.lat - pad, lng: bounds.sw.lng - pad}
+  pBounds.ne = { lat: bounds.ne.lat + pad, lng: bounds.ne.lng + pad }
+  pBounds.nw = { lat: bounds.nw.lat + pad, lng: bounds.nw.lng - pad }
+  pBounds.se = { lat: bounds.se.lat - pad, lng: bounds.se.lng + pad }
+  pBounds.sw = { lat: bounds.sw.lat - pad, lng: bounds.sw.lng - pad }
 
   const fitted = fitBounds(pBounds, size)
 
@@ -404,7 +404,7 @@ export function getViewportOffset (bounds, drawer) {
     lat: fitted.center.lat - fudgeLat,
     lng: fitted.center.lng - fudgeLng
   }
-  return {center: returnCenter, zoom: fitted.zoom}
+  return { center: returnCenter, zoom: fitted.zoom }
 }
 
 export function getMarginBounds (bounds, browserSize) {
@@ -485,17 +485,41 @@ export const extrapolateDrinks = drinks => {
  * @param {array} cleansedDrinks
  * @returns {array} of drinks separated by the drinkIncludes title
  */
-export const extrapolateIncludes = (cleansedDrinks) => {
+export const extrapolateIncludes = cleansedDrinks => {
   const output = []
   drinkIncludes.forEach(title => {
     const items = cleansedDrinks.filter(drink => drink.includes === title)
     if (items.length) {
-      const fixedTitle = title.replace('Drink', 'Drinks').replace(' Only', '').replace('Full Course Meal', 'Prix Fixe')
+      const fixedTitle = title
+        .replace('Drink', 'Drinks')
+        .replace(' Only', '')
+        .replace('Full Course Meal', 'Prix Fixe')
       output.push({
         title: 'Bottomless ' + fixedTitle,
         items
       })
     }
+  })
+  return output
+}
+/**
+ * Extrapolates the date and times into flatter data
+ *
+ * @param {array} times
+ * @param {array} cleansedDrinks
+ * @returns {array} of drinks separated by the drinkIncludes title
+ */
+export const extrapolateTimes = (times, daysEnum) => {
+  let output = []
+  times.forEach(timeItem => {
+    timeItem.days.forEach(day => {
+      output.push({
+        category: timeItem.category,
+        day: stringDayToInt(day, daysEnum),
+        startTime: stringTimeToNumber(timeItem.startTime),
+        endTime: stringTimeToNumber(timeItem.endTime)
+      })
+    })
   })
   return output
 }
@@ -508,7 +532,7 @@ export const makeSliderHours = (start, end) => {
     } else if (i === 12) {
       hours[i] = i + 'PM'
     } else {
-      hours[i] = (i - 12) + 'PM'
+      hours[i] = i - 12 + 'PM'
     }
   }
   return hours
@@ -520,4 +544,34 @@ export const makeSliderPrices = (start, end, increment = 10) => {
     prices[i] = '$' + i
   }
   return prices
+}
+
+/**
+ * Coverts a time string like "8:30PM" to a float like 20.5
+ *
+ * @export function
+ * @param {string} str
+ * @returns {float}
+ */
+export const stringTimeToNumber = str => {
+  const decimalToAdd = str.includes(':30') ? 0.5 : 0
+  const milTimeToAdd = str.includes('12:') && str.includes('AM')
+    ? -12
+    : (str.includes('12:') && str.includes('PM')) || str.includes('AM') ? 0 : 12
+  const strippedTime = str.replace(':00', '').replace(':30', '')
+  const intTime = parseInt(strippedTime, 10)
+  return intTime + decimalToAdd + milTimeToAdd
+}
+
+/**
+ * Coverts a day string like "Saturday" to an like 6
+ *
+ * @export function
+ * @param {string} str
+ * @returns {string}
+ */
+export const stringDayToInt = (day, allDays) => {
+  const smallDays = allDays.map(aDay => aDay.substring(0, 2).toLowerCase())
+  const thisSmallDay = day.substring(0, 2).toLowerCase()
+  return smallDays.indexOf(thisSmallDay)
 }

@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 import constants from '../actions/types'
+import { extrapolateDrinks, extrapolateTimes } from '../lib/myHelpers'
+import { days } from '../lib/enumerables'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
@@ -36,7 +38,7 @@ export function fetchVenueDetail (
         }
         dispatch({
           type: constants.VENUE_FETCH_DETAIL,
-          payload: response.data
+          payload: makeFilterReady(response.data)
         })
       })
   }
@@ -88,4 +90,10 @@ export function deleteVenue (venueId, history) {
       // TODO: fix error stuff. It doesn't work:
       .catch(error => dispatch(apiError(error.response.data.error)))
   }
+}
+
+const makeFilterReady = venue => {
+  venue.normalizedDrinks = extrapolateDrinks(venue.funItems)
+  venue.normalizedTimes = extrapolateTimes(venue.funTimes, days)
+  return venue
 }

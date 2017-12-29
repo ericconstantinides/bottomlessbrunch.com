@@ -40,9 +40,11 @@ class VenueFilters extends Component {
     super(props)
     this.state = {
       activeClass: 'is-active',
+      // these are ranges:
       hours: [8, 16],
       days: [0, 6],
       prices: [0, 60],
+      // see these are checkboxes:
       drinks: drinksObj,
       pricesMeta
     }
@@ -163,7 +165,7 @@ class VenueFilters extends Component {
       : days[this.state.days[0]] + ' - ' + days[this.state.days[1]]
     const displayPrices = this.state.prices[0] === this.state.prices[1]
       ? '$' + this.state.prices[0]
-      : '$' + this.state.prices[0] + ' - ' + '$' + this.state.prices[1]
+      : '$' + this.state.prices[0] + ' - $' + this.state.prices[1]
     return (
       <div className={`VenueFilters ${this.state.activeClass}`}>
         <h3 className='VenueFilters__title' onClick={this.handleFiltersToggle}>
@@ -175,7 +177,7 @@ class VenueFilters extends Component {
               Brunch Hours: {displayHours}
             </h4>
             <p className='VenueFilters__description'>
-              Brunch available at some time within the selected hours but not necessarily all hours
+              Brunch available for the selected hours but not necessarily all the hours
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
@@ -194,7 +196,7 @@ class VenueFilters extends Component {
               Brunch Days: {displayDays}
             </h4>
             <p className='VenueFilters__description'>
-              Brunch available at least one of the selected days
+              Brunch available for the selected days but not necessarily all the days
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
