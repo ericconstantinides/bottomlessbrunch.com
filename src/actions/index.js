@@ -7,6 +7,7 @@ export * from './yDataActions'
 export * from './uiActions'
 export * from './mainMapActions'
 export * from './adminActions'
+export * from './filterActions'
 
 export function apiError (error) {
   return {

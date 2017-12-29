@@ -4,6 +4,7 @@ import VenuesReducer from './VenuesReducer'
 import EditVenueFieldsReducer from './EditVenueFieldsReducer'
 import UiReducer from './UiReducer'
 import MainMapReducer from './MainMapReducer'
+import FilterReducer from './FilterReducer'
 import AdminReducer from './AdminReducer'
 
 const reducers = {
@@ -13,6 +14,7 @@ const reducers = {
   form: formReducer,
   ui: UiReducer,
   mainMap: MainMapReducer,
+  filter: FilterReducer,
   admin: AdminReducer
 }
 
