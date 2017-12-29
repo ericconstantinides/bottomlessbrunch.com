@@ -7,16 +7,14 @@ import * as filterActions from '../../actions/filterActions'
 
 import { drinks, drinkIncludes, days } from '../../lib/enumerables'
 import {
-  makeSliderHours,
-  makeSliderPrices,
+  makeTimeMarks,
+  makePriceMarks,
   makeDayMarks,
   numTimeToString,
   numDayToStr
 } from '../../lib/myHelpers'
 
 drinks.push('All')
-
-const prices = makeSliderPrices(0, 60)
 
 const drinksObj = {}
 drinks.forEach((drink, i) => {
@@ -55,13 +53,13 @@ class VenueFilters extends Component {
     this.setState({ activeClass })
   }
   handleTimeChange = hours => {
-    this.setState({ hours })
+    this.props.updateFilter({ timeStart: hours[0], timeEnd: hours[1] })
   }
   handleDayChange = days => {
-    this.setState({ days })
+    this.props.updateFilter({ dayStart: days[0], dayEnd: days[1] })
   }
   handlePriceChange = prices => {
-    this.setState({ prices })
+    this.props.updateFilter({ priceStart: prices[0], priceEnd: prices[1] })
   }
   handleDrinkClick = drinkName => event => {
     const drinkChecked = !this.state.drinks[drinkName].checked
@@ -101,32 +99,21 @@ class VenueFilters extends Component {
     }
     this.setState({ drinks })
   }
-  handleMetaClick = meta => event => {
-    const pricesMeta = {
-      ...this.state.pricesMeta,
-      [meta]: {
-        disabled: this.state.pricesMeta[meta].disabled,
-        checked: !this.state.pricesMeta[meta].checked
-      }
-    }
-    this.setState({ pricesMeta })
+  handleMetaClick = metaName => event => {
+    this.props.togglePriceMeta(this.props.filters.priceMeta, metaName)
   }
   renderDrinks = () => {
-    return drinks.map((drink, i) => {
+    return Object.entries(
+      this.props.filters.drinks
+    ).map(([drink, drinkObj], i) => {
       return (
         <div className='VenueFilters__checkbox' key={i}>
-          <label
-            className='VenueFilters__label'
-            disabled={this.state.drinks[drink].disabled}
-          >
+          <label className='VenueFilters__label' disabled={drinkObj.disabled}>
             <input
               name={drink}
               type='checkbox'
-              disabled={this.state.drinks[drink].disabled}
-              checked={
-                this.state.drinks[drink].checked &&
-                  !this.state.drinks[drink].disabled
-              }
+              disabled={drinkObj.disabled}
+              checked={drinkObj.checked && !drinkObj.disabled}
               onChange={this.handleDrinkClick(drink)}
             />
             {drink}
@@ -136,7 +123,9 @@ class VenueFilters extends Component {
     })
   }
   renderPricesMeta = () => {
-    return Object.entries(this.state.pricesMeta).map(([meta, metaObj], i) => {
+    return Object.entries(
+      this.props.filters.priceMeta
+    ).map(([meta, metaObj], i) => {
       return (
         <div className='VenueFilters__checkbox' key={i}>
           <label className='VenueFilters__label' disabled={metaObj.disabled}>
@@ -147,9 +136,7 @@ class VenueFilters extends Component {
               checked={metaObj.checked && !metaObj.disabled}
               onChange={this.handleMetaClick(meta)}
             />
-            {meta
-              .replace('Drink +', 'w/')
-              .replace('Full Course Meal', 'Prix Fixe')}
+            {metaObj.label}
           </label>
         </div>
       )
@@ -157,19 +144,19 @@ class VenueFilters extends Component {
   }
   render () {
     const { filters } = this.props
-    const displayHours = this.state.hours[0] === this.state.hours[1]
-      ? numTimeToString(this.state.hours[0])
-      : numTimeToString(this.state.hours[0]) +
+    const displayHours = filters.timeStart === filters.timeEnd
+      ? numTimeToString(filters.timeStart)
+      : numTimeToString(filters.timeStart) +
           ' - ' +
-          numTimeToString(this.state.hours[1])
-    const displayDays = this.state.days[0] === this.state.days[1]
-      ? numDayToStr(this.state.days[0], days)
-      : numDayToStr(this.state.days[0], days) +
+          numTimeToString(filters.timeEnd)
+    const displayDays = filters.dayStart === filters.dayEnd
+      ? numDayToStr(filters.dayStart, days)
+      : numDayToStr(filters.dayStart, days) +
           ' - ' +
-          numDayToStr(this.state.days[1], days)
-    const displayPrices = this.state.prices[0] === this.state.prices[1]
-      ? '$' + this.state.prices[0]
-      : '$' + this.state.prices[0] + ' - $' + this.state.prices[1]
+          numDayToStr(filters.dayEnd, days)
+    const displayPrices = filters.priceStart === filters.priceEnd
+      ? '$' + filters.priceStart
+      : '$' + filters.priceStart + ' - $' + filters.priceEnd
     return (
       <div className={`VenueFilters ${this.state.activeClass}`}>
         <h3 className='VenueFilters__title' onClick={this.handleFiltersToggle}>
@@ -186,11 +173,11 @@ class VenueFilters extends Component {
             <div className='VenueFilters__slider-container'>
               <Range
                 className='VenueFilters__slider'
-                min={filters.timeStart}
-                max={filters.timeEnd}
-                marks={makeSliderHours(filters.timeStart, filters.timeEnd)}
+                min={filters.timeMin}
+                max={filters.timeMax}
+                marks={makeTimeMarks(filters.timeMin, filters.timeMax)}
                 onChange={this.handleTimeChange}
-                defaultValue={[filters.timeStart, filters.timeEnd]}
+                defaultValue={[filters.timeMin, filters.timeMax]}
                 allowCross={false}
               />
             </div>
@@ -205,11 +192,11 @@ class VenueFilters extends Component {
             <div className='VenueFilters__slider-container'>
               <Range
                 className='VenueFilters__slider'
-                min={0}
-                max={6}
+                min={filters.dayMin}
+                max={filters.dayMax}
                 marks={makeDayMarks(days, 3)}
                 onChange={this.handleDayChange}
-                defaultValue={this.state.days}
+                defaultValue={[filters.dayMin, filters.dayMax]}
                 allowCross={false}
               />
             </div>
@@ -224,11 +211,11 @@ class VenueFilters extends Component {
             <div className='VenueFilters__slider-container'>
               <Range
                 className='VenueFilters__slider'
-                min={0}
-                max={60}
-                marks={prices}
+                min={filters.priceMin}
+                max={filters.priceMax}
+                marks={makePriceMarks(filters.priceMin, filters.priceMax)}
                 onChange={this.handlePriceChange}
-                defaultValue={this.state.prices}
+                defaultValue={[filters.priceMin, filters.priceMax]}
                 allowCross={false}
               />
             </div>

@@ -524,21 +524,15 @@ export const extrapolateTimes = (times, daysEnum) => {
   return output
 }
 
-export const makeSliderHours = (start, end) => {
+export const makeTimeMarks = (start, end) => {
   const hours = {}
   for (let i = start; i <= end; i++) {
-    if (i < 12) {
-      hours[i] = i + 'AM'
-    } else if (i === 12) {
-      hours[i] = i + 'PM'
-    } else {
-      hours[i] = i - 12 + 'PM'
-    }
+    hours[i] = numTimeToString(i, true)
   }
   return hours
 }
 
-export const makeSliderPrices = (start, end, increment = 10) => {
+export const makePriceMarks = (start, end, increment = 10) => {
   const prices = {}
   for (let i = start; i <= end; i += increment) {
     prices[i] = '$' + i
@@ -567,10 +561,11 @@ export const stringTimeToNumber = str => {
  *
  * @export function
  * @param {float} num
+ * @param {boolean} short
  * @returns {string}
  */
-export const numTimeToString = num => {
-  const colonPlus = num % 1 === 0 ? ':00' : ':30'
+export const numTimeToString = (num, short = false) => {
+  const colonPlus = num % 1 !== 0 ? ':30' : short ? '' : ':00'
   const fNum = Math.floor(num)
   const nonMilTime = fNum === 0 ? 12 + fNum : fNum > 12 ? fNum - 12 : fNum
   const amOrPm = num < 12 ? 'AM' : 'PM'
@@ -625,5 +620,9 @@ export const toCheckboxObj = arr => {
 }
 
 export const makeDayMarks = (days, length) => {
-  return days.map(day => day.substring(0, length))
+  const output = {}
+  days.forEach((day, i) => {
+    output[i] = day.substring(0, length)
+  })
+  return output
 }
