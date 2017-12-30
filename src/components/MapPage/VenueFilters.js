@@ -117,7 +117,7 @@ class VenueFilters extends Component {
               Brunch Hours: {displayHours}
             </h4>
             <p className='VenueFilters__description'>
-              Brunch available for the selected hours but not necessarily all the selected hours
+              Brunch available for some of the selected hours but not necessarily all the selected hours
             </p>
             <div className='VenueFilters__slider-container'>
               <Range
@@ -128,6 +128,7 @@ class VenueFilters extends Component {
                 onChange={this.handleTimeChange}
                 defaultValue={[filters.timeMin, filters.timeMax]}
                 allowCross={false}
+                pushable
               />
             </div>
           </div>
@@ -136,7 +137,7 @@ class VenueFilters extends Component {
               Brunch Days: {displayDays}
             </h4>
             <p className='VenueFilters__description'>
-              Brunch available on the selected days but not necessarily on all the selected days
+              Brunch available at least one of the selected days but not necessarily all the selected days
             </p>
             <div className='VenueFilters__slider-container'>
               <Range

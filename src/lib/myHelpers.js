@@ -643,3 +643,12 @@ export const makeFilterReady = (venue, callback) => {
 export const checkFiltered = (visVenuesArr, _id) => {
   return visVenuesArr.some(venue => (venue._id === _id && venue.filtered))
 }
+
+export const timeWithin = (a, b, rangeLow, rangeHi) => {
+  return rangeLow >= b || rangeHi <= a
+}
+
+export const dayWithin = (day, dayLow, dayHi) => {
+  console.log(day, dayLow, dayHi)
+  return dayLow > day || dayHi < day
+}

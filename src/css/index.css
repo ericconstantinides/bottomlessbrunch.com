@@ -2555,7 +2555,9 @@ body.body--VenueSlider #root,
 
 .VenueTeaser.is-filtered {
   opacity: 0 !important;
-  height: 0 !important; }
+  height: 0 !important;
+  margin-top: 0;
+  margin-bottom: 0; }
 
 .Marker {
   transform: translateY(-100%); }

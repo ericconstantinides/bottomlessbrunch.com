@@ -5,7 +5,9 @@ import {
   getViewportOffset,
   getMarginBounds,
   getRegionByPath,
-  parsePath
+  parsePath,
+  timeWithin,
+  dayWithin
 } from '../lib/myHelpers'
 
 // I will get the slug from the path and also the storage to figure
@@ -220,25 +222,24 @@ export const setMainMapFilteredVenues = (filters, venues, visibleVenues) => {
   const filteredVenues = visibleVenues.map(({ _id, filtered }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
     // Filter out by Time:
-    const newFiltered = normalizedTimes.every(time => {
-      return (
-        !((time.startTime >= filters.timeStart &&
-          time.startTime <= filters.timeEnd) ||
-        (time.endTime >= filters.timeStart && time.endTime <= filters.timeEnd))
-      )
-    })
-    return {
-      _id,
-      filtered: newFiltered
-    }
-
+    let newFiltered = normalizedTimes.every(day =>
+      timeWithin(day.startTime, day.endTime, filters.timeStart, filters.timeEnd)
+    )
+    if (newFiltered) return { _id, filtered: newFiltered }
     // Filter out by Day:
+    newFiltered = normalizedTimes.every(day => (
+      dayWithin(day.day, filters.dayStart, filters.dayEnd)
+    ))
+    if (newFiltered) return { _id, filtered: newFiltered }
 
     // Filter out by Price:
 
     // Filter out by priceMeta:
 
     // Filter out by drinks:
+
+    // return what we got:
+    return { _id, filtered: false }
   })
   return {
     type: constants.MAIN_MAP_SET_FILTERED_VENUES,
