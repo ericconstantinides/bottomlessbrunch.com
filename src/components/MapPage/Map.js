@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import _ from 'lodash'
 
 import * as actions from '../../actions'
-import { closeEnough } from '../../lib/myHelpers'
+import { closeEnough, checkFiltered } from '../../lib/myHelpers'
 import mapStyle from '../../mapStyles/bottomlessbrunch.json'
 
 import VenueTeaser from './VenueTeaser'
@@ -95,6 +95,10 @@ class Map extends Component {
             {...venue}
             lat={venue.lat}
             lng={venue.lng}
+            filtered={checkFiltered(
+              this.props.mainMap.visibleVenuesArr,
+              venue._id
+            )}
             handleMouseOver={this.props.handleMouseOver}
             handleMouseLeave={this.props.handleMouseLeave}
             toggleMarkerClick={this.props.toggleMarkerClick}
@@ -243,7 +247,7 @@ class Map extends Component {
       >
         {this.renderVenueTeasers()}
         {this.renderRegionMarkers()}
-        {/* 
+        {/*
         {this.debugMarginBounds()}
         {this.debugMarginCenter()}
         {this.debugRegionCenter()}

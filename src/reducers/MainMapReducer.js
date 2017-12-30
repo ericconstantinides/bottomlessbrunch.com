@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import constants from '../actions/types'
 import { USA_MAP_COORDS } from '../config'
 
@@ -34,7 +35,7 @@ export default function (state = initialState, action) {
       } = action.payload
       return {
         ...state,
-        visibleVenuesArr,
+        visibleVenuesArr: _.cloneDeep(visibleVenuesArr),
         visibleRegionsObj,
         regionTitle,
         regionReset
@@ -47,6 +48,8 @@ export default function (state = initialState, action) {
         regionTitle: action.payload,
         regionReset: ''
       }
+    case constants.MAIN_MAP_SET_FILTERED_VENUES:
+      return { ...state, visibleVenuesArr: _.cloneDeep(action.payload) }
     default:
       return state
   }

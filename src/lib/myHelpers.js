@@ -1,6 +1,6 @@
 import { fitBounds } from 'google-map-react/utils'
 import { DRAWER } from '../config'
-import { drinkIncludes } from '../lib/enumerables'
+import { drinkIncludes, days } from '../lib/enumerables'
 import _ from 'lodash'
 
 /**
@@ -625,4 +625,21 @@ export const makeDayMarks = (days, length) => {
     output[i] = day.substring(0, length)
   })
   return output
+}
+
+export const makeFilterReady = (venue, callback) => {
+  if (!venue.normalizedDrinks) {
+    venue.normalizedDrinks = extrapolateDrinks(venue.funItems)
+  }
+  if (!venue.normalizedTimes) {
+    venue.normalizedTimes = extrapolateTimes(venue.funTimes, days)
+  }
+  if (callback) {
+    callback(venue)
+  }
+  return venue
+}
+
+export const checkFiltered = (visVenuesArr, _id) => {
+  return visVenuesArr.some(venue => (venue._id === _id && venue.filtered))
 }

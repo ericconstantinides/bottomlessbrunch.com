@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Range } from 'rc-slider'
+import _ from 'lodash'
 import 'rc-slider/assets/index.css'
 
 import * as filterActions from '../../actions/filterActions'
+import { setMainMapFilteredVenues } from '../../actions/mainMapActions'
 
 import { days } from '../../lib/enumerables'
 import {
@@ -18,6 +20,15 @@ class VenueFilters extends Component {
   constructor (props) {
     super(props)
     this.state = { activeClass: 'is-active' }
+  }
+  componentWillReceiveProps = nextProps => {
+    if (!_.isEqual(this.props.filters, nextProps.filters)) {
+      nextProps.setMainMapFilteredVenues(
+        nextProps.filters,
+        nextProps.venues,
+        nextProps.mainMap.visibleVenuesArr
+      )  
+    }
   }
   handleFiltersToggle = () => {
     const activeClass = this.state.activeClass === 'not-active'
@@ -171,8 +182,11 @@ class VenueFilters extends Component {
     )
   }
 }
-const mapStateToProps = ({ filters }) => {
-  return { filters }
+const mapStateToProps = ({ filters, venues, mainMap }) => {
+  return { filters, venues, mainMap }
 }
 
-export default connect(mapStateToProps, filterActions)(VenueFilters)
+export default connect(mapStateToProps, {
+  ...filterActions,
+  setMainMapFilteredVenues
+})(VenueFilters)

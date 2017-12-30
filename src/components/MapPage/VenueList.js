@@ -30,16 +30,17 @@ class VenueList extends Component {
           <div className='VenueList__inner-handle' />
         </div>
         <VenueFilters />
-        {this.props.mainMap.visibleVenuesArr.map((id, index) => (
+        {this.props.mainMap.visibleVenuesArr.map(({ _id, filtered }) => (
           <VenueTeaser
-            key={id}
+            key={_id}
             altClass='VenueListItem'
             handleMouseOver={this.props.handleMouseOver}
             handleMouseLeave={this.props.handleMouseLeave}
             toggleMarkerClick={this.props.toggleMarkerClick}
             hoveredVenue={this.props.hoveredVenue}
-            venue={this.props.venues[id]}
-            regionSlug={this.props.regions[this.props.venues[id].regionId].slug}
+            venue={this.props.venues[_id]}
+            filtered={filtered}
+            regionSlug={this.props.regions[this.props.venues[_id].regionId].slug}
             handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
             />
         ))}

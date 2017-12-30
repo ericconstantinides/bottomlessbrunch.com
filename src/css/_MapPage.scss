@@ -218,6 +218,13 @@ body.body--VenueSlider #root,
 .VenueTeaser.is-hovered {
   z-index: 1;
 }
+.VenueTeaser {
+  transition: 0.25s opacity, 0s 0.25s height;
+}
+.VenueTeaser.is-filtered {
+  opacity: 0 !important;
+  height: 0 !important;
+}
 .Marker {
   transform: translateY(-100%);
 }

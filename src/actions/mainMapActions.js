@@ -100,7 +100,10 @@ export function getMainMapVisibleVenues (
         venue.lng >= sw.lng
       ) {
         // add the venue to the visibleVenuesArr:
-        visibleVenuesArr.push(venue._id)
+        visibleVenuesArr.push({
+          _id: venue._id,
+          filtered: false
+        })
         // VISIBLE REGIONS LOGIC:
         // check if this region has been recorded yet:
         if (!visibleRegionsObj[venue.regionId]) {
@@ -186,10 +189,12 @@ export function getMainMapVisibleVenues (
         regionTitle = 'Multiple Regions'
       }
     }
-    visibleVenuesArr.sort((idA, idB) => (
-        (Math.abs(venues[idB].lat) + Math.abs(venues[idB].lng)) -
-        (Math.abs(venues[idA].lat) + Math.abs(venues[idA].lng))
-    ))
+    visibleVenuesArr.sort(
+      (idA, idB) =>
+        Math.abs(venues[idB._id].lat) +
+        Math.abs(venues[idB._id].lng) -
+        (Math.abs(venues[idA._id].lat) + Math.abs(venues[idA._id].lng))
+    )
     return {
       type: constants.MAIN_MAP_SET_VISIBLE_VENUES_AND_REGIONS,
       payload: {
@@ -208,5 +213,35 @@ export function getMainMapVisibleVenues (
       type: constants.MAIN_MAP_SET_ONLY_REGIONS,
       payload: regionTitle
     }
+  }
+}
+
+export const setMainMapFilteredVenues = (filters, venues, visibleVenues) => {
+  const filteredVenues = visibleVenues.map(({ _id, filtered }) => {
+    const { normalizedTimes, normalizedDrinks } = venues[_id]
+    // Filter out by Time:
+    const newFiltered = normalizedTimes.every(time => {
+      return (
+        !((time.startTime >= filters.timeStart &&
+          time.startTime <= filters.timeEnd) ||
+        (time.endTime >= filters.timeStart && time.endTime <= filters.timeEnd))
+      )
+    })
+    return {
+      _id,
+      filtered: newFiltered
+    }
+
+    // Filter out by Day:
+
+    // Filter out by Price:
+
+    // Filter out by priceMeta:
+
+    // Filter out by drinks:
+  })
+  return {
+    type: constants.MAIN_MAP_SET_FILTERED_VENUES,
+    payload: filteredVenues
   }
 }

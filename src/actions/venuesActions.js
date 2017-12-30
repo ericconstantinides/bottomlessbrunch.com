@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 import constants from '../actions/types'
-import { extrapolateDrinks, extrapolateTimes } from '../lib/myHelpers'
-import { days } from '../lib/enumerables'
+import { makeFilterReady } from '../lib/myHelpers'
 import { ROOT_URL } from '../config'
 import { apiError } from './index'
 
@@ -12,7 +11,7 @@ export function fetchVenues (calcRegionsMeta) {
       // add the minimal fetched level:
       const venues = response.data.map(venue => {
         venue.fetchedLevel = 'minimal'
-        return venue
+        return makeFilterReady(venue)
       })
       // calling calcRegionsMeta
       calcRegionsMeta(venues)
@@ -90,10 +89,4 @@ export function deleteVenue (venueId, history) {
       // TODO: fix error stuff. It doesn't work:
       .catch(error => dispatch(apiError(error.response.data.error)))
   }
-}
-
-const makeFilterReady = venue => {
-  venue.normalizedDrinks = extrapolateDrinks(venue.funItems)
-  venue.normalizedTimes = extrapolateTimes(venue.funTimes, days)
-  return venue
 }

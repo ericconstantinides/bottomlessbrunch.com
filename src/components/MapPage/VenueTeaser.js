@@ -23,7 +23,8 @@ class VenueTeaser extends Component {
     if (
       this.state.isActive !== nextState.isActive ||
       this.state.isPositioned !== nextState.isPositioned ||
-      this.props.venue.fetchedLevel !== nextProps.venue.fetchedLevel
+      this.props.venue.fetchedLevel !== nextProps.venue.fetchedLevel ||
+      this.props.filtered !== nextProps.filtered
     ) {
       return true
     }
@@ -68,10 +69,12 @@ class VenueTeaser extends Component {
       handleMouseOver,
       handleMouseLeave,
       toggleMarkerClick,
-      altClass
+      altClass,
+      filtered
     } = this.props
     const hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
     const side = this.state.teaserSide === 'right' ? 'is-right' : 'is-left'
+    const filterClass = filtered ? 'is-filtered' : 'not-filtered'
 
     const offsetStyles = altClass === 'MapItem'
       ? { transform: `translateY(${this.state.offVert}px)` }
@@ -79,7 +82,7 @@ class VenueTeaser extends Component {
     // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     return (
       <article
-        className={`VenueTeaser ${altClass} ${hovered} ${side}`}
+        className={`VenueTeaser ${altClass} ${hovered} ${side} ${filterClass}`}
         onMouseEnter={handleMouseOver(venue)}
         onMouseLeave={handleMouseLeave(venue)}
         onClick={toggleMarkerClick(venue, altClass)}

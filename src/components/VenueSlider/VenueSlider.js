@@ -71,7 +71,7 @@ class VenueSlider extends Component {
         visVenues[current],
         visVenues[next],
         visVenues[prev]
-      ].forEach(venueId => {
+      ].forEach(({_id: venueId}) => {
         if (!this.state.fetchedGData[venueId]) {
           let fetchedGData = this.state.fetchedGData
           fetchedGData[venueId] = venueId
@@ -101,7 +101,7 @@ class VenueSlider extends Component {
       history,
       setUiVenueSliderPosition
     } = this.props
-    setUiVenueSliderPosition(visVenues[sliderPos], visVenues, venues, history)
+    setUiVenueSliderPosition(visVenues[sliderPos]._id, visVenues, venues, history)
   }
   handleShare = service => event => {
     console.log(service)
@@ -114,7 +114,7 @@ class VenueSlider extends Component {
     const { sliderPosition } = this.props.ui
     const prevPointer = movePointer(visVenues, sliderPosition, 'prev')
     const nextPointer = movePointer(visVenues, sliderPosition, 'next')
-    const sliderItems = visVenues.map((venueId, index) => {
+    const sliderItems = visVenues.map(({_id: venueId}, index) => {
       const venue = this.props.venues[venueId]
       return (
         <VenueSliderItem

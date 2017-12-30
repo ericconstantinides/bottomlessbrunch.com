@@ -28,7 +28,12 @@ export function setUiActiveRegion (regionId) {
 }
 
 export function setUiVenueSliderPosition (_id, visVenues, venues, history) {
-  const pointer = visVenues.indexOf(_id)
+  let pointer
+  visVenues.forEach((venue, i) => {
+    if (venue._id === _id) {
+      pointer = i
+    }
+  })
   if (history) {
     history.push('/' + venues[_id].slug)
   }
