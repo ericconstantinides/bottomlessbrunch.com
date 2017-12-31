@@ -509,13 +509,14 @@ export const extrapolateIncludes = cleansedDrinks => {
  * @param {array} cleansedDrinks
  * @returns {array} of drinks separated by the drinkIncludes title
  */
-export const extrapolateTimes = (times, daysEnum) => {
+export const extrapolateTimes = (times, daysEnm, cat = 'Bottomless Brunch') => {
   let output = []
   times.forEach(timeItem => {
     timeItem.days.forEach(day => {
+      if (timeItem.category !== cat) return
       output.push({
         category: timeItem.category,
-        day: stringDayToNum(day, daysEnum),
+        day: stringDayToNum(day, daysEnm),
         startTime: stringTimeToNumber(timeItem.startTime),
         endTime: stringTimeToNumber(timeItem.endTime)
       })
@@ -654,7 +655,7 @@ export const timeWithin = (a, b, rangeLow, rangeHi) => {
   return rangeLow >= b || rangeHi <= a
 }
 
-export const dayWithin = (day, dayLow, dayHi, dayCat = 'Bottomless Brunch') => {
+export const dayWithin = (day, dayLow, dayHi) => {
   return dayLow > day || dayHi < day
 }
 
