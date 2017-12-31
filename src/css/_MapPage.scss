@@ -219,13 +219,14 @@ body.body--VenueSlider #root,
   z-index: 1;
 }
 .VenueTeaser {
-  transition: 0.25s opacity, 0s 0.25s height;
+  // transition: 0.25s opacity, 0s 0.25s height;
 }
 .VenueTeaser.is-filtered {
-  opacity: 0 !important;
-  height: 0 !important;
-  margin-top: 0;
-  margin-bottom: 0;
+  display: none !important;
+  // opacity: 0 !important;
+  // height: 0 !important;
+  // margin-top: 0;
+  // margin-bottom: 0;
 }
 .Marker {
   transform: translateY(-100%);

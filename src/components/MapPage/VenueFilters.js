@@ -22,12 +22,18 @@ class VenueFilters extends Component {
     this.state = { activeClass: 'is-active' }
   }
   componentWillReceiveProps = nextProps => {
-    if (!_.isEqual(this.props.filters, nextProps.filters)) {
+    if (
+      !_.isEqual(this.props.filters, nextProps.filters) ||
+      !_.isEqual(
+        this.props.mainMap.visibleVenuesArr,
+        nextProps.mainMap.visibleVenuesArr
+      )
+    ) {
       nextProps.setMainMapFilteredVenues(
         nextProps.filters,
         nextProps.venues,
         nextProps.mainMap.visibleVenuesArr
-      )  
+      )
     }
   }
   handleFiltersToggle = () => {
