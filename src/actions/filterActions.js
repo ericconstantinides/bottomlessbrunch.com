@@ -13,14 +13,14 @@ export const updateFilter = filtersObj => {
   }
 }
 
-export const togglePriceMeta = (oldPriceMeta, meta) => {
-  const priceMeta = {
-    ...oldPriceMeta,
-    [meta]: { ...oldPriceMeta[meta], checked: !oldPriceMeta[meta].checked }
+export const togglePriceMeta = oldIncludeDrinkWithMealPrices => {
+  const includeDrinkWithMealPrices = {
+    ...oldIncludeDrinkWithMealPrices,
+    checked: !oldIncludeDrinkWithMealPrices.checked
   }
   return {
     type: constants.FILTER_UPDATE,
-    payload: { priceMeta }
+    payload: { includeDrinkWithMealPrices }
   }
 }
 

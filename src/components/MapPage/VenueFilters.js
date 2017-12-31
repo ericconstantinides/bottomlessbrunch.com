@@ -49,7 +49,7 @@ class VenueFilters extends Component {
     this.props.toggleDrink(this.props.filters.drinks, drinkName)
   }
   handleMetaClick = metaName => event => {
-    this.props.togglePriceMeta(this.props.filters.priceMeta, metaName)
+    this.props.togglePriceMeta(this.props.filters.includeDrinkWithMealPrices)
   }
   renderDrinks = () => {
     return Object.entries(
@@ -72,24 +72,21 @@ class VenueFilters extends Component {
     })
   }
   renderPricesMeta = () => {
-    return Object.entries(
-      this.props.filters.priceMeta
-    ).map(([meta, metaObj], i) => {
-      return (
-        <div className='VenueFilters__checkbox' key={i}>
-          <label className='VenueFilters__label' disabled={metaObj.disabled}>
-            <input
-              name={meta}
-              type='checkbox'
-              disabled={metaObj.disabled}
-              checked={metaObj.checked && !metaObj.disabled}
-              onChange={this.handleMetaClick(meta)}
-            />
-            {metaObj.label}
-          </label>
-        </div>
-      )
-    })
+    const { includeDrinkWithMealPrices: incMeal } = this.props.filters
+    return (
+      <div className='VenueFilters__checkbox u-d-b'>
+        <label className='VenueFilters__label' disabled={incMeal.disabled}>
+          <input
+            name='includeDrinkWithMealPrices'
+            type='checkbox'
+            disabled={incMeal.disabled}
+            checked={incMeal.checked && !incMeal.disabled}
+            onChange={this.handleMetaClick()}
+          />
+          <span>Include <strong>"Drink + Meal"</strong> Prices</span>
+        </label>
+      </div>
+    )
   }
   render () {
     const { filters } = this.props
@@ -116,7 +113,7 @@ class VenueFilters extends Component {
             <h4 className='VenueFilters__item-title'>
               Brunch Hours: {displayHours}
             </h4>
-            <p className='VenueFilters__description'>
+            <p className='VenueFilters__description u-hide'>
               Brunch available for some of the selected hours but not necessarily all the selected hours
             </p>
             <div className='VenueFilters__slider-container'>
@@ -136,7 +133,7 @@ class VenueFilters extends Component {
             <h4 className='VenueFilters__item-title'>
               Brunch Days: {displayDays}
             </h4>
-            <p className='VenueFilters__description'>
+            <p className='VenueFilters__description u-hide'>
               Brunch available at least one of the selected days but not necessarily all the selected days
             </p>
             <div className='VenueFilters__slider-container'>
@@ -155,7 +152,7 @@ class VenueFilters extends Component {
             <h4 className='VenueFilters__item-title'>
               Bottomless Brunch Price: {displayPrices}
             </h4>
-            <div className='VenueFilters__horz width-25 u-mb-0_5'>
+            <div className='u-mb-0_5'>
               {this.renderPricesMeta()}
             </div>
             <div className='VenueFilters__slider-container'>

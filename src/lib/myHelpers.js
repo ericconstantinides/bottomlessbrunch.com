@@ -524,6 +524,12 @@ export const extrapolateTimes = (times, daysEnum) => {
   return output
 }
 
+export const simplifyIncludes = drinks => {
+  return drinks.map(drink => (
+    {...drink, priceIncludesFood: drink.includes !== 'Drink Only'}
+  ))
+}
+
 export const makeTimeMarks = (start, end) => {
   const hours = {}
   for (let i = start; i <= end; i++) {
@@ -629,7 +635,7 @@ export const makeDayMarks = (days, length) => {
 
 export const makeFilterReady = (venue, callback) => {
   if (!venue.normalizedDrinks) {
-    venue.normalizedDrinks = extrapolateDrinks(venue.funItems)
+    venue.normalizedDrinks = simplifyIncludes(extrapolateDrinks(venue.funItems))
   }
   if (!venue.normalizedTimes) {
     venue.normalizedTimes = extrapolateTimes(venue.funTimes, days)
@@ -648,7 +654,14 @@ export const timeWithin = (a, b, rangeLow, rangeHi) => {
   return rangeLow >= b || rangeHi <= a
 }
 
-export const dayWithin = (day, dayLow, dayHi) => {
-  console.log(day, dayLow, dayHi)
+export const dayWithin = (day, dayLow, dayHi, dayCat = 'Bottomless Brunch') => {
   return dayLow > day || dayHi < day
+}
+
+export const priceWithin = (price, priceLow, priceHi) => {
+  return priceLow > price || priceHi < price
+}
+
+export const drinkWithin = (drink, drinkFilters) => {
+  return !drinkFilters[drink].checked
 }

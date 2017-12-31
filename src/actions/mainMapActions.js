@@ -7,7 +7,9 @@ import {
   getRegionByPath,
   parsePath,
   timeWithin,
-  dayWithin
+  dayWithin,
+  priceWithin,
+  drinkWithin
 } from '../lib/myHelpers'
 
 // I will get the slug from the path and also the storage to figure
@@ -233,10 +235,21 @@ export const setMainMapFilteredVenues = (filters, venues, visibleVenues) => {
     if (newFiltered) return { _id, filtered: newFiltered }
 
     // Filter out by Price:
+    newFiltered = normalizedDrinks.every(drink => (
+      priceWithin(drink.price, filters.priceStart, filters.priceEnd)
+    ))
+    if (newFiltered) return { _id, filtered: newFiltered }
 
     // Filter out by priceMeta:
-
+    if (!filters.includeDrinkWithMealPrices.checked) {
+      newFiltered = normalizedDrinks.every(drink => drink.priceIncludesFood)
+      if (newFiltered) return { _id, filtered: newFiltered }
+    }
     // Filter out by drinks:
+    newFiltered = normalizedDrinks.every(drink => (
+      drinkWithin(drink.drink, filters.drinks)
+    ))
+    if (newFiltered) return { _id, filtered: newFiltered }
 
     // return what we got:
     return { _id, filtered: false }

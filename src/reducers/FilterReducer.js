@@ -1,5 +1,5 @@
 import constants from '../actions/types'
-import { drinkIncludesFull, drinks } from '../lib/enumerables'
+import { drinks } from '../lib/enumerables'
 import { toCheckboxObj } from '../lib/myHelpers'
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
   priceMax: 60,
   priceStart: 0,
   priceEnd: 60,
-  priceMeta: drinkIncludesFull,
+  includeDrinkWithMealPrices: { disabled: false, checked: true },
   drinks: toCheckboxObj([...drinks, 'All'])
 }
 
