@@ -47,7 +47,7 @@ class VenueSlider extends Component {
         )
         props.setUiVenueSliderPosition(
           venue._id,
-          props.mainMap.visibleVenuesArr,
+          props.mainMap.visibleVenuesArr.filter(({ filtered }) => !filtered),
           props.venues
         )
       }
@@ -57,13 +57,14 @@ class VenueSlider extends Component {
     if (
       props.ui.siteDataReady &&
       props.ui.sliderPosition !== false &&
-      props.mainMap.visibleVenuesArr.length > 0
+      props.mainMap.visibleVenuesArr.filter(({ filtered }) => !filtered).length > 0
     ) {
       const {
         ui: { sliderPosition: current },
         venues,
-        mainMap: { visibleVenuesArr: visVenues }
+        mainMap: { visibleVenuesArr }
       } = props
+      const visVenues = visibleVenuesArr.filter(({ filtered }) => !filtered)
       const prev = movePointer(visVenues, current, 'prev')
       const next = movePointer(visVenues, current, 'next')
       // let staggeredNum = 0
@@ -96,11 +97,12 @@ class VenueSlider extends Component {
 
   handleSliderChange = sliderPos => {
     const {
-      mainMap: { visibleVenuesArr: visVenues },
+      mainMap: { visibleVenuesArr },
       venues,
       history,
       setUiVenueSliderPosition
     } = this.props
+    const visVenues = visibleVenuesArr.filter(({ filtered }) => !filtered)
     setUiVenueSliderPosition(visVenues[sliderPos]._id, visVenues, venues, history)
   }
   handleShare = service => event => {
@@ -110,11 +112,13 @@ class VenueSlider extends Component {
     if (!this.state.sliderReady) {
       return <div>Loading...</div>
     }
-    const { visibleVenuesArr: visVenues } = this.props.mainMap
+    const { visibleVenuesArr } = this.props.mainMap
+    const visVenues = visibleVenuesArr.filter(({ filtered }) => !filtered)
     const { sliderPosition } = this.props.ui
     const prevPointer = movePointer(visVenues, sliderPosition, 'prev')
     const nextPointer = movePointer(visVenues, sliderPosition, 'next')
-    const sliderItems = visVenues.map(({_id: venueId}, index) => {
+    const sliderItems = visVenues
+      .map(({_id: venueId}, index) => {
       const venue = this.props.venues[venueId]
       return (
         <VenueSliderItem

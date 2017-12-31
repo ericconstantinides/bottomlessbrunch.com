@@ -72,10 +72,11 @@ class MapPage extends Component {
   }
   handleVenueTeaserLinkClick = _id => event => {
     const {
-      mainMap: { visibleVenuesArr: visVenues },
+      mainMap: { visibleVenuesArr },
       venues,
       history
     } = this.props
+    const visVenues = visibleVenuesArr.filter(({ filtered }) => !filtered)
     this.props.setUiVenueSliderPosition(_id, visVenues, venues, history)
   }
   render () {
