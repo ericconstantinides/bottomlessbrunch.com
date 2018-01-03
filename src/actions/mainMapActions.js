@@ -86,7 +86,6 @@ export function getMainMapVisibleVenues (
   history,
   drawer,
   setUiActiveRegion,
-  filters,
   constructFilters
 ) {
   const parsedPath = parsePath(history.location.pathname)
@@ -210,7 +209,7 @@ export function getMainMapVisibleVenues (
         visibleVenuesArr.some(({ _id: nId }) => _id === nId)
       )
     ) {
-      constructFilters(filters, venues, visibleVenuesArr)
+      constructFilters(venues, visibleVenuesArr)
     }
     return {
       type: constants.MAIN_MAP_SET_VISIBLE_VENUES_AND_REGIONS,

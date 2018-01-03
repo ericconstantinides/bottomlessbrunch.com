@@ -19,11 +19,13 @@ import {
 class VenueFilters extends Component {
   constructor (props) {
     super(props)
-    this.state = { activeClass: 'is-active' }
+    this.state = {
+      filterReset: false,
+      activeClass: 'is-active'
+    }
   }
   componentDidMount = () => {
     this.props.constructFilters(
-      this.props.filters,
       this.props.venues,
       this.props.mainMap.visibleVenuesArr
     )
@@ -41,6 +43,12 @@ class VenueFilters extends Component {
         nextProps.mainMap.visibleVenuesArr
       )
     }
+  }
+  handleFilterReset = () => {
+    this.props.constructFilters(
+      this.props.venues,
+      this.props.mainMap.visibleVenuesArr
+    )
   }
   handleFiltersToggle = () => {
     const activeClass = this.state.activeClass === 'not-active'
@@ -105,10 +113,10 @@ class VenueFilters extends Component {
     const { filters } = this.props
     // if (!filters.ready) return <div>Loading...</div>
     const displayHours = filters.timeStart === filters.timeEnd
-      ? numTimeToString(filters.timeStart)
-      : numTimeToString(filters.timeStart) +
+      ? numTimeToString(filters.timeStart, true)
+      : numTimeToString(filters.timeStart, true) +
           ' - ' +
-          numTimeToString(filters.timeEnd)
+          numTimeToString(filters.timeEnd, true)
     const displayDays = filters.dayStart === filters.dayEnd
       ? numDayToStr(filters.dayStart, days)
       : numDayToStr(filters.dayStart, days) +
@@ -119,9 +127,15 @@ class VenueFilters extends Component {
       : '$' + filters.priceStart + ' - $' + filters.priceEnd
     return (
       <div className={`VenueFilters ${this.state.activeClass}`}>
-        <h3 className='VenueFilters__title' onClick={this.handleFiltersToggle}>
-          Filters
-        </h3>
+        <div>
+          <h3
+            className='VenueFilters__title'
+            onClick={this.handleFiltersToggle}
+          >
+            Filters
+          </h3>
+          <span onClick={this.handleFilterReset} className="button button--orange-black is-smaller">Reset Filters</span>
+        </div>
         <div className='VenueFilters__inner'>
           <div className='VenueFilters__item'>
             <h4 className='VenueFilters__item-title'>
@@ -166,9 +180,9 @@ class VenueFilters extends Component {
             <h4 className='VenueFilters__item-title'>
               Bottomless Brunch Price: {displayPrices}
             </h4>
-            <div className='u-mb-0_5'>
+            {/* <div className='u-mb-0_5'>
               {this.renderPricesMeta()}
-            </div>
+            </div> */}
             <div className='VenueFilters__slider-container'>
               <Range
                 className='VenueFilters__slider'

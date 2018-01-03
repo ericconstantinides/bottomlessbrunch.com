@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import * as actions from '../../actions'
+import { constructFilters } from '../../actions/filterActions'
 
 import VenueTeaser from './VenueTeaser'
 import VenueFilters from './VenueFilters'
@@ -21,29 +21,44 @@ class VenueList extends Component {
       this.refs.VenueList.scrollTop = 0
     }
   }
+  handleFilterReset = () => {
+    this.props.constructFilters(
+      this.props.venues,
+      this.props.mainMap.visibleVenuesArr
+    )
+  }
   render () {
     return (
       <div
-        className='VenueList layout__sidebar-width layout__transparency-bg' ref='VenueList'
+        className='VenueList layout__sidebar-width layout__transparency-bg'
+        ref='VenueList'
       >
         <div className='VenueList__handle'>
           <div className='VenueList__inner-handle' />
         </div>
         <VenueFilters />
-        {this.props.mainMap.visibleVenuesArr.map(({ _id, filtered }) => (
-          <VenueTeaser
-            key={_id}
-            altClass='VenueListItem'
-            handleMouseOver={this.props.handleMouseOver}
-            handleMouseLeave={this.props.handleMouseLeave}
-            toggleMarkerClick={this.props.toggleMarkerClick}
-            hoveredVenue={this.props.hoveredVenue}
-            venue={this.props.venues[_id]}
-            filtered={filtered}
-            regionSlug={this.props.regions[this.props.venues[_id].regionId].slug}
-            handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
+        {!this.props.mainMap.visibleVenuesArr.every(ven => ven.filtered) &&
+          this.props.mainMap.visibleVenuesArr.map(({ _id, filtered }) => (
+            <VenueTeaser
+              key={_id}
+              altClass='VenueListItem'
+              handleMouseOver={this.props.handleMouseOver}
+              handleMouseLeave={this.props.handleMouseLeave}
+              toggleMarkerClick={this.props.toggleMarkerClick}
+              hoveredVenue={this.props.hoveredVenue}
+              venue={this.props.venues[_id]}
+              filtered={filtered}
+              regionSlug={
+                this.props.regions[this.props.venues[_id].regionId].slug
+              }
+              handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
             />
-        ))}
+          ))}
+        {this.props.mainMap.visibleVenuesArr.every(ven => ven.filtered) &&
+          <div className='VenueFilters__empty'>
+            <p>No venues visible</p>
+            <span onClick={this.handleFilterReset} className="button button--orange-black is-smaller">Reset Filters</span>
+          </div>}
       </div>
     )
   }
@@ -53,4 +68,4 @@ function mapStateToProps ({ regions, venues, ui, mainMap }) {
   return { regions, venues, ui, mainMap }
 }
 
-export default connect(mapStateToProps, actions)(VenueList)
+export default connect(mapStateToProps, { constructFilters })(VenueList)

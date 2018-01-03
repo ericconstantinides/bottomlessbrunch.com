@@ -70,7 +70,6 @@ class Map extends Component {
       props.history,
       props.ui.drawer,
       props.setUiActiveRegion,
-      props.filters,
       props.constructFilters
     )
   }
@@ -262,8 +261,8 @@ class Map extends Component {
   }
 }
 
-function mapStateToProps ({ ui, regions, venues, mainMap, filters }) {
-  return { ui, regions, venues, mainMap, filters }
+function mapStateToProps ({ ui, regions, venues, mainMap }) {
+  return { ui, regions, venues, mainMap }
 }
 
 export default connect(mapStateToProps, actions)(Map)

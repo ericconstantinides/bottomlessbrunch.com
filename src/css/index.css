@@ -3572,7 +3572,7 @@ html.touch .VenueSlider__arrow {
 .VenueFilters {
   background-color: white;
   margin: 0 0.5em 0.5em;
-  padding: 1em 0.5em;
+  padding: 1em;
   border-radius: 4px; }
   .VenueFilters.not-active .VenueFilters__inner {
     display: none; }
@@ -3617,7 +3617,9 @@ html.touch .VenueSlider__arrow {
 .VenueFilters__item-title {
   font-size: 0.925em;
   text-transform: uppercase;
-  margin-bottom: 0.5em; }
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+  letter-spacing: -0.01em; }
 
 .VenueFilters__description {
   font-size: 0.75em; }
@@ -3634,6 +3636,16 @@ html.touch .VenueSlider__arrow {
   line-height: 1; }
   .VenueFilters__label[disabled] {
     color: #999; }
+
+.VenueFilters__empty {
+  color: white;
+  margin: 0 0.5em 0.5em;
+  padding: 1em;
+  text-align: center; }
+  .VenueFilters__empty p {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.925em; }
 
 .Deals {
   width: 1px;

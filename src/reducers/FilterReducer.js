@@ -29,7 +29,7 @@ export const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case constants.FILTER_SET:
+    case constants.FILTER_RESET:
       return _.cloneDeep(initialState)
     case constants.FILTER_UPDATE:
       return { ...state, ...(_.cloneDeep(action.payload)) }

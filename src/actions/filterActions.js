@@ -2,9 +2,9 @@ import _ from 'lodash'
 import constants from '../actions/types'
 import { initialState } from '../reducers/FilterReducer'
 
-export const setFilters = () => {
+export const resetFilters = () => {
   return {
-    type: constants.FILTER_SET
+    type: constants.FILTER_RESET
   }
 }
 
@@ -33,8 +33,8 @@ export const changeDrink = (clickedDrinkName) => {
   }
 }
 
-export const constructFilters = (oldFilters, venues, visibleVenues) => {
-  console.log('[filterActions.js]: constructFilters()')
+export const constructFilters = (venues, visibleVenues) => {
+  // console.log('[filterActions.js]: constructFilters()')
   // now I have to cycle through all the visible venues to aggregate the data:
   const fltrs = _.cloneDeep(initialState)
   visibleVenues.forEach(({ _id }) => {
