@@ -224,9 +224,9 @@ export const filterMainMapVenues = (
   filters,
   venues,
   visibleVenues,
+  visVenuesChanged,
   constructFilters
 ) => {
-  console.log('[mainMapActions.js]: filterMainMapVenues()')
   const filteredVenues = visibleVenues.map(({ _id }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
     // Filter out by Time:
@@ -263,7 +263,9 @@ export const filterMainMapVenues = (
     // return what we got:
     return { _id, filtered: false }
   })
-  // constructFilters(filters, venues, filteredVenues)
+  if (visVenuesChanged) {
+    constructFilters(filters, venues, filteredVenues)
+  }
   return {
     type: constants.MAIN_MAP_FILTER_VENUES,
     payload: filteredVenues

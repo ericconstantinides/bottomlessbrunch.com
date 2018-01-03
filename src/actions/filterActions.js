@@ -37,7 +37,6 @@ export const constructFilters = (oldFilters, venues, visibleVenues) => {
   console.log('[filterActions.js]: constructFilters()')
   // now I have to cycle through all the visible venues to aggregate the data:
   const fltrs = _.cloneDeep(initialState)
-  console.log(fltrs)
   visibleVenues.forEach(({ _id }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
     normalizedTimes.forEach(day => {
@@ -78,8 +77,6 @@ export const constructFilters = (oldFilters, venues, visibleVenues) => {
   fltrs.dayEnd = fltrs.dayMax
   fltrs.priceMax = fltrs.priceMax + (10 - fltrs.priceMax % 10)
   fltrs.priceEnd = fltrs.priceMax
-  // console.log(fltrs)
-  console.log(fltrs)
   return {
     type: constants.FILTER_UPDATE,
     payload: { ...fltrs, ready: true }

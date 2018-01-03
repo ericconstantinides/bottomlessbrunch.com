@@ -30,25 +30,16 @@ class VenueFilters extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    if (
-      // !this.props.filters.ready && nextProps.filters.ready
-      //  &&
-      !_.isEqual(
-        this.props.mainMap.visibleVenuesArr,
-        nextProps.mainMap.visibleVenuesArr
-      )
-      ||
-      (
-        !_.isEqual(
-        this.props.filters,
-        nextProps.filters
-        )
-      )
-    ) {
+    const visVenuesChanged = !this.props.mainMap.visibleVenuesArr.every(
+      ({ _id }, i) =>
+        nextProps.mainMap.visibleVenuesArr.some(({ _id: nId }) => _id === nId)
+    )
+    if (visVenuesChanged || !_.isEqual(this.props.filters, nextProps.filters)) {
       nextProps.filterMainMapVenues(
         nextProps.filters,
         nextProps.venues,
         nextProps.mainMap.visibleVenuesArr,
+        visVenuesChanged,
         nextProps.constructFilters
       )
     }
@@ -114,7 +105,6 @@ class VenueFilters extends Component {
   }
   render () {
     const { filters } = this.props
-    console.log(filters)
     // if (!filters.ready) return <div>Loading...</div>
     const displayHours = filters.timeStart === filters.timeEnd
       ? numTimeToString(filters.timeStart)
