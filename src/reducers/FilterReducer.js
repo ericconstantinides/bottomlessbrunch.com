@@ -2,21 +2,28 @@ import constants from '../actions/types'
 import { drinks } from '../lib/enumerables'
 import { toCheckboxObj } from '../lib/myHelpers'
 
-const initialState = {
-  timeMin: 7,
-  timeMax: 17,
-  timeStart: 7,
-  timeEnd: 17,
+export const initialState = {
+  timeMin: -1,
+  timeMax: -1,
+  timeStart: -1,
+  timeEnd: -1,
   dayMin: 0,
   dayMax: 6,
-  dayStart: 0,
-  dayEnd: 6,
+  dayStart: -1,
+  dayEnd: -1,
   priceMin: 0,
-  priceMax: 60,
+  priceMax: -1,
   priceStart: 0,
-  priceEnd: 60,
-  includeDrinkWithMealPrices: { disabled: false, checked: true },
-  drinks: toCheckboxObj([...drinks, 'All'])
+  priceEnd: -1,
+  includeDrinkWithMealPrices: { disabled: true, checked: false },
+  drinks: {
+    ...toCheckboxObj(drinks),
+    All: {
+      label: 'All',
+      disabled: false,
+      checked: true
+    }
+  }
 }
 
 export default function (state = initialState, action) {

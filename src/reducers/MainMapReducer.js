@@ -48,8 +48,8 @@ export default function (state = initialState, action) {
         regionTitle: action.payload,
         regionReset: ''
       }
-    case constants.MAIN_MAP_SET_FILTERED_VENUES:
-      return { ...state, visibleVenuesArr: _.cloneDeep(action.payload) }
+    case constants.MAIN_MAP_FILTER_VENUES:
+      return { ...state, visibleVenuesArr: action.payload }
     default:
       return state
   }

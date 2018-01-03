@@ -5,7 +5,7 @@ import _ from 'lodash'
 import 'rc-slider/assets/index.css'
 
 import * as filterActions from '../../actions/filterActions'
-import { setMainMapFilteredVenues } from '../../actions/mainMapActions'
+import { filterMainMapVenues } from '../../actions/mainMapActions'
 
 import { days } from '../../lib/enumerables'
 import {
@@ -21,18 +21,35 @@ class VenueFilters extends Component {
     super(props)
     this.state = { activeClass: 'is-active' }
   }
+  componentDidMount = () => {
+    this.props.constructFilters(
+      this.props.filters,
+      this.props.venues,
+      this.props.mainMap.visibleVenuesArr
+    )
+  }
+
   componentWillReceiveProps = nextProps => {
     if (
-      !_.isEqual(this.props.filters, nextProps.filters) ||
+      // !this.props.filters.ready && nextProps.filters.ready
+      //  &&
       !_.isEqual(
         this.props.mainMap.visibleVenuesArr,
         nextProps.mainMap.visibleVenuesArr
       )
+      ||
+      (
+        !_.isEqual(
+        this.props.filters,
+        nextProps.filters
+        )
+      )
     ) {
-      nextProps.setMainMapFilteredVenues(
+      nextProps.filterMainMapVenues(
         nextProps.filters,
         nextProps.venues,
-        nextProps.mainMap.visibleVenuesArr
+        nextProps.mainMap.visibleVenuesArr,
+        nextProps.constructFilters
       )
     }
   }
@@ -96,6 +113,7 @@ class VenueFilters extends Component {
   }
   render () {
     const { filters } = this.props
+    if (!filters.ready) return <div>Loading...</div>
     const displayHours = filters.timeStart === filters.timeEnd
       ? numTimeToString(filters.timeStart)
       : numTimeToString(filters.timeStart) +
@@ -175,7 +193,7 @@ class VenueFilters extends Component {
           </div>
           <div className='VenueFilters__item'>
             <h4 className='VenueFilters__item-title'>
-              Bottomless Drink Options
+              Bottomless Drink
             </h4>
             <div className='VenueFilters__horz'>
               {this.renderDrinks()}
@@ -192,5 +210,5 @@ const mapStateToProps = ({ filters, venues, mainMap }) => {
 
 export default connect(mapStateToProps, {
   ...filterActions,
-  setMainMapFilteredVenues
+  filterMainMapVenues
 })(VenueFilters)

@@ -220,8 +220,14 @@ export function getMainMapVisibleVenues (
   }
 }
 
-export const setMainMapFilteredVenues = (filters, venues, visibleVenues) => {
-  const filteredVenues = visibleVenues.map(({ _id, filtered }) => {
+export const filterMainMapVenues = (
+  filters,
+  venues,
+  visibleVenues,
+  constructFilters
+) => {
+  console.log('[mainMapActions.js]: filterMainMapVenues()')
+  const filteredVenues = visibleVenues.map(({ _id }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
     // Filter out by Time:
     let newFiltered = normalizedTimes.every(day =>
@@ -229,15 +235,15 @@ export const setMainMapFilteredVenues = (filters, venues, visibleVenues) => {
     )
     if (newFiltered) return { _id, filtered: newFiltered }
     // Filter out by Day:
-    newFiltered = normalizedTimes.every(day => (
+    newFiltered = normalizedTimes.every(day =>
       dayWithin(day.day, filters.dayStart, filters.dayEnd)
-    ))
+    )
     if (newFiltered) return { _id, filtered: newFiltered }
 
     // Filter out by Price:
-    newFiltered = normalizedDrinks.every(drink => (
+    newFiltered = normalizedDrinks.every(drink =>
       priceWithin(drink.price, filters.priceStart, filters.priceEnd)
-    ))
+    )
     if (newFiltered) return { _id, filtered: newFiltered }
 
     // Filter out by priceMeta:
@@ -246,16 +252,17 @@ export const setMainMapFilteredVenues = (filters, venues, visibleVenues) => {
       if (newFiltered) return { _id, filtered: newFiltered }
     }
     // Filter out by drinks:
-    newFiltered = normalizedDrinks.every(drink => (
+    newFiltered = normalizedDrinks.every(drink =>
       drinkWithin(drink.drink, filters.drinks)
-    ))
+    )
     if (newFiltered) return { _id, filtered: newFiltered }
 
     // return what we got:
     return { _id, filtered: false }
   })
+  // constructFilters(filters, venues, filteredVenues)
   return {
-    type: constants.MAIN_MAP_SET_FILTERED_VENUES,
+    type: constants.MAIN_MAP_FILTER_VENUES,
     payload: filteredVenues
   }
 }
