@@ -8,8 +8,7 @@ import {
   parsePath,
   timeWithin,
   dayWithin,
-  priceWithin,
-  drinkWithin
+  priceWithin
 } from '../lib/myHelpers'
 
 // I will get the slug from the path and also the storage to figure
@@ -82,10 +81,13 @@ export function getMainMapVisibleVenues (
   venues,
   regions,
   coords,
+  oldVisibleVenues,
   fetchVenueDetail,
   history,
   drawer,
-  setUiActiveRegion
+  setUiActiveRegion,
+  filters,
+  constructFilters
 ) {
   const parsedPath = parsePath(history.location.pathname)
   let regionTitle = 'Choose Region'
@@ -106,7 +108,9 @@ export function getMainMapVisibleVenues (
         // add the venue to the visibleVenuesArr:
         visibleVenuesArr.push({
           _id: venue._id,
-          filtered: false
+          filtered: oldVisibleVenues.some(
+            prevVenue => prevVenue._id === venue._id && prevVenue.filtered
+          )
         })
         // VISIBLE REGIONS LOGIC:
         // check if this region has been recorded yet:
@@ -199,6 +203,15 @@ export function getMainMapVisibleVenues (
         Math.abs(venues[idB._id].lng) -
         (Math.abs(venues[idA._id].lat) + Math.abs(venues[idA._id].lng))
     )
+    // Construct the filters if the visible venues has changed:
+    if (
+      oldVisibleVenues.length !== visibleVenuesArr.length ||
+      !oldVisibleVenues.every(({ _id }, i) =>
+        visibleVenuesArr.some(({ _id: nId }) => _id === nId)
+      )
+    ) {
+      constructFilters(filters, venues, visibleVenuesArr)
+    }
     return {
       type: constants.MAIN_MAP_SET_VISIBLE_VENUES_AND_REGIONS,
       payload: {
@@ -223,9 +236,7 @@ export function getMainMapVisibleVenues (
 export const filterMainMapVenues = (
   filters,
   venues,
-  visibleVenues,
-  visVenuesChanged,
-  constructFilters
+  visibleVenues
 ) => {
   const filteredVenues = visibleVenues.map(({ _id }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
@@ -254,8 +265,8 @@ export const filterMainMapVenues = (
     // Filter out by drinks:
     // console.log(normalizedDrinks)
     if (filters.checkedDrink !== 'All') {
-      newFiltered = normalizedDrinks.every(drink =>
-        filters.checkedDrink !== drink.drink
+      newFiltered = normalizedDrinks.every(
+        drink => filters.checkedDrink !== drink.drink
       )
       if (newFiltered) return { _id, filtered: newFiltered }
     }
@@ -263,9 +274,6 @@ export const filterMainMapVenues = (
     // return what we got:
     return { _id, filtered: false }
   })
-  if (visVenuesChanged) {
-    constructFilters(filters, venues, filteredVenues)
-  }
   return {
     type: constants.MAIN_MAP_FILTER_VENUES,
     payload: filteredVenues

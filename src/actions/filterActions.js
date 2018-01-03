@@ -65,7 +65,7 @@ export const constructFilters = (oldFilters, venues, visibleVenues) => {
       }
       fltrs.drinks[drinkObj.drink] = {
         ...fltrs.drinks[drinkObj.drink],
-        disabled: !(fltrs.drinks[drinkObj.drink].disabled || drinkObj.drink)
+        disabled: false
       }
     })
   })

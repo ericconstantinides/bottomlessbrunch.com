@@ -30,17 +30,15 @@ class VenueFilters extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    const visVenuesChanged = !this.props.mainMap.visibleVenuesArr.every(
+    const visVenuesChanged = !nextProps.mainMap.visibleVenuesArr.every(
       ({ _id }, i) =>
-        nextProps.mainMap.visibleVenuesArr.some(({ _id: nId }) => _id === nId)
+        this.props.mainMap.visibleVenuesArr.some(({ _id: nId }) => _id === nId)
     )
     if (visVenuesChanged || !_.isEqual(this.props.filters, nextProps.filters)) {
       nextProps.filterMainMapVenues(
         nextProps.filters,
         nextProps.venues,
-        nextProps.mainMap.visibleVenuesArr,
-        visVenuesChanged,
-        nextProps.constructFilters
+        nextProps.mainMap.visibleVenuesArr
       )
     }
   }

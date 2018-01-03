@@ -60,14 +60,18 @@ class Map extends Component {
     this.props.setMainMap(coords)
   }
   handleGettingVisibleVenues = props => {
+    // console.log(props.mainMap.visibleVenuesArr)
     props.getMainMapVisibleVenues(
       props.venues,
       props.regions,
       props.mainMap.coords,
+      props.mainMap.visibleVenuesArr,
       props.fetchVenueDetail,
       props.history,
       props.ui.drawer,
-      props.setUiActiveRegion
+      props.setUiActiveRegion,
+      props.filters,
+      props.constructFilters
     )
   }
   handleMapClick = props => {
@@ -258,8 +262,8 @@ class Map extends Component {
   }
 }
 
-function mapStateToProps ({ ui, regions, venues, mainMap }) {
-  return { ui, regions, venues, mainMap }
+function mapStateToProps ({ ui, regions, venues, mainMap, filters }) {
+  return { ui, regions, venues, mainMap, filters }
 }
 
 export default connect(mapStateToProps, actions)(Map)
