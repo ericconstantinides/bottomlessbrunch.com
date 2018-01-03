@@ -148,12 +148,6 @@ export function getMainMapVisibleVenues (
             _id: region._id,
             venuesVisible: 0
           }
-        } else {
-          // NO REGION:
-          setUiActiveRegion(false)
-          if (history.location.pathname !== '/') {
-            history.replace('/')
-          }
         }
       })
     }
@@ -194,6 +188,12 @@ export function getMainMapVisibleVenues (
           history.replace('/')
         }
         regionTitle = 'Multiple Regions'
+      }
+    } else {
+      // NO REGION:
+      setUiActiveRegion(false)
+      if (history.location.pathname !== '/') {
+        history.replace('/')
       }
     }
     activeVenues.sort(

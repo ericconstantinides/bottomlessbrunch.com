@@ -398,9 +398,9 @@ body.body--VenueSlider #root,
     height: 100%;
     bottom: auto;
     z-index: 1;
-    .MapPage.no-venues & {
-      height: 100vh;
-    }
+    // .MapPage.no-venues & {
+    //   height: 100vh;
+    // }
   }
   .MapPage__VenueList--width {
     width: 100%;

@@ -645,17 +645,6 @@ a * {
   .App--MapPage:not(.App--VenueSlider) .SiteHeader:not(.layout__stacked-logo) {
     width: auto !important; } }
 
-@media only screen and (min-width: 768px) {
-  .MapPage.no-venues .SiteHeader {
-    border-radius: 7px;
-    margin: 0.5em;
-    width: calc(320px - 1em);
-    height: calc(100px - 1em); } }
-
-@media only screen and (min-width: 901px) {
-  .MapPage.no-venues .SiteHeader {
-    width: calc(390px - 1em); } }
-
 .App--VenueSlider .SiteHeader,
 .App--IntroPage .SiteHeader {
   background: transparent;
@@ -2701,8 +2690,6 @@ body.body--VenueSlider #root,
     height: 100%;
     bottom: auto;
     z-index: 1; }
-    .MapPage.no-venues .MapPage__Map-container {
-      height: 100vh; }
   .MapPage__VenueList--width {
     width: 100%; }
   .VenueList {

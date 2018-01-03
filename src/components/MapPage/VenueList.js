@@ -28,6 +28,9 @@ class VenueList extends Component {
     )
   }
   render () {
+    const hasUnfilteredVenues = !this.props.mainMap.activeVenues.every(
+      ven => ven.filtered
+    )
     return (
       <div
         className='VenueList layout__sidebar-width layout__transparency-bg'
@@ -36,8 +39,8 @@ class VenueList extends Component {
         <div className='VenueList__handle'>
           <div className='VenueList__inner-handle' />
         </div>
-        <VenueFilters />
-        {!this.props.mainMap.activeVenues.every(ven => ven.filtered) &&
+        {this.props.hasVenues && <VenueFilters />}
+        {hasUnfilteredVenues &&
           this.props.mainMap.activeVenues.map(({ _id, filtered }) => (
             <VenueTeaser
               key={_id}
@@ -54,10 +57,32 @@ class VenueList extends Component {
               handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
             />
           ))}
-        {this.props.mainMap.activeVenues.every(ven => ven.filtered) &&
+        {!hasUnfilteredVenues &&
+          this.props.hasVenues &&
+          <div className='VenueFilters__empty'>
+            <p>All Venues filtered out</p>
+            <span
+              onClick={this.handleFilterReset}
+              className='button button--orange-black is-smaller'
+            >
+              Reset Filters
+            </span>
+          </div>}
+        {!hasUnfilteredVenues &&
+          !this.props.hasVenues &&
           <div className='VenueFilters__empty'>
             <p>No venues visible</p>
-            <span onClick={this.handleFilterReset} className="button button--orange-black is-smaller">Reset Filters</span>
+            {Object.entries(
+              this.props.mainMap.visibleRegionsObj
+            ).map(([_id, reg]) => (
+              <span
+                key={_id}
+                onClick={this.props.handleRegionSelect(_id)}
+                className='button button--orange-black is-smaller'
+              >
+                Re-Center {reg.name}
+              </span>
+            ))}
           </div>}
       </div>
     )

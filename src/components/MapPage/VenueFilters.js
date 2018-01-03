@@ -60,15 +60,7 @@ class VenueFilters extends Component {
     this.setState({ activeClass })
   }
   handleTimeChange = hours => {
-    const { updateFilter } = this.props
-    const { timeMin, timeMax, timeStart, timeEnd} = this.props.filters
-    // if (hours[0] === timeEnd && timeEnd < timeMax) {
-    //   updateFilter({ timeStart: hours[0], timeEnd: hours[0] + 1 }) 
-    // } else if (hours[1] === timeStart && timeStart > timeMin) {
-    //   updateFilter({ timeStart: hours[1] - 1, timeEnd: hours[1] })
-    // } else {
-      updateFilter({ timeStart: hours[0], timeEnd: hours[1] })
-    // }
+    this.props.updateFilter({ timeStart: hours[0], timeEnd: hours[1] })
   }
   handleDayChange = days => {
     this.props.updateFilter({ dayStart: days[0], dayEnd: days[1] })

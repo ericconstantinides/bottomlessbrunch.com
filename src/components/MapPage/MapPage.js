@@ -83,9 +83,10 @@ class MapPage extends Component {
     if (_.isEmpty(this.props.regions) || _.isEmpty(this.props.venues)) {
       return <div>Loading...</div>
     }
+    // need to also check if it's within a region:
     const hasVenues =
-      !!(this.props.mainMap.activeVenues &&
-      this.props.mainMap.activeVenues.length)
+      this.props.mainMap.activeVenues &&
+      this.props.mainMap.activeVenues.length
     const hasVenuesClass = hasVenues ? 'has-venues' : 'no-venues'
     const styles = { height: `100%`, width: `100%` }
 
@@ -121,16 +122,17 @@ class MapPage extends Component {
             </div>
           </div>
           <div className='VenueList__spacer' />
-          {hasVenues &&
-            <VenueList
-              history={this.props.history}
-              region={this.props.ui.activeRegion._id}
-              handleMouseOver={this.handleMouseOver}
-              handleMouseLeave={this.handleMouseLeave}
-              toggleMarkerClick={this.toggleMarkerClick}
-              hoveredVenue={this.state.hoveredVenue}
-              handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
-            />}
+          <VenueList
+            history={this.props.history}
+            region={this.props.ui.activeRegion._id}
+            handleMouseOver={this.handleMouseOver}
+            handleMouseLeave={this.handleMouseLeave}
+            toggleMarkerClick={this.toggleMarkerClick}
+            hoveredVenue={this.state.hoveredVenue}
+            handleVenueTeaserLinkClick={this.handleVenueTeaserLinkClick}
+            handleRegionSelect={this.handleRegionSelect}
+            hasVenues={hasVenues}
+          />
         </div>
       </div>
     )
