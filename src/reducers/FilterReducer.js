@@ -4,6 +4,7 @@ import { drinks } from '../lib/enumerables'
 import { toCheckboxObj } from '../lib/myHelpers'
 
 export const initialState = {
+  ready: false,
   timeMin: -1,
   timeMax: -1,
   timeStart: -1,
