@@ -252,10 +252,13 @@ export const filterMainMapVenues = (
       if (newFiltered) return { _id, filtered: newFiltered }
     }
     // Filter out by drinks:
-    newFiltered = normalizedDrinks.every(drink =>
-      drinkWithin(drink.drink, filters.drinks)
-    )
-    if (newFiltered) return { _id, filtered: newFiltered }
+    // console.log(normalizedDrinks)
+    if (filters.checkedDrink !== 'All') {
+      newFiltered = normalizedDrinks.every(drink =>
+        filters.checkedDrink !== drink.drink
+      )
+      if (newFiltered) return { _id, filtered: newFiltered }
+    }
 
     // return what we got:
     return { _id, filtered: false }

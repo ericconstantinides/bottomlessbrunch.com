@@ -619,8 +619,7 @@ export const toCheckboxObj = arr => {
   arr.forEach(item => {
     checkboxObj[item] = {
       label: item,
-      disabled: true,
-      checked: false
+      disabled: true
     }
   })
   return checkboxObj

@@ -69,7 +69,8 @@ class VenueFilters extends Component {
     this.props.updateFilter({ priceStart: prices[0], priceEnd: prices[1] })
   }
   handleDrinkClick = drinkName => event => {
-    this.props.toggleDrink(this.props.filters.drinks, drinkName)
+    if (this.props.filters.drinks[drinkName].checked) return
+    this.props.changeDrink(drinkName)
   }
   handleMetaClick = metaName => event => {
     this.props.togglePriceMeta(this.props.filters.includeDrinkWithMealPrices)
@@ -85,10 +86,10 @@ class VenueFilters extends Component {
               name={drink}
               type='checkbox'
               disabled={drinkObj.disabled}
-              checked={drinkObj.checked && !drinkObj.disabled}
+              checked={this.props.filters.checkedDrink === drink}
               onChange={this.handleDrinkClick(drink)}
             />
-            {drink}
+            {drinkObj.label}
           </label>
         </div>
       )
@@ -113,7 +114,8 @@ class VenueFilters extends Component {
   }
   render () {
     const { filters } = this.props
-    if (!filters.ready) return <div>Loading...</div>
+    console.log(filters)
+    // if (!filters.ready) return <div>Loading...</div>
     const displayHours = filters.timeStart === filters.timeEnd
       ? numTimeToString(filters.timeStart)
       : numTimeToString(filters.timeStart) +
@@ -147,7 +149,7 @@ class VenueFilters extends Component {
                 max={filters.timeMax}
                 marks={makeTimeMarks(filters.timeMin, filters.timeMax)}
                 onChange={this.handleTimeChange}
-                defaultValue={[filters.timeMin, filters.timeMax]}
+                value={[filters.timeStart, filters.timeEnd]}
                 allowCross={false}
                 pushable
               />
@@ -167,7 +169,7 @@ class VenueFilters extends Component {
                 max={filters.dayMax}
                 marks={makeDayMarks(days, 3)}
                 onChange={this.handleDayChange}
-                defaultValue={[filters.dayMin, filters.dayMax]}
+                value={[filters.dayStart, filters.dayEnd]}
                 allowCross={false}
               />
             </div>
@@ -186,7 +188,7 @@ class VenueFilters extends Component {
                 max={filters.priceMax}
                 marks={makePriceMarks(filters.priceMin, filters.priceMax)}
                 onChange={this.handlePriceChange}
-                defaultValue={[filters.priceMin, filters.priceMax]}
+                value={[filters.priceStart, filters.priceEnd]}
                 allowCross={false}
               />
             </div>

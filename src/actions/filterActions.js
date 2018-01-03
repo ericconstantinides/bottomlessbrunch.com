@@ -26,45 +26,10 @@ export const togglePriceMeta = oldIncludeDrinkWithMealPrices => {
   }
 }
 
-export const toggleDrink = (oldDrinks, drinkName) => {
-  const drinkChecked = !oldDrinks[drinkName].checked
-  const drinkDisabled = oldDrinks[drinkName].disabled
-  let drinks = {}
-  if (drinkName === 'All') {
-    Object.keys(oldDrinks).forEach(drink => {
-      drinks[drink] = {
-        disabled: drinkDisabled,
-        checked: drinkChecked
-      }
-    })
-  } else {
-    drinks = {
-      ...oldDrinks,
-      [drinkName]: {
-        disabled: drinkDisabled,
-        checked: drinkChecked
-      }
-    }
-    // now double check the status of All and if it needs to be updated:
-    const allSame = Object.keys(drinks).every(drink => {
-      if (drink === 'All') return true
-      return drinks[drink].checked === drinkChecked
-    })
-    drinks = {
-      ...oldDrinks,
-      [drinkName]: {
-        disabled: drinkDisabled,
-        checked: drinkChecked
-      },
-      All: {
-        disabled: false,
-        checked: allSame ? drinkChecked : false
-      }
-    }
-  }
+export const changeDrink = (clickedDrinkName) => {
   return {
     type: constants.FILTER_UPDATE,
-    payload: { drinks }
+    payload: { checkedDrink: clickedDrinkName }
   }
 }
 
@@ -72,6 +37,7 @@ export const constructFilters = (oldFilters, venues, visibleVenues) => {
   console.log('[filterActions.js]: constructFilters()')
   // now I have to cycle through all the visible venues to aggregate the data:
   const fltrs = _.cloneDeep(initialState)
+  console.log(fltrs)
   visibleVenues.forEach(({ _id }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
     normalizedTimes.forEach(day => {
@@ -99,8 +65,8 @@ export const constructFilters = (oldFilters, venues, visibleVenues) => {
           drinkObj.priceIncludesFood
       }
       fltrs.drinks[drinkObj.drink] = {
-        disabled: !(fltrs.drinks[drinkObj.drink].checked || drinkObj.drink),
-        checked: fltrs.drinks[drinkObj.drink].checked || drinkObj.drink
+        ...fltrs.drinks[drinkObj.drink],
+        disabled: !(fltrs.drinks[drinkObj.drink].disabled || drinkObj.drink)
       }
     })
   })
@@ -113,6 +79,7 @@ export const constructFilters = (oldFilters, venues, visibleVenues) => {
   fltrs.priceMax = fltrs.priceMax + (10 - fltrs.priceMax % 10)
   fltrs.priceEnd = fltrs.priceMax
   // console.log(fltrs)
+  console.log(fltrs)
   return {
     type: constants.FILTER_UPDATE,
     payload: { ...fltrs, ready: true }

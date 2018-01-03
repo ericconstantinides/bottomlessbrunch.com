@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import constants from '../actions/types'
 import { drinks } from '../lib/enumerables'
 import { toCheckboxObj } from '../lib/myHelpers'
@@ -16,22 +17,22 @@ export const initialState = {
   priceStart: 0,
   priceEnd: -1,
   includeDrinkWithMealPrices: { disabled: true, checked: false },
+  checkedDrink: 'All',
   drinks: {
-    ...toCheckboxObj(drinks),
     All: {
-      label: 'All',
-      disabled: false,
-      checked: true
-    }
+      label: 'All Drinks',
+      disabled: false
+    },
+    ...toCheckboxObj(drinks)
   }
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case constants.FILTER_SET:
-      return initialState
+      return _.cloneDeep(initialState)
     case constants.FILTER_UPDATE:
-      return { ...state, ...action.payload }
+      return { ...state, ...(_.cloneDeep(action.payload)) }
     default:
       return state
   }
