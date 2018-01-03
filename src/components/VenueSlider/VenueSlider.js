@@ -34,8 +34,8 @@ class VenueSlider extends Component {
     this.props.addUiAppClass(['App--MapPage'])
   }
   getVenueSliderReady = props => {
-    // check if the slider has been set already and if we have visibleVenuesArr
-    if (!this.state.sliderReady && !_.isEmpty(props.mainMap.visibleVenuesArr)) {
+    // check if the slider has been set already and if we have activeVenues
+    if (!this.state.sliderReady && !_.isEmpty(props.mainMap.activeVenues)) {
       // ok, now do we have a sliderPosition?
       if (props.ui.sliderPosition !== false) {
         this.setState({ sliderReady: true })
@@ -47,7 +47,7 @@ class VenueSlider extends Component {
         )
         props.setUiVenueSliderPosition(
           venue._id,
-          props.mainMap.visibleVenuesArr.filter(({ filtered }) => !filtered),
+          props.mainMap.activeVenues.filter(({ filtered }) => !filtered),
           props.venues
         )
       }
@@ -57,14 +57,14 @@ class VenueSlider extends Component {
     if (
       props.ui.siteDataReady &&
       props.ui.sliderPosition !== false &&
-      props.mainMap.visibleVenuesArr.filter(({ filtered }) => !filtered).length > 0
+      props.mainMap.activeVenues.filter(({ filtered }) => !filtered).length > 0
     ) {
       const {
         ui: { sliderPosition: current },
         venues,
-        mainMap: { visibleVenuesArr }
+        mainMap: { activeVenues }
       } = props
-      const visVenues = visibleVenuesArr.filter(({ filtered }) => !filtered)
+      const visVenues = activeVenues.filter(({ filtered }) => !filtered)
       const prev = movePointer(visVenues, current, 'prev')
       const next = movePointer(visVenues, current, 'next')
       // let staggeredNum = 0
@@ -97,12 +97,12 @@ class VenueSlider extends Component {
 
   handleSliderChange = sliderPos => {
     const {
-      mainMap: { visibleVenuesArr },
+      mainMap: { activeVenues },
       venues,
       history,
       setUiVenueSliderPosition
     } = this.props
-    const visVenues = visibleVenuesArr.filter(({ filtered }) => !filtered)
+    const visVenues = activeVenues.filter(({ filtered }) => !filtered)
     setUiVenueSliderPosition(visVenues[sliderPos]._id, visVenues, venues, history)
   }
   handleShare = service => event => {
@@ -112,8 +112,8 @@ class VenueSlider extends Component {
     if (!this.state.sliderReady) {
       return <div>Loading...</div>
     }
-    const { visibleVenuesArr } = this.props.mainMap
-    const visVenues = visibleVenuesArr.filter(({ filtered }) => !filtered)
+    const { activeVenues } = this.props.mainMap
+    const visVenues = activeVenues.filter(({ filtered }) => !filtered)
     const { sliderPosition } = this.props.ui
     const prevPointer = movePointer(visVenues, sliderPosition, 'prev')
     const nextPointer = movePointer(visVenues, sliderPosition, 'next')

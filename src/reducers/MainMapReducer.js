@@ -6,7 +6,7 @@ const initialState = {
   coords: USA_MAP_COORDS,
   loaded: false,
   initialCoordsFrom: false,
-  visibleVenuesArr: [],
+  activeVenues: [],
   visibleRegionsObj: {},
   regionTitle: '',
   regionReset: ''
@@ -28,14 +28,14 @@ export default function (state = initialState, action) {
       }
     case constants.MAIN_MAP_SET_VISIBLE_VENUES_AND_REGIONS:
       const {
-        visibleVenuesArr,
+        activeVenues,
         visibleRegionsObj,
         regionTitle,
         regionReset
       } = action.payload
       return {
         ...state,
-        visibleVenuesArr: _.cloneDeep(visibleVenuesArr),
+        activeVenues: _.cloneDeep(activeVenues),
         visibleRegionsObj,
         regionTitle,
         regionReset
@@ -43,13 +43,13 @@ export default function (state = initialState, action) {
     case constants.MAIN_MAP_SET_ONLY_REGIONS:
       return {
         ...state,
-        visibleVenuesArr: [],
+        activeVenues: [],
         visibleRegionsObj: {},
         regionTitle: action.payload,
         regionReset: ''
       }
     case constants.MAIN_MAP_FILTER_VENUES:
-      return { ...state, visibleVenuesArr: action.payload }
+      return { ...state, activeVenues: action.payload }
     default:
       return state
   }

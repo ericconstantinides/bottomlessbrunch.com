@@ -26,20 +26,20 @@ class VenueFilters extends Component {
   componentDidMount = () => {
     this.props.constructFilters(
       this.props.venues,
-      this.props.mainMap.visibleVenuesArr
+      this.props.mainMap.activeVenues
     )
   }
 
   componentWillReceiveProps = nextProps => {
-    const visVenuesChanged = !nextProps.mainMap.visibleVenuesArr.every(
+    const visVenuesChanged = !nextProps.mainMap.activeVenues.every(
       ({ _id }, i) =>
-        this.props.mainMap.visibleVenuesArr.some(({ _id: nId }) => _id === nId)
+        this.props.mainMap.activeVenues.some(({ _id: nId }) => _id === nId)
     )
     if (visVenuesChanged || !_.isEqual(this.props.filters, nextProps.filters)) {
       nextProps.filterMainMapVenues(
         nextProps.filters,
         nextProps.venues,
-        nextProps.mainMap.visibleVenuesArr
+        nextProps.mainMap.activeVenues
       )
     }
     if (!nextProps.filters.ready) {
@@ -50,7 +50,7 @@ class VenueFilters extends Component {
   handleFilterReset = () => {
     this.props.constructFilters(
       this.props.venues,
-      this.props.mainMap.visibleVenuesArr
+      this.props.mainMap.activeVenues
     )
   }
   handleFiltersToggle = () => {

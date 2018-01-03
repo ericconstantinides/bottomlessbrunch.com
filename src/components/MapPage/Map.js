@@ -60,12 +60,12 @@ class Map extends Component {
     this.props.setMainMap(coords)
   }
   handleGettingVisibleVenues = props => {
-    // console.log(props.mainMap.visibleVenuesArr)
+    // console.log(props.mainMap.activeVenues)
     props.getMainMapVisibleVenues(
       props.venues,
       props.regions,
       props.mainMap.coords,
-      props.mainMap.visibleVenuesArr,
+      props.mainMap.activeVenues,
       props.fetchVenueDetail,
       props.history,
       props.ui.drawer,
@@ -99,7 +99,7 @@ class Map extends Component {
             lat={venue.lat}
             lng={venue.lng}
             filtered={checkFiltered(
-              this.props.mainMap.visibleVenuesArr,
+              this.props.mainMap.activeVenues,
               venue._id
             )}
             handleMouseOver={this.props.handleMouseOver}

@@ -14,8 +14,8 @@ class VenueList extends Component {
   componentWillReceiveProps (nextProps) {
     if (
       !_.isEqual(
-        this.props.mainMap.visibleVenuesArr,
-        nextProps.mainMap.visibleVenuesArr
+        this.props.mainMap.activeVenues,
+        nextProps.mainMap.activeVenues
       )
     ) {
       this.refs.VenueList.scrollTop = 0
@@ -24,7 +24,7 @@ class VenueList extends Component {
   handleFilterReset = () => {
     this.props.constructFilters(
       this.props.venues,
-      this.props.mainMap.visibleVenuesArr
+      this.props.mainMap.activeVenues
     )
   }
   render () {
@@ -37,8 +37,8 @@ class VenueList extends Component {
           <div className='VenueList__inner-handle' />
         </div>
         <VenueFilters />
-        {!this.props.mainMap.visibleVenuesArr.every(ven => ven.filtered) &&
-          this.props.mainMap.visibleVenuesArr.map(({ _id, filtered }) => (
+        {!this.props.mainMap.activeVenues.every(ven => ven.filtered) &&
+          this.props.mainMap.activeVenues.map(({ _id, filtered }) => (
             <VenueTeaser
               key={_id}
               altClass='VenueListItem'
@@ -54,7 +54,7 @@ class VenueList extends Component {
               handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
             />
           ))}
-        {this.props.mainMap.visibleVenuesArr.every(ven => ven.filtered) &&
+        {this.props.mainMap.activeVenues.every(ven => ven.filtered) &&
           <div className='VenueFilters__empty'>
             <p>No venues visible</p>
             <span onClick={this.handleFilterReset} className="button button--orange-black is-smaller">Reset Filters</span>

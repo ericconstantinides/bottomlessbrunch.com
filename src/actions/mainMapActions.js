@@ -93,7 +93,7 @@ export function getMainMapVisibleVenues (
   if (coords.zoom >= drawer.show_venues_zoom_level) {
     let regionReset = ''
     const { ne, sw } = coords.marginBounds
-    let visibleVenuesArr = []
+    let activeVenues = []
     let visibleRegionsObj = {}
     // loop through all the venues:
     _.map(venues, venue => {
@@ -104,8 +104,8 @@ export function getMainMapVisibleVenues (
         venue.lng <= ne.lng &&
         venue.lng >= sw.lng
       ) {
-        // add the venue to the visibleVenuesArr:
-        visibleVenuesArr.push({
+        // add the venue to the activeVenues:
+        activeVenues.push({
           _id: venue._id,
           filtered: oldVisibleVenues.some(
             prevVenue => prevVenue._id === venue._id && prevVenue.filtered
@@ -196,7 +196,7 @@ export function getMainMapVisibleVenues (
         regionTitle = 'Multiple Regions'
       }
     }
-    visibleVenuesArr.sort(
+    activeVenues.sort(
       (idA, idB) =>
         Math.abs(venues[idB._id].lat) +
         Math.abs(venues[idB._id].lng) -
@@ -204,17 +204,17 @@ export function getMainMapVisibleVenues (
     )
     // Construct the filters if the visible venues has changed:
     if (
-      oldVisibleVenues.length !== visibleVenuesArr.length ||
+      oldVisibleVenues.length !== activeVenues.length ||
       !oldVisibleVenues.every(({ _id }, i) =>
-        visibleVenuesArr.some(({ _id: nId }) => _id === nId)
+        activeVenues.some(({ _id: nId }) => _id === nId)
       )
     ) {
-      constructFilters(venues, visibleVenuesArr)
+      constructFilters(venues, activeVenues)
     }
     return {
       type: constants.MAIN_MAP_SET_VISIBLE_VENUES_AND_REGIONS,
       payload: {
-        visibleVenuesArr,
+        activeVenues,
         visibleRegionsObj,
         regionTitle,
         regionReset
