@@ -130,7 +130,7 @@ class VenueFilters extends Component {
       : '$' + filters.priceStart + ' - $' + filters.priceEnd
     return (
       <div className={`VenueFilters ${this.state.activeClass}`}>
-        <div>
+        <div className='VenueFilters__title-container'>
           <h3
             className='VenueFilters__title'
             onClick={this.handleFiltersToggle}

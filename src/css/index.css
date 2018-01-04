@@ -3572,6 +3572,11 @@ html.touch .VenueSlider__arrow {
 .VenueFilters__inner {
   padding-top: 1em; }
 
+.VenueFilters__title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
 .VenueFilters__title {
   font-size: 1.5em;
   margin-bottom: 0;
