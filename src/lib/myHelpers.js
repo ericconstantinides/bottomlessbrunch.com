@@ -543,6 +543,7 @@ export const extrapolateAsterisks = drinks => {
  * @returns {array} of drinks separated by the drinkIncludes title
  */
 export const extrapolateTimes = (times, daysEnm, cat = 'Bottomless Brunch') => {
+  if (!times) return
   let output = []
   times.forEach(timeItem => {
     timeItem.days.forEach(day => {
