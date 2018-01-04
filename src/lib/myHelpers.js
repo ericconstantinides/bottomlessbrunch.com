@@ -462,6 +462,7 @@ export function closeEnough (numberA, numberB, difference = 0.00001) {
  * @returns {array}
  */
 export const extrapolateDrinks = drinks => {
+  if (!drinks) return
   const output = []
   drinks.forEach(drinkItem => {
     drinkItem.drink.forEach(drink => {
