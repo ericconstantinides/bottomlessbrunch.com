@@ -239,35 +239,40 @@ export const filterMainMapVenues = (
 ) => {
   const filteredVenues = visibleVenues.map(({ _id }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
+    let newFiltered
     // Filter out by Time:
-    let newFiltered = normalizedTimes.every(day =>
-      timeWithin(day.startTime, day.endTime, filters.timeStart, filters.timeEnd)
-    )
-    if (newFiltered) return { _id, filtered: newFiltered }
-    // Filter out by Day:
-    newFiltered = normalizedTimes.every(day =>
-      dayWithin(day.day, filters.dayStart, filters.dayEnd)
-    )
-    if (newFiltered) return { _id, filtered: newFiltered }
-
-    // Filter out by Price:
-    newFiltered = normalizedDrinks.every(drink =>
-      priceWithin(drink.price, filters.priceStart, filters.priceEnd)
-    )
-    if (newFiltered) return { _id, filtered: newFiltered }
-
-    // Filter out by priceMeta:
-    if (!filters.includeDrinkWithMealPrices.checked) {
-      newFiltered = normalizedDrinks.every(drink => drink.priceIncludesFood)
-      if (newFiltered) return { _id, filtered: newFiltered }
-    }
-    // Filter out by drinks:
-    // console.log(normalizedDrinks)
-    if (filters.checkedDrink !== 'All') {
-      newFiltered = normalizedDrinks.every(
-        drink => filters.checkedDrink !== drink.drink
+    if (normalizedTimes && normalizedTimes.length) {
+      newFiltered = normalizedTimes.every(day =>
+        timeWithin(day.startTime, day.endTime, filters.timeStart, filters.timeEnd)
       )
       if (newFiltered) return { _id, filtered: newFiltered }
+      // Filter out by Day:
+      newFiltered = normalizedTimes.every(day =>
+        dayWithin(day.day, filters.dayStart, filters.dayEnd)
+      )
+      if (newFiltered) return { _id, filtered: newFiltered }
+    }
+
+    // Filter out by Price:
+    if (normalizedDrinks && normalizedDrinks.length) {
+      newFiltered = normalizedDrinks.every(drink =>
+        priceWithin(drink.price, filters.priceStart, filters.priceEnd)
+      )
+      if (newFiltered) return { _id, filtered: newFiltered }
+
+      // Filter out by priceMeta:
+      if (!filters.includeDrinkWithMealPrices.checked) {
+        newFiltered = normalizedDrinks.every(drink => drink.priceIncludesFood)
+        if (newFiltered) return { _id, filtered: newFiltered }
+      }
+      // Filter out by drinks:
+      // console.log(normalizedDrinks)
+      if (filters.checkedDrink !== 'All') {
+        newFiltered = normalizedDrinks.every(
+          drink => filters.checkedDrink !== drink.drink
+        )
+        if (newFiltered) return { _id, filtered: newFiltered }
+      }
     }
 
     // return what we got:

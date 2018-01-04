@@ -462,7 +462,7 @@ export function closeEnough (numberA, numberB, difference = 0.00001) {
  * @returns {array}
  */
 export const extrapolateDrinks = drinks => {
-  if (!drinks) return
+  if (!drinks || !drinks.length) return
   const output = []
   drinks.forEach(drinkItem => {
     drinkItem.drink.forEach(drink => {
@@ -560,7 +560,7 @@ export const extrapolateTimes = (times, daysEnm, cat = 'Bottomless Brunch') => {
 }
 
 export const simplifyIncludes = drinks => {
-  if (!drinks) return
+  if (!drinks || !drinks.length) return
   return drinks.map(drink => (
     {...drink, priceIncludesFood: drink.includes !== 'Drink Only'}
   ))
