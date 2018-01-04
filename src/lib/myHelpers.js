@@ -465,6 +465,7 @@ export const extrapolateDrinks = drinks => {
   if (!drinks || !drinks.length) return
   const output = []
   drinks.forEach(drinkItem => {
+    if (!drinkItem.drink || !drinkItem.drink.length) return
     drinkItem.drink.forEach(drink => {
       const newDrink = {
         drink,
