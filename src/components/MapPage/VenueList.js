@@ -70,9 +70,11 @@ class VenueList extends Component {
           </div>}
         {!hasUnfilteredVenues &&
           !this.props.hasVenues &&
-          <div className='VenueFilters__empty'>
-            <p>No venues visible</p>
-            {Object.entries(
+          this.props.mainMap.coords.zoom >
+            this.props.ui.drawer.show_venues_zoom_level &&
+            <div className='VenueFilters__empty'>
+              <p>No venues visible</p>
+              {Object.entries(
               this.props.mainMap.visibleRegionsObj
             ).map(([_id, reg]) => (
               <span
@@ -83,7 +85,7 @@ class VenueList extends Component {
                 Re-Center {reg.name}
               </span>
             ))}
-          </div>}
+            </div>}
       </div>
     )
   }
