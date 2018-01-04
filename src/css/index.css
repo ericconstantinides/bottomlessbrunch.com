@@ -107,6 +107,11 @@ a * {
   font-size: 1.25em;
   content: '\AB'; }
 
+.asterisk {
+  font-family: serif;
+  font-size: 0.875rem;
+  line-height: 0; }
+
 /*---------------------------------------------------------
 // Responsive Ratio
 //-------------------------------------------------------*/
@@ -3659,6 +3664,10 @@ html.touch .VenueSlider__arrow {
 
 .Deals__td--right {
   text-align: left; }
+
+.Deals__asterisks {
+  margin-top: 1rem;
+  font-size: 0.675em; }
 
 /*
  * Deals Overrides
