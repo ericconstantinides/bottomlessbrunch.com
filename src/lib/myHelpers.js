@@ -559,6 +559,7 @@ export const extrapolateTimes = (times, daysEnm, cat = 'Bottomless Brunch') => {
 }
 
 export const simplifyIncludes = drinks => {
+  if (!drinks) return
   return drinks.map(drink => (
     {...drink, priceIncludesFood: drink.includes !== 'Drink Only'}
   ))
