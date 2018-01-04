@@ -93,8 +93,6 @@ class VenueSlider extends Component {
       })
     }
   }
-  // handleSliderBeforeChange = (prevIndex, index) => {}
-
   handleSliderChange = sliderPos => {
     const {
       mainMap: { activeVenues },
@@ -125,12 +123,12 @@ class VenueSlider extends Component {
           key={venue._id}
           venueId={venue._id}
           slideNum={index}
+          sliderPosition={sliderPosition}
           history={this.props.history}
           regionSlug={this.props.region.slug}
           isActive={venue._id === visVenues[sliderPosition]}
           isPrev={venue._id === visVenues[prevPointer]}
           isNext={venue._id === visVenues[nextPointer]}
-          index={index}
         />
       )
     })

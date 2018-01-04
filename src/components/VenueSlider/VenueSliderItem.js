@@ -11,15 +11,7 @@ import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
 import Deals from '../common/Deals'
 
 class VenueSliderItem extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isActive: false
-    }
-  }
-  componentWillReceiveProps (nextProps) {
-    this.setState({ isActive: nextProps.isActive })
-  }
+
   renderBackground = venue => {
     if (
       !venue.googlePlacesData ||
