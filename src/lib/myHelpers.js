@@ -502,6 +502,38 @@ export const extrapolateIncludes = cleansedDrinks => {
   })
   return output
 }
+const makeAsterisks = asterisksLength => {
+  let output = ''
+  for (let i = 0; i < asterisksLength; i++) {
+    output += '*'
+  }
+  return output
+}
+export const extrapolateAsterisks = drinks => {
+  let items = []
+  let asterisks = []
+  // go through each meta type:
+  drinkIncludes.forEach(incTitle => {
+    const thisMetaItems = drinks.filter(drink => drink.includes === incTitle)
+    if (thisMetaItems.length) {
+      if (incTitle === 'Drink Only') {
+        items = [ ...thisMetaItems, ...items ]
+        return
+      }
+      const asterisk = makeAsterisks(asterisks.length + 1)
+      asterisks.push({
+        asterisk,
+        title: incTitle
+      })
+      const newItems = thisMetaItems.map(item => ({
+        ...item,
+        asterisk
+      }))
+      items = [ ...items, ...newItems ]
+    }
+  })
+  return { items, asterisks }
+}
 /**
  * Extrapolates the date and times into flatter data
  *

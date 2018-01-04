@@ -76,14 +76,51 @@ describe('myHelpers', () => {
       ]
     }
   ]
+  const asteriskedDrinks = {
+    items: [
+      {
+        drink: 'Mimosa',
+        includes: 'Drink Only',
+        price: 20
+      },
+      {
+        drink: 'Bloody Mary',
+        includes: 'Drink Only',
+        price: 20
+      },
+      {
+        drink: 'Bloody Mary',
+        includes: 'Drink Only',
+        price: 25,
+        remarks: 'with Absolute Vodka'
+      },
+      {
+        drink: 'Mimosa',
+        includes: 'Drink + Full Course Meal',
+        price: 28,
+        asterisk: '*'
+      }
+    ],
+    asterisks: [
+      {
+        asterisk: '*',
+        title: 'Drink + Full Course Meal'
+      }
+    ]
+  }
 
   it('should extrapolate drinks', () => {
     expect(myHelpers.extrapolateDrinks(dbDrinks)).toEqual(cleansedDrinks)
   })
+
   it('should Extrapolate Includes', () => {
-    expect(
-      myHelpers.extrapolateIncludes(cleansedDrinks)
-    ).toEqual(sortedDrinks)
+    expect(myHelpers.extrapolateIncludes(cleansedDrinks)).toEqual(sortedDrinks)
+  })
+
+  it('should create asterisked includes', () => {
+    expect(myHelpers.extrapolateAsterisks(cleansedDrinks)).toEqual(
+      asteriskedDrinks
+    )
   })
 
   it('should convert string time to an floatString', () => {
