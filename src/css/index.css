@@ -2679,6 +2679,7 @@ body.body--VenueSlider #root,
     display: none; }
   .VenueList {
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     top: 56px;
     bottom: 0;
