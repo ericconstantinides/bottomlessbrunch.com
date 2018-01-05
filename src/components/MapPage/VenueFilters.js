@@ -135,13 +135,13 @@ class VenueFilters extends Component {
             className='VenueFilters__title'
             onClick={this.handleFiltersToggle}
           >
-            Filters
+            Filter the restaurants
           </h3>
           <span
             className='VenueFilters__reset button button--orange-black is-smaller'
             onClick={this.handleFilterReset}
           >
-            Reset Filters
+            Reset
           </span>
         </div>
         <AnimateHeight

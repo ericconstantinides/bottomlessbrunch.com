@@ -3562,13 +3562,21 @@ html.touch .VenueSlider__arrow {
     margin-bottom: 1em; } }
 
 .VenueFilters {
-  background-color: white;
-  margin: 0 0.5em 0.5em;
-  padding: 0.75em;
-  border-radius: 4px; }
+  margin: 0.2em 0.5em 0.5em;
+  padding: 0.5em 0.75em;
+  border-radius: 4px;
+  color: white;
+  box-shadow: 0 0 0px 1px rgba(255, 255, 255, 0.2);
+  margin-top: 0.2em;
+  background: rgba(0, 0, 0, 0.95); }
 
 .VenueFilters__inner {
-  padding-top: 1em; }
+  padding-top: 1em;
+  opacity: 0;
+  transition: 350ms; }
+  .VenueFilters.is-active .VenueFilters__inner {
+    opacity: 1;
+    transition: 0; }
 
 .VenueFilters__title-container {
   display: flex;
@@ -3578,19 +3586,23 @@ html.touch .VenueSlider__arrow {
 .VenueFilters__title {
   font-family: "Open Sans Condensed", sans-serif;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.1em;
   margin-bottom: 0;
+  text-transform: uppercase;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  white-space: nowrap;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.75); }
   .VenueFilters__title:after {
     content: '';
     display: block;
-    margin-left: 0.5em;
-    border-top: 0.35em solid black;
+    margin-left: 0.25em;
+    border-top: 0.35em solid white;
     border-left: 0.25em solid transparent;
     border-right: 0.25em solid transparent;
+    filter: drop-shadow(1px 1px 1px black);
     transform: rotate(-90deg);
     transition: 0.35s; }
   .VenueFilters.is-active .VenueFilters__title:after {
@@ -3611,7 +3623,7 @@ html.touch .VenueSlider__arrow {
 .VenueFilters__slider-container {
   padding: 0 1em 1.25em 0.5em; }
   .VenueFilters__slider-container .rc-slider-mark-text-active {
-    color: black; }
+    color: white; }
   .VenueFilters__slider-container .rc-slider-mark-text {
     transform: rotate(45deg);
     transform-origin: 50% 100%; }
@@ -3644,9 +3656,10 @@ html.touch .VenueSlider__arrow {
   display: flex;
   align-items: center;
   margin-bottom: 0.325em;
-  line-height: 1; }
+  line-height: 1;
+  font-weight: bold; }
   .VenueFilters__label[disabled] {
-    color: #999; }
+    color: #666; }
 
 .VenueFilters__empty {
   color: white;
