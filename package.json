@@ -14,6 +14,7 @@
     "prop-types": "^15.5.10",
     "rc-slider": "^8.5.0",
     "react": "^16.2.0",
+    "react-animate-height": "^0.10.9",
     "react-dom": "^16.2.0",
     "react-ga": "^2.2.0",
     "react-google-maps": "^7.3.0",
@@ -37,13 +38,14 @@
   },
   "scripts": {
     "client": "react-scripts start",
+    "server": "nodemon ../server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "dev": "concurrently 'npm run client' 'nodemon ../server/server.js' 'npm run watch-css'",
+    "dev": "concurrently 'npm run client' 'npm run server' 'npm run watch-css'",
     "deploy": "yarn run build && git add . && git commit -m 'Buildout' && git push && pm2 deploy ecosystem.config.js production"
   },
   "devDependencies": {

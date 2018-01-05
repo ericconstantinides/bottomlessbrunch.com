@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Range } from 'rc-slider'
+import AnimateHeight from 'react-animate-height'
 import _ from 'lodash'
 import 'rc-slider/assets/index.css'
 
@@ -20,7 +21,7 @@ class VenueFilters extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeClass: 'is-active'
+      filterOpen: false
     }
   }
   componentDidMount = () => {
@@ -54,10 +55,7 @@ class VenueFilters extends Component {
     )
   }
   handleFiltersToggle = () => {
-    const activeClass = this.state.activeClass === 'not-active'
-      ? 'is-active'
-      : 'not-active'
-    this.setState({ activeClass })
+    this.setState({ filterOpen: !this.state.filterOpen })
   }
   handleTimeChange = hours => {
     this.props.updateFilter({ timeStart: hours[0], timeEnd: hours[1] })
@@ -129,7 +127,9 @@ class VenueFilters extends Component {
       ? '$' + filters.priceStart
       : '$' + filters.priceStart + ' - $' + filters.priceEnd
     return (
-      <div className={`VenueFilters ${this.state.activeClass}`}>
+      <div
+        className={`VenueFilters ${this.state.filterOpen ? 'is-active' : 'not-active'}`}
+      >
         <div className='VenueFilters__title-container'>
           <h3
             className='VenueFilters__title'
@@ -137,78 +137,87 @@ class VenueFilters extends Component {
           >
             Filters
           </h3>
-          <span onClick={this.handleFilterReset} className="button button--orange-black is-smaller">Reset Filters</span>
+          <span
+            className='VenueFilters__reset button button--orange-black is-smaller'
+            onClick={this.handleFilterReset}
+          >
+            Reset Filters
+          </span>
         </div>
-        <div className='VenueFilters__inner'>
-          <div className='VenueFilters__item'>
-            <h4 className='VenueFilters__item-title'>
-              Brunch Hours: {displayHours}
-            </h4>
-            <p className='VenueFilters__description u-hide'>
-              Brunch available for some of the selected hours but not necessarily all the selected hours
-            </p>
-            <div className='VenueFilters__slider-container'>
-            {filters.ready &&
-              <Range
-                className='VenueFilters__slider'
-                min={filters.timeMin}
-                max={filters.timeMax}
-                marks={makeTimeMarks(filters.timeMin, filters.timeMax)}
-                onChange={this.handleTimeChange}
-                defaultValue={[filters.timeMin, filters.timeMax]}
-                allowCross={false}
-                pushable
-              />
-            }
+        <AnimateHeight
+          duration={333}
+          height={this.state.filterOpen ? 'auto' : 0}
+        >
+          <div className='VenueFilters__inner'>
+            <div className='VenueFilters__item'>
+              <h4 className='VenueFilters__item-title'>
+                Brunch Hours: {displayHours}
+              </h4>
+              <p className='VenueFilters__description u-hide'>
+                Brunch available for some of the selected hours but not necessarily all the selected hours
+              </p>
+              <div className='VenueFilters__slider-container'>
+                {filters.ready &&
+                  <Range
+                    className='VenueFilters__slider'
+                    min={filters.timeMin}
+                    max={filters.timeMax}
+                    marks={makeTimeMarks(filters.timeMin, filters.timeMax)}
+                    onChange={this.handleTimeChange}
+                    defaultValue={[filters.timeMin, filters.timeMax]}
+                    allowCross={false}
+                    pushable
+                  />}
+              </div>
+            </div>
+            <div className='VenueFilters__item'>
+              <h4 className='VenueFilters__item-title'>
+                Brunch Days: {displayDays}
+              </h4>
+              <p className='VenueFilters__description u-hide'>
+                Brunch available at least one of the selected days but not necessarily all the selected days
+              </p>
+              <div className='VenueFilters__slider-container'>
+                <Range
+                  className='VenueFilters__slider'
+                  min={filters.dayMin}
+                  max={filters.dayMax}
+                  marks={makeDayMarks(days, 3)}
+                  onChange={this.handleDayChange}
+                  value={[filters.dayStart, filters.dayEnd]}
+                  allowCross={false}
+                />
+              </div>
+            </div>
+            <div className='VenueFilters__item'>
+              <h4 className='VenueFilters__item-title'>
+                Bottomless Brunch Price: {displayPrices}
+              </h4>
+              {/* <div className='u-mb-0_5'>
+                {this.renderPricesMeta()}
+              </div> */}
+              <div className='VenueFilters__slider-container'>
+                <Range
+                  className='VenueFilters__slider'
+                  min={filters.priceMin}
+                  max={filters.priceMax}
+                  marks={makePriceMarks(filters.priceMin, filters.priceMax)}
+                  onChange={this.handlePriceChange}
+                  value={[filters.priceStart, filters.priceEnd]}
+                  allowCross={false}
+                />
+              </div>
+            </div>
+            <div className='VenueFilters__item'>
+              <h4 className='VenueFilters__item-title'>
+                Bottomless Drink
+              </h4>
+              <div className='VenueFilters__horz'>
+                {this.renderDrinks()}
+              </div>
             </div>
           </div>
-          <div className='VenueFilters__item'>
-            <h4 className='VenueFilters__item-title'>
-              Brunch Days: {displayDays}
-            </h4>
-            <p className='VenueFilters__description u-hide'>
-              Brunch available at least one of the selected days but not necessarily all the selected days
-            </p>
-            <div className='VenueFilters__slider-container'>
-              <Range
-                className='VenueFilters__slider'
-                min={filters.dayMin}
-                max={filters.dayMax}
-                marks={makeDayMarks(days, 3)}
-                onChange={this.handleDayChange}
-                value={[filters.dayStart, filters.dayEnd]}
-                allowCross={false}
-              />
-            </div>
-          </div>
-          <div className='VenueFilters__item'>
-            <h4 className='VenueFilters__item-title'>
-              Bottomless Brunch Price: {displayPrices}
-            </h4>
-            {/* <div className='u-mb-0_5'>
-              {this.renderPricesMeta()}
-            </div> */}
-            <div className='VenueFilters__slider-container'>
-              <Range
-                className='VenueFilters__slider'
-                min={filters.priceMin}
-                max={filters.priceMax}
-                marks={makePriceMarks(filters.priceMin, filters.priceMax)}
-                onChange={this.handlePriceChange}
-                value={[filters.priceStart, filters.priceEnd]}
-                allowCross={false}
-              />
-            </div>
-          </div>
-          <div className='VenueFilters__item'>
-            <h4 className='VenueFilters__item-title'>
-              Bottomless Drink
-            </h4>
-            <div className='VenueFilters__horz'>
-              {this.renderDrinks()}
-            </div>
-          </div>
-        </div>
+        </AnimateHeight>
       </div>
     )
   }

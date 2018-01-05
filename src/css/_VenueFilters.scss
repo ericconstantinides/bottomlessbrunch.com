@@ -1,13 +1,8 @@
 .VenueFilters {
   background-color: white;
   margin: 0 0.5em 0.5em;
-  padding: 1em;
+  padding: 0.75em;
   border-radius: 4px;
-  &.not-active {
-    .VenueFilters__inner {
-      display: none;
-    }
-  }
 }
 .VenueFilters__inner {
   padding-top: 1em;
@@ -18,9 +13,28 @@
   align-items: center;
 }
 .VenueFilters__title {
+  @include openSansCondensedBold;
   font-size: 1.5em;
   margin-bottom: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:after {
+    content: '';
+    display: block;
+    margin-left: 0.5em;
+    border-top: 0.35em solid black;
+    border-left: 0.25em solid transparent;
+    border-right: 0.25em solid transparent;
+    transform: rotate(-90deg);
+    transition: 0.35s
+  }
+  .VenueFilters.is-active & {
+    &:after {
+      transform: rotate(0)
+    }
+  }
 }
 .VenueFilters__horz {
   display: flex;
@@ -38,7 +52,7 @@
 }
 
 .VenueFilters__slider-container {
-  padding: 0 0.75em 1.25em;
+  padding: 0 1em 1.25em 0.5em;
   .rc-slider-mark-text-active {
     color: black;
   }
@@ -91,5 +105,20 @@
     text-transform: uppercase;
     font-weight: 600;
     font-size: 0.925em;
+  }
+}
+/*
+ * Reset Button
+ */
+.VenueFilters {
+  .VenueFilters__reset {
+    z-index: -1;
+    opacity: 0;
+    transition: 0s 0.35s, opacity 0.35s;
+  }
+  &.is-active .VenueFilters__reset {
+    z-index: 0;
+    opacity: 1;
+    transition: 0s, opacity 0.35s;
   }
 }
