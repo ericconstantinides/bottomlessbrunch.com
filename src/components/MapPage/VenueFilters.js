@@ -55,6 +55,13 @@ class VenueFilters extends Component {
     )
   }
   handleFiltersToggle = () => {
+    // if going to close filters, reset them too:
+    if (this.state.filterOpen) {
+      this.props.constructFilters(
+        this.props.venues,
+        this.props.mainMap.activeVenues
+      )
+    }
     this.setState({ filterOpen: !this.state.filterOpen })
   }
   handleTimeChange = hours => {
