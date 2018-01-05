@@ -86,7 +86,8 @@ export function getMainMapVisibleVenues (
   history,
   drawer,
   setUiActiveRegion,
-  constructFilters
+  constructFilters,
+  oldVisibleRegionsObj
 ) {
   const parsedPath = parsePath(history.location.pathname)
   let regionTitle = 'Choose Region'
@@ -202,11 +203,12 @@ export function getMainMapVisibleVenues (
         Math.abs(venues[idB._id].lng) -
         (Math.abs(venues[idA._id].lat) + Math.abs(venues[idA._id].lng))
     )
-    // Construct the filters if the visible venues has changed:
+    // Construct the filters if the region has changed:
     if (
-      oldVisibleVenues.length !== activeVenues.length ||
-      !oldVisibleVenues.every(({ _id }, i) =>
-        activeVenues.some(({ _id: nId }) => _id === nId)
+      Object.entries(oldVisibleRegionsObj).length !==
+        Object.entries(visibleRegionsObj).length ||
+      !Object.entries(oldVisibleRegionsObj).every(([ oldId ]) =>
+        Object.entries(visibleRegionsObj).some(([ _id ]) => _id === oldId)
       )
     ) {
       constructFilters(venues, activeVenues)
@@ -232,18 +234,19 @@ export function getMainMapVisibleVenues (
   }
 }
 
-export const filterMainMapVenues = (
-  filters,
-  venues,
-  visibleVenues
-) => {
+export const filterMainMapVenues = (filters, venues, visibleVenues) => {
   const filteredVenues = visibleVenues.map(({ _id }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
     let newFiltered
     // Filter out by Time:
     if (normalizedTimes && normalizedTimes.length) {
       newFiltered = normalizedTimes.every(day =>
-        timeWithin(day.startTime, day.endTime, filters.timeStart, filters.timeEnd)
+        timeWithin(
+          day.startTime,
+          day.endTime,
+          filters.timeStart,
+          filters.timeEnd
+        )
       )
       if (newFiltered) return { _id, filtered: newFiltered }
       // Filter out by Day:

@@ -70,7 +70,8 @@ class Map extends Component {
       props.history,
       props.ui.drawer,
       props.setUiActiveRegion,
-      props.constructFilters
+      props.constructFilters,
+      props.mainMap.visibleRegionsObj
     )
   }
   handleMapClick = props => {
