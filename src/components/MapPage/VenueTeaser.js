@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AnimateHeight from 'react-animate-height'
 
 import Deals from '../common/Deals'
 
@@ -63,7 +64,7 @@ class VenueTeaser extends Component {
       }, 150)
     }
   }
-  render () {
+  renderTeaser = () => {
     const {
       venue,
       handleMouseOver,
@@ -79,7 +80,6 @@ class VenueTeaser extends Component {
     const offsetStyles = altClass === 'MapItem'
       ? { transform: `translateY(${this.state.offVert}px)` }
       : {}
-    // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
     return (
       <article
         className={`VenueTeaser ${altClass} ${hovered} ${side} ${filterClass}`}
@@ -93,7 +93,6 @@ class VenueTeaser extends Component {
             <span className='MapItem__marker' />
             <span className='MapItem__pointer' />
           </div>}
-        {/* THE VENUETEASER__INNER is where the real link should be... */}
         <div
           className={`VenueTeaser__link ${altClass}__link`}
           onClick={this.props.handleVenueTeaserLinkClick(venue._id)}
@@ -142,6 +141,25 @@ class VenueTeaser extends Component {
           </div>
         </div>
       </article>
+    )
+  }
+  render () {
+    // const funTimes = compileDays(venue.funTimes, 'Bottomless Brunch', venue.name)
+    if (this.props.altClass === 'MapItem') {
+      return (
+        <div>
+          {this.renderTeaser()}
+        </div>
+      )
+    }
+    return (
+      <AnimateHeight
+        duration={250}
+        className={`${this.props.altClass}__container`}
+        height={this.props.filtered ? 0 : 'auto'}
+      >
+        {this.renderTeaser()}
+      </AnimateHeight>
     )
   }
 }

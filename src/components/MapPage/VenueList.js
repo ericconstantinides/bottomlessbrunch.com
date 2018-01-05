@@ -40,23 +40,22 @@ class VenueList extends Component {
           <div className='VenueList__inner-handle' />
         </div>
         {this.props.hasVenues && <VenueFilters />}
-        {hasUnfilteredVenues &&
-          this.props.mainMap.activeVenues.map(({ _id, filtered }) => (
-            <VenueTeaser
-              key={_id}
-              altClass='VenueListItem'
-              handleMouseOver={this.props.handleMouseOver}
-              handleMouseLeave={this.props.handleMouseLeave}
-              toggleMarkerClick={this.props.toggleMarkerClick}
-              hoveredVenue={this.props.hoveredVenue}
-              venue={this.props.venues[_id]}
-              filtered={filtered}
-              regionSlug={
-                this.props.regions[this.props.venues[_id].regionId].slug
-              }
-              handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
-            />
-          ))}
+        {this.props.mainMap.activeVenues.map(({ _id, filtered }) => (
+          <VenueTeaser
+            key={_id}
+            altClass='VenueListItem'
+            handleMouseOver={this.props.handleMouseOver}
+            handleMouseLeave={this.props.handleMouseLeave}
+            toggleMarkerClick={this.props.toggleMarkerClick}
+            hoveredVenue={this.props.hoveredVenue}
+            venue={this.props.venues[_id]}
+            filtered={filtered}
+            regionSlug={
+              this.props.regions[this.props.venues[_id].regionId].slug
+            }
+            handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
+          />
+        ))}
         {!hasUnfilteredVenues &&
           this.props.hasVenues &&
           <div className='VenueFilters__empty'>
