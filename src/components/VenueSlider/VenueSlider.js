@@ -47,7 +47,7 @@ class VenueSlider extends Component {
         )
         props.setUiVenueSliderPosition(
           venue._id,
-          props.mainMap.activeVenues.filter(({ filtered }) => !filtered),
+          props.mainMap.activeVenues.filter(({ filtered, visible }) => visible && !filtered),
           props.venues
         )
       }
@@ -57,14 +57,14 @@ class VenueSlider extends Component {
     if (
       props.ui.siteDataReady &&
       props.ui.sliderPosition !== false &&
-      props.mainMap.activeVenues.filter(({ filtered }) => !filtered).length > 0
+      props.mainMap.activeVenues.filter(({ filtered, visible }) => visible && !filtered)
     ) {
       const {
         ui: { sliderPosition: current },
         venues,
         mainMap: { activeVenues }
       } = props
-      const visVenues = activeVenues.filter(({ filtered }) => !filtered)
+      const visVenues = activeVenues.filter(({ filtered, visible }) => visible && !filtered)
       const prev = movePointer(visVenues, current, 'prev')
       const next = movePointer(visVenues, current, 'next')
       // let staggeredNum = 0
@@ -100,7 +100,7 @@ class VenueSlider extends Component {
       history,
       setUiVenueSliderPosition
     } = this.props
-    const visVenues = activeVenues.filter(({ filtered }) => !filtered)
+    const visVenues = activeVenues.filter(({ filtered, visible }) => visible && !filtered)
     setUiVenueSliderPosition(visVenues[sliderPos]._id, visVenues, venues, history)
   }
   handleShare = service => event => {
@@ -111,7 +111,7 @@ class VenueSlider extends Component {
       return <div>Loading...</div>
     }
     const { activeVenues } = this.props.mainMap
-    const visVenues = activeVenues.filter(({ filtered }) => !filtered)
+    const visVenues = activeVenues.filter(({ filtered, visible }) => visible && !filtered)
     const { sliderPosition } = this.props.ui
     const prevPointer = movePointer(visVenues, sliderPosition, 'prev')
     const nextPointer = movePointer(visVenues, sliderPosition, 'next')

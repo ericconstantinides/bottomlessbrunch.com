@@ -108,6 +108,7 @@ export function getMainMapVisibleVenues (
         // add the venue to the activeVenues:
         activeVenues.push({
           _id: venue._id,
+          visible: true,
           filtered: oldVisibleVenues.some(
             prevVenue => prevVenue._id === venue._id && prevVenue.filtered
           )
@@ -133,7 +134,7 @@ export function getMainMapVisibleVenues (
     })
     // POST VENUE CHECKING:
     // check if we're inside a region, just no venues are currently visible:
-    if (_.isEmpty(visibleRegionsObj)) {
+    if (!Object.entries(visibleRegionsObj).length) {
       _.map(regions, region => {
         const center = coords.marginCenter ? coords.marginCenter : coords.center
         if (
@@ -153,34 +154,53 @@ export function getMainMapVisibleVenues (
       })
     }
     // check visibleRegionsObj again if it changed from right above:
-    if (!_.isEmpty(visibleRegionsObj)) {
+    if (Object.entries(visibleRegionsObj).length) {
       // visibleRegionsObj has data. let's do some checks on it:
-      const keys = _.keysIn(visibleRegionsObj)
-      if (keys.length === 1) {
+      const rIds = Object.keys(visibleRegionsObj)
+
+      // update activeVenues to include all the not currently visible venues:
+      rIds.forEach(rId => {
+        Object.entries(venues).forEach(([vId, venue]) => {
+          if (
+            venue.regionId === rId &&
+            !activeVenues.some(({ _id }) => _id === vId)
+          ) {
+            // add the venue to the activeVenues but don't make it visible:
+            activeVenues.push({
+              _id: venue._id,
+              visible: false,
+              filtered: oldVisibleVenues.some(
+                prevVenue => prevVenue._id === venue._id && prevVenue.filtered
+              )
+            })
+          }
+        })
+      })
+      if (rIds.length === 1) {
         // we have only 1 region visible
         // let's check if we're showing less than all the venues:
         if (
-          visibleRegionsObj[keys[0]].venuesVisible <
-          regions[keys[0]].venuesAvailable
+          visibleRegionsObj[rIds[0]].venuesVisible <
+          regions[rIds[0]].venuesAvailable
         ) {
           // PARTIAL SINGLE REGION:
-          const slug = regions[visibleRegionsObj[keys[0]]._id].slug
-          setUiActiveRegion(visibleRegionsObj[keys[0]]._id)
+          const slug = regions[visibleRegionsObj[rIds[0]]._id].slug
+          setUiActiveRegion(visibleRegionsObj[rIds[0]]._id)
           if (parsedPath.length <= 1 && parsedPath[0] !== slug) {
             history.push(slug)
           }
-          regionReset = keys[0]
-          regionTitle = visibleRegionsObj[keys[0]].name
+          regionReset = rIds[0]
+          regionTitle = visibleRegionsObj[rIds[0]].name
         } else {
           // FULL SINGLE REGION:
-          const slug = regions[visibleRegionsObj[keys[0]]._id].slug
-          setUiActiveRegion(visibleRegionsObj[keys[0]]._id)
+          const slug = regions[visibleRegionsObj[rIds[0]]._id].slug
+          setUiActiveRegion(visibleRegionsObj[rIds[0]]._id)
           if (parsedPath.length <= 1 && parsedPath[0] !== slug) {
             history.push(slug)
           }
           // This should only show when the coords are different:
-          regionReset = keys[0]
-          regionTitle = visibleRegionsObj[keys[0]].name
+          regionReset = rIds[0]
+          regionTitle = visibleRegionsObj[rIds[0]].name
         }
       } else {
         // MULTIPLE REGIONS
@@ -203,12 +223,12 @@ export function getMainMapVisibleVenues (
         Math.abs(venues[idB._id].lng) -
         (Math.abs(venues[idA._id].lat) + Math.abs(venues[idA._id].lng))
     )
-    // Construct the filters if the region has changed:
+    // Construct the filters if the visible regions have changed:
     if (
       Object.entries(oldVisibleRegionsObj).length !==
         Object.entries(visibleRegionsObj).length ||
-      !Object.entries(oldVisibleRegionsObj).every(([ oldId ]) =>
-        Object.entries(visibleRegionsObj).some(([ _id ]) => _id === oldId)
+      !Object.entries(oldVisibleRegionsObj).every(
+        ([_id]) => visibleRegionsObj[_id]
       )
     ) {
       constructFilters(venues, activeVenues)
@@ -235,7 +255,7 @@ export function getMainMapVisibleVenues (
 }
 
 export const filterMainMapVenues = (filters, venues, visibleVenues) => {
-  const filteredVenues = visibleVenues.map(({ _id }) => {
+  const filteredVenues = visibleVenues.map(({ _id, visible }) => {
     const { normalizedTimes, normalizedDrinks } = venues[_id]
     let newFiltered
     // Filter out by Time:
@@ -248,12 +268,12 @@ export const filterMainMapVenues = (filters, venues, visibleVenues) => {
           filters.timeEnd
         )
       )
-      if (newFiltered) return { _id, filtered: newFiltered }
+      if (newFiltered) return { _id, visible, filtered: newFiltered }
       // Filter out by Day:
       newFiltered = normalizedTimes.every(day =>
         dayWithin(day.day, filters.dayStart, filters.dayEnd)
       )
-      if (newFiltered) return { _id, filtered: newFiltered }
+      if (newFiltered) return { _id, visible, filtered: newFiltered }
     }
 
     // Filter out by Price:
@@ -261,12 +281,12 @@ export const filterMainMapVenues = (filters, venues, visibleVenues) => {
       newFiltered = normalizedDrinks.every(drink =>
         priceWithin(drink.price, filters.priceStart, filters.priceEnd)
       )
-      if (newFiltered) return { _id, filtered: newFiltered }
+      if (newFiltered) return { _id, visible, filtered: newFiltered }
 
       // Filter out by priceMeta:
       if (!filters.includeDrinkWithMealPrices.checked) {
         newFiltered = normalizedDrinks.every(drink => drink.priceIncludesFood)
-        if (newFiltered) return { _id, filtered: newFiltered }
+        if (newFiltered) return { _id, visible, filtered: newFiltered }
       }
       // Filter out by drinks:
       // console.log(normalizedDrinks)
@@ -274,12 +294,12 @@ export const filterMainMapVenues = (filters, venues, visibleVenues) => {
         newFiltered = normalizedDrinks.every(
           drink => filters.checkedDrink !== drink.drink
         )
-        if (newFiltered) return { _id, filtered: newFiltered }
+        if (newFiltered) return { _id, visible, filtered: newFiltered }
       }
     }
 
     // return what we got:
-    return { _id, filtered: false }
+    return { _id, visible, filtered: false }
   })
   return {
     type: constants.MAIN_MAP_FILTER_VENUES,

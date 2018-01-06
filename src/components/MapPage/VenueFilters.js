@@ -21,7 +21,7 @@ class VenueFilters extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      filterOpen: false
+      filterOpen: true
     }
   }
   componentDidMount = () => {

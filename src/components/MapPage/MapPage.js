@@ -76,7 +76,7 @@ class MapPage extends Component {
       venues,
       history
     } = this.props
-    const visVenues = activeVenues.filter(({ filtered }) => !filtered)
+    const visVenues = activeVenues.filter(({ filtered, visible }) => visible && !filtered)
     this.props.setUiVenueSliderPosition(_id, visVenues, venues, history)
   }
   render () {

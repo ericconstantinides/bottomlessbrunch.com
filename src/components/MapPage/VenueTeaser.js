@@ -25,7 +25,8 @@ class VenueTeaser extends Component {
       this.state.isActive !== nextState.isActive ||
       this.state.isPositioned !== nextState.isPositioned ||
       this.props.venue.fetchedLevel !== nextProps.venue.fetchedLevel ||
-      this.props.filtered !== nextProps.filtered
+      this.props.filtered !== nextProps.filtered ||
+      this.props.visible !== nextProps.visible
     ) {
       return true
     }
@@ -71,18 +72,20 @@ class VenueTeaser extends Component {
       handleMouseLeave,
       toggleMarkerClick,
       altClass,
-      filtered
+      filtered,
+      visible
     } = this.props
     const hovered = this.state.isActive ? 'is-hovered' : 'not-hovered'
     const side = this.state.teaserSide === 'right' ? 'is-right' : 'is-left'
     const filterClass = filtered ? 'is-filtered' : 'not-filtered'
+    const visibleClass = visible ? 'is-visible' : 'not-visible'
 
     const offsetStyles = altClass === 'MapItem'
       ? { transform: `translateY(${this.state.offVert}px)` }
       : {}
     return (
       <article
-        className={`VenueTeaser ${altClass} ${hovered} ${side} ${filterClass}`}
+        className={`VenueTeaser ${altClass} ${hovered} ${side} ${filterClass} ${visibleClass}`}
         onMouseEnter={handleMouseOver(venue)}
         onMouseLeave={handleMouseLeave(venue)}
         onClick={toggleMarkerClick(venue, altClass)}
@@ -152,11 +155,12 @@ class VenueTeaser extends Component {
         </div>
       )
     }
+    const {visible, filtered} = this.props
     return (
       <AnimateHeight
         duration={250}
         className={`${this.props.altClass}__container`}
-        height={this.props.filtered ? 0 : 'auto'}
+        height={!visible || filtered ? 0 : 'auto'}
       >
         {this.renderTeaser()}
       </AnimateHeight>
