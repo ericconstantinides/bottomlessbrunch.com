@@ -4,7 +4,7 @@ import { extrapolateDrinks, extrapolateAsterisks } from '../../lib/myHelpers'
 const renderAsterisks = asterisks => (
   asterisks.map((astObj, i) => (
     <div key={i} className='Deals__asterisk-item'>
-      <span className='asterisk'>{astObj.asterisk}</span> Price includes {astObj.title}
+      <span className='asterisk'>{astObj.asterisk}</span>Price includes {astObj.title}
     </div>
   ))
 )
@@ -16,8 +16,8 @@ const renderDeals = items => (
         ${deal.price}
       </td>
       <td className='Deals__td Deals__td--right'>
-        {deal.drink} {deal.remarks &&
-        <span>({deal.remarks})</span>}
+        {deal.drink}{deal.remarks &&
+        <span> ({deal.remarks})</span>}
         {deal.asterisk &&
         <span className='asterisk'>{deal.asterisk}</span>}
       </td>
