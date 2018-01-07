@@ -319,7 +319,7 @@ class venueForm extends Component {
                     component={this.renderField}
                   />
                 </div> */}
-                <div className='flex-basis-35p'>
+                <div className='flex-basis-40p'>
                   <label className='AddEdit__label'>Bottomless Drink(s)</label>
                   <Field
                     name={`${funItem}.drink`}
@@ -337,7 +337,7 @@ class venueForm extends Component {
                     lbl='Price ($)'
                   />
                 </div>
-                <div className='flex-basis-15p'>
+                <div className='flex-basis-25p'>
                   <label className='AddEdit__label'>Price Includes</label>
                   <Field
                     name={`${funItem}.includes`}
@@ -346,7 +346,7 @@ class venueForm extends Component {
                     clearable={false}
                   />
                 </div>
-                <div className='flex-basis-35p'>
+                <div className='flex-basis-20p'>
                   <Field
                     name={`${funItem}.remarks`}
                     component={this.renderField}
