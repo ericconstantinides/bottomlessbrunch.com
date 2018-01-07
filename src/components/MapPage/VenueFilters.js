@@ -61,13 +61,6 @@ class VenueFilters extends Component {
     )
   }
   handleFiltersToggle = () => {
-    // if going to close filters, reset them too:
-    if (this.state.filterOpen) {
-      this.props.constructFilters(
-        this.props.venues,
-        this.props.mainMap.activeVenues
-      )
-    }
     this.setState({ filterOpen: !this.state.filterOpen })
   }
   handleTimeChange = hours => {
@@ -148,13 +141,13 @@ class VenueFilters extends Component {
             className='VenueFilters__title'
             onClick={this.handleFiltersToggle}
           >
-            Filter the restaurants
+            Filter restaurants
           </h3>
           <span
             className={`VenueFilters__reset button button--orange-black is-smaller ${this.state.matchesPristine ? 'not-active' : 'is-active'}`}
             onClick={this.handleFilterReset}
           >
-            Reset
+            Reset Filters
           </span>
         </div>
         <AnimateHeight

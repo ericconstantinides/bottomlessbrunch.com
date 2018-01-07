@@ -65,7 +65,7 @@ class VenueList extends Component {
         {actual === 0 && possible > 0 &&
           this.props.hasVenues &&
           <div className='VenueFilters__empty'>
-            <p>All Venues filtered out</p>
+            <p>All restaurants filtered out</p>
             <span
               onClick={this.handleFilterReset}
               className='button button--orange-black is-smaller'
@@ -78,7 +78,7 @@ class VenueList extends Component {
           this.props.mainMap.coords.zoom >
             this.props.ui.drawer.show_venues_zoom_level &&
             <div className='VenueFilters__empty'>
-              <p>No venues visible</p>
+              <p>No restaurants visible</p>
               {Object.entries(
               this.props.mainMap.visibleRegionsObj
             ).map(([_id, reg]) => (
