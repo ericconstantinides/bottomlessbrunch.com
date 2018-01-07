@@ -229,6 +229,15 @@ $venueSliderItemSidePadding: 2vw;
   line-height: 1;
   margin-bottom: 0;
 }
+.VenueSliderItem__middle.no-meta {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  .VenueSliderItem__middle-center,
+  .VenueSliderItem__middle-right {
+    width: 50%;
+  }
+}
 .VenueSliderItem__table {
   margin: 0 auto;
 }
@@ -275,9 +284,12 @@ $venueSliderItemSidePadding: 2vw;
   .VenueSliderItem__middle-center {
     order: -1;
   }
+  .VenueSliderItem__middle.no-meta .VenueSliderItem__middle-center,
   .VenueSliderItem__middle-center {
     width: 100%;
   }
+  .VenueSliderItem__middle.no-meta .VenueSliderItem__middle-left,
+  .VenueSliderItem__middle.no-meta .VenueSliderItem__middle-right,
   .VenueSliderItem__middle-left,
   .VenueSliderItem__middle-right {
     width: (calc(100% - 0.5em))

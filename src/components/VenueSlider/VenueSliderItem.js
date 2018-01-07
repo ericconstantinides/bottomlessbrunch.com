@@ -11,7 +11,6 @@ import { roundHalf, compileGoogleHours, compileDays } from '../../lib/myHelpers'
 import Deals from '../common/Deals'
 
 class VenueSliderItem extends Component {
-
   renderBackground = venue => {
     if (
       !venue.googlePlacesData ||
@@ -97,55 +96,47 @@ class VenueSliderItem extends Component {
       </div>
     )
   }
-  renderMeta = venue => {
-    const alcohol = !(venue.yMeta && venue.yMeta.alcohol)
-      ? false
-      : venue.yMeta.alcohol.replace(/&amp;/g, '&')
-    const ambience = !(venue.yMeta && venue.yMeta.ambience)
-      ? false
-      : Array.isArray(venue.yMeta.ambience)
-          ? venue.yMeta.ambience.length === 2
-              ? venue.yMeta.ambience.join(' & ')
-              : venue.yMeta.ambience.join(', ')
-          : venue.yMeta.ambience
+  renderMeta = yMeta => {
     return (
       <div className='VenueSliderItem__middle-left'>
-        {venue.yMeta &&
-          venue.yMeta.outdoorSeating &&
+        {yMeta.outdoorSeating &&
           <div className='VenueSliderItem__middle-meta'>
             <h4 className='VenueSliderItem__middle-meta-title'>
               Outside Seating
             </h4>
             <p className='VenueSliderItem__middle-meta-p'>
-              {venue.yMeta.outdoorSeating ? 'Yes' : 'No'}
+              {yMeta.outdoorSeating ? 'Yes' : 'No'}
             </p>
           </div>}
-        {venue.yMeta &&
-          venue.yMeta.takesReservations &&
+        {yMeta.takesReservations &&
           <div className='VenueSliderItem__middle-meta'>
             <h4 className='VenueSliderItem__middle-meta-title'>
               Takes Reservations
             </h4>
             <p className='VenueSliderItem__middle-meta-p'>
-              {venue.yMeta.takesReservations ? 'Yes' : 'No'}
+              {yMeta.takesReservations ? 'Yes' : 'No'}
             </p>
           </div>}
-        {alcohol !== false &&
+        {yMeta.alcohol &&
           <div className='VenueSliderItem__middle-meta'>
             <h4 className='VenueSliderItem__middle-meta-title'>
               Alcohol Served
             </h4>
             <p className='VenueSliderItem__middle-meta-p'>
-              {alcohol}
+              {yMeta.alcohol.replace(/&amp;/g, '&')}
             </p>
           </div>}
-        {ambience !== false &&
+        {yMeta.ambience &&
           <div className='VenueSliderItem__middle-meta'>
             <h4 className='VenueSliderItem__middle-meta-title'>
               The Scene
             </h4>
             <p className='VenueSliderItem__middle-meta-p'>
-              {ambience}
+              {Array.isArray(yMeta.ambience)
+                ? yMeta.ambience.length === 2
+                    ? yMeta.ambience.join(' & ')
+                    : yMeta.ambience.join(', ')
+                : yMeta.ambience}
             </p>
           </div>}
       </div>
@@ -232,6 +223,13 @@ class VenueSliderItem extends Component {
       ? venue.neighborhood
       : venue.address && venue.address.city ? venue.address.city : ''
     const slideNumClass = 'slideNum-' + this.props.slideNum
+    const yMeta = venue.yMeta &&
+      (venue.yMeta.alcohol ||
+        venue.yMeta.ambience ||
+        venue.yMeta.outdoorSeating ||
+        venue.yMeta.takesReservations)
+      ? venue.yMeta
+      : false
     return (
       <article className={cx('VenueSliderItem', 'slick-slide', slideNumClass)}>
         <div
@@ -251,8 +249,10 @@ class VenueSliderItem extends Component {
                     {this.renderRegHours(venue)}
                   </div>
                 </div>
-                <div className='VenueSliderItem__middle'>
-                  {this.renderMeta(venue)}
+                <div
+                  className={`VenueSliderItem__middle ${yMeta ? 'has-meta' : 'no-meta'}`}
+                >
+                  {yMeta && this.renderMeta(venue.yMeta)}
                   {(venue.funItems || venue.funItems) &&
                     <div className='VenueSliderItem__middle-center'>
                       {this.renderFunHours(venue)}
