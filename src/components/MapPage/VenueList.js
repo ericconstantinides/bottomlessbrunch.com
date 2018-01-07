@@ -28,12 +28,12 @@ class VenueList extends Component {
     )
   }
   render () {
-    // check to see if there are unfiltered or visible
-    let hasUnfiltered = false
-    let hasVisible = false
+    // check to see how many are actual vs what's possible
+    let actual = 0
+    let possible = 0
     this.props.mainMap.activeVenues.forEach(venue => {
-      hasUnfiltered = !venue.filtered || hasUnfiltered
-      hasVisible = venue.visible || hasVisible
+      actual = venue.visible && !venue.filtered ? actual + 1 : actual
+      possible = venue.visible ? possible + 1 : possible
     })
     return (
       <div
@@ -61,7 +61,8 @@ class VenueList extends Component {
             handleVenueTeaserLinkClick={this.props.handleVenueTeaserLinkClick}
           />
         ))}
-        {!hasUnfiltered &&
+        {/* All Venues filtered out: */}
+        {actual === 0 && possible > 0 &&
           this.props.hasVenues &&
           <div className='VenueFilters__empty'>
             <p>All Venues filtered out</p>
@@ -73,8 +74,7 @@ class VenueList extends Component {
             </span>
           </div>}
         {/* No venues visible: */}
-        {((!hasVisible && this.props.hasVenues) ||
-          (!hasUnfiltered && !this.props.hasVenues)) &&
+        {possible === 0 &&
           this.props.mainMap.coords.zoom >
             this.props.ui.drawer.show_venues_zoom_level &&
             <div className='VenueFilters__empty'>
