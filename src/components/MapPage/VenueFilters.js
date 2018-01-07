@@ -21,7 +21,8 @@ class VenueFilters extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      filterOpen: true
+      filterOpen: true,
+      matchesPristine: true
     }
   }
   componentDidMount = () => {
@@ -47,6 +48,11 @@ class VenueFilters extends Component {
       // this allows the Hours to reinitialize
       this.props.updateFilter({ ready: true })
     }
+    const matchesPristine = _.isEqual(_.omit(nextProps.filters, [
+      'ready',
+      'pristineFilters'
+    ]), nextProps.filters.pristineFilters)
+    this.setState({ matchesPristine })
   }
   handleFilterReset = () => {
     this.props.constructFilters(
@@ -145,7 +151,7 @@ class VenueFilters extends Component {
             Filter the restaurants
           </h3>
           <span
-            className='VenueFilters__reset button button--orange-black is-smaller'
+            className={`VenueFilters__reset button button--orange-black is-smaller ${this.state.matchesPristine ? 'not-active' : 'is-active'}`}
             onClick={this.handleFilterReset}
           >
             Reset

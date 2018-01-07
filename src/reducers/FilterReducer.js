@@ -25,15 +25,27 @@ export const initialState = {
       disabled: false
     },
     ...toCheckboxObj(drinks)
-  }
+  },
+  pristineFilters: {}
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case constants.FILTER_CONSTRUCT:
+      const newFilters = _.cloneDeep(action.payload)
+      return {
+        ...newFilters,
+        pristineFilters: {
+          ..._.omit(newFilters, [
+            'ready',
+            'pristineFilters'
+          ])
+        }
+      }
     case constants.FILTER_RESET:
       return _.cloneDeep(initialState)
     case constants.FILTER_UPDATE:
-      return { ...state, ...(_.cloneDeep(action.payload)) }
+      return { ...state, ..._.cloneDeep(action.payload) }
     default:
       return state
   }

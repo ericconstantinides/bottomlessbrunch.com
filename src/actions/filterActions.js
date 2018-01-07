@@ -82,7 +82,7 @@ export const constructFilters = (venues, visibleVenues) => {
   fltrs.priceMax = fltrs.priceMax + (10 - fltrs.priceMax % 10)
   fltrs.priceEnd = fltrs.priceMax
   return {
-    type: constants.FILTER_UPDATE,
+    type: constants.FILTER_CONSTRUCT,
     payload: { ...fltrs }
   }
 }
