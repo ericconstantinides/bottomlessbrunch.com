@@ -312,14 +312,14 @@ class venueForm extends Component {
           {fields.map((funItem, index) => (
             <div className='AddEdit__field-wrapper-container' key={index}>
               <div className='AddEdit__field-wrapper'>
-                <div className='flex-basis-20p'>
+                {/* <div className='flex-basis-20p'>
                   <label className='AddEdit__label'>Old Drink</label>
                   <Field
                     name={`${funItem}.name`}
                     component={this.renderField}
                   />
-                </div>
-                <div className='flex-basis-20p'>
+                </div> */}
+                <div className='flex-basis-35p'>
                   <label className='AddEdit__label'>Bottomless Drink(s)</label>
                   <Field
                     name={`${funItem}.drink`}
@@ -329,7 +329,7 @@ class venueForm extends Component {
                     multi
                   />
                 </div>
-                <div className='flex-basis-20p'>
+                <div className='flex-basis-15p'>
                   <Field
                     name={`${funItem}.price`}
                     type='number'
@@ -337,7 +337,7 @@ class venueForm extends Component {
                     lbl='Price ($)'
                   />
                 </div>
-                <div className='flex-basis-20p'>
+                <div className='flex-basis-15p'>
                   <label className='AddEdit__label'>Price Includes</label>
                   <Field
                     name={`${funItem}.includes`}
@@ -346,7 +346,7 @@ class venueForm extends Component {
                     clearable={false}
                   />
                 </div>
-                <div className='flex-basis-20p'>
+                <div className='flex-basis-35p'>
                   <Field
                     name={`${funItem}.remarks`}
                     component={this.renderField}
@@ -366,7 +366,7 @@ class venueForm extends Component {
         </div>}
     </div>
   )
-  renderImages = ({ fields, meta: { error, submitFailed } }) => (
+/*   renderImages = ({ fields, meta: { error, submitFailed } }) => (
     <div className='AddEdit__array'>
       <header className='AddEdit__array-header'>
         <button
@@ -410,7 +410,7 @@ class venueForm extends Component {
           ))}
         </div>}
     </div>
-  )
+  ) */
   renderResearch = ({ fields, meta: { error, submitFailed } }) => (
     <div className='AddEdit__array'>
       <header className='AddEdit__array-header'>
@@ -708,7 +708,7 @@ class venueForm extends Component {
             <div className='AddEdit__field-wrapper'>
               <FieldArray name='funTimes' component={this.renderFunTimes} />
               <FieldArray name='funItems' component={this.renderMenuItems} />
-              <FieldArray name='images' component={this.renderImages} />
+              {/* <FieldArray name='images' component={this.renderImages} /> */}
               <FieldArray name='research' component={this.renderResearch} />
               <div className='checkbox-wrapper'>
                 <label className='AddEdit__label' htmlFor='unpublish'>
