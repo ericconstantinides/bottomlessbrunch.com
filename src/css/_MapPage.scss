@@ -369,6 +369,11 @@ body.body--VenueSlider #root,
     top: 56px;
     bottom: 0;
     position: absolute;
+    // on iOS, this prevents items from disappearing when changing filters
+    // https://stackoverflow.com/a/10122689/2913371:
+    > * {
+      transform: translateZ(0);
+    }
   }
 }
 // medium to medium large style stuff:

@@ -2683,7 +2683,9 @@ body.body--VenueSlider #root,
     -webkit-overflow-scrolling: touch;
     top: 56px;
     bottom: 0;
-    position: absolute; } }
+    position: absolute; }
+    .VenueList > * {
+      transform: translateZ(0); } }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
   .VenueListItem__image-container {
