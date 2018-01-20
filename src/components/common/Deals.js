@@ -27,7 +27,7 @@ const renderDeals = items => (
 
 const Deals = ({ venue }) => {
   const deals = extrapolateAsterisks(extrapolateDrinks(venue.funItems))
-  const output = (
+  return (
     <div>
       <table className='Deals'>
         <tbody className='Deals__table'>
@@ -46,7 +46,6 @@ const Deals = ({ venue }) => {
       }
     </div>
   )
-  return output
 }
 
 export default Deals

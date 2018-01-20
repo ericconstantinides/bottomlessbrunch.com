@@ -256,11 +256,11 @@ class VenueSliderItem extends Component {
                   {(venue.funItems || venue.funItems) &&
                     <div className='VenueSliderItem__middle-center'>
                       {this.renderFunHours(venue)}
-                      <div className='VenueSliderItem__middle-center-bottom'>
-                        {venue.funItems &&
-                          venue.funItems.length &&
-                          <Deals venue={venue} />}
-                      </div>
+                      {venue.funItems &&
+                        venue.funItems.length > 0 &&
+                        <div className='VenueSliderItem__middle-center-bottom'>
+                          <Deals venue={venue} />
+                        </div>}
                     </div>}
                   {this.renderShare()}
                 </div>

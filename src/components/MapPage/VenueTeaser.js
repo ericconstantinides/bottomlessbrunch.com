@@ -133,7 +133,7 @@ class VenueTeaser extends Component {
                 </div>
               } */}
               {venue.funItems &&
-                venue.funItems.length &&
+                venue.funItems.length > 0 &&
                 <Deals venue={venue} />}
               <button
                 className={`VenueTeaser__more-info ${altClass}__more-info`}
