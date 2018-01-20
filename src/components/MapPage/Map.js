@@ -242,7 +242,6 @@ class Map extends Component {
         center={this.props.mainMap.coords.center}
         options={{
           fullscreenControl: false,
-          zoomControl: false,
           gestureHandling: 'greedy',
           styles: mapStyle
         }}
