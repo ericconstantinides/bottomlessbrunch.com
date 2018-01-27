@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./server.js",
+    "deploy": "pm2 deploy ecosystem.config.js production"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "crawler": "^1.0.5",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.11.6",
+    "morgan": "^1.8.2",
+    "node-yelp-api-v3": "^1.0.3",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sanitize-html": "^1.14.1",
+    "sitemap": "^1.13.0"
+  }
+}
