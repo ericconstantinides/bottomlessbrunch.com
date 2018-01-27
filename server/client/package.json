@@ -37,8 +37,7 @@
     "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
-    "client": "react-scripts start",
-    "server": "nodemon ../server/server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
@@ -55,7 +54,11 @@
     "node-sass-chokidar": "^0.0.3",
     "redux-devtools-extension": "^2.13.2"
   },
-  "proxy": "http://localhost:3021/",
+  "proxy": {
+    "/api/v1": {
+      "target": "http://localhost:3021/"
+    }
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.js",

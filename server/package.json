@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./server.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {
@@ -25,5 +27,8 @@
     "path": "^0.12.7",
     "sanitize-html": "^1.14.1",
     "sitemap": "^1.13.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
   }
 }
