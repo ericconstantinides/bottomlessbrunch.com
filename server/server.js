@@ -31,11 +31,17 @@ const routes = require('./routes')
 // NOT YET:
 // const authRoutes = require('./routes/authRoutes')
 
-// register the route
+// register the routes
 app.use('/api/v1', routes)
 app.get('/sitemap.xml', pages.sitemap)
 // NOT YET:
 // app.use('/', authRoutes)
+
+// RUN THE APP
+app.use(express.static(path.join(__dirname, 'client', 'build')))
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+})
 
 // Server Setup
 const PORT = process.env.PORT || 3000

@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon server.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "watch-css": "npm run watch-css --prefix client",
+    "dev": "concurrently 'npm run server' 'npm run client' 'npm run watch-css'",
     "deploy": "pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {
