@@ -11,7 +11,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'git@github.com:ericconstantinides/bottomlessbrunch.com.git',
       path: '/home/ubuntu/Sites/bottomlessbrunch.com',
-      'post-deploy': 'npm install --prefix server && npm install --prefix server/client && npm run build --prefix server/client && pm2 startOrRestart ecosystem.config.js'
+      'post-deploy': 'npm install --prefix server && npm install --prefix server/client && pm2 startOrRestart ecosystem.config.js'
     }
   }
 }

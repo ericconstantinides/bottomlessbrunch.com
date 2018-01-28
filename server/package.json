@@ -8,7 +8,7 @@
     "client": "npm run start --prefix client",
     "watch-css": "npm run watch-css --prefix client",
     "dev": "concurrently 'npm run server' 'npm run client' 'npm run watch-css'",
-    "deploy": "pm2 deploy ecosystem.config.js production"
+    "deploy": "npm run build --prefix server/client && git add . && git commit -m 'Buildout' && git push && pm2 deploy ../ecosystem.config.js production"
   },
   "dependencies": {
     "axios": "^0.16.2",

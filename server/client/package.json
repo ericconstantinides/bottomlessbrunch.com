@@ -44,8 +44,7 @@
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "dev": "concurrently 'npm run client' 'npm run server' 'npm run watch-css'",
-    "deploy": "yarn run build && git add . && git commit -m 'Buildout' && git push && pm2 deploy ecosystem.config.js production"
+    "dev": "concurrently 'npm run client' 'npm run server' 'npm run watch-css'"
   },
   "devDependencies": {
     "concurrently": "^3.5.0",
