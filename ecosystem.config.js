@@ -5,12 +5,11 @@ module.exports = {
   }],
   deploy: {
     production: {
-      user: 'ubuntu',
-      host: 'ec2-13-56-120-181.us-west-1.compute.amazonaws.com',
-      key: '~/.ssh/TheKeyPairofEric.pem',
+      user: 'eric',
+      host: 'eric2',
       ref: 'origin/master',
       repo: 'git@github.com:ericconstantinides/bottomlessbrunch.com.git',
-      path: '/home/ubuntu/Sites/bottomlessbrunch.com',
+      path: '/var/www/node/bottomlessbrunch.com',
       'post-deploy': 'pm2 startOrRestart ecosystem.config.js'
     }
   }
