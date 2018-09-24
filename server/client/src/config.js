@@ -1,7 +1,8 @@
 import React from 'react'
 
 export const GOOGLE_GA = 'UA-21524856-1'
-export const GOOGLE_API_KEY = 'AIzaSyDsJWQDeqiFe-Chw1tBWfitg_7rGSWmHTU'
+// export const GOOGLE_API_KEY = 'AIzaSyDsJWQDeqiFe-Chw1tBWfitg_7rGSWmHTU'
+export const GOOGLE_API_KEY = 'AIzaSyAlJ2-D1vw4PxFuTX5BhGEz1v8TReprq3A'
 export const SITE_NAME = 'Bottomless Brunch'
 export const SITE_SLOGAN = 'The Bottomless Mimosas & Drinks Guide'
 export const SITE_DOMAIN = 'https://www.bottomlessbrunch.com'

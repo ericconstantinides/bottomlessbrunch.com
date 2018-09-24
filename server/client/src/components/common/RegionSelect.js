@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import 'react-select/dist/react-select.css'
+// import 'react-select/dist/react-select.css'
 
 const RegionSelect = ({ className, region, handleChange, options }) => {
   return (

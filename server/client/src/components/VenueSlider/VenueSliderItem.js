@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Star from 'react-stars'
-import { ShareButtons, generateShareIcon } from 'react-share'
+// import { ShareButtons, generateShareIcon } from 'react-share'
 import { connect } from 'react-redux'
 import cx from 'classnames'
 
@@ -174,9 +174,9 @@ class VenueSliderItem extends Component {
     )
   }
   renderShare = () => {
-    const { FacebookShareButton, TwitterShareButton } = ShareButtons
-    const FacebookIcon = generateShareIcon('facebook')
-    const TwitterIcon = generateShareIcon('twitter')
+    // const { FacebookShareButton, TwitterShareButton } = ShareButtons
+    // const FacebookIcon = generateShareIcon('facebook')
+    // const TwitterIcon = generateShareIcon('twitter')
     return (
       <div className='VenueSliderItem__middle-right'>
         <h3 className='VenueSliderItem__middle-title'>
@@ -186,20 +186,20 @@ class VenueSliderItem extends Component {
           Tell your girlfriends,<br />
           tell your boyfriends!
         </p>
-        <FacebookShareButton
+        {/* <FacebookShareButton
           url={`${SITE_DOMAIN}${this.props.history.location.pathname}`}
           hashtag='#bottomlessbrunch'
         >
           <FacebookIcon iconBgStyle={{ fill: 'transparent' }} size={40} />
           <span>Share on Facebook</span>
-        </FacebookShareButton>
-        <TwitterShareButton
+        </FacebookShareButton> */}
+        {/* <TwitterShareButton
           url={`${SITE_DOMAIN}${this.props.history.location.pathname}`}
           hashtag='#bottomlessbrunch'
         >
           <TwitterIcon iconBgStyle={{ fill: 'transparent' }} size={40} />
           <span>Share on Twitter</span>
-        </TwitterShareButton>
+        </TwitterShareButton> */}
       </div>
     )
   }
